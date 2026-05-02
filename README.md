@@ -1,4 +1,4 @@
-# low-hanging-bugs
+# Bugbounty monitor
 
 Yet another automated intelligence feed for **real-world** vulnerabilities disclosed on [HackerOne](https://hackerone.com/hacktivity).
 
