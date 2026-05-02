@@ -1,0 +1,34 @@
+openssl s_client -connect target.com:443 -ssl2 2>&1 | grep -i "ssl\|cipher\|error"
+openssl s_client -connect target.com:443 -ssl3 2>&1 | grep -i "ssl\|cipher\|error"
+openssl s_client -connect target.com:443 -tls1 2>&1 | grep -i "cipher\|ssl\|error"
+openssl s_client -connect target.com:443 -tls1_1 2>&1 | grep -i "cipher\|ssl\|error"
+openssl s_client -connect target.com:443 -tls1_2 2>&1 | grep -i "cipher\|ssl\|error"
+openssl s_client -connect target.com:443 -tls1_3 2>&1 | grep -i "cipher\|ssl\|error"
+openssl s_client -connect target.com:443 -cipher "RC4" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "DES" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "3DES" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "NULL-SHA" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "EXPORT" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "aNULL" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -cipher "MD5" 2>&1 | grep -i "cipher\|error"
+openssl s_client -connect target.com:443 -no_ticket 2>&1 | grep -i "session ticket\|tls"
+curl -s -k https://target.com/ (check if --insecure succeeds = invalid cert accepted)
+curl -s --tlsv1 https://target.com/
+curl -s --tlsv1.1 https://target.com/
+curl -s --ssl-no-revoke https://target.com/
+curl -s http://target.com/ -L (follow HTTP to see if HTTPS redirect exists)
+openssl s_client -connect target.com:443 -servername attacker.com 2>&1 | grep -i "subject\|issuer"
+openssl s_client -connect target.com:443 2>&1 | grep -i "verify return\|depth\|error"
+openssl s_client -connect target.com:443 2>&1 | grep -i "heartbeat" (Heartbleed check)
+openssl s_client -connect target.com:443 2>&1 | grep -E "CRIME|BREACH|BEAST|POODLE|FREAK|LOGJAM"
+testssl.sh target.com:443
+nmap --script ssl-enum-ciphers -p 443 target.com
+nmap --script ssl-heartbleed -p 443 target.com
+nmap --script ssl-dh-params -p 443 target.com
+nmap --script ssl-cert -p 443 target.com
+curl -s -I https://target.com | grep -i "strict-transport-security"
+curl -s -I http://target.com | grep -i "location" (check HTTP→HTTPS redirect)
+curl -s -I https://target.com | grep -i "public-key-pins"
+openssl s_client -connect target.com:443 2>&1 | openssl x509 -noout -dates
+openssl s_client -connect target.com:443 2>&1 | openssl x509 -noout -subject -issuer
+openssl s_client -connect target.com:443 2>&1 | openssl x509 -noout -text | grep -i "key size\|public key"

