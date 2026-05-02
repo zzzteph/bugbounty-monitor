@@ -12,14 +12,14 @@ Yet another automated intelligence feed for **real-world** vulnerabilities discl
 
 ## Features
 
-- **Hourly updates** — GitHub Actions fetches newly disclosed reports every hour and rebuilds the index.
-- **Hunter playbooks** — each `skills/*.md` file covers root causes, attack surface, recon checklist, hunt methodology, payload library, WAF bypass tips, triage guidance, and real bounty examples.
-- **Fuzzing payloads** — extracted and curated from real reports.
-- **Telegram notifications** — 👉 [https://t.me/lowhangingvulns](https://t.me/lowhangingvulns)
+- **Hourly updates** - GitHub Actions fetches newly disclosed reports every hour and rebuilds the index.
+- **Hunter playbooks** - each `skills/*.md` file covers root causes, attack surface, recon checklist, hunt methodology, payload library, WAF bypass tips, triage guidance, and real bounty examples.
+- **Fuzzing payloads** - extracted and curated from real reports.
+- **Telegram notifications** 👉 [https://t.me/lowhangingvulns](https://t.me/lowhangingvulns)
 
 ## Telegram channel
 
-Join to get notified about freshly disclosed, bug bounty reports:
+Join to get notified about freshly disclosed bug bounty reports:
 
 👉 [https://t.me/lowhangingvulns](https://t.me/lowhangingvulns)
 
@@ -29,5 +29,4 @@ Join to get notified about freshly disclosed, bug bounty reports:
 
 ## Data source
 
-All reports are sourced from [HackerOne Hacktivity](https://hackerone.com/hacktivity) — publicly disclosed vulnerability reports submitted to bug bounty programs.
-
+ [HackerOne Hacktivity](https://hackerone.com/hacktivity)
