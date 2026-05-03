@@ -1,4 +1,4 @@
-name: Hourly Index Update
+name: Fetch reports
 
 on:
   workflow_dispatch:

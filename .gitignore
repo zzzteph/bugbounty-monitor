@@ -1,9 +1,6 @@
-# Python scripts (run locally / via CI with secrets)
-*.py
 
-# Python cache
+aggregate_skills.py
+extract_payloads.py
 __pycache__/
 *.pyc
-
-# Claude Code
 .claude/
