@@ -1,6 +1,8 @@
 name: Fetch reports
 
 on:
+  schedule:
+    - cron: "0 * * * *"   # every hour
   workflow_dispatch:
 
 
