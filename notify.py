@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 import subprocess
 import sys
 
@@ -44,7 +45,16 @@ def _bounty_emoji(amount: float) -> str:
     return "💸"
 
 
-def _format(report: dict) -> str:
+def _category_from_path(path: str) -> str:
+    parts = pathlib.Path(path).parts
+    # reports/{category}/...
+    idx = next((i for i, p in enumerate(parts) if p == "reports"), -1)
+    if idx >= 0 and idx + 1 < len(parts):
+        return parts[idx + 1]
+    return ""
+
+
+def _format(report: dict, path: str) -> str:
     title     = report.get("title") or "Untitled"
     url       = report.get("url") or ""
     sev_raw   = (report.get("severity_rating") or "none").lower()
@@ -52,12 +62,16 @@ def _format(report: dict) -> str:
     cwe       = (report.get("weakness") or {}).get("name") or "Unknown"
     amount    = float(report.get("bounty_amount") or 0)
     bounty    = report.get("formatted_bounty") or f"${amount:,.0f}"
+    category  = _category_from_path(path)
+    tags      = f"#h1 #{category}" if category else "#h1"
 
     return "\n".join([
         f'{sev_emoji} <a href="{url}">{_html(title)}</a>',
         "",
         f"🎯 CWE: {_html(cwe)}",
         f"{_bounty_emoji(amount)} Amount: {_html(bounty)}",
+        "",
+        tags,
     ])
 
 
@@ -96,7 +110,7 @@ def main() -> None:
                 skipped += 1
                 continue
 
-            _send(_format(report))
+            _send(_format(report, path))
             print(f"  sent: {report.get('url', path)}  ({report.get('formatted_bounty', f'${bounty:,.0f}')})")
             sent += 1
 
