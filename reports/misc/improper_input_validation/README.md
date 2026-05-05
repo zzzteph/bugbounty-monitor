@@ -18,53 +18,53 @@
 | Operation CreateOrUpdateSo5LineupMutation does not restrict multiple captains | $300 | sorare | 2023-08-01 | [#2067247](https://hackerone.com/reports/2067247) |
 | Posts sent via websockets aren't sanitized properly | $150 | mattermost | 2024-10-01 | [#2541027](https://hackerone.com/reports/2541027) |
 | Moderators can send messages to users from banned subreddits via `oauth.reddit.com/api/mod/conversations` | $100 | reddit | 2022-07-04 | [#1543770](https://hackerone.com/reports/1543770) |
-| athome.starbucks.com - URL parameter tampering of review forms permitted possible content injection | — | starbucks | 2020-03-17 | [#367589](https://hackerone.com/reports/367589) |
-| Add non-existent room moderator | — | chaturbate | 2018-10-19 | [#385239](https://hackerone.com/reports/385239) |
-| Bypass of GitLab CI runner slash fix in YAML validation | — | gitlab | 2019-04-10 | [#409395](https://hackerone.com/reports/409395) |
-| Improper UUID validation results in bypass of #419896 | — | security | 2018-10-25 | [#423073](https://hackerone.com/reports/423073) |
-| H1514 Shopify API ruby SDK session setup lacks input validation, resulting in SSRF and leakage of client secret | — | shopify | 2019-04-05 | [#423437](https://hackerone.com/reports/423437) |
-| [url-parse] Improper Validation and Sanitization | — | nodejs-ecosystem | 2020-01-27 | [#496293](https://hackerone.com/reports/496293) |
-| CSS Injection to disable app & potential message exfil | — | slack | 2019-11-09 | [#679969](https://hackerone.com/reports/679969) |
-| Steal ALL collateral during liquidation by exploiting lack of validation in `flip.kick` | — | makerdao_bbp | 2019-10-01 | [#684092](https://hackerone.com/reports/684092) |
-| Steal all MKR from `flap` during liquidation by exploiting lack of validation in `flap.kick` | — | makerdao_bbp | 2019-09-26 | [#684152](https://hackerone.com/reports/684152) |
-| SMB access smuggling via FILE URL on Windows | — | curl | 2021-01-17 | [#726117](https://hackerone.com/reports/726117) |
-| HTTP header values do not have trailing OWS trimmed | — | nodejs | 2020-02-24 | [#730779](https://hackerone.com/reports/730779) |
-| Improper Input Validation on User's Location on PUT /WhoService/putLocation Could Affect Availability/Falsify Users | — | who-covid-19-mobile-app | 2021-01-12 | [#1064149](https://hackerone.com/reports/1064149) |
-| Insecure OAuth redirection at [admin.8x8.vc] | — | 8x8-bounty | 2020-04-10 | [#770548](https://hackerone.com/reports/770548) |
-| Division by zero if terminal width is 2 | — | curl | 2021-02-08 | [#774883](https://hackerone.com/reports/774883) |
-| curl still vulnerable to SMB access smuggling via FILE URL on Windows | — | curl | 2021-01-08 | [#812969](https://hackerone.com/reports/812969) |
-| Improper Input Validation on User's Location on PUT /WhoService/putLocation Could Affect Availability/Falsify Users | — | who-covid-19-mobile-app | 2020-12-22 | [#838647](https://hackerone.com/reports/838647) |
-| Send Phishing/Spam email from support@sameroom.io to any email address. | — | 8x8-bounty | 2020-08-05 | [#840688](https://hackerone.com/reports/840688) |
-| CVE-2020-8177: curl overwrite local file with -J | — | curl | 2020-12-05 | [#887462](https://hackerone.com/reports/887462) |
-| 2FA Disable With Wrong Password - Response Tampering. | — | 8x8-bounty | 2020-10-21 | [#893085](https://hackerone.com/reports/893085) |
-| Incorrect Deep-link validation leading to unresponsive application and device | — | flickr | 2024-07-06 | [#1157795](https://hackerone.com/reports/1157795) |
-| Remote code execution due to unvalidated file upload | — | mtn_group | 2022-09-01 | [#1164452](https://hackerone.com/reports/1164452) |
 | Missing captcha and rate limit protection in help form  | — | mtn_group | 2021-12-11 | [#1165223](https://hackerone.com/reports/1165223) |
-| Hyper Link Injection while signup  | — | upchieve | 2022-06-15 | [#1166073](https://hackerone.com/reports/1166073) |
-| CVE-2021-22924: Bad connection reuse due to flawed path name checks | — | curl | 2021-07-21 | [#1223565](https://hackerone.com/reports/1223565) |
+| Remote code execution due to unvalidated file upload | — | mtn_group | 2022-09-01 | [#1164452](https://hackerone.com/reports/1164452) |
+| Underrepresentation Bias through Twitter's Cropping Algorithm #2: Favoring Animals over Black People | — | twitter-algorithmic-bias | 2021-09-08 | [#1294242](https://hackerone.com/reports/1294242) |
 | Improper input validation in projects leads to fully deny access to project resources | — | semrush | 2021-09-01 | [#1237700](https://hackerone.com/reports/1237700) |
 | Economic Harm through Twitter's Cropping Algorithm | — | twitter-algorithmic-bias | 2021-09-08 | [#1290872](https://hackerone.com/reports/1290872) |
-| Underrepresentation Bias through Twitter's Cropping Algorithm | — | twitter-algorithmic-bias | 2021-09-08 | [#1294062](https://hackerone.com/reports/1294062) |
-| Underrepresentation Bias through Twitter's Cropping Algorithm #2: Favoring Animals over Black People | — | twitter-algorithmic-bias | 2021-09-08 | [#1294242](https://hackerone.com/reports/1294242) |
 | HTML Injection on tiktoktutorials via firstName parameter | — | tiktok | 2021-10-30 | [#1343492](https://hackerone.com/reports/1343492) |
-| Add more seats by paying less via PUT /v2/seats request manipulation | — | krisp | 2022-06-20 | [#1446090](https://hackerone.com/reports/1446090) |
-| Bypass global deny-lists by wrapping domains using "[]" in https://github.com/stripe/smokescreen | — | stripe | 2022-05-18 | [#1528242](https://hackerone.com/reports/1528242) |
-| CVE-2022-27780: percent-encoded path separator in URL host | — | ibb | 2022-06-11 | [#1565619](https://hackerone.com/reports/1565619) |
-| Improper user validation on mentions and hashtags | — | tiktok | 2023-06-22 | [#1610316](https://hackerone.com/reports/1610316) |
-| CVE-2022-35252: control code in cookie denial of service | — | curl | 2022-08-31 | [#1613943](https://hackerone.com/reports/1613943) |
-| Local File Inclusion in download.php | — | deptofdefense | 2024-07-19 | [#1639364](https://hackerone.com/reports/1639364) |
-| CVE-2022-35252: control code in cookie denial of service | — | ibb | 2022-11-05 | [#1686935](https://hackerone.com/reports/1686935) |
+| CVE-2021-22924: Bad connection reuse due to flawed path name checks | — | curl | 2021-07-21 | [#1223565](https://hackerone.com/reports/1223565) |
+| Incorrect Deep-link validation leading to unresponsive application and device | — | flickr | 2024-07-06 | [#1157795](https://hackerone.com/reports/1157795) |
+| Hyper Link Injection while signup  | — | upchieve | 2022-06-15 | [#1166073](https://hackerone.com/reports/1166073) |
+| Underrepresentation Bias through Twitter's Cropping Algorithm | — | twitter-algorithmic-bias | 2021-09-08 | [#1294062](https://hackerone.com/reports/1294062) |
 | Html injection in event Description  | — | linkedin | 2024-01-29 | [#2215418](https://hackerone.com/reports/2215418) |
-| Inconsistent URL Parsing in curl Leading to Potential SSRF and Access Control Bypass | — | curl | 2025-09-26 | [#2814750](https://hackerone.com/reports/2814750) |
-| Arbitrary File Deletion Vulnerability in curl Source Code via os.unlink() | — | curl | 2025-07-07 | [#2864414](https://hackerone.com/reports/2864414) |
-| HTTP/3 Stream Dependency Cycle Exploit | — | curl | 2025-05-04 | [#3125832](https://hackerone.com/reports/3125832) |
-| Residual Malicious Payloads on HackerOne after Vulnerability Fixes | — | security | 2026-04-16 | [#3168691](https://hackerone.com/reports/3168691) |
-| Bypass "No Links" Restriction in Biography via Protocol-Relative URL (//) | — | mozilla | 2025-07-29 | [#3175695](https://hackerone.com/reports/3175695) |
-| ImageId Format Injection in Image Upload Endpoint | — | lichess | 2025-06-06 | [#3175928](https://hackerone.com/reports/3175928) |
-| Unsafe Global IFS Modification in OS400 Shell Script Enables Command Injection and Parsing Flaws (CWE-78/CWE-20) | — | curl | 2025-08-12 | [#3295656](https://hackerone.com/reports/3295656) |
-| Logical Flaw in curl_url_set Leads to Inconsistent Query Parameter Encoding | — | curl | 2025-10-29 | [#3403880](https://hackerone.com/reports/3403880) |
-| Functional Regression in Digest Authentication: Failure to handle optional spaces and escaped quotes | — | curl | 2025-12-21 | [#3473384](https://hackerone.com/reports/3473384) |
-| IMAP Protocol Desynchronization and Response Smuggling via Naive Literal Parsing | — | curl | 2026-01-14 | [#3509396](https://hackerone.com/reports/3509396) |
 | HTTP/2 server push accepts a non-authoritative :scheme=https over cleartext h2c, enabling HTTPS cache-key poisoning | — | curl | 2026-03-29 | [#3630310](https://hackerone.com/reports/3630310) |
+| IMAP Protocol Desynchronization and Response Smuggling via Naive Literal Parsing | — | curl | 2026-01-14 | [#3509396](https://hackerone.com/reports/3509396) |
 | Cookie attribute TAB injection regression in Set-Cookie parsing | — | curl | 2026-04-03 | [#3641893](https://hackerone.com/reports/3641893) |
 | MQTT state machine confusion: PINGRESP/DISCONNECT with non-zero remaining_length dispatches to stale nextstate | — | curl | 2026-04-29 | [#3702718](https://hackerone.com/reports/3702718) |
+| Bypass "No Links" Restriction in Biography via Protocol-Relative URL (//) | — | mozilla | 2025-07-29 | [#3175695](https://hackerone.com/reports/3175695) |
+| Residual Malicious Payloads on HackerOne after Vulnerability Fixes | — | security | 2026-04-16 | [#3168691](https://hackerone.com/reports/3168691) |
+| HTTP/3 Stream Dependency Cycle Exploit | — | curl | 2025-05-04 | [#3125832](https://hackerone.com/reports/3125832) |
+| Unsafe Global IFS Modification in OS400 Shell Script Enables Command Injection and Parsing Flaws (CWE-78/CWE-20) | — | curl | 2025-08-12 | [#3295656](https://hackerone.com/reports/3295656) |
+| ImageId Format Injection in Image Upload Endpoint | — | lichess | 2025-06-06 | [#3175928](https://hackerone.com/reports/3175928) |
+| Functional Regression in Digest Authentication: Failure to handle optional spaces and escaped quotes | — | curl | 2025-12-21 | [#3473384](https://hackerone.com/reports/3473384) |
+| Logical Flaw in curl_url_set Leads to Inconsistent Query Parameter Encoding | — | curl | 2025-10-29 | [#3403880](https://hackerone.com/reports/3403880) |
+| Steal all MKR from `flap` during liquidation by exploiting lack of validation in `flap.kick` | — | makerdao_bbp | 2019-09-26 | [#684152](https://hackerone.com/reports/684152) |
+| SMB access smuggling via FILE URL on Windows | — | curl | 2021-01-17 | [#726117](https://hackerone.com/reports/726117) |
+| CSS Injection to disable app & potential message exfil | — | slack | 2019-11-09 | [#679969](https://hackerone.com/reports/679969) |
+| HTTP header values do not have trailing OWS trimmed | — | nodejs | 2020-02-24 | [#730779](https://hackerone.com/reports/730779) |
+| Steal ALL collateral during liquidation by exploiting lack of validation in `flip.kick` | — | makerdao_bbp | 2019-10-01 | [#684092](https://hackerone.com/reports/684092) |
+| [url-parse] Improper Validation and Sanitization | — | nodejs-ecosystem | 2020-01-27 | [#496293](https://hackerone.com/reports/496293) |
+| CVE-2022-35252: control code in cookie denial of service | — | ibb | 2022-11-05 | [#1686935](https://hackerone.com/reports/1686935) |
+| CVE-2022-27780: percent-encoded path separator in URL host | — | ibb | 2022-06-11 | [#1565619](https://hackerone.com/reports/1565619) |
+| CVE-2022-35252: control code in cookie denial of service | — | curl | 2022-08-31 | [#1613943](https://hackerone.com/reports/1613943) |
+| Local File Inclusion in download.php | — | deptofdefense | 2024-07-19 | [#1639364](https://hackerone.com/reports/1639364) |
+| Bypass global deny-lists by wrapping domains using "[]" in https://github.com/stripe/smokescreen | — | stripe | 2022-05-18 | [#1528242](https://hackerone.com/reports/1528242) |
+| Improper user validation on mentions and hashtags | — | tiktok | 2023-06-22 | [#1610316](https://hackerone.com/reports/1610316) |
+| Add more seats by paying less via PUT /v2/seats request manipulation | — | krisp | 2022-06-20 | [#1446090](https://hackerone.com/reports/1446090) |
+| Send Phishing/Spam email from support@sameroom.io to any email address. | — | 8x8-bounty | 2020-08-05 | [#840688](https://hackerone.com/reports/840688) |
+| 2FA Disable With Wrong Password - Response Tampering. | — | 8x8-bounty | 2020-10-21 | [#893085](https://hackerone.com/reports/893085) |
+| Improper Input Validation on User's Location on PUT /WhoService/putLocation Could Affect Availability/Falsify Users | — | who-covid-19-mobile-app | 2021-01-12 | [#1064149](https://hackerone.com/reports/1064149) |
+| Improper Input Validation on User's Location on PUT /WhoService/putLocation Could Affect Availability/Falsify Users | — | who-covid-19-mobile-app | 2020-12-22 | [#838647](https://hackerone.com/reports/838647) |
+| Insecure OAuth redirection at [admin.8x8.vc] | — | 8x8-bounty | 2020-04-10 | [#770548](https://hackerone.com/reports/770548) |
+| CVE-2020-8177: curl overwrite local file with -J | — | curl | 2020-12-05 | [#887462](https://hackerone.com/reports/887462) |
+| Division by zero if terminal width is 2 | — | curl | 2021-02-08 | [#774883](https://hackerone.com/reports/774883) |
+| curl still vulnerable to SMB access smuggling via FILE URL on Windows | — | curl | 2021-01-08 | [#812969](https://hackerone.com/reports/812969) |
+| Bypass of GitLab CI runner slash fix in YAML validation | — | gitlab | 2019-04-10 | [#409395](https://hackerone.com/reports/409395) |
+| Improper UUID validation results in bypass of #419896 | — | security | 2018-10-25 | [#423073](https://hackerone.com/reports/423073) |
+| Add non-existent room moderator | — | chaturbate | 2018-10-19 | [#385239](https://hackerone.com/reports/385239) |
+| athome.starbucks.com - URL parameter tampering of review forms permitted possible content injection | — | starbucks | 2020-03-17 | [#367589](https://hackerone.com/reports/367589) |
+| H1514 Shopify API ruby SDK session setup lacks input validation, resulting in SSRF and leakage of client secret | — | shopify | 2019-04-05 | [#423437](https://hackerone.com/reports/423437) |
+| Arbitrary File Deletion Vulnerability in curl Source Code via os.unlink() | — | curl | 2025-07-07 | [#2864414](https://hackerone.com/reports/2864414) |
+| Inconsistent URL Parsing in curl Leading to Potential SSRF and Access Control Bypass | — | curl | 2025-09-26 | [#2814750](https://hackerone.com/reports/2814750) |
