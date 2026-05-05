@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1576 report(s) across 22 class(es)**
+**1577 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 944 | $50,000 |
+| [Unknown](unknown/README.md) | 945 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -184,6 +184,7 @@
 | "urllib" will result to deny of service | $240 | ibb | 2021-10-21 | [#1188128](https://hackerone.com/reports/1188128) |
 | Wrong Url in Main Page | $200 | sifchain | 2021-05-12 | [#1188629](https://hackerone.com/reports/1188629) |
 | HTML Injection in DAST Trial Request Form Confirmation Email – PortSwigger | $200 | portswigger | 2026-02-26 | [#3556892](https://hackerone.com/reports/3556892) |
+| Out of scope: Improper Input Validation Order on /api-internal/login via password field leads to unnecessary resource consumption | $200 | portswigger | 2026-05-05 | [#3625600](https://hackerone.com/reports/3625600) |
 | Отправка подарков/стикерпаков не теряя голоса. | $200 | vkcom | 2020-03-28 | [#729064](https://hackerone.com/reports/729064) |
 | Null character at fnmatch | $200 | ruby | 2019-10-16 | [#449617](https://hackerone.com/reports/449617) |
 | View Failed Approval and Pending videos other users | $200 | chaturbate | 2018-10-21 | [#411679](https://hackerone.com/reports/411679) |
