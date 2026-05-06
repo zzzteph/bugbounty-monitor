@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**401 report(s)**
+**402 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -158,6 +158,7 @@
 | OpenSSL backend: X509 peer certificate not freed in ossl_get_channel_binding causes per-request memory leak (DoS risk for long-lived clients) | — | curl | 2025-10-08 | [#3373640](https://hackerone.com/reports/3373640) |
 | Unbounded memory consumption via compressed HTTP responses (gzip/brotli/zstd) | — | curl | 2025-12-21 | [#3471553](https://hackerone.com/reports/3471553) |
 | Application Level DoS - Large Markdown Payload in Reply Section Leading to Resource Exhaustion | — | discourse | 2025-10-18 | [#3058919](https://hackerone.com/reports/3058919) |
+| Critical Deadlock Vulnerability in Monero RPC Leading to Complete Node Paralysis | — | monero | 2026-05-06 | [#3307874](https://hackerone.com/reports/3307874) |
 | Memory leak in Curl_auth_create_ntlm_type3_message | — | curl | 2025-10-28 | [#3393539](https://hackerone.com/reports/3393539) |
 | Economic DoS (Griefing) on IBC Relayers via `memo` Callback Gas Exploitation | — | cosmos | 2025-12-18 | [#3425308](https://hackerone.com/reports/3425308) |
 | WebSocket Fragmentation DoS on Curl Client | — | curl | 2025-08-19 | [#3303765](https://hackerone.com/reports/3303765) |

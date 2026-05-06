@@ -1,6 +1,6 @@
 # Privacy Violation
 
-**75 report(s)**
+**76 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -35,6 +35,7 @@
 | Avatar URL is exposed in patron export for secret donations | — | liberapay | 2023-12-15 | [#2286764](https://hackerone.com/reports/2286764) |
 | Intent Leads To Unauthorised Video Call Initiation Leaking Surrounding Informations Of Victim | — | snapchat | 2024-04-05 | [#2139260](https://hackerone.com/reports/2139260) |
 | SVG filter primitives bypass remote image blocking, enabling email tracking without consent. | — | nextcloud | 2026-04-20 | [#3486747](https://hackerone.com/reports/3486747) |
+| Connection Count Bug in Monero Node Enables Outbound Peer Reset Attack | — | monero | 2026-05-06 | [#3185083](https://hackerone.com/reports/3185083) |
 | exposure of personal IP address via email. | — | weblate | 2025-07-16 | [#3179850](https://hackerone.com/reports/3179850) |
 | Detect Tor Browser's language | — | torproject | 2019-05-29 | [#588239](https://hackerone.com/reports/588239) |
 | A small set of users were assigned someone else's payout preference | — | security | 2019-02-20 | [#498845](https://hackerone.com/reports/498845) |
