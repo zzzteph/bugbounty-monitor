@@ -1,6 +1,6 @@
 # Injection (Other)
 
-**41 report(s) across 5 class(es)**
+**42 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -8,8 +8,8 @@
 |-------|---------|------------|
 | [Resource Injection](resource_injection/README.md) | 33 | $8,690 |
 | [Ldap Injection](ldap_injection/README.md) | 5 | — |
+| [Improper Neutralization Of Value Delimiters](improper_neutralization_of_value_delimiters/README.md) | 2 | — |
 | [Improper Neutralization Of Formula Elements In A Csv File](improper_neutralization_of_formula_elements_in_a_csv_file/README.md) | 1 | — |
-| [Improper Neutralization Of Value Delimiters](improper_neutralization_of_value_delimiters/README.md) | 1 | — |
 | [Improper Neutralization Of Whitespace](improper_neutralization_of_whitespace/README.md) | 1 | — |
 
 ## All Reports
@@ -27,6 +27,7 @@
 | HTML Injection in Owncloud | $150 | owncloud | 2017-07-06 | [#215410](https://hackerone.com/reports/215410) |
 | #**CSV Injection in shared passwords leads to complete Private Vault Exfiltration** | — | 1password | 2025-04-12 | [#3042984](https://hackerone.com/reports/3042984) |
 | In curl's SASL OAUTHBEARER authentication, including the SOH character (0x01) in the username corrupts the message structure. | — | curl | 2026-03-08 | [#3584865](https://hackerone.com/reports/3584865) |
+| wcurl treats some URL operands after -- as curl options | — | curl | 2026-05-06 | [#3708482](https://hackerone.com/reports/3708482) |
 | Username normalization missing allows visually indistinguishable accounts (Whitespace-Based Impersonation) | — | revive_adserver | 2025-11-19 | [#3413764](https://hackerone.com/reports/3413764) |
 | [CVE-2021-29156 on ForgeRock OpenAm] LDAP Injection in Webfinger Protocol! | — | deptofdefense | 2021-08-19 | [#1278050](https://hackerone.com/reports/1278050) |
 | [CVE-2021-29156] LDAP Injection at https://██████ | — | deptofdefense | 2021-08-26 | [#1278891](https://hackerone.com/reports/1278891) |
