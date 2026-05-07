@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**663 report(s) across 25 class(es)**
+**664 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -17,7 +17,7 @@
 | [Integer Overflow](integer_overflow/README.md) | 26 | $500 |
 | [Double Free](double_free/README.md) | 16 | $10,000 |
 | [Array Index Underflow](array_index_underflow/README.md) | 14 | $7,500 |
-| [Improper Null Termination](improper_null_termination/README.md) | 10 | — |
+| [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
 | [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 7 | $10,000 |
 | [Type Confusion](type_confusion/README.md) | 7 | $500 |
@@ -396,6 +396,7 @@
 | Timeout-based race conditions make Uint8Array/Buffer.alloc non-zerofilled | — | nodejs | 2026-02-12 | [#3405778](https://hackerone.com/reports/3405778) |
 | Improper handling of untypical characters in domain names | — | nodejs | 2021-09-10 | [#1178337](https://hackerone.com/reports/1178337) |
 | HackerOne SAML signup domain enforcement bypass results in unauthorized access to HackerOne PullRequest organization | — | security | 2024-02-04 | [#2101076](https://hackerone.com/reports/2101076) |
+| mbedTLS private-key blob null-termination asymmetry in lib/vtls/mbedtls.c (mbed_load_privkey) | — | curl | 2026-05-07 | [#3717365](https://hackerone.com/reports/3717365) |
 | Improper input validation On Exported deep-link handler crashes `FileDisplayActivity` on crafted external URL — Denial-of-Service | — | nextcloud | 2026-05-01 | [#3399016](https://hackerone.com/reports/3399016) |
 | Vulnerability in http-parser & embedded NULL header handling | — | nodejs | 2020-02-13 | [#536954](https://hackerone.com/reports/536954) |
 | Null byte Injection in https://████/ | — | deptofdefense | 2020-05-14 | [#709072](https://hackerone.com/reports/709072) |
