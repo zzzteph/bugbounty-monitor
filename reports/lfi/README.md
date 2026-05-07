@@ -1,12 +1,12 @@
 # LFI / Path Traversal
 
-**257 report(s) across 9 class(es)**
+**258 report(s) across 9 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Path Traversal](path_traversal/README.md) | 224 | $29,000 |
+| [Path Traversal](path_traversal/README.md) | 225 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
 | [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 3 | — |
@@ -101,6 +101,7 @@
 | CVE-2023-27534: SFTP path ~ resolving discrepancy | — | curl | 2023-03-22 | [#1892351](https://hackerone.com/reports/1892351) |
 | Filesystem experimental permissions policy does not handle path traversal cases. | — | nodejs | 2023-07-20 | [#1952978](https://hackerone.com/reports/1952978) |
 | Path Traversal in curl file:// Protocol Handler Allows Unauthorized File Access | — | curl | 2026-01-04 | [#3485930](https://hackerone.com/reports/3485930) |
+| ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection | — | rails | 2026-05-07 | [#3580511](https://hackerone.com/reports/3580511) |
 | inconsistently Rejection Logic in file:// URLs with Authority | — | curl | 2026-01-08 | [#3494098](https://hackerone.com/reports/3494098) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |
 | Path Traversal Vulnerability in Nextcloud Tables Enables Arbitrary File Exfiltration of Any Files Supported by PhpSpreadsheet Library | — | nextcloud | 2025-10-16 | [#3249624](https://hackerone.com/reports/3249624) |
