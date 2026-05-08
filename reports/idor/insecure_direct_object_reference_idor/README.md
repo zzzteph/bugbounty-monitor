@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**276 report(s)**
+**277 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -45,6 +45,7 @@
 | IDOR to cancel any table booking and leak sensitive information such as email,mobile number,uuid | $250 | eternal | 2017-10-22 | [#265258](https://hackerone.com/reports/265258) |
 | fs.fchown/fchmod bypasses permission model | $249 | ibb | 2024-10-16 | [#2590608](https://hackerone.com/reports/2590608) |
 | IDOR with Geolocation data not stripped from images | $200 | irccloud | 2020-07-26 | [#906907](https://hackerone.com/reports/906907) |
+| Private circle can be added to another circle via API despite visibility restriction | $150 | nextcloud | 2026-05-08 | [#3511998](https://hackerone.com/reports/3511998) |
 | Access control missing while viewing the attachments in the "All boards" | $150 | nextcloud | 2020-09-29 | [#916704](https://hackerone.com/reports/916704) |
 | IDOR on www.acronis.com API lead to steal private business user information | $100 | acronis | 2021-08-31 | [#1182465](https://hackerone.com/reports/1182465) |
 | Unauthenticated access to private files on app.fizzy.do via Active Storage URLs leads to information disclosure | $100 | basecamp | 2026-03-16 | [#3467641](https://hackerone.com/reports/3467641) |

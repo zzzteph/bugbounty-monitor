@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1030 report(s) across 10 class(es)**
+**1031 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 656 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 276 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 277 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 13 | $2,500 |
@@ -208,6 +208,7 @@
 | Secure view trivial to bypass | $150 | nextcloud | 2023-03-30 | [#1724021](https://hackerone.com/reports/1724021) |
 | unauth mosquitto ( client emails, ips, license keys exposure ) | $150 | acronis | 2022-07-18 | [#1578574](https://hackerone.com/reports/1578574) |
 | Private and group tokens per minute endpoint active for disabled users | $150 | chaturbate | 2018-09-27 | [#403603](https://hackerone.com/reports/403603) |
+| Private circle can be added to another circle via API despite visibility restriction | $150 | nextcloud | 2026-05-08 | [#3511998](https://hackerone.com/reports/3511998) |
 | Access control missing while viewing the attachments in the "All boards" | $150 | nextcloud | 2020-09-29 | [#916704](https://hackerone.com/reports/916704) |
 | Federated editing allows iframing possibly malicious remotes | $100 | nextcloud | 2022-07-02 | [#1210424](https://hackerone.com/reports/1210424) |
 | Admins can change authentication details of user configured external storage | $100 | nextcloud | 2023-12-21 | [#2107934](https://hackerone.com/reports/2107934) |
