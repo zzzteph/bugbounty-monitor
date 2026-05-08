@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**275 report(s)**
+**276 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -102,6 +102,7 @@
 | Unauthorized Reservation Cancellation Through IDOR Vulnerability | — | yelp | 2025-01-29 | [#2944357](https://hackerone.com/reports/2944357) |
 | Tables app allowed users to view columns metadata information of any table | — | nextcloud | 2025-12-05 | [#3138721](https://hackerone.com/reports/3138721) |
 | IDOR Vulnerability in Banner Deletion  | — | revive_adserver | 2025-11-19 | [#3401612](https://hackerone.com/reports/3401612) |
+| Files drop share links for end-to-end encrypted folders allowed to drop files into other folders of the share owner  | — | nextcloud | 2026-05-08 | [#3304830](https://hackerone.com/reports/3304830) |
 | IDOR: Account Deletion via Session Misbinding – Attacker Can Delete Victim Account | — | mozilla | 2025-06-03 | [#3154983](https://hackerone.com/reports/3154983) |
 | IDOR Vulnerability Allowing Unauthorized Profile Picture Change | — | autodesk | 2025-02-19 | [#2962056](https://hackerone.com/reports/2962056) |
 | BOLA/IDOR in Out-of-Office API allows any authenticated user to read other users' absence data | — | nextcloud | 2026-04-14 | [#3382343](https://hackerone.com/reports/3382343) |

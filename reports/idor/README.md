@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1029 report(s) across 10 class(es)**
+**1030 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 656 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 275 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 276 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 13 | $2,500 |
@@ -867,6 +867,7 @@
 | Unauthorized Reservation Cancellation Through IDOR Vulnerability | — | yelp | 2025-01-29 | [#2944357](https://hackerone.com/reports/2944357) |
 | Tables app allowed users to view columns metadata information of any table | — | nextcloud | 2025-12-05 | [#3138721](https://hackerone.com/reports/3138721) |
 | IDOR Vulnerability in Banner Deletion  | — | revive_adserver | 2025-11-19 | [#3401612](https://hackerone.com/reports/3401612) |
+| Files drop share links for end-to-end encrypted folders allowed to drop files into other folders of the share owner  | — | nextcloud | 2026-05-08 | [#3304830](https://hackerone.com/reports/3304830) |
 | IDOR: Account Deletion via Session Misbinding – Attacker Can Delete Victim Account | — | mozilla | 2025-06-03 | [#3154983](https://hackerone.com/reports/3154983) |
 | IDOR Vulnerability Allowing Unauthorized Profile Picture Change | — | autodesk | 2025-02-19 | [#2962056](https://hackerone.com/reports/2962056) |
 | BOLA/IDOR in Out-of-Office API allows any authenticated user to read other users' absence data | — | nextcloud | 2026-04-14 | [#3382343](https://hackerone.com/reports/3382343) |
