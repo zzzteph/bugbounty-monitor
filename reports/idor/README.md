@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1028 report(s) across 10 class(es)**
+**1029 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 655 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 656 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 275 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
@@ -394,6 +394,7 @@
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
+| View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | ASBS Analytics Dashboard | — | deptofdefense | 2026-01-12 | [#2954381](https://hackerone.com/reports/2954381) |
 | User Can Delete Other Users' Personal Access Tokens at /delete-token/{token_id}/ on Mozilla Pontoon | — | mozilla | 2026-04-10 | [#3325582](https://hackerone.com/reports/3325582) |
 | Lack of Validation in Reward Redemption Allows Unlimited Burp Suite License Abuse | — | security | 2026-03-18 | [#3378540](https://hackerone.com/reports/3378540) |
