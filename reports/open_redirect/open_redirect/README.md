@@ -1,6 +1,6 @@
 # Open Redirect
 
-**198 report(s)**
+**199 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -74,6 +74,7 @@
 | Open redirect due to scanning QR code via brave browser | — | brave | 2023-06-08 | [#1946534](https://hackerone.com/reports/1946534) |
 | Open Redirect - Polycom Company Directory | — | 8x8-bounty | 2023-10-17 | [#1836339](https://hackerone.com/reports/1836339) |
 | Open Redirect - https://████████.jetblue.com/███?url= | — | jetblue | 2023-03-13 | [#1851969](https://hackerone.com/reports/1851969) |
+| another liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3723002](https://hackerone.com/reports/3723002) |
 | Liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3721519](https://hackerone.com/reports/3721519) |
 | Bypass of Open Redirect Fix on lovable.dev via /..// Path Traversal in redirect parameter | — | lovable-vdp | 2026-03-12 | [#3599248](https://hackerone.com/reports/3599248) |
 | Open Redirect Vulnerability in OAuth Flow Leading to Potential Phishing Attack | — | lichess | 2025-05-15 | [#3099816](https://hackerone.com/reports/3099816) |
