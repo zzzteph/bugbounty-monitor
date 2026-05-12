@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1577 report(s) across 22 class(es)**
+**1578 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 945 | $50,000 |
+| [Unknown](unknown/README.md) | 946 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -559,6 +559,7 @@
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate | — | weblate | 2026-04-26 | [#3518571](https://hackerone.com/reports/3518571) |
+| QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | FTP entrypath accepts 0xFF (Telnet IAC) through incomplete ISCNTRL filter, sent on wire via CWD on connection reuse | — | curl | 2026-04-07 | [#3650473](https://hackerone.com/reports/3650473) |
 | File URL UNC Path Access (Windows SSRF) | — | curl | 2025-12-18 | [#3470649](https://hackerone.com/reports/3470649) |
