@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1578 report(s) across 22 class(es)**
+**1579 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 946 | $50,000 |
+| [Unknown](unknown/README.md) | 947 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -545,6 +545,7 @@
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
+| Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |
 | Health check errors silently dropped when channel buffer full | — | aws_vdp | 2026-04-07 | [#3620761](https://hackerone.com/reports/3620761) |
 | MQTT Protocol Packet Injection via Unchecked CONNACK Remaining Length | — | curl | 2026-02-05 | [#3531216](https://hackerone.com/reports/3531216) |
