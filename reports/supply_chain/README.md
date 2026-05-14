@@ -22,8 +22,8 @@
 | RCE on build server via misconfigured pip install | — | yelp | 2021-02-09 | [#946409](https://hackerone.com/reports/946409) |
 | flatmap-stream malicious package (distributed via the popular events-stream) | — | nodejs-ecosystem | 2018-11-26 | [#450006](https://hackerone.com/reports/450006) |
 | Bootstrap library is vulnerable | — | sifchain | 2021-09-06 | [#1198203](https://hackerone.com/reports/1198203) |
-| Vulnerability in GoldSource Engine allows to upload and run an arbitrary DLL on client | — | valve | 2020-03-25 | [#508894](https://hackerone.com/reports/508894) |
 | Trojan:JS/CoinMiner in npm files | — | nodejs-ecosystem | 2019-10-04 | [#687325](https://hackerone.com/reports/687325) |
+| Vulnerability in GoldSource Engine allows to upload and run an arbitrary DLL on client | — | valve | 2020-03-25 | [#508894](https://hackerone.com/reports/508894) |
 | Node.js - DLL Hijacking on Windows | — | ibb | 2022-07-25 | [#1636566](https://hackerone.com/reports/1636566) |
-| Vulnerable javascript dependency at Main domain | — | sifchain | 2021-08-02 | [#1188643](https://hackerone.com/reports/1188643) |
 | CVE-2020-5902  | — | aws_vdp | 2024-12-24 | [#2794126](https://hackerone.com/reports/2794126) |
+| Vulnerable javascript dependency at Main domain | — | sifchain | 2021-08-02 | [#1188643](https://hackerone.com/reports/1188643) |
