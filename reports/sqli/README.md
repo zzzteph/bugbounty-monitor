@@ -1,12 +1,12 @@
 # SQL Injection
 
-**203 report(s) across 2 class(es)**
+**204 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Sql Injection](sql_injection/README.md) | 202 | $25,000 |
+| [Sql Injection](sql_injection/README.md) | 203 | $25,000 |
 | [Blind Sql Injection](blind_sql_injection/README.md) | 1 | $4,134 |
 
 ## All Reports
@@ -189,6 +189,7 @@
 | Woocommerce SQL Injection in WC_Report_Coupon_Usage | — | automattic | 2025-06-24 | [#3198980](https://hackerone.com/reports/3198980) |
 | SQL Injection - entryid parameter in 'formbuilderv2-confirmation.php' | — | deptofdefense | 2026-01-12 | [#3127198](https://hackerone.com/reports/3127198) |
 | SQL injection in structure plugin | — | expressionengine | 2026-01-26 | [#3249794](https://hackerone.com/reports/3249794) |
+| SQL Injection in Column Type Parameter Allows Arbitrary SQL Execution | — | nextcloud | 2026-05-15 | [#3462991](https://hackerone.com/reports/3462991) |
 | SQLi \| in URL paths | — | mtn_group | 2025-03-06 | [#2958619](https://hackerone.com/reports/2958619) |
 | SQL Injection - data[account][id] parameter | — | deptofdefense | 2026-01-12 | [#3127152](https://hackerone.com/reports/3127152) |
 | SQLi At `███████` via `theme_name`  | — | mars | 2026-02-24 | [#3293803](https://hackerone.com/reports/3293803) |
