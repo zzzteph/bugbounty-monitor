@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**335 report(s)**
+**336 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -299,6 +299,7 @@
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
 | PROTOCOL-LEVEL: Persistent UDP Amplification and Cache Poisoning via Alt-Svc Logic Flaw | — | curl | 2026-01-02 | [#3483902](https://hackerone.com/reports/3483902) |
+| Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | When sharing a Deck card in conversation the metaData can be manipulated to open arbitrary URL | — | nextcloud | 2022-02-15 | [#1358977](https://hackerone.com/reports/1358977) |
 | CVE-2021-22897: schannel cipher selection surprise | — | curl | 2021-05-26 | [#1172857](https://hackerone.com/reports/1172857) |
 | Unrestricted Upload of File with Dangerous Type | — | enjin | 2021-01-20 | [#1081766](https://hackerone.com/reports/1081766) |

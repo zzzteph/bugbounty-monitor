@@ -1,12 +1,12 @@
 # Business Logic
 
-**358 report(s) across 5 class(es)**
+**359 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 335 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 336 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -311,6 +311,7 @@
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
 | PROTOCOL-LEVEL: Persistent UDP Amplification and Cache Poisoning via Alt-Svc Logic Flaw | — | curl | 2026-01-02 | [#3483902](https://hackerone.com/reports/3483902) |
+| Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | When sharing a Deck card in conversation the metaData can be manipulated to open arbitrary URL | — | nextcloud | 2022-02-15 | [#1358977](https://hackerone.com/reports/1358977) |
 | CVE-2021-22897: schannel cipher selection surprise | — | curl | 2021-05-26 | [#1172857](https://hackerone.com/reports/1172857) |
 | Unrestricted Upload of File with Dangerous Type | — | enjin | 2021-01-20 | [#1081766](https://hackerone.com/reports/1081766) |
