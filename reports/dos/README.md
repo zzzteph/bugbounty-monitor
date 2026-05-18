@@ -1,13 +1,13 @@
 # Denial of Service
 
-**429 report(s) across 5 class(es)**
+**430 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 402 | $10,000 |
-| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 23 | $2,540 |
+| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 24 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
 | [Loop With Unreachable Exit Condition Infinite Loop](loop_with_unreachable_exit_condition_infinite_loop/README.md) | 1 | — |
@@ -148,6 +148,7 @@
 | Security check up | — | curl | 2025-07-24 | [#3269761](https://hackerone.com/reports/3269761) |
 | Memory Leak in libcurl via Location Header Handling (CWE-770) | — | curl | 2025-05-22 | [#3158093](https://hackerone.com/reports/3158093) |
 | HTTP/2 CONTINUATION Flood Vulnerability | — | curl | 2025-06-28 | [#3125820](https://hackerone.com/reports/3125820) |
+| libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
 | No Limit on Email Subscription | — | openmage | 2021-09-04 | [#1085079](https://hackerone.com/reports/1085079) |
 | Unbounded GZIP Decompression Leading to Event-Loop Starvation | — | curl | 2026-03-31 | [#3632427](https://hackerone.com/reports/3632427) |
 | CVE-2025-5399: WebSocket endless loop | — | curl | 2025-06-04 | [#3168039](https://hackerone.com/reports/3168039) |

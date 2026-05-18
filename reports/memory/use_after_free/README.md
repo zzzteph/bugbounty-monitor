@@ -1,6 +1,6 @@
 # Use After Free
 
-**58 report(s)**
+**59 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -59,6 +59,7 @@
 | Use-After-Free race condition in url_move_hostname() via shared connection pool | — | curl | 2026-03-31 | [#3638715](https://hackerone.com/reports/3638715) |
 | CVE-2026-3805: use after free in SMB connection reuse | — | curl | 2026-03-11 | [#3591944](https://hackerone.com/reports/3591944) |
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
+| CURLOPT_HSTS_CTRL disables shared HSTS without share guard — use-after-free and double-free | — | curl | 2026-05-18 | [#3733934](https://hackerone.com/reports/3733934) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
 | CVE-2021-22901: TLS session caching disaster | — | curl | 2021-05-26 | [#1180380](https://hackerone.com/reports/1180380) |

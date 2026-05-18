@@ -1,6 +1,6 @@
 # Secrets & Hardcoded Credentials
 
-**251 report(s) across 16 class(es)**
+**252 report(s) across 16 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Cleartext Storage Of Sensitive Information](cleartext_storage_of_sensitive_information/README.md) | 73 | $1,000 |
 | [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 44 | $40,000 |
-| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 38 | $4,000 |
+| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 39 | $4,000 |
 | [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 36 | $20,000 |
 | [Use Of Hard Coded Credentials](use_of_hard_coded_credentials/README.md) | 13 | $500 |
 | [Missing Encryption Of Sensitive Data](missing_encryption_of_sensitive_data/README.md) | 11 | $750 |
@@ -156,6 +156,7 @@
 | Insecure WebSocket Usage in curl Documentation and Examples (CWE-319: Cleartext Transmission of Sensitive Information) | — | curl | 2025-08-12 | [#3295652](https://hackerone.com/reports/3295652) |
 | curl doesn't hide credentials in /proc/XXX/cmdline provided via CLI arguments | — | curl | 2025-07-03 | [#3000639](https://hackerone.com/reports/3000639) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
+| HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | Proxy-Authorization header carried to a new host on a redirect | — | curl | 2021-03-08 | [#1086259](https://hackerone.com/reports/1086259) |
 | CVE-2021-22923: Metalink download sends credentials | — | curl | 2021-07-21 | [#1213181](https://hackerone.com/reports/1213181) |
 | Critical Information Disclosure via /talos/api/v1/files/upload | — | bykea | 2025-09-17 | [#3228011](https://hackerone.com/reports/3228011) |
