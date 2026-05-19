@@ -1,6 +1,6 @@
 # Incorrect Authorization
 
-**13 report(s)**
+**14 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -16,4 +16,5 @@
 | Incorrect Authorization leads to see other users Documents Uploaded | — | tennessee-valley-authority | 2023-11-30 | [#2214049](https://hackerone.com/reports/2214049) |
 | OTP bypass - Unintended disclosure of OTP to client allows attacker to manage users' subscriptions | — | mtn_group | 2020-04-11 | [#777957](https://hackerone.com/reports/777957) |
 | CVE-2026-3784: wrong proxy connection reuse with credentials | — | curl | 2026-03-11 | [#3584903](https://hackerone.com/reports/3584903) |
+| Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers | — | curl | 2026-05-19 | [#3741135](https://hackerone.com/reports/3741135) |
 | Incorrect Authorization Checks in /include/findusers.php | — | impresscms | 2022-03-22 | [#1081137](https://hackerone.com/reports/1081137) |

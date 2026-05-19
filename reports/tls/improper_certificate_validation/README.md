@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**39 report(s)**
+**40 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -43,3 +43,4 @@
 | CVE-2025-5025: No QUIC certificate pinning with wolfSSL | — | curl | 2025-05-28 | [#3153497](https://hackerone.com/reports/3153497) |
 | Silent TLS Trust Model Hijacking via `CURL_CA_BUNDLE` Environment Variable Leads to MITM | — | curl | 2025-11-11 | [#3418776](https://hackerone.com/reports/3418776) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |

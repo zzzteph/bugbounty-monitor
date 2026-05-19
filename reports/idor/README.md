@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1034 report(s) across 10 class(es)**
+**1035 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 279 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
-| [Incorrect Authorization](incorrect_authorization/README.md) | 13 | $2,500 |
+| [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 11 | $560 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 5 | — |
 | [Missing Authorization](missing_authorization/README.md) | 4 | $1,200 |
@@ -819,6 +819,7 @@
 | Incorrect Authorization leads to see other users Documents Uploaded | — | tennessee-valley-authority | 2023-11-30 | [#2214049](https://hackerone.com/reports/2214049) |
 | OTP bypass - Unintended disclosure of OTP to client allows attacker to manage users' subscriptions | — | mtn_group | 2020-04-11 | [#777957](https://hackerone.com/reports/777957) |
 | CVE-2026-3784: wrong proxy connection reuse with credentials | — | curl | 2026-03-11 | [#3584903](https://hackerone.com/reports/3584903) |
+| Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers | — | curl | 2026-05-19 | [#3741135](https://hackerone.com/reports/3741135) |
 | Incorrect Authorization Checks in /include/findusers.php | — | impresscms | 2022-03-22 | [#1081137](https://hackerone.com/reports/1081137) |
 | Add and Access to Labels of any Private Projects/Groups of Gitlab(IDOR) | — | gitlab | 2019-09-19 | [#439729](https://hackerone.com/reports/439729) |
 | Comment restriction in subsection "Workshop" of domain "steamcommunity.com" can be bypassed using IDOR | — | valve | 2019-01-07 | [#365504](https://hackerone.com/reports/365504) |

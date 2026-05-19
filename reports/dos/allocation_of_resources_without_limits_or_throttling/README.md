@@ -1,6 +1,6 @@
 # Allocation Of Resources Without Limits Or Throttling
 
-**24 report(s)**
+**26 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -27,4 +27,6 @@
 | Memory Leak in libcurl via Location Header Handling (CWE-770) | — | curl | 2025-05-22 | [#3158093](https://hackerone.com/reports/3158093) |
 | HTTP/2 CONTINUATION Flood Vulnerability | — | curl | 2025-06-28 | [#3125820](https://hackerone.com/reports/3125820) |
 | libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
+| HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c) | — | curl | 2026-05-19 | [#3734020](https://hackerone.com/reports/3734020) |
+| HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB | — | curl | 2026-05-19 | [#3734947](https://hackerone.com/reports/3734947) |
 | No Limit on Email Subscription | — | openmage | 2021-09-04 | [#1085079](https://hackerone.com/reports/1085079) |

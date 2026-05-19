@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**338 report(s)**
+**342 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -295,11 +295,15 @@
 | User Limit Bypass via Pending Invitations in Workspace System | — | dust | 2025-04-29 | [#3102890](https://hackerone.com/reports/3102890) |
 | Not a Vuln: Race Condition Allows Creation of Multiple Organizations with the Same Name | — | wakatime | 2025-07-14 | [#3248712](https://hackerone.com/reports/3248712) |
 | IDOR - Scheduled data leak to other accounts By "projectID" | — | singlestore | 2025-08-12 | [#3219944](https://hackerone.com/reports/3219944) |
+| Schannel custom-CA path skips Extended Key Usage enforcement | — | curl | 2026-05-19 | [#3734992](https://hackerone.com/reports/3734992) |
 | rustls backend silently ignores CURLOPT_CRLFILE when native CA store is active | — | curl | 2026-05-18 | [#3734935](https://hackerone.com/reports/3734935) |
 | cookie: case-insensitive path comparison in replace_existing() allows cookie eviction across distinct paths | — | curl | 2026-05-18 | [#3735238](https://hackerone.com/reports/3735238) |
 | Password Strength Policy Bypass via Server-Side Validation Flaw | — | tucows_vdp | 2026-03-27 | [#3523703](https://hackerone.com/reports/3523703) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
+| CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
+| TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
+| TLS verifyhost bypass in rustls, mbedTLS, and wolfSSL when verifypeer=0 | — | curl | 2026-05-19 | [#3734095](https://hackerone.com/reports/3734095) |
 | PROTOCOL-LEVEL: Persistent UDP Amplification and Cache Poisoning via Alt-Svc Logic Flaw | — | curl | 2026-01-02 | [#3483902](https://hackerone.com/reports/3483902) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | When sharing a Deck card in conversation the metaData can be manipulated to open arbitrary URL | — | nextcloud | 2022-02-15 | [#1358977](https://hackerone.com/reports/1358977) |
