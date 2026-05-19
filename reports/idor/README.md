@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1033 report(s) across 10 class(es)**
+**1034 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 657 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 278 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 279 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 13 | $2,500 |
@@ -1031,6 +1031,7 @@
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
+| Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification | — | github | 2026-05-19 | [#3560256](https://hackerone.com/reports/3560256) |
 | Multiple IDORs in family pairing api | — | tiktok | 2022-05-06 | [#1286332](https://hackerone.com/reports/1286332) |
 | Access control vulnerability (read-only) | — | exness | 2022-04-13 | [#1159367](https://hackerone.com/reports/1159367) |
 | IDOR Leads To Account Takeover Without User Interaction | — | mtn_group | 2022-09-04 | [#1272478](https://hackerone.com/reports/1272478) |

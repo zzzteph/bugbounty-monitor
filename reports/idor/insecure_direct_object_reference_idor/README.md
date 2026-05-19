@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**278 report(s)**
+**279 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -265,6 +265,7 @@
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
+| Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification | — | github | 2026-05-19 | [#3560256](https://hackerone.com/reports/3560256) |
 | Multiple IDORs in family pairing api | — | tiktok | 2022-05-06 | [#1286332](https://hackerone.com/reports/1286332) |
 | Access control vulnerability (read-only) | — | exness | 2022-04-13 | [#1159367](https://hackerone.com/reports/1159367) |
 | IDOR Leads To Account Takeover Without User Interaction | — | mtn_group | 2022-09-04 | [#1272478](https://hackerone.com/reports/1272478) |
