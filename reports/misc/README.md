@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1580 report(s) across 22 class(es)**
+**1581 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 948 | $50,000 |
+| [Unknown](unknown/README.md) | 949 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -1147,6 +1147,7 @@
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
+| Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | mruby-engine: UAF in MRubyEngine#initialize enables local RCE | — | shopify | 2026-04-24 | [#3679660](https://hackerone.com/reports/3679660) |
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |

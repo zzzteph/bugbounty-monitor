@@ -1,13 +1,13 @@
 # Race Conditions
 
-**33 report(s) across 4 class(es)**
+**34 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Concurrent Execution Using Shared Resource With Improper Syn](concurrent_execution_using_shared_resource_with_improper_syn/README.md) | 17 | $3,000 |
-| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 14 | $15,250 |
+| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 15 | $15,250 |
 | [Improper Synchronization](improper_synchronization/README.md) | 1 | — |
 | [Leveraging Race Conditions](leveraging_race_conditions/README.md) | 1 | — |
 
@@ -47,4 +47,5 @@
 | Bypass apiserver proxy filter | — | kubernetes | 2021-05-27 | [#859962](https://hackerone.com/reports/859962) |
 | [SFTP] TOCTOU Race Condition in Upload Resume Logic Leads to Arbitrary File Append | — | curl | 2025-11-24 | [#3432833](https://hackerone.com/reports/3432833) |
 | TOCTOU Race Condition in HTTP/2 Connection Reuse Leads to Certificate Validation Bypass | — | curl | 2025-09-11 | [#3335085](https://hackerone.com/reports/3335085) |
+| curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 | [api.krisp.ai] Race condition on /v2/seats endpoint allows bypassing the original seat limit | — | krisp | 2022-04-04 | [#1418419](https://hackerone.com/reports/1418419) |
