@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**377 report(s)**
+**378 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -345,6 +345,7 @@
 | Approval app allows users to request approval for other users file  | — | nextcloud | 2025-12-05 | [#3338748](https://hackerone.com/reports/3338748) |
 | Session Replay Attack Allows Authentication Bypass via Captured Login Responses Allowing Bypass of 429 Too many attempts for Multiple Failed Logins | — | wakatime | 2025-05-01 | [#3120790](https://hackerone.com/reports/3120790) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
+| POST /api/bitcoinWithdrawalFees returns financial data without authentication despite being documented as a USER OPERATION (private endpoint) | — | coinmate | 2026-05-20 | [#3676308](https://hackerone.com/reports/3676308) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | Otp  bypass in verifying nin | — | mtn_group | 2022-10-17 | [#1314172](https://hackerone.com/reports/1314172) |
 | Administration Authentication Bypass on https://█████ | — | deptofdefense | 2021-04-20 | [#1146600](https://hackerone.com/reports/1146600) |

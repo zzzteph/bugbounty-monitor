@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**589 report(s) across 18 class(es)**
+**590 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 377 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 378 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -447,6 +447,7 @@
 | Approval app allows users to request approval for other users file  | — | nextcloud | 2025-12-05 | [#3338748](https://hackerone.com/reports/3338748) |
 | Session Replay Attack Allows Authentication Bypass via Captured Login Responses Allowing Bypass of 429 Too many attempts for Multiple Failed Logins | — | wakatime | 2025-05-01 | [#3120790](https://hackerone.com/reports/3120790) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
+| POST /api/bitcoinWithdrawalFees returns financial data without authentication despite being documented as a USER OPERATION (private endpoint) | — | coinmate | 2026-05-20 | [#3676308](https://hackerone.com/reports/3676308) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | Otp  bypass in verifying nin | — | mtn_group | 2022-10-17 | [#1314172](https://hackerone.com/reports/1314172) |
 | Administration Authentication Bypass on https://█████ | — | deptofdefense | 2021-04-20 | [#1146600](https://hackerone.com/reports/1146600) |
