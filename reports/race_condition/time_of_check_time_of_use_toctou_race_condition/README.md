@@ -1,6 +1,6 @@
 # Time Of Check Time Of Use Toctou Race Condition
 
-**15 report(s)**
+**16 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,4 +18,5 @@
 | [SFTP] TOCTOU Race Condition in Upload Resume Logic Leads to Arbitrary File Append | — | curl | 2025-11-24 | [#3432833](https://hackerone.com/reports/3432833) |
 | TOCTOU Race Condition in HTTP/2 Connection Reuse Leads to Certificate Validation Bypass | — | curl | 2025-09-11 | [#3335085](https://hackerone.com/reports/3335085) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
+| Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | [api.krisp.ai] Race condition on /v2/seats endpoint allows bypassing the original seat limit | — | krisp | 2022-04-04 | [#1418419](https://hackerone.com/reports/1418419) |

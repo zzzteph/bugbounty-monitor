@@ -1,6 +1,6 @@
 # Null Pointer Dereference
 
-**33 report(s)**
+**34 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -35,5 +35,6 @@
 | null pointer dereference in Sass::Eval::operator()(Sass::Map*) | — | libsass | 2017-06-08 | [#221287](https://hackerone.com/reports/221287) |
 | SIGSEGV in mrb_str_inum | — | shopify-scripts | 2017-05-13 | [#217083](https://hackerone.com/reports/217083) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |
+| NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
 | No Rate Limiting for Password Reset Email Leads to Email Flooding | — | upchieve | 2022-03-26 | [#1340650](https://hackerone.com/reports/1340650) |

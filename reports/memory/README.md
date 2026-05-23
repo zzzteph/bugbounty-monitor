@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**666 report(s) across 25 class(es)**
+**667 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -12,7 +12,7 @@
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
 | [Buffer Over Read](buffer_over_read/README.md) | 52 | $2,142 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 36 | $9,000 |
-| [Null Pointer Dereference](null_pointer_dereference/README.md) | 33 | $4,920 |
+| [Null Pointer Dereference](null_pointer_dereference/README.md) | 34 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 26 | $500 |
 | [Double Free](double_free/README.md) | 16 | $10,000 |
@@ -591,6 +591,7 @@
 | null pointer dereference in Sass::Eval::operator()(Sass::Map*) | — | libsass | 2017-06-08 | [#221287](https://hackerone.com/reports/221287) |
 | SIGSEGV in mrb_str_inum | — | shopify-scripts | 2017-05-13 | [#217083](https://hackerone.com/reports/217083) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |
+| NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
 | No Rate Limiting for Password Reset Email Leads to Email Flooding | — | upchieve | 2022-03-26 | [#1340650](https://hackerone.com/reports/1340650) |
 | Exim off-by-one RCE vulnerability | — | ibb | 2019-09-26 | [#322935](https://hackerone.com/reports/322935) |
