@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**279 report(s)**
+**280 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -262,6 +262,7 @@
 | IDOR on in-app hardcoded zombie endpoint   | — | bykea | 2025-06-13 | [#3085742](https://hackerone.com/reports/3085742) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
 | IDOR: autotranslate.translateMessage Full Message Content Leak | — | rocket_chat | 2026-05-18 | [#3713682](https://hackerone.com/reports/3713682) |
+| Autotranslate DDP Method Exposes Private Messages Without Authentication or Room Access Check | — | rocket_chat | 2026-05-25 | [#3734326](https://hackerone.com/reports/3734326) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |

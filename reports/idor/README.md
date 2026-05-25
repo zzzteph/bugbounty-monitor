@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1036 report(s) across 10 class(es)**
+**1037 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 658 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 279 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 280 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
@@ -1030,6 +1030,7 @@
 | IDOR on in-app hardcoded zombie endpoint   | — | bykea | 2025-06-13 | [#3085742](https://hackerone.com/reports/3085742) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
 | IDOR: autotranslate.translateMessage Full Message Content Leak | — | rocket_chat | 2026-05-18 | [#3713682](https://hackerone.com/reports/3713682) |
+| Autotranslate DDP Method Exposes Private Messages Without Authentication or Room Access Check | — | rocket_chat | 2026-05-25 | [#3734326](https://hackerone.com/reports/3734326) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
