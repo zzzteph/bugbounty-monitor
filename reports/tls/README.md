@@ -1,12 +1,12 @@
 # TLS / Certificate Validation
 
-**72 report(s) across 5 class(es)**
+**73 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 40 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 41 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 3 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 1 | — |
@@ -56,6 +56,7 @@
 | Certificate Hostname Validation Bypass via Leading Dot in Hostname | — | curl | 2025-12-09 | [#3455037](https://hackerone.com/reports/3455037) |
 | CVE-2025-5025: No QUIC certificate pinning with wolfSSL | — | curl | 2025-05-28 | [#3153497](https://hackerone.com/reports/3153497) |
 | Silent TLS Trust Model Hijacking via `CURL_CA_BUNDLE` Environment Variable Leads to MITM | — | curl | 2025-11-11 | [#3418776](https://hackerone.com/reports/3418776) |
+| curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |

@@ -1,6 +1,6 @@
 # Buffer Over Read
 
-**52 report(s)**
+**53 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -53,6 +53,7 @@
 | Heap Buffer Overflow in Curl_memdup0() via CURLOPT_COPYPOSTFIELDS/CURLOPT_POSTFIELDSIZE Mismatch | — | curl | 2025-08-09 | [#3292590](https://hackerone.com/reports/3292590) |
 | Out-of-bounds read in HTTP method handling causes undefined behavior and potential crash This is sharp, Gaurav. We’ve got a real memory-safety bug ins | — | curl | 2025-11-20 | [#3434510](https://hackerone.com/reports/3434510) |
 | Curl parse_connect_to_string Heap-Overread Leading to Denial of Service via CURLOPT_CONNECT_TO | — | curl | 2025-08-20 | [#3306456](https://hackerone.com/reports/3306456) |
+| Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
 | Index Out Of Bounds in protobuf unmarshalling | — | kubernetes | 2021-08-30 | [#1073363](https://hackerone.com/reports/1073363) |
 | OOB read in libuv | — | nodejs | 2021-07-05 | [#1209681](https://hackerone.com/reports/1209681) |

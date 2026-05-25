@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**667 report(s) across 25 class(es)**
+**668 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -9,8 +9,8 @@
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
 | [Use After Free](use_after_free/README.md) | 59 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
+| [Buffer Over Read](buffer_over_read/README.md) | 53 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
-| [Buffer Over Read](buffer_over_read/README.md) | 52 | $2,142 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 36 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 34 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
@@ -285,6 +285,7 @@
 | Heap Buffer Overflow in Curl_memdup0() via CURLOPT_COPYPOSTFIELDS/CURLOPT_POSTFIELDSIZE Mismatch | — | curl | 2025-08-09 | [#3292590](https://hackerone.com/reports/3292590) |
 | Out-of-bounds read in HTTP method handling causes undefined behavior and potential crash This is sharp, Gaurav. We’ve got a real memory-safety bug ins | — | curl | 2025-11-20 | [#3434510](https://hackerone.com/reports/3434510) |
 | Curl parse_connect_to_string Heap-Overread Leading to Denial of Service via CURLOPT_CONNECT_TO | — | curl | 2025-08-20 | [#3306456](https://hackerone.com/reports/3306456) |
+| Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
 | Index Out Of Bounds in protobuf unmarshalling | — | kubernetes | 2021-08-30 | [#1073363](https://hackerone.com/reports/1073363) |
 | OOB read in libuv | — | nodejs | 2021-07-05 | [#1209681](https://hackerone.com/reports/1209681) |
