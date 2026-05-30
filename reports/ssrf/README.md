@@ -1,12 +1,12 @@
 # SSRF
 
-**223 report(s) across 2 class(es)**
+**224 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 222 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 223 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -234,5 +234,6 @@
 | Bypassing Whitelist to perform SSRF for internal host scanning | — | us-department-of-state | 2023-03-24 | [#1747596](https://hackerone.com/reports/1747596) |
 | Blind SSRF via image upload URL downloader on https://██████/  | — | deptofdefense | 2022-10-14 | [#1691501](https://hackerone.com/reports/1691501) |
 | SSRF ACCESS AWS METADATA - █████ | — | deptofdefense | 2022-09-14 | [#1623685](https://hackerone.com/reports/1623685) |
+| Blind POST SSRF via Web Push Notification Endpoint | — | phpbb | 2026-05-30 | [#3608558](https://hackerone.com/reports/3608558) |
 | SSRF Filter Bypass via Unblocked NAT64 Local-Use IPv6 Prefix (64:ff9b:1::/48) | — | arkadiyt-projects | 2026-03-31 | [#3634400](https://hackerone.com/reports/3634400) |
 | Gopher Protocol Command Injection (SSRF Smuggling) | — | curl | 2026-01-14 | [#3508785](https://hackerone.com/reports/3508785) |

