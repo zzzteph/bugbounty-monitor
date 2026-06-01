@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1037 report(s) across 10 class(es)**
+**1038 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
-| [Forced Browsing](forced_browsing/README.md) | 11 | $560 |
+| [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 5 | — |
 | [Missing Authorization](missing_authorization/README.md) | 4 | $1,200 |
 | [Exposed Dangerous Method Or Function](exposed_dangerous_method_or_function/README.md) | 3 | — |
@@ -257,6 +257,7 @@
 | Improper deep link validation  | — | shopify | 2022-07-11 | [#1087744](https://hackerone.com/reports/1087744) |
 | One Click Account Hijacking via Unvalidated Deeplink | — | tiktok | 2022-05-04 | [#1500614](https://hackerone.com/reports/1500614) |
 | URL Scheme Validation Bypass in Shopify Mobile App Allows Javascript Execution | — | shopify | 2025-09-17 | [#1737358](https://hackerone.com/reports/1737358) |
+| Mentioned unites are at the same time .Then we have to increase the bounty. | — | curl | 2026-06-01 | [#3761789](https://hackerone.com/reports/3761789) |
 | Unauthorized access to Argo dashboard on █████ | — | deptofdefense | 2023-12-21 | [#2247231](https://hackerone.com/reports/2247231) |
 | Exposed CDN access token allows modification of all newly uploaded Snapmatic photos | — | rockstargames | 2024-01-26 | [#2184872](https://hackerone.com/reports/2184872) |
 | Unauthenticated Remote Access to Testing Endpoint | — | ibm | 2023-12-04 | [#2192984](https://hackerone.com/reports/2192984) |

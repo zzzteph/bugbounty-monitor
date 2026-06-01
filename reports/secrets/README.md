@@ -1,6 +1,6 @@
 # Secrets & Hardcoded Credentials
 
-**252 report(s) across 16 class(es)**
+**254 report(s) across 16 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Cleartext Storage Of Sensitive Information](cleartext_storage_of_sensitive_information/README.md) | 73 | $1,000 |
 | [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 44 | $40,000 |
 | [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 39 | $4,000 |
-| [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 36 | $20,000 |
+| [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 38 | $20,000 |
 | [Use Of Hard Coded Credentials](use_of_hard_coded_credentials/README.md) | 13 | $500 |
 | [Missing Encryption Of Sensitive Data](missing_encryption_of_sensitive_data/README.md) | 11 | $750 |
 | [Plaintext Storage Of A Password](plaintext_storage_of_a_password/README.md) | 10 | $6,500 |
@@ -231,6 +231,8 @@
 | Hashed data exposure via WebSockets to Workspace Members | — | slack | 2023-09-21 | [#1639600](https://hackerone.com/reports/1639600) |
 | Cross‑origin cookies leak and injection risk when using a custom Host header | — | curl | 2026-01-20 | [#3516878](https://hackerone.com/reports/3516878) |
 | libcurl: Improper Authentication State Management on Cross-Protocol Redirects | — | curl | 2026-01-17 | [#3514263](https://hackerone.com/reports/3514263) |
+| lib/ldap.c follows attacker-controlled LDAP referrals and binds to a second server; WinLDAP builds leak current logon credentials (confirmed on Window | — | curl | 2026-06-01 | [#3756699](https://hackerone.com/reports/3756699) |
+| TLS conn reuse and session cache ignore fsslctx callback and ssl_config_data flags ( incomplete fix variant of 7541ae569 ) | — | curl | 2026-06-01 | [#3761647](https://hackerone.com/reports/3761647) |
 | Digest Auth State Leak on Cross-Origin Redirect via Netrc - Username and Password Hash Sent to Wrong Host | — | curl | 2026-04-19 | [#3680038](https://hackerone.com/reports/3680038) |
 | CVE-2023-46219: HSTS long file name clears contents | — | curl | 2023-12-08 | [#2236133](https://hackerone.com/reports/2236133) |
 | Waketime Payment Gateway Vulnerability | — | wakatime | 2023-08-05 | [#2097517](https://hackerone.com/reports/2097517) |

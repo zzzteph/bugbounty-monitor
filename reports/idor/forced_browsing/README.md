@@ -1,6 +1,6 @@
 # Forced Browsing
 
-**11 report(s)**
+**12 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -15,3 +15,4 @@
 | Improper deep link validation  | — | shopify | 2022-07-11 | [#1087744](https://hackerone.com/reports/1087744) |
 | One Click Account Hijacking via Unvalidated Deeplink | — | tiktok | 2022-05-04 | [#1500614](https://hackerone.com/reports/1500614) |
 | URL Scheme Validation Bypass in Shopify Mobile App Allows Javascript Execution | — | shopify | 2025-09-17 | [#1737358](https://hackerone.com/reports/1737358) |
+| Mentioned unites are at the same time .Then we have to increase the bounty. | — | curl | 2026-06-01 | [#3761789](https://hackerone.com/reports/3761789) |

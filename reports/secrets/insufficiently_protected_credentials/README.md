@@ -1,6 +1,6 @@
 # Insufficiently Protected Credentials
 
-**36 report(s)**
+**38 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -39,4 +39,6 @@
 | Hashed data exposure via WebSockets to Workspace Members | — | slack | 2023-09-21 | [#1639600](https://hackerone.com/reports/1639600) |
 | Cross‑origin cookies leak and injection risk when using a custom Host header | — | curl | 2026-01-20 | [#3516878](https://hackerone.com/reports/3516878) |
 | libcurl: Improper Authentication State Management on Cross-Protocol Redirects | — | curl | 2026-01-17 | [#3514263](https://hackerone.com/reports/3514263) |
+| lib/ldap.c follows attacker-controlled LDAP referrals and binds to a second server; WinLDAP builds leak current logon credentials (confirmed on Window | — | curl | 2026-06-01 | [#3756699](https://hackerone.com/reports/3756699) |
+| TLS conn reuse and session cache ignore fsslctx callback and ssl_config_data flags ( incomplete fix variant of 7541ae569 ) | — | curl | 2026-06-01 | [#3761647](https://hackerone.com/reports/3761647) |
 | Digest Auth State Leak on Cross-Origin Redirect via Netrc - Username and Password Hash Sent to Wrong Host | — | curl | 2026-04-19 | [#3680038](https://hackerone.com/reports/3680038) |
