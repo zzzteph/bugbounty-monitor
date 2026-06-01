@@ -1,6 +1,6 @@
 # Cryptography
 
-**140 report(s) across 12 class(es)**
+**141 report(s) across 12 class(es)**
 
 ## Classes
 
@@ -15,8 +15,8 @@
 | [Use Of Insufficiently Random Values](use_of_insufficiently_random_values/README.md) | 5 | $100 |
 | [Use Of A Key Past Its Expiration Date](use_of_a_key_past_its_expiration_date/README.md) | 4 | — |
 | [Reusing A Nonce Key Pair In Encryption](reusing_a_nonce_key_pair_in_encryption/README.md) | 3 | — |
+| [Improper Verification Of Cryptographic Signature](improper_verification_of_cryptographic_signature/README.md) | 2 | $750 |
 | [Key Exchange Without Entity Authentication](key_exchange_without_entity_authentication/README.md) | 2 | — |
-| [Improper Verification Of Cryptographic Signature](improper_verification_of_cryptographic_signature/README.md) | 1 | $750 |
 | [Reversible One Way Hash](reversible_one_way_hash/README.md) | 1 | — |
 
 ## All Reports
@@ -109,6 +109,7 @@
 | Multiple OpenSSL error handling issues in nodejs crypto library | — | nodejs | 2023-02-17 | [#1808596](https://hackerone.com/reports/1808596) |
 | HashDoS in V8 | — | nodejs | 2026-03-30 | [#3511792](https://hackerone.com/reports/3511792) |
 | Timing side-channel in HMAC verification via memcmp() in crypto_hmac.cc leads to potential MAC forgery | — | nodejs | 2026-03-30 | [#3533945](https://hackerone.com/reports/3533945) |
+| Missing HMAC validation on /uninstall webhook in Shopify/sample-django-app reference template | — | shopify | 2026-06-01 | [#3697491](https://hackerone.com/reports/3697491) |
 | curl built with GnuTLS backend defaults to weak crypto parameters | — | curl | 2025-12-08 | [#3407352](https://hackerone.com/reports/3407352) |
 | demo.weblate.org is vulnerable to SWEET32 Vulnerability | — | weblate | 2017-05-17 | [#223653](https://hackerone.com/reports/223653) |
 | Website vulnerable to POODLE (SSLv3) with expired certificate | — | deptofdefense | 2021-04-02 | [#481632](https://hackerone.com/reports/481632) |
