@@ -1,6 +1,6 @@
 # Information Exposure Through Sent Data
 
-**17 report(s)**
+**18 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -21,3 +21,4 @@
 | CVE-2026-3783: token leak with redirect and netrc | — | curl | 2026-03-11 | [#3583983](https://hackerone.com/reports/3583983) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
+| Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
