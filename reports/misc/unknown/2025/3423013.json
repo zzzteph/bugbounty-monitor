@@ -1,0 +1,150 @@
+{
+  "id": 3423013,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNDIzMDEz",
+  "url": "https://hackerone.com/reports/3423013",
+  "title": "page.line.me Open Redirect Leading to OAuth Authorization Code Exposure and Access Token Compromise",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2025-11-12T12:30:21.382Z",
+  "submitted_at": "2025-11-12T12:30:21.664Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "imnotr3al",
+    "url": "/imnotr3al",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/3w6iyrtzbwgbm7dtboprpj0yem49/3cb67cc78dc0cba55b102dd9eca2ee89b206d3e960be830f070583d9070b69ef"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 13343,
+    "url": "https://hackerone.com/line",
+    "handle": "line",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/nfgd330erfzkfvdi70dv3txlgpah/235acf2ba808c3a51a94888fb977392c26f8fb0ccf77a81a4546c5e4065c06f1",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/nfgd330erfzkfvdi70dv3txlgpah/3f1ab5c6a9b6dadada1e6c8121700b884388bd0a43471fee1897a38ce57d0b2c"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "LY Corporation",
+      "twitter_handle": "",
+      "website": "https://line.me",
+      "about": "LINE Security Bug Bounty Program"
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "no-content",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-06-02T03:30:35.141Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-04-20T09:24:43.338Z",
+  "team_member_agreed_on_going_public_at": "2026-06-02T03:30:34.576Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "",
+  "bounty_amount": "1000.0",
+  "formatted_bounty": "$1,000",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 5,
+  "voters": [
+    "zy9ard3",
+    "imnotr3al",
+    "sottam",
+    "xier",
+    "fearhunt"
+  ],
+  "severity": {
+    "rating": "high",
+    "score": 7.1,
+    "author_type": "Team",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "high",
+      "privileges_required": "none",
+      "user_interaction": "required",
+      "scope": "unchanged",
+      "confidentiality": "high",
+      "integrity": "none",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 72259,
+    "asset_type": "OTHER",
+    "asset_identifier": "LINE Messenger - Chat",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "id": 860023,
+      "category": "team",
+      "content": "An open redirect vulnerability was identified in page.line.me because redirect destinations were not properly restricted to trusted domains. By abusing this behavior within an OAuth 2.0 authorization flow, an attacker could cause the authorization response to be sent to an attacker-controlled endpoint. This could expose the authorization code issued after successful user authentication, which may then be exchanged for a valid access token. As a result, the vulnerability could lead to unauthorized access to the victim’s account, allowing an attacker to perform actions with the victim’s privileges.",
+      "updated_at": "2026-06-02T03:29:31.691Z",
+      "can_view?": true,
+      "can_create?": false,
+      "attachments": [],
+      "user": {
+        "id": 1980862,
+        "username": "calvin55",
+        "name": "calvin",
+        "bio": "",
+        "cleared": false,
+        "verified": false,
+        "website": null,
+        "location": "",
+        "created_at": "2021-09-23T06:45:00.395Z",
+        "url": "https://hackerone.com/calvin55",
+        "hackerone_triager": false,
+        "hackerone_employee": false,
+        "user_type": "hacker",
+        "profile_picture_urls": {
+          "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/3psrkj4ww7zinan2hmyji13vqlda/235acf2ba808c3a51a94888fb977392c26f8fb0ccf77a81a4546c5e4065c06f1?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F.png%22%3B%20filename%2A%3DUTF-8%27%27%25E1%2584%2583%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25AE%25E1%2586%25AB%25E1%2584%2585%25E1%2585%25A9%25E1%2584%2583%25E1%2585%25B3.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ7JI7SZ22%2F20260602%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260602T053724Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFYaCXVzLXdlc3QtMiJGMEQCIEoE3H3VvsAByRWHqgBONvD9y7FMqEFJAJ8DOqQ08RKVAiAYHA2hxAWK09wAoP0jeVakZXv6JiO85jBMLalbrSuDdCqyBQgeEAMaDDAxMzYxOTI3NDg0OSIMFSaUP6nolCnlA4g%2BKo8FIkjqgYt0akTna1pMQLEXF%2FMIOMiwncfvk%2Bh8YsahPvDMdTxHZzrHR6oqHedgptgvyYftHJ0hAqHk9IJw4o0e%2FY%2F58%2FnY4vgot%2B9l5V4g%2FTsHtEsPA%2FMrkfB%2FXmSOl41183X4D1UxKbnUEgx3E%2Bz1oSOSgefV%2FzvWqpiyZKTZJbo6ADdZjbHMlj%2BzM8k8tfNoXqwWjrnlQ9VXWMdDC%2BuuumFYAoYCRhDRLBkAPpIS4k1yfhfENmqzgSG%2FCvn9h2rBz1%2BhOD8Ibqqgko1qKKyEIr0XcqB43HRl885AsQDh0EOLvIchJEM8hkTYo08S5G20o8LkfgVlNGYLYhdhR6GAznNRJ5LiLNfhLoQ7rZ8g2FcZ%2FgDTzcbOhN8E531XN8X1rvBR10tlF4mb0mB45mMZGpnor625afqyDbAmnLx2fWtc9xjqKkAUlYfYvr5TGuxwTtJf4KhBu1sSCUEK3YQv9ZSNZdavAuVz3PmGieRXOQJFe7FcCVegFryAPgcVaZFTdzpnR6DvfSlwQPo2tBGWYUzw41Gn8eKK4zK0shVgB%2FepiqpqXbSXjwMYklsvIUliJeNdr%2FoARk4mTNJ7iHa8F6PnwcfiMNojE5ZGJ7eiHMj16HFPYXJRgIzyoRXiexFUDmGSwioGIno%2B3mbaAz9LOMSrmvgFeHIhOd%2BnMT%2BUngh6HIFPYZMMnpFBQpbfbdz8ADbN2zhvKXu0IaTT38yUZeLKYl5G%2B9ldoIAFE%2BBV1y4BCcO739ljfEdmPXnXXcLyJqecRYLm3RPBpnQtg1F%2FRzlFiZRGC93OQAOVFz%2BfB6%2FSr%2BXsEcoJV5q%2F%2F7GZpP9xm2eC7rbrBEwcqhMFLRLgM81D0F66c1WVZiMh1HEhUDCqz%2FnQBjqyAfoTHaSTPAuuZH287sKWwyeArk777%2B8OXZ2JUALJn59Cl8HHXveJTi0MhEtW0nIfp2mIrqb%2B3iuxKfiNHE10GJeirqIxJAbgMfufjstXGJudTJnJm7IhKQrgCtC2unOyj2U%2Bjt0cEmoQT6ToFQD6a1O3tpR8Ncmpblwa22y1Zke4s4SyoyY6Zn%2BYCkhNYsj%2BHdzwMZVzqpFMNGjRDioSOlKvSCvGjoiWf06HCldbWps9Y04%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=9d212dd2aada63b701fbb7d9c9547974b89880509aa658799f013108ba629826",
+          "medium": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/3psrkj4ww7zinan2hmyji13vqlda/3f1ab5c6a9b6dadada1e6c8121700b884388bd0a43471fee1897a38ce57d0b2c?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F.png%22%3B%20filename%2A%3DUTF-8%27%27%25E1%2584%2583%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25AE%25E1%2586%25AB%25E1%2584%2585%25E1%2585%25A9%25E1%2584%2583%25E1%2585%25B3.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ7JI7SZ22%2F20260602%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260602T053724Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFYaCXVzLXdlc3QtMiJGMEQCIEoE3H3VvsAByRWHqgBONvD9y7FMqEFJAJ8DOqQ08RKVAiAYHA2hxAWK09wAoP0jeVakZXv6JiO85jBMLalbrSuDdCqyBQgeEAMaDDAxMzYxOTI3NDg0OSIMFSaUP6nolCnlA4g%2BKo8FIkjqgYt0akTna1pMQLEXF%2FMIOMiwncfvk%2Bh8YsahPvDMdTxHZzrHR6oqHedgptgvyYftHJ0hAqHk9IJw4o0e%2FY%2F58%2FnY4vgot%2B9l5V4g%2FTsHtEsPA%2FMrkfB%2FXmSOl41183X4D1UxKbnUEgx3E%2Bz1oSOSgefV%2FzvWqpiyZKTZJbo6ADdZjbHMlj%2BzM8k8tfNoXqwWjrnlQ9VXWMdDC%2BuuumFYAoYCRhDRLBkAPpIS4k1yfhfENmqzgSG%2FCvn9h2rBz1%2BhOD8Ibqqgko1qKKyEIr0XcqB43HRl885AsQDh0EOLvIchJEM8hkTYo08S5G20o8LkfgVlNGYLYhdhR6GAznNRJ5LiLNfhLoQ7rZ8g2FcZ%2FgDTzcbOhN8E531XN8X1rvBR10tlF4mb0mB45mMZGpnor625afqyDbAmnLx2fWtc9xjqKkAUlYfYvr5TGuxwTtJf4KhBu1sSCUEK3YQv9ZSNZdavAuVz3PmGieRXOQJFe7FcCVegFryAPgcVaZFTdzpnR6DvfSlwQPo2tBGWYUzw41Gn8eKK4zK0shVgB%2FepiqpqXbSXjwMYklsvIUliJeNdr%2FoARk4mTNJ7iHa8F6PnwcfiMNojE5ZGJ7eiHMj16HFPYXJRgIzyoRXiexFUDmGSwioGIno%2B3mbaAz9LOMSrmvgFeHIhOd%2BnMT%2BUngh6HIFPYZMMnpFBQpbfbdz8ADbN2zhvKXu0IaTT38yUZeLKYl5G%2B9ldoIAFE%2BBV1y4BCcO739ljfEdmPXnXXcLyJqecRYLm3RPBpnQtg1F%2FRzlFiZRGC93OQAOVFz%2BfB6%2FSr%2BXsEcoJV5q%2F%2F7GZpP9xm2eC7rbrBEwcqhMFLRLgM81D0F66c1WVZiMh1HEhUDCqz%2FnQBjqyAfoTHaSTPAuuZH287sKWwyeArk777%2B8OXZ2JUALJn59Cl8HHXveJTi0MhEtW0nIfp2mIrqb%2B3iuxKfiNHE10GJeirqIxJAbgMfufjstXGJudTJnJm7IhKQrgCtC2unOyj2U%2Bjt0cEmoQT6ToFQD6a1O3tpR8Ncmpblwa22y1Zke4s4SyoyY6Zn%2BYCkhNYsj%2BHdzwMZVzqpFMNGjRDioSOlKvSCvGjoiWf06HCldbWps9Y04%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e149a554e464b8c0c8650e34f0ff240bbd8c8c63f63f796b29ec92cbe31131bd",
+          "xtralarge": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/3psrkj4ww7zinan2hmyji13vqlda/d6d8259739a2a4d509639b7804214d057bca547cc3fafe509ec3e3a86321b1d1?response-content-disposition=inline%3B%20filename%3D%22%253F%253F%253F%253F%253F%253F%253F%253F%253F.png%22%3B%20filename%2A%3DUTF-8%27%27%25E1%2584%2583%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25AE%25E1%2586%25AB%25E1%2584%2585%25E1%2585%25A9%25E1%2584%2583%25E1%2585%25B3.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ7JI7SZ22%2F20260602%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260602T053724Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFYaCXVzLXdlc3QtMiJGMEQCIEoE3H3VvsAByRWHqgBONvD9y7FMqEFJAJ8DOqQ08RKVAiAYHA2hxAWK09wAoP0jeVakZXv6JiO85jBMLalbrSuDdCqyBQgeEAMaDDAxMzYxOTI3NDg0OSIMFSaUP6nolCnlA4g%2BKo8FIkjqgYt0akTna1pMQLEXF%2FMIOMiwncfvk%2Bh8YsahPvDMdTxHZzrHR6oqHedgptgvyYftHJ0hAqHk9IJw4o0e%2FY%2F58%2FnY4vgot%2B9l5V4g%2FTsHtEsPA%2FMrkfB%2FXmSOl41183X4D1UxKbnUEgx3E%2Bz1oSOSgefV%2FzvWqpiyZKTZJbo6ADdZjbHMlj%2BzM8k8tfNoXqwWjrnlQ9VXWMdDC%2BuuumFYAoYCRhDRLBkAPpIS4k1yfhfENmqzgSG%2FCvn9h2rBz1%2BhOD8Ibqqgko1qKKyEIr0XcqB43HRl885AsQDh0EOLvIchJEM8hkTYo08S5G20o8LkfgVlNGYLYhdhR6GAznNRJ5LiLNfhLoQ7rZ8g2FcZ%2FgDTzcbOhN8E531XN8X1rvBR10tlF4mb0mB45mMZGpnor625afqyDbAmnLx2fWtc9xjqKkAUlYfYvr5TGuxwTtJf4KhBu1sSCUEK3YQv9ZSNZdavAuVz3PmGieRXOQJFe7FcCVegFryAPgcVaZFTdzpnR6DvfSlwQPo2tBGWYUzw41Gn8eKK4zK0shVgB%2FepiqpqXbSXjwMYklsvIUliJeNdr%2FoARk4mTNJ7iHa8F6PnwcfiMNojE5ZGJ7eiHMj16HFPYXJRgIzyoRXiexFUDmGSwioGIno%2B3mbaAz9LOMSrmvgFeHIhOd%2BnMT%2BUngh6HIFPYZMMnpFBQpbfbdz8ADbN2zhvKXu0IaTT38yUZeLKYl5G%2B9ldoIAFE%2BBV1y4BCcO739ljfEdmPXnXXcLyJqecRYLm3RPBpnQtg1F%2FRzlFiZRGC93OQAOVFz%2BfB6%2FSr%2BXsEcoJV5q%2F%2F7GZpP9xm2eC7rbrBEwcqhMFLRLgM81D0F66c1WVZiMh1HEhUDCqz%2FnQBjqyAfoTHaSTPAuuZH287sKWwyeArk777%2B8OXZ2JUALJn59Cl8HHXveJTi0MhEtW0nIfp2mIrqb%2B3iuxKfiNHE10GJeirqIxJAbgMfufjstXGJudTJnJm7IhKQrgCtC2unOyj2U%2Bjt0cEmoQT6ToFQD6a1O3tpR8Ncmpblwa22y1Zke4s4SyoyY6Zn%2BYCkhNYsj%2BHdzwMZVzqpFMNGjRDioSOlKvSCvGjoiWf06HCldbWps9Y04%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=12a709aeeb4612e6253a1ff153979b452ee10f3b9d6371c7253b853e9e4cc2ab"
+        }
+      }
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

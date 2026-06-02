@@ -1,6 +1,6 @@
 # Unknown
 
-**949 report(s)**
+**950 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -45,6 +45,7 @@
 | [dev.twitter.com] XSS and Open Redirect Protection Bypass | $1,120 | x | 2019-02-07 | [#330008](https://hackerone.com/reports/330008) |
 | Any user with invite capabilities can take-over any account on Discourse | $1,024 | discourse | 2017-11-06 | [#242765](https://hackerone.com/reports/242765) |
 | Unauthorized Ticket can be created by an Attacker in user's Helpdesk account | $1,000 | security | 2023-09-08 | [#2079502](https://hackerone.com/reports/2079502) |
+| page.line.me Open Redirect Leading to OAuth Authorization Code Exposure and Access Token Compromise | $1,000 | line | 2026-06-02 | [#3423013](https://hackerone.com/reports/3423013) |
 | XSS в товарах | $1,000 | vkcom | 2017-10-29 | [#273365](https://hackerone.com/reports/273365) |
 | SSRF on image renderer | $1,000 | playstation | 2021-01-12 | [#811136](https://hackerone.com/reports/811136) |
 | Information Leakage - GitHub - VCenter configuration scripts, StorMagic usernames and password along with default ESXi root password | $1,000 | uber | 2018-08-27 | [#365199](https://hackerone.com/reports/365199) |

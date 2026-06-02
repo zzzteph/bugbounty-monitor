@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1581 report(s) across 22 class(es)**
+**1582 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 949 | $50,000 |
+| [Unknown](unknown/README.md) | 950 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -94,6 +94,7 @@
 | Wordpress Takeover using setup configuration at http://████.edu [HtUS] | $1,000 | deptofdefense | 2023-01-13 | [#1626205](https://hackerone.com/reports/1626205) |
 | Lack of URL normalization renders Blocked-Previews feature ineffectual | $1,000 | slack | 2022-01-16 | [#1102764](https://hackerone.com/reports/1102764) |
 | Unauthorized Ticket can be created by an Attacker in user's Helpdesk account | $1,000 | security | 2023-09-08 | [#2079502](https://hackerone.com/reports/2079502) |
+| page.line.me Open Redirect Leading to OAuth Authorization Code Exposure and Access Token Compromise | $1,000 | line | 2026-06-02 | [#3423013](https://hackerone.com/reports/3423013) |
 | XSS в товарах | $1,000 | vkcom | 2017-10-29 | [#273365](https://hackerone.com/reports/273365) |
 | SSRF on image renderer | $1,000 | playstation | 2021-01-12 | [#811136](https://hackerone.com/reports/811136) |
 | Information Leakage - GitHub - VCenter configuration scripts, StorMagic usernames and password along with default ESXi root password | $1,000 | uber | 2018-08-27 | [#365199](https://hackerone.com/reports/365199) |
