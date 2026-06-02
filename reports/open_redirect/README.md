@@ -1,12 +1,12 @@
 # Open Redirect
 
-**199 report(s) across 1 class(es)**
+**200 report(s) across 1 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Open Redirect](open_redirect/README.md) | 199 | $2,400 |
+| [Open Redirect](open_redirect/README.md) | 200 | $2,400 |
 
 ## All Reports
 
@@ -208,6 +208,7 @@
 | Bypass for Domain-level redirects (Unvalidated Redirects and Forwar) | — | gitlab | 2022-06-22 | [#1582160](https://hackerone.com/reports/1582160) |
 | Open redirect Via X-Forwarded-Host | — | omise | 2024-11-17 | [#1479889](https://hackerone.com/reports/1479889) |
 | Open Redirect on https://██.8x8.com/login?nextPage=%2F | — | 8x8-bounty | 2022-03-10 | [#1467046](https://hackerone.com/reports/1467046) |
+| Incomplete fix for CVE-2022-35406: meta-redirect content-type check bypassable via parameter injection | — | portswigger | 2026-06-02 | [#3775183](https://hackerone.com/reports/3775183) |
 | Liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3721519](https://hackerone.com/reports/3721519) |
 | Bypass of Open Redirect Fix on lovable.dev via /..// Path Traversal in redirect parameter | — | lovable-vdp | 2026-03-12 | [#3599248](https://hackerone.com/reports/3599248) |
 | another liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3723002](https://hackerone.com/reports/3723002) |
