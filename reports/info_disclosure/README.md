@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1100 report(s) across 10 class(es)**
+**1101 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 901 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 902 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 76 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -963,6 +963,7 @@
 | Django debug enabled showing information about system, database, configuration files | — | glovo | 2022-05-31 | [#1561377](https://hackerone.com/reports/1561377) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
+| PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
 | Install.php File Exposure on Drupal | — | deptofdefense | 2023-02-24 | [#1844674](https://hackerone.com/reports/1844674) |
 | internal path disclosure via register error | — | tennessee-valley-authority | 2023-11-30 | [#2213381](https://hackerone.com/reports/2213381) |

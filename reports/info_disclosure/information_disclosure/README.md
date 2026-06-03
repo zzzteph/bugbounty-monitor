@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**901 report(s)**
+**902 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -904,4 +904,5 @@
 | Django debug enabled showing information about system, database, configuration files | — | glovo | 2022-05-31 | [#1561377](https://hackerone.com/reports/1561377) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
+| PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
