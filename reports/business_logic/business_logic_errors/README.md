@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**342 report(s)**
+**343 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -344,5 +344,6 @@
 | Schannel custom-CA path skips Extended Key Usage enforcement | — | curl | 2026-05-19 | [#3734992](https://hackerone.com/reports/3734992) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
+| Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | Password Strength Policy Bypass via Server-Side Validation Flaw | — | tucows_vdp | 2026-03-27 | [#3523703](https://hackerone.com/reports/3523703) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |

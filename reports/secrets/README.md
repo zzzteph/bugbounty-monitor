@@ -1,6 +1,6 @@
 # Secrets & Hardcoded Credentials
 
-**254 report(s) across 16 class(es)**
+**255 report(s) across 16 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Cleartext Storage Of Sensitive Information](cleartext_storage_of_sensitive_information/README.md) | 73 | $1,000 |
 | [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 44 | $40,000 |
-| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 39 | $4,000 |
+| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 40 | $4,000 |
 | [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 38 | $20,000 |
 | [Use Of Hard Coded Credentials](use_of_hard_coded_credentials/README.md) | 13 | $500 |
 | [Missing Encryption Of Sensitive Data](missing_encryption_of_sensitive_data/README.md) | 11 | $750 |
@@ -159,6 +159,7 @@
 | CVE-2022-43551: Another HSTS bypass via IDN | — | curl | 2022-12-21 | [#1755083](https://hackerone.com/reports/1755083) |
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
+| SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |
 | Critical Information Disclosure via /talos/api/v1/files/upload | — | bykea | 2025-09-17 | [#3228011](https://hackerone.com/reports/3228011) |
 | Splunk Sensitive Information Disclosure @████████ | — | deptofdefense | 2023-02-13 | [#1860905](https://hackerone.com/reports/1860905) |
 | Direct access to tox.ini file which is contain configuration details | — | yelp | 2023-03-02 | [#1824865](https://hackerone.com/reports/1824865) |

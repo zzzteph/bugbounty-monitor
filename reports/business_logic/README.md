@@ -1,12 +1,12 @@
 # Business Logic
 
-**365 report(s) across 5 class(es)**
+**366 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 342 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 343 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -356,6 +356,7 @@
 | Schannel custom-CA path skips Extended Key Usage enforcement | — | curl | 2026-05-19 | [#3734992](https://hackerone.com/reports/3734992) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
+| Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | Password Strength Policy Bypass via Server-Side Validation Flaw | — | tucows_vdp | 2026-03-27 | [#3523703](https://hackerone.com/reports/3523703) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | CVE-2023-28322: more POST-after-PUT confusion | — | curl | 2023-05-18 | [#1954658](https://hackerone.com/reports/1954658) |

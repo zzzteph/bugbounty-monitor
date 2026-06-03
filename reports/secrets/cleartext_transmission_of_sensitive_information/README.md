@@ -1,6 +1,6 @@
 # Cleartext Transmission Of Sensitive Information
 
-**39 report(s)**
+**40 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -43,3 +43,4 @@
 | CVE-2022-43551: Another HSTS bypass via IDN | — | curl | 2022-12-21 | [#1755083](https://hackerone.com/reports/1755083) |
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
+| SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |

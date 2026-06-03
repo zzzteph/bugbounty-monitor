@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1582 report(s) across 22 class(es)**
+**1583 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 950 | $50,000 |
+| [Unknown](unknown/README.md) | 951 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -1221,6 +1221,7 @@
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
+| curl/libcurl 8.20.0 NOPROXY bypass via uppercase-hex IPv4 aliases leaks off-proxy Basic credentials to the configured proxy | — | curl | 2026-06-03 | [#3773293](https://hackerone.com/reports/3773293) |
 | FTP entrypath accepts 0xFF (Telnet IAC) through incomplete ISCNTRL filter, sent on wire via CWD on connection reuse | — | curl | 2026-04-07 | [#3650473](https://hackerone.com/reports/3650473) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
