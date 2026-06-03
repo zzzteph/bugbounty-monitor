@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**379 report(s)**
+**380 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -380,6 +380,7 @@
 | Admin Authentication Bypass Lead to Admin Account Takeover  | — | ups | 2022-06-20 | [#1490470](https://hackerone.com/reports/1490470) |
 | Broken access control  | — | ups | 2022-06-18 | [#1539426](https://hackerone.com/reports/1539426) |
 | POST /api/bitcoinWithdrawalFees returns financial data without authentication despite being documented as a USER OPERATION (private endpoint) | — | coinmate | 2026-05-20 | [#3676308](https://hackerone.com/reports/3676308) |
+| Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |

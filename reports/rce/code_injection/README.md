@@ -1,6 +1,6 @@
 # Code Injection
 
-**247 report(s)**
+**249 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -251,3 +251,5 @@
 | Dependency confusion in https://github.com/hyperledger/aries-mobile-agent-react-native  | — | hyperledger | 2023-02-07 | [#1763343](https://hackerone.com/reports/1763343) |
 | ███ vulnerable to CVE-2022-22954 | — | deptofdefense | 2022-04-20 | [#1537694](https://hackerone.com/reports/1537694) |
 | Internal application wrapper or script using curl | — | curl | 2026-04-03 | [#3648199](https://hackerone.com/reports/3648199) |
+| PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
+| PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |

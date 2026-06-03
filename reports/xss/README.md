@@ -1,13 +1,13 @@
 # XSS
 
-**1474 report(s) across 10 class(es)**
+**1477 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 513 | $5,000 |
-| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 461 | $16,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 514 | $5,000 |
+| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 463 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
@@ -1122,6 +1122,7 @@
 | Reflected XSS at https://██████████/████████ via "███████" parameter | — | deptofdefense | 2022-02-14 | [#1457493](https://hackerone.com/reports/1457493) |
 | Reflected XSS at https://█████████ via "███" parameter | — | deptofdefense | 2022-02-14 | [#1457277](https://hackerone.com/reports/1457277) |
 | Reflected XSS at https://██████/██████ via "██████" parameter | — | deptofdefense | 2022-02-14 | [#1457444](https://hackerone.com/reports/1457444) |
+| Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | Stored XSS + CSRF in "apellido" value | — | mars | 2023-08-30 | [#2037234](https://hackerone.com/reports/2037234) |
 | HTML injection that may lead to XSS on HackerOne.com through H1 Triage Wizard Chrome Extension | — | security | 2023-02-14 | [#1874260](https://hackerone.com/reports/1874260) |
 | Stored XSS on  wordpress.com | — | automattic | 2023-05-19 | [#1987172](https://hackerone.com/reports/1987172) |
@@ -1471,6 +1472,8 @@
 | stored cross site scripting in https://███ | — | deptofdefense | 2023-01-06 | [#1657006](https://hackerone.com/reports/1657006) |
 | [user_oidc] Stored XSS via Authorization Endpoint - Safari-Only | — | nextcloud | 2022-12-18 | [#1687410](https://hackerone.com/reports/1687410) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
+| Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
+| Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |
 | CVE-2023-27533: Telnet option IAC injection | — | curl | 2023-03-22 | [#1891474](https://hackerone.com/reports/1891474) |
 | Profile bio at rockstar is accepting control characters | — | rockstargames | 2017-05-23 | [#214763](https://hackerone.com/reports/214763) |
 | Terminal Output Not Great | — | curl | 2025-12-11 | [#3460184](https://hackerone.com/reports/3460184) |

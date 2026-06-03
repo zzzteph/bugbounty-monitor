@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**658 report(s)**
+**662 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -655,10 +655,14 @@
 | Hide download previews are accessible without a watermark | — | nextcloud | 2023-05-04 | [#1745755](https://hackerone.com/reports/1745755) |
 | CORS Misconfiguration in https://████████/accounts/login/ | — | deptofdefense | 2023-02-24 | [#1771149](https://hackerone.com/reports/1771149) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
+| Missing access control when linking trackers to campaigns | — | revive_adserver | 2026-06-03 | [#3650582](https://hackerone.com/reports/3650582) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
+| Missing access control when linking banners or campaigns to zones  | — | revive_adserver | 2026-06-03 | [#3650504](https://hackerone.com/reports/3650504) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
+| Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
 | Potential Subdomain Takeover on IBM.com domain. | — | ibm | 2026-03-24 | [#3592387](https://hackerone.com/reports/3592387) |
+| Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |

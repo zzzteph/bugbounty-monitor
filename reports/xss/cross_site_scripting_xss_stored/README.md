@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**461 report(s)**
+**463 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -465,3 +465,5 @@
 | stored cross site scripting in https://███ | — | deptofdefense | 2023-01-06 | [#1657006](https://hackerone.com/reports/1657006) |
 | [user_oidc] Stored XSS via Authorization Endpoint - Safari-Only | — | nextcloud | 2022-12-18 | [#1687410](https://hackerone.com/reports/1687410) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
+| Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
+| Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |

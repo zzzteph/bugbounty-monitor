@@ -1,12 +1,12 @@
 # SQL Injection
 
-**204 report(s) across 2 class(es)**
+**205 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Sql Injection](sql_injection/README.md) | 203 | $25,000 |
+| [Sql Injection](sql_injection/README.md) | 204 | $25,000 |
 | [Blind Sql Injection](blind_sql_injection/README.md) | 1 | $4,134 |
 
 ## All Reports
@@ -214,6 +214,7 @@
 | SQL injection at [█████████] [HtUS] | — | deptofdefense | 2022-09-14 | [#1626198](https://hackerone.com/reports/1626198) |
 | SQL injection at [https://█████████] [HtUS] | — | deptofdefense | 2022-09-14 | [#1627995](https://hackerone.com/reports/1627995) |
 | NoSQL injection in listEmojiCustom method call | — | rocket_chat | 2023-05-09 | [#1757676](https://hackerone.com/reports/1757676) |
+| Blind SQL injection via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653196](https://hackerone.com/reports/3653196) |
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
 | SQL Injection vulnerability found on ibm.com endpoint | — | ibm | 2026-03-12 | [#3578842](https://hackerone.com/reports/3578842) |
 | Complete authentication bypass to admin permissions | — | rocket_chat | 2026-04-22 | [#3564655](https://hackerone.com/reports/3564655) |

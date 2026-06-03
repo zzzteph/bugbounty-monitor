@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**513 report(s)**
+**514 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -517,3 +517,4 @@
 | Reflected XSS at https://██████████/████████ via "███████" parameter | — | deptofdefense | 2022-02-14 | [#1457493](https://hackerone.com/reports/1457493) |
 | Reflected XSS at https://█████████ via "███" parameter | — | deptofdefense | 2022-02-14 | [#1457277](https://hackerone.com/reports/1457277) |
 | Reflected XSS at https://██████/██████ via "██████" parameter | — | deptofdefense | 2022-02-14 | [#1457444](https://hackerone.com/reports/1457444) |
+| Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
