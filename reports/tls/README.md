@@ -1,12 +1,12 @@
 # TLS / Certificate Validation
 
-**74 report(s) across 5 class(es)**
+**75 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 41 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 42 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 3 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
@@ -59,6 +59,7 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
 | CURLOPT_PROXY_CRLFILE / CURLOPT_PROXY_ISSUERCERT / CURLOPT_PROXY_ISSUERCERT_BLOB silently ignored on backends that don't support them | — | curl | 2026-06-05 | [#3717552](https://hackerone.com/reports/3717552) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |

@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**41 report(s)**
+**42 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -45,3 +45,4 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
