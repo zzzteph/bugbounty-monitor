@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1585 report(s) across 22 class(es)**
+**1586 report(s) across 23 class(es)**
 
 ## Classes
 
@@ -27,6 +27,7 @@
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
 | [Unchecked Error Condition](unchecked_error_condition/README.md) | 1 | $150 |
+| [Uncontrolled Search Path Element](uncontrolled_search_path_element/README.md) | 1 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 1 | — |
 
 ## All Reports
@@ -428,6 +429,7 @@
 | [h1-415 2020] H1-415 CTF Writeup by W-- | — | h1-ctf | 2020-02-03 | [#780285](https://hackerone.com/reports/780285) |
 | All Burp Suite Scan report | — | semmle | 2019-03-22 | [#513172](https://hackerone.com/reports/513172) |
 | Subdomain takeover of █████████ | — | deptofdefense | 2022-09-06 | [#1457928](https://hackerone.com/reports/1457928) |
+| DLL side-loading vulnerability in Sony Music Center for PC Ver. 2.7.2 (Latest version) | — | sony | 2026-06-05 | [#3355766](https://hackerone.com/reports/3355766) |
 | Ruby's CGI library has HTTP response splitting (HTTP header injection), leaking confidential information | — | ibb | 2023-04-09 | [#1889474](https://hackerone.com/reports/1889474) |
 | Bypassing Garbage Collection with Uppercase Endpoint | — | indrive | 2023-10-04 | [#2078527](https://hackerone.com/reports/2078527) |
 | Twitter Account hijack @nextcloudfrance | — | nextcloud | 2023-03-30 | [#1916565](https://hackerone.com/reports/1916565) |
