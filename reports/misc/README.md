@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1583 report(s) across 22 class(es)**
+**1585 report(s) across 22 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 951 | $50,000 |
+| [Unknown](unknown/README.md) | 953 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -1233,9 +1233,11 @@
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | Authorization header leak in ssrf_filter via cross-host redirect leads to credential theft and unauthorized access | — | arkadiyt-projects | 2026-04-15 | [#3642600](https://hackerone.com/reports/3642600) |
 | Fail-Open in set_tlsext_servername_callback on pyopenssl via unhandled exceptions leads to security bypass | — | pyca | 2026-03-20 | [#3558277](https://hackerone.com/reports/3558277) |
+| Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | MQTT Protocol Packet Injection via Unchecked CONNACK Remaining Length | — | curl | 2026-02-05 | [#3531216](https://hackerone.com/reports/3531216) |
+| libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |

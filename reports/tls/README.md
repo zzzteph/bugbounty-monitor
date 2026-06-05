@@ -1,6 +1,6 @@
 # TLS / Certificate Validation
 
-**73 report(s) across 5 class(es)**
+**74 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 41 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 3 | — |
-| [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 1 | — |
+| [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
 ## All Reports
@@ -60,6 +60,7 @@
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
+| CURLOPT_PROXY_CRLFILE / CURLOPT_PROXY_ISSUERCERT / CURLOPT_PROXY_ISSUERCERT_BLOB silently ignored on backends that don't support them | — | curl | 2026-06-05 | [#3717552](https://hackerone.com/reports/3717552) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |
 | CVE-2025-4947: QUIC certificate check skip with wolfSSL | — | curl | 2025-05-28 | [#3150884](https://hackerone.com/reports/3150884) |

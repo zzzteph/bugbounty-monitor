@@ -1,6 +1,6 @@
 # Information Exposure Through Sent Data
 
-**18 report(s)**
+**20 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -19,6 +19,8 @@
 |  Remote memory disclosure vulnerability in libcurl on 64 Bit Windows | — | curl | 2022-02-21 | [#1444539](https://hackerone.com/reports/1444539) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
 | CVE-2026-3783: token leak with redirect and netrc | — | curl | 2026-03-11 | [#3583983](https://hackerone.com/reports/3583983) |
+| RTSP Digest auth state leaks across origins on reused libcurl easy handle | — | curl | 2026-06-05 | [#3776535](https://hackerone.com/reports/3776535) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
+| TFTP upload ignores --continue-at / CURLOPT_RESUME_FROM and leaks skipped local file prefix | — | curl | 2026-06-05 | [#3776433](https://hackerone.com/reports/3776433) |

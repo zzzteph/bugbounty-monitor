@@ -1,17 +1,17 @@
 # Information Disclosure
 
-**1101 report(s) across 10 class(es)**
+**1104 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 902 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 903 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 76 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 18 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 20 | $2,540 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
 | [Leftover Debug Code Backdoor](leftover_debug_code_backdoor/README.md) | 2 | — |
@@ -965,6 +965,7 @@
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 | PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
+| CURLOPT_COOKIE leaked to cross-origin redirect target — CURLOPT_UNRESTRICTED_AUTH bypass for the STRING_COOKIE path | — | curl | 2026-06-05 | [#3766065](https://hackerone.com/reports/3766065) |
 | Install.php File Exposure on Drupal | — | deptofdefense | 2023-02-24 | [#1844674](https://hackerone.com/reports/1844674) |
 | internal path disclosure via register error | — | tennessee-valley-authority | 2023-11-30 | [#2213381](https://hackerone.com/reports/2213381) |
 | Lack of rate limiting in https://███/PKI/PassReset.aspx leads to PII disclosure and potential account takeover | — | deptofdefense | 2024-10-25 | [#2748003](https://hackerone.com/reports/2748003) |
@@ -1061,9 +1062,11 @@
 |  Remote memory disclosure vulnerability in libcurl on 64 Bit Windows | — | curl | 2022-02-21 | [#1444539](https://hackerone.com/reports/1444539) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
 | CVE-2026-3783: token leak with redirect and netrc | — | curl | 2026-03-11 | [#3583983](https://hackerone.com/reports/3583983) |
+| RTSP Digest auth state leaks across origins on reused libcurl easy handle | — | curl | 2026-06-05 | [#3776535](https://hackerone.com/reports/3776535) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
+| TFTP upload ignores --continue-at / CURLOPT_RESUME_FROM and leaks skipped local file prefix | — | curl | 2026-06-05 | [#3776433](https://hackerone.com/reports/3776433) |
 | Timing Attack Vulnerability in curl Digest Authentication via Non-Constant-Time String Comparison | — | curl | 2025-09-18 | [#3346118](https://hackerone.com/reports/3346118) |
 | ███ on https://████ enable ███ scraping, injection, stored XSS | — | deptofdefense | 2021-05-11 | [#1048571](https://hackerone.com/reports/1048571) |
 | Subdomain Takeover at http://██.get8x8.com/ | — | 8x8-bounty | 2022-10-14 | [#1697402](https://hackerone.com/reports/1697402) |
