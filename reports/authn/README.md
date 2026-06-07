@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**593 report(s) across 18 class(es)**
+**594 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 381 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 382 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -51,6 +51,7 @@
 | Argocd's web terminal session doesn't expire | $2,540 | ibb | 2023-09-09 | [#2123094](https://hackerone.com/reports/2123094) |
 | “email” MFA mode allows bypassing MFA from victim’s device when the device trust is not expired | $2,500 | superhuman | 2019-08-12 | [#665722](https://hackerone.com/reports/665722) |
 | Bypass validation parts in AWS IAM Authenticator for Kubernetes | $2,500 | kubernetes | 2023-05-25 | [#1580493](https://hackerone.com/reports/1580493) |
+| Authentication Bypass in ID4me handling via Missing JWT Signature Verification in User OIDC | $2,500 | nextcloud | 2026-06-07 | [#3489490](https://hackerone.com/reports/3489490) |
 | TLS client authentication can be bypassed due to ticket resumption | $2,162 | ibb | 2025-05-27 | [#2978267](https://hackerone.com/reports/2978267) |
 | Improper bot-authentication allows to impersonate any user when sending messages in a room | $2,000 | basecamp | 2025-11-21 | [#3329310](https://hackerone.com/reports/3329310) |
 | Improper Validation at Partners Login | $2,000 | eternal | 2021-10-06 | [#990048](https://hackerone.com/reports/990048) |

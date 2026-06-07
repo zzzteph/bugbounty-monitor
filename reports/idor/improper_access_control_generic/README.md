@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**662 report(s)**
+**663 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -664,5 +664,6 @@
 | Potential Subdomain Takeover on IBM.com domain. | — | ibm | 2026-03-24 | [#3592387](https://hackerone.com/reports/3592387) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
+| Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |

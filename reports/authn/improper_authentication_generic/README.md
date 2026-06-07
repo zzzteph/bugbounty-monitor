@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**381 report(s)**
+**382 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,6 +18,7 @@
 | HackerOne Jira integration plugin Leaked JWT to unauthorized jira users | $3,000 | security | 2021-04-01 | [#1103582](https://hackerone.com/reports/1103582) |
 | “email” MFA mode allows bypassing MFA from victim’s device when the device trust is not expired | $2,500 | superhuman | 2019-08-12 | [#665722](https://hackerone.com/reports/665722) |
 | Bypass validation parts in AWS IAM Authenticator for Kubernetes | $2,500 | kubernetes | 2023-05-25 | [#1580493](https://hackerone.com/reports/1580493) |
+| Authentication Bypass in ID4me handling via Missing JWT Signature Verification in User OIDC | $2,500 | nextcloud | 2026-06-07 | [#3489490](https://hackerone.com/reports/3489490) |
 | TLS client authentication can be bypassed due to ticket resumption | $2,162 | ibb | 2025-05-27 | [#2978267](https://hackerone.com/reports/2978267) |
 | Improper bot-authentication allows to impersonate any user when sending messages in a room | $2,000 | basecamp | 2025-11-21 | [#3329310](https://hackerone.com/reports/3329310) |
 | Improper Validation at Partners Login | $2,000 | eternal | 2021-10-06 | [#990048](https://hackerone.com/reports/990048) |

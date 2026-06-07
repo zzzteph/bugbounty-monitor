@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1042 report(s) across 10 class(es)**
+**1043 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 662 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 663 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 280 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
@@ -780,6 +780,7 @@
 | Potential Subdomain Takeover on IBM.com domain. | — | ibm | 2026-03-24 | [#3592387](https://hackerone.com/reports/3592387) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
+| Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Subscription check bypass of NordVPN service  | — | nordsecurity | 2023-07-17 | [#2012443](https://hackerone.com/reports/2012443) |
