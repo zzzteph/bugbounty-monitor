@@ -1,6 +1,6 @@
 # LFI / Path Traversal
 
-**258 report(s) across 9 class(es)**
+**259 report(s) across 9 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Path Traversal](path_traversal/README.md) | 225 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
-| [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 3 | — |
+| [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 4 | — |
 | [Relative Path Traversal](relative_path_traversal/README.md) | 3 | — |
 | [File Content Injection](file_content_injection/README.md) | 1 | — |
 | [Improper Link Resolution Before File Access Link Following](improper_link_resolution_before_file_access_link_following/README.md) | 1 | — |
@@ -57,6 +57,7 @@
 | CVE-2023-38546: cookie injection with none file | — | curl | 2023-10-11 | [#2148242](https://hackerone.com/reports/2148242) |
 | Arbitrary Configuration File Inclusion: via External Control of File Name or Path | — | curl | 2025-11-10 | [#3418646](https://hackerone.com/reports/3418646) |
 | Arbitrary File Read via Unsanitized curl Usage Results in Sensitive File Exposure | — | curl | 2025-06-27 | [#3183957](https://hackerone.com/reports/3183957) |
+| curl External-Controlled Filename in `--url @file` Leads to Arbitrary File Overwrite | — | curl | 2026-06-07 | [#3766392](https://hackerone.com/reports/3766392) |
 | wavecell.com: Broken Link Hijacking / Instagram Takeover @██ | — | 8x8-bounty | 2023-01-27 | [#1826892](https://hackerone.com/reports/1826892) |
 | Acquisition on broken link listed on the page "https://docs.doppler.com/docs/removal-deprecated-packages-scripts in [scheduling a call] | — | doppler | 2024-05-22 | [#2418210](https://hackerone.com/reports/2418210) |
 | Social media account takeover  | — | mtn_group | 2024-11-03 | [#2682974](https://hackerone.com/reports/2682974) |

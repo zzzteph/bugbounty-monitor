@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1586 report(s) across 23 class(es)**
+**1587 report(s) across 24 class(es)**
 
 ## Classes
 
@@ -23,6 +23,7 @@
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
 | [Improper Removal Of Sensitive Information Before Storage Or ](improper_removal_of_sensitive_information_before_storage_or_/README.md) | 1 | — |
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
+| [Improper Validation Of Certificate Expiration](improper_validation_of_certificate_expiration/README.md) | 1 | — |
 | [Improper Validation Of Syntactic Correctness Of Input](improper_validation_of_syntactic_correctness_of_input/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
@@ -304,6 +305,7 @@
 | MQTT state machine confusion: PINGRESP/DISCONNECT with non-zero remaining_length dispatches to stale nextstate | — | curl | 2026-04-29 | [#3702718](https://hackerone.com/reports/3702718) |
 | the complete server installation path is visible in cloud/user endpoint | — | nextcloud | 2023-03-30 | [#1690510](https://hackerone.com/reports/1690510) |
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2024-02-11 | [#2037032](https://hackerone.com/reports/2037032) |
+| OpenSSL TLS 1.2 session resumption accepts expired server certificates in libcurl | — | curl | 2026-06-07 | [#3781305](https://hackerone.com/reports/3781305) |
 | Missing enforcement of SFTP quote syntax can lead to operation on wrong object | — | curl | 2025-10-12 | [#3379102](https://hackerone.com/reports/3379102) |
 | admin_audit does not log actions on files in a group folder | — | nextcloud | 2025-12-05 | [#2890071](https://hackerone.com/reports/2890071) |
 | Non-Production API Endpoints for the bedrock-agent Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-28 | [#2800091](https://hackerone.com/reports/2800091) |
