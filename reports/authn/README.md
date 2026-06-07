@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**592 report(s) across 18 class(es)**
+**593 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 380 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 381 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -486,6 +486,7 @@
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Entering passwords on the Share Login Page can lead to a brute-force attack | — | automattic | 2023-08-27 | [#2039447](https://hackerone.com/reports/2039447) |
 | Bruteforce protection in password verification can be bypassed | — | nextcloud | 2024-01-17 | [#2230915](https://hackerone.com/reports/2230915) |
 | Missing brute force protection for passwords of password protected share links | — | nextcloud | 2023-04-25 | [#1894653](https://hackerone.com/reports/1894653) |
