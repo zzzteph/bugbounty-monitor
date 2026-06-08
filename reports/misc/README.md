@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1587 report(s) across 24 class(es)**
+**1588 report(s) across 24 class(es)**
 
 ## Classes
 
@@ -16,6 +16,7 @@
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 3 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
+| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 2 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
@@ -29,7 +30,6 @@
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
 | [Unchecked Error Condition](unchecked_error_condition/README.md) | 1 | $150 |
 | [Uncontrolled Search Path Element](uncontrolled_search_path_element/README.md) | 1 | — |
-| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 1 | — |
 
 ## All Reports
 
@@ -1247,6 +1247,7 @@
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |
 | Name collision of shared folders | — | nextcloud | 2023-04-29 | [#1697281](https://hackerone.com/reports/1697281) |
+| DNS domain search list followed for extant domain missing A or AAAA records | — | curl | 2026-06-08 | [#3780733](https://hackerone.com/reports/3780733) |
 | Unexpected input validation of octal literals in nodejs v15.12.0 and below returns defined values for all undefined octal literals. | — | nodejs | 2021-06-14 | [#1141623](https://hackerone.com/reports/1141623) |
 | Text Injection/ Content Spoofing on  https://cloud.e.khanacademy.org  by breaking out of input tag. | — | khanacademy | 2023-12-22 | [#2234420](https://hackerone.com/reports/2234420) |
 | [hackerone.com] Program's old handles are not blacklisted like usernames and allows reclaim over past handles for potential abuse | — | security | 2024-05-30 | [#2241266](https://hackerone.com/reports/2241266) |

@@ -1,6 +1,6 @@
 # HTTP Injection
 
-**127 report(s) across 4 class(es)**
+**128 report(s) across 4 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 58 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 52 | $5,000 |
-| [Http Response Splitting](http_response_splitting/README.md) | 13 | $2,600 |
+| [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
 ## All Reports
@@ -141,4 +141,5 @@
 | HTTP Smuggling multiple issues in Squid 3.x & squid 4.x | — | ibb | 2021-08-26 | [#758445](https://hackerone.com/reports/758445) |
 | RubyのCGIライブラリにHTTPレスポンス分割（HTTPヘッダインジェクション）があり、秘密情報が漏洩する | — | ruby | 2022-11-24 | [#1204695](https://hackerone.com/reports/1204695) |
 | CGI::Cookieクラスにおけるセキュリティ上好ましくない仕様および実装 | — | ruby | 2022-11-24 | [#1204977](https://hackerone.com/reports/1204977) |
+| libcurl: HTTP/1.x bare LF byte in response header value enables cookie jar pollution and POST body/credential exfiltration via redirect — RC=0, curl 8 | — | curl | 2026-06-08 | [#3785919](https://hackerone.com/reports/3785919) |
 | Digest Authentication Header Injection | — | curl | 2026-01-14 | [#3508799](https://hackerone.com/reports/3508799) |
