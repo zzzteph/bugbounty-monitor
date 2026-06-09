@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**382 report(s)**
+**383 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -385,4 +385,5 @@
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |

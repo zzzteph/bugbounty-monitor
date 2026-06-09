@@ -1,17 +1,17 @@
 # Authentication & Session
 
-**594 report(s) across 18 class(es)**
+**596 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 382 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 383 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 10 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 11 | — |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
 | [Authentication Bypass](authentication_bypass/README.md) | 5 | $7,500 |
@@ -138,6 +138,7 @@
 | CVE-2023-27536: GSS delegation too eager connection re-use | — | curl | 2023-03-22 | [#1895135](https://hackerone.com/reports/1895135) |
 | Speculative Execution Side-Channel in `curl`  | — | curl | 2025-07-01 | [#3124490](https://hackerone.com/reports/3124490) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |
+| SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal | — | curl | 2026-06-09 | [#3788506](https://hackerone.com/reports/3788506) |
 | Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                         | — | curl | 2026-04-29 | [#3646072](https://hackerone.com/reports/3646072) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
@@ -487,6 +488,7 @@
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Entering passwords on the Share Login Page can lead to a brute-force attack | — | automattic | 2023-08-27 | [#2039447](https://hackerone.com/reports/2039447) |
 | Bruteforce protection in password verification can be bypassed | — | nextcloud | 2024-01-17 | [#2230915](https://hackerone.com/reports/2230915) |

@@ -1,6 +1,6 @@
 # Authentication Bypass By Primary Weakness
 
-**10 report(s)**
+**11 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -9,6 +9,7 @@
 | CVE-2023-27536: GSS delegation too eager connection re-use | — | curl | 2023-03-22 | [#1895135](https://hackerone.com/reports/1895135) |
 | Speculative Execution Side-Channel in `curl`  | — | curl | 2025-07-01 | [#3124490](https://hackerone.com/reports/3124490) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |
+| SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal | — | curl | 2026-06-09 | [#3788506](https://hackerone.com/reports/3788506) |
 | Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                         | — | curl | 2026-04-29 | [#3646072](https://hackerone.com/reports/3646072) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
