@@ -1,12 +1,12 @@
 # Denial of Service
 
-**432 report(s) across 5 class(es)**
+**433 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 402 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 403 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 26 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -200,6 +200,7 @@
 | Uncontrolled Resource Consumption when parsing maliciously crafted XML with REXML | — | ruby | 2025-02-20 | [#2666849](https://hackerone.com/reports/2666849) |
 | "Assertion failed" in node::http2::Http2Session::~Http2Session() leads to HTTP/2 server crash | — | nodejs | 2024-04-08 | [#2319584](https://hackerone.com/reports/2319584) |
 | HTTP/2 PUSH_PROMISE DoS | — | curl | 2024-03-27 | [#2402853](https://hackerone.com/reports/2402853) |
+| Action Text ReDoS (Ruby 3.1  or lower) | — | rails | 2026-06-09 | [#2389431](https://hackerone.com/reports/2389431) |
 | RPC service DOS | — | monero | 2025-05-23 | [#2338094](https://hackerone.com/reports/2338094) |
 | Crafted smart contract can take 8 minutes to execute due to bug in modexp precompile. | — | rootstocklabs | 2025-06-13 | [#2412583](https://hackerone.com/reports/2412583) |
 | Spamming highly nested JSON RPC requests cause node to disconnect from p2p network | — | monero | 2025-04-23 | [#2677306](https://hackerone.com/reports/2677306) |
