@@ -1,6 +1,6 @@
 # Unknown
 
-**953 report(s)**
+**955 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -886,6 +886,8 @@
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
+| RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
+| RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |

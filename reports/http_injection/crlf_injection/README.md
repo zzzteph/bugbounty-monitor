@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**52 report(s)**
+**53 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -46,6 +46,7 @@
 | CRLF injection on www.starbucks.com | — | starbucks | 2020-09-01 | [#858650](https://hackerone.com/reports/858650) |
 | Protocol Smuggling over LDAP password field | — | owncloud | 2021-09-03 | [#1054282](https://hackerone.com/reports/1054282) |
 | CRLF Injection in legacy url API (url.parse().hostname) | — | nodejs | 2020-01-10 | [#771596](https://hackerone.com/reports/771596) |
+| CRLF Injection via Custom HTTP Headers | — | curl | 2026-06-11 | [#3741744](https://hackerone.com/reports/3741744) |
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | CRLF Injection in HTTP header values allows arbitrary header injection | — | curl | 2026-01-10 | [#3505557](https://hackerone.com/reports/3505557) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |

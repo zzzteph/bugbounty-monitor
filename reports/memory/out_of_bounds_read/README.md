@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**36 report(s)**
+**37 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -39,4 +39,5 @@
 | Out-of-bounds Read in php_strip_tags_ex | — | ibb | 2020-11-09 | [#781325](https://hackerone.com/reports/781325) |
 | Heap Out-of-Bounds Read in lib/http2.c via Malformed PUSH_PROMISE Headers | — | curl | 2026-01-10 | [#3506159](https://hackerone.com/reports/3506159) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
+|  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
