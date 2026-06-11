@@ -1,6 +1,6 @@
 # Os Command Injection
 
-**57 report(s)**
+**58 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -47,6 +47,7 @@
 | Insecure use of shell.openExternal() in Rocket.Chat Desktop App leading to RCE | — | rocket_chat | 2022-08-01 | [#924151](https://hackerone.com/reports/924151) |
 | Shell command injection in https://partner.steamgames.com/admin/game/publish/ via screenshot URL | — | valve | 2024-07-30 | [#949361](https://hackerone.com/reports/949361) |
 | XSS leads to RCE on the RocketChat desktop client. | — | rocket_chat | 2021-01-01 | [#899964](https://hackerone.com/reports/899964) |
+| Command Injection via Unsanitized Bundling Options in `aws-cdk-lib/aws-lambda-nodejs` | — | aws_vdp | 2026-06-11 | [#3558713](https://hackerone.com/reports/3558713) |
 | Jenkins Unauthenticated RCE on https://djangoci.com/ | — | django | 2019-05-16 | [#579760](https://hackerone.com/reports/579760) |
 | Store Development Resource Center was vulnerable to a Remote Code Execution - Unauthenticated Remote Command Injection (CVE-2019-0604) | — | starbucks | 2019-12-12 | [#536134](https://hackerone.com/reports/536134) |
 | OS Command Injection via egrep in Rake::FileList | — | ruby | 2019-08-29 | [#651518](https://hackerone.com/reports/651518) |
