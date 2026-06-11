@@ -1,12 +1,12 @@
 # SSRF
 
-**225 report(s) across 2 class(es)**
+**227 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 224 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 226 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -129,6 +129,8 @@
 | Server-Side Request Forgery (SSRF) via Game Export API | — | lichess | 2025-06-03 | [#3165242](https://hackerone.com/reports/3165242) |
 | Node.js permission model bypass via unchecked Unix Domain Socket connections (UDS) | — | nodejs | 2026-02-12 | [#3465156](https://hackerone.com/reports/3465156) |
 | Link unfurling calls out to arbitrary URLs and the private-network guard misses link-local addresses | — | basecamp | 2025-12-22 | [#3445890](https://hackerone.com/reports/3445890) |
+| SSRF via Improper Redirect Validation in Rocket.Chat oEmbed Function | — | rocket_chat | 2026-06-11 | [#3383079](https://hackerone.com/reports/3383079) |
+| SSRF via improper validation after DNS name resolution in the link-preview feature | — | rocket_chat | 2026-06-11 | [#3393664](https://hackerone.com/reports/3393664) |
 | [my.stripo.email] Blind SSRF Vulnerability in Stripo App Export via Missing Endpoints Export Email Message to Zapier | — | stripo | 2025-12-01 | [#2932960](https://hackerone.com/reports/2932960) |
 | Unsanitized IPFS CID Allows SSRF Against Configured Gateway | — | curl | 2025-10-03 | [#3366484](https://hackerone.com/reports/3366484) |
 | DNS Rebinding Attack | — | arkadiyt-projects | 2025-10-19 | [#3383095](https://hackerone.com/reports/3383095) |

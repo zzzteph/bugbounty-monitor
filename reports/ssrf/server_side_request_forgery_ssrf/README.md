@@ -1,6 +1,6 @@
 # Server Side Request Forgery Ssrf
 
-**224 report(s)**
+**226 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -119,6 +119,8 @@
 | Server-Side Request Forgery (SSRF) via Game Export API | — | lichess | 2025-06-03 | [#3165242](https://hackerone.com/reports/3165242) |
 | Node.js permission model bypass via unchecked Unix Domain Socket connections (UDS) | — | nodejs | 2026-02-12 | [#3465156](https://hackerone.com/reports/3465156) |
 | Link unfurling calls out to arbitrary URLs and the private-network guard misses link-local addresses | — | basecamp | 2025-12-22 | [#3445890](https://hackerone.com/reports/3445890) |
+| SSRF via Improper Redirect Validation in Rocket.Chat oEmbed Function | — | rocket_chat | 2026-06-11 | [#3383079](https://hackerone.com/reports/3383079) |
+| SSRF via improper validation after DNS name resolution in the link-preview feature | — | rocket_chat | 2026-06-11 | [#3393664](https://hackerone.com/reports/3393664) |
 | [my.stripo.email] Blind SSRF Vulnerability in Stripo App Export via Missing Endpoints Export Email Message to Zapier | — | stripo | 2025-12-01 | [#2932960](https://hackerone.com/reports/2932960) |
 | Unsanitized IPFS CID Allows SSRF Against Configured Gateway | — | curl | 2025-10-03 | [#3366484](https://hackerone.com/reports/3366484) |
 | DNS Rebinding Attack | — | arkadiyt-projects | 2025-10-19 | [#3383095](https://hackerone.com/reports/3383095) |
