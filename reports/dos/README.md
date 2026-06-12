@@ -1,12 +1,12 @@
 # Denial of Service
 
-**433 report(s) across 5 class(es)**
+**434 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 403 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 404 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 26 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -423,6 +423,7 @@
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
+|  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
 | Crash Node.js process from handlebars using a small and simple source | — | nodejs-ecosystem | 2020-04-27 | [#726364](https://hackerone.com/reports/726364) |
 | WEBrick::HTTPAuth::DigestAuth authentication is vulnerable to regular expression denial of service (ReDoS) | — | ruby | 2019-11-15 | [#661722](https://hackerone.com/reports/661722) |
 | No redirect_uri in the db for web-internal clientKey leads to one-click DoS on gitter.im | — | gitlab | 2020-05-15 | [#702987](https://hackerone.com/reports/702987) |
