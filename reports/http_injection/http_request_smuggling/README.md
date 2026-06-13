@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**58 report(s)**
+**59 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -54,6 +54,7 @@
 | HTTP Request Smuggling due to CR-to-Hyphen conversion | — | nodejs | 2020-10-17 | [#922597](https://hackerone.com/reports/922597) |
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
+| Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | HTTP Request Smuggling | — | jamieweb | 2020-03-09 | [#643225](https://hackerone.com/reports/643225) |
 | http request smuggling in  twitter.com | — | x | 2020-11-18 | [#715996](https://hackerone.com/reports/715996) |
 | Request smuggling on ████████ | — | deptofdefense | 2019-10-08 | [#526880](https://hackerone.com/reports/526880) |
