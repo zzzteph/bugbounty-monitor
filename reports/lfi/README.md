@@ -1,12 +1,12 @@
 # LFI / Path Traversal
 
-**259 report(s) across 9 class(es)**
+**260 report(s) across 9 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Path Traversal](path_traversal/README.md) | 225 | $29,000 |
+| [Path Traversal](path_traversal/README.md) | 226 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
 | [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 4 | — |
@@ -25,6 +25,7 @@
 | Arbitrary file read during project import | $16,000 | gitlab | 2021-05-24 | [#1132378](https://hackerone.com/reports/1132378) |
 | Path traversal in Nuget Package Registry | $12,000 | gitlab | 2022-06-07 | [#822262](https://hackerone.com/reports/822262) |
 | Mozilla VPN Clients: RCE via file write and path traversal | $6,000 | mozilla | 2025-07-29 | [#2995025](https://hackerone.com/reports/2995025) |
+| Burp Suite Professional: browser-powered crawl can write attacker-controlled files through file input handling | $5,000 | portswigger | 2026-06-14 | [#3712279](https://hackerone.com/reports/3712279) |
 | Path traversal and file disclosure vulnerability in Apache HTTP Server 2.4.49 | $4,000 | ibb | 2021-11-09 | [#1394916](https://hackerone.com/reports/1394916) |
 | [Android] Directory traversal leading to disclosure of auth tokens | $3,500 | slack | 2022-02-25 | [#1378889](https://hackerone.com/reports/1378889) |
 | Path traversal through path stored in Uint8Array in Node.js 20 | $3,495 | ibb | 2024-01-20 | [#2256167](https://hackerone.com/reports/2256167) |

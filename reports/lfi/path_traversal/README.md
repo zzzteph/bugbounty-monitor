@@ -1,6 +1,6 @@
 # Path Traversal
 
-**225 report(s)**
+**226 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -9,6 +9,7 @@
 | Arbitrary file read during project import | $16,000 | gitlab | 2021-05-24 | [#1132378](https://hackerone.com/reports/1132378) |
 | Path traversal in Nuget Package Registry | $12,000 | gitlab | 2022-06-07 | [#822262](https://hackerone.com/reports/822262) |
 | Mozilla VPN Clients: RCE via file write and path traversal | $6,000 | mozilla | 2025-07-29 | [#2995025](https://hackerone.com/reports/2995025) |
+| Burp Suite Professional: browser-powered crawl can write attacker-controlled files through file input handling | $5,000 | portswigger | 2026-06-14 | [#3712279](https://hackerone.com/reports/3712279) |
 | Path traversal and file disclosure vulnerability in Apache HTTP Server 2.4.49 | $4,000 | ibb | 2021-11-09 | [#1394916](https://hackerone.com/reports/1394916) |
 | [Android] Directory traversal leading to disclosure of auth tokens | $3,500 | slack | 2022-02-25 | [#1378889](https://hackerone.com/reports/1378889) |
 | Path traversal through path stored in Uint8Array in Node.js 20 | $3,495 | ibb | 2024-01-20 | [#2256167](https://hackerone.com/reports/2256167) |
