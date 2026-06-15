@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**59 report(s)**
+**60 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -55,6 +55,7 @@
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
+| Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
 | HTTP Request Smuggling | — | jamieweb | 2020-03-09 | [#643225](https://hackerone.com/reports/643225) |
 | http request smuggling in  twitter.com | — | x | 2020-11-18 | [#715996](https://hackerone.com/reports/715996) |
 | Request smuggling on ████████ | — | deptofdefense | 2019-10-08 | [#526880](https://hackerone.com/reports/526880) |

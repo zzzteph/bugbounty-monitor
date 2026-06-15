@@ -1,0 +1,131 @@
+{
+  "id": 3793495,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNzkzNDk1",
+  "url": "https://hackerone.com/reports/3793495",
+  "title": "Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "low",
+  "readable_substate": "N/A",
+  "created_at": "2026-06-10T07:54:45.717Z",
+  "submitted_at": "2026-06-10T07:54:46.486Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "unknowperson0212",
+    "url": "/unknowperson0212",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-06-15T13:48:29.363Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-06-13T20:47:10.824Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "When curl  send a request with `Transfer-Encoding: chunked` using HTTP/1.1, and follows a redirect to an HTTP/2 endpoint, the `upload_chunky` flag is not properly reset. As a result, the `Transfer-Encoding: chunked` header is sent in the subsequent request even when HTTP/2 is negotiated/used.\n\nThis violates RFC 9113 (HTTP/2) which states that HTTP/2 uses its own farming and `Transfer-Encoding` header must not be used.\n\n##Proof OF Concept\nSetup:\nLocal test server with HTTP/1.1 ---> HTTPS (HTTP/2) redirect \n`Reproduction Command:`\n```bash\ncurl -vvv --http1.1 --no-alpn -L --http2 -k \\\n  -H \"Transfer-Encoding: chunked\" \\\n  -H \"Content-Type: text/plain\" \\\n  -d \"This is chunked encoding bug test data\" \\\n  http://test.local:8080/\n```\n##Observed Behavior:\n- First request (HTTP/1.1): `Transfer-Encoding: chunked` --> Correct\n- Second request (after redirect): 'Transfer-Encoding: chunked' is still present ---> Vulnerable Even with `--http2` flag, the header is not suppressed.\n\n##Root Cause\nin 'lib/http.c'\n- `http_req_set_TE()` and 'http_add_content_hds()' functions only check HTTP version at intial request setup.\n- During redirect handling ('Curl_follow_Location()' / new Request setup), the 'data->req.upload_chunky' falg is not relible reset when protocol changes from HTTP/1.1 ---> HTTP/2.\n\n## Impact\n\n- Protocol confusion between client and server / proxies.\n- potential for `HTTP Request Smuggling / Desync attack` in enviroments with reverse proxies or CDNs that handle HTTP/1.1 <--> HTTP/2 translation.\n- Unexpected behavior in middleboxes and caching systems.",
+  "weakness": {
+    "id": 86,
+    "name": "HTTP Request Smuggling"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6067597,
+      "file_name": "poc-large-body-request.PNG",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/al35lnycc9sj1rv3jimvbvpmgru0?response-content-disposition=attachment%3B%20filename%3D%22poc-large-body-request.PNG%22%3B%20filename%2A%3DUTF-8%27%27poc-large-body-request.PNG&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ7COVNQAT%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCKUFC4Z36sj4Y0rLrZMv6ma8N8qxSpkJ4F3Z8VDNvZ1wIgMOOB6KQvFt0%2BPbE4wq%2Bvq873GNgXHTy8QY7jZOqBJj0qsQUIXxADGgwwMTM2MTkyNzQ4NDkiDMZgnj6R0SVoCqMIgiqOBfkNK71hYL5iJsQrX%2BCyeZUOpzSirUbopEhW6jEQOa4BoXstP7ZyvIxM0%2F5BR8FcXBCd0EyE8UrJ6QkYF5HsF1eFWb9IlZUrvfXPSKvWnTtKk%2Fv8FYnYr0Bwjr9qekVNSNiyjdRIA3EBF2JyLFeHk8Jjaa%2BUwneaT%2Bwce90IaDMRAkwj9d3TWZK0eV%2BbYgXRfsxbeJI1p0vjLW3PuYnbawQLyjKErrMnpNHYJo37GyQxA3Jdvd6i5pypA4T46kGmQWzcu0s9s7i1V%2FH%2FDs%2BU1r5Aw1bx80qaK7PTr8QhxXu9Xli4GieTGQGydH84wta7OCslkQo1jOh2Qb2n%2BCPmDeAgijVgmtMhUJgSDVYnEeKiD6VqaLTizhTDK0XUx2FzmUNJIc0xnIWQFKlamfwidJ%2FMnkxGzLjUZKdAMcCqJ7qLBBWTTG0jEMcohgxRtggwSHiyXG7vvErNnILeGkkjnk3ClfyJeYr9gb%2Bgm%2FI0pUlkXmFgWBEmY3xatYKPa5LsidnGk%2BDaBnjv9wat9OOOrpxqjjj8fGhTbFP8P79WfAZK0TyxaLbtrk6FVQPq5UsUbqQkcb6nQ0KWNuchej5QBu40V1lv1Kyymy5D3lWWkV5FKSrHfpmeGGEoB6%2FsHaayHm9DbNWqrAHt%2FyIURr%2B0AYrbvoRpkhg8p%2BRAjSa37NdJxrf8Yha3u%2FVjmS4cQvmex6P2SS9N1PvwYUhJQduNG%2Fr615ELNBK49vyZiKNZZLv1Oxn0tTgngOaoMZSLViuxe14dnoFMzOZdbxbGXECUfxbio71fJhS7ym1WRX7MicULERNrg7%2BXJ8R1ZCbwuHkppGpqlaAHbTZsXg9G9BUfT3oTdUST9p4ShbN6p9VD%2FTCVi8DRBjqxAX6JLhLpehn3Rb1V2W3vLsDGJW0gVGnPsJBJJylUtuhy7LcFZhjqDyeaNzslmMbW2p625lGGpfMbDFbVzu3pMCgQxeqmjqYnPzsI20cYJQav3fUaXegYMbS12S5TqMY1ZKJ7tzOZ%2BLICY60QJA%2B2PUbG%2FngvcuF1%2FLpCWKOOGIgVBROIRIljzXYbF3Yui3OuXH%2FeDR5TPcFHcHy7%2B8c%2BNeUBvgY%2BOdLJpN%2Boooik5QjaUw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1b4e58675170e3b73033074006d2efd741938b06ea7b59724a8c107e622c4979",
+      "file_size": 32306,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6067598,
+      "file_name": "poc-basic-request.PNG",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/hw32yopnsuoh9s25oxy6yw9q1915?response-content-disposition=attachment%3B%20filename%3D%22poc-basic-request.PNG%22%3B%20filename%2A%3DUTF-8%27%27poc-basic-request.PNG&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ7COVNQAT%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCKUFC4Z36sj4Y0rLrZMv6ma8N8qxSpkJ4F3Z8VDNvZ1wIgMOOB6KQvFt0%2BPbE4wq%2Bvq873GNgXHTy8QY7jZOqBJj0qsQUIXxADGgwwMTM2MTkyNzQ4NDkiDMZgnj6R0SVoCqMIgiqOBfkNK71hYL5iJsQrX%2BCyeZUOpzSirUbopEhW6jEQOa4BoXstP7ZyvIxM0%2F5BR8FcXBCd0EyE8UrJ6QkYF5HsF1eFWb9IlZUrvfXPSKvWnTtKk%2Fv8FYnYr0Bwjr9qekVNSNiyjdRIA3EBF2JyLFeHk8Jjaa%2BUwneaT%2Bwce90IaDMRAkwj9d3TWZK0eV%2BbYgXRfsxbeJI1p0vjLW3PuYnbawQLyjKErrMnpNHYJo37GyQxA3Jdvd6i5pypA4T46kGmQWzcu0s9s7i1V%2FH%2FDs%2BU1r5Aw1bx80qaK7PTr8QhxXu9Xli4GieTGQGydH84wta7OCslkQo1jOh2Qb2n%2BCPmDeAgijVgmtMhUJgSDVYnEeKiD6VqaLTizhTDK0XUx2FzmUNJIc0xnIWQFKlamfwidJ%2FMnkxGzLjUZKdAMcCqJ7qLBBWTTG0jEMcohgxRtggwSHiyXG7vvErNnILeGkkjnk3ClfyJeYr9gb%2Bgm%2FI0pUlkXmFgWBEmY3xatYKPa5LsidnGk%2BDaBnjv9wat9OOOrpxqjjj8fGhTbFP8P79WfAZK0TyxaLbtrk6FVQPq5UsUbqQkcb6nQ0KWNuchej5QBu40V1lv1Kyymy5D3lWWkV5FKSrHfpmeGGEoB6%2FsHaayHm9DbNWqrAHt%2FyIURr%2B0AYrbvoRpkhg8p%2BRAjSa37NdJxrf8Yha3u%2FVjmS4cQvmex6P2SS9N1PvwYUhJQduNG%2Fr615ELNBK49vyZiKNZZLv1Oxn0tTgngOaoMZSLViuxe14dnoFMzOZdbxbGXECUfxbio71fJhS7ym1WRX7MicULERNrg7%2BXJ8R1ZCbwuHkppGpqlaAHbTZsXg9G9BUfT3oTdUST9p4ShbN6p9VD%2FTCVi8DRBjqxAX6JLhLpehn3Rb1V2W3vLsDGJW0gVGnPsJBJJylUtuhy7LcFZhjqDyeaNzslmMbW2p625lGGpfMbDFbVzu3pMCgQxeqmjqYnPzsI20cYJQav3fUaXegYMbS12S5TqMY1ZKJ7tzOZ%2BLICY60QJA%2B2PUbG%2FngvcuF1%2FLpCWKOOGIgVBROIRIljzXYbF3Yui3OuXH%2FeDR5TPcFHcHy7%2B8c%2BNeUBvgY%2BOdLJpN%2Boooik5QjaUw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=c0df6599bbede07b4fbe0103c40d3618d022b8fd3fec22823502640f89e5d07a",
+      "file_size": 33020,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 2,
+  "voters": [
+    "latte2123",
+    "flipbit2"
+  ],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": 3803415,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODAzNDE1",
+  "url": "https://hackerone.com/reports/3803415",
+  "title": " Secure cookies leaked to HTTP origins through HTTPS forwarding proxy",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "none",
+  "readable_substate": "N/A",
+  "created_at": "2026-06-15T11:37:09.463Z",
+  "submitted_at": "2026-06-15T11:37:09.860Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "daviey",
+    "url": "/daviey",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/7kxxua3tul58qwjfma4mq1my01ff/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6?response-content-disposition=inline%3B%20filename%3D%22mugshot.jpg%22%3B%20filename%2A%3DUTF-8%27%27mugshot.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQW3HWX5NW%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCocjbuV38TERTT5%2BHwkOHe6yAq33WldmIuIDH42LzY5QIhANhJfo0%2BB0LrueX%2FxernPbaBFLgYyjYFkdr75Ksi4YihKrIFCF8QAxoMMDEzNjE5Mjc0ODQ5IgwCk6rrDDegVoJa3kEqjwWO%2B8ULRQHua05O7Rwi85ZDe7Raxo2P4AXxvDRjBW4c%2FgJLTBSUU3wV25fQWV4v7Z3b9CiaEKjRiLIVzOV8zC2z2pD%2Bd7pB84BZxXNXChZpYxv6v7tEoh2cK%2F2J%2FrSHHN3TgykmyS6EgtFGb%2FBQIgx0i8A2FWt0XOPPXP2G3qzVVvYFMjtE8iV7MWSmjRYtIkVCRCizQhpo6eoSnkwxbBo%2BNyfpioVinDFgEvx4qgGip6mZt6udT%2FO9ou%2BJa7uBZS0lqn%2Fk3VS6kIpeSY2q1o%2F%2F0G7D%2FeRbVL39c%2BEclFVkdSIr%2BodyanNLDDuqFFFYEkL%2BAorCxU%2BXmiLiaTgxTpE8EdoDnIASJUxGK2a6HhzI%2FkLES7KehKDsi0RhYFGSJR3bdNdt03tZ08kHwMxWMzQHjZlOxIolV0NOfUfF83hYY%2Fki4c8OpHoe9kerJ03cRLWdoZwe0gSRsYbw1KVYuysgAUMt4JO7AIgLEdWMCZY6zzxTh3756MX6U8xv0wNHjS2JJy0Iopw2TVv93%2FRJDlD2zU9Il%2BNqUSmAl5wX%2FVFOaG5i4b4WTbdlWyK%2BAavw23vnN25MIoIZ%2BmAzCS9Cqk%2BDlGGmf9VjfZjCpCxpV3KHMKsoNLH7rq4b2IEUhtkGRzCLScgIb7Rtx4ex5rRZX19mALStkhQwFZbVvMVV3yNx7VsqkEaZL3MvRdPyAKFtU9J8TI1UuZ%2BdjqAK7wtclBlDZ65ZyRG5%2Bfa5VpGOXTeIFGlWHSn8qHf6GsTNkeDb9HGwugwSlTZQFaKy0fwSzIIWSwGJNJp7vLmhD0PYqTIFuupPaC9kaxGneEEpjUqovwm6LkAI4nfKLKoiwGRjddfw%2Fn2QJGYodA8NmNUKJuB6MLH8v9EGOrABMFpNX7e5RGBy4sRNukksGzO%2Fv3NZFnRIXiOxRTzigakaS9QdP07mt3Dqy0kad9Er2Bpj88g29C9j7c5DpD5GNgds1M006fdsHwecFevvlqqkwlel4oaXj6QT6e0GWYDolEFHmf3BLrxImGrlQZlfbEyErpVpkLwJu94%2BKxTNxu3Jwjp04wMQTYWKr8rOrG3LBunqy%2BJXOx5wy%2FygwpbzWyTDNwIXdUNbX125mnM7B1g%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d2ff1897ff1ebf56f8f8c0a8dc59af710bb94ac2e79ac76cb952615f1cba71b4"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-06-15T13:48:15.761Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-06-15T12:20:03.582Z",
+  "team_member_agreed_on_going_public_at": "2026-06-15T13:48:15.342Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\nWhen curl accesses an `http://` origin through an HTTPS forwarding proxy, it sends Secure cookies in the request. The cookies travel in cleartext between the proxy and the origin server, visible to the proxy operator and anyone on that network path. curl also reports `CURLINFO_SCHEME` as `\"https\"` to the application for what is an `http://` transfer, which can mislead application-level security logic.\n\nThis is a regression introduced on 2026-06-12 in [commit 73daec6](https://github.com/curl/curl/commit/73daec6620bf9983df89e8df3660bfa3b8fd501d) ([PR #21967](https://github.com/curl/curl/pull/21967)). [proxy.c:652](https://github.com/curl/curl/blob/bb837dd/lib/proxy.c#L652) sets `conn->scheme` to the proxy's HTTPS scheme. `Curl_secure_context()` ([cookie.c:1273](https://github.com/curl/curl/blob/bb837dd/lib/cookie.c#L1273)) checks `conn->scheme->protocol & CURLPROTO_HTTPS` and returns TRUE, so Secure cookies are included. Before this commit, `conn->scheme` held the origin's scheme and Secure cookies were correctly withheld.\n\nThe same `conn->scheme` change causes [url.c:2505](https://github.com/curl/curl/blob/bb837dd/lib/url.c#L2505) to report `CURLINFO_SCHEME` as `\"https\"` for an `http://` origin.\n\n## Affected version\n```\n$ curl  --version\ncurl 8.21.0-DEV (Linux) libcurl/8.21.0-DEV OpenSSL/3.0.20 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libpsl/0.21.2 nghttp2/1.52.0\nRelease-Date: [unreleased]\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt mqtts pop3 pop3s rtsp smtp smtps telnet tftp ws wss\nFeatures: alt-svc AsynchDNS brotli HSTS HTTP2 HTTPS-proxy IPv6 Largefile libz PSL SSL threadsafe TLS-SRP UnixSockets zstd\n```\n\nOnly affected since commit [73daec6](https://github.com/curl/curl/commit/73daec6620bf9983df89e8df3660bfa3b8fd501d) (2026-06-12). No released version is affected. Still present on origin/master at [79a2416](https://github.com/curl/curl/commit/79a24161ab) as of 2026-06-15.\n\n## Steps To Reproduce:\n\nA self-contained Dockerfile and patch (`fix.patch`) are attached. The Dockerfile builds three curl binaries from source: pre-regression (`c951368`), regression (`bb837dd`), and regression with the suggested fix applied. It also runs a Squid HTTPS forwarding proxy and a plain HTTP origin server that logs received cookies.\n\n```bash\ndocker build -t cookie-proxy .\ndocker run --rm -it cookie-proxy\n```\n\nInside the container, test each binary:\n\n```bash\ncurl-safe  -sv -x https://127.0.0.1:8443 --proxy-insecure -b /tmp/cookies.txt http://test.example:8080/path\ncurl-vuln  -sv -x https://127.0.0.1:8443 --proxy-insecure -b /tmp/cookies.txt http://test.example:8080/path\ncurl-fixed -sv -x https://127.0.0.1:8443 --proxy-insecure -b /tmp/cookies.txt http://test.example:8080/path\n```\n\nCheck what the origin received:\n\n```bash\ntail /tmp/origin.log\n```\n\n`curl-vuln` leaks the Secure cookie (the verbose output includes a `Cookie:` header, and the origin log confirms receipt). `curl-safe` and `curl-fixed` withhold it (no `Cookie:` header, origin log shows `RECEIVED no Cookie header`).\n\n## Suggested fix\n\nA patch is attached (`fix.patch`). `Curl_secure_context()` should check `data->state.origin->scheme` instead of `conn->scheme`. The refactor already migrated most security checks to `data->state.origin` but missed this function. The `conn->scheme` assignment at [proxy.c:652](https://github.com/curl/curl/blob/bb837dd/lib/proxy.c#L652) is still needed for SSL filter setup, so it should stay, but `Curl_secure_context()` should not read it. `Curl_xfer_is_secure()` is not affected because it has an additional `Curl_conn_is_ssl()` check that correctly excludes proxy SSL filters ([cfilters.c:693](https://github.com/curl/curl/blob/bb837dd/lib/cfilters.c#L693)).\n\n## Impact\n\nSecure cookies (session tokens, auth cookies, CSRF tokens) are sent in cleartext over the HTTP connection between the HTTPS proxy and the origin server. Anyone who can observe that network path can read them. The proxy operator can harvest them regardless. The `CURLINFO_SCHEME` misreporting can also trick application-level security checks (e.g. \"only allow this action over HTTPS\") into treating an insecure transfer as secure.\n\nThe bug affects all HTTP methods (GET, HEAD, POST, PUT, DELETE, PATCH, etc.) because the Secure context check runs in `Curl_cookie_getlist` ([cookie.c:1300](https://github.com/curl/curl/blob/bb837dd/lib/cookie.c#L1300)), which is called from the request header construction path for every method. WebSocket upgrade requests (`ws://` through the proxy) are also affected. Any libcurl application using the cookie engine (`CURLOPT_COOKIEFILE` / `CURLOPT_COOKIEJAR`) through an HTTPS proxy is affected, not just the curl CLI.\n\nRFC violated: [RFC 6265](https://datatracker.ietf.org/doc/html/rfc6265#section-5.4) Section 5.4 step 3 ties \"secure channel\" to the `https` URI scheme ([RFC 7230](https://datatracker.ietf.org/doc/html/rfc7230#section-2.7.2) Section 2.7.2). The request uses `http://`, so Secure cookies must not be sent regardless of the TLS transport to the proxy.",
+  "weakness": {
+    "id": 18,
+    "name": "Information Disclosure"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6094229,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/rs7y0rvevqoqqkwfobpal55mk6vo?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQW3HWX5NW%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCocjbuV38TERTT5%2BHwkOHe6yAq33WldmIuIDH42LzY5QIhANhJfo0%2BB0LrueX%2FxernPbaBFLgYyjYFkdr75Ksi4YihKrIFCF8QAxoMMDEzNjE5Mjc0ODQ5IgwCk6rrDDegVoJa3kEqjwWO%2B8ULRQHua05O7Rwi85ZDe7Raxo2P4AXxvDRjBW4c%2FgJLTBSUU3wV25fQWV4v7Z3b9CiaEKjRiLIVzOV8zC2z2pD%2Bd7pB84BZxXNXChZpYxv6v7tEoh2cK%2F2J%2FrSHHN3TgykmyS6EgtFGb%2FBQIgx0i8A2FWt0XOPPXP2G3qzVVvYFMjtE8iV7MWSmjRYtIkVCRCizQhpo6eoSnkwxbBo%2BNyfpioVinDFgEvx4qgGip6mZt6udT%2FO9ou%2BJa7uBZS0lqn%2Fk3VS6kIpeSY2q1o%2F%2F0G7D%2FeRbVL39c%2BEclFVkdSIr%2BodyanNLDDuqFFFYEkL%2BAorCxU%2BXmiLiaTgxTpE8EdoDnIASJUxGK2a6HhzI%2FkLES7KehKDsi0RhYFGSJR3bdNdt03tZ08kHwMxWMzQHjZlOxIolV0NOfUfF83hYY%2Fki4c8OpHoe9kerJ03cRLWdoZwe0gSRsYbw1KVYuysgAUMt4JO7AIgLEdWMCZY6zzxTh3756MX6U8xv0wNHjS2JJy0Iopw2TVv93%2FRJDlD2zU9Il%2BNqUSmAl5wX%2FVFOaG5i4b4WTbdlWyK%2BAavw23vnN25MIoIZ%2BmAzCS9Cqk%2BDlGGmf9VjfZjCpCxpV3KHMKsoNLH7rq4b2IEUhtkGRzCLScgIb7Rtx4ex5rRZX19mALStkhQwFZbVvMVV3yNx7VsqkEaZL3MvRdPyAKFtU9J8TI1UuZ%2BdjqAK7wtclBlDZ65ZyRG5%2Bfa5VpGOXTeIFGlWHSn8qHf6GsTNkeDb9HGwugwSlTZQFaKy0fwSzIIWSwGJNJp7vLmhD0PYqTIFuupPaC9kaxGneEEpjUqovwm6LkAI4nfKLKoiwGRjddfw%2Fn2QJGYodA8NmNUKJuB6MLH8v9EGOrABMFpNX7e5RGBy4sRNukksGzO%2Fv3NZFnRIXiOxRTzigakaS9QdP07mt3Dqy0kad9Er2Bpj88g29C9j7c5DpD5GNgds1M006fdsHwecFevvlqqkwlel4oaXj6QT6e0GWYDolEFHmf3BLrxImGrlQZlfbEyErpVpkLwJu94%2BKxTNxu3Jwjp04wMQTYWKr8rOrG3LBunqy%2BJXOx5wy%2FygwpbzWyTDNwIXdUNbX125mnM7B1g%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=978f7c64591b4d8e4a5383b53e2a1f29167afb6a1cba1ec5c8f9398186e49661",
+      "file_size": 3760,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6094231,
+      "file_name": "fix.patch",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/6kqe74fsf83ezr2907s6fnh96ju6?response-content-disposition=attachment%3B%20filename%3D%22fix.patch%22%3B%20filename%2A%3DUTF-8%27%27fix.patch&response-content-type=text%2Fx-diff&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQW3HWX5NW%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCocjbuV38TERTT5%2BHwkOHe6yAq33WldmIuIDH42LzY5QIhANhJfo0%2BB0LrueX%2FxernPbaBFLgYyjYFkdr75Ksi4YihKrIFCF8QAxoMMDEzNjE5Mjc0ODQ5IgwCk6rrDDegVoJa3kEqjwWO%2B8ULRQHua05O7Rwi85ZDe7Raxo2P4AXxvDRjBW4c%2FgJLTBSUU3wV25fQWV4v7Z3b9CiaEKjRiLIVzOV8zC2z2pD%2Bd7pB84BZxXNXChZpYxv6v7tEoh2cK%2F2J%2FrSHHN3TgykmyS6EgtFGb%2FBQIgx0i8A2FWt0XOPPXP2G3qzVVvYFMjtE8iV7MWSmjRYtIkVCRCizQhpo6eoSnkwxbBo%2BNyfpioVinDFgEvx4qgGip6mZt6udT%2FO9ou%2BJa7uBZS0lqn%2Fk3VS6kIpeSY2q1o%2F%2F0G7D%2FeRbVL39c%2BEclFVkdSIr%2BodyanNLDDuqFFFYEkL%2BAorCxU%2BXmiLiaTgxTpE8EdoDnIASJUxGK2a6HhzI%2FkLES7KehKDsi0RhYFGSJR3bdNdt03tZ08kHwMxWMzQHjZlOxIolV0NOfUfF83hYY%2Fki4c8OpHoe9kerJ03cRLWdoZwe0gSRsYbw1KVYuysgAUMt4JO7AIgLEdWMCZY6zzxTh3756MX6U8xv0wNHjS2JJy0Iopw2TVv93%2FRJDlD2zU9Il%2BNqUSmAl5wX%2FVFOaG5i4b4WTbdlWyK%2BAavw23vnN25MIoIZ%2BmAzCS9Cqk%2BDlGGmf9VjfZjCpCxpV3KHMKsoNLH7rq4b2IEUhtkGRzCLScgIb7Rtx4ex5rRZX19mALStkhQwFZbVvMVV3yNx7VsqkEaZL3MvRdPyAKFtU9J8TI1UuZ%2BdjqAK7wtclBlDZ65ZyRG5%2Bfa5VpGOXTeIFGlWHSn8qHf6GsTNkeDb9HGwugwSlTZQFaKy0fwSzIIWSwGJNJp7vLmhD0PYqTIFuupPaC9kaxGneEEpjUqovwm6LkAI4nfKLKoiwGRjddfw%2Fn2QJGYodA8NmNUKJuB6MLH8v9EGOrABMFpNX7e5RGBy4sRNukksGzO%2Fv3NZFnRIXiOxRTzigakaS9QdP07mt3Dqy0kad9Er2Bpj88g29C9j7c5DpD5GNgds1M006fdsHwecFevvlqqkwlel4oaXj6QT6e0GWYDolEFHmf3BLrxImGrlQZlfbEyErpVpkLwJu94%2BKxTNxu3Jwjp04wMQTYWKr8rOrG3LBunqy%2BJXOx5wy%2FygwpbzWyTDNwIXdUNbX125mnM7B1g%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=83a448ae8cc2c72e5e3ce114ab3f1d48b38e02a13c4e3e603cd33d9b2b8151b8",
+      "file_size": 3328,
+      "type": "text/x-diff",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "none",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "id": 864740,
+      "category": "researcher",
+      "content": "A regression in commit [`73daec6`](https://github.com/curl/curl/commit/73daec6620bf9983df89e8df3660bfa3b8fd501d) caused `Curl_secure_context()` to use the proxy's HTTPS scheme instead of the origin's scheme when forwarding through an HTTPS proxy, leaking Secure cookies to HTTP origins in cleartext. Fix in PR [#22024](https://github.com/curl/curl/pull/22024).\n\nClosed as \"Not Applicable\" as the regression was not present in any release, only `origin/master`",
+      "updated_at": "2026-06-15T13:20:53.926Z",
+      "can_view?": true,
+      "can_create?": false,
+      "attachments": [],
+      "user": {
+        "id": 974225,
+        "username": "daviey",
+        "name": "Dave Walker",
+        "bio": "",
+        "cleared": false,
+        "verified": false,
+        "website": null,
+        "location": "",
+        "created_at": "2020-03-05T14:15:44.402Z",
+        "url": "https://hackerone.com/daviey",
+        "hackerone_triager": false,
+        "hackerone_employee": false,
+        "user_type": "hacker",
+        "profile_picture_urls": {
+          "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/7kxxua3tul58qwjfma4mq1my01ff/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6?response-content-disposition=inline%3B%20filename%3D%22mugshot.jpg%22%3B%20filename%2A%3DUTF-8%27%27mugshot.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQW3HWX5NW%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCocjbuV38TERTT5%2BHwkOHe6yAq33WldmIuIDH42LzY5QIhANhJfo0%2BB0LrueX%2FxernPbaBFLgYyjYFkdr75Ksi4YihKrIFCF8QAxoMMDEzNjE5Mjc0ODQ5IgwCk6rrDDegVoJa3kEqjwWO%2B8ULRQHua05O7Rwi85ZDe7Raxo2P4AXxvDRjBW4c%2FgJLTBSUU3wV25fQWV4v7Z3b9CiaEKjRiLIVzOV8zC2z2pD%2Bd7pB84BZxXNXChZpYxv6v7tEoh2cK%2F2J%2FrSHHN3TgykmyS6EgtFGb%2FBQIgx0i8A2FWt0XOPPXP2G3qzVVvYFMjtE8iV7MWSmjRYtIkVCRCizQhpo6eoSnkwxbBo%2BNyfpioVinDFgEvx4qgGip6mZt6udT%2FO9ou%2BJa7uBZS0lqn%2Fk3VS6kIpeSY2q1o%2F%2F0G7D%2FeRbVL39c%2BEclFVkdSIr%2BodyanNLDDuqFFFYEkL%2BAorCxU%2BXmiLiaTgxTpE8EdoDnIASJUxGK2a6HhzI%2FkLES7KehKDsi0RhYFGSJR3bdNdt03tZ08kHwMxWMzQHjZlOxIolV0NOfUfF83hYY%2Fki4c8OpHoe9kerJ03cRLWdoZwe0gSRsYbw1KVYuysgAUMt4JO7AIgLEdWMCZY6zzxTh3756MX6U8xv0wNHjS2JJy0Iopw2TVv93%2FRJDlD2zU9Il%2BNqUSmAl5wX%2FVFOaG5i4b4WTbdlWyK%2BAavw23vnN25MIoIZ%2BmAzCS9Cqk%2BDlGGmf9VjfZjCpCxpV3KHMKsoNLH7rq4b2IEUhtkGRzCLScgIb7Rtx4ex5rRZX19mALStkhQwFZbVvMVV3yNx7VsqkEaZL3MvRdPyAKFtU9J8TI1UuZ%2BdjqAK7wtclBlDZ65ZyRG5%2Bfa5VpGOXTeIFGlWHSn8qHf6GsTNkeDb9HGwugwSlTZQFaKy0fwSzIIWSwGJNJp7vLmhD0PYqTIFuupPaC9kaxGneEEpjUqovwm6LkAI4nfKLKoiwGRjddfw%2Fn2QJGYodA8NmNUKJuB6MLH8v9EGOrABMFpNX7e5RGBy4sRNukksGzO%2Fv3NZFnRIXiOxRTzigakaS9QdP07mt3Dqy0kad9Er2Bpj88g29C9j7c5DpD5GNgds1M006fdsHwecFevvlqqkwlel4oaXj6QT6e0GWYDolEFHmf3BLrxImGrlQZlfbEyErpVpkLwJu94%2BKxTNxu3Jwjp04wMQTYWKr8rOrG3LBunqy%2BJXOx5wy%2FygwpbzWyTDNwIXdUNbX125mnM7B1g%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d2ff1897ff1ebf56f8f8c0a8dc59af710bb94ac2e79ac76cb952615f1cba71b4",
+          "medium": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/7kxxua3tul58qwjfma4mq1my01ff/1d3351b56b27c9bb56ce22821a57514a7210186a77aefb760cd2113272723c1f?response-content-disposition=inline%3B%20filename%3D%22mugshot.jpg%22%3B%20filename%2A%3DUTF-8%27%27mugshot.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQW3HWX5NW%2F20260615%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260615T141017Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQCocjbuV38TERTT5%2BHwkOHe6yAq33WldmIuIDH42LzY5QIhANhJfo0%2BB0LrueX%2FxernPbaBFLgYyjYFkdr75Ksi4YihKrIFCF8QAxoMMDEzNjE5Mjc0ODQ5IgwCk6rrDDegVoJa3kEqjwWO%2B8ULRQHua05O7Rwi85ZDe7Raxo2P4AXxvDRjBW4c%2FgJLTBSUU3wV25fQWV4v7Z3b9CiaEKjRiLIVzOV8zC2z2pD%2Bd7pB84BZxXNXChZpYxv6v7tEoh2cK%2F2J%2FrSHHN3TgykmyS6EgtFGb%2FBQIgx0i8A2FWt0XOPPXP2G3qzVVvYFMjtE8iV7MWSmjRYtIkVCRCizQhpo6eoSnkwxbBo%2BNyfpioVinDFgEvx4qgGip6mZt6udT%2FO9ou%2BJa7uBZS0lqn%2Fk3VS6kIpeSY2q1o%2F%2F0G7D%2FeRbVL39c%2BEclFVkdSIr%2BodyanNLDDuqFFFYEkL%2BAorCxU%2BXmiLiaTgxTpE8EdoDnIASJUxGK2a6HhzI%2FkLES7KehKDsi0RhYFGSJR3bdNdt03tZ08kHwMxWMzQHjZlOxIolV0NOfUfF83hYY%2Fki4c8OpHoe9kerJ03cRLWdoZwe0gSRsYbw1KVYuysgAUMt4JO7AIgLEdWMCZY6zzxTh3756MX6U8xv0wNHjS2JJy0Iopw2TVv93%2FRJDlD2zU9Il%2BNqUSmAl5wX%2FVFOaG5i4b4WTbdlWyK%2BAavw23vnN25MIoIZ%2BmAzCS9Cqk%2BDlGGmf9VjfZjCpCxpV3KHMKsoNLH7rq4b2IEUhtkGRzCLScgIb7Rtx4ex5rRZX19mALStkhQwFZbVvMVV3yNx7VsqkEaZL3MvRdPyAKFtU9J8TI1UuZ%2BdjqAK7wtclBlDZ65ZyRG5%2Bfa5VpGOXTeIFGlWHSn8qHf6GsTNkeDb9HGwugwSlTZQFaKy0fwSzIIWSwGJNJp7vLmhD0PYqTIFuupPaC9kaxGneEEpjUqovwm6LkAI4nfKLKoiwGRjddfw%2Fn2QJGYodA8NmNUKJuB6MLH8v9EGOrABMFpNX7e5RGBy4sRNukksGzO%2Fv3NZFnRIXiOxRTzigakaS9QdP07mt3Dqy0kad9Er2Bpj88g29C9j7c5DpD5GNgds1M006fdsHwecFevvlqqkwlel4oaXj6QT6e0GWYDolEFHmf3BLrxImGrlQZlfbEyErpVpkLwJu94%2BKxTNxu3Jwjp04wMQTYWKr8rOrG3LBunqy%2BJXOx5wy%2FygwpbzWyTDNwIXdUNbX125mnM7B1g%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=02c9b70eb0fad17a6efd5b39adc8b95f0d85db40f2405de8624dba0498d871dd",
+          "xtralarge": "https://hackerone.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTI2NDAyNCwicHVyIjoiYmxvYl9pZCJ9fQ==--9b0f78541752560a5c94b277eec58128a8b98a5c/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiIyNjB4MjYwXHUwMDNlIn0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--6507e48fd2f16c79f4c96d055fb119d5c42eb886/mugshot.jpg"
+        }
+      }
+    }
+  ]
+}
