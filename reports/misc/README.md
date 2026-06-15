@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1590 report(s) across 24 class(es)**
+**1591 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -26,6 +26,7 @@
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
 | [Improper Validation Of Certificate Expiration](improper_validation_of_certificate_expiration/README.md) | 1 | — |
 | [Improper Validation Of Syntactic Correctness Of Input](improper_validation_of_syntactic_correctness_of_input/README.md) | 1 | — |
+| [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
 | [Unchecked Error Condition](unchecked_error_condition/README.md) | 1 | $150 |
@@ -329,6 +330,7 @@
 | Non-Production API Endpoints for the Route 53 Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-27 | [#3092085](https://hackerone.com/reports/3092085) |
 | admin_audit does not log actions on files in a group folder | — | nextcloud | 2025-12-05 | [#2890071](https://hackerone.com/reports/2890071) |
 | Non-Production API Endpoints for the bedrock-agent Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-28 | [#2800091](https://hackerone.com/reports/2800091) |
+| UI Consent Bypass via Comma Injection in `addAutoApproveTarget` — User-Approval Dialog and Persistence Layer Disagree on Target Scope, Yielding Authen | — | portswigger | 2026-06-15 | [#3717354](https://hackerone.com/reports/3717354) |
 | Password Reuse | — | upchieve | 2022-03-26 | [#1354382](https://hackerone.com/reports/1354382) |
 | Мисконфигурация Cisco Smart Install | — | av | 2021-11-16 | [#1398662](https://hackerone.com/reports/1398662) |
 | Social media link hijack of team member [Linkedin] at https://mackeeper.com/team/ | — | clario | 2021-04-21 | [#1152588](https://hackerone.com/reports/1152588) |
