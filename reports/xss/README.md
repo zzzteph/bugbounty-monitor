@@ -1,12 +1,12 @@
 # XSS
 
-**1477 report(s) across 10 class(es)**
+**1478 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 514 | $5,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 515 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 463 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
@@ -1082,6 +1082,7 @@
 | XSS via X-Forwarded-Host header | — | deptofdefense | 2021-05-11 | [#882220](https://hackerone.com/reports/882220) |
 | Reflected XSS in photogallery component on [https://market.av.ru] | — | av | 2021-12-01 | [#988271](https://hackerone.com/reports/988271) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
+| Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
 | Unauthenticated reflected XSS in preview_as_user function | — | concretecms | 2019-12-06 | [#643442](https://hackerone.com/reports/643442) |
 | Reflected XSS on card.starbucks.com.sg/unsubRevert.php via the 'ct' Parameter | — | starbucks | 2019-12-12 | [#541199](https://hackerone.com/reports/541199) |
 | XSS Reflected  | — | deptofdefense | 2020-05-27 | [#484905](https://hackerone.com/reports/484905) |

@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**514 report(s)**
+**515 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -477,6 +477,7 @@
 | XSS via X-Forwarded-Host header | — | deptofdefense | 2021-05-11 | [#882220](https://hackerone.com/reports/882220) |
 | Reflected XSS in photogallery component on [https://market.av.ru] | — | av | 2021-12-01 | [#988271](https://hackerone.com/reports/988271) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
+| Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
 | Unauthenticated reflected XSS in preview_as_user function | — | concretecms | 2019-12-06 | [#643442](https://hackerone.com/reports/643442) |
 | Reflected XSS on card.starbucks.com.sg/unsubRevert.php via the 'ct' Parameter | — | starbucks | 2019-12-12 | [#541199](https://hackerone.com/reports/541199) |
 | XSS Reflected  | — | deptofdefense | 2020-05-27 | [#484905](https://hackerone.com/reports/484905) |
