@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**404 report(s)**
+**405 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -108,6 +108,7 @@
 | Invalid Pointer reference in L_RESCUE | $100 | shopify-scripts | 2017-06-01 | [#219293](https://hackerone.com/reports/219293) |
 | Crash in print_backtrace | $100 | shopify-scripts | 2017-02-07 | [#197916](https://hackerone.com/reports/197916) |
 | Interger overflow in str_substr leading to read/write out of bound memory | $100 | shopify-scripts | 2017-03-15 | [#205884](https://hackerone.com/reports/205884) |
+| Malicious Conflux Endpoint Can Leave Stale Global OOO Queue Accounting After Teardown | $100 | torproject | 2026-06-16 | [#3701692](https://hackerone.com/reports/3701692) |
 | Memory Leak in OCUtil.dll library in Desktop client can lead to DoS | $100 | nextcloud | 2020-08-06 | [#588562](https://hackerone.com/reports/588562) |
 | xmlrpc.php And /wp-json/wp/v2/users FILE IS enable it will used for bruteforce attack and denial of service | $50 | sifchain | 2021-05-06 | [#1147449](https://hackerone.com/reports/1147449) |
 | SMS Invite Form Abuse | $30 | whisper | 2017-03-21 | [#94642](https://hackerone.com/reports/94642) |
