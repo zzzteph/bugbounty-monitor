@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1591 report(s) across 25 class(es)**
+**1592 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 955 | $50,000 |
+| [Unknown](unknown/README.md) | 956 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -1174,6 +1174,7 @@
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
+| Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
