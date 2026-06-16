@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**597 report(s) across 18 class(es)**
+**598 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 384 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 385 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -459,6 +459,7 @@
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
+| Unauthenticated file deletion via deleteFileMessage DDP method allows permanent destruction of any uploaded file | — | rocket_chat | 2026-06-16 | [#3611837](https://hackerone.com/reports/3611837) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | No Valid SPF Records. | — | chainlink | 2019-07-18 | [#629087](https://hackerone.com/reports/629087) |
