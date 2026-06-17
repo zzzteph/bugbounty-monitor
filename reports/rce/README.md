@@ -1,12 +1,12 @@
 # RCE / Command Injection
 
-**468 report(s) across 4 class(es)**
+**469 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Code Injection](code_injection/README.md) | 249 | $30,000 |
+| [Code Injection](code_injection/README.md) | 250 | $30,000 |
 | [Command Injection Generic](command_injection_generic/README.md) | 154 | $33,510 |
 | [Os Command Injection](os_command_injection/README.md) | 58 | $25,000 |
 | [Use Of Externally Controlled Format String](use_of_externally_controlled_format_string/README.md) | 7 | $8,000 |
@@ -30,6 +30,7 @@
 | RCE via npm misconfig -- installing internal libraries from the public registry | $9,000 | uber | 2021-02-24 | [#1007014](https://hackerone.com/reports/1007014) |
 | Remote code execution and exfiltration of secret tokens by poisoning the mozilla/fxa CI build cache | $8,000 | mozilla | 2024-01-20 | [#2255750](https://hackerone.com/reports/2255750) |
 | CVE-2022-40604: Apache Airflow: Format String Vulnerability | $8,000 | ibb | 2025-01-18 | [#1707287](https://hackerone.com/reports/1707287) |
+| Authenticated Elasticsearch Painless script execution via Query.search.sort_query on hackerone.com/graphql | $7,000 | security | 2026-06-17 | [#3694007](https://hackerone.com/reports/3694007) |
 | Git flag injection - Search API with scope 'blobs'  | $7,000 | gitlab | 2019-12-15 | [#682442](https://hackerone.com/reports/682442) |
 | Apache Flink RCE via GET jar/plan API Endpoint | $6,000 | aiven_ltd | 2022-11-08 | [#1418891](https://hackerone.com/reports/1418891) |
 | Sending arbitrary IPC messages via overriding Function.prototype.apply | $5,300 | brave | 2018-09-18 | [#188086](https://hackerone.com/reports/188086) |

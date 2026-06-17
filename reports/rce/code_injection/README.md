@@ -1,6 +1,6 @@
 # Code Injection
 
-**249 report(s)**
+**250 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -11,6 +11,7 @@
 | Arbitrary Code Execution via npm misconfiguration – installing internal libraries from the public registry | $11,500 | line | 2021-07-05 | [#1043385](https://hackerone.com/reports/1043385) |
 | RCE via npm misconfig -- installing internal libraries from the public registry | $9,000 | uber | 2021-02-24 | [#1007014](https://hackerone.com/reports/1007014) |
 | Remote code execution and exfiltration of secret tokens by poisoning the mozilla/fxa CI build cache | $8,000 | mozilla | 2024-01-20 | [#2255750](https://hackerone.com/reports/2255750) |
+| Authenticated Elasticsearch Painless script execution via Query.search.sort_query on hackerone.com/graphql | $7,000 | security | 2026-06-17 | [#3694007](https://hackerone.com/reports/3694007) |
 | CVE-2023-5528: Insufficient input sanitization in in-tree storage plugin leads to privilege escalation on Windows nodes | $5,000 | kubernetes | 2023-12-21 | [#2231019](https://hackerone.com/reports/2231019) |
 | CVE-2022-40127: RCE in Apache Airflow <2.4.0 bash example | $4,000 | ibb | 2023-01-05 | [#1776476](https://hackerone.com/reports/1776476) |
 | Code inject via nginx.ingress.kubernetes.io/permanent-redirect annotation | $2,500 | kubernetes | 2023-10-25 | [#2039464](https://hackerone.com/reports/2039464) |
