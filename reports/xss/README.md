@@ -1,12 +1,12 @@
 # XSS
 
-**1478 report(s) across 10 class(es)**
+**1479 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 515 | $5,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 516 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 463 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
@@ -92,6 +92,7 @@
 | CRLF and XSS stored on ton.twitter.com | $1,680 | x | 2017-07-05 | [#191380](https://hackerone.com/reports/191380) |
 | Read/Write arbitrary (non-HttpOnly) cookies on checkout pages via GoogleAnalyticsAdditionalScripts postMessage handler | $1,600 | shopify | 2022-12-01 | [#1081167](https://hackerone.com/reports/1081167) |
 | Cross-site scripting on api.collabs.shopify.com | $1,600 | shopify | 2022-10-13 | [#1672459](https://hackerone.com/reports/1672459) |
+| Reflected XSS in AI Chat Bot Greetings at help.shopify.com via Markdown Image Rendering | $1,600 | shopify | 2026-06-18 | [#2509022](https://hackerone.com/reports/2509022) |
 | [h1-2102] Stored XSS in product description via `productUpdate` GraphQL query leads to XSS at handshake-web-internal.shopifycloud.com/products/[ID] | $1,600 | shopify | 2022-07-11 | [#1085546](https://hackerone.com/reports/1085546) |
 | Stored XSS in Dovetale by application of creator | $1,600 | shopify | 2022-11-29 | [#1652046](https://hackerone.com/reports/1652046) |
 | XSS в upload.php | $1,500 | vkcom | 2017-02-09 | [#142135](https://hackerone.com/reports/142135) |

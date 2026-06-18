@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**515 report(s)**
+**516 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -15,6 +15,7 @@
 | Reflected XSS in OAUTH2 login flow  | $1,990 | line | 2020-04-21 | [#697099](https://hackerone.com/reports/697099) |
 | XSS while logging using Google | $1,750 | shopify | 2019-09-11 | [#691611](https://hackerone.com/reports/691611) |
 | Cross-site scripting on api.collabs.shopify.com | $1,600 | shopify | 2022-10-13 | [#1672459](https://hackerone.com/reports/1672459) |
+| Reflected XSS in AI Chat Bot Greetings at help.shopify.com via Markdown Image Rendering | $1,600 | shopify | 2026-06-18 | [#2509022](https://hackerone.com/reports/2509022) |
 | Query parameter reordering causes redirect page to render unsafe URL | $1,500 | security | 2017-11-30 | [#293689](https://hackerone.com/reports/293689) |
 | Reflected XSS on $Any$.myshopify.com/admin | $1,500 | shopify | 2018-11-13 | [#422707](https://hackerone.com/reports/422707) |
 | CSP bypass on PortSwigger.net using Google script resources | $1,500 | portswigger | 2024-02-18 | [#2279346](https://hackerone.com/reports/2279346) |
