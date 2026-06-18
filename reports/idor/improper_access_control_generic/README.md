@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**664 report(s)**
+**665 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -609,6 +609,7 @@
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
+| Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
 | Potential Subdomain Takeover on IBM.com domain. | — | ibm | 2026-03-24 | [#3592387](https://hackerone.com/reports/3592387) |
 | Missing access control when linking trackers to campaigns | — | revive_adserver | 2026-06-03 | [#3650582](https://hackerone.com/reports/3650582) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
