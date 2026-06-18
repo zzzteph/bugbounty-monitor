@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**405 report(s)**
+**406 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -378,6 +378,7 @@
 | DoS attack against the client when entering a long password | — | nextcloud | 2021-02-14 | [#949712](https://hackerone.com/reports/949712) |
 | [api.tumblr.com] Denial of Service by cookies manipulation | — | automattic | 2020-11-29 | [#1005421](https://hackerone.com/reports/1005421) |
 | xmlrpc.php FILE IS enable it can be used for conducting a Bruteforce attack and Denial of Service(DoS) | — | iandunn-projects | 2020-01-07 | [#769716](https://hackerone.com/reports/769716) |
+| HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |

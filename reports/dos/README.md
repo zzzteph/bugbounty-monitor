@@ -1,12 +1,12 @@
 # Denial of Service
 
-**435 report(s) across 5 class(es)**
+**436 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 405 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 406 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 26 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -420,6 +420,7 @@
 | DoS attack against the client when entering a long password | — | nextcloud | 2021-02-14 | [#949712](https://hackerone.com/reports/949712) |
 | [api.tumblr.com] Denial of Service by cookies manipulation | — | automattic | 2020-11-29 | [#1005421](https://hackerone.com/reports/1005421) |
 | xmlrpc.php FILE IS enable it can be used for conducting a Bruteforce attack and Denial of Service(DoS) | — | iandunn-projects | 2020-01-07 | [#769716](https://hackerone.com/reports/769716) |
+| HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |

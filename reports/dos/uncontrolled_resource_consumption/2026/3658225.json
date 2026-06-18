@@ -1,0 +1,150 @@
+{
+  "id": 3658225,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNjU4MjI1",
+  "url": "https://hackerone.com/reports/3658225",
+  "title": "HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-04-08T15:26:14.550Z",
+  "submitted_at": "2026-04-08T15:26:15.292Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "pimterry",
+    "url": "/pimterry",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/w3wnkoizub9qacv4b9jf39lwcih0/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6?response-content-disposition=inline%3B%20filename%3D%22speaking-1000px.jpg%22%3B%20filename%2A%3DUTF-8%27%27speaking-1000px.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQ6PVSUZA%2F20260618%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260618T185054Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEN%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIAhW2zxIuMHn7gAntnChe6NvjC3FTF88aSRmirKlbeeXAiAz9AlC7l4SHYhO9iWXMvBnwpkf8uYzr0nEIH4E5obsNCq7BQio%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMMasjq5nYPKQFr4QwKo8Fx8zXyhDueq44h5tPfXIaw1NiZOHyULwKVVWx0MnqXQH1NT2FYrVdWQrRJ5VjMTefk%2FJsrjXJwOOjFB0liS3sYRCGZ28%2B9ZvESh2VjlQUQjSfecnr5ING63Of43VJ8TsSUDqJBI3vRyDPUenj9Nxu39OvLsMBAW8eiJua%2F2xzL3dRsYChLZ0XL%2FrX6UIixYsk4bOKxOIX%2B%2B8Z5o%2B1v%2Fsx1beaSZXKkhSBUxmow1Ol95Iw79eDlSNvfTTI0MYE6CY98xAj4L4ensHeOIaXhETkwLohKzO3bCyJhHDrAPwaMrmD2LdvcgXRhRTz0DTudT5XtlVds6GPRQIRzP2eOwuvEvMkjWVrcoZ0L%2FBDk3XJcFuviRR7IANmzUM5tUgadZM%2FwKEpllRnwQr57rcfmUYKiG%2Bffj0rrS1IDoxTYxGeWJqnJF03d0%2BQypRYaAfge0waw5bv2wqLo%2FIhqJZ6pdua%2Bo7IASawwP1kUjHO51szmnVgjf2Btyvi4ehNnRqOeIXKYOUOX12PzqsRtoHorgVJzrXpI9DtaEI2UkvAZCuPuAubaLCU%2BjgNTGp4EAIiSFSovi0Hfg%2BRHpwpKqwb7wUzRz8Ax5NNYozEwilLMRGi5pnoGYnKXZLF0PFLL0foZ2aQaC58yK27UagvlGKeYEtqVcH3rEOaZGUtGQiBe2WTWtfAfefOsmBlaN7i6ZeiylT1Upv8sbvhA1IkBDrw%2B1hNhEzOijOgGu1n7RBnwNiT0x07W5uXJEdjH%2FvTj0DbZ%2FaTRsTv76E6IAkUGdOKvu92kEq4Pv9DLjy2xH1BbF116EOylo3YVS2K6LmlbY2t%2FGqNtEB2PiA5CInVq66E6%2BfeofXhmDuEYif1CXE6GiziYzDogNDRBjqyAaiVn8Xc51WBb1UMg1z0%2B6qSzz70uOSV3WtkRHjP0APid%2BjTvl0xM4E1pzXuE0l3cuvb9pH3%2B20DGLq%2FtpHxaHLrMdL2b%2BqfBdWQ9jAHR6JCxSTosqwKbHb%2Fz2s8msrLffLHYRWfLmd0UTXu4gIllJFvBhjftykuFxUcP2wvUB6dL13RPV2nO2z0Q6HjfbpMzrZBo%2BKZvIzXMuslaGSr1xZaDV0BKjbevKdfKTxfMn8HDHU%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=5a65f46e28f29261b926a294bcbb442885f1b28faba0d322b989f669bd0a8137"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 22984,
+    "url": "https://hackerone.com/nodejs",
+    "handle": "nodejs",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/022/984/e600648ace4a8553247bce967d461a030aa81d49_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/022/984/e600648ace4a8553247bce967d461a030aa81d49_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Node.js",
+      "twitter_handle": "nodejs",
+      "website": "https://nodejs.org",
+      "about": "The Node.js JavaScript Runtime"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "no-content",
+  "cve_ids": [
+    "CVE-2026-48937"
+  ],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-06-18T17:34:31.244Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-06-18T17:34:30.427Z",
+  "team_member_agreed_on_going_public_at": "2026-06-18T14:44:56.443Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "",
+  "weakness": {
+    "id": 48,
+    "name": "Uncontrolled Resource Consumption"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": "2026-07-18T14:44:57.708Z",
+  "allow_singular_disclosure_after": 2577242.82249723,
+  "singular_disclosure_allowed": false,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "score": 5.3,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "none",
+      "availability": "low"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 666,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/nodejs/node",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "id": 866079,
+      "category": "team",
+      "content": "A flaw in Node.js HTTP/2 server API can cause servers to keep accepting data even after sending a `GOAWAY` frame.\n\nThis vulnerability affects two supported release lines: **Node.js 22** and **Node.js 24**.",
+      "updated_at": "2026-06-17T17:46:46.093Z",
+      "can_view?": true,
+      "can_create?": false,
+      "attachments": [],
+      "user": {
+        "id": 1676002,
+        "username": "aduh95",
+        "name": "Antoine du Hamel",
+        "bio": null,
+        "cleared": false,
+        "verified": false,
+        "website": null,
+        "location": null,
+        "created_at": "2021-04-22T19:22:06.246Z",
+        "url": "https://hackerone.com/aduh95",
+        "hackerone_triager": false,
+        "hackerone_employee": false,
+        "user_type": "hacker",
+        "profile_picture_urls": {
+          "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png",
+          "medium": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png",
+          "xtralarge": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+        }
+      }
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
