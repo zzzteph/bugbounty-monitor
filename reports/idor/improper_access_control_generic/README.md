@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**665 report(s)**
+**666 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -607,6 +607,7 @@
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
+| 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |

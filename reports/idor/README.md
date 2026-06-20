@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1046 report(s) across 10 class(es)**
+**1047 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 665 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 666 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 280 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
@@ -723,6 +723,7 @@
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
+| 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
