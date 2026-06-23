@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1592 report(s) across 25 class(es)**
+**1593 report(s) across 26 class(es)**
 
 ## Classes
 
@@ -19,6 +19,7 @@
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 2 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
+| [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
@@ -80,6 +81,7 @@
 | Apache HTTP Server: mod_proxy_ajp: Possible request smuggling | $2,400 | ibb | 2022-07-09 | [#1594627](https://hackerone.com/reports/1594627) |
 | Deadlock in x86 HVM standard VGA handling | $2,162 | ibb | 2025-03-07 | [#2921724](https://hackerone.com/reports/2921724) |
 | CVE-2024-56374:  Denial-of-service vulnerability in IPv6 validation | $2,162 | ibb | 2025-05-27 | [#2939104](https://hackerone.com/reports/2939104) |
+| Taskcluster web-server OAuth2 authorization codes are reusable and the exchange handler checks the wrong expiry column | $2,000 | mozilla | 2026-06-23 | [#3734676](https://hackerone.com/reports/3734676) |
 | Reflected XSS on Partners Subdomain | $2,000 | uber | 2018-09-16 | [#390181](https://hackerone.com/reports/390181) |
 | Staff without Manage Themes permissions can update themes | $1,900 | shopify | 2024-01-23 | [#1550400](https://hackerone.com/reports/1550400) |
 | Staff who only have apps and channels permission can do a takeover account at the wholesale store (Bypass get invitation link) | $1,600 | shopify | 2021-11-21 | [#1266828](https://hackerone.com/reports/1266828) |
