@@ -1,6 +1,6 @@
 # Information Exposure Through Sent Data
 
-**20 report(s)**
+**21 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -24,3 +24,4 @@
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
+| CVE-2026-11856: cross-origin Digest auth state leak | — | curl | 2026-06-24 | [#3793260](https://hackerone.com/reports/3793260) |

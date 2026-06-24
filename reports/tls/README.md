@@ -1,12 +1,12 @@
 # TLS / Certificate Validation
 
-**75 report(s) across 5 class(es)**
+**76 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 42 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 43 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 3 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
@@ -57,6 +57,7 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Only OpenSSL handles a CRL when passed in via CApath  | — | curl | 2021-01-08 | [#713975](https://hackerone.com/reports/713975) |
 | Remotely trigger an assertion on a TLS server with a malformed certificate string | — | nodejs | 2020-02-06 | [#746733](https://hackerone.com/reports/746733) |
 | curl successfully matches IP address literal in URL against IP address literal in certificate Common Name | — | curl | 2021-01-08 | [#715413](https://hackerone.com/reports/715413) |

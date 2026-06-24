@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**42 report(s)**
+**43 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -43,6 +43,7 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Only OpenSSL handles a CRL when passed in via CApath  | — | curl | 2021-01-08 | [#713975](https://hackerone.com/reports/713975) |
 | Remotely trigger an assertion on a TLS server with a malformed certificate string | — | nodejs | 2020-02-06 | [#746733](https://hackerone.com/reports/746733) |
 | curl successfully matches IP address literal in URL against IP address literal in certificate Common Name | — | curl | 2021-01-08 | [#715413](https://hackerone.com/reports/715413) |

@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1105 report(s) across 10 class(es)**
+**1106 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 20 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 21 | $2,540 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
 | [Leftover Debug Code Backdoor](leftover_debug_code_backdoor/README.md) | 2 | — |
@@ -1068,6 +1068,7 @@
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
+| CVE-2026-11856: cross-origin Digest auth state leak | — | curl | 2026-06-24 | [#3793260](https://hackerone.com/reports/3793260) |
 | Timing Attack Vulnerability in curl Digest Authentication via Non-Constant-Time String Comparison | — | curl | 2025-09-18 | [#3346118](https://hackerone.com/reports/3346118) |
 | Subdomain Takeover at http://██.get8x8.com/ | — | 8x8-bounty | 2022-10-14 | [#1697402](https://hackerone.com/reports/1697402) |
 | ███ on https://████ enable ███ scraping, injection, stored XSS | — | deptofdefense | 2021-05-11 | [#1048571](https://hackerone.com/reports/1048571) |
