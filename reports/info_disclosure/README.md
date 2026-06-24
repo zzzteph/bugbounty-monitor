@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1106 report(s) across 10 class(es)**
+**1108 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 904 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 906 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 76 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -876,8 +876,10 @@
 | sdrc.starbucks.com - Information Disclosure via unsecured attachment directory | — | starbucks | 2020-02-26 | [#769016](https://hackerone.com/reports/769016) |
 | Exposed .bash_history at http://21days2017.mtncameroon.net/.bash_history | — | mtn_group | 2022-03-20 | [#801437](https://hackerone.com/reports/801437) |
 | ctf walkthrough | — | h1-ctf | 2021-01-12 | [#1065468](https://hackerone.com/reports/1065468) |
+| CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
 |  Secure cookies leaked to HTTP origins through HTTPS forwarding proxy | — | curl | 2026-06-15 | [#3803415](https://hackerone.com/reports/3803415) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
+| CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 | CURLOPT_COOKIE leaked to cross-origin redirect target — CURLOPT_UNRESTRICTED_AUTH bypass for the STRING_COOKIE path | — | curl | 2026-06-05 | [#3766065](https://hackerone.com/reports/3766065) |

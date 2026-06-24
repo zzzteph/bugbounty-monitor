@@ -1,6 +1,6 @@
 # Allocation Of Resources Without Limits Or Throttling
 
-**26 report(s)**
+**27 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -29,4 +29,5 @@
 | libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
 | HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c) | — | curl | 2026-05-19 | [#3734020](https://hackerone.com/reports/3734020) |
 | HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB | — | curl | 2026-05-19 | [#3734947](https://hackerone.com/reports/3734947) |
+| CVE-2026-11586: WS Auto-PONG memory exhaustion | — | curl | 2026-06-24 | [#3788931](https://hackerone.com/reports/3788931) |
 | Prototype pollution attack (lodash) | — | nodejs-ecosystem | 2020-04-27 | [#712065](https://hackerone.com/reports/712065) |

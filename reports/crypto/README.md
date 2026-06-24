@@ -1,6 +1,6 @@
 # Cryptography
 
-**141 report(s) across 12 class(es)**
+**142 report(s) across 12 class(es)**
 
 ## Classes
 
@@ -13,8 +13,8 @@
 | [Inadequate Encryption Strength](inadequate_encryption_strength/README.md) | 6 | $300 |
 | [Use Of Cryptographically Weak Pseudo Random Number Generator](use_of_cryptographically_weak_pseudo_random_number_generator/README.md) | 6 | — |
 | [Use Of Insufficiently Random Values](use_of_insufficiently_random_values/README.md) | 5 | $100 |
+| [Reusing A Nonce Key Pair In Encryption](reusing_a_nonce_key_pair_in_encryption/README.md) | 4 | — |
 | [Use Of A Key Past Its Expiration Date](use_of_a_key_past_its_expiration_date/README.md) | 4 | — |
-| [Reusing A Nonce Key Pair In Encryption](reusing_a_nonce_key_pair_in_encryption/README.md) | 3 | — |
 | [Improper Verification Of Cryptographic Signature](improper_verification_of_cryptographic_signature/README.md) | 2 | $750 |
 | [Key Exchange Without Entity Authentication](key_exchange_without_entity_authentication/README.md) | 2 | — |
 | [Reversible One Way Hash](reversible_one_way_hash/README.md) | 1 | — |
@@ -127,6 +127,7 @@
 | i can join without user and pass in this website  https://argocd.upchieve.org/settings/accounts | — | upchieve | 2021-08-18 | [#1304490](https://hackerone.com/reports/1304490) |
 | Key Reinstallation Attacks: Breaking WPA2 by forcing nonce reuse | — | ibb | 2017-11-03 | [#286740](https://hackerone.com/reports/286740) |
 | CVE-2025-10148: predictable WebSocket mask | — | curl | 2025-09-10 | [#3330839](https://hackerone.com/reports/3330839) |
+| CVE-2026-9547: SSH improper host validation | — | curl | 2026-06-24 | [#3751712](https://hackerone.com/reports/3751712) |
 | LM Challenge-Response Hash Always Sent in SMB Authentication | — | curl | 2026-03-09 | [#3584491](https://hackerone.com/reports/3584491) |
 | Use of a Broken or Risky Cryptographic Algorithm | — | revive_adserver | 2021-09-15 | [#1306942](https://hackerone.com/reports/1306942) |
 | Inadequate Cryptographic Key Size and Insecure Cryptographic Mode.  File Name :- curl_ntlm_core.c | — | curl | 2021-03-08 | [#1113663](https://hackerone.com/reports/1113663) |

@@ -1,22 +1,22 @@
 # Authentication & Session
 
-**598 report(s) across 18 class(es)**
+**601 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 385 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 386 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 11 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 12 | — |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
 | [Authentication Bypass](authentication_bypass/README.md) | 5 | $7,500 |
+| [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 5 | — |
 | [Unverified Password Change](unverified_password_change/README.md) | 5 | — |
-| [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 4 | — |
 | [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 3 | $15,300 |
 | [Insufficient Verification Of Data Authenticity](insufficient_verification_of_data_authenticity/README.md) | 2 | $1,270 |
 | [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 2 | — |
@@ -138,6 +138,7 @@
 | CVE-2023-27538: SSH connection too eager reuse still | — | curl | 2023-03-22 | [#1898475](https://hackerone.com/reports/1898475) |
 | CVE-2023-27535: FTP too eager connection reuse | — | curl | 2023-03-22 | [#1892780](https://hackerone.com/reports/1892780) |
 | CVE-2023-27536: GSS delegation too eager connection re-use | — | curl | 2023-03-22 | [#1895135](https://hackerone.com/reports/1895135) |
+| CVE-2026-8458: wrong reuse for different services | — | curl | 2026-06-24 | [#3721183](https://hackerone.com/reports/3721183) |
 | SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal | — | curl | 2026-06-09 | [#3788506](https://hackerone.com/reports/3788506) |
 | Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning | — | curl | 2026-04-03 | [#3640932](https://hackerone.com/reports/3640932) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
@@ -164,6 +165,7 @@
 | State Isolation Failure in Multiplexed Connections (Shared Auth Context) | — | curl | 2026-01-08 | [#3487952](https://hackerone.com/reports/3487952) |
 | libcurl reuses a learned RTSP Session header across different hosts on the same easy handle, enabling cross-host session leak and replay | — | curl | 2026-04-18 | [#3680234](https://hackerone.com/reports/3680234) |
 | CVE-2026-6276: stale custom cookie host causes cookie leak | — | curl | 2026-04-29 | [#3671818](https://hackerone.com/reports/3671818) |
+| HTTPS proxy connection reuse lets one easy handle inherit another handle's mTLS-authenticated proxy session | — | curl | 2026-06-24 | [#3735180](https://hackerone.com/reports/3735180) |
 | CVE-2026-7168: cross-proxy Digest auth state leak | — | curl | 2026-04-29 | [#3697719](https://hackerone.com/reports/3697719) |
 | Attacker can bypass authentication build on ingress external auth (`nginx.ingress.kubernetes.io/auth-url`) | — | kubernetes | 2022-04-23 | [#1357948](https://hackerone.com/reports/1357948) |
 | PIN 📌 BYPASS 🥷 | — | yoti | 2022-03-18 | [#1257586](https://hackerone.com/reports/1257586) |
@@ -460,6 +462,7 @@
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 | Unauthenticated file deletion via deleteFileMessage DDP method allows permanent destruction of any uploaded file | — | rocket_chat | 2026-06-16 | [#3611837](https://hackerone.com/reports/3611837) |
+| CVE-2026-8927: env-set cross-proxy Digest auth state leak | — | curl | 2026-06-24 | [#3744543](https://hackerone.com/reports/3744543) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | No Valid SPF Records. | — | chainlink | 2019-07-18 | [#629087](https://hackerone.com/reports/629087) |

@@ -1,6 +1,6 @@
 # Buffer Over Read
 
-**53 report(s)**
+**54 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -50,6 +50,7 @@
 | CVE-2017-13019:  The PGM parser in tcpdump before 4.9.2 has a buffer over-read in print-pgm.c:pgm_print() | — | ibb | 2021-08-22 | [#802896](https://hackerone.com/reports/802896) |
 | CVE-2017-13050: The RPKI-Router parser in tcpdump before 4.9.2 has a buffer over-read in print-rpki-rtr.c:rpki_rtr_pdu_print() | — | ibb | 2021-08-22 | [#802863](https://hackerone.com/reports/802863) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
+| CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | A specifically malformed MQTT Subscribe packet crashes MQTT Brokers using the mqtt-packet module for decoding   | — | nodejs-ecosystem | 2019-04-28 | [#541354](https://hackerone.com/reports/541354) |
 | Heap Buffer Overflow (READ: 4) in phar_parse_pharfile | — | ibb | 2020-10-10 | [#477344](https://hackerone.com/reports/477344) |

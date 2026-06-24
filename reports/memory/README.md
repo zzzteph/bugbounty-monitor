@@ -1,22 +1,22 @@
 # Memory Corruption
 
-**673 report(s) across 25 class(es)**
+**677 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 61 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 63 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
-| [Buffer Over Read](buffer_over_read/README.md) | 53 | $2,142 |
+| [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 34 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 26 | $500 |
+| [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Array Index Underflow](array_index_underflow/README.md) | 16 | $7,500 |
-| [Double Free](double_free/README.md) | 16 | $10,000 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
 | [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 7 | $10,000 |
@@ -284,6 +284,7 @@
 | CVE-2017-13019:  The PGM parser in tcpdump before 4.9.2 has a buffer over-read in print-pgm.c:pgm_print() | — | ibb | 2021-08-22 | [#802896](https://hackerone.com/reports/802896) |
 | CVE-2017-13050: The RPKI-Router parser in tcpdump before 4.9.2 has a buffer over-read in print-rpki-rtr.c:rpki_rtr_pdu_print() | — | ibb | 2021-08-22 | [#802863](https://hackerone.com/reports/802863) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
+| CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | A specifically malformed MQTT Subscribe packet crashes MQTT Brokers using the mqtt-packet module for decoding   | — | nodejs-ecosystem | 2019-04-28 | [#541354](https://hackerone.com/reports/541354) |
 | Heap Buffer Overflow (READ: 4) in phar_parse_pharfile | — | ibb | 2020-10-10 | [#477344](https://hackerone.com/reports/477344) |
@@ -346,6 +347,7 @@
 | CVE-2023-27537: HSTS double-free | — | curl | 2023-03-20 | [#1897203](https://hackerone.com/reports/1897203) |
 | CVE-2022-42915: HTTP proxy double-free | — | curl | 2022-11-26 | [#1722065](https://hackerone.com/reports/1722065) |
 | Invalid write (or double free) triggers curl command line tool crash | — | curl | 2020-05-18 | [#875775](https://hackerone.com/reports/875775) |
+| CVE-2026-8925: SASL double-free | — | curl | 2026-06-24 | [#3735193](https://hackerone.com/reports/3735193) |
 | CVE-2019-5481: krb5: double-free in read_data() after realloc() fail | — | curl | 2020-11-14 | [#686823](https://hackerone.com/reports/686823) |
 | Double-free of `trailers_buf' on `Curl_http_compile_trailers()` failure | — | curl | 2021-01-12 | [#687734](https://hackerone.com/reports/687734) |
 | CVE-2024-6197: freeing stack buffer in utf8asn1str | — | curl | 2024-07-24 | [#2559516](https://hackerone.com/reports/2559516) |
@@ -691,9 +693,11 @@
 | CURLOPT_HSTS_CTRL disables shared HSTS without share guard — use-after-free and double-free | — | curl | 2026-05-18 | [#3733934](https://hackerone.com/reports/3733934) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
+| CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
+| CVE-2026-9080: UAF after pause in socket callback | — | curl | 2026-06-24 | [#3749204](https://hackerone.com/reports/3749204) |
 | CVE-2026-3805: use after free in SMB connection reuse | — | curl | 2026-03-11 | [#3591944](https://hackerone.com/reports/3591944) |
 | Use-After-Free race condition in url_move_hostname() via shared connection pool | — | curl | 2026-03-31 | [#3638715](https://hackerone.com/reports/3638715) |
 | heap-use-after-free in state.referer when CURLOPT_REFERER replaced or cleared after perform | — | curl | 2026-06-11 | [#3774279](https://hackerone.com/reports/3774279) |

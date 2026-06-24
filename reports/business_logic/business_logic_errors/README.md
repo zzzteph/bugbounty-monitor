@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**344 report(s)**
+**345 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -317,6 +317,7 @@
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | TLS verifyhost bypass in rustls, mbedTLS, and wolfSSL when verifypeer=0 | — | curl | 2026-05-19 | [#3734095](https://hackerone.com/reports/3734095) |
+| CVE-2026-8932: incomplete mTLS config matching in conn reuse | — | curl | 2026-06-24 | [#3733910](https://hackerone.com/reports/3733910) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | Schannel custom-CA path skips Extended Key Usage enforcement | — | curl | 2026-05-19 | [#3734992](https://hackerone.com/reports/3734992) |

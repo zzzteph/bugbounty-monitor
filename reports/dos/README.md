@@ -1,13 +1,13 @@
 # Denial of Service
 
-**436 report(s) across 5 class(es)**
+**438 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 406 | $10,000 |
-| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 26 | $2,540 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 407 | $10,000 |
+| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
 | [Loop With Unreachable Exit Condition Infinite Loop](loop_with_unreachable_exit_condition_infinite_loop/README.md) | 1 | — |
@@ -152,6 +152,7 @@
 | libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
 | HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c) | — | curl | 2026-05-19 | [#3734020](https://hackerone.com/reports/3734020) |
 | HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB | — | curl | 2026-05-19 | [#3734947](https://hackerone.com/reports/3734947) |
+| CVE-2026-11586: WS Auto-PONG memory exhaustion | — | curl | 2026-06-24 | [#3788931](https://hackerone.com/reports/3788931) |
 | Prototype pollution attack (lodash) | — | nodejs-ecosystem | 2020-04-27 | [#712065](https://hackerone.com/reports/712065) |
 | Unbounded GZIP Decompression Leading to Event-Loop Starvation | — | curl | 2026-03-31 | [#3632427](https://hackerone.com/reports/3632427) |
 | CVE-2025-5399: WebSocket endless loop | — | curl | 2025-06-04 | [#3168039](https://hackerone.com/reports/3168039) |
@@ -426,6 +427,7 @@
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
+| CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
 | Crash Node.js process from handlebars using a small and simple source | — | nodejs-ecosystem | 2020-04-27 | [#726364](https://hackerone.com/reports/726364) |
 | WEBrick::HTTPAuth::DigestAuth authentication is vulnerable to regular expression denial of service (ReDoS) | — | ruby | 2019-11-15 | [#661722](https://hackerone.com/reports/661722) |
 | No redirect_uri in the db for web-internal clientKey leads to one-click DoS on gitter.im | — | gitlab | 2020-05-15 | [#702987](https://hackerone.com/reports/702987) |

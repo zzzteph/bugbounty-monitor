@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**406 report(s)**
+**407 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -384,6 +384,7 @@
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
+| CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
 | Crash Node.js process from handlebars using a small and simple source | — | nodejs-ecosystem | 2020-04-27 | [#726364](https://hackerone.com/reports/726364) |
 | WEBrick::HTTPAuth::DigestAuth authentication is vulnerable to regular expression denial of service (ReDoS) | — | ruby | 2019-11-15 | [#661722](https://hackerone.com/reports/661722) |
 | No redirect_uri in the db for web-internal clientKey leads to one-click DoS on gitter.im | — | gitlab | 2020-05-15 | [#702987](https://hackerone.com/reports/702987) |

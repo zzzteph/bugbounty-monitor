@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1593 report(s) across 26 class(es)**
+**1596 report(s) across 26 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 956 | $50,000 |
+| [Unknown](unknown/README.md) | 958 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -15,8 +15,8 @@
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 3 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
+| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
-| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 2 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
@@ -1175,6 +1175,7 @@
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
+| CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
 | Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
 | Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
@@ -1183,6 +1184,7 @@
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
+| CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |
@@ -1255,6 +1257,7 @@
 | Мини-уязвимость в обработке ссылок | — | vkcom | 2019-12-10 | [#726063](https://hackerone.com/reports/726063) |
 | Name collision of shared folders | — | nextcloud | 2023-04-29 | [#1697281](https://hackerone.com/reports/1697281) |
 | DNS domain search list followed for extant domain missing A or AAAA records | — | curl | 2026-06-08 | [#3780733](https://hackerone.com/reports/3780733) |
+| CVE-2026-8924: trailing dot domain super cookie | — | curl | 2026-06-24 | [#3733905](https://hackerone.com/reports/3733905) |
 | Unexpected input validation of octal literals in nodejs v15.12.0 and below returns defined values for all undefined octal literals. | — | nodejs | 2021-06-14 | [#1141623](https://hackerone.com/reports/1141623) |
 | No Rate Limit on redditgifts gift  when Adding Comment | — | reddit | 2021-10-21 | [#1202408](https://hackerone.com/reports/1202408) |
 | Origin IP found, Cloudflare bypassed | — | cs_money | 2021-03-30 | [#1105673](https://hackerone.com/reports/1105673) |

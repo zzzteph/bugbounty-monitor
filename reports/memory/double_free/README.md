@@ -1,6 +1,6 @@
 # Double Free
 
-**16 report(s)**
+**17 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,5 +18,6 @@
 | CVE-2023-27537: HSTS double-free | — | curl | 2023-03-20 | [#1897203](https://hackerone.com/reports/1897203) |
 | CVE-2022-42915: HTTP proxy double-free | — | curl | 2022-11-26 | [#1722065](https://hackerone.com/reports/1722065) |
 | Invalid write (or double free) triggers curl command line tool crash | — | curl | 2020-05-18 | [#875775](https://hackerone.com/reports/875775) |
+| CVE-2026-8925: SASL double-free | — | curl | 2026-06-24 | [#3735193](https://hackerone.com/reports/3735193) |
 | CVE-2019-5481: krb5: double-free in read_data() after realloc() fail | — | curl | 2020-11-14 | [#686823](https://hackerone.com/reports/686823) |
 | Double-free of `trailers_buf' on `Curl_http_compile_trailers()` failure | — | curl | 2021-01-12 | [#687734](https://hackerone.com/reports/687734) |
