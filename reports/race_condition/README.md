@@ -1,13 +1,13 @@
 # Race Conditions
 
-**35 report(s) across 4 class(es)**
+**36 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Concurrent Execution Using Shared Resource With Improper Syn](concurrent_execution_using_shared_resource_with_improper_syn/README.md) | 17 | $3,000 |
-| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 16 | $15,250 |
+| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 17 | $15,250 |
 | [Improper Synchronization](improper_synchronization/README.md) | 1 | — |
 | [Leveraging Race Conditions](leveraging_race_conditions/README.md) | 1 | — |
 
@@ -46,6 +46,7 @@
 | Promotion code can be used more than redemption limit. | — | stripe | 2023-02-13 | [#1717650](https://hackerone.com/reports/1717650) |
 | Race condition leads to Inflation of coins when bought via Google Play Store at endpoint https://oauth.reddit.com/api/v2/gold/android/verify_purchase  | — | reddit | 2021-10-27 | [#801743](https://hackerone.com/reports/801743) |
 | Bypass apiserver proxy filter | — | kubernetes | 2021-05-27 | [#859962](https://hackerone.com/reports/859962) |
+| HTTP Response Queue Poisoning via TOCTOU Race Condition in `http.Agent` | — | nodejs | 2026-06-25 | [#3582376](https://hackerone.com/reports/3582376) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 | Race condition in claiming program credentials  | — | security | 2019-05-19 | [#488985](https://hackerone.com/reports/488985) |

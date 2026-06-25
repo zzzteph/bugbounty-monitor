@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1596 report(s) across 26 class(es)**
+**1599 report(s) across 29 class(es)**
 
 ## Classes
 
@@ -21,12 +21,15 @@
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
+| [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
+| [Improper Handling Of Unicode Encoding](improper_handling_of_unicode_encoding/README.md) | 1 | — |
 | [Improper Removal Of Sensitive Information Before Storage Or ](improper_removal_of_sensitive_information_before_storage_or_/README.md) | 1 | — |
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
 | [Improper Validation Of Certificate Expiration](improper_validation_of_certificate_expiration/README.md) | 1 | — |
 | [Improper Validation Of Syntactic Correctness Of Input](improper_validation_of_syntactic_correctness_of_input/README.md) | 1 | — |
+| [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 1 | — |
 | [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
@@ -248,11 +251,13 @@
 | HSTS accepted from HTTP origin behind HTTPS proxy | — | curl | 2026-03-17 | [#3609505](https://hackerone.com/reports/3609505) |
 | MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker | — | curl | 2026-05-05 | [#3712343](https://hackerone.com/reports/3712343) |
 | Unicode-to-ASCII conversion on Windows can lead to argument injection and more | — | curl | 2024-06-18 | [#2550951](https://hackerone.com/reports/2550951) |
+| TLS host identity verification bypass via session reuse with different servername leads to unauthorized connections | — | nodejs | 2026-06-25 | [#3649802](https://hackerone.com/reports/3649802) |
 | curl proceeds with unsafe connections when -K file can't be read | — | curl | 2022-04-21 | [#1542881](https://hackerone.com/reports/1542881) |
 | -H with space prefix leads to previous header injection when used with --proxy | — | curl | 2025-07-07 | [#2864859](https://hackerone.com/reports/2864859) |
 | RTSP RTP Interleaved Parser Assertion Failure (Zero-Length RTP Payload) | — | curl | 2026-02-26 | [#3575250](https://hackerone.com/reports/3575250) |
 | Uncatchable "Maximum call stack size exceeded" error on Node.js via async_hooks leads to process crashes bypassing error handlers | — | nodejs | 2026-02-12 | [#3456295](https://hackerone.com/reports/3456295) |
 | Calendar attachments of local files are offered to downloaded | — | nextcloud | 2025-12-05 | [#3112033](https://hackerone.com/reports/3112033) |
+| Node.js unicode dot separator handling can lead to tls wildcard-depth authentication bypass due to resolver and verifier hostname normalization mismat | — | nodejs | 2026-06-25 | [#3688064](https://hackerone.com/reports/3688064) |
 | Improper handling of request URLs in nextcloud/guests allows guest users to bypass app allowlist | — | nextcloud | 2024-01-18 | [#2251074](https://hackerone.com/reports/2251074) |
 | Cache Poisoning | — | ibb | 2021-08-26 | [#824753](https://hackerone.com/reports/824753) |
 | Incorrect IPv6 literal parsing leads to validated connection to unexpected https server. | — | curl | 2021-01-12 | [#688048](https://hackerone.com/reports/688048) |
@@ -310,6 +315,7 @@
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2024-02-11 | [#2037032](https://hackerone.com/reports/2037032) |
 | OpenSSL TLS 1.2 session resumption accepts expired server certificates in libcurl | — | curl | 2026-06-07 | [#3781305](https://hackerone.com/reports/3781305) |
 | Missing enforcement of SFTP quote syntax can lead to operation on wrong object | — | curl | 2025-10-12 | [#3379102](https://hackerone.com/reports/3379102) |
+| Permission Model bypass via FileHandle.utimes() in the promises API | — | nodejs | 2026-06-25 | [#3625987](https://hackerone.com/reports/3625987) |
 | Non-Production API Endpoints for the AI Ops Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-01-06 | [#3418966](https://hackerone.com/reports/3418966) |
 | Non-Production API Endpoints for the cloudwatch Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-04-25 | [#2972435](https://hackerone.com/reports/2972435) |
 | Non-Production API Endpoints for the Datazone Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-02-26 | [#2981210](https://hackerone.com/reports/2981210) |

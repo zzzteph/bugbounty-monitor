@@ -1,6 +1,6 @@
 # Time Of Check Time Of Use Toctou Race Condition
 
-**16 report(s)**
+**17 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -16,6 +16,7 @@
 | Promotion code can be used more than redemption limit. | — | stripe | 2023-02-13 | [#1717650](https://hackerone.com/reports/1717650) |
 | Race condition leads to Inflation of coins when bought via Google Play Store at endpoint https://oauth.reddit.com/api/v2/gold/android/verify_purchase  | — | reddit | 2021-10-27 | [#801743](https://hackerone.com/reports/801743) |
 | Bypass apiserver proxy filter | — | kubernetes | 2021-05-27 | [#859962](https://hackerone.com/reports/859962) |
+| HTTP Response Queue Poisoning via TOCTOU Race Condition in `http.Agent` | — | nodejs | 2026-06-25 | [#3582376](https://hackerone.com/reports/3582376) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 | Race condition in claiming program credentials  | — | security | 2019-05-19 | [#488985](https://hackerone.com/reports/488985) |

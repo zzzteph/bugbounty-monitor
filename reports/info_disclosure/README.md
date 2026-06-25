@@ -1,13 +1,13 @@
 # Information Disclosure
 
-**1108 report(s) across 10 class(es)**
+**1109 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Information Disclosure](information_disclosure/README.md) | 906 | $25,000 |
-| [Privacy Violation](privacy_violation/README.md) | 76 | $2,940 |
+| [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
@@ -1121,6 +1121,7 @@
 | Account deletion requests not entirely honoured. Misinformation even after seeking clarification from customer support. | — | nordsecurity | 2020-03-24 | [#813421](https://hackerone.com/reports/813421) |
 | Improper Access Controls Allow PII Leak via ████ | — | deptofdefense | 2021-02-18 | [#819591](https://hackerone.com/reports/819591) |
 | GPS metadata preserved when converting HEIF to PNG | — | reddit | 2021-10-21 | [#1069039](https://hackerone.com/reports/1069039) |
+| Proxy credentials leaked in ERR_PROXY_TUNNEL error message | — | nodejs | 2026-06-25 | [#3720313](https://hackerone.com/reports/3720313) |
 | SVG filter primitives bypass remote image blocking, enabling email tracking without consent. | — | nextcloud | 2026-04-20 | [#3486747](https://hackerone.com/reports/3486747) |
 | Nextcloud domain and name of every user leaked to lookup server | — | nextcloud | 2019-11-26 | [#508490](https://hackerone.com/reports/508490) |
 | A small set of users were assigned someone else's payout preference | — | security | 2019-02-20 | [#498845](https://hackerone.com/reports/498845) |

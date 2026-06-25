@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**677 report(s) across 25 class(es)**
+**678 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -13,8 +13,8 @@
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 34 | $4,920 |
+| [Integer Overflow](integer_overflow/README.md) | 27 | $500 |
 | [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
-| [Integer Overflow](integer_overflow/README.md) | 26 | $500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Array Index Underflow](array_index_underflow/README.md) | 16 | $7,500 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
@@ -436,6 +436,7 @@
 | Cookie Max-Age Integer Overflow Vulnerability | — | curl | 2026-01-19 | [#3516186](https://hackerone.com/reports/3516186) |
 | Integer Overflow/Signedness Mismatch in Printf Precision for HTTP/2 Trailer Headers | — | curl | 2026-04-11 | [#3665363](https://hackerone.com/reports/3665363) |
 | integer Overflow in MQTT Protocol Handling Allows Bypassing Message Size Limit | — | curl | 2026-01-13 | [#3508500](https://hackerone.com/reports/3508500) |
+| Node.js WebCrypto AES Integer Overflow Leads to Remote Process Abort (DoS) | — | nodejs | 2026-06-25 | [#3760016](https://hackerone.com/reports/3760016) |
 | Integer overflow  at line 1603 in the src/operator.c file | — | curl | 2021-02-08 | [#662412](https://hackerone.com/reports/662412) |
 | Signed integer overflow in tool_progress_cb() | — | curl | 2019-10-04 | [#591770](https://hackerone.com/reports/591770) |
 | Integer overlow in "header_append" function | — | curl | 2021-02-08 | [#627245](https://hackerone.com/reports/627245) |

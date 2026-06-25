@@ -1,6 +1,6 @@
 # Integer Overflow
 
-**26 report(s)**
+**27 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -25,6 +25,7 @@
 | Cookie Max-Age Integer Overflow Vulnerability | — | curl | 2026-01-19 | [#3516186](https://hackerone.com/reports/3516186) |
 | Integer Overflow/Signedness Mismatch in Printf Precision for HTTP/2 Trailer Headers | — | curl | 2026-04-11 | [#3665363](https://hackerone.com/reports/3665363) |
 | integer Overflow in MQTT Protocol Handling Allows Bypassing Message Size Limit | — | curl | 2026-01-13 | [#3508500](https://hackerone.com/reports/3508500) |
+| Node.js WebCrypto AES Integer Overflow Leads to Remote Process Abort (DoS) | — | nodejs | 2026-06-25 | [#3760016](https://hackerone.com/reports/3760016) |
 | Integer overflow  at line 1603 in the src/operator.c file | — | curl | 2021-02-08 | [#662412](https://hackerone.com/reports/662412) |
 | Signed integer overflow in tool_progress_cb() | — | curl | 2019-10-04 | [#591770](https://hackerone.com/reports/591770) |
 | Integer overlow in "header_append" function | — | curl | 2021-02-08 | [#627245](https://hackerone.com/reports/627245) |
