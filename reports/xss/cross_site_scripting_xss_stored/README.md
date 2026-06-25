@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**463 report(s)**
+**464 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -416,6 +416,7 @@
 | Improper Sanitization leads to XSS Fire on admin panel | — | informatica | 2021-08-03 | [#1011888](https://hackerone.com/reports/1011888) |
 | Stored XSS at "Conditions "  through "My Custom Rule" Field at [https://my.stripo.email/cabinet/#/template-editor/] in Template Editor. | — | stripo | 2020-12-24 | [#996371](https://hackerone.com/reports/996371) |
 | Stored XSS in app.lemlist.com | — | lemlist | 2020-07-23 | [#928816](https://hackerone.com/reports/928816) |
+| Stored XSS in maintenance tools via unescaped entity names | — | revive_adserver | 2026-06-25 | [#3781311](https://hackerone.com/reports/3781311) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
 | Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
 | Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |

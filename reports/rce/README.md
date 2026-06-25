@@ -1,12 +1,12 @@
 # RCE / Command Injection
 
-**470 report(s) across 4 class(es)**
+**472 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Code Injection](code_injection/README.md) | 250 | $30,000 |
+| [Code Injection](code_injection/README.md) | 252 | $30,000 |
 | [Command Injection Generic](command_injection_generic/README.md) | 154 | $33,510 |
 | [Os Command Injection](os_command_injection/README.md) | 59 | $25,000 |
 | [Use Of Externally Controlled Format String](use_of_externally_controlled_format_string/README.md) | 7 | $8,000 |
@@ -268,6 +268,8 @@
 | Arbitrary file download via "Save .torrent file" option can lead to Client RCE and XSS | — | brave | 2022-06-30 | [#963155](https://hackerone.com/reports/963155) |
 | (Critical) Remote Code Execution Through Old TinyMCE upload bypass | — | 8x8-bounty | 2020-02-12 | [#778629](https://hackerone.com/reports/778629) |
 | Arbitrary file download due to bad handling of Redirects in WebTorrent | — | brave | 2022-06-30 | [#975514](https://hackerone.com/reports/975514) |
+| PHP code injection in delivery-limitation `logical` validation bypass - XML-RPC setChannelTargeting | — | revive_adserver | 2026-06-25 | [#3781492](https://hackerone.com/reports/3781492) |
+| PHP code injection in delivery-limitation `logical` validation bypass | — | revive_adserver | 2026-06-25 | [#3780854](https://hackerone.com/reports/3780854) |
 | PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |
 | Internal application wrapper or script using curl | — | curl | 2026-04-03 | [#3648199](https://hackerone.com/reports/3648199) |

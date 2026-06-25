@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**669 report(s)**
+**670 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -604,6 +604,7 @@
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
+| XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |

@@ -1,13 +1,13 @@
 # XSS
 
-**1479 report(s) across 10 class(es)**
+**1482 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 516 | $5,000 |
-| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 463 | $16,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 518 | $5,000 |
+| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 464 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
@@ -1084,6 +1084,8 @@
 | Reflected XSS in photogallery component on [https://market.av.ru] | — | av | 2021-12-01 | [#988271](https://hackerone.com/reports/988271) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
+| Reflected XSS in stats‑video.php via improperly encoded URL parameters | — | revive_adserver | 2026-06-25 | [#3793243](https://hackerone.com/reports/3793243) |
+| Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 | Unauthenticated reflected XSS in preview_as_user function | — | concretecms | 2019-12-06 | [#643442](https://hackerone.com/reports/643442) |
 | Reflected XSS on card.starbucks.com.sg/unsubRevert.php via the 'ct' Parameter | — | starbucks | 2019-12-12 | [#541199](https://hackerone.com/reports/541199) |
 | XSS Reflected  | — | deptofdefense | 2020-05-27 | [#484905](https://hackerone.com/reports/484905) |
@@ -1425,6 +1427,7 @@
 | Improper Sanitization leads to XSS Fire on admin panel | — | informatica | 2021-08-03 | [#1011888](https://hackerone.com/reports/1011888) |
 | Stored XSS at "Conditions "  through "My Custom Rule" Field at [https://my.stripo.email/cabinet/#/template-editor/] in Template Editor. | — | stripo | 2020-12-24 | [#996371](https://hackerone.com/reports/996371) |
 | Stored XSS in app.lemlist.com | — | lemlist | 2020-07-23 | [#928816](https://hackerone.com/reports/928816) |
+| Stored XSS in maintenance tools via unescaped entity names | — | revive_adserver | 2026-06-25 | [#3781311](https://hackerone.com/reports/3781311) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
 | Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
 | Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |

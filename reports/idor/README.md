@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1050 report(s) across 10 class(es)**
+**1052 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 669 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 280 | $20,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 670 | $35,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 281 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
@@ -720,6 +720,7 @@
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
+| XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
@@ -1037,6 +1038,7 @@
 | Singapore - IDOR in campaign.starbucks.com.sg | — | starbucks | 2020-03-17 | [#783332](https://hackerone.com/reports/783332) |
 | Identify unique user ID of all the profiles  | — | bumble | 2020-12-25 | [#1005020](https://hackerone.com/reports/1005020) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
+| Missing ownership validation allows cross‑manager tracker–campaign linking | — | revive_adserver | 2026-06-25 | [#3780709](https://hackerone.com/reports/3780709) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |

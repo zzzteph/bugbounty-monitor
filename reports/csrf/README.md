@@ -1,12 +1,12 @@
 # CSRF
 
-**282 report(s) across 1 class(es)**
+**283 report(s) across 1 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Request Forgery Csrf](cross_site_request_forgery_csrf/README.md) | 282 | $10,000 |
+| [Cross Site Request Forgery Csrf](cross_site_request_forgery_csrf/README.md) | 283 | $10,000 |
 
 ## All Reports
 
@@ -273,6 +273,7 @@
 | CSRF on https://apps.topcoder.com/wiki/users general and email preferences | — | lab45 | 2020-05-12 | [#868583](https://hackerone.com/reports/868583) |
 | SocialClub Account Take Over Through Import Friends feature | — | rockstargames | 2021-04-01 | [#901728](https://hackerone.com/reports/901728) |
 | CSRF to Stored HTML injection at https://www.█████ | — | deptofdefense | 2020-12-03 | [#1014593](https://hackerone.com/reports/1014593) |
+| CSRF in zone‑include.php allows unauthorized banner and campaign linking | — | revive_adserver | 2026-06-25 | [#3781691](https://hackerone.com/reports/3781691) |
 | [CSRF] No Csrf protection against sending invitation to join the team. | — | lark_technologies | 2022-10-20 | [#728199](https://hackerone.com/reports/728199) |
 | Facebook OAuth Code Theft through referer leakage on support.rockstargames.com | — | rockstargames | 2019-02-19 | [#482743](https://hackerone.com/reports/482743) |
 | CSRF in Account Deletion feature (https://www.flickr.com/account/delete) | — | flickr | 2021-09-14 | [#615448](https://hackerone.com/reports/615448) |

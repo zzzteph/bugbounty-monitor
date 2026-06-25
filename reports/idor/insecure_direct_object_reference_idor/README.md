@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**280 report(s)**
+**281 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -257,6 +257,7 @@
 | Singapore - IDOR in campaign.starbucks.com.sg | — | starbucks | 2020-03-17 | [#783332](https://hackerone.com/reports/783332) |
 | Identify unique user ID of all the profiles  | — | bumble | 2020-12-25 | [#1005020](https://hackerone.com/reports/1005020) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
+| Missing ownership validation allows cross‑manager tracker–campaign linking | — | revive_adserver | 2026-06-25 | [#3780709](https://hackerone.com/reports/3780709) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
