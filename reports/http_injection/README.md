@@ -1,13 +1,13 @@
 # HTTP Injection
 
-**131 report(s) across 4 class(es)**
+**132 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 60 | $20,000 |
-| [Crlf Injection](crlf_injection/README.md) | 53 | $5,000 |
+| [Crlf Injection](crlf_injection/README.md) | 54 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
@@ -89,6 +89,7 @@
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | CRLF Injection in HTTP header values allows arbitrary header injection | — | curl | 2026-01-10 | [#3505557](https://hackerone.com/reports/3505557) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
+| CURLOPT_HAPROXY_CLIENT_IP lacks input validation, enabling HAProxy PROXY protocol injection | — | curl | 2026-06-26 | [#3823932](https://hackerone.com/reports/3823932) |
 | CRLF Injection in Gopher Protocol (`lib/gopher.c`) | — | curl | 2026-01-02 | [#3484506](https://hackerone.com/reports/3484506) |
 | SMTP Command Injection via CRLF in libcurl MAIL_FROM / MAIL_RCPT (lib/smtp.c) | — | curl | 2026-04-06 | [#3651975](https://hackerone.com/reports/3651975) |
 | [downloads.mariadb.org] CRLF injection in case of encoded query mark | — | mariadb | 2019-02-14 | [#490997](https://hackerone.com/reports/490997) |

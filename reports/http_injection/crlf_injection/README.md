@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**53 report(s)**
+**54 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -50,6 +50,7 @@
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | CRLF Injection in HTTP header values allows arbitrary header injection | — | curl | 2026-01-10 | [#3505557](https://hackerone.com/reports/3505557) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
+| CURLOPT_HAPROXY_CLIENT_IP lacks input validation, enabling HAProxy PROXY protocol injection | — | curl | 2026-06-26 | [#3823932](https://hackerone.com/reports/3823932) |
 | CRLF Injection in Gopher Protocol (`lib/gopher.c`) | — | curl | 2026-01-02 | [#3484506](https://hackerone.com/reports/3484506) |
 | SMTP Command Injection via CRLF in libcurl MAIL_FROM / MAIL_RCPT (lib/smtp.c) | — | curl | 2026-04-06 | [#3651975](https://hackerone.com/reports/3651975) |
 | [downloads.mariadb.org] CRLF injection in case of encoded query mark | — | mariadb | 2019-02-14 | [#490997](https://hackerone.com/reports/490997) |

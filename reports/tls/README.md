@@ -1,6 +1,6 @@
 # TLS / Certificate Validation
 
-**77 report(s) across 5 class(es)**
+**78 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 44 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
-| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 3 | — |
+| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 4 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
@@ -68,6 +68,7 @@
 | CVE-2025-4947: QUIC certificate check skip with wolfSSL | — | curl | 2025-05-28 | [#3150884](https://hackerone.com/reports/3150884) |
 | CVE-2025-15079: libssh global knownhost override  | — | curl | 2026-01-07 | [#3477116](https://hackerone.com/reports/3477116) |
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |
+| mbedTLS / wolfSSL / rustls backends silently skip hostname verification when CURLOPT_SSL_VERIFYPEER=0 | — | curl | 2026-06-26 | [#3826199](https://hackerone.com/reports/3826199) |
 | CVE-2021-22890: TLS 1.3 session ticket proxy host mixup | — | curl | 2021-04-30 | [#1129529](https://hackerone.com/reports/1129529) |
 | federalist.18f.gov vulnerable to Sweet32 attack | — | gsa_bbp | 2017-09-05 | [#263553](https://hackerone.com/reports/263553) |
 | Email verification over an unencrypted channel | — | weblate | 2017-05-17 | [#224287](https://hackerone.com/reports/224287) |
