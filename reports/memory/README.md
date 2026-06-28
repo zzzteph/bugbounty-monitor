@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**679 report(s) across 25 class(es)**
+**680 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 64 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 65 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
@@ -695,6 +695,7 @@
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
+| UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
