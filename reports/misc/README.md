@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1599 report(s) across 29 class(es)**
+**1600 report(s) across 29 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 958 | $50,000 |
+| [Unknown](unknown/README.md) | 959 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
@@ -1194,6 +1194,7 @@
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |
+| Inverted ternary in peerlist_manager::filter() allows unlimited whitelist entries per host via different ports | — | monero | 2026-06-29 | [#3547349](https://hackerone.com/reports/3547349) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | Fail-Open in set_tlsext_servername_callback on pyopenssl via unhandled exceptions leads to security bypass | — | pyca | 2026-03-20 | [#3558277](https://hackerone.com/reports/3558277) |
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |

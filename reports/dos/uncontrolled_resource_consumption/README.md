@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**408 report(s)**
+**409 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -365,6 +365,7 @@
 | Long filenames cause OOM and temp files are not cleaned | — | ibb | 2020-10-10 | [#905015](https://hackerone.com/reports/905015) |
 | Denial of Service by requesting to reset a password | — | nextcloud | 2021-01-25 | [#812754](https://hackerone.com/reports/812754) |
 | Denial Of Service (Out Of Memory) on Updating Bounty Table [Urgent] | — | security | 2021-02-02 | [#1043372](https://hackerone.com/reports/1043372) |
+| Remote node DOS | — | monero | 2026-06-29 | [#876530](https://hackerone.com/reports/876530) |
 | "Self" DOS with large deployment and scaling | — | kubernetes | 2020-07-23 | [#831654](https://hackerone.com/reports/831654) |
 | Nginx version is disclosed in HTTP response | — | localizejs | 2020-02-06 | [#783852](https://hackerone.com/reports/783852) |
 | character limitation bypass can lead to DoS on Twitter App and 500 Internal Server Error | — | x | 2020-05-06 | [#819088](https://hackerone.com/reports/819088) |

@@ -1,12 +1,12 @@
 # Denial of Service
 
-**439 report(s) across 5 class(es)**
+**440 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 408 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 409 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -408,6 +408,7 @@
 | Long filenames cause OOM and temp files are not cleaned | — | ibb | 2020-10-10 | [#905015](https://hackerone.com/reports/905015) |
 | Denial of Service by requesting to reset a password | — | nextcloud | 2021-01-25 | [#812754](https://hackerone.com/reports/812754) |
 | Denial Of Service (Out Of Memory) on Updating Bounty Table [Urgent] | — | security | 2021-02-02 | [#1043372](https://hackerone.com/reports/1043372) |
+| Remote node DOS | — | monero | 2026-06-29 | [#876530](https://hackerone.com/reports/876530) |
 | "Self" DOS with large deployment and scaling | — | kubernetes | 2020-07-23 | [#831654](https://hackerone.com/reports/831654) |
 | Nginx version is disclosed in HTTP response | — | localizejs | 2020-02-06 | [#783852](https://hackerone.com/reports/783852) |
 | character limitation bypass can lead to DoS on Twitter App and 500 Internal Server Error | — | x | 2020-05-06 | [#819088](https://hackerone.com/reports/819088) |
