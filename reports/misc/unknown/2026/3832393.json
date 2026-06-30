@@ -1,0 +1,116 @@
+{
+  "id": 3832393,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODMyMzkz",
+  "url": "https://hackerone.com/reports/3832393",
+  "title": "libcurl upload read callbacks miss recursive API guard, allowing prohibited multi API reentry and ASAN-confirmed UAF",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "low",
+  "readable_substate": "N/A",
+  "created_at": "2026-06-29T19:08:01.622Z",
+  "submitted_at": "2026-06-29T19:08:01.958Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "th3hound",
+    "url": "/th3hound",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/ydpywj4e6i5t5kdwge3sfz8x7gg7/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-06-30T05:56:23.176Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-06-29T20:26:27.407Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\nSeveral libcurl upload read callback paths invoke the application-provided CURLOPT_READFUNCTION without marking the easy handle as being inside a callback. As a result, recursive multi APIs that are correctly rejected from ordinary callbacks are accepted from these upload read callback paths. I confirmed this in the TELNET read callback path and in the FTP upload resume fallback path. In both cases, calling curl_multi_remove_handle() from the affected read callback returns CURLM_OK, frees active transfer state, and libcurl later dereferences freed objects, producing AddressSanitizer-confirmed heap-use-after-free crashes. A normal HTTP CURLOPT_WRITEFUNCTION control blocks the same call with CURLM_RECURSIVE_API_CALL, showing that the expected recursive callback guard exists but is not consistently applied.\n\nThis report does not claim a standalone remote-only exploit where a malicious TELNET or FTP server can crash curl by sending bytes alone. The issue is that libcurl fails to activate its recursive API guard in some upload read callback paths, so otherwise-prohibited lifecycle/multi API calls are accepted and can corrupt active transfer state.\n\n## Affected version\ncurl/libcurl version used for reproduction:\n\ncurl 8.21.0 (x86_64-pc-linux-gnu) libcurl/8.21.0 OpenSSL/3.5.0 zlib/1.2.11\nRelease-Date: 2026-06-24\nProtocols: dict file ftp ftps gopher gophers http https imap imaps ipfs ipns mqtt mqtts pop3 pop3s rtsp smtp smtps telnet tftp ws wss\nFeatures: alt-svc AsynchDNS HSTS HTTPS-proxy IPv6 Largefile libz SSL threadsafe TLS-SRP UnixSockets\n\n**Platform:**\nPlatform: Linux x86_64\nBuild: local curl 8.21.0 build with OpenSSL 3.5.0\nASAN/UBSAN PoCs were linked against a local static libcurl 8.21.0 build:\n  /tmp/curl-8.21.0-asan/lib/.libs/libcurl.a\n\n\n## Root cause\n\nlibcurl normally marks user callbacks as active callbacks before invoking application code. While that flag is set, recursive multi APIs such as curl_multi_remove_handle(), curl_multi_cleanup(), curl_multi_perform(), and curl_multi_socket_action() are rejected with CURLM_RECURSIVE_API_CALL.\n\nThat protection works for normal callbacks. For example, calling curl_multi_remove_handle() from an HTTP CURLOPT_WRITEFUNCTION returns:\n\nCURLM_RECURSIVE_API_CALL / API function called from within callback\n\nHowever, some upload read callback paths call data->state.fread_func directly without wrapping the call with the same callback guard. I confirmed this in:\n```\nlib/telnet.c   TELNET CURLOPT_READFUNCTION path\nlib/ftp.c      FTP upload resume fallback read path\n```\nBecause these paths do not mark the easy handle as being inside a callback, prohibited recursive multi APIs are accepted and can remove or mutate the active transfer while the outer protocol state machine continues executing.\n\n## Vulnerable behavior\nControl case: HTTP WRITEFUNCTION\n\nWhen the same prohibited API call is attempted from a normal HTTP write callback, libcurl blocks it correctly.\n\nObserved result:\n```\ncurl_multi_remove_handle() returned 8\nAPI function called from within callback\nNo ASAN crash\n```\nThis proves that libcurl has an intended recursive API guard for this class of callback misuse.\n\n## TELNET positive case\n\nWhen the same call is made from a TELNET CURLOPT_READFUNCTION, libcurl does not block it.\n\nObserved result:\n```\ncurl_multi_remove_handle() returned 0\nNo error\n```\nAfter the active handle/connection is removed, libcurl returns to the TELNET state machine and dereferences freed connection state. AddressSanitizer reports a heap-use-after-free in the TELNET path, including a read involving conn->created through curlx_ptimediff_ms() from telnet_do().\n\n## FTP positive case\n\nThe same missing-guard pattern was also confirmed in the FTP upload resume fallback path.\n\nConditions used:\n```\nCURLOPT_RESUME_FROM_LARGE = 1\nSEEKFUNCTION returns CURL_SEEKFUNC_CANTSEEK\nFTP upload resume fallback invokes CURLOPT_READFUNCTION\n```\nFrom that read callback, curl_multi_remove_handle() returned CURLM_OK. Afterward, ASAN reported a use-after-free in ftp_statemach().\n\nThis supports treating the issue as a missing recursive callback guard family around upload read callbacks, not as a TELNET-only one-off.\n\n## Steps To Reproduce\n1. Build curl/libcurl with ASAN\n\nFrom the curl source tree:\n```\n./configure --with-openssl --disable-shared --disable-debug \\\n  CFLAGS=\"-fsanitize=address,undefined -g -O1\" \\\n  LDFLAGS=\"-fsanitize=address,undefined\"\n\nmake -j\"$(nproc)\"\n```\nA release-style ASAN build is useful because debug assertions can stop execution before the UAF path is reached.\n\n2. Compile the control PoC\n\nCompile the HTTP control PoC that calls curl_multi_remove_handle() from CURLOPT_WRITEFUNCTION.\n```\ncc -fsanitize=address,undefined -g write_api_matrix.c \\\n  -o write_api_matrix \\\n  /path/to/curl/lib/.libs/libcurl.a \\\n  -lssl -lcrypto -lz -lpthread\n```\nRun it:\n```\n./write_api_matrix\n```\nExpected result:\n```\ncurl_multi_remove_handle() returned 8\nAPI function called from within callback\nNo ASAN crash\n```\nThis is the expected safe behavior.\n\n3. Compile the TELNET PoC\n\nCompile the TELNET PoC that calls curl_multi_remove_handle() from CURLOPT_READFUNCTION.\n```\ncc -fsanitize=address,undefined -g telnet_api_matrix.c \\\n  -o telnet_api_matrix \\\n  /path/to/curl/lib/.libs/libcurl.a \\\n  -lssl -lcrypto -lz -lpthread\n```\nRun it with the included local TELNET test server, or use the standalone harness if it starts its own loopback listener.\n```\npython3 attacker_telnet_server.py &\n./telnet_api_matrix\n```\nExpected result before fix:\n```\ncurl_multi_remove_handle() returned 0\nNo error\nAddressSanitizer: heap-use-after-free\n...\nREAD of size ...\n...\ntelnet_do()\ncurlx_ptimediff_ms()\n```\nThe important part is that the same API call that is rejected from the HTTP callback is accepted from the TELNET read callback and then leads to UAF.\n\n4. Compile the FTP resume fallback PoC\n\nCompile the FTP PoC that reaches the upload resume fallback read path.\n```\ncc -fsanitize=address,undefined -g ftp_resume_read_remove.c \\\n  -o ftp_resume_read_remove \\\n  /path/to/curl/lib/.libs/libcurl.a \\\n  -lssl -lcrypto -lz -lpthread\n```\nRun it with the included minimal FTP server:\n```\npython3 mini_ftp_server.py &\n./ftp_resume_read_remove\n```\nExpected result before fix:\n```\ncurl_multi_remove_handle() returned 0\nNo error\nAddressSanitizer: heap-use-after-free\n...\nftp_statemach()\n```\nThis confirms that the issue is not limited to TELNET.\n\nAdditional observations\n\nAdditional lifecycle/reentrant APIs were tested from the affected TELNET read callback path:\n```\ncurl_multi_cleanup()       accepted, ASAN UAF\ncurl_easy_cleanup()        ASAN UAF\ncurl_multi_perform()       accepted, ASAN UAF\ncurl_multi_socket_action() accepted in the harness, no ASAN crash observed\ncurl_easy_reset()          ASAN UAF in telrcv()\ncurl_easy_pause()          CURLE_OK, expected for most callbacks\n```\nDocumented CURLOPT_READFUNCTION return values alone did not produce a UAF in my testing:\n```\nreturn 0\nreturn CURL_READFUNC_ABORT\nreturn CURL_READFUNC_PAUSE\nshort read\nnormal data\n```\nThis means the current confirmed impact depends on a callback invoking a prohibited or risky libcurl lifecycle/multi API. The bug is that affected read callback paths fail to engage the guard that normally rejects those calls.\n\nI attached a small repro package: curl-h1-rare03-repro.zip.\n\nIt contains:\n- README.md with build/run instructions\n- VERSION.txt with the curl -V output used for reproduction\n- 3 PoCs:\n  - HTTP WRITEFUNCTION negative control\n  - TELNET READFUNCTION positive case\n  - FTP resume fallback positive case\n- local TELNET/FTP test servers\n- sample ASAN logs from my curl/libcurl 8.21.0 ASAN build\n\nThe intended flow is:\n1. Build curl/libcurl 8.21.0 with ASAN/UBSAN.\n2. Set CURL_SRC to that ASAN-built source tree.\n3. Run ./run_all.sh.\n\nExpected results:\n- HTTP control: curl_multi_remove_handle() is rejected with CURLM_RECURSIVE_API_CALL.\n- TELNET case: the same call returns CURLM_OK and then ASAN reports UAF.\n- FTP resume fallback case: the same call returns CURLM_OK and then ASAN reports UAF.\n\nThis is meant to demonstrate that the recursive callback guard exists and works for normal callbacks, but is not engaged in these upload read callback paths.\n\n## Impact\n\n## Summary:\nApplications embedding libcurl with TELNET or FTP upload-resume flows can crash or corrupt heap state if application callback logic, plugin code, scripting bindings, FFI layers, or extension code invoke libcurl lifecycle/multi APIs from affected CURLOPT_READFUNCTION paths.\n\nThe demonstrated impact is:\n\nASAN-confirmed heap-use-after-free\nReliable process crash\nActive transfer state freed and then used by libcurl\n\nI did not demonstrate code execution, information disclosure, controlled write-after-free, double-free, or a remote-server-only trigger. A remote TELNET or FTP server can influence timing and application-level conditions that lead a callback to cancel a transfer, but the UAF still requires the application callback to invoke a prohibited or risky libcurl API.\n\nThe security-relevant point is that libcurl already enforces a recursive callback guard in ordinary callbacks. The affected upload read callback paths fail to activate that guard, so calls that should return CURLM_RECURSIVE_API_CALL instead return CURLM_OK and corrupt active transfer state.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6171522,
+      "file_name": "curl-h1-rare03-repro.zip",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/32mmmx809mnie3hyafgbpeprx5h4?response-content-disposition=attachment%3B%20filename%3D%22curl-h1-rare03-repro.zip%22%3B%20filename%2A%3DUTF-8%27%27curl-h1-rare03-repro.zip&response-content-type=application%2Fzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQVSLDQJVN%2F20260630%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260630T072147Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEPf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCtr%2BrLaV%2FAS%2Fea1ypSxJu6cF%2Fs8V1nDC%2B%2FSDTDdl9jGQIgM9%2B8mWWQiGyup6PoIsFmon1BJQJvizuD32t0eE%2BCCAkqugUIwP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGz7ohrKhlOc01tgmyqOBYuD3rewIP06KHaqlr3C6naa3t9mgHikDhOzD0Qgf%2By%2Fxd4pM2MSl3pD7BMDBwDAjJUpOKthJgdxaAJLEo6YEMv07dwDrFBcPPXftIFAdNeFc5VQ3IRG2nh6c46MrdurUb5vlTgD92Rrk16SlsCpWoZe4WOdN%2FPhBJB%2BNN93S8CfMJvtWFEFUVSkwiGBPw14r7TTPea1dtxs4O%2FuRvgo2eyOFQKBaUZDhmKUg%2Fn8VHzJZfh2gW35X1XLJ40ifw4b6SdWJ7PWkQSnJ3F%2BmcFiOQVe438Cc%2Ft4PCMnblwjccjXl9UhOg3aJkF1hUH1Lv7HN0DmZBwXC%2BtHLWoZVbmdpSDmCBqTaR849Q66KSP8DLayBvHQeYu8r1TH2Gxfq2Ue0UzJgQjek8QM5ff%2B7Mqb6k7ubjRy4DsFiQli%2BIcIW%2BMC%2B8ApH3lxPWPwjk6dDvxHfIDZ0FKosuB0Cf%2BiE87GbwwhuH987a3VdJVrBDNePJhy5gvzP6Qmek%2FJRFXb%2Fqm25g%2F2cCIouMY0tW0KFvk5d7w41W1JrzzVr2jQfvLx9%2FU359%2FY3NOszCz%2BD64sIF6uSmJNGKyLITyoUNInJoPC2%2BFMebrhgpzAdYm6cLeJP4Tug%2BYN5IZ4OHJmJGPrN7T3KkY57rpeMNYEtcCWNXoOq2d%2Fy49vJnCcSDC%2BsBj7y9lGRj0SucSlDuWS6DcHhHKuEKorrj5ah2YUQOF7a9CZSnOPyIpEv4QrHXsw8HOYCTRaIRfRpqAcXeufbIvHoitOdzUxcmkgDbHzFzO2eb07lQZAXyW92jTGVi2y1CfN3ABIuX5ckxyFvRLTLsfeo%2Fz4GJUEEjmrrbmr5x86NWoqYqSqqi6jXOUY0AqyqkvPFjC%2Bxo3SBjqxAUnn0l9xNhPkyMPJY3wkYQomCbepSAG2Q%2BRq7ffL9php9XnanCMx6Q1l%2BBJRTkI5EnhSPiA8oxkXz1YSZlWaku6ZdzoGBT3pe3KJ8MfdVBWbXOHIEETFI58zxux7N3ljIyJHjBSUNDLWgN7Xpv7KYt3gub0Tyi8ClDuOpL5cbS47LrCrCMNSk2%2F7jpCKHJfVXwZRW0dPzzXuY0CMa1sZRfhHrrnJIpcqnG06zxXdfHdRIg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1a7ede8b2eca40594d2972eb9a4730586e7521c2cee094af89a3a98491c6bd87",
+      "file_size": 18442,
+      "type": "application/zip",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
