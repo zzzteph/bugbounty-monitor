@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**601 report(s) across 18 class(es)**
+**602 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 12 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 13 | — |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
 | [Authentication Bypass](authentication_bypass/README.md) | 5 | $7,500 |
@@ -143,6 +143,7 @@
 | Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning | — | curl | 2026-04-03 | [#3640932](https://hackerone.com/reports/3640932) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
+| ssh_config_matches is dead code: unauthorized SSH key reuse | — | curl | 2026-06-30 | [#3826843](https://hackerone.com/reports/3826843) |
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |
 | Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                         | — | curl | 2026-04-29 | [#3646072](https://hackerone.com/reports/3646072) |
 | ArcGIS Rest Service linked to unsecured survey data | — | who-covid-19-mobile-app | 2021-02-13 | [#1070344](https://hackerone.com/reports/1070344) |

@@ -1,6 +1,6 @@
 # Authentication Bypass By Primary Weakness
 
-**12 report(s)**
+**13 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -14,5 +14,6 @@
 | Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning | — | curl | 2026-04-03 | [#3640932](https://hackerone.com/reports/3640932) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
+| ssh_config_matches is dead code: unauthorized SSH key reuse | — | curl | 2026-06-30 | [#3826843](https://hackerone.com/reports/3826843) |
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |
 | Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                         | — | curl | 2026-04-29 | [#3646072](https://hackerone.com/reports/3646072) |
