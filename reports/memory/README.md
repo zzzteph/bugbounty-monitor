@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**681 report(s) across 25 class(es)**
+**682 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 66 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 67 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
@@ -705,6 +705,7 @@
 | Use-After-Free race condition in url_move_hostname() via shared connection pool | — | curl | 2026-03-31 | [#3638715](https://hackerone.com/reports/3638715) |
 | heap-use-after-free in state.referer when CURLOPT_REFERER replaced or cleared after perform | — | curl | 2026-06-11 | [#3774279](https://hackerone.com/reports/3774279) |
 | Use-after-free in `curl_easy_duphandle()` with HTTP/2 stream-dependency tree | — | curl | 2026-06-01 | [#3751701](https://hackerone.com/reports/3751701) |
+| heap-use-after-free in curl_easy_cleanup() called from callback | — | curl | 2026-06-30 | [#3833577](https://hackerone.com/reports/3833577) |
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
 | Race condition with CURL_LOCK_DATA_CONNECT can cause connections to be used at the same time | — | curl | 2021-01-08 | [#724134](https://hackerone.com/reports/724134) |
 | CVE-2019-0196: mod_http2 with scoreboard Use-After-Free (Read) | — | ibb | 2019-09-10 | [#527042](https://hackerone.com/reports/527042) |
