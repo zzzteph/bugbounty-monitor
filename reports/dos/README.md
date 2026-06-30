@@ -1,12 +1,12 @@
 # Denial of Service
 
-**440 report(s) across 5 class(es)**
+**441 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 409 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 410 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -51,6 +51,7 @@
 | DOS validator nodes of blockchain to block external connections | $1,500 | hyperledger | 2022-09-13 | [#1695472](https://hackerone.com/reports/1695472) |
 | Denial of Service \| twitter.com & mobile.twitter.com | $1,120 | x | 2020-09-02 | [#903740](https://hackerone.com/reports/903740) |
 | url that twitter mobile site can not load | $1,120 | x | 2019-03-19 | [#500686](https://hackerone.com/reports/500686) |
+| Denial of Service (DoS) Vulnerability in Drafts Creation Endpoint | $1,024 | discourse | 2026-06-30 | [#3400140](https://hackerone.com/reports/3400140) |
 | Incorrect code generation when result of NODE_NEGATE is not used | $1,000 | shopify-scripts | 2017-01-12 | [#191689](https://hackerone.com/reports/191689) |
 | SSL_peek() hang on empty record (CVE-2016-6305) | $1,000 | ibb | 2018-01-11 | [#288993](https://hackerone.com/reports/288993) |
 | Segmentation fault while printing backtrace | $1,000 | shopify-scripts | 2017-03-14 | [#204047](https://hackerone.com/reports/204047) |

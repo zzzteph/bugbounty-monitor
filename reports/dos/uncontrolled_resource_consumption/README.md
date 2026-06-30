@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**409 report(s)**
+**410 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -34,6 +34,7 @@
 | DOS validator nodes of blockchain to block external connections | $1,500 | hyperledger | 2022-09-13 | [#1695472](https://hackerone.com/reports/1695472) |
 | Denial of Service \| twitter.com & mobile.twitter.com | $1,120 | x | 2020-09-02 | [#903740](https://hackerone.com/reports/903740) |
 | url that twitter mobile site can not load | $1,120 | x | 2019-03-19 | [#500686](https://hackerone.com/reports/500686) |
+| Denial of Service (DoS) Vulnerability in Drafts Creation Endpoint | $1,024 | discourse | 2026-06-30 | [#3400140](https://hackerone.com/reports/3400140) |
 | Incorrect code generation when result of NODE_NEGATE is not used | $1,000 | shopify-scripts | 2017-01-12 | [#191689](https://hackerone.com/reports/191689) |
 | SSL_peek() hang on empty record (CVE-2016-6305) | $1,000 | ibb | 2018-01-11 | [#288993](https://hackerone.com/reports/288993) |
 | Segmentation fault while printing backtrace | $1,000 | shopify-scripts | 2017-03-14 | [#204047](https://hackerone.com/reports/204047) |
