@@ -1,12 +1,12 @@
 # Business Logic
 
-**368 report(s) across 5 class(es)**
+**369 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 345 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 346 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -208,6 +208,7 @@
 | Lack of minimum value bid wheel verification on customer_bid in Rental Trips | — | bykea | 2025-11-20 | [#3328343](https://hackerone.com/reports/3328343) |
 | User Limit Bypass via Pending Invitations in Workspace System | — | dust | 2025-04-29 | [#3102890](https://hackerone.com/reports/3102890) |
 | IDOR - Scheduled data leak to other accounts By "projectID" | — | singlestore | 2025-08-12 | [#3219944](https://hackerone.com/reports/3219944) |
+| Exceeding the maximum number of spaces allowed by exploiting a Race Condition in the Workspace creation process | — | singlestore | 2026-07-01 | [#3295500](https://hackerone.com/reports/3295500) |
 | Exceed the maximum number of subscribers using Race Condition  | — | singlestore | 2025-08-12 | [#3221185](https://hackerone.com/reports/3221185) |
 | A logic error in detect_proxy caused truncation of environment variable names for long protocol schemes. | — | curl | 2025-12-21 | [#3473182](https://hackerone.com/reports/3473182) |
 | Race Condition in Folder Creation Allows Bypassing Folder Limit | — | dust | 2025-04-29 | [#3104355](https://hackerone.com/reports/3104355) |
