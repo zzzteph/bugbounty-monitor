@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**281 report(s)**
+**283 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -120,6 +120,7 @@
 | IDOR Exposes PII of Tens of Thousands of Users and Supervisors | — | deptofdefense | 2026-01-12 | [#2967032](https://hackerone.com/reports/2967032) |
 | Calendar app allowed booking appointments without the generated token | — | nextcloud | 2025-12-05 | [#3275810](https://hackerone.com/reports/3275810) |
 | Unauthorized Reservation Cancellation Through IDOR Vulnerability | — | yelp | 2025-01-29 | [#2944357](https://hackerone.com/reports/2944357) |
+| Insecure Direct Object Reference (IDOR) allows creating folders. | — | singlestore | 2026-07-01 | [#3353057](https://hackerone.com/reports/3353057) |
 | IDOR Vulnerability Allowing Unauthorized Profile Picture Change | — | autodesk | 2025-02-19 | [#2962056](https://hackerone.com/reports/2962056) |
 | Unauthenticated Users Can Access Other Users’ Bug Report Attachments via Broken Access Control | — | deptofdefense | 2026-01-12 | [#3259610](https://hackerone.com/reports/3259610) |
 | IDOR: Account Deletion via Session Misbinding – Attacker Can Delete Victim Account | — | mozilla | 2025-06-03 | [#3154983](https://hackerone.com/reports/3154983) |
@@ -128,6 +129,7 @@
 | Participants were able to blindly delete poll drafts of other users by ID | — | nextcloud | 2025-12-05 | [#3247386](https://hackerone.com/reports/3247386) |
 | Unauthorized Access to Private Video Description via Translation API for Private Accounts | — | tiktok | 2025-06-27 | [#2921830](https://hackerone.com/reports/2921830) |
 | BOLA/IDOR in Out-of-Office API allows any authenticated user to read other users' absence data | — | nextcloud | 2026-04-14 | [#3382343](https://hackerone.com/reports/3382343) |
+| Delete any folder for any user within the organization | — | singlestore | 2026-07-01 | [#3353035](https://hackerone.com/reports/3353035) |
 | Tables app allowed users to view columns metadata information of any table | — | nextcloud | 2025-12-05 | [#3138721](https://hackerone.com/reports/3138721) |
 | Information disclosure on IBM training service endpoint | — | ibm | 2025-04-29 | [#3051155](https://hackerone.com/reports/3051155) |
 | Insecure Direct Object Reference (IDOR) - Delete Campaigns   | — | security | 2023-05-03 | [#1969141](https://hackerone.com/reports/1969141) |
