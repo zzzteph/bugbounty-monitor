@@ -1,12 +1,12 @@
 # Privilege Escalation
 
-**292 report(s) across 7 class(es)**
+**293 report(s) across 7 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Privilege Escalation](privilege_escalation/README.md) | 276 | $20,000 |
+| [Privilege Escalation](privilege_escalation/README.md) | 277 | $20,000 |
 | [Improper Privilege Management](improper_privilege_management/README.md) | 5 | $750 |
 | [Execution With Unnecessary Privileges](execution_with_unnecessary_privileges/README.md) | 3 | $5,000 |
 | [Improper Handling Of Insufficient Permissions Or Privileges](improper_handling_of_insufficient_permissions_or_privileges/README.md) | 3 | — |
@@ -200,6 +200,7 @@
 | [flintcms] Account takeover due to blind MongoDB injection in password reset | — | nodejs-ecosystem | 2018-08-15 | [#386807](https://hackerone.com/reports/386807) |
 | WooCommerce Blacklist in 'map_meta_cap' leads to Privilege Escalation of Shopmanagers | — | automattic | 2019-12-19 | [#403039](https://hackerone.com/reports/403039) |
 | Privilage escalation with malicious .npmrc | — | nodejs-ecosystem | 2018-06-30 | [#358359](https://hackerone.com/reports/358359) |
+| Privilege Escalation – Access to the Alert Subscribers page for users with low privileges | — | singlestore | 2026-07-01 | [#3353000](https://hackerone.com/reports/3353000) |
 | Elevation of Privileges (EoP) vulnerabilities related to the some easy_options on Windows | — | curl | 2025-07-03 | [#2941920](https://hackerone.com/reports/2941920) |
 | Chained Broken Access Control in TikTok Live Backstage Enables Full Control of Public Leaderboard Activities | — | tiktok | 2025-09-11 | [#3012526](https://hackerone.com/reports/3012526) |
 | Pivilege escalation of any new user to Keymaster caused by CSRF | — | wordpress | 2025-09-13 | [#2999394](https://hackerone.com/reports/2999394) |
