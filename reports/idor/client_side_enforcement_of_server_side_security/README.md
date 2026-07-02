@@ -1,6 +1,6 @@
 # Client Side Enforcement Of Server Side Security
 
-**14 report(s)**
+**15 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -17,4 +17,5 @@
 | ActiveStorage direct upload fails to sign content-length header for S3 service | — | rails | 2020-05-18 | [#789579](https://hackerone.com/reports/789579) |
 | Incorrect control of the trial period | — | nordsecurity | 2020-05-26 | [#865828](https://hackerone.com/reports/865828) |
 | Hacker can bypass minimum bounty amount restrictions in "invitation preferences" setting via UpdateInvitationPreferencesMutation GraphQL operation | — | security | 2021-09-20 | [#981036](https://hackerone.com/reports/981036) |
+| Splatoon 3 In-Match Integrity Bypass via Consensus Reflection Attack on Unordered Peer Submission | — | nintendo | 2026-07-02 | [#3559522](https://hackerone.com/reports/3559522) |
 | Unauthenticated read and write access to ALL endpoints of a store is possible for removed staff members who had "Apps" permission | — | shopify | 2019-10-10 | [#700831](https://hackerone.com/reports/700831) |

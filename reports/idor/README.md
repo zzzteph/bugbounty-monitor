@@ -1,15 +1,15 @@
 # IDOR / Broken Access Control
 
-**1054 report(s) across 10 class(es)**
+**1056 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 670 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 671 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
-| [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 14 | $1,100 |
+| [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 15 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
@@ -242,6 +242,7 @@
 | ActiveStorage direct upload fails to sign content-length header for S3 service | — | rails | 2020-05-18 | [#789579](https://hackerone.com/reports/789579) |
 | Incorrect control of the trial period | — | nordsecurity | 2020-05-26 | [#865828](https://hackerone.com/reports/865828) |
 | Hacker can bypass minimum bounty amount restrictions in "invitation preferences" setting via UpdateInvitationPreferencesMutation GraphQL operation | — | security | 2021-09-20 | [#981036](https://hackerone.com/reports/981036) |
+| Splatoon 3 In-Match Integrity Bypass via Consensus Reflection Attack on Unordered Peer Submission | — | nintendo | 2026-07-02 | [#3559522](https://hackerone.com/reports/3559522) |
 | Unauthenticated read and write access to ALL endpoints of a store is possible for removed staff members who had "Apps" permission | — | shopify | 2019-10-10 | [#700831](https://hackerone.com/reports/700831) |
 | Hash exposed in public repository | — | curl | 2025-11-11 | [#3419617](https://hackerone.com/reports/3419617) |
 | Open memory dump method leaking customer information ,secret keys , password , source code & admin accounts | — | stripo | 2020-01-31 | [#783360](https://hackerone.com/reports/783360) |
@@ -719,6 +720,7 @@
 | Missing access control when linking banners or campaigns to zones  | — | revive_adserver | 2026-06-03 | [#3650504](https://hackerone.com/reports/3650504) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
+| [Splatoon 3] Kick other players with NplnLogin message | — | nintendo | 2026-07-02 | [#3813932](https://hackerone.com/reports/3813932) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
 | XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
