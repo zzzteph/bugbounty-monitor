@@ -1,6 +1,6 @@
 # Path Traversal
 
-**226 report(s)**
+**227 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -34,6 +34,7 @@
 | Access to arbitrary file of the Nextcloud Android app from within the Nextcloud Android app | $250 | nextcloud | 2022-09-11 | [#1408692](https://hackerone.com/reports/1408692) |
 | Linux client is vulnerable to directory traversal when downloading files | $250 | nextcloud | 2020-08-17 | [#590319](https://hackerone.com/reports/590319) |
 | Fix : (Security) Mitigate Path Traversal Bug | $200 | hyperledger | 2022-08-05 | [#1635321](https://hackerone.com/reports/1635321) |
+| jitsi-call-analytics: Unauthenticated arbitrary file write via path traversal in `/api/v1/uploads/analyze` | $100 | 8x8-bounty | 2026-07-02 | [#3485343](https://hackerone.com/reports/3485343) |
 | GitHub Security Lab (GHSL) Vulnerability Report: Insufficient path validation in ReceiveExternalFilesActivity.java (GHSL-2022-060) | $50 | owncloud | 2023-01-16 | [#1650270](https://hackerone.com/reports/1650270) |
 | Non-authenticated path traversal leading to arbitrary file read  | — | expressionengine | 2024-05-28 | [#1096043](https://hackerone.com/reports/1096043) |
 | CVE-2020-3452 - unauthenticated file read on anyconnect.routematch.com | — | uber | 2021-08-05 | [#1257100](https://hackerone.com/reports/1257100) |

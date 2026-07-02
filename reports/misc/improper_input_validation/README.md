@@ -1,6 +1,6 @@
 # Improper Input Validation
 
-**64 report(s)**
+**65 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,6 +18,7 @@
 | Operation CreateOrUpdateSo5LineupMutation does not restrict multiple captains | $300 | sorare | 2023-08-01 | [#2067247](https://hackerone.com/reports/2067247) |
 | Posts sent via websockets aren't sanitized properly | $150 | mattermost | 2024-10-01 | [#2541027](https://hackerone.com/reports/2541027) |
 | Moderators can send messages to users from banned subreddits via `oauth.reddit.com/api/mod/conversations` | $100 | reddit | 2022-07-04 | [#1543770](https://hackerone.com/reports/1543770) |
+| jitsi-meet: Prosody/Jigasi missing header whitelist in mod_filter_iq_rayo allows arbitrary SIP header injection and Caller ID spoofing | $100 | 8x8-bounty | 2026-07-02 | [#3789570](https://hackerone.com/reports/3789570) |
 | Economic Harm through Twitter's Cropping Algorithm | — | twitter-algorithmic-bias | 2021-09-08 | [#1290872](https://hackerone.com/reports/1290872) |
 | Hyper Link Injection while signup  | — | upchieve | 2022-06-15 | [#1166073](https://hackerone.com/reports/1166073) |
 | Incorrect Deep-link validation leading to unresponsive application and device | — | flickr | 2024-07-06 | [#1157795](https://hackerone.com/reports/1157795) |

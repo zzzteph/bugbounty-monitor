@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1602 report(s) across 29 class(es)**
+**1603 report(s) across 29 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Unknown](unknown/README.md) | 961 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
-| [Improper Input Validation](improper_input_validation/README.md) | 64 | $4,920 |
+| [Improper Input Validation](improper_input_validation/README.md) | 65 | $4,920 |
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 22 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
@@ -211,6 +211,7 @@
 | Sub Domain Takeover at mk.prd.vine.co | $140 | x | 2017-02-13 | [#191323](https://hackerone.com/reports/191323) |
 | Индексация почты/логинов пользователей | $140 | bumble | 2018-06-24 | [#261734](https://hackerone.com/reports/261734) |
 | Moderators can send messages to users from banned subreddits via `oauth.reddit.com/api/mod/conversations` | $100 | reddit | 2022-07-04 | [#1543770](https://hackerone.com/reports/1543770) |
+| jitsi-meet: Prosody/Jigasi missing header whitelist in mod_filter_iq_rayo allows arbitrary SIP header injection and Caller ID spoofing | $100 | 8x8-bounty | 2026-07-02 | [#3789570](https://hackerone.com/reports/3789570) |
 | UI spoofing by showing sms:/tel: dialog on another website | $100 | brave | 2023-06-22 | [#1819652](https://hackerone.com/reports/1819652) |
 | URL filter bypass in Enterprise Grid | $100 | slack | 2020-02-14 | [#500348](https://hackerone.com/reports/500348) |
 | Ransomware protection is missing extentions take 2 | $100 | nextcloud | 2021-07-16 | [#1200785](https://hackerone.com/reports/1200785) |

