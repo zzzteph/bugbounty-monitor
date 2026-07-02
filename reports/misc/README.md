@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1603 report(s) across 29 class(es)**
+**1604 report(s) across 29 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 65 | $4,920 |
 | [Phishing](phishing/README.md) | 31 | $250 |
-| [Insufficient Logging](insufficient_logging/README.md) | 22 | — |
+| [Insufficient Logging](insufficient_logging/README.md) | 23 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 3 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
@@ -339,6 +339,7 @@
 | Non-Production API Endpoints for the Route 53 Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-27 | [#3092085](https://hackerone.com/reports/3092085) |
 | admin_audit does not log actions on files in a group folder | — | nextcloud | 2025-12-05 | [#2890071](https://hackerone.com/reports/2890071) |
 | Non-Production API Endpoints for the bedrock-agent Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-28 | [#2800091](https://hackerone.com/reports/2800091) |
+| Non-Production API Endpoints for the Amazon S3 Tables Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-07-02 | [#3780277](https://hackerone.com/reports/3780277) |
 | UI Consent Bypass via Comma Injection in `addAutoApproveTarget` — User-Approval Dialog and Persistence Layer Disagree on Target Scope, Yielding Authen | — | portswigger | 2026-06-15 | [#3717354](https://hackerone.com/reports/3717354) |
 | Password Reuse | — | upchieve | 2022-03-26 | [#1354382](https://hackerone.com/reports/1354382) |
 | Мисконфигурация Cisco Smart Install | — | av | 2021-11-16 | [#1398662](https://hackerone.com/reports/1398662) |
