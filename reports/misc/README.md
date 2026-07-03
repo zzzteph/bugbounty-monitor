@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1604 report(s) across 29 class(es)**
+**1605 report(s) across 29 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 961 | $50,000 |
+| [Unknown](unknown/README.md) | 962 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 65 | $4,920 |
@@ -1195,6 +1195,7 @@
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
+| admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |
