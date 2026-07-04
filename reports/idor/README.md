@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1057 report(s) across 10 class(es)**
+**1058 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 671 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 672 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -180,6 +180,7 @@
 | Attacker can generate cancelled transctions in a user's transaction history using only Steam ID | $300 | cs_money | 2021-02-03 | [#1021776](https://hackerone.com/reports/1021776) |
 | IDOR bug to See hidden slowvote of any user even when you dont have access right | $300 | phabricator | 2019-08-29 | [#661978](https://hackerone.com/reports/661978) |
 | IDOR and statistics leakage in Orders  | $289 | x | 2019-06-14 | [#544329](https://hackerone.com/reports/544329) |
+| Any installed app can force immediate logout and persistent DOS of authenticated Basecamp sessions via unprotected exported StartActivity | $287 | basecamp | 2026-07-04 | [#3764217](https://hackerone.com/reports/3764217) |
 | Gaining access to private topics using quoting feature | $256 | discourse | 2018-03-17 | [#312647](https://hackerone.com/reports/312647) |
 | IP restriction bypass via X-Forwarded-For header | $250 | acronis | 2024-12-05 | [#1224089](https://hackerone.com/reports/1224089) |
 | Store Admin Page Accessible Without Authentication at http://www.grouplogic.com/ADMIN/store/index.cfm | $250 | acronis | 2022-06-07 | [#1164854](https://hackerone.com/reports/1164854) |

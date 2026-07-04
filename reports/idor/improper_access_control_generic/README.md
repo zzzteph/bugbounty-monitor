@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**671 report(s)**
+**672 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -101,6 +101,7 @@
 | Deprecated owners.query API bypasses object view policy | $300 | phabricator | 2022-05-31 | [#1584409](https://hackerone.com/reports/1584409) |
 | Global default settings page is accessible to non-administrators | $300 | phabricator | 2022-05-09 | [#1563139](https://hackerone.com/reports/1563139) |
 | Authentication token and CSRF token bypass | $300 | enjin | 2022-06-19 | [#998457](https://hackerone.com/reports/998457) |
+| Any installed app can force immediate logout and persistent DOS of authenticated Basecamp sessions via unprotected exported StartActivity | $287 | basecamp | 2026-07-04 | [#3764217](https://hackerone.com/reports/3764217) |
 | Gaining access to private topics using quoting feature | $256 | discourse | 2018-03-17 | [#312647](https://hackerone.com/reports/312647) |
 | Store Admin Page Accessible Without Authentication at http://www.grouplogic.com/ADMIN/store/index.cfm | $250 | acronis | 2022-06-07 | [#1164854](https://hackerone.com/reports/1164854) |
 | End to end encryption folder locking is not properly protected | $250 | nextcloud | 2021-06-10 | [#1189174](https://hackerone.com/reports/1189174) |
