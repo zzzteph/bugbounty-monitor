@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1605 report(s) across 29 class(es)**
+**1606 report(s) across 29 class(es)**
 
 ## Classes
 
@@ -17,6 +17,7 @@
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
+| [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
@@ -29,7 +30,6 @@
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
 | [Improper Validation Of Certificate Expiration](improper_validation_of_certificate_expiration/README.md) | 1 | — |
 | [Improper Validation Of Syntactic Correctness Of Input](improper_validation_of_syntactic_correctness_of_input/README.md) | 1 | — |
-| [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 1 | — |
 | [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
@@ -317,6 +317,7 @@
 | OpenSSL TLS 1.2 session resumption accepts expired server certificates in libcurl | — | curl | 2026-06-07 | [#3781305](https://hackerone.com/reports/3781305) |
 | Missing enforcement of SFTP quote syntax can lead to operation on wrong object | — | curl | 2025-10-12 | [#3379102](https://hackerone.com/reports/3379102) |
 | Permission Model bypass via FileHandle.utimes() in the promises API | — | nodejs | 2026-06-25 | [#3625987](https://hackerone.com/reports/3625987) |
+| Kiro IDE Stores Auth Tokens with World-Readable Permissions (0644) | — | aws_vdp | 2026-07-09 | [#3630605](https://hackerone.com/reports/3630605) |
 | Non-Production API Endpoints for the AI Ops Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-01-06 | [#3418966](https://hackerone.com/reports/3418966) |
 | Non-Production API Endpoints for the cloudwatch Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-04-25 | [#2972435](https://hackerone.com/reports/2972435) |
 | Non-Production API Endpoints for the Datazone Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-02-26 | [#2981210](https://hackerone.com/reports/2981210) |
