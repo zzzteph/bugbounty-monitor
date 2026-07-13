@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1058 report(s) across 10 class(es)**
+**1059 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -13,7 +13,7 @@
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
-| [Missing Authorization](missing_authorization/README.md) | 4 | $1,200 |
+| [Missing Authorization](missing_authorization/README.md) | 5 | $1,200 |
 | [Exposed Dangerous Method Or Function](exposed_dangerous_method_or_function/README.md) | 3 | — |
 | [External Control Of Critical State Data](external_control_of_critical_state_data/README.md) | 2 | — |
 
@@ -1073,6 +1073,7 @@
 | IDOR in Report CSV export discloses the IDs of Custom Field Attributes of Programs | — | security | 2019-09-06 | [#510759](https://hackerone.com/reports/510759) |
 | Unauth IDOR to mass account takeover without user interaction on the ███████ (https://███████.edu/) | — | deptofdefense | 2024-07-19 | [#685338](https://hackerone.com/reports/685338) |
 | Unauthorized access to choice.av.ru control panel | — | av | 2021-12-19 | [#963161](https://hackerone.com/reports/963161) |
+| SELECT ... INTO OUTFILE does not enforce the FILE WRITE privilege  unprivileged arbitrary file write on the   server | — | singlestore | 2026-07-13 | [#3780695](https://hackerone.com/reports/3780695) |
 | [High] MITM via Insecure CA Path Handling in cURL (--capath, CURLOPT_CAPATH) (CWE-494: Download of Code Without Integrity Check) | — | curl | 2025-06-30 | [#3120969](https://hackerone.com/reports/3120969) |
 | User registration using public domain email like gmail in place of professional email. | — | dropcontact | 2020-08-24 | [#963546](https://hackerone.com/reports/963546) |
 | verify-release rebuilds from the tarball under verification, enabling pre-check command execution and false OK for a malicious curl release tarball | — | curl | 2026-06-17 | [#3802645](https://hackerone.com/reports/3802645) |
