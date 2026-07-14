@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1606 report(s) across 29 class(es)**
+**1607 report(s) across 30 class(es)**
 
 ## Classes
 
@@ -30,6 +30,7 @@
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
 | [Improper Validation Of Certificate Expiration](improper_validation_of_certificate_expiration/README.md) | 1 | — |
 | [Improper Validation Of Syntactic Correctness Of Input](improper_validation_of_syntactic_correctness_of_input/README.md) | 1 | — |
+| [Insecure Default Initialization Of Resource](insecure_default_initialization_of_resource/README.md) | 1 | — |
 | [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
@@ -318,6 +319,7 @@
 | Missing enforcement of SFTP quote syntax can lead to operation on wrong object | — | curl | 2025-10-12 | [#3379102](https://hackerone.com/reports/3379102) |
 | Permission Model bypass via FileHandle.utimes() in the promises API | — | nodejs | 2026-06-25 | [#3625987](https://hackerone.com/reports/3625987) |
 | Kiro IDE Stores Auth Tokens with World-Readable Permissions (0644) | — | aws_vdp | 2026-07-09 | [#3630605](https://hackerone.com/reports/3630605) |
+| bedrock-mantle.api.aws accepts Bedrock API keys outside the IAM Deny, CloudTrail signal, and invocation logging AWS publishes for Bedrock keys | — | aws_vdp | 2026-07-14 | [#3702072](https://hackerone.com/reports/3702072) |
 | Non-Production API Endpoints for the AI Ops Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-01-06 | [#3418966](https://hackerone.com/reports/3418966) |
 | Non-Production API Endpoints for the cloudwatch Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-04-25 | [#2972435](https://hackerone.com/reports/2972435) |
 | Non-Production API Endpoints for the Datazone Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-02-26 | [#2981210](https://hackerone.com/reports/2981210) |

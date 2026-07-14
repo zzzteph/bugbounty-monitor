@@ -1,13 +1,13 @@
 # XSS
 
-**1482 report(s) across 10 class(es)**
+**1483 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 518 | $5,000 |
-| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 464 | $16,000 |
+| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 465 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
@@ -225,6 +225,7 @@
 | [render.bitstrips.com] Stored XSS via an incorrect avatar property value | $400 | snapchat | 2017-01-04 | [#159878](https://hackerone.com/reports/159878) |
 | [chatws25.stream.highwebmedia.com] - Reflected XSS in c parameter | $350 | chaturbate | 2018-09-26 | [#413442](https://hackerone.com/reports/413442) |
 | Blind XSS - Report review - Admin panel | $350 | eternal | 2018-03-29 | [#314126](https://hackerone.com/reports/314126) |
+| Stored XSS on Trix Editor version latest (2.1.16) - Sanitizer Bypass  | $337 | basecamp | 2026-07-14 | [#3581911](https://hackerone.com/reports/3581911) |
 | XSS in vk.link | $300 | vkcom | 2020-12-09 | [#1025125](https://hackerone.com/reports/1025125) |
 | HTML injection in title of reader view | $300 | brave | 2023-06-22 | [#991713](https://hackerone.com/reports/991713) |
 | RXSS on /landings/123.1/index.php (mackeeperapp.mackeeper.com) | $300 | clario | 2020-06-13 | [#732394](https://hackerone.com/reports/732394) |

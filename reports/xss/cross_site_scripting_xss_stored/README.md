@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**464 report(s)**
+**465 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -96,6 +96,7 @@
 | CVE-2024-41937: Apache Airflow: Stored XSS Vulnerability on provider link | $497 | ibb | 2024-09-07 | [#2677187](https://hackerone.com/reports/2677187) |
 | Stored XSS in chat topic due to insecure emoticon parsing on any message type | $450 | chaturbate | 2018-11-01 | [#429298](https://hackerone.com/reports/429298) |
 | Blind XSS - Report review - Admin panel | $350 | eternal | 2018-03-29 | [#314126](https://hackerone.com/reports/314126) |
+| Stored XSS on Trix Editor version latest (2.1.16) - Sanitizer Bypass  | $337 | basecamp | 2026-07-14 | [#3581911](https://hackerone.com/reports/3581911) |
 | Blind Stored XSS In  "Report a Problem" on www.data.gov/issue/ | $300 | gsa_bbp | 2019-08-07 | [#615840](https://hackerone.com/reports/615840) |
 | Self-Stored XSS - Chained with login/logout CSRF | $300 | eternal | 2019-07-03 | [#632017](https://hackerone.com/reports/632017) |
 | Stored XSS on promo.indrive.com | $284 | indrive | 2023-08-28 | [#2051085](https://hackerone.com/reports/2051085) |
