@@ -1,6 +1,6 @@
 # Privilege Escalation
 
-**293 report(s) across 7 class(es)**
+**294 report(s) across 7 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Improper Privilege Management](improper_privilege_management/README.md) | 5 | $750 |
 | [Execution With Unnecessary Privileges](execution_with_unnecessary_privileges/README.md) | 3 | $5,000 |
 | [Improper Handling Of Insufficient Permissions Or Privileges](improper_handling_of_insufficient_permissions_or_privileges/README.md) | 3 | — |
-| [Incorrect Permission Assignment For Critical Resource](incorrect_permission_assignment_for_critical_resource/README.md) | 2 | $3,100 |
+| [Incorrect Permission Assignment For Critical Resource](incorrect_permission_assignment_for_critical_resource/README.md) | 3 | $3,100 |
 | [Incorrect Privilege Assignment](incorrect_privilege_assignment/README.md) | 2 | — |
 | [Improper Export Of Android Application Components](improper_export_of_android_application_components/README.md) | 1 | — |
 
@@ -99,6 +99,7 @@
 | Sub-Dept User Can Add User's To Main Department. | — | lark_technologies | 2022-10-18 | [#890209](https://hackerone.com/reports/890209) |
 | [H1-2006 2020] Exploiting multiple vulnerabilities to get hacker's payment ensured | — | h1-ctf | 2020-06-18 | [#894949](https://hackerone.com/reports/894949) |
 | Re-Sharing allows increase of privileges | — | nextcloud | 2020-09-28 | [#889243](https://hackerone.com/reports/889243) |
+| Bedrock AgentCore Starter Toolkit Creates Gateway IAM Roles Without Confused Deputy Protections | — | aws_vdp | 2026-07-15 | [#3632577](https://hackerone.com/reports/3632577) |
 | A potential risk in the experimental-programmatic-access-ccft which can be used to privilege escalation. | — | aws_vdp | 2024-11-06 | [#2808412](https://hackerone.com/reports/2808412) |
 | A potential risk in the aws-lambda-ecs-run-task which can be used to privilege escalation. | — | aws_vdp | 2024-12-27 | [#2894222](https://hackerone.com/reports/2894222) |
 | Holes in EndpointSlice Validation Enable Host Network Hijack | — | kubernetes | 2021-09-05 | [#1145044](https://hackerone.com/reports/1145044) |
