@@ -1,0 +1,137 @@
+{
+  "id": 3713965,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNzEzOTY1",
+  "url": "https://hackerone.com/reports/3713965",
+  "title": "Able to bypass authorization logic and gain more access then intended",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-05-05T07:30:34.855Z",
+  "submitted_at": "2026-05-05T07:30:36.070Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "vaib25vicky",
+    "url": "/vaib25vicky",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/57p315i5zik2npsxb38huhcol29q/47c72a82657a929c13ab24e11674f7e10ea2bf67b1b9e7116b522cd7ede42f15?response-content-disposition=inline%3B%20filename%3D%22awesome.jpeg%22%3B%20filename%2A%3DUTF-8%27%27awesome.jpeg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ24BLFZSC%2F20260715%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260715T180448Z&X-Amz-Expires=383&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGQaCXVzLXdlc3QtMiJHMEUCIAfDOEejxaHQS7bTWyBPGu%2BUgYTKMARGPjqOehGCYOW6AiEAwSLRQ4w5H2GvZap2XCyRStGWyPYxzRDCmg2OBC3JWp4qsQUILRADGgwwMTM2MTkyNzQ4NDkiDC66CJGjtSuWN9jIOyqOBdAP2YAh2V4QUOERCC7a47grxPrIfAYL4yWhSUJyM3ve6Ww%2FLVQjR6z78GPqCRo92%2F0OtS%2FU3ItHB%2BMzteqhnKg%2FUjnMQr12af9fcirW5plS8xCpwsZEbdKbYjQh7C2G7GQLnHE0smHVqSFUD5r9uiiphOOr1%2FLZC9e79pJ961hb3X5Vlkpkvkqt%2F4NEK9ebVxVw%2FNCxN6N78Ls3Tpz7nf3zoObl2KMkEpsdgYOxXIldr8Cx88eDFj9qGdx1aw%2Bird1E2Tw428kMkqEgsBq71fTVli%2BfA68%2Bz5Z31Q4av6rAD3OcNaDgOcT8S87O6oSw0Z7cLWSlVzYue6gKpO4e4ez1hCLzOdt2kwStIndUJ%2FUMwQB1WzKtsRawXndK6xIeyIvohaX5RbrFILbTan6IVTuvMiy3STLnDh%2FvknjF%2F9eG3UBq1qXNv%2FCrVvk2LqGu5ecbLtWfNC7ZhTCjABBG7NMWZE4890VCqaqOwXMkxJmQUyQ9cJzz5ygc8idISdMJHmMac0qthMOWQ5DVRWnS8mt4A227XAcbpKplIc2vFj87X2VgqpFxgI71ylO1nUNOJbzlG8W3aCRVVxslACtaWgfjVvOZdi2dL0shzuJcge2b1tH9Ergeb4dWoSTbk3dY2a%2FTfXuH18Ls0sB20dSaErCkaV24byrFFVKFJqDdyo%2FbOWq4TU3QP3N6ksM0h98YUz08%2FbsRHFkzZuVQGtBdexXZbghJuAurCeesufm7i90Tzv5dB6KGYPnn9aJ5owT7dVSs8It4ZoetqH5cSgc1VJTy0S0N0TLvoZjYpEd%2FEN6ErnbO896o9cIVsqG4u7PX9mHBFYlzQjv8aoRAsk%2BGqdpDkOoJek2mvqAAvWiqxDDc6d3SBjqxAYMg7LEn514n8plohsWuhEzlKpRzk027nDOud5EcSoylyOzkZIiFP9gyIDnxjxuN%2B9Cm%2B22MHryC0mSeg3F0FCCTpOHLdDuTbo2MGVVu37KJDI4ksi%2FGmwmZKxFNysk7Sa8RQo9SJQsloPS%2B2s1%2BlsqAOIMU6rh19jRtgh14o7YHZ3TUqWtefjGvDCIkM%2B9CJJ9pKLmXVfCIbgMOC8x06P8j%2F3H1OxCFy34fk%2FEVFgKURA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=cfc52f2d1e68882d09c0244f843625b0633312a1b678092052f8041fa01b0921"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 1894,
+    "url": "https://hackerone.com/github",
+    "handle": "github",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/001/894/1de36b69ee85cb77397b0ee01ddbabd7ed47a3dd_original.jpg/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/001/894/1de36b69ee85cb77397b0ee01ddbabd7ed47a3dd_original.jpg/1d3351b56b27c9bb56ce22821a57514a7210186a77aefb760cd2113272723c1f"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "GitHub",
+      "twitter_handle": "githubsecurity",
+      "website": "https://bounty.github.com",
+      "about": "How people build software"
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "no-content",
+  "cve_ids": [
+    "CVE-2026-9106"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-07-15T16:35:57.706Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-07-15T06:31:16.207Z",
+  "team_member_agreed_on_going_public_at": "2026-07-15T16:35:57.107Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 3,
+  "voters": [
+    "baehelprichard",
+    "foxribeye",
+    "56dluffy"
+  ],
+  "severity": {
+    "rating": "medium",
+    "author_type": "Team"
+  },
+  "structured_scope": {
+    "databaseId": 79,
+    "asset_type": "URL",
+    "asset_identifier": "github.com",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "id": 875370,
+      "category": "team",
+      "content": "A UI misrepresentation vulnerability was identified in GitHub Enterprise Server that allowed an OAuth application to gain unintended access to an organization's runner management. An attacker could exploit this by creating an OAuth application requesting the manage_runners:org scope and directing a victim user to authorize it, as the scope was not displayed on the authorization consent screen. This vulnerability affected all versions of GitHub Enterprise Server prior to 3.22 and was fixed in versions 3.21.2, 3.20.4, 3.19.8, 3.18.11, 3.17.17, 3.16.20. This vulnerability was reported via the GitHub Bug Bounty program.\n\n[CVE-2026-9106](https://nvd.nist.gov/vuln/detail/CVE-2026-9106)",
+      "updated_at": "2026-07-14T18:16:50.915Z",
+      "can_view?": true,
+      "can_create?": false,
+      "attachments": [],
+      "user": {
+        "id": 1817117,
+        "username": "skum-gh",
+        "name": "",
+        "bio": "",
+        "cleared": false,
+        "verified": false,
+        "website": null,
+        "location": "",
+        "created_at": "2021-06-30T16:35:56.422Z",
+        "url": "https://hackerone.com/skum-gh",
+        "hackerone_triager": false,
+        "hackerone_employee": false,
+        "user_type": "company",
+        "profile_picture_urls": {
+          "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png",
+          "medium": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png",
+          "xtralarge": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+        }
+      }
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
