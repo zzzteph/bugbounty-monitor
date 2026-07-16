@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**465 report(s)**
+**466 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -247,6 +247,7 @@
 | Action Text XSS (Rails 7.1.x) | — | rails | 2025-02-04 | [#2389565](https://hackerone.com/reports/2389565) |
 | Multiple XSS and open HTTP redirection | — | expressionengine | 2024-07-16 | [#2372332](https://hackerone.com/reports/2372332) |
 | Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
+| Stored XSS in Rocket.Chat HTML File Export — Unauthenticated Entry via LiveChat | — | rocket_chat | 2026-07-16 | [#3779690](https://hackerone.com/reports/3779690) |
 | Stored XSS in maintenance tools via unescaped entity names | — | revive_adserver | 2026-06-25 | [#3781311](https://hackerone.com/reports/3781311) |
 | Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
