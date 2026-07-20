@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1059 report(s) across 10 class(es)**
+**1060 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 672 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 673 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -445,6 +445,7 @@
 | 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
+| Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Missing access control when linking trackers to campaigns | — | revive_adserver | 2026-06-03 | [#3650582](https://hackerone.com/reports/3650582) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
