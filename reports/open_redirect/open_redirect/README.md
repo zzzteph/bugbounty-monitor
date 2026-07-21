@@ -1,6 +1,6 @@
 # Open Redirect
 
-**200 report(s)**
+**201 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -107,6 +107,7 @@
 | Incomplete fix for CVE-2022-35406: meta-redirect content-type check bypassable via parameter injection | — | portswigger | 2026-06-02 | [#3775183](https://hackerone.com/reports/3775183) |
 | Bypass of Open Redirect Fix on lovable.dev via /..// Path Traversal in redirect parameter | — | lovable-vdp | 2026-03-12 | [#3599248](https://hackerone.com/reports/3599248) |
 | Liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3721519](https://hackerone.com/reports/3721519) |
+| OAuth redirect uri validation bypass for :proxima_first_party_sync apps | — | github | 2026-07-21 | [#3588801](https://hackerone.com/reports/3588801) |
 | another liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3723002](https://hackerone.com/reports/3723002) |
 | Open redirect due to scanning QR code via brave browser | — | brave | 2023-06-08 | [#1946534](https://hackerone.com/reports/1946534) |
 | Open Redirect - Polycom Company Directory | — | 8x8-bounty | 2023-10-17 | [#1836339](https://hackerone.com/reports/1836339) |
