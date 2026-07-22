@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**602 report(s) across 18 class(es)**
+**603 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -14,7 +14,7 @@
 | [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 13 | — |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
-| [Authentication Bypass](authentication_bypass/README.md) | 5 | $7,500 |
+| [Authentication Bypass](authentication_bypass/README.md) | 6 | $7,500 |
 | [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 5 | — |
 | [Unverified Password Change](unverified_password_change/README.md) | 5 | — |
 | [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 3 | $15,300 |
@@ -133,6 +133,7 @@
 | 2FA bypass possible on https://authsvc.singlestore.com | — | singlestore | 2025-10-22 | [#3329361](https://hackerone.com/reports/3329361) |
 | 2FA Bypass via Response Manipulation on Login Page | — | deptofdefense | 2026-01-12 | [#2962527](https://hackerone.com/reports/2962527) |
 | Unauthenticated GraphQL access by prepending __schema to private operations | — | enjin | 2025-12-05 | [#3452015](https://hackerone.com/reports/3452015) |
+| AWS *.a2z.com \| Unauthenticated Clickhouse UI : Database access + SSRF | — | aws_vdp | 2026-07-22 | [#3809407](https://hackerone.com/reports/3809407) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |
 | Speculative Execution Side-Channel in `curl`  | — | curl | 2025-07-01 | [#3124490](https://hackerone.com/reports/3124490) |
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |

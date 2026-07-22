@@ -1,6 +1,6 @@
 # Authentication Bypass
 
-**5 report(s)**
+**6 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -9,3 +9,4 @@
 | 2FA bypass possible on https://authsvc.singlestore.com | — | singlestore | 2025-10-22 | [#3329361](https://hackerone.com/reports/3329361) |
 | 2FA Bypass via Response Manipulation on Login Page | — | deptofdefense | 2026-01-12 | [#2962527](https://hackerone.com/reports/2962527) |
 | Unauthenticated GraphQL access by prepending __schema to private operations | — | enjin | 2025-12-05 | [#3452015](https://hackerone.com/reports/3452015) |
+| AWS *.a2z.com \| Unauthenticated Clickhouse UI : Database access + SSRF | — | aws_vdp | 2026-07-22 | [#3809407](https://hackerone.com/reports/3809407) |
