@@ -1,6 +1,6 @@
 # Cryptography
 
-**142 report(s) across 12 class(es)**
+**143 report(s) across 12 class(es)**
 
 ## Classes
 
@@ -15,7 +15,7 @@
 | [Use Of Insufficiently Random Values](use_of_insufficiently_random_values/README.md) | 5 | $100 |
 | [Reusing A Nonce Key Pair In Encryption](reusing_a_nonce_key_pair_in_encryption/README.md) | 4 | — |
 | [Use Of A Key Past Its Expiration Date](use_of_a_key_past_its_expiration_date/README.md) | 4 | — |
-| [Improper Verification Of Cryptographic Signature](improper_verification_of_cryptographic_signature/README.md) | 2 | $750 |
+| [Improper Verification Of Cryptographic Signature](improper_verification_of_cryptographic_signature/README.md) | 3 | $1,337 |
 | [Key Exchange Without Entity Authentication](key_exchange_without_entity_authentication/README.md) | 2 | — |
 | [Reversible One Way Hash](reversible_one_way_hash/README.md) | 1 | — |
 
@@ -26,6 +26,7 @@
 | Inadequate Encryption Strength in nodejs-current reads openssl.cnf from /home/iojs/build/... upon startup on MacOS | $2,400 | ibb | 2023-04-09 | [#1888758](https://hackerone.com/reports/1888758) |
 | DiffieHellman doesn't generate keys after setting a key | $1,800 | ibb | 2023-06-30 | [#2038484](https://hackerone.com/reports/2038484) |
 | CVE-2023-23919: Multiple OpenSSL error handling issues in nodejs crypto library | $1,800 | ibb | 2023-03-29 | [#1877977](https://hackerone.com/reports/1877977) |
+| connect.8x8.com/api/v1: JWT Algorithm Confusion Vulnerability | $1,337 | 8x8-bounty | 2026-07-22 | [#3800870](https://hackerone.com/reports/3800870) |
 | Critical vulnerability in JSON Web Encryption (JWE) - RFC 7516 Invalid Curve attack | $1,000 | ibb | 2019-11-12 | [#213437](https://hackerone.com/reports/213437) |
 | ID4ME does not validate signature or expiration | $750 | nextcloud | 2024-07-14 | [#1878391](https://hackerone.com/reports/1878391) |
 | Phabricator is vulnerable to padding oracle attacks and chosen-ciphertext attacks. | $750 | phabricator | 2017-04-05 | [#216746](https://hackerone.com/reports/216746) |
