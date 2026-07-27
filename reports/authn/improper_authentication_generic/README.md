@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**386 report(s)**
+**387 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -119,6 +119,7 @@
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| Authentication Bypass via XML Signature Wrapping in SAML SSO | — | rocket_chat | 2026-07-27 | [#3827674](https://hackerone.com/reports/3827674) |
 | CVE-2026-8927: env-set cross-proxy Digest auth state leak | — | curl | 2026-06-24 | [#3744543](https://hackerone.com/reports/3744543) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
