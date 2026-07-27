@@ -1,6 +1,6 @@
 # Insufficient Logging
 
-**23 report(s)**
+**24 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -24,6 +24,7 @@
 | Amazon Comprehend Medical Service Reporting "AWS Internal" for CloudTrail Events Generated from FIPS Endpoints | — | aws_vdp | 2025-02-25 | [#2979238](https://hackerone.com/reports/2979238) |
 | Non-Production API Endpoints for the AI Ops Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-01-06 | [#3418966](https://hackerone.com/reports/3418966) |
 | Non-Production API Endpoints for the Datazone Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-02-26 | [#2981210](https://hackerone.com/reports/2981210) |
+| Non-Production API Endpoints for the Amazon Cloudwatch Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-07-27 | [#3775702](https://hackerone.com/reports/3775702) |
 | Non-Production API Endpoints for the Amazon S3 Tables Service Fails to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2026-07-02 | [#3780277](https://hackerone.com/reports/3780277) |
 | admin_audit does not log actions on files in a group folder | — | nextcloud | 2025-12-05 | [#2890071](https://hackerone.com/reports/2890071) |
 | Non-Production API Endpoints for the bedrock-agent Service Fail to Log to CloudTrail Resulting in Silent Permission Enumeration | — | aws_vdp | 2025-05-28 | [#2800091](https://hackerone.com/reports/2800091) |
