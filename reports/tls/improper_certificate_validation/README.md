@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**44 report(s)**
+**45 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -26,6 +26,7 @@
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
+| Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
 | Silent omission of certificate hostname verification in LibreSSL and BoringSSL | — | ibb | 2019-09-26 | [#329645](https://hackerone.com/reports/329645) |
 | OpenSSL::X509::Name Equality Check Does Not Work, Patch included | — | ruby | 2018-10-19 | [#387250](https://hackerone.com/reports/387250) |
 | CVE-2023-28321: IDN wildcard match | — | ibb | 2023-06-25 | [#1991427](https://hackerone.com/reports/1991427) |
