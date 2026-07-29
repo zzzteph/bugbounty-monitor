@@ -1,12 +1,12 @@
 # SSRF
 
-**227 report(s) across 2 class(es)**
+**228 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 226 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 227 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -77,6 +77,7 @@
 | [my.stripo.email] Blind SSRF Vulnerability in Stripo App Export via Missing Endpoints Export Email Message to Zapier | — | stripo | 2025-12-01 | [#2932960](https://hackerone.com/reports/2932960) |
 | Unsanitized IPFS CID Allows SSRF Against Configured Gateway | — | curl | 2025-10-03 | [#3366484](https://hackerone.com/reports/3366484) |
 | SSRF via Improper Redirect Validation in Rocket.Chat oEmbed Function | — | rocket_chat | 2026-06-11 | [#3383079](https://hackerone.com/reports/3383079) |
+| Unauthenticated SSRF in Voxtelesys integration ('checkUrlForSsrf' Bypass via DNS rebinding) | — | rocket_chat | 2026-07-29 | [#3473145](https://hackerone.com/reports/3473145) |
 | SSRF (open) - via GET request | — | vkcom | 2017-02-09 | [#180527](https://hackerone.com/reports/180527) |
 | Server Side Request Forgery (SSRF) vulnerability in a DoD website | — | deptofdefense | 2017-08-15 | [#189648](https://hackerone.com/reports/189648) |
 | SSRF in https://cards-dev.twitter.com/validator | — | x | 2017-04-06 | [#178184](https://hackerone.com/reports/178184) |

