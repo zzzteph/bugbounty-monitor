@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1061 report(s) across 10 class(es)**
+**1062 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 674 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 675 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -304,6 +304,7 @@
 | Missing access control when linking banners or campaigns to zones  | — | revive_adserver | 2026-06-03 | [#3650504](https://hackerone.com/reports/3650504) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
+| Permission Model Bypass: `trace_events.createTracing().enable()` Writes Trace Logs Outside `--allow-fs-write` | — | nodejs | 2026-07-29 | [#3838601](https://hackerone.com/reports/3838601) |
 | XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |

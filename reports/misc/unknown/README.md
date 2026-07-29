@@ -1,6 +1,6 @@
 # Unknown
 
-**963 report(s)**
+**964 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -269,6 +269,7 @@
 | libcurl upload read callbacks miss recursive API guard, allowing prohibited multi API reentry and ASAN-confirmed UAF | — | curl | 2026-06-30 | [#3832393](https://hackerone.com/reports/3832393) |
 | QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
 | Fail-Open in set_tlsext_servername_callback on pyopenssl via unhandled exceptions leads to security bypass | — | pyca | 2026-03-20 | [#3558277](https://hackerone.com/reports/3558277) |
+| `exportReportPdf` mutation shows internal Activity | — | security | 2026-07-29 | [#3577216](https://hackerone.com/reports/3577216) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |

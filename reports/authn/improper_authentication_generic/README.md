@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**387 report(s)**
+**388 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -114,6 +114,7 @@
 | Urgent : Unauthorised Access to Media content of all Direct messages and protected tweets(Indirect object reference) | — | x | 2018-03-21 | [#99600](https://hackerone.com/reports/99600) |
 | Race Conditions in OAuth 2 API implementations | — | ibb | 2017-09-19 | [#55140](https://hackerone.com/reports/55140) |
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
+| HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 | POST /api/bitcoinWithdrawalFees returns financial data without authentication despite being documented as a USER OPERATION (private endpoint) | — | coinmate | 2026-05-20 | [#3676308](https://hackerone.com/reports/3676308) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
