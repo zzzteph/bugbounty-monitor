@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1062 report(s) across 10 class(es)**
+**1063 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 675 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 676 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -315,6 +315,7 @@
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | Uppercase sni context matching can lead to mtls authorization bypass due to case-sensitive hostname matching | — | nodejs | 2026-06-25 | [#3656869](https://hackerone.com/reports/3656869) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
+| Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
 | Missing access control when linking trackers to campaigns | — | revive_adserver | 2026-06-03 | [#3650582](https://hackerone.com/reports/3650582) |
 | [Splatoon 3] Kick other players with NplnLogin message | — | nintendo | 2026-07-02 | [#3813932](https://hackerone.com/reports/3813932) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |

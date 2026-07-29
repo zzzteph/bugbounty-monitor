@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**675 report(s)**
+**676 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -197,6 +197,7 @@
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
 | Uppercase sni context matching can lead to mtls authorization bypass due to case-sensitive hostname matching | — | nodejs | 2026-06-25 | [#3656869](https://hackerone.com/reports/3656869) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
+| Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
 | Missing access control when linking trackers to campaigns | — | revive_adserver | 2026-06-03 | [#3650582](https://hackerone.com/reports/3650582) |
 | [Splatoon 3] Kick other players with NplnLogin message | — | nintendo | 2026-07-02 | [#3813932](https://hackerone.com/reports/3813932) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
