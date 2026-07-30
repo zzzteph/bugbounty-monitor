@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1063 report(s) across 10 class(es)**
+**1064 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 676 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 677 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -313,6 +313,7 @@
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
+| GitHub scoped user to server tokens can escape their installation | — | github | 2026-07-29 | [#3638909](https://hackerone.com/reports/3638909) |
 | Uppercase sni context matching can lead to mtls authorization bypass due to case-sensitive hostname matching | — | nodejs | 2026-06-25 | [#3656869](https://hackerone.com/reports/3656869) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |

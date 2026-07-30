@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**676 report(s)**
+**677 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -195,6 +195,7 @@
 | Unauthenticated reading of every file via livechat auth and predicting MongoDB ObjectId() | — | rocket_chat | 2026-06-15 | [#3687142](https://hackerone.com/reports/3687142) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
+| GitHub scoped user to server tokens can escape their installation | — | github | 2026-07-29 | [#3638909](https://hackerone.com/reports/3638909) |
 | Uppercase sni context matching can lead to mtls authorization bypass due to case-sensitive hostname matching | — | nodejs | 2026-06-25 | [#3656869](https://hackerone.com/reports/3656869) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
