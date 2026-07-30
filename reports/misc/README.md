@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1610 report(s) across 30 class(es)**
+**1611 report(s) across 30 class(es)**
 
 ## Classes
 
@@ -17,12 +17,12 @@
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
+| [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
 | [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
-| [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
 | [Improper Handling Of Unicode Encoding](improper_handling_of_unicode_encoding/README.md) | 1 | — |
@@ -254,6 +254,7 @@
 | MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker | — | curl | 2026-05-05 | [#3712343](https://hackerone.com/reports/3712343) |
 | Unicode-to-ASCII conversion on Windows can lead to argument injection and more | — | curl | 2024-06-18 | [#2550951](https://hackerone.com/reports/2550951) |
 | TLS host identity verification bypass via session reuse with different servername leads to unauthorized connections | — | nodejs | 2026-06-25 | [#3649802](https://hackerone.com/reports/3649802) |
+| HTTPS Agent TLS session reuse skips hostname verification across identity policies (incomplete fix of CVE-2026-48934) | — | nodejs | 2026-07-30 | [#3812439](https://hackerone.com/reports/3812439) |
 | RTSP RTP Interleaved Parser Assertion Failure (Zero-Length RTP Payload) | — | curl | 2026-02-26 | [#3575250](https://hackerone.com/reports/3575250) |
 | -H with space prefix leads to previous header injection when used with --proxy | — | curl | 2025-07-07 | [#2864859](https://hackerone.com/reports/2864859) |
 | curl proceeds with unsafe connections when -K file can't be read | — | curl | 2022-04-21 | [#1542881](https://hackerone.com/reports/1542881) |
