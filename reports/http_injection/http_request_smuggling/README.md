@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**61 report(s)**
+**62 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -28,6 +28,7 @@
 | HTTP Request Smuggling Vulnerability Analysis - cURL Security Report | — | curl | 2025-07-13 | [#3249936](https://hackerone.com/reports/3249936) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line | — | nodejs | 2026-07-01 | [#3648681](https://hackerone.com/reports/3648681) |
+| HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser | — | nodejs | 2026-07-31 | [#3723248](https://hackerone.com/reports/3723248) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
 | Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
