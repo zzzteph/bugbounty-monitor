@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1611 report(s) across 30 class(es)**
+**1612 report(s) across 30 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 964 | $50,000 |
+| [Unknown](unknown/README.md) | 965 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 406 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 65 | $4,920 |
@@ -216,6 +216,7 @@
 | UI spoofing by showing sms:/tel: dialog on another website | $100 | brave | 2023-06-22 | [#1819652](https://hackerone.com/reports/1819652) |
 | URL filter bypass in Enterprise Grid | $100 | slack | 2020-02-14 | [#500348](https://hackerone.com/reports/500348) |
 | Stored XSS via SVG Upload in chat.line.biz | $100 | line | 2026-01-05 | [#3008878](https://hackerone.com/reports/3008878) |
+| Unauthenticated team "income/payments" export ignores donor privacy settings (hide_giving, hide_from_lists) and uses frozen visibility, exposing donat | $100 | liberapay | 2026-08-01 | [#3878586](https://hackerone.com/reports/3878586) |
 | Ransomware protection is missing extentions take 2 | $100 | nextcloud | 2021-07-16 | [#1200785](https://hackerone.com/reports/1200785) |
 | public webdav endpoint not bruteforce protected | $100 | nextcloud | 2021-08-11 | [#1192159](https://hackerone.com/reports/1192159) |
 | Add to your nextcloud endpoint is not properly protected | $100 | nextcloud | 2021-08-11 | [#1192144](https://hackerone.com/reports/1192144) |

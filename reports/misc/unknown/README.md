@@ -1,6 +1,6 @@
 # Unknown
 
-**964 report(s)**
+**965 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -120,6 +120,7 @@
 | Sub Domain Takeover at mk.prd.vine.co | $140 | x | 2017-02-13 | [#191323](https://hackerone.com/reports/191323) |
 | Индексация почты/логинов пользователей | $140 | bumble | 2018-06-24 | [#261734](https://hackerone.com/reports/261734) |
 | Stored XSS via SVG Upload in chat.line.biz | $100 | line | 2026-01-05 | [#3008878](https://hackerone.com/reports/3008878) |
+| Unauthenticated team "income/payments" export ignores donor privacy settings (hide_giving, hide_from_lists) and uses frozen visibility, exposing donat | $100 | liberapay | 2026-08-01 | [#3878586](https://hackerone.com/reports/3878586) |
 | Ransomware protection is missing extentions take 2 | $100 | nextcloud | 2021-07-16 | [#1200785](https://hackerone.com/reports/1200785) |
 | public webdav endpoint not bruteforce protected | $100 | nextcloud | 2021-08-11 | [#1192159](https://hackerone.com/reports/1192159) |
 | Add to your nextcloud endpoint is not properly protected | $100 | nextcloud | 2021-08-11 | [#1192144](https://hackerone.com/reports/1192144) |
