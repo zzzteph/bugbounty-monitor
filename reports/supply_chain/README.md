@@ -1,13 +1,13 @@
 # Supply Chain
 
-**10 report(s) across 6 class(es)**
+**11 report(s) across 6 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
+| [Inclusion Of Functionality From Untrusted Control Sphere](inclusion_of_functionality_from_untrusted_control_sphere/README.md) | 3 | $4,920 |
 | [Malware](malware/README.md) | 3 | $1,500 |
-| [Inclusion Of Functionality From Untrusted Control Sphere](inclusion_of_functionality_from_untrusted_control_sphere/README.md) | 2 | $4,920 |
 | [Using Components With Known Vulnerabilities](using_components_with_known_vulnerabilities/README.md) | 2 | — |
 | [Download Of Code Without Integrity Check](download_of_code_without_integrity_check/README.md) | 1 | — |
 | [Embedded Malicious Code](embedded_malicious_code/README.md) | 1 | — |
@@ -21,6 +21,7 @@
 | Malformed save files (.sav) allow to write files with arbitrary extensions and content in GoldSrc-based games. | $1,500 | valve | 2020-02-24 | [#458842](https://hackerone.com/reports/458842) |
 | RCE on build server via misconfigured pip install | — | yelp | 2021-02-09 | [#946409](https://hackerone.com/reports/946409) |
 | flatmap-stream malicious package (distributed via the popular events-stream) | — | nodejs-ecosystem | 2018-11-26 | [#450006](https://hackerone.com/reports/450006) |
+| GitHub Retired UsernameTakeover From  [aws/████████] | — | aws_vdp | 2026-08-03 | [#3478646](https://hackerone.com/reports/3478646) |
 | Bootstrap library is vulnerable | — | sifchain | 2021-09-06 | [#1198203](https://hackerone.com/reports/1198203) |
 | Trojan:JS/CoinMiner in npm files | — | nodejs-ecosystem | 2019-10-04 | [#687325](https://hackerone.com/reports/687325) |
 | Vulnerability in GoldSource Engine allows to upload and run an arbitrary DLL on client | — | valve | 2020-03-25 | [#508894](https://hackerone.com/reports/508894) |
