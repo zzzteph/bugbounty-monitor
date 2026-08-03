@@ -1,0 +1,149 @@
+{
+  "id": 3911605,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTExNjA1",
+  "url": "https://hackerone.com/reports/3911605",
+  "title": "SMTP CRLF injection in custom SMTP recipient operand allows additional SMTP commands after authentication",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "medium",
+  "readable_substate": "N/A",
+  "created_at": "2026-08-03T07:02:33.903Z",
+  "submitted_at": "2026-08-03T07:02:34.228Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "dark_river",
+    "url": "/dark_river",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/qka2cqt17z80a4c8vh6jlsmneq2n/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-03T07:16:40.811Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-03T07:11:55.764Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nDuring testing of curl 8.18.0, I observed that CRLF characters embedded in the SMTP recipient operand used with a custom SMTP request are transmitted as additional SMTP commands.\n\nThe injected commands are accepted and processed after successful SMTP authentication, allowing multiple SMTP commands to be executed within the same authenticated session.\n\n---\n\n## Product\n\ncurl CLI\n\nVersion tested:\n\n```\ncurl 8.18.0\nRelease-Date: 2026-01-07\n```\n\n---\n\n## Environment\n\n* OS: Kali Linux\n* curl: 8.18.0\n* SMTP AUTH: PLAIN\n\n---\n\n## Steps to Reproduce\n\n1. Configure curl to perform an authenticated SMTP session using a custom SMTP request (EXPN).\n\n2. Supply a recipient operand containing embedded CRLF characters followed by additional SMTP commands.\n\nExample payload structure:\n\n```text\nFriends\\r\\n\nMAIL FROM:<probe-sender@example.com>\\r\\n\nRCPT TO:<probe-recipient@example.com>\\r\\n\nDATA\\r\\n\nSubject: injected\\r\\n\n\\r\\n\ncurl-smtp-injection-marker-v1\\r\\n\n.\n```\n\n3. Execute the SMTP request.\n\n---\n\n## Observed Behavior\n\nThe SMTP session authenticates successfully.\n\nInstead of treating the recipient operand as a single parameter, curl transmits the embedded CRLF characters, causing the SMTP server to interpret the following data as additional SMTP commands.\n\nObserved command sequence:\n\n```text\nEHLO probe\nAUTH PLAIN\nEXPN Friends\nMAIL FROM:<probe-sender@example.com>\nRCPT TO:<probe-recipient@example.com>\nDATA\nSubject: injected\n\ncurl-smtp-injection-marker-v1\n.\nQUIT\n```\n\nThe SMTP server accepted the injected transaction and completed the DATA phase successfully.\n\n---\n\n## Expected Behavior\n\nCR and LF characters should not be permitted inside the SMTP recipient operand.\n\nThe value should be validated before serialization so it cannot terminate the current SMTP command and inject additional commands.\n\n\n\n---\n\n## Evidence\n\nThe attached screenshots demonstrate:\n\n* curl version\n* Successful authenticated SMTP session\n* Additional injected SMTP commands\n* Successful completion of the injected DATA transaction\n* Marker confirming successful command injection\n\n## Impact\n\nAn application that passes attacker-controlled input into the SMTP recipient operand while using custom SMTP requests may unintentionally execute additional SMTP commands within an authenticated SMTP session.\n\nDepending on the application's usage of libcurl/curl, this may allow unintended SMTP operations.",
+  "weakness": {
+    "id": 69,
+    "name": "CRLF Injection"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6383677,
+      "file_name": "Screenshot_2026-07-03_153252.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/1fp80jwtd7wn5svsdk16hc52teh4?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-07-03_153252.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-07-03_153252.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2UEKBQOM%2F20260803%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260803T104024Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECgaCXVzLXdlc3QtMiJHMEUCIQD3m5l49VsMlINqmP%2FYgZ2QKVrdLf%2B5m1IFm6%2BmgPGj%2FAIgGut2oBfwp7U%2FBAB6N20rbJ9A%2BsYiYaI4SAdEqfGkkJIquwUI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDOC3DJLRzgkPcW44LCqPBe84NZeVJz%2FEx9xaRy0m0Rz7i5P2kiuz6pAZm8qo8pBzgeDWqJlxUYTmC9w0YtyJhh81Hfv87Q4gIXZqZdj7N%2BqC%2FNtaR4OpMRJ1z2wncANc2uQ%2FMCaMiaLgcdl2cCCPyfkLoj10dIcDYY2vAVjF%2BcJEgScZPvH%2FTL7Ox1KsR4nU%2Bas8FgTd%2F7GRXYecYfNzGhAzAxB1fCDiNz%2FoXdkmRlSaVbFJMGW1oqloR06ru7nXtVM0AlxFBx6FZnnEzyBu%2FmqVyVKqQMbPKOO3ySLr16zexz%2F%2Fqzrb5MfElmCqQDrwD6gsrFrBG%2BR1ockfSqUkI3Hw%2B6%2F0PcIuIlR4LsGABkCru7za9LFlVxn6%2B8LrhFjtc9wMGe0XdKrafKZUwFc2Q8SgxMUprNPmIwfpKvWQ4rJo7AiO%2FLMnNf%2BOZr5L6ZjgN%2F8qbRxLJt9%2FvD3oZizp8HvTK%2FqhYPR2jsO9B2h6W4F1f68905gE7TRfB3xi4pDRr8%2BLrU%2Bh9SVAdMMTgEicrYxqKVWH89pm7mTaQLcb2BLkoXdTJOvr3GbKMMLB6LUAYhIInJA5%2Fxu7N1RqrW9hgSeybQBURS8QM%2Bmnjmki6yyUsh0hJCbDKDR2i3ZuH4nXFzJWukosGN%2FeaQLSwQNctYdJhyZFGYY8sH0S6%2B%2B8aH0hnSW5HsSpe0e0ngI6oqiPxGTh0wOJSosKfLDHRU2m8ldTmf%2BZCZ5PyuUger1GpXtnnqSRx9eMajrJ6lkjdtKkweq3EWwk5jJFDh%2BjbvSAztkMSIMinMzFYc8hzBcAjMZXO0g5ycilAIh3gphIB2hQR%2Fl8hRU63dMyQn9arXiS7152MPY8JdY7ugW%2B2YSVupeHBcXwQ3OdVnHCWr%2BeqeIwl53B0wY6sQFusDWGDJSoHwgjLMvL0PKH5ONPT5Sxf1QCWtwRgcNH%2F9eGRJ1CZF0cp6h1q1F8G61BMiPB53J2JfYzKzsq%2FWtFuElKGmY%2BvSQKP1S5rBCi3S%2B0tGaNfgC4mn9PX98ExN8zuqwpUDqOYjp7lZB0RqAXCoa9bGTduQHYb8rkX7Ns7T1dzPVYRzgCnoQDTqGifcCccUbnfMsLhXBDk0z45VqyGzeY3NLQUMmoLnqvhLoCQbs%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=cec12232d6aeec80ba959c638727f2c1836fd950d327a3e65b3c323e67bcf2e3",
+      "file_size": 32229,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6383678,
+      "file_name": "Screenshot_2026-07-03_153306.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/j2tc8qs8c1xbpnzx1bm18j599syz?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-07-03_153306.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-07-03_153306.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2UEKBQOM%2F20260803%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260803T104024Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECgaCXVzLXdlc3QtMiJHMEUCIQD3m5l49VsMlINqmP%2FYgZ2QKVrdLf%2B5m1IFm6%2BmgPGj%2FAIgGut2oBfwp7U%2FBAB6N20rbJ9A%2BsYiYaI4SAdEqfGkkJIquwUI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDOC3DJLRzgkPcW44LCqPBe84NZeVJz%2FEx9xaRy0m0Rz7i5P2kiuz6pAZm8qo8pBzgeDWqJlxUYTmC9w0YtyJhh81Hfv87Q4gIXZqZdj7N%2BqC%2FNtaR4OpMRJ1z2wncANc2uQ%2FMCaMiaLgcdl2cCCPyfkLoj10dIcDYY2vAVjF%2BcJEgScZPvH%2FTL7Ox1KsR4nU%2Bas8FgTd%2F7GRXYecYfNzGhAzAxB1fCDiNz%2FoXdkmRlSaVbFJMGW1oqloR06ru7nXtVM0AlxFBx6FZnnEzyBu%2FmqVyVKqQMbPKOO3ySLr16zexz%2F%2Fqzrb5MfElmCqQDrwD6gsrFrBG%2BR1ockfSqUkI3Hw%2B6%2F0PcIuIlR4LsGABkCru7za9LFlVxn6%2B8LrhFjtc9wMGe0XdKrafKZUwFc2Q8SgxMUprNPmIwfpKvWQ4rJo7AiO%2FLMnNf%2BOZr5L6ZjgN%2F8qbRxLJt9%2FvD3oZizp8HvTK%2FqhYPR2jsO9B2h6W4F1f68905gE7TRfB3xi4pDRr8%2BLrU%2Bh9SVAdMMTgEicrYxqKVWH89pm7mTaQLcb2BLkoXdTJOvr3GbKMMLB6LUAYhIInJA5%2Fxu7N1RqrW9hgSeybQBURS8QM%2Bmnjmki6yyUsh0hJCbDKDR2i3ZuH4nXFzJWukosGN%2FeaQLSwQNctYdJhyZFGYY8sH0S6%2B%2B8aH0hnSW5HsSpe0e0ngI6oqiPxGTh0wOJSosKfLDHRU2m8ldTmf%2BZCZ5PyuUger1GpXtnnqSRx9eMajrJ6lkjdtKkweq3EWwk5jJFDh%2BjbvSAztkMSIMinMzFYc8hzBcAjMZXO0g5ycilAIh3gphIB2hQR%2Fl8hRU63dMyQn9arXiS7152MPY8JdY7ugW%2B2YSVupeHBcXwQ3OdVnHCWr%2BeqeIwl53B0wY6sQFusDWGDJSoHwgjLMvL0PKH5ONPT5Sxf1QCWtwRgcNH%2F9eGRJ1CZF0cp6h1q1F8G61BMiPB53J2JfYzKzsq%2FWtFuElKGmY%2BvSQKP1S5rBCi3S%2B0tGaNfgC4mn9PX98ExN8zuqwpUDqOYjp7lZB0RqAXCoa9bGTduQHYb8rkX7Ns7T1dzPVYRzgCnoQDTqGifcCccUbnfMsLhXBDk0z45VqyGzeY3NLQUMmoLnqvhLoCQbs%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=17deb0250f648ecadfe0974687cb9eff613efa83fd9ef2036af26f21d0b13fd9",
+      "file_size": 47638,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6383680,
+      "file_name": "Screenshot_2026-07-03_153217.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/r9yc7huw8r13bs4ch89j1snu9yti?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-07-03_153217.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-07-03_153217.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2UEKBQOM%2F20260803%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260803T104024Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECgaCXVzLXdlc3QtMiJHMEUCIQD3m5l49VsMlINqmP%2FYgZ2QKVrdLf%2B5m1IFm6%2BmgPGj%2FAIgGut2oBfwp7U%2FBAB6N20rbJ9A%2BsYiYaI4SAdEqfGkkJIquwUI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDOC3DJLRzgkPcW44LCqPBe84NZeVJz%2FEx9xaRy0m0Rz7i5P2kiuz6pAZm8qo8pBzgeDWqJlxUYTmC9w0YtyJhh81Hfv87Q4gIXZqZdj7N%2BqC%2FNtaR4OpMRJ1z2wncANc2uQ%2FMCaMiaLgcdl2cCCPyfkLoj10dIcDYY2vAVjF%2BcJEgScZPvH%2FTL7Ox1KsR4nU%2Bas8FgTd%2F7GRXYecYfNzGhAzAxB1fCDiNz%2FoXdkmRlSaVbFJMGW1oqloR06ru7nXtVM0AlxFBx6FZnnEzyBu%2FmqVyVKqQMbPKOO3ySLr16zexz%2F%2Fqzrb5MfElmCqQDrwD6gsrFrBG%2BR1ockfSqUkI3Hw%2B6%2F0PcIuIlR4LsGABkCru7za9LFlVxn6%2B8LrhFjtc9wMGe0XdKrafKZUwFc2Q8SgxMUprNPmIwfpKvWQ4rJo7AiO%2FLMnNf%2BOZr5L6ZjgN%2F8qbRxLJt9%2FvD3oZizp8HvTK%2FqhYPR2jsO9B2h6W4F1f68905gE7TRfB3xi4pDRr8%2BLrU%2Bh9SVAdMMTgEicrYxqKVWH89pm7mTaQLcb2BLkoXdTJOvr3GbKMMLB6LUAYhIInJA5%2Fxu7N1RqrW9hgSeybQBURS8QM%2Bmnjmki6yyUsh0hJCbDKDR2i3ZuH4nXFzJWukosGN%2FeaQLSwQNctYdJhyZFGYY8sH0S6%2B%2B8aH0hnSW5HsSpe0e0ngI6oqiPxGTh0wOJSosKfLDHRU2m8ldTmf%2BZCZ5PyuUger1GpXtnnqSRx9eMajrJ6lkjdtKkweq3EWwk5jJFDh%2BjbvSAztkMSIMinMzFYc8hzBcAjMZXO0g5ycilAIh3gphIB2hQR%2Fl8hRU63dMyQn9arXiS7152MPY8JdY7ugW%2B2YSVupeHBcXwQ3OdVnHCWr%2BeqeIwl53B0wY6sQFusDWGDJSoHwgjLMvL0PKH5ONPT5Sxf1QCWtwRgcNH%2F9eGRJ1CZF0cp6h1q1F8G61BMiPB53J2JfYzKzsq%2FWtFuElKGmY%2BvSQKP1S5rBCi3S%2B0tGaNfgC4mn9PX98ExN8zuqwpUDqOYjp7lZB0RqAXCoa9bGTduQHYb8rkX7Ns7T1dzPVYRzgCnoQDTqGifcCccUbnfMsLhXBDk0z45VqyGzeY3NLQUMmoLnqvhLoCQbs%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=c852ac859a99bcd8dda54b6087c3edd3e759516080d007f1a6d50d3670e28406",
+      "file_size": 42370,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6383681,
+      "file_name": "Screenshot_2026-07-03_153231.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ozbcvqfsphgokx9panl2kblv05d5?response-content-disposition=attachment%3B%20filename%3D%22Screenshot_2026-07-03_153231.png%22%3B%20filename%2A%3DUTF-8%27%27Screenshot_2026-07-03_153231.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2UEKBQOM%2F20260803%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260803T104024Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECgaCXVzLXdlc3QtMiJHMEUCIQD3m5l49VsMlINqmP%2FYgZ2QKVrdLf%2B5m1IFm6%2BmgPGj%2FAIgGut2oBfwp7U%2FBAB6N20rbJ9A%2BsYiYaI4SAdEqfGkkJIquwUI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDOC3DJLRzgkPcW44LCqPBe84NZeVJz%2FEx9xaRy0m0Rz7i5P2kiuz6pAZm8qo8pBzgeDWqJlxUYTmC9w0YtyJhh81Hfv87Q4gIXZqZdj7N%2BqC%2FNtaR4OpMRJ1z2wncANc2uQ%2FMCaMiaLgcdl2cCCPyfkLoj10dIcDYY2vAVjF%2BcJEgScZPvH%2FTL7Ox1KsR4nU%2Bas8FgTd%2F7GRXYecYfNzGhAzAxB1fCDiNz%2FoXdkmRlSaVbFJMGW1oqloR06ru7nXtVM0AlxFBx6FZnnEzyBu%2FmqVyVKqQMbPKOO3ySLr16zexz%2F%2Fqzrb5MfElmCqQDrwD6gsrFrBG%2BR1ockfSqUkI3Hw%2B6%2F0PcIuIlR4LsGABkCru7za9LFlVxn6%2B8LrhFjtc9wMGe0XdKrafKZUwFc2Q8SgxMUprNPmIwfpKvWQ4rJo7AiO%2FLMnNf%2BOZr5L6ZjgN%2F8qbRxLJt9%2FvD3oZizp8HvTK%2FqhYPR2jsO9B2h6W4F1f68905gE7TRfB3xi4pDRr8%2BLrU%2Bh9SVAdMMTgEicrYxqKVWH89pm7mTaQLcb2BLkoXdTJOvr3GbKMMLB6LUAYhIInJA5%2Fxu7N1RqrW9hgSeybQBURS8QM%2Bmnjmki6yyUsh0hJCbDKDR2i3ZuH4nXFzJWukosGN%2FeaQLSwQNctYdJhyZFGYY8sH0S6%2B%2B8aH0hnSW5HsSpe0e0ngI6oqiPxGTh0wOJSosKfLDHRU2m8ldTmf%2BZCZ5PyuUger1GpXtnnqSRx9eMajrJ6lkjdtKkweq3EWwk5jJFDh%2BjbvSAztkMSIMinMzFYc8hzBcAjMZXO0g5ycilAIh3gphIB2hQR%2Fl8hRU63dMyQn9arXiS7152MPY8JdY7ugW%2B2YSVupeHBcXwQ3OdVnHCWr%2BeqeIwl53B0wY6sQFusDWGDJSoHwgjLMvL0PKH5ONPT5Sxf1QCWtwRgcNH%2F9eGRJ1CZF0cp6h1q1F8G61BMiPB53J2JfYzKzsq%2FWtFuElKGmY%2BvSQKP1S5rBCi3S%2B0tGaNfgC4mn9PX98ExN8zuqwpUDqOYjp7lZB0RqAXCoa9bGTduQHYb8rkX7Ns7T1dzPVYRzgCnoQDTqGifcCccUbnfMsLhXBDk0z45VqyGzeY3NLQUMmoLnqvhLoCQbs%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=67c96422bd915f85d1f18d656aafc02398e7b1662243f5a3bf39ceff999c46a0",
+      "file_size": 41627,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 4,
+  "voters": [
+    "2026",
+    "dark_river",
+    "huntereverest",
+    "0xc4"
+  ],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

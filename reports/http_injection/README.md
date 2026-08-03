@@ -1,13 +1,13 @@
 # HTTP Injection
 
-**135 report(s) across 4 class(es)**
+**136 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 62 | $20,000 |
-| [Crlf Injection](crlf_injection/README.md) | 55 | $5,000 |
+| [Crlf Injection](crlf_injection/README.md) | 56 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
@@ -70,6 +70,7 @@
 | SMTP Command Injection via CRLF in libcurl MAIL_FROM / MAIL_RCPT (lib/smtp.c) | — | curl | 2026-04-06 | [#3651975](https://hackerone.com/reports/3651975) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
 | ZMQ RPC Log Injection and Untrusted Payload Persistence | — | monero | 2026-07-24 | [#3621606](https://hackerone.com/reports/3621606) |
+| SMTP CRLF injection in custom SMTP recipient operand allows additional SMTP commands after authentication | — | curl | 2026-08-03 | [#3911605](https://hackerone.com/reports/3911605) |
 | 'net/http': HTTP Header Injection in the set_content_type method | — | ruby | 2022-02-04 | [#1168205](https://hackerone.com/reports/1168205) |
 | Control character filtering misses leading and trailing whitespace in file and folder names | — | nextcloud | 2022-05-27 | [#1402249](https://hackerone.com/reports/1402249) |
 | CRLF injection agentcrm.8x8.com | — | 8x8-bounty | 2020-06-26 | [#413115](https://hackerone.com/reports/413115) |

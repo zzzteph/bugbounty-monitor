@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**55 report(s)**
+**56 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -31,6 +31,7 @@
 | SMTP Command Injection via CRLF in libcurl MAIL_FROM / MAIL_RCPT (lib/smtp.c) | — | curl | 2026-04-06 | [#3651975](https://hackerone.com/reports/3651975) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
 | ZMQ RPC Log Injection and Untrusted Payload Persistence | — | monero | 2026-07-24 | [#3621606](https://hackerone.com/reports/3621606) |
+| SMTP CRLF injection in custom SMTP recipient operand allows additional SMTP commands after authentication | — | curl | 2026-08-03 | [#3911605](https://hackerone.com/reports/3911605) |
 | 'net/http': HTTP Header Injection in the set_content_type method | — | ruby | 2022-02-04 | [#1168205](https://hackerone.com/reports/1168205) |
 | Control character filtering misses leading and trailing whitespace in file and folder names | — | nextcloud | 2022-05-27 | [#1402249](https://hackerone.com/reports/1402249) |
 | CRLF injection agentcrm.8x8.com | — | 8x8-bounty | 2020-06-26 | [#413115](https://hackerone.com/reports/413115) |
