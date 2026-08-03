@@ -1,6 +1,6 @@
 # Path Traversal
 
-**228 report(s)**
+**229 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -54,6 +54,7 @@
 | Path Traversal Bypass in file:// URLs Due to Incomplete URL-Encoded Path Normalization | — | curl | 2025-12-15 | [#3465094](https://hackerone.com/reports/3465094) |
 | UniFi Video Server - Arbitrary file upload as SYSTEM | — | ui | 2018-11-07 | [#129641](https://hackerone.com/reports/129641) |
 | Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix | — | rails | 2026-07-30 | [#3553340](https://hackerone.com/reports/3553340) |
+| Unauthenticated Path Traversal (LFI) via /custom-sounds/ when CustomSounds uses FileSystem storage | — | rocket_chat | 2026-08-03 | [#3514640](https://hackerone.com/reports/3514640) |
 | inconsistently Rejection Logic in file:// URLs with Authority | — | curl | 2026-01-08 | [#3494098](https://hackerone.com/reports/3494098) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |
 | ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection | — | rails | 2026-05-07 | [#3580511](https://hackerone.com/reports/3580511) |
