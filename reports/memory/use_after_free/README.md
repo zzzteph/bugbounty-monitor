@@ -1,6 +1,6 @@
 # Use After Free
 
-**67 report(s)**
+**68 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -33,6 +33,7 @@
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
 | Use-After-Free race condition in url_move_hostname() via shared connection pool | — | curl | 2026-03-31 | [#3638715](https://hackerone.com/reports/3638715) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
+| Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |
 | UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
 | CVE-2026-9080: UAF after pause in socket callback | — | curl | 2026-06-24 | [#3749204](https://hackerone.com/reports/3749204) |
