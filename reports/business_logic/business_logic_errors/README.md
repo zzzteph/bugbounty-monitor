@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**346 report(s)**
+**347 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -88,6 +88,7 @@
 | Hi Hacker | — | curl | 2025-11-03 | [#3409186](https://hackerone.com/reports/3409186) |
 | Lack of payment type validation in dial.uber.com allows for free rides | — | uber | 2018-11-20 | [#162199](https://hackerone.com/reports/162199) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
+| `check_reserve_proof` counts duplicate entries: one output can inflate `total` | — | monero | 2026-08-05 | [#3699522](https://hackerone.com/reports/3699522) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |

@@ -1,13 +1,13 @@
 # TLS / Certificate Validation
 
-**79 report(s) across 5 class(es)**
+**80 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 45 | $2,580 |
-| [Man In The Middle](man_in_the_middle/README.md) | 27 | $1,000 |
+| [Man In The Middle](man_in_the_middle/README.md) | 28 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 4 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
@@ -72,6 +72,7 @@
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |
 | Man-in-the-middle through broken SSL certificate verification | — | nintendo | 2025-08-08 | [#3174987](https://hackerone.com/reports/3174987) |
 | `Curl_socketpair()` fallback vulnerable to man-in-the-middle attack | — | curl | 2025-05-20 | [#3148937](https://hackerone.com/reports/3148937) |
+| curl Missing Sec-WebSocket-Accept Verification Enables MITM WebSocket Session Hijacking | — | curl | 2026-08-05 | [#3917775](https://hackerone.com/reports/3917775) |
 | CVE-2021-22890: TLS 1.3 session ticket proxy host mixup | — | curl | 2021-04-30 | [#1129529](https://hackerone.com/reports/1129529) |
 | Web protection component in Anti-Virus products family ignores HSTS security policy | — | kaspersky | 2019-09-05 | [#461780](https://hackerone.com/reports/461780) |
 | burp does not validate the common name of the presented collaborator server certificate | — | portswigger | 2018-06-13 | [#337680](https://hackerone.com/reports/337680) |

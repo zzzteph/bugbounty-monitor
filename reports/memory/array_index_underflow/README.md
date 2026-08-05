@@ -1,6 +1,6 @@
 # Array Index Underflow
 
-**16 report(s)**
+**17 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -11,6 +11,7 @@
 | HackerOne | — | curl | 2025-11-03 | [#3409193](https://hackerone.com/reports/3409193) |
 | V2Plugin.Decrypt panics on empty ciphertext (Remote DoS) | — | aws_vdp | 2026-05-28 | [#3620753](https://hackerone.com/reports/3620753) |
 | V1Plugin.Decrypt panics on empty ciphertext (Remote DoS) | — | aws_vdp | 2026-05-28 | [#3620748](https://hackerone.com/reports/3620748) |
+| wallet-rpc describe_transfer uses real_output_in_tx_index instead of real_output: cold-wallet pre-sign review shows wrong ring member | — | monero | 2026-08-05 | [#3723315](https://hackerone.com/reports/3723315) |
 | Your page has 2 blocking CSS resources. This causes a delay in rendering your page. | — | nodejs | 2018-07-15 | [#365968](https://hackerone.com/reports/365968) |
 | Take over subdomain undici.nodejs.org.cdn.cloudflare.net | — | nodejs | 2023-01-11 | [#1763817](https://hackerone.com/reports/1763817) |
 | [MK8DX] Improper metadata validation 2 | — | nintendo | 2023-08-17 | [#1812732](https://hackerone.com/reports/1812732) |

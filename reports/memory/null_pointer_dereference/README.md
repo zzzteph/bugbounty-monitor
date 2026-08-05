@@ -1,6 +1,6 @@
 # Null Pointer Dereference
 
-**34 report(s)**
+**35 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -15,6 +15,7 @@
 | Inappropriately parsing HTTP response leads to PHP segment fault! | $500 | ibb | 2019-11-12 | [#305973](https://hackerone.com/reports/305973) |
 | csi-snapshot-controller crashes when processing VolumeSnapshot with non-existing PVC | $500 | kubernetes | 2020-12-03 | [#1032086](https://hackerone.com/reports/1032086) |
 | Null Pointer Dereference by Crafted Response from AI Model | $100 | brave | 2025-03-26 | [#2958097](https://hackerone.com/reports/2958097) |
+| wallet-rpc crash via malformed /gettransactions response (empty txs → vector::front() in check_tx_key / check_tx_proof) | — | monero | 2026-08-05 | [#3693636](https://hackerone.com/reports/3693636) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
 | NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |

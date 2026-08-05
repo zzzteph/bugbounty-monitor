@@ -1,6 +1,6 @@
 # Man In The Middle
 
-**27 report(s)**
+**28 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -8,6 +8,7 @@
 | Passive mixed content issues on the site https://*.fanduel.com | $100 | fanduel | 2018-12-21 | [#437800](https://hackerone.com/reports/437800) |
 | Man-in-the-middle through broken SSL certificate verification | — | nintendo | 2025-08-08 | [#3174987](https://hackerone.com/reports/3174987) |
 | `Curl_socketpair()` fallback vulnerable to man-in-the-middle attack | — | curl | 2025-05-20 | [#3148937](https://hackerone.com/reports/3148937) |
+| curl Missing Sec-WebSocket-Accept Verification Enables MITM WebSocket Session Hijacking | — | curl | 2026-08-05 | [#3917775](https://hackerone.com/reports/3917775) |
 | CVE-2021-22890: TLS 1.3 session ticket proxy host mixup | — | curl | 2021-04-30 | [#1129529](https://hackerone.com/reports/1129529) |
 | Web protection component in Anti-Virus products family ignores HSTS security policy | — | kaspersky | 2019-09-05 | [#461780](https://hackerone.com/reports/461780) |
 | burp does not validate the common name of the presented collaborator server certificate | — | portswigger | 2018-06-13 | [#337680](https://hackerone.com/reports/337680) |

@@ -1,6 +1,6 @@
 # Cryptography
 
-**143 report(s) across 12 class(es)**
+**145 report(s) across 12 class(es)**
 
 ## Classes
 
@@ -8,8 +8,8 @@
 |-------|---------|------------|
 | [Cryptographic Issues Generic](cryptographic_issues_generic/README.md) | 80 | $2,400 |
 | [Use Of A Broken Or Risky Cryptographic Algorithm](use_of_a_broken_or_risky_cryptographic_algorithm/README.md) | 14 | $300 |
+| [Missing Required Cryptographic Step](missing_required_cryptographic_step/README.md) | 10 | $750 |
 | [Weak Cryptography For Passwords](weak_cryptography_for_passwords/README.md) | 10 | $100 |
-| [Missing Required Cryptographic Step](missing_required_cryptographic_step/README.md) | 8 | $750 |
 | [Inadequate Encryption Strength](inadequate_encryption_strength/README.md) | 6 | $300 |
 | [Use Of Cryptographically Weak Pseudo Random Number Generator](use_of_cryptographically_weak_pseudo_random_number_generator/README.md) | 6 | — |
 | [Use Of Insufficiently Random Values](use_of_insufficiently_random_values/README.md) | 5 | $100 |
@@ -120,7 +120,9 @@
 | 明確な認証不備および潜在的な中間者攻撃の可能性（Clear Authentication Deficiencies & Potential for Man-in-the-Middle Attacks） | — | sony | 2025-07-08 | [#2642615](https://hackerone.com/reports/2642615) |
 | Missing AES-GCM Authentication Tag Validation and Improper Deprecation Handling | — | nodejs | 2025-12-19 | [#3463949](https://hackerone.com/reports/3463949) |
 | Able to bypass HSTS using trailing dot | — | curl | 2026-02-26 | [#3574928](https://hackerone.com/reports/3574928) |
+| SpendProofV1 txid-substitution: get_spend_proof/check_spend_proof do not verify returned transaction hash | — | monero | 2026-08-05 | [#3700036](https://hackerone.com/reports/3700036) |
 | SSL options ISSUERCERT, EC_CURVES and CRLFILE silently ignored by non-OpenSSL backends | — | curl | 2026-01-20 | [#3516974](https://hackerone.com/reports/3516974) |
+|  `check_reserve_proof` sums RingCT ECDH amounts without checking the output commitment | — | monero | 2026-08-05 | [#3698862](https://hackerone.com/reports/3698862) |
 | HMAC signature verification omits endpoint and payload allowing request forgery on CoinMate API | — | coinmate | 2026-05-20 | [#3670955](https://hackerone.com/reports/3670955) |
 | CVE-2021-22946: Protocol downgrade required TLS bypassed | — | curl | 2021-09-24 | [#1334111](https://hackerone.com/reports/1334111) |
 | Constant-time comparison is not always implemented; critical areas are vulnerable to key-timing attacks | — | monero | 2018-08-06 | [#363680](https://hackerone.com/reports/363680) |

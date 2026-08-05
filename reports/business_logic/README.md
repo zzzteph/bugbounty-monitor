@@ -1,12 +1,12 @@
 # Business Logic
 
-**369 report(s) across 5 class(es)**
+**370 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 346 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 347 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -100,6 +100,7 @@
 | Hi Hacker | — | curl | 2025-11-03 | [#3409186](https://hackerone.com/reports/3409186) |
 | Lack of payment type validation in dial.uber.com allows for free rides | — | uber | 2018-11-20 | [#162199](https://hackerone.com/reports/162199) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
+| `check_reserve_proof` counts duplicate entries: one output can inflate `total` | — | monero | 2026-08-05 | [#3699522](https://hackerone.com/reports/3699522) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |

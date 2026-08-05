@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**683 report(s) across 25 class(es)**
+**685 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -12,11 +12,11 @@
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
-| [Null Pointer Dereference](null_pointer_dereference/README.md) | 34 | $4,920 |
+| [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Integer Overflow](integer_overflow/README.md) | 27 | $500 |
 | [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
+| [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
-| [Array Index Underflow](array_index_underflow/README.md) | 16 | $7,500 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
 | [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 7 | $10,000 |
@@ -242,6 +242,7 @@
 | HackerOne | — | curl | 2025-11-03 | [#3409193](https://hackerone.com/reports/3409193) |
 | V2Plugin.Decrypt panics on empty ciphertext (Remote DoS) | — | aws_vdp | 2026-05-28 | [#3620753](https://hackerone.com/reports/3620753) |
 | V1Plugin.Decrypt panics on empty ciphertext (Remote DoS) | — | aws_vdp | 2026-05-28 | [#3620748](https://hackerone.com/reports/3620748) |
+| wallet-rpc describe_transfer uses real_output_in_tx_index instead of real_output: cold-wallet pre-sign review shows wrong ring member | — | monero | 2026-08-05 | [#3723315](https://hackerone.com/reports/3723315) |
 | Your page has 2 blocking CSS resources. This causes a delay in rendering your page. | — | nodejs | 2018-07-15 | [#365968](https://hackerone.com/reports/365968) |
 | Take over subdomain undici.nodejs.org.cdn.cloudflare.net | — | nodejs | 2023-01-11 | [#1763817](https://hackerone.com/reports/1763817) |
 | [MK8DX] Improper metadata validation 2 | — | nintendo | 2023-08-17 | [#1812732](https://hackerone.com/reports/1812732) |
@@ -577,6 +578,7 @@
 | no string size restriction on team name | — | mixmax | 2017-07-16 | [#237125](https://hackerone.com/reports/237125) |
 | Segmentation fault on program counter | — | shopify-scripts | 2017-02-05 | [#196498](https://hackerone.com/reports/196498) |
 | Memory leak in Node.js HTTP/2 server via WINDOW_UPDATE on stream 0 leads to resource exhaustion | — | nodejs | 2026-03-30 | [#3531737](https://hackerone.com/reports/3531737) |
+| wallet-rpc crash via malformed /gettransactions response (empty txs → vector::front() in check_tx_key / check_tx_proof) | — | monero | 2026-08-05 | [#3693636](https://hackerone.com/reports/3693636) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
 | NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |
