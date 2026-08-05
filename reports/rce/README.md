@@ -1,12 +1,12 @@
 # RCE / Command Injection
 
-**473 report(s) across 4 class(es)**
+**474 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Code Injection](code_injection/README.md) | 252 | $30,000 |
+| [Code Injection](code_injection/README.md) | 253 | $30,000 |
 | [Command Injection Generic](command_injection_generic/README.md) | 154 | $33,510 |
 | [Os Command Injection](os_command_injection/README.md) | 60 | $25,000 |
 | [Use Of Externally Controlled Format String](use_of_externally_controlled_format_string/README.md) | 7 | $8,000 |
@@ -23,6 +23,7 @@
 | RCE when removing metadata with ExifTool | $20,000 | gitlab | 2021-05-14 | [#1154542](https://hackerone.com/reports/1154542) |
 | RCE via unsafe inline Kramdown options when rendering certain Wiki pages | $20,000 | gitlab | 2021-04-20 | [#1125425](https://hackerone.com/reports/1125425) |
 | Websites Can Run Arbitrary Code on Machines Running the 'PlayStation Now' Application | $15,000 | playstation | 2020-12-04 | [#873614](https://hackerone.com/reports/873614) |
+| Unauthenticated RCE in Taskcluster web-server via GraphQL filter argument (sift $where) | $12,000 | mozilla | 2026-08-05 | [#3782701](https://hackerone.com/reports/3782701) |
 | Local files could be overwritten in GitLab, leading to remote command execution | $12,000 | gitlab | 2019-07-17 | [#587854](https://hackerone.com/reports/587854) |
 | Path traversal, to RCE | $12,000 | gitlab | 2022-06-07 | [#733072](https://hackerone.com/reports/733072) |
 | Git flag injection - local file overwrite to remote code execution | $12,000 | gitlab | 2019-12-19 | [#658013](https://hackerone.com/reports/658013) |

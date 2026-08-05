@@ -1,6 +1,6 @@
 # Code Injection
 
-**252 report(s)**
+**253 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -8,6 +8,7 @@
 | RCE when removing metadata with ExifTool | $20,000 | gitlab | 2021-05-14 | [#1154542](https://hackerone.com/reports/1154542) |
 | RCE via unsafe inline Kramdown options when rendering certain Wiki pages | $20,000 | gitlab | 2021-04-20 | [#1125425](https://hackerone.com/reports/1125425) |
 | Websites Can Run Arbitrary Code on Machines Running the 'PlayStation Now' Application | $15,000 | playstation | 2020-12-04 | [#873614](https://hackerone.com/reports/873614) |
+| Unauthenticated RCE in Taskcluster web-server via GraphQL filter argument (sift $where) | $12,000 | mozilla | 2026-08-05 | [#3782701](https://hackerone.com/reports/3782701) |
 | Arbitrary Code Execution via npm misconfiguration – installing internal libraries from the public registry | $11,500 | line | 2021-07-05 | [#1043385](https://hackerone.com/reports/1043385) |
 | RCE via npm misconfig -- installing internal libraries from the public registry | $9,000 | uber | 2021-02-24 | [#1007014](https://hackerone.com/reports/1007014) |
 | Remote code execution and exfiltration of secret tokens by poisoning the mozilla/fxa CI build cache | $8,000 | mozilla | 2024-01-20 | [#2255750](https://hackerone.com/reports/2255750) |
