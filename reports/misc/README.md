@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1612 report(s) across 30 class(es)**
+**1613 report(s) across 30 class(es)**
 
 ## Classes
 
@@ -13,9 +13,9 @@
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
+| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 4 | — |
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 3 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
-| [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
 | [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
 | [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
@@ -1277,6 +1277,7 @@
 | [h1-2006 2020] Write up for H1-2006 CTF | — | h1-ctf | 2020-06-18 | [#895772](https://hackerone.com/reports/895772) |
 | CVE-2026-8924: trailing dot domain super cookie | — | curl | 2026-06-24 | [#3733905](https://hackerone.com/reports/3733905) |
 | DNS domain search list followed for extant domain missing A or AAAA records | — | curl | 2026-06-08 | [#3780733](https://hackerone.com/reports/3780733) |
+| URL API: triple-slash parses path segment as hostname | — | curl | 2026-08-07 | [#3923212](https://hackerone.com/reports/3923212) |
 | Name collision of shared folders | — | nextcloud | 2023-04-29 | [#1697281](https://hackerone.com/reports/1697281) |
 | Unexpected input validation of octal literals in nodejs v15.12.0 and below returns defined values for all undefined octal literals. | — | nodejs | 2021-06-14 | [#1141623](https://hackerone.com/reports/1141623) |
 | Cross‑Layer State Confusion in libcurl: Credential & Key‑Material Persistence Across Redirect / Connection Reuse Boundaries | — | curl | 2025-12-28 | [#3480641](https://hackerone.com/reports/3480641) |
