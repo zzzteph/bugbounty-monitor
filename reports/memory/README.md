@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**685 report(s) across 25 class(es)**
+**686 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -13,8 +13,8 @@
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
+| [Stack Overflow](stack_overflow/README.md) | 28 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 27 | $500 |
-| [Stack Overflow](stack_overflow/README.md) | 27 | $3,000 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
@@ -645,6 +645,7 @@
 | NEX: Stack overflow in UnicodeToUtf8 | — | nintendo | 2025-06-27 | [#469997](https://hackerone.com/reports/469997) |
 | Stack Overflow in JSON RPC Server | — | monero | 2018-09-28 | [#390499](https://hackerone.com/reports/390499) |
 | [Switch, PIA/MK8DX] Stack buffer overflow and potential RCE in PIA (LAN/LDN, possibly NEX) room info deserialization | — | nintendo | 2024-09-30 | [#2611669](https://hackerone.com/reports/2611669) |
+| [Wii U/3DS/Switch] Improper bounds check in StationURL in all NEX clients leading to remote crash/RCE | — | nintendo | 2026-08-07 | [#2551512](https://hackerone.com/reports/2551512) |
 | CVE-2022-35260: .netrc parser out-of-bounds access | — | ibb | 2022-12-03 | [#1753224](https://hackerone.com/reports/1753224) |
 | Stack overflow in XML Parsing | — | notepad-plus-plus | 2019-08-25 | [#480883](https://hackerone.com/reports/480883) |
 | Stack overflow affecting "ext" field on stylers.xml configuration file | — | notepad-plus-plus | 2019-08-25 | [#480984](https://hackerone.com/reports/480984) |
