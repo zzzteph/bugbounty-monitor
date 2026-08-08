@@ -1,6 +1,6 @@
 # Insecure Storage Of Sensitive Information
 
-**44 report(s)**
+**45 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -8,6 +8,7 @@
 | Mozilla Mastodon Staging Instance Admin API Key Disclosure Through Slack | $1,000 | mozilla | 2023-09-11 | [#2137154](https://hackerone.com/reports/2137154) |
 | Public Postman Api Collection Leaks Internal access to https://assets-paris-dev.codefi.network/  | $500 | consensys | 2022-05-14 | [#1523651](https://hackerone.com/reports/1523651) |
 | Leak of sensitive values to Airflow rendered template | $480 | ibb | 2022-12-27 | [#1773895](https://hackerone.com/reports/1773895) |
+| Adding phone number to profile By OTP brute forcing | $100 | coinmate | 2026-08-08 | [#3265780](https://hackerone.com/reports/3265780) |
 | Exposure of Private RSA Private Key in curl GitHub Repository | — | curl | 2025-07-23 | [#3268294](https://hackerone.com/reports/3268294) |
 | Private RSA key for Vagrant exposed in GitHub repository | — | sifchain | 2021-05-07 | [#1183502](https://hackerone.com/reports/1183502) |
 | Leaking sensitive information through JSON  file path. | — | nextcloud | 2022-02-07 | [#1211061](https://hackerone.com/reports/1211061) |

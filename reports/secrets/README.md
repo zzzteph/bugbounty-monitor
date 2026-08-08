@@ -1,13 +1,13 @@
 # Secrets & Hardcoded Credentials
 
-**256 report(s) across 16 class(es)**
+**257 report(s) across 16 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Cleartext Storage Of Sensitive Information](cleartext_storage_of_sensitive_information/README.md) | 73 | $1,000 |
-| [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 44 | $40,000 |
+| [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 45 | $40,000 |
 | [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 40 | $4,000 |
 | [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 39 | $20,000 |
 | [Use Of Hard Coded Credentials](use_of_hard_coded_credentials/README.md) | 13 | $500 |
@@ -60,6 +60,7 @@
 | SSO through odnoklassniki uses http rather than https | $150 | bumble | 2019-12-21 | [#703759](https://hackerone.com/reports/703759) |
 | OAuth2 client_secret stored in plain text in the database | $100 | nextcloud | 2023-11-15 | [#1994324](https://hackerone.com/reports/1994324) |
 | Brave Browser potentially logs the last time a Tor window was used | $100 | brave | 2020-11-04 | [#1024668](https://hackerone.com/reports/1024668) |
+| Adding phone number to profile By OTP brute forcing | $100 | coinmate | 2026-08-08 | [#3265780](https://hackerone.com/reports/3265780) |
 | Broken Domain Link Takeover from kubernetes.io docs | $100 | kubernetes | 2022-04-03 | [#1434179](https://hackerone.com/reports/1434179) |
 | Broken link hijacking in https://kubernetes-csi.github.io/docs/drivers.html?highlight=chubaofs#production-drivers | $100 | kubernetes | 2022-03-25 | [#1466889](https://hackerone.com/reports/1466889) |
 | licenses key disclosure | $50 | acronis | 2021-02-09 | [#1079630](https://hackerone.com/reports/1079630) |
