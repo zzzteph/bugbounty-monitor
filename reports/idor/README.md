@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1067 report(s) across 10 class(es)**
+**1068 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -12,8 +12,8 @@
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
+| [Missing Authorization](missing_authorization/README.md) | 6 | $1,200 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
-| [Missing Authorization](missing_authorization/README.md) | 5 | $1,200 |
 | [Exposed Dangerous Method Or Function](exposed_dangerous_method_or_function/README.md) | 3 | — |
 | [External Control Of Critical State Data](external_control_of_critical_state_data/README.md) | 2 | — |
 
@@ -170,6 +170,7 @@
 | View the Starred Projects in a Private Profile | $500 | gitlab | 2021-02-02 | [#703894](https://hackerone.com/reports/703894) |
 | IDOR [partners.shopify.com] - User with ONLY Manage apps permission is able to get shops info and staff names from inside the shop | $500 | shopify | 2017-07-19 | [#243943](https://hackerone.com/reports/243943) |
 | Missing ownership check on remote wipe endpoint | $500 | nextcloud | 2020-04-19 | [#819807](https://hackerone.com/reports/819807) |
+| JaaS SIP Gateway Authorization Bypass | $500 | 8x8-bounty | 2026-08-12 | [#3837634](https://hackerone.com/reports/3837634) |
 |  Renderers can obtain access to random bluetooth device without permission | $480 | ibb | 2022-04-23 | [#1519099](https://hackerone.com/reports/1519099) |
 | End-to-end encrypted file-drops can be made inaccessible | $400 | nextcloud | 2023-06-22 | [#1914115](https://hackerone.com/reports/1914115) |
 | [com.exness.android.pa Android] Universal XSS in webview. Lead to steal user cookies | $400 | exness | 2022-05-24 | [#532836](https://hackerone.com/reports/532836) |
