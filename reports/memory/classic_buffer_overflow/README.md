@@ -20,42 +20,42 @@
 | [GoldSrc] RCE via malformed BSP file | $450 | valve | 2020-08-19 | [#763403](https://hackerone.com/reports/763403) |
 | [GoldSrc] RCE via 'spk' Console Command | $350 | valve | 2020-08-19 | [#769014](https://hackerone.com/reports/769014) |
 | FileZilla 3.46.3 - 'Scale factor' Buffer Overflow | $250 | filezilla | 2020-11-21 | [#798301](https://hackerone.com/reports/798301) |
-| Multiple Unsafe strcpy() Function Calls Leading to Potential Buffer Overflow Vulnerabilities in cURL 8.16.1-DEV | — | curl | 2025-09-14 | [#3337561](https://hackerone.com/reports/3337561) |
+| Stack Buffer Overflow in mprintf.c formatting function (fallback path) | — | curl | 2026-01-08 | [#3493602](https://hackerone.com/reports/3493602) |
+| Integer Overflow in curl_multi_get_handles() Leading to Heap Buffer Overflow | — | curl | 2026-02-26 | [#3575245](https://hackerone.com/reports/3575245) |
+| UrnState Heap Overflow | — | ibb | 2021-08-26 | [#824771](https://hackerone.com/reports/824771) |
+| Several protocol parsers in before 4.9.2 could cause a buffer overflow in util-print.c:bittok2str_internal() | — | ibb | 2021-08-22 | [#800324](https://hackerone.com/reports/800324) |
+| `fs.realpath.native` on darwin may cause buffer overflow | — | nodejs | 2020-10-17 | [#965914](https://hackerone.com/reports/965914) |
+| Squid as reverse proxy RCE and data leak | — | ibb | 2021-08-26 | [#778610](https://hackerone.com/reports/778610) |
+| Android App Crashes while sending message to users/ on channel  | — | rocket_chat | 2021-03-18 | [#832217](https://hackerone.com/reports/832217) |
+| Buffer Overflow in ext_lm_group_acl helper | — | ibb | 2021-07-28 | [#789034](https://hackerone.com/reports/789034) |
 | [Xenoblade Chronicles X: Definitive Edition] Buffer overflow in string escape function, multiplayer DoS | — | nintendo | 2025-05-15 | [#3048061](https://hackerone.com/reports/3048061) |
+| Multiple Unsafe strcpy() Function Calls Leading to Potential Buffer Overflow Vulnerabilities in cURL 8.16.1-DEV | — | curl | 2025-09-14 | [#3337561](https://hackerone.com/reports/3337561) |
 | Unsafe use of strcpy in Curl_ldap_err2string (packages/OS400/os400sys.c) — stack-buffer-overflow (PoC + ASan) | — | curl | 2025-11-10 | [#3418528](https://hackerone.com/reports/3418528) |
 | Buffer Overflow in WebSocket Handshake (lib/ws.c:1287) | — | curl | 2025-10-21 | [#3392174](https://hackerone.com/reports/3392174) |
-| Integer Overflow in curl_multi_get_handles() Leading to Heap Buffer Overflow | — | curl | 2026-02-26 | [#3575245](https://hackerone.com/reports/3575245) |
-| Stack Buffer Overflow in mprintf.c formatting function (fallback path) | — | curl | 2026-01-08 | [#3493602](https://hackerone.com/reports/3493602) |
-| Malformed .BMP file in Counter-Strike 1.6 may cause shellcode injection | — | valve | 2020-02-27 | [#397545](https://hackerone.com/reports/397545) |
-| Malformed BSP in GoldSrc Engine may cause shellcode injection | — | valve | 2020-03-25 | [#458929](https://hackerone.com/reports/458929) |
-| Improper Data Validation / Unvalidated Input | — | liberapay | 2018-07-05 | [#363850](https://hackerone.com/reports/363850) |
-| Malformed Skybox .TGA in Half-Life (GoldSRC) leads to Access Violation | — | valve | 2018-08-28 | [#351016](https://hackerone.com/reports/351016) |
-| Malformed .BSP Access Violation in CS:GO can lead to Remote Code Execution | — | valve | 2018-07-19 | [#351014](https://hackerone.com/reports/351014) |
 | Buffer overflows in demo parsing | — | valve | 2018-08-28 | [#350119](https://hackerone.com/reports/350119) |
-| Buffer overflow | — | liberapay | 2018-06-10 | [#363658](https://hackerone.com/reports/363658) |
-| Media parsing in canvas is at least vulnerable to Denial of Service through multiple vulnerabilities | — | nodejs-ecosystem | 2019-04-03 | [#315037](https://hackerone.com/reports/315037) |
-| RCE on Steam Client via buffer overflow in Server Info | — | valve | 2019-03-15 | [#470520](https://hackerone.com/reports/470520) |
+| Malformed Skybox .TGA in Half-Life (GoldSRC) leads to Access Violation | — | valve | 2018-08-28 | [#351016](https://hackerone.com/reports/351016) |
+| Malformed .BMP file in Counter-Strike 1.6 may cause shellcode injection | — | valve | 2020-02-27 | [#397545](https://hackerone.com/reports/397545) |
 | Potential buffer overflow in demoplayer module of GoldSource Engine | — | valve | 2020-02-27 | [#440758](https://hackerone.com/reports/440758) |
-| Buffer overflow and affected url:-https://github.com/curl/curl/blob/master/docs/examples/hsts-preload.c | — | curl | 2023-11-15 | [#2252307](https://hackerone.com/reports/2252307) |
-| Buffer Overflow Vulnerability in strcpy() Leading to Remote Code Execution | — | curl | 2024-12-02 | [#2871792](https://hackerone.com/reports/2871792) |
-| Buffer Overflow Risk in Curl_inet_ntop and inet_ntop4 | — | curl | 2024-12-08 | [#2887487](https://hackerone.com/reports/2887487) |
-| Buffer Overflow in optimized_escape_html method | — | ibb | 2022-01-22 | [#1455248](https://hackerone.com/reports/1455248) |
+| Media parsing in canvas is at least vulnerable to Denial of Service through multiple vulnerabilities | — | nodejs-ecosystem | 2019-04-03 | [#315037](https://hackerone.com/reports/315037) |
+| Malformed .BSP Access Violation in CS:GO can lead to Remote Code Execution | — | valve | 2018-07-19 | [#351014](https://hackerone.com/reports/351014) |
+| Improper Data Validation / Unvalidated Input | — | liberapay | 2018-07-05 | [#363850](https://hackerone.com/reports/363850) |
+| RCE on Steam Client via buffer overflow in Server Info | — | valve | 2019-03-15 | [#470520](https://hackerone.com/reports/470520) |
+| Malformed BSP in GoldSrc Engine may cause shellcode injection | — | valve | 2020-03-25 | [#458929](https://hackerone.com/reports/458929) |
+| Buffer overflow | — | liberapay | 2018-06-10 | [#363658](https://hackerone.com/reports/363658) |
 | Use of Unsafe function \|\| Strcpy | — | curl | 2022-03-09 | [#1485379](https://hackerone.com/reports/1485379) |
+| Buffer Overflow in optimized_escape_html method | — | ibb | 2022-01-22 | [#1455248](https://hackerone.com/reports/1455248) |
 | [WiiU/Switch] Remote code execution inside the ENL library | — | nintendo | 2023-08-11 | [#1541273](https://hackerone.com/reports/1541273) |
 | Binary output bypass | — | curl | 2022-03-09 | [#1468962](https://hackerone.com/reports/1468962) |
-| Buffer write overflow when forming dns over http request | — | curl | 2021-02-08 | [#694449](https://hackerone.com/reports/694449) |
-| mod_remoteip stack buffer overflow and NULL pointer dereference | — | ibb | 2019-11-07 | [#674540](https://hackerone.com/reports/674540) |
-| huge COLUMNS causes progress-bar to buffer overflow | — | curl | 2021-02-08 | [#636013](https://hackerone.com/reports/636013) |
-| Uninitialized read in exif_process_IFD_in_TIFF | — | ibb | 2020-10-10 | [#510336](https://hackerone.com/reports/510336) |
+| Buffer Overflow Vulnerability in strcpy() Leading to Remote Code Execution | — | curl | 2024-12-02 | [#2871792](https://hackerone.com/reports/2871792) |
+| Buffer Overflow Risk in Curl_inet_ntop and inet_ntop4 | — | curl | 2024-12-08 | [#2887487](https://hackerone.com/reports/2887487) |
+| Buffer overflow and affected url:-https://github.com/curl/curl/blob/master/docs/examples/hsts-preload.c | — | curl | 2023-11-15 | [#2252307](https://hackerone.com/reports/2252307) |
 | Buffer Overflow in smblib.c | — | ibb | 2021-07-28 | [#721333](https://hackerone.com/reports/721333) |
-| Big XSS vulnerability! | — | legalrobot | 2017-07-30 | [#216330](https://hackerone.com/reports/216330) |
+| Uninitialized read in exif_process_IFD_in_TIFF | — | ibb | 2020-10-10 | [#510336](https://hackerone.com/reports/510336) |
+| mod_remoteip stack buffer overflow and NULL pointer dereference | — | ibb | 2019-11-07 | [#674540](https://hackerone.com/reports/674540) |
+| Buffer write overflow when forming dns over http request | — | curl | 2021-02-08 | [#694449](https://hackerone.com/reports/694449) |
+| huge COLUMNS causes progress-bar to buffer overflow | — | curl | 2021-02-08 | [#636013](https://hackerone.com/reports/636013) |
 | Crashes/Buffer at 0x2C0086,name=PBrowser::Msg_Destroy  | — | torproject | 2017-10-24 | [#281682](https://hackerone.com/reports/281682) |
-| CVE-2017-13089 wget stack smash | — | ibb | 2019-11-12 | [#287666](https://hackerone.com/reports/287666) |
 | Memory Corruption via Large Pixels | — | infogram | 2024-02-01 | [#282518](https://hackerone.com/reports/282518) |
 | CVE-2017-13090 wget heap smash | — | ibb | 2019-11-12 | [#287667](https://hackerone.com/reports/287667) |
-| `fs.realpath.native` on darwin may cause buffer overflow | — | nodejs | 2020-10-17 | [#965914](https://hackerone.com/reports/965914) |
-| Buffer Overflow in ext_lm_group_acl helper | — | ibb | 2021-07-28 | [#789034](https://hackerone.com/reports/789034) |
-| UrnState Heap Overflow | — | ibb | 2021-08-26 | [#824771](https://hackerone.com/reports/824771) |
-| Android App Crashes while sending message to users/ on channel  | — | rocket_chat | 2021-03-18 | [#832217](https://hackerone.com/reports/832217) |
-| Several protocol parsers in before 4.9.2 could cause a buffer overflow in util-print.c:bittok2str_internal() | — | ibb | 2021-08-22 | [#800324](https://hackerone.com/reports/800324) |
-| Squid as reverse proxy RCE and data leak | — | ibb | 2021-08-26 | [#778610](https://hackerone.com/reports/778610) |
+| CVE-2017-13089 wget stack smash | — | ibb | 2019-11-12 | [#287666](https://hackerone.com/reports/287666) |
+| Big XSS vulnerability! | — | legalrobot | 2017-07-30 | [#216330](https://hackerone.com/reports/216330) |
