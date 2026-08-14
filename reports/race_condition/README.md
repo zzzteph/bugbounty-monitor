@@ -1,13 +1,13 @@
 # Race Conditions
 
-**36 report(s) across 4 class(es)**
+**37 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
+| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 18 | $15,250 |
 | [Concurrent Execution Using Shared Resource With Improper Syn](concurrent_execution_using_shared_resource_with_improper_syn/README.md) | 17 | $3,000 |
-| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 17 | $15,250 |
 | [Improper Synchronization](improper_synchronization/README.md) | 1 | — |
 | [Leveraging Race Conditions](leveraging_race_conditions/README.md) | 1 | — |
 
@@ -41,6 +41,7 @@
 | Race Condition on Create API Function | — | enjin | 2024-10-15 | [#2682392](https://hackerone.com/reports/2682392) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
+| libcurl cache updates follow symlinks and truncate their targets | — | curl | 2026-08-14 | [#3938220](https://hackerone.com/reports/3938220) |
 | HTTP Response Queue Poisoning via TOCTOU Race Condition in `http.Agent` | — | nodejs | 2026-06-25 | [#3582376](https://hackerone.com/reports/3582376) |
 | [api.krisp.ai] Race condition on /v2/seats endpoint allows bypassing the original seat limit | — | krisp | 2022-04-04 | [#1418419](https://hackerone.com/reports/1418419) |
 | Race condition leads to Inflation of coins when bought via Google Play Store at endpoint https://oauth.reddit.com/api/v2/gold/android/verify_purchase  | — | reddit | 2021-10-27 | [#801743](https://hackerone.com/reports/801743) |

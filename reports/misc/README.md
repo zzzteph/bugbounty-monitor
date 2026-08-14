@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1614 report(s) across 30 class(es)**
+**1615 report(s) across 31 class(es)**
 
 ## Classes
 
@@ -22,6 +22,7 @@
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 1 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
+| [Authentication Bypass By Spoofing](authentication_bypass_by_spoofing/README.md) | 1 | — |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
@@ -253,6 +254,7 @@
 | limit number of images in statement | $1 | gratipay | 2017-06-16 | [#117739](https://hackerone.com/reports/117739) |
 | HSTS accepted from HTTP origin behind HTTPS proxy | — | curl | 2026-03-17 | [#3609505](https://hackerone.com/reports/3609505) |
 | MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker | — | curl | 2026-05-05 | [#3712343](https://hackerone.com/reports/3712343) |
+| Windows SSPI connection-pool probe can reuse a connection under the wrong user | — | curl | 2026-08-14 | [#3938185](https://hackerone.com/reports/3938185) |
 | Unicode-to-ASCII conversion on Windows can lead to argument injection and more | — | curl | 2024-06-18 | [#2550951](https://hackerone.com/reports/2550951) |
 | HTTPS Agent TLS session reuse skips hostname verification across identity policies (incomplete fix of CVE-2026-48934) | — | nodejs | 2026-07-30 | [#3812439](https://hackerone.com/reports/3812439) |
 | TLS host identity verification bypass via session reuse with different servername leads to unauthorized connections | — | nodejs | 2026-06-25 | [#3649802](https://hackerone.com/reports/3649802) |
