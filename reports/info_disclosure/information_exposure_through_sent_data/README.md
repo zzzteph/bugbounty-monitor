@@ -1,6 +1,6 @@
 # Information Exposure Through Sent Data
 
-**21 report(s)**
+**22 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -13,6 +13,7 @@
 | CVE-2026-11856: cross-origin Digest auth state leak | — | curl | 2026-06-24 | [#3793260](https://hackerone.com/reports/3793260) |
 | TFTP upload ignores --continue-at / CURLOPT_RESUME_FROM and leaks skipped local file prefix | — | curl | 2026-06-05 | [#3776433](https://hackerone.com/reports/3776433) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
+| Cookie jar load skips public suffix check on PSL builds | — | curl | 2026-08-14 | [#3920276](https://hackerone.com/reports/3920276) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
 | The response shows the nginx version | — | judgeme | 2021-11-11 | [#1395068](https://hackerone.com/reports/1395068) |
 |  API Data Leakage Vulnerability Report - `xvcams.com` | — | xvideos | 2025-02-09 | [#2979153](https://hackerone.com/reports/2979153) |

@@ -1,0 +1,120 @@
+{
+  "id": 3920276,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTIwMjc2",
+  "url": "https://hackerone.com/reports/3920276",
+  "title": "Cookie jar load skips public suffix check on PSL builds",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "medium",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-06T04:59:14.144Z",
+  "submitted_at": "2026-08-06T04:59:14.429Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "1rhino2",
+    "url": "/1rhino2",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-14T07:33:39.314Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-06T15:28:54.703Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "On curl 8.21.0 with libpsl (official curl.se 8.21.0_6 win64, Features: PSL), HTTP Set-Cookie: Domain=co.uk is dropped in verbose. The same cookie loaded from a Netscape jar file or a Set-Cookie: line in that file is accepted and later sent to unrelated hosts under the suffix (bank.co.uk, other.co.uk).\n\nRoot cause: is_public_suffix() in lib/cookie.c only calls libpsl when the setting-host domain argument is non-NULL (line 815). cookie_load() passes NULL at line 1179. CURLOPT_COOKIELIST uses the same path. docs/cmdline-opts/cookie.md says PSL builds discard suffix-domain cookies on --cookie file load; that check is missing here.\n\nVersion: curl 8.21.0 (x86_64-w64-mingw32), libcurl/8.21.0, libpsl/0.23.0, Windows 11.\n\nControl (HTTP - works):\n1. Server returns Set-Cookie: trk=http; Domain=co.uk; Path=/\n2. curl -v -c jar -b jar --resolve evil.co.uk:9999:127.0.0.1 http://evil.co.uk:9999/\n3. Verbose: must not set cookies for 'co.uk'. Request to bank.co.uk with -b jar sends no Cookie: header.\n\nBug (jar - broken):\n1. cookies.txt (tab-separated Netscape format):\n# Netscape HTTP Cookie File\n.co.uk\tTRUE\t/\tFALSE\t0\ttrk\tplanted\n2. curl -v -b cookies.txt --resolve bank.co.uk:9998:127.0.0.1 http://bank.co.uk:9998/\n3. Request includes Cookie: trk=planted. Same jar also sends to other.co.uk.\n\nAlso reproduces with Set-Cookie: trk=viafile; Domain=co.uk; Path=/ as the only line in the file. PoC attached runs control + bug twice on localhost.\n\n(AI for report polishing)\n\n## Impact\n\nIf untrusted data can be merged into a cookie jar (shared file, -b -, CURLOPT_COOKIELIST, app importing a foreign cookie export), an attacker can plant a supercookie for a public suffix (co.uk, github.io, etc.). curl then attaches it on requests to unrelated sites under that suffix. Same impact class as prior PSL supercookie fixes on live Set-Cookie, but the gap is jar/COOKIELIST import where domain is NULL and the PSL gate is skipped.",
+  "weakness": {
+    "id": 113,
+    "name": "Information Exposure Through Sent Data"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6406633,
+      "file_name": "poc-jar-psl-bypass.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/bfck3j8h0mh8znowieur2sn7n04i?response-content-disposition=attachment%3B%20filename%3D%22poc-jar-psl-bypass.py%22%3B%20filename%2A%3DUTF-8%27%27poc-jar-psl-bypass.py&response-content-type=text%2Fx-python&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ52N3ABBX%2F20260814%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260814T081335Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEC8aCXVzLXdlc3QtMiJHMEUCIQDyfCqV3Qaad7vw%2FpFYDuXf1Cx9yiUDcEvkvhQImwM9rgIgUJOOnMEXwuPuruTuYW7hPZaJTdl4fX2%2Bb5w5EH%2B17rIqugUI%2BP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDLrlY87XVbn1o1bO1CqOBSwoYPBF5NHhmWutNw2uoDa%2FQK9SC%2FwSIgCBhhkqYLB8CXKLKA8rJFRdONeYB%2F%2FVkx%2B5ob00dwO9YSjYDRr%2FMUvuzgwqI%2FgXcM5l%2FJH%2BQoF2tgce7fTGB3oSIQE4JFnYhR7PeNF2PjlM9qNq%2FEgywtID2V3AectUjpULWf9ciP%2FejMiz2l0NJ9Ifh5d3OOBnu%2BdGAeiEo5yhkjD0n%2BGpZ5rJw4Wt2GH4aGygD02nPSPvv6X6u%2BugWlsUYjZVa4CBVV1Q0bTxDWl0q4IRr5%2BaO2PPa2AgBoR0aCkpzLybBJyuQeBBa%2B%2BpC%2B3UyD%2F95mQmaG8JCdpsoVngqdApiFnQypOsEH%2F7iDBb9w7TyFwWI%2FCAdrM8OEABZ4ikEYg2cCjyS1KIfQIwSiepub0kz3TcuPk2bB5eQUpa8ZDgAXDiAr0DHlptBbQgmo26XQR0a5XK%2FsoEX58nDQgrBxkVWB1Svl4McoXIYebwfo0Mbd1z9UJqp3%2FW8Xr1Juaj%2FfB6yY4ZMS9bOStKu%2Bythg60U4dCjUqD1MzgNomnNUBfloojiBBAOVvJPNA1NSInyoD3cdpqzZYd2szkww13DoCcba7ivOXeQv0GcWaUI2UnmPhuC1xbsTRbsqT5oj0J8CuAKPcZsqQTXrTgcd%2FJjsJ3L4z%2B9wWm1ggFYAH5zzSIDHBa7KjGH4mR0ZQT61HjJiR9D7mcd9SwMXrRc8%2FFlcl87BebWluse8p3W%2BFr7Uz5e%2FgL%2Btgdgr13zilDX5ChZzP3i4ExJ%2FjaExA%2B1e%2BFL79dDhY6HgOkjYDI%2FmhoytMIbh0epG%2FI5YYbXbum%2BNOwka%2FTkhzkIB1aWaomFUc7q%2FjTc4mANtS3ZONua5T3tJskusfP7zDJ%2FvrTBjqxAfk0MlGBRLJQMctqfZuAig171kts0trMoir3ML4wETUvmEMk1eUGeOEzaeCfYPzw593bXnb1sKUTXpCN4Z85krePXXbajOnwlWR5Bu0MgD1DIksBploxFP3YuiaNRdXp4OLVoStdwlFTeUwXbk2R3QbX3btDERGDgzHkrgmFqNQ5WV10B%2FF2FPbDN0qjtfPHUtVngfEsgpsj5MMnw52UThMJFskKC1W2q6MDaPgs43nUOA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=da05ea536f6d36113f8b454f7ccfa7ed188720cdb0791122a5fa24bd9fcce0f9",
+      "file_size": 4591,
+      "type": "text/x-python",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
