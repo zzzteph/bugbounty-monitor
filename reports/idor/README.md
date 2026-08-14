@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1068 report(s) across 10 class(es)**
+**1069 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 680 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 283 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 284 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
@@ -849,6 +849,7 @@
 | Email verification bypasa | — | stripo | 2020-03-24 | [#763458](https://hackerone.com/reports/763458) |
 | Full access to internal Gitlab instances at redash.gitlab.com, dashboards.gitlab.com, prometheus.gitlab.com | — | gitlab | 2019-04-19 | [#498964](https://hackerone.com/reports/498964) |
 | IDOR on partners.uber.com allows for a driver to override administrator documents | — | uber | 2018-12-19 | [#194594](https://hackerone.com/reports/194594) |
+| TaskProcessing callback authorization bypass allows ex-members to post as Assistant Talk Bot | — | nextcloud | 2026-08-14 | [#3799010](https://hackerone.com/reports/3799010) |
 | Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification | — | github | 2026-05-19 | [#3560256](https://hackerone.com/reports/3560256) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |

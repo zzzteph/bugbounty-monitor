@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**283 report(s)**
+**284 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -55,6 +55,7 @@
 | Registered users can change app password permissions for any user | $100 | nextcloud | 2018-02-08 | [#297751](https://hackerone.com/reports/297751) |
 | Use any User to Follow you (Increase Followers) [IDOR] | $50 | eternal | 2017-11-28 | [#245969](https://hackerone.com/reports/245969) |
 | IDOR on partners.uber.com allows for a driver to override administrator documents | — | uber | 2018-12-19 | [#194594](https://hackerone.com/reports/194594) |
+| TaskProcessing callback authorization bypass allows ex-members to post as Assistant Talk Bot | — | nextcloud | 2026-08-14 | [#3799010](https://hackerone.com/reports/3799010) |
 | Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification | — | github | 2026-05-19 | [#3560256](https://hackerone.com/reports/3560256) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
