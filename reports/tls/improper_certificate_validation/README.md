@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**45 report(s)**
+**46 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -13,6 +13,7 @@
 | SameSite restrictions are lifted, and SameSite:Strict cookie are being sent. | $500 | brave | 2025-10-15 | [#3253725](https://hackerone.com/reports/3253725) |
 | Acronis True Image 2021 (windows) does not validate server hostname on a login TLS connection | $250 | acronis | 2021-08-10 | [#1070533](https://hackerone.com/reports/1070533) |
 | Built-in TLS module unexpectedly treats "rejectUnauthorized: undefined" as "rejectUnauthorized: false", disabling all certificate validation | $150 | nodejs | 2021-09-10 | [#1278254](https://hackerone.com/reports/1278254) |
+| `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |

@@ -1,12 +1,12 @@
 # TLS / Certificate Validation
 
-**80 report(s) across 5 class(es)**
+**81 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 45 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 46 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 28 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 4 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
@@ -27,6 +27,7 @@
 | Acronis True Image 2021 (windows) does not validate server hostname on a login TLS connection | $250 | acronis | 2021-08-10 | [#1070533](https://hackerone.com/reports/1070533) |
 | Built-in TLS module unexpectedly treats "rejectUnauthorized: undefined" as "rejectUnauthorized: false", disabling all certificate validation | $150 | nodejs | 2021-09-10 | [#1278254](https://hackerone.com/reports/1278254) |
 | Passive mixed content issues on the site https://*.fanduel.com | $100 | fanduel | 2018-12-21 | [#437800](https://hackerone.com/reports/437800) |
+| `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
