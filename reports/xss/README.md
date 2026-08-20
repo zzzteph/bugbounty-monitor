@@ -1,6 +1,6 @@
 # XSS
 
-**1486 report(s) across 10 class(es)**
+**1487 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 518 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 468 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
-| [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 126 | $3,000 |
+| [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
 | [Failure To Sanitize Special Elements Into A Different Plane ](failure_to_sanitize_special_elements_into_a_different_plane_/README.md) | 4 | $300 |
 | [Improper Neutralization Of Http Headers For Scripting Syntax](improper_neutralization_of_http_headers_for_scripting_syntax/README.md) | 4 | $1,000 |
@@ -301,6 +301,7 @@
 | Self-XSS on Suggest Tag dialog box | $50 | xvideos | 2022-11-08 | [#1761505](https://hackerone.com/reports/1761505) |
 | upgrade Aspen on inside.gratipay.com to pick up CR injection fix | $40 | gratipay | 2017-03-22 | [#143139](https://hackerone.com/reports/143139) |
 | [Meetup][World ID][OIDC] Insufficient Filtering of "state" Parameter in Response Mode form_post leads to XSS and ATO | — | toolsforhumanity | 2024-06-19 | [#2515808](https://hackerone.com/reports/2515808) |
+| Stored HTML Injection (CWE-79) via Livechat Visitor Name | — | rocket_chat | 2026-08-20 | [#3872858](https://hackerone.com/reports/3872858) |
 | DOM XSS в learning.ozon.ru | — | ozon | 2021-05-28 | [#1167230](https://hackerone.com/reports/1167230) |
 | com.basecamp.bc3 Webview Javascript Injection and JS bridge takeover | — | basecamp | 2022-09-23 | [#1343300](https://hackerone.com/reports/1343300) |
 | 4 xss vulnerability dom based cwe 79 ; wordpress bootstrap.min.js is vulnerable | — | sifchain | 2021-12-09 | [#1219002](https://hackerone.com/reports/1219002) |

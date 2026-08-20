@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Dom
 
-**126 report(s)**
+**127 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -30,6 +30,7 @@
 | HTML injection in title of reader view | $300 | brave | 2023-06-22 | [#991713](https://hackerone.com/reports/991713) |
 | DOM based CSS Injection on grammarly.com | $250 | superhuman | 2019-05-06 | [#500436](https://hackerone.com/reports/500436) |
 | DOM XSS on http://talks.lystit.com | $100 | lyst | 2021-02-09 | [#1031644](https://hackerone.com/reports/1031644) |
+| Stored HTML Injection (CWE-79) via Livechat Visitor Name | — | rocket_chat | 2026-08-20 | [#3872858](https://hackerone.com/reports/3872858) |
 | DOM XSS в learning.ozon.ru | — | ozon | 2021-05-28 | [#1167230](https://hackerone.com/reports/1167230) |
 | com.basecamp.bc3 Webview Javascript Injection and JS bridge takeover | — | basecamp | 2022-09-23 | [#1343300](https://hackerone.com/reports/1343300) |
 | 4 xss vulnerability dom based cwe 79 ; wordpress bootstrap.min.js is vulnerable | — | sifchain | 2021-12-09 | [#1219002](https://hackerone.com/reports/1219002) |
