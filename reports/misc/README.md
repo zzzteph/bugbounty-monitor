@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1615 report(s) across 31 class(es)**
+**1616 report(s) across 32 class(es)**
 
 ## Classes
 
@@ -34,6 +34,7 @@
 | [Insecure Default Initialization Of Resource](insecure_default_initialization_of_resource/README.md) | 1 | — |
 | [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
+| [Nosql Injection](nosql_injection/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
 | [Unchecked Error Condition](unchecked_error_condition/README.md) | 1 | $150 |
 | [Uncontrolled Search Path Element](uncontrolled_search_path_element/README.md) | 1 | — |
@@ -420,6 +421,7 @@
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2024-01-04 | [#2287098](https://hackerone.com/reports/2287098) |
 | Cross-origin resource sharing misconfig \| steal user information  | — | semrush | 2017-12-17 | [#235200](https://hackerone.com/reports/235200) |
 | CVE-2024-2004: Usage of disabled protocol | — | curl | 2024-03-27 | [#2384833](https://hackerone.com/reports/2384833) |
+| DDP methods getThreadsList / getThreadMessages leaks private thread content to any authenticated low privilege user (unpatched sibling of #1446767) | — | rocket_chat | 2026-08-20 | [#3852135](https://hackerone.com/reports/3852135) |
 | Targeted phishing attacks in Login flow v2 | — | nextcloud | 2023-03-03 | [#1169033](https://hackerone.com/reports/1169033) |
 | com.reddit.frontpage vulernable to Task Hijacking (aka StrandHogg Attack) | — | reddit | 2021-12-13 | [#1325649](https://hackerone.com/reports/1325649) |
 | Possible Domain Takeover on AWS Instance. | — | rocket_chat | 2022-05-22 | [#1390782](https://hackerone.com/reports/1390782) |
