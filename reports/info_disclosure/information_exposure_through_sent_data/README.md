@@ -1,12 +1,13 @@
 # Information Exposure Through Sent Data
 
-**22 report(s)**
+**23 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | curl cookie mixed case PSL bypass | $2,540 | ibb | 2023-12-22 | [#2274981](https://hackerone.com/reports/2274981) |
 | Google Maps API key leaked during device pairing | $150 | pingidentity | 2020-04-28 | [#724039](https://hackerone.com/reports/724039) |
 | CVE-2026-3783: token leak with redirect and netrc | — | curl | 2026-03-11 | [#3583983](https://hackerone.com/reports/3583983) |
+| Domainless COOKIEFILE cookie leaks to unrelated IP-literal hosts | — | curl | 2026-08-21 | [#3952619](https://hackerone.com/reports/3952619) |
 | RTSP Digest auth state leaks across origins on reused libcurl easy handle | — | curl | 2026-06-05 | [#3776535](https://hackerone.com/reports/3776535) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |

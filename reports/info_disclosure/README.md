@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1111 report(s) across 10 class(es)**
+**1112 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 22 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 23 | $2,540 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
 | [Leftover Debug Code Backdoor](leftover_debug_code_backdoor/README.md) | 2 | — |
@@ -1054,6 +1054,7 @@
 | Information Exposure Through Directory Listing | — | nextcloud | 2018-05-17 | [#260221](https://hackerone.com/reports/260221) |
 | Full directory path listing | — | paragonie | 2017-05-20 | [#230098](https://hackerone.com/reports/230098) |
 | CVE-2026-3783: token leak with redirect and netrc | — | curl | 2026-03-11 | [#3583983](https://hackerone.com/reports/3583983) |
+| Domainless COOKIEFILE cookie leaks to unrelated IP-literal hosts | — | curl | 2026-08-21 | [#3952619](https://hackerone.com/reports/3952619) |
 | RTSP Digest auth state leaks across origins on reused libcurl easy handle | — | curl | 2026-06-05 | [#3776535](https://hackerone.com/reports/3776535) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
