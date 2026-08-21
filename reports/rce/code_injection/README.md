@@ -1,6 +1,6 @@
 # Code Injection
 
-**253 report(s)**
+**254 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -77,6 +77,7 @@
 | The “Malstaller” Attack, global hijacking of any installation process to achieve RCE with elevated privileges, Windows OS (vendor agnostic)  | — | ibb | 2019-11-12 | [#165969](https://hackerone.com/reports/165969) |
 | Remote Unrestricted file Creation/Deletion and Possible RCE. | — | x | 2017-02-26 | [#191884](https://hackerone.com/reports/191884) |
 | Urgent: Server side template injection via Smarty template allows for RCE | — | unikrn | 2017-08-17 | [#164224](https://hackerone.com/reports/164224) |
+| HTML Injection in Transaction Confirmation Dialog via Address Book Description Enables UI Spoofing Before Fund Transfer | — | monero | 2026-08-20 | [#3679471](https://hackerone.com/reports/3679471) |
 | PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
 | PHP code injection in delivery-limitation `logical` validation bypass | — | revive_adserver | 2026-06-25 | [#3780854](https://hackerone.com/reports/3780854) |
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |

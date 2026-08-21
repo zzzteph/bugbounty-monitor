@@ -1,6 +1,6 @@
 # Unknown
 
-**965 report(s)**
+**966 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -224,6 +224,7 @@
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | libcurl upload read callbacks miss recursive API guard, allowing prohibited multi API reentry and ASAN-confirmed UAF | — | curl | 2026-06-30 | [#3832393](https://hackerone.com/reports/3832393) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
+| Monero GUI OpenAlias DNSSEC-invalid resolution still writes spoofable address into recipient field | — | monero | 2026-08-20 | [#3819475](https://hackerone.com/reports/3819475) |
 | Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
 | No Rate Limit On Regenerate Password on Portswigger | — | portswigger | 2021-09-13 | [#1337425](https://hackerone.com/reports/1337425) |
 | HackerOne making payments in USDC (Coinbase stable coin) | — | security | 2021-06-17 | [#1220747](https://hackerone.com/reports/1220747) |

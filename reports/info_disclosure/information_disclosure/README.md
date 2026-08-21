@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**906 report(s)**
+**907 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -237,6 +237,7 @@
 | CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
 | CURLOPT_COOKIE leaked to cross-origin redirect target — CURLOPT_UNRESTRICTED_AUTH bypass for the STRING_COOKIE path | — | curl | 2026-06-05 | [#3766065](https://hackerone.com/reports/3766065) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
+| View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 |  Secure cookies leaked to HTTP origins through HTTPS forwarding proxy | — | curl | 2026-06-15 | [#3803415](https://hackerone.com/reports/3803415) |
