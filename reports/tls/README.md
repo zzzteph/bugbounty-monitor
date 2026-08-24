@@ -1,6 +1,6 @@
 # TLS / Certificate Validation
 
-**81 report(s) across 5 class(es)**
+**82 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 46 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 28 | $1,000 |
-| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 4 | — |
+| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 5 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
@@ -68,6 +68,7 @@
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |
 | mbedTLS / wolfSSL / rustls backends silently skip hostname verification when CURLOPT_SSL_VERIFYPEER=0 | — | curl | 2026-06-26 | [#3826199](https://hackerone.com/reports/3826199) |
+| wolfSSL backend disables hostname verification when CURLOPT_SSL_VERIFYPEER is 0 | — | curl | 2026-08-24 | [#3963725](https://hackerone.com/reports/3963725) |
 | CVE-2025-15079: libssh global knownhost override  | — | curl | 2026-01-07 | [#3477116](https://hackerone.com/reports/3477116) |
 | CVE-2025-4947: QUIC certificate check skip with wolfSSL | — | curl | 2025-05-28 | [#3150884](https://hackerone.com/reports/3150884) |
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |

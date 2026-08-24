@@ -1,13 +1,13 @@
 # HTTP Injection
 
-**137 report(s) across 4 class(es)**
+**138 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 63 | $20,000 |
-| [Crlf Injection](crlf_injection/README.md) | 56 | $5,000 |
+| [Crlf Injection](crlf_injection/README.md) | 57 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
@@ -54,6 +54,7 @@
 | Denial of Access to Static Resources via Cache Poisoning on addons.allizom.org | — | mozilla | 2025-01-08 | [#2860983](https://hackerone.com/reports/2860983) |
 | DOS via cache poisoning on [developer.mozilla.org] | — | mozilla | 2023-06-05 | [#1976449](https://hackerone.com/reports/1976449) |
 | ZMQ RPC Log Injection and Untrusted Payload Persistence | — | monero | 2026-07-24 | [#3621606](https://hackerone.com/reports/3621606) |
+| RTSP CRLF injection in libcurl allows CURLOPT_RTSP_* values to inject commands into independent sessions | — | curl | 2026-08-24 | [#3963494](https://hackerone.com/reports/3963494) |
 | CURLOPT_HAPROXY_CLIENT_IP lacks input validation, enabling HAProxy PROXY protocol injection | — | curl | 2026-06-26 | [#3823932](https://hackerone.com/reports/3823932) |
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |

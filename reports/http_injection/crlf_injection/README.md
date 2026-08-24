@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**56 report(s)**
+**57 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -15,6 +15,7 @@
 | CRLF Injection - http://stage-static-cdn.mackeeper.com/ | $50 | clario | 2020-05-25 | [#730788](https://hackerone.com/reports/730788) |
 | CRLF Injection - http://stage.mackeeper.com/ | $50 | clario | 2020-05-25 | [#730786](https://hackerone.com/reports/730786) |
 | ZMQ RPC Log Injection and Untrusted Payload Persistence | — | monero | 2026-07-24 | [#3621606](https://hackerone.com/reports/3621606) |
+| RTSP CRLF injection in libcurl allows CURLOPT_RTSP_* values to inject commands into independent sessions | — | curl | 2026-08-24 | [#3963494](https://hackerone.com/reports/3963494) |
 | CURLOPT_HAPROXY_CLIENT_IP lacks input validation, enabling HAProxy PROXY protocol injection | — | curl | 2026-06-26 | [#3823932](https://hackerone.com/reports/3823932) |
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
