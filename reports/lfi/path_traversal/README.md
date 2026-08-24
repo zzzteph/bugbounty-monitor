@@ -1,6 +1,6 @@
 # Path Traversal
 
-**229 report(s)**
+**230 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -43,6 +43,7 @@
 | Path Traversal in curl file:// Protocol Handler Allows Unauthorized File Access | — | curl | 2026-01-04 | [#3485930](https://hackerone.com/reports/3485930) |
 | Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix | — | rails | 2026-07-30 | [#3553340](https://hackerone.com/reports/3553340) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |
+| Path Traversal in Nextcloud Talk Android Exposes User Credentials and Private Data via FileProvider | — | nextcloud | 2026-08-24 | [#3696266](https://hackerone.com/reports/3696266) |
 | [CVE-2020-3452] on ███████ | — | deptofdefense | 2022-04-07 | [#1234925](https://hackerone.com/reports/1234925) |
 | [CVE-2020-3452] Unauthenticated file read in Cisco ASA | — | deptofdefense | 2022-02-14 | [#1415825](https://hackerone.com/reports/1415825) |
 | Git flag injection leads to arbitrary file write | — | phabricator | 2021-07-25 | [#1070247](https://hackerone.com/reports/1070247) |
