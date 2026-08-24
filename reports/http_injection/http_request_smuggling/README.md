@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**62 report(s)**
+**63 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -26,6 +26,7 @@
 | Potential HTTP Request Smuggling in nodejs | $250 | nodejs | 2021-01-07 | [#1002188](https://hackerone.com/reports/1002188) |
 | [spectacles.com] Bypassing quantity limit in orders | $250 | snapchat | 2017-08-12 | [#246803](https://hackerone.com/reports/246803) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
+| HTTP Request Smuggling | — | essity | 2026-05-20 | [#3589269](https://hackerone.com/reports/3589269) |
 | Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line | — | nodejs | 2026-07-01 | [#3648681](https://hackerone.com/reports/3648681) |
 | Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
 | HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser | — | nodejs | 2026-07-31 | [#3723248](https://hackerone.com/reports/3723248) |

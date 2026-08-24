@@ -1,12 +1,12 @@
 # HTTP Injection
 
-**136 report(s) across 4 class(es)**
+**137 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Http Request Smuggling](http_request_smuggling/README.md) | 62 | $20,000 |
+| [Http Request Smuggling](http_request_smuggling/README.md) | 63 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 56 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
@@ -100,6 +100,7 @@
 | Cross-site scripting (XSS) vulnerability on a DoD website | — | deptofdefense | 2017-08-15 | [#225936](https://hackerone.com/reports/225936) |
 | Add arbitrary value in reset password cookie | — | legalrobot | 2018-02-01 | [#266030](https://hackerone.com/reports/266030) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
+| HTTP Request Smuggling | — | essity | 2026-05-20 | [#3589269](https://hackerone.com/reports/3589269) |
 | Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line | — | nodejs | 2026-07-01 | [#3648681](https://hackerone.com/reports/3648681) |
 | Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
 | HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser | — | nodejs | 2026-07-31 | [#3723248](https://hackerone.com/reports/3723248) |

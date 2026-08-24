@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1112 report(s) across 10 class(es)**
+**1113 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Information Disclosure](information_disclosure/README.md) | 907 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
-| [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 35 | $1,000 |
+| [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
 | [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 23 | $2,540 |
@@ -1021,6 +1021,7 @@
 | Default page exposes admin functions and all metods and classes available. on https://██████/█████/dwr/index.html | — | deptofdefense | 2019-12-02 | [#214800](https://hackerone.com/reports/214800) |
 | Information disclosure vulnerability on a DoD website | — | deptofdefense | 2017-07-05 | [#226427](https://hackerone.com/reports/226427) |
 | Directory listing vulnerability is disclosing names and emails, widespread (thousands of records, publicly accessible without auth) | — | curl | 2026-01-14 | [#3509437](https://hackerone.com/reports/3509437) |
+| ████████ ████████ Server Full Exposure with Database Credentials | — | essity | 2026-06-10 | [#3584078](https://hackerone.com/reports/3584078) |
 | Information Exposure Through Directory Listing | — | torproject | 2021-08-27 | [#1316412](https://hackerone.com/reports/1316412) |
 | Found a url on source code which was disclosing different juicy informations like ip addresses and available endponts | — | sifchain | 2021-05-14 | [#1195432](https://hackerone.com/reports/1195432) |
 | Directory Listing vulnerability on █.packet8.net/php/include/ | — | 8x8-bounty | 2022-09-28 | [#790846](https://hackerone.com/reports/790846) |

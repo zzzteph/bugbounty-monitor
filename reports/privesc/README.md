@@ -1,16 +1,16 @@
 # Privilege Escalation
 
-**294 report(s) across 7 class(es)**
+**296 report(s) across 7 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Privilege Escalation](privilege_escalation/README.md) | 277 | $20,000 |
-| [Improper Privilege Management](improper_privilege_management/README.md) | 5 | $750 |
+| [Improper Privilege Management](improper_privilege_management/README.md) | 6 | $750 |
+| [Incorrect Permission Assignment For Critical Resource](incorrect_permission_assignment_for_critical_resource/README.md) | 4 | $3,100 |
 | [Execution With Unnecessary Privileges](execution_with_unnecessary_privileges/README.md) | 3 | $5,000 |
 | [Improper Handling Of Insufficient Permissions Or Privileges](improper_handling_of_insufficient_permissions_or_privileges/README.md) | 3 | — |
-| [Incorrect Permission Assignment For Critical Resource](incorrect_permission_assignment_for_critical_resource/README.md) | 3 | $3,100 |
 | [Incorrect Privilege Assignment](incorrect_privilege_assignment/README.md) | 2 | — |
 | [Improper Export Of Android Application Components](improper_export_of_android_application_components/README.md) | 1 | — |
 
@@ -95,11 +95,13 @@
 | HTTP/2 PUSH_PROMISE header loss on OOM bypasses scheme validation (regression of 2e8c922a89) | — | curl | 2026-03-31 | [#3636044](https://hackerone.com/reports/3636044) |
 | curl overwrites local file with -J option if file non-readable, but file writable. | — | curl | 2020-08-01 | [#926638](https://hackerone.com/reports/926638) |
 | A member-member privilege could access the https://console.rockset.com/billing?tab=payment page even though the billing page is hidden from the menu.  | — | rockset | 2021-11-09 | [#946384](https://hackerone.com/reports/946384) |
+| Privilege-relevant fields are clientModify in SAP CDC schema allowing role escalation to Admin | — | essity | 2026-05-20 | [#3726887](https://hackerone.com/reports/3726887) |
 | [h1-2102] [Plus] User with Store Management Permission can Make changeDomainEnforcementState - that should be limited to User Management Only | — | shopify | 2022-04-21 | [#1084892](https://hackerone.com/reports/1084892) |
 | Re-Sharing allows increase of privileges | — | nextcloud | 2020-09-28 | [#889243](https://hackerone.com/reports/889243) |
 | Sub-Dept User Can Add User's To Main Department. | — | lark_technologies | 2022-10-18 | [#890209](https://hackerone.com/reports/890209) |
 | [H1-2006 2020] Exploiting multiple vulnerabilities to get hacker's payment ensured | — | h1-ctf | 2020-06-18 | [#894949](https://hackerone.com/reports/894949) |
 | Bedrock AgentCore Starter Toolkit Creates Gateway IAM Roles Without Confused Deputy Protections | — | aws_vdp | 2026-07-15 | [#3632577](https://hackerone.com/reports/3632577) |
+| 29 Premium Plugin Packages with License Keys Publicly Accessible in Uploads Directory | — | essity | 2026-07-06 | [#3839889](https://hackerone.com/reports/3839889) |
 | A potential risk in the experimental-programmatic-access-ccft which can be used to privilege escalation. | — | aws_vdp | 2024-11-06 | [#2808412](https://hackerone.com/reports/2808412) |
 | A potential risk in the aws-lambda-ecs-run-task which can be used to privilege escalation. | — | aws_vdp | 2024-12-27 | [#2894222](https://hackerone.com/reports/2894222) |
 | Bypass permissions | — | nextcloud | 2017-02-09 | [#169680](https://hackerone.com/reports/169680) |

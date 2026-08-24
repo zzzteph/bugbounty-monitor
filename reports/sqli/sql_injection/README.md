@@ -1,6 +1,6 @@
 # Sql Injection
 
-**204 report(s)**
+**206 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -40,8 +40,10 @@
 | Time Based SQL Injection vulnerability on a DoD website | — | deptofdefense | 2017-06-16 | [#188929](https://hackerone.com/reports/188929) |
 | Complete authentication bypass to admin permissions | — | rocket_chat | 2026-04-22 | [#3564655](https://hackerone.com/reports/3564655) |
 | SQL Injection vulnerability found on ibm.com endpoint | — | ibm | 2026-03-12 | [#3578842](https://hackerone.com/reports/3578842) |
+| Unauthenticated SQL Injection via REST Batch Route Confusion ████████ | — | essity | 2026-07-21 | [#3873072](https://hackerone.com/reports/3873072) |
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
 | Blind SQL injection via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653196](https://hackerone.com/reports/3653196) |
+| Error-Based SQL Injection in ████████.com Login/Password Reset (username parameter) | — | essity | 2026-07-03 | [#3809973](https://hackerone.com/reports/3809973) |
 | SQL injection in https://demor.adr.acronis.com/ via the username parameter | — | acronis | 2024-08-28 | [#1436751](https://hackerone.com/reports/1436751) |
 | 100K CTF's Writeup | — | h1-ctf | 2021-06-21 | [#1216591](https://hackerone.com/reports/1216591) |
 | Blind SQL iNJECTION  | — | deptofdefense | 2021-06-03 | [#1102591](https://hackerone.com/reports/1102591) |

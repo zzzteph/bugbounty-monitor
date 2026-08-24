@@ -1,6 +1,6 @@
 # Improper Input Validation
 
-**65 report(s)**
+**66 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -20,6 +20,7 @@
 | jitsi-meet: Prosody/Jigasi missing header whitelist in mod_filter_iq_rayo allows arbitrary SIP header injection and Caller ID spoofing | $100 | 8x8-bounty | 2026-07-02 | [#3789570](https://hackerone.com/reports/3789570) |
 | Moderators can send messages to users from banned subreddits via `oauth.reddit.com/api/mod/conversations` | $100 | reddit | 2022-07-04 | [#1543770](https://hackerone.com/reports/1543770) |
 | MQTT state machine confusion: PINGRESP/DISCONNECT with non-zero remaining_length dispatches to stale nextstate | — | curl | 2026-04-29 | [#3702718](https://hackerone.com/reports/3702718) |
+| Reflected HTML Injection in ████████ Login Page via infotext/signintext Parameters | — | essity | 2026-07-22 | [#3781785](https://hackerone.com/reports/3781785) |
 | HTTP/2 server push accepts a non-authoritative :scheme=https over cleartext h2c, enabling HTTPS cache-key poisoning | — | curl | 2026-03-29 | [#3630310](https://hackerone.com/reports/3630310) |
 | Cookie attribute TAB injection regression in Set-Cookie parsing | — | curl | 2026-04-03 | [#3641893](https://hackerone.com/reports/3641893) |
 | IMAP Protocol Desynchronization and Response Smuggling via Naive Literal Parsing | — | curl | 2026-01-14 | [#3509396](https://hackerone.com/reports/3509396) |

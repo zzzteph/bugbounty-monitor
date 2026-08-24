@@ -1,6 +1,6 @@
 # Authentication Bypass By Primary Weakness
 
-**13 report(s)**
+**14 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -10,6 +10,7 @@
 | SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal | — | curl | 2026-06-09 | [#3788506](https://hackerone.com/reports/3788506) |
 | Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning | — | curl | 2026-04-03 | [#3640932](https://hackerone.com/reports/3640932) |
 | ssh_config_matches is dead code: unauthorized SSH key reuse | — | curl | 2026-06-30 | [#3826843](https://hackerone.com/reports/3826843) |
+| Unauthenticated Account Registration + Email Verification Bypass + PII Data Leak (2,480 Records) on ████████ | — | essity | 2026-05-27 | [#3737516](https://hackerone.com/reports/3737516) |
 | CVE-2026-8458: wrong reuse for different services | — | curl | 2026-06-24 | [#3721183](https://hackerone.com/reports/3721183) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |

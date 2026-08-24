@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1070 report(s) across 10 class(es)**
+**1071 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -12,7 +12,7 @@
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
-| [Missing Authorization](missing_authorization/README.md) | 6 | $1,200 |
+| [Missing Authorization](missing_authorization/README.md) | 7 | $1,200 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
 | [Exposed Dangerous Method Or Function](exposed_dangerous_method_or_function/README.md) | 3 | — |
 | [External Control Of Critical State Data](external_control_of_critical_state_data/README.md) | 2 | — |
@@ -1083,6 +1083,7 @@
 | Insecure Direct Object Reference on in-scope .mil website | — | deptofdefense | 2019-12-02 | [#230026](https://hackerone.com/reports/230026) |
 | Arbitary file download vulnerability on a DoD website | — | deptofdefense | 2017-07-05 | [#230870](https://hackerone.com/reports/230870) |
 | [www.zomato.com] IDOR - Delete/Deactivate ANY/ALL Promos through a Post Request at **clients/promoDataHandler.php** | — | eternal | 2017-12-28 | [#264754](https://hackerone.com/reports/264754) |
+| Unauthenticated Plugin Settings Modification on Three Crocoblock/Jet Plugins | — | essity | 2026-07-06 | [#3839914](https://hackerone.com/reports/3839914) |
 | SELECT ... INTO OUTFILE does not enforce the FILE WRITE privilege  unprivileged arbitrary file write on the   server | — | singlestore | 2026-07-13 | [#3780695](https://hackerone.com/reports/3780695) |
 | Unauthorized access to choice.av.ru control panel | — | av | 2021-12-19 | [#963161](https://hackerone.com/reports/963161) |
 | verify-release rebuilds from the tarball under verification, enabling pre-check command execution and false OK for a malicious curl release tarball | — | curl | 2026-06-17 | [#3802645](https://hackerone.com/reports/3802645) |

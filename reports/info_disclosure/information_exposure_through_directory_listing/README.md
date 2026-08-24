@@ -1,12 +1,13 @@
 # Information Exposure Through Directory Listing
 
-**35 report(s)**
+**36 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | Bitmoji source code is accessible | $1,000 | snapchat | 2021-07-31 | [#301812](https://hackerone.com/reports/301812) |
 | Large Amounts of Back-End Acronis Source Code is Publicly Accessible | $250 | acronis | 2024-08-26 | [#1008364](https://hackerone.com/reports/1008364) |
 | Directory listing vulnerability is disclosing names and emails, widespread (thousands of records, publicly accessible without auth) | — | curl | 2026-01-14 | [#3509437](https://hackerone.com/reports/3509437) |
+| ████████ ████████ Server Full Exposure with Database Credentials | — | essity | 2026-06-10 | [#3584078](https://hackerone.com/reports/3584078) |
 | Information Exposure Through Directory Listing | — | torproject | 2021-08-27 | [#1316412](https://hackerone.com/reports/1316412) |
 | Found a url on source code which was disclosing different juicy informations like ip addresses and available endponts | — | sifchain | 2021-05-14 | [#1195432](https://hackerone.com/reports/1195432) |
 | Directory Listing vulnerability on █.packet8.net/php/include/ | — | 8x8-bounty | 2022-09-28 | [#790846](https://hackerone.com/reports/790846) |

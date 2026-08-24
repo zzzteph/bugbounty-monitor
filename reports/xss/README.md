@@ -1,12 +1,12 @@
 # XSS
 
-**1487 report(s) across 10 class(es)**
+**1489 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 518 | $5,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 520 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 468 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
@@ -686,7 +686,9 @@
 | Cross-site scripting (XSS) on a DoD website | — | deptofdefense | 2017-08-15 | [#203060](https://hackerone.com/reports/203060) |
 | Self-XSS can be achieved in the editor link using filter bypass | — | weblate | 2017-06-02 | [#229735](https://hackerone.com/reports/229735) |
 | Reflected XSS in lert.uber.com | — | uber | 2018-12-19 | [#191810](https://hackerone.com/reports/191810) |
+| Reflected XSS in legacy CGI script /cgi-bin/████████.pl on ████████ via `████████` parameter | — | essity | 2026-06-30 | [#3830771](https://hackerone.com/reports/3830771) |
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
+|  Unauthenticated reflected XSS in Essity "Network Toolbox" CGI (████████ ████████ | — | essity | 2026-06-23 | [#3793533](https://hackerone.com/reports/3793533) |
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | Reflected XSS in stats‑video.php via improperly encoded URL parameters | — | revive_adserver | 2026-06-25 | [#3793243](https://hackerone.com/reports/3793243) |

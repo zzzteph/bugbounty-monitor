@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**518 report(s)**
+**520 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -79,7 +79,9 @@
 | Reflected XSS in "Manage Tags" Notes Field | $50 | mainwp | 2025-07-17 | [#3181803](https://hackerone.com/reports/3181803) |
 | Reflected XSS in "Create Category" Functionality of Post Creation Module | $50 | mainwp | 2025-07-17 | [#3179138](https://hackerone.com/reports/3179138) |
 | Reflected XSS in lert.uber.com | — | uber | 2018-12-19 | [#191810](https://hackerone.com/reports/191810) |
+| Reflected XSS in legacy CGI script /cgi-bin/████████.pl on ████████ via `████████` parameter | — | essity | 2026-06-30 | [#3830771](https://hackerone.com/reports/3830771) |
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
+|  Unauthenticated reflected XSS in Essity "Network Toolbox" CGI (████████ ████████ | — | essity | 2026-06-23 | [#3793533](https://hackerone.com/reports/3793533) |
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | Reflected XSS in stats‑video.php via improperly encoded URL parameters | — | revive_adserver | 2026-06-25 | [#3793243](https://hackerone.com/reports/3793243) |
