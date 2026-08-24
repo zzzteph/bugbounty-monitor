@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**520 report(s)**
+**521 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -85,6 +85,7 @@
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | Reflected XSS in stats‑video.php via improperly encoded URL parameters | — | revive_adserver | 2026-06-25 | [#3793243](https://hackerone.com/reports/3793243) |
+| URI scheme validation bypass in ActionText `to_markdown` via user-supplied `<action-text-markdown>` marker tag | — | rails | 2026-08-24 | [#3727743](https://hackerone.com/reports/3727743) |
 | Open Akamai ARL XSS on http://master-config-████████ | — | deptofdefense | 2024-07-26 | [#1315907](https://hackerone.com/reports/1315907) |
 | Reflected XSS on /admin/campaign-zone-zones.php | — | revive_adserver | 2021-03-16 | [#1097979](https://hackerone.com/reports/1097979) |
 | Reflected XSS In https://███████ | — | deptofdefense | 2021-02-10 | [#1094276](https://hackerone.com/reports/1094276) |
