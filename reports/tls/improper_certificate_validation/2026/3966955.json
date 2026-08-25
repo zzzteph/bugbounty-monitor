@@ -1,0 +1,124 @@
+{
+  "id": 3966955,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTY2OTU1",
+  "url": "https://hackerone.com/reports/3966955",
+  "title": "TLS session cache case-folds CA paths and bypasses the active trust profile",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "medium",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-25T01:16:32.448Z",
+  "submitted_at": "2026-08-25T01:16:32.732Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "1rhino2",
+    "url": "/1rhino2",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2021-22924"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-25T17:21:35.890Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-08-25T17:21:35.652Z",
+  "team_member_agreed_on_going_public_at": "2026-08-25T13:26:29.679Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "curl 8.21.0 case-folds the entire TLS session-cache peer key, so two distinct CA files whose Unix paths differ only by case can share a TLS session ticket.\n\nAt `lib/vtls/vtls_scache.c:723`, `curl_strequal()` compares keys that include case-sensitive CA, CRL, and issuer paths, even though `docs/internals/TLS-SESSIONS.md` says lookup uses exactly the same peer key.\n\nRun the attached `poc-casefolded-scache.py`: each of its two vulnerable passes first trusts `Trust.pem`, switches to an unrelated `trust.pem`, logs `SSL reusing session`, sends `Authorization: Bearer VICTIM_CANARY`, receives two HTTP 200 responses, and exits 0.\n\n    cert controls: good_rc=0 bad_rc=2\n    run1 case-only bad CA: rc=0 reused=True canary_sent=True http_200=2\n    run2 case-only bad CA: rc=0 reused=True canary_sent=True http_200=2\n    control different-name bad CA: rc=60 reused=False canary_sent=False http_200=1\n\nThe control uses the same unrelated CA under `Different.pem`; curl performs a full certificate handshake, exits 60, and never sends the canary, while changing the known-key lookup to `strcmp()` produces the same safe result.\n\nCurrent master `2687751471c04e07a9c5da78338569d97aff7fd4` is still affected; this is a session-ticket-cache regression distinct from CVE-2021-22924's live connection-cache bug because the vulnerable cache was added later by `fa0ccd9f`, and I used AI to assist the audit and report while personally rerunning and checking every claim.\n\n## Impact\n\nAn application that reuses a multi handle or shared TLS session cache across per-transfer CA profiles can send credentials or request data to a server that the active CA profile explicitly does not trust.",
+  "weakness": {
+    "id": 28,
+    "name": "Improper Certificate Validation"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6545111,
+      "file_name": "PZ-CURL-006-h1-attachments.zip",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/9xivjflps8jj4twhf9c1f3gdjuvq?response-content-disposition=attachment%3B%20filename%3D%22PZ-CURL-006-h1-attachments.zip%22%3B%20filename%2A%3DUTF-8%27%27PZ-CURL-006-h1-attachments.zip&response-content-type=application%2Fzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3XJNG7KU%2F20260825%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260825T172904Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEAaCXVzLXdlc3QtMiJIMEYCIQCd8m0Y7czfS6RNA6%2FmFTlyaQVoyZaven7GD4yWpbN5dwIhAK0ma95wG%2BUH30M%2Bcg1gLxf735psbL1UsM%2Fg7O1S7E9hKrEFCAkQAxoMMDEzNjE5Mjc0ODQ5IgxkO8AUa%2FQnmAE6e8YqjgUwjvNN2cSf7jRFJL%2BPPJDdCPw5UQXgF%2FQxn1d05tLgGVGWXoW4Us6W0V%2Bjn99vMLj8grXjDi2PyWbrkh1hyV%2F3qqj2iXlXav6NBcdeH4a8QNgcNnJea6ynlAdOfwBwgvN%2FnsVg4QsRKerNlN4UEyaYWeG15AnOlUKznCCp%2FFn9Ttt1Sllcn63KlX2B8xVJu5AnGUiM7CtYq%2FDTERFw1CnkvojD1OE%2FGIj2bUuxnz8cVuxTS3zbVHJiEEzod9smNhAkkGqQFNwSVcRc5btueuhmByVOOXbZXA%2Bf2FftHt2AQv9M1k6SLLCE0QvrEGueDAO7D0a3RjLQxDpRBBzVsTV4g7PnK%2FnYgnub7k9oDMR%2FumELcyajlRooomXAp69XmaLTLXqFn%2B04cedb51xq8AEBEhj%2F2iCVdMEeu9ZffNSTdoJjn9bRrl%2FVlQPzpgKlOKQCBRmbySgGMPOoIlRJeIrnzQ38HiCT7zrXLjAAiZjDhNg%2FHIjAB8AENcy9QU9ttg%2Bd4YaN2OozRZDOjD7hzLP2HMIr0ZNvZjvpTwtsJVNRM8lBZUZD95abgy8K60EZ8ESHV1pFzB3Y7NF4XqPYUr6yFNkqcz%2BFuPiIaFqw386BPVFmAKee7yMRT52r75SXIzHXCyNpchrEQkyVAmPCIVrKdlsOxhRM7AU3T0vHmCWXHJF14emBYdmkF2k%2FK8LulfcERHxfZeCKitE7qkiw5sfaSRDECFrwWpcRBom4bjpXGPWqr69FScGNOfRYdowGmKeSvisIBSVyYpnsIpXcicH8HQhnu03lIjn6F%2FgV3W66rcQPUMgEJ2YI%2BhtYylJNNeuYcSduIjnNoWDTboFMS1BcSo3jeLEPprE%2Bd5OG41sw4%2Bq21AY6sAH5Wluvg3jBNg0gc48RjVWYu%2BH7JD81u4uIfatcqM89j%2BPp8uRm1bh7FanEKcJPhSK0Dq1zoav75aZyvu6oWbR5r6sbD1clbTkxS7Y%2BuF3eqAGpanzcX%2BR11Pbn8IOpKZhMl43W6jE09R%2FhzrjYCxUEM%2FYIwJnXbDAPukiUwnYqg8w%2BRgbBem9A2HRVUc0EBYTenkWngQYkIyc9FtlIb8FVozXSka46C2RICoF%2F2cS5gQ%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e03c396560fb879686c62368b4ac6557858e87cfccd8cf4e145c14baa35d7e78",
+      "file_size": 6595,
+      "type": "application/zip",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 1,
+  "voters": [
+    "1rhino2"
+  ],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**46 report(s)**
+**47 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -17,6 +17,7 @@
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
+| TLS session cache case-folds CA paths and bypasses the active trust profile | — | curl | 2026-08-25 | [#3966955](https://hackerone.com/reports/3966955) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
