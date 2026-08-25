@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1072 report(s) across 10 class(es)**
+**1073 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 681 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 284 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 285 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 15 | $2,500 |
@@ -855,6 +855,7 @@
 | Cross-repository IDOR in `/settings/security_analysis/bypass_reviewers` allows unauthorized delegated bypass reviewer modification | — | github | 2026-05-19 | [#3560256](https://hackerone.com/reports/3560256) |
 | Access to Deactivated LinkedIn Company Pages via Competitor Analytics API | — | linkedin | 2026-03-24 | [#3604288](https://hackerone.com/reports/3604288) |
 | Missing Access Control in MigrationFile allows attacker to upload files to any Migration | — | github | 2026-03-05 | [#3506183](https://hackerone.com/reports/3506183) |
+| Add labels to arbitrary issues/prs via Memex Bulk Update to compromise github actions label gating  | — | github | 2026-08-25 | [#3527788](https://hackerone.com/reports/3527788) |
 | Missing ownership validation allows cross‑manager tracker–campaign linking | — | revive_adserver | 2026-06-25 | [#3780709](https://hackerone.com/reports/3780709) |
 | Autotranslate DDP Method Exposes Private Messages Without Authentication or Room Access Check | — | rocket_chat | 2026-05-25 | [#3734326](https://hackerone.com/reports/3734326) |
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
