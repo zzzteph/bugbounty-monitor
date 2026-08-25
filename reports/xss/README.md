@@ -1,6 +1,6 @@
 # XSS
 
-**1490 report(s) across 10 class(es)**
+**1491 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 521 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 468 | $16,000 |
-| [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 342 | $13,950 |
+| [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 343 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
 | [Failure To Sanitize Special Elements Into A Different Plane ](failure_to_sanitize_special_elements_into_a_different_plane_/README.md) | 4 | $300 |
@@ -519,6 +519,7 @@
 | Full Page Caching Stored XSS Vulnerability | — | concretecms | 2017-04-11 | [#148300](https://hackerone.com/reports/148300) |
 | Flash XSS on homepage fliptilescroller | — | gm | 2017-06-05 | [#172821](https://hackerone.com/reports/172821) |
 | Stored XSS in blog comments through Shopify API | — | shopify | 2017-03-16 | [#192210](https://hackerone.com/reports/192210) |
+| @jitsi/docker-jitsi-meet: `/colibri-relay-ws/` unsafe nginx regex (OCTO relay configuration) | — | 8x8-bounty | 2026-08-25 | [#3889473](https://hackerone.com/reports/3889473) |
 | Open Akamai ARL XSS at ████████ | — | deptofdefense | 2022-04-20 | [#1317024](https://hackerone.com/reports/1317024) |
 |  XSS | — | reddit | 2021-10-21 | [#1209098](https://hackerone.com/reports/1209098) |
 | Blind XSS | — | rocket_chat | 2021-12-07 | [#1091118](https://hackerone.com/reports/1091118) |

@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Generic
 
-**342 report(s)**
+**343 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -180,6 +180,7 @@
 | Full Page Caching Stored XSS Vulnerability | — | concretecms | 2017-04-11 | [#148300](https://hackerone.com/reports/148300) |
 | Flash XSS on homepage fliptilescroller | — | gm | 2017-06-05 | [#172821](https://hackerone.com/reports/172821) |
 | Stored XSS in blog comments through Shopify API | — | shopify | 2017-03-16 | [#192210](https://hackerone.com/reports/192210) |
+| @jitsi/docker-jitsi-meet: `/colibri-relay-ws/` unsafe nginx regex (OCTO relay configuration) | — | 8x8-bounty | 2026-08-25 | [#3889473](https://hackerone.com/reports/3889473) |
 | Open Akamai ARL XSS at ████████ | — | deptofdefense | 2022-04-20 | [#1317024](https://hackerone.com/reports/1317024) |
 |  XSS | — | reddit | 2021-10-21 | [#1209098](https://hackerone.com/reports/1209098) |
 | Blind XSS | — | rocket_chat | 2021-12-07 | [#1091118](https://hackerone.com/reports/1091118) |
