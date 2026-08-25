@@ -1,12 +1,13 @@
 # Incorrect Authorization
 
-**14 report(s)**
+**15 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | A user can bypass approval step in Hacker Publishing feature, allowing them to publish reports immediately | $2,500 | security | 2018-12-05 | [#452959](https://hackerone.com/reports/452959) |
 | Any meeting chat history can be read and modified by an arbitrary user | $1,337 | 8x8-bounty | 2021-04-29 | [#1038658](https://hackerone.com/reports/1038658) |
 | inDriver Job - Admin Approval Bypass | $1,000 | indrive | 2023-07-05 | [#1861487](https://hackerone.com/reports/1861487) |
+| libcurl Digest/NTLM authentication ignores an explicit Authorization header | — | curl | 2026-08-25 | [#3963330](https://hackerone.com/reports/3963330) |
 | CVE-2026-3784: wrong proxy connection reuse with credentials | — | curl | 2026-03-11 | [#3584903](https://hackerone.com/reports/3584903) |
 | Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers | — | curl | 2026-05-19 | [#3741135](https://hackerone.com/reports/3741135) |
 | Incorrect Authorization Checks in /include/findusers.php | — | impresscms | 2022-03-22 | [#1081137](https://hackerone.com/reports/1081137) |

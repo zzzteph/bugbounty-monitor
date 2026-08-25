@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1071 report(s) across 10 class(es)**
+**1072 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 284 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
-| [Incorrect Authorization](incorrect_authorization/README.md) | 14 | $2,500 |
+| [Incorrect Authorization](incorrect_authorization/README.md) | 15 | $2,500 |
 | [Forced Browsing](forced_browsing/README.md) | 12 | $560 |
 | [Missing Authorization](missing_authorization/README.md) | 7 | $1,200 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
@@ -838,6 +838,7 @@
 | Improper Authorization | — | stripo | 2020-02-03 | [#751299](https://hackerone.com/reports/751299) |
 | Removed staff members who had "Manage shops" permission can still create development stores | — | shopify | 2019-11-08 | [#254588](https://hackerone.com/reports/254588) |
 | Shopify admin authentication bypass using partners.shopify.com | — | shopify | 2017-09-28 | [#270981](https://hackerone.com/reports/270981) |
+| libcurl Digest/NTLM authentication ignores an explicit Authorization header | — | curl | 2026-08-25 | [#3963330](https://hackerone.com/reports/3963330) |
 | CVE-2026-3784: wrong proxy connection reuse with credentials | — | curl | 2026-03-11 | [#3584903](https://hackerone.com/reports/3584903) |
 | Connection reuse ignores haproxyprotocol and HAPROXY_CLIENT_IP settings, allowing PROXY context to persist across transfers | — | curl | 2026-05-19 | [#3741135](https://hackerone.com/reports/3741135) |
 | Incorrect Authorization Checks in /include/findusers.php | — | impresscms | 2022-03-22 | [#1081137](https://hackerone.com/reports/1081137) |
