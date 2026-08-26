@@ -1,0 +1,136 @@
+{
+  "id": 3689633,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNjg5NjMz",
+  "url": "https://hackerone.com/reports/3689633",
+  "title": "Hidden/restricted tags can be mutated through synonym ID paths without per-tag authorization",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-04-22T18:49:03.703Z",
+  "submitted_at": "2026-04-22T18:49:04.039Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "ahpuh",
+    "url": "/ahpuh",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 16893,
+    "url": "https://hackerone.com/discourse",
+    "handle": "discourse",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/016/893/0bc08a2076b0f1f4a2c58636b8171b32cc367a52_original./b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/016/893/0bc08a2076b0f1f4a2c58636b8171b32cc367a52_original./89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Discourse",
+      "twitter_handle": "discourse",
+      "website": "https://discourse.org",
+      "about": "Discourse is JavaScript (ember.js) and Ruby on Rails based 100% open source discussion software -- https://github.com/discourse/discourse"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": true,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-08-26T05:47:28.698Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-07-27T05:47:16.904Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "Discourse requires both tag-edit permission and tag visibility for a user to edit a tag. However, the ID-based synonym mutation paths do not consistently enforce that rule for each tag being modified.\n\n`TagsController#create_synonyms` authorizes only the target tag (`guardian.ensure_can_edit_tag!(@tag)`) and then forwards attacker-supplied synonym tag IDs to `DiscourseTagging.add_or_create_synonyms` without verifying that the user can see or edit each referenced synonym tag.\n\n`TagSettingsUpdater` has the same issue for `new_synonyms` and `removed_synonym_ids`: it accepts tag IDs and mutates synonym relationships without per-synonym authorization checks.\n\nIn local reproduction on the 2026.4.0-latest source:\n1. a non-admin tag editor could not view a hidden tag (`GET /tag/:hidden_id/info.json` returned 404),\n2. but the same user could still submit the hidden tag's numeric ID to `/tag/:visible_id/synonyms.json` and `/tag/:visible_id/settings.json`,\n3. and both paths updated the hidden tag's `target_tag_id` successfully.\n\nThis is an authorization bypass affecting hidden/restricted tag integrity. If the vendor considers a similar hidden-tag synonym issue already fixed, this should be triaged as an incomplete fix / variant.\n\n1. Create a non-admin user in `edit_tags_allowed_groups`.\n2. Create one visible tag the user can edit.\n3. Create one hidden/restricted tag in a tag group the user cannot access.\n4. Sign in as the non-admin tag editor.\n5. Request `/tag/<hidden_tag_id>/info.json`.\n6. Observe that the response is 404, confirming the hidden tag is not visible.\n7. Send `POST /tag/<visible_tag_id>/synonyms.json` with `tags[0][id]=<hidden_tag_id>`.\n8. Observe that the request succeeds and the hidden tag becomes a synonym of the visible tag.\n9. Reset state and send `PUT /tag/<visible_tag_id>/settings.json` with `tag_settings[new_synonyms][0][id]=<hidden_tag_id>`.\n10. Observe that this also succeeds and updates the hidden tag's synonym relationship.\n\n2 examples, 0 failures\n\n## Impact\n\n## Summary:\nA non-admin user with tag-editing permission can modify hidden or restricted tags by supplying their numeric IDs to the synonym creation and tag settings endpoints. Although the user cannot view the hidden tag, the controller only authorizes the visible target tag and does not re-check authorization for each synonym tag ID, allowing hidden tags to be reassigned as synonyms of a visible tag.\n\nThis allows a tag editor to modify the synonym relationship of a hidden or restricted tag they are not allowed to view or edit. The practical impact is unauthorized mutation of hidden tag taxonomy and integrity corruption of tag relationships through numeric-ID paths that skip per-synonym authorization checks.",
+  "weakness": {
+    "id": 55,
+    "name": "Insecure Direct Object Reference (IDOR)"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5781177,
+      "file_name": "hidden_tag_synonym_id_bypass_poc_spec.rb",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/pxddhkmnhl4w2rk2s7pw46vurs6x?response-content-disposition=attachment%3B%20filename%3D%22hidden_tag_synonym_id_bypass_poc_spec.rb%22%3B%20filename%2A%3DUTF-8%27%27hidden_tag_synonym_id_bypass_poc_spec.rb&response-content-type=text%2Fx-ruby&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQX2IZ7QC2%2F20260826%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260826T074252Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEE8aCXVzLXdlc3QtMiJHMEUCIGLG%2BTifYvGH3xxN7A94joPqEivdTPR%2BTyQXf57yicaiAiEA9PIvWGG8pG25EZjge%2BfNiy%2BVbHlwIUEIwCdErLG9768qsgUIGBADGgwwMTM2MTkyNzQ4NDkiDNQ1qus9gTyUZAUjMiqPBX03SqpszMOq8M%2B%2B4Myf05ETz80mA6LEUoT9AHwNFPQ25cITBAoa%2BgqQcq1OPy8KXZjhn%2BJxAbrO%2FnvTgigLwF75p%2B9kkaGm4dtlCTqBj%2F%2FJTJJSzbWjw13n8Uc3qcEjxyoFNSLec2LnriX8JTHQsWkGZCoVFo1Py%2FNkn730hZUTA2HqoX%2FOfkbgbXOsBOPyopnycIU0TQ2VpTSssYHmpUaGnKjSTO0LyJlBx1ohbwerbq5btASsdQZ%2FfCZg2TSwnkDMfnLIssXrwAHq55ofmSd9zKyOb5t5VC55ONRolf4vkmavJOPmCdwaS6xqRIdwFWgiopLVla3izdhOyEq8aap7pHQGTmMYwAxDCInfE4H1eZXz21wjLKVSRjCAQJngwMLSc1Isj62XGdTr6E2nDeslE3FyD2hogu53wuk9L8a%2FLHVXtTsH%2BGM8ifwqC3iTOz8dPWlWSjvVDz8kC3m6YBRk5dUlZMUXT8Hm1X2EqEHgTFiQ5A3AeKkjWX%2FFDPKVscC0JlGdjtT4CPMINTSellXA5x%2Bm19lSjlyc%2BSH01YfQYWSBT9xV63Wv9mDsQNbfcypem5hl92e1WgX%2BO6ERv1ULpT6i35jubCdg2lDserDUStTF356bz7252EzY3BuLgnRfcffoYsFBtlyg9PxFe0Y012CQ%2BTFMbb33rx9DgtDCOsrfHpDck51r1TudbFS29q%2FLzQSJI2iHcUy3718zitsYOGcpzyWnDKmeCB%2Fs9cy5Uqjc1p902rZqdYcIVIftpksCyunjlFdTLTj6TXsORbRV5gy%2FsXAHC8dewpg5FK6FUDOfnSzxoECc0hIbdai3smc1Mi99yMjvoSrNK%2FLGpMX8QZMCTRypAeTDAnkzlyYw2ZC61AY6sQHxUN3MrpnZiWij8bLM%2FQXrAWJCL%2BmSGaBB8d6vHl1tg%2FYnbQ%2FuUCFYrkx%2BstnJo1kpnP7QyYoyd1afN4e8Lw6HNeKhtDDZ43Q9foTm1iDU%2BnxszudqRhyL1smYQh6FTTtyQCxYqW1qJvYGbemfIBwP1H5Qye4EJh%2F7ZJ0qC3EC9KphMjUMxYm9E8YmTEV6wMHz9jjLp1h1QC9dIBDs7dsP7TEApi6kUYgQdSrBOvdcwko%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=7d3298146019189e9246f0cfc632646bd59564d6bd9779e38c6f5cf7ad2c2fa4",
+      "file_size": 1678,
+      "type": "text/x-ruby",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-08-26T05:47:17.535Z",
+  "allow_singular_disclosure_after": -6935.078806825,
+  "singular_disclosure_allowed": true,
+  "vote_count": 2,
+  "voters": [
+    "acartag7",
+    "ahpuh"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 4.3,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "low",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "low",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 665254,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/discourse/discourse",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
