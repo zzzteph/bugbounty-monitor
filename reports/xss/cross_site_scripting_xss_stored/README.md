@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**468 report(s)**
+**469 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -122,6 +122,7 @@
 | Stored XSS via Full Name field in userlog email entries | — | revive_adserver | 2026-06-03 | [#3669623](https://hackerone.com/reports/3669623) |
 | Stored XSS in maintenance tools via unescaped entity names | — | revive_adserver | 2026-06-25 | [#3781311](https://hackerone.com/reports/3781311) |
 | Stored XSS via SVG Upload — check_content() Blocklist Bypass & 256-Byte Scan Limit (Self-Propagating Worm) | — | phpbb | 2026-07-30 | [#3606773](https://hackerone.com/reports/3606773) |
+| Pre-authentication Stored XSS in Essity Customer-Service Pipeline via ContactApi (reCAPTCHA bypass + no rate limit) | — | essity | 2026-08-27 | [#3729501](https://hackerone.com/reports/3729501) |
 | Stored XSS via malicious usernames in audit log details + Username validation bypass in XML‑RPC addUser  | — | revive_adserver | 2026-06-03 | [#3680090](https://hackerone.com/reports/3680090) |
 | Stored XSS in attachment-display exploitable through SameSite | — | nextcloud | 2026-04-19 | [#3594137](https://hackerone.com/reports/3594137) |
 | Stored XSS in nameserver field on account settings page | — | tucows_vdp | 2026-07-31 | [#3644182](https://hackerone.com/reports/3644182) |

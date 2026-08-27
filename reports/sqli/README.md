@@ -1,12 +1,12 @@
 # SQL Injection
 
-**207 report(s) across 2 class(es)**
+**208 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Sql Injection](sql_injection/README.md) | 206 | $25,000 |
+| [Sql Injection](sql_injection/README.md) | 207 | $25,000 |
 | [Blind Sql Injection](blind_sql_injection/README.md) | 1 | $4,134 |
 
 ## All Reports
@@ -51,6 +51,7 @@
 | Complete authentication bypass to admin permissions | — | rocket_chat | 2026-04-22 | [#3564655](https://hackerone.com/reports/3564655) |
 | SQL Injection vulnerability found on ibm.com endpoint | — | ibm | 2026-03-12 | [#3578842](https://hackerone.com/reports/3578842) |
 | Unauthenticated SQL Injection via REST Batch Route Confusion ████████ | — | essity | 2026-07-21 | [#3873072](https://hackerone.com/reports/3873072) |
+| Critical SQL Injection WDM API (████████) | — | essity | 2026-08-27 | [#3778282](https://hackerone.com/reports/3778282) |
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
 | Blind SQL injection via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653196](https://hackerone.com/reports/3653196) |
 | Error-Based SQL Injection in ████████.com Login/Password Reset (username parameter) | — | essity | 2026-07-03 | [#3809973](https://hackerone.com/reports/3809973) |

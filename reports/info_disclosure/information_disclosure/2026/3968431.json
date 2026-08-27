@@ -1,0 +1,120 @@
+{
+  "id": 3968431,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTY4NDMx",
+  "url": "https://hackerone.com/reports/3968431",
+  "title": "ARG_CLEAR credential scrubbing wipes only UTF-8 copies on Windows Unicode builds",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "low",
+  "readable_substate": "N/A",
+  "created_at": "2026-08-25T13:41:05.550Z",
+  "submitted_at": "2026-08-25T13:41:06.115Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-27T08:21:33.546Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-26T06:38:32.220Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "`cleanarg()` operates on `char *str`, which is the UTF-8 copy allocated by `convert_tchar_to_UTF8()`. It has no reference to the original `wchar_t argv[]` element.\n```c\n/* tool_getparam.c:632 */\nstatic void cleanarg(char *str)\n{\n  /* now that getstr has copied the contents of nextarg, wipe the next\n   * argument out so that the username:password is not displayed in the\n   * system process list */\n  if(str) {\n    size_t len = strlen(str);\n    memset(str, '*', len);\n  }\n}\n```\nIn `parse_args()` (line 3115), the conversion and scrub flow is:\n\n```c\norig_opt = convert_tchar_to_UTF8(argv[i]);      /* UTF-8 copy of the option */\nnextarg  = convert_tchar_to_UTF8(argv[i + 1]);  /* UTF-8 copy of the value  */\nerr = getparameter(orig_opt, nextarg, ...);\n/* inside getparameter, line 3090: */\nif(a->desc & ARG_CLEAR)\n    cleanarg(CURL_UNCONST(nextarg));             /* scrubs the UTF-8 copy    */\nunicodefree(CURL_UNCONST(nextarg));              /* frees the UTF-8 copy     */\n/* argv[i+1] — the original wchar_t pointer — is never touched */\n```\n\nThe original `wchar_t argv[i + 1]` buffer, which is part of the process command line visible through the PEB, is never overwritten by `cleanarg()` or any other routine. `unicodefree()` only frees the converted copy, not the original.\n\n## Impact\n\nA co-located process or user with permission to enumerate process command lines can read credentials supplied via `--user`, `--proxy-user`, `--pass`, `--oauth2-bearer`, `--proxy-pass`, `--tlspassword`, `--proxy-tlspassword`, `--cert`, `--proxy-cert`, `--httpsig-key`, or `--tlsuser` for the entire duration of the curl transfer. This defeats the explicit security goal of `cleanarg()`, which curl's own source comments describe as hiding \"username:password\" from \"the system process list.\"\n\nThe attack requires local access (AV:L) with low privilege (PR:L) — any authenticated Windows user can call `wmic process get commandline` or `Get-CimInstance Win32_Process`. No user interaction is needed (UI:N) and the impact is high confidentiality loss (C:H) of the exposed credentials.",
+  "weakness": {
+    "id": 18,
+    "name": "Information Disclosure"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6548874,
+      "file_name": "poc.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ijn250tjqlc8e3yihc7ym0uiurlu?response-content-disposition=attachment%3B%20filename%3D%22poc.py%22%3B%20filename%2A%3DUTF-8%27%27poc.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSHPS5FWB%2F20260827%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260827T134601Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGwaCXVzLXdlc3QtMiJGMEQCIBaavck%2B8cVepS8rXrq9%2BdEkg58h55FzeRCNJqqWWiOpAiB3kea%2FuhYJlsbeHfM53mmBYdC3dg9Lfnc9ADg9bn%2FbuyqyBQg1EAMaDDAxMzYxOTI3NDg0OSIM1u7tOPvP3J%2BuBqsVKo8Fpoy5Pla7uk%2FtxZZYPPbUZubIi7judWI9RuTIWRU5pkDaaj46YpF1Uq%2Bg9pDhT757PlUzqGWGVt9r0f1BqXPi6qRZX3FpR1ESOv6%2B2QJt0uoIjRrAOLEcNl%2F8sGxxO6vfe%2F1m5QqfQOKTELKSkTwvpzI%2F8JDPxS6dEsOL53R2wgBJZp76UDOXtJ8Qe6%2FlCm3iBhgnlxxE%2F%2BnoxO2lyBmRrwOyyH%2FoJyB%2FLoPnmhktcLFf48%2BBKxRn25YF1Xv6CGi%2FQC12iE7HSdN67xut0gK%2BPm3jpuvnrjPao1P3xKhRiOVzM6PiCvR%2BPvOz504WWfMOfNp9dzZEkIPTkfyIxrZ1SH7AjJgEYUryUtjV0VYJEJTv%2BbbIdgJmyfhZYJ%2F1M0FRH7WZpTe2U3YuBKOmw4%2Bc8CQSalfrEEiU3Yzoj2Rfs%2B%2F8EoX5IzzmDXH32mCaO0N6VVadFzSGCnNN77w1Xk5sFQA80eEe0uJeHgv3J43XoD%2BI0qYiBwywhf2A0Y4sgaWm6XLuXz1s5KJiitmYfDEHaX1aEaftkYOKt6DVan6LA6RCH%2BIke5miyWOz%2FIrDwfb14klIFzD8hk5%2FGGih9l9uq%2BIVN4x1ARTLdyV2FX%2FfFE1Qm3OezgPnVG4GWccRQKG02YbTTLMoBuvjLiT%2BtfU%2F5qGqgUy%2F%2FuAYND6URnQva%2F7UaqE6FrrzpIDrLKdaywoMqBcaJKFrfvXnsm%2FMXPW5o%2BtFbGjh%2B2aa02n1SWru%2Bvw1GcO6jXc%2FGmRMBouZ1WTe%2B4NEC%2BGC6zlqVdltfpzpKQrjJEuTwV6tvDW7WQwycXBMgNizSsoFCu01C%2BSmawRp6u2eJcu%2FnbJto1%2FhHKw9iTGmq1Q%2BrVHOIV2aURc%2FXzDjxcDUBjqyAb0qO0o31NelnMn8ukXi3OdFUlyHHvXlRIld64K4Kgy%2BoUlokg5nujL4%2Bem4%2FXfHcUJeZOSdUGtbSOgZMsGVtIN9bkWhBnxSRgHLBrnjsiiOf1cVWfWHSmZwR3Wdn5ntzyI70rs39DPFiHwtasYwt0GVcUjh34wuZAC5hynmk%2BC0MEo32vNfzfWfWm09Pay2kz5MRhiHdyNgPhhFLJHia%2B3K8ur88j%2BqUcoBh8%2FATiKk%2B2w%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0a4f243117fa14f5f726b46f2976cc1a4f398bd560acd819e90792ad1a469318",
+      "file_size": 3147,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1618 report(s) across 32 class(es)**
+**1619 report(s) across 32 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 966 | $50,000 |
+| [Unknown](unknown/README.md) | 967 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 66 | $4,920 |
@@ -505,6 +505,7 @@
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | FTP entrypath accepts 0xFF (Telnet IAC) through incomplete ISCNTRL filter, sent on wire via CWD on connection reuse | — | curl | 2026-04-07 | [#3650473](https://hackerone.com/reports/3650473) |
+| Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |

@@ -1,0 +1,118 @@
+{
+  "id": 3968729,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTY4NzI5",
+  "url": "https://hackerone.com/reports/3968729",
+  "title": "Unbound cross-peer HTTP Digest challenge state",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "medium",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-25T15:43:03.560Z",
+  "submitted_at": "2026-08-25T15:43:03.886Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-27T08:21:49.325Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-26T13:44:06.996Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nWhen libcurl parses an HTTP Digest `WWW-Authenticate` challenge, it stores the realm, nonce, algorithm, and qop into the easy handle's `state.digest` — but does not bind that state to the peer that sent it. If the challenge is parsed but never used for output (e.g. because Basic or Bearer was the selected auth method), `digest->origin` stays NULL.\n\nOn handle reuse for a different origin, `digest_flush_stale()` checks whether `digest->origin` matches the new destination. Since it's NULL, the function adopts the stale state instead of flushing it. `Curl_output_digest()` then generates a valid `Authorization: Digest` header using the original peer's realm and nonce — and sends it to the new, unrelated peer.\n\n## Preconditions\n\n- libcurl built with HTTP Digest support\n- Easy handle reused across two different origins without `curl_easy_reset()`\n- HostA's Digest challenge parsed but not selected for output (e.g. `CURLAUTH_BASIC | CURLAUTH_BEARER` was active)\n- Digest becomes selected when the handle is reused for HostB (e.g. auth mask changed to `CURLAUTH_DIGEST`)\n\n## Reproduction\n\nThe PoC (`poc.py`) implements Reproduction 1 from the original report:\n\n1. Configure handle with `CURLOPT_USERPWD`, `CURLOPT_HTTPAUTH = CURLAUTH_BASIC | CURLAUTH_BEARER`\n2. Perform against HostA — HostA returns `401` with `WWW-Authenticate: Digest realm=\"host-a-realm\", nonce=\"host-a-nonce-0123456789\", algorithm=MD5, qop=\"auth\"`\n3. HostA receives no `Authorization` header (Basic/Bearer selected, neither matched)\n4. Reuse handle: change URL to HostB, change auth to `CURLAUTH_DIGEST`\n5. HostB sends **no challenge** — yet receives:\n   ```\n   Authorization: Digest username=\"alice\", realm=\"host-a-realm\",\n     nonce=\"host-a-nonce-0123456789\", uri=\"/same-resource\",\n     cnonce=\"...\", nc=00000001, qop=auth, response=\"...\", algorithm=MD5\n   ```\n\n## Root cause trace\n\n1. `auth_digest()` in `lib/http.c` calls `Curl_input_digest()` for any Digest challenge header, even when Digest is not the selected auth method.\n2. `Curl_input_digest()` decodes directly into `state.digest`, calling `Curl_auth_digest_cleanup()` first (clearing any prior binding), then storing the new challenge unbound.\n3. `Curl_pretransfer()` in `lib/transfer.c` clears the current origin and reapplies the auth mask, but preserves the Digest challenge object.\n4. `digest_flush_stale()` in `lib/http_digest.c` only rejects a destination mismatch when `digest->origin` is non-NULL. For a parsed-but-never-output challenge, origin is NULL — so the stale state is adopted for the new destination.\n5. `Curl_output_digest()` generates the header from HostA's retained challenge, bound to HostB.\n\n## Remediation\n\nBind the Digest challenge to the originating peer at parse time, not at first output. On `Curl_pretransfer()` for a new origin, flush any Digest state whose binding does not match. At output, require a non-NULL binding matching the current peer.\n\n## Impact\n\nAn attacker running a malicious server (HostB) receives a valid Digest response computed with the victim's password, bound to a legitimate server's (HostA) realm and nonce. The attacker can:\n\n1. **Replay** the captured response to HostA while the nonce is live.\n2. **Mint fresh tokens** by redirecting curl (307) or returning `stale=true`, producing new `nc`/`cnonce` values that bypass strict replay caches. This makes the attacker a signing oracle for HostA's nonce for its entire lifetime.\n\nDigest binds responses to method and URI, so the attacker cannot forge arbitrary requests — only those matching what curl actually sent. No plaintext password is disclosed.\n\nThis is not an application-misuse scenario. libcurl deliberately enforces per-origin Digest isolation via `digest_flush_stale()`, hardened in PRs [#21944](https://github.com/curl/curl/pull/21944) and [#21951](https://github.com/curl/curl/pull/21951). That guard rejects stale state only when `digest->origin` is non-NULL — but origin is linked at output time, not at parse time. A challenge that was parsed but never used for output retains a NULL origin, causing the guard to fail open and adopt HostA's challenge as HostB's state. Because libcurl itself asserts this isolation boundary, emitting HostA's challenge to HostB is a violation of an invariant the library maintains, independent of application behavior.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6550034,
+      "file_name": "poc.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/jfg161rh9hxbliwavcie7o0m6pzu?response-content-disposition=attachment%3B%20filename%3D%22poc.py%22%3B%20filename%2A%3DUTF-8%27%27poc.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ6NXSKWA6%2F20260827%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260827T134600Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGwaCXVzLXdlc3QtMiJHMEUCIQDjb3pwyQ4w3W58DAGkP8n9EOzBCfpcARlkBaA36J9zbgIgBVDJDyDvikVis9Tq7Omi5bJijxA%2FR0CKyghw5PMHzegqsQUINRADGgwwMTM2MTkyNzQ4NDkiDKWD7KbhOobjQoGP%2BSqOBdjdVtvunbGhy9Vq9arPqRVfzsIDEtfNvJU%2FeI9qcXXAuLfMT%2BT9wX30N0kHgr0EXP6U6nWuGFdxV1gOsb%2BDY2vFomlr04n3DnZA0XBXKpQGxnssfmIp%2FQ7wAsc4ZKlIHL8Xn8pauy2TXwdmdiky2Jp3FvrCDMOMuYgb2pTItjRidBN5llIc46qNaEc82ngdsxh%2BzXpeb8AsG2hUj1yR6Zx5NcJBumOxXw%2FHtDAFRZjx4NOChyrO%2BQhgmlafTPuebL4Xgcz6f0M257iPLCxncXSl6TJT2cEZOmlCbuI%2FRGMywlMLDBsdpmCwwnGaIaAIoaBc2p7z17GRAeQPGL9wxsR6nYaBc1oFZoCyTZZkawbeEvCpTQNWQNrWCzRwtZEL8JaIlaTigPgwkmD8XRz9CHcBzKV9uu%2Fho5nsHS4xsuwjQojfdmcBJRVBqaeeL0gv0MlGxXgFX17PN%2FA7lJi1t%2FMaqB7PJY61jn4H8YJ8pDDcdayKqtgjZhZcYFN605UZNjCqSq8KnT%2B9AbqkEIeQOuyuC0g08qGu8lZFWGu0O56XfwZWsQHTQ5A3gQ7v0G3sVigheZrmYAM2aqae%2BNEK1QX2%2FIuVqMigmYOguXm9Icjc3HxoJwtfmpaFQyLoLUbwF16nv9d6m4WMljyceXiepLNAq%2F9WopOCoY4KPAMoL5oelXS1HUz0ttv21ux1JbFIkLQkInXXBnWNTGS80cm%2FeLDBPGpGqetm%2Fsv6oCGnQCkM%2FGKTr9PFfJMextFLnG1Cdz3Y3sROXN75UtKv6pHRYojrGT3W4Z0T02p38yxmEUrXEJg4UhIMJDjZQKZ8xwZV1W2WHdkeHo4bxrRrg6dQZBCdA79%2FxXnht2j%2B4hv%2BwDDtvMDUBjqxAa23EafqNhDmd3c3pGAksq9ZqmpeoWdJV8Rg0e07afLNy4z5f9hwVUIwyGidxOFKdLU9X3uXYktBl0Pt2UnXBfFhS7XuqpnNvZMOpr2cmC0hmo9t590Iir2gAlIdZgB%2B%2Bf4P3zcrhkZZcYlI6l%2F75U4reJgU%2FAt05F1yGOgU3VlkcWwQOAFYw9juKvEkT3I5P6yZ%2FPeEZUe3vAJ3OQH3wSnQ4SIDIyq2YiZVTfU1uR9%2B1g%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=03a359f61cc21766b5841205c22a2509b4654dd33fcec418f37a1399d26706b1",
+      "file_size": 6594,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 1,
+  "voters": [
+    "ncpz"
+  ],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
