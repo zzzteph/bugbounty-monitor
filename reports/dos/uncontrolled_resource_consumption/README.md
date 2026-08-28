@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**410 report(s)**
+**413 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -139,9 +139,12 @@
 | [tor] control connection pre-auth DoS (infinite loop) with --enable-bufferevents | — | torproject | 2017-10-19 | [#113424](https://hackerone.com/reports/113424) |
 | ntpd: read_mru_list() does inadequate incoming packet checks | — | ibb | 2017-07-12 | [#147310](https://hackerone.com/reports/147310) |
 | Lack of length validation on user address attribute | — | security | 2019-04-11 | [#161947](https://hackerone.com/reports/161947) |
+| Reachable assertion in node:zlib sync API crashes the entire process via spoofed TypedArray byteLength (all 11 *Sync functions affected) | — | nodejs | 2026-08-28 | [#3857258](https://hackerone.com/reports/3857258) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
+| dns.resolveAny() Aborts the Node.js Process When a DNS Response Contains More Than 256 A Records | — | nodejs | 2026-08-28 | [#3795657](https://hackerone.com/reports/3795657) |
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
+| HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
 | Unbounded memory growth in `node:http2` clients via attacker-controlled ORIGIN frames | — | nodejs | 2026-06-25 | [#3676863](https://hackerone.com/reports/3676863) |

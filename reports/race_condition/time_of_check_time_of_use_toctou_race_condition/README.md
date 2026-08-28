@@ -1,6 +1,6 @@
 # Time Of Check Time Of Use Toctou Race Condition
 
-**19 report(s)**
+**20 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -10,6 +10,7 @@
 | Race condition in joining CTF group | $500 | security | 2023-01-08 | [#1540969](https://hackerone.com/reports/1540969) |
 | Bypass subdomain limits using race condition | $100 | chaturbate | 2018-09-27 | [#395351](https://hackerone.com/reports/395351) |
 |  curl_share TOCTOU > RCE via Curl_llist _dtor Function Pointer Hijack | — | curl | 2026-08-26 | [#3955945](https://hackerone.com/reports/3955945) |
+| node:sqlite SQLTagStore Iterator Replay Lets Attacker Re-Execute Victim-Bound Writes Indefinitely | — | nodejs | 2026-08-28 | [#3795900](https://hackerone.com/reports/3795900) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 | libcurl cache updates follow symlinks and truncate their targets | — | curl | 2026-08-14 | [#3938220](https://hackerone.com/reports/3938220) |

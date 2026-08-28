@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1074 report(s) across 10 class(es)**
+**1075 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 681 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 682 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 286 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -272,6 +272,7 @@
 | GitHub user to server tokens can create issues in any public repository | — | github | 2026-07-22 | [#3641229](https://hackerone.com/reports/3641229) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
+| Unauthorized vertical privilege escalation vulnerability found on ibm.com endpoint | — | ibm | 2026-08-28 | [#3909372](https://hackerone.com/reports/3909372) |
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 |  `relay_tx` wallet-rpc skips `--restricted-rpc` guard and lets any caller corrupt wallet state via attacker-controlled `pending_tx` | — | monero | 2026-08-05 | [#3687543](https://hackerone.com/reports/3687543) |

@@ -1,6 +1,6 @@
 # Path Traversal
 
-**230 report(s)**
+**231 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -40,6 +40,7 @@
 | Unauthenticated Path Traversal (LFI) via /custom-sounds/ when CustomSounds uses FileSystem storage | — | rocket_chat | 2026-08-03 | [#3514640](https://hackerone.com/reports/3514640) |
 | ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection | — | rails | 2026-05-07 | [#3580511](https://hackerone.com/reports/3580511) |
 | inconsistently Rejection Logic in file:// URLs with Authority | — | curl | 2026-01-08 | [#3494098](https://hackerone.com/reports/3494098) |
+| Author → arbitrary file deletion anywhere on disk (site takeover) via `POST /wp/v2/media/<id>/finalize` poisoning `_wp_attachment_metadata` | — | wordpress | 2026-08-28 | [#3931777](https://hackerone.com/reports/3931777) |
 | Path Traversal in curl file:// Protocol Handler Allows Unauthorized File Access | — | curl | 2026-01-04 | [#3485930](https://hackerone.com/reports/3485930) |
 | Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix | — | rails | 2026-07-30 | [#3553340](https://hackerone.com/reports/3553340) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |

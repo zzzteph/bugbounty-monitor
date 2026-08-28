@@ -1,12 +1,12 @@
 # HTTP Injection
 
-**138 report(s) across 4 class(es)**
+**139 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Http Request Smuggling](http_request_smuggling/README.md) | 63 | $20,000 |
+| [Http Request Smuggling](http_request_smuggling/README.md) | 64 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 57 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
@@ -106,6 +106,7 @@
 | Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
 | HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser | — | nodejs | 2026-07-31 | [#3723248](https://hackerone.com/reports/3723248) |
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
+| HTTP Request Smuggling via Silent Header Truncation in Node.js HTTP Parser | — | nodejs | 2026-08-28 | [#3564941](https://hackerone.com/reports/3564941) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | HTTP Request Smuggling  | — | deptofdefense | 2021-04-20 | [#1120982](https://hackerone.com/reports/1120982) |
 | Host Header Injection | — | kartpay | 2021-05-10 | [#1098948](https://hackerone.com/reports/1098948) |

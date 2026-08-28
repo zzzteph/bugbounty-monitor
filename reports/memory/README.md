@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**686 report(s) across 25 class(es)**
+**687 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 68 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 69 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
@@ -677,6 +677,7 @@
 | heap-use-after-free in curl_easy_cleanup() called from callback | — | curl | 2026-06-30 | [#3833577](https://hackerone.com/reports/3833577) |
 | heap-use-after-free in state.referer when CURLOPT_REFERER replaced or cleared after perform | — | curl | 2026-06-11 | [#3774279](https://hackerone.com/reports/3774279) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |
+| Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | CVE-2026-3805: use after free in SMB connection reuse | — | curl | 2026-03-11 | [#3591944](https://hackerone.com/reports/3591944) |
 | UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |

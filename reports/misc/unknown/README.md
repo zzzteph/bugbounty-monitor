@@ -1,6 +1,6 @@
 # Unknown
 
-**969 report(s)**
+**972 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -192,6 +192,7 @@
 | --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
+| 28: HTTP/3 UDP path ignores CURL_SOCKOPT_ALREADY_CONNECTED, reconnects callback-provided socket | — | curl | 2026-08-28 | [#3971496](https://hackerone.com/reports/3971496) |
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | FTP entrypath accepts 0xFF (Telnet IAC) through incomplete ISCNTRL filter, sent on wire via CWD on connection reuse | — | curl | 2026-04-07 | [#3650473](https://hackerone.com/reports/3650473) |
@@ -207,11 +208,13 @@
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
+| 34: `curl_mprintf` reads `double` for documented `long double` conversions — uninitialized value disclosure | — | curl | 2026-08-28 | [#3972196](https://hackerone.com/reports/3972196) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |
 | Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate | — | weblate | 2026-04-26 | [#3518571](https://hackerone.com/reports/3518571) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
+| 46: `--libcurl` output carries `--insecure` across `--next` boundaries | — | curl | 2026-08-28 | [#3972316](https://hackerone.com/reports/3972316) |
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | Authorization header leak in ssrf_filter via cross-host redirect leads to credential theft and unauthorized access | — | arkadiyt-projects | 2026-04-15 | [#3642600](https://hackerone.com/reports/3642600) |

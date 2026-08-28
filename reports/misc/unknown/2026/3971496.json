@@ -1,0 +1,116 @@
+{
+  "id": 3971496,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTcxNDk2",
+  "url": "https://hackerone.com/reports/3971496",
+  "title": "28: HTTP/3 UDP path ignores CURL_SOCKOPT_ALREADY_CONNECTED, reconnects callback-provided socket",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "low",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-26T15:33:19.178Z",
+  "submitted_at": "2026-08-26T15:33:19.356Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-28T09:33:23.001Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-27T11:06:22.084Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nWhen `CURLOPT_SOCKOPTFUNCTION` returns `CURL_SOCKOPT_ALREADY_CONNECTED`, the HTTP/3 (QUIC) UDP code path ignores it and calls `connect()` anyway, silently reassociating the application-provided socket to a different peer. The TCP path has the correct check. This violates the documented callback contract and can bypass an application-controlled relay or egress route.\n\nThe same class of bug was previously reported for TCP in #10626 and fixed by #10648 (commit `233810bb`), but the equivalent UDP path was missed.\n\n## Root cause\n\nIn `lib/cf-socket.c`, `cf_socket_open()` records `CURL_SOCKOPT_ALREADY_CONNECTED` by setting `cf->connected = TRUE`.\n\n`cf_tcp_connect()` checks this flag immediately after `cf_socket_open()` returns and short-circuits:\n\n```c\n// lib/cf-socket.c, inside cf_tcp_connect(), after cf_socket_open():\nif(cf->connected) {\n  *done = TRUE;\n  return CURLE_OK;\n}\n```\n\n`cf_udp_connect()` has no such check. After `cf_socket_open()` sets `cf->connected`, it proceeds unconditionally into `cf_udp_setup_quic()`, which calls `connect()` with the URL's destination address, overwriting the application's chosen peer on the same file descriptor.\n\n## Reproduction\n\n\nExpected output (port numbers will vary):\n\n**Vulnerable build:**\n```\nVERDICT=VULNERABLE\n```\nThe socket's `getpeername()` reports endpoint B (the URL target), B received 2 QUIC Initial datagrams (2400 bytes), A received nothing. The `SO_BROADCAST` marker set in the sockopt callback persists, confirming this is the same file descriptor, not a replacement socket.\n\n**Patched control:**\n```\nVERDICT=FIXED\n```\nThe socket's `getpeername()` still reports endpoint A (the callback-chosen peer), A received the 2 QUIC Initial datagrams, B received nothing.\n\nThe final line `VERDICT_VALIDATED=YES` confirms both checks passed.\n\nNo HTTP/3 server is required; the PoC uses two bare UDP listeners. The timeout (`CURLE_OPERATION_TIMEDOUT`) is expected because neither listener answers the QUIC handshake.\n\n## Impact\n\nAn application can use `CURLOPT_OPENSOCKETFUNCTION` + `CURLOPT_SOCKOPTFUNCTION` to supply a UDP socket already connected through a relay, policy boundary, or selected egress endpoint. With HTTP/3, curl silently reassociates that socket with its own resolved destination and sends pre-authentication QUIC Initial datagrams there instead.\n\nPreconditions for exposure:\n\n1. HTTP/3 is used\n2. The application supplies an already-connected UDP descriptor via `CURLOPT_OPENSOCKETFUNCTION`\n3. `CURLOPT_SOCKOPTFUNCTION` returns `CURL_SOCKOPT_ALREADY_CONNECTED`\n\nThis is a specialized callback arrangement. I have not identified a production application relying on it, so I am reporting the confirmed contract and routing violation for the security team to assess rather than asserting a particular severity.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6557911,
+      "file_name": "poc.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/1sji68bgcy7fhjrya0b2mceidtg4?response-content-disposition=attachment%3B%20filename%3D%22poc.c%22%3B%20filename%2A%3DUTF-8%27%27poc.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQX3EMYYP%2F20260828%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260828T210506Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJIMEYCIQDsWWhiw%2F9Bgmp7VeGvsBPd0HegaY4WDAnZkDihyaz7JgIhAPicuIYlpHbltVpLloOYAQg1rdBzlCDYXS9zbt6zEvwBKrIFCFYQAxoMMDEzNjE5Mjc0ODQ5IgycegDAH9Mh%2ByGajrUqjwV997Pd5y9MdeqtxUR8rJCfucLiOrz3c6EVQgLxygbp%2FSjZyuBHtSgILby1YBJsPw3kMJ68iYTQUVC9HxN9S01Ety%2BBtEsDqKpKxlmoBY0CuA7KgqtYUyNle82%2F5KdtroUK7KAlYBq5wFwFNMJoP8L9n7Yfpe24ZM1FpZ1ASmEgWPIPR3mW%2FQi2KHo9QACmhQetOpE27ipIw5VRF4WyZ1hKWKSWMQ87hHj11uoJ7eZyAifrGJS7cfwPQZth9mI0ANN%2F%2Bx1c6TWkE%2BUYfJBWsXC8yutUPAPI0m1K6hTQRGYaKd8TtWvpuvI0WJx9kTPrQwn3WW0Mkv30d5smNZDCIs9PTsdGqicfAQIVaVPy3Ng8kIAl88l6D4Mt0Lij641KaMzB3z8ZqTWr1c0dLhictjlniNbccsQRuEuGI3L3IS73pWfJ00MnyEqF83qSmuGVrtkFscAR6Bt3btqh0Fly9Zyuo8y0%2FDbw8zp3%2BfTSSulGXRWUly6HcuqJ0pO2kV%2F5DKrLCBt%2Bc3GMkkQCKz1q3s1q3NIwMqx%2BV6qY1VordQNH2pwXkhbkYtIxn5FOJBGSTD%2FHgWDTR04zgELRUKdlUCGsG%2BWW2urHpFg61ht%2BMBnUMLu25MvmCUIqjhFy6T9KNoON4TaNAnVgcvf43Xd6oPLd4a7Gag1f38k%2FkTWUTdyrRkxIDkMZo3l%2FKco%2FmAEsMbJVTtcmEH%2FaSLSGdgqnJt72B6WyMWIjsYXHkDIVP94ETFYIilLHFFj3iKrY0qzOU4JpjvU8L8YYCh%2F2I0eJo8eHMfQ%2B9pNQHbv8HHpI3acA%2Fvy1YL9VJS1PdpdbO23uyrrZCaPnMwrXf9V6RgeexMrfEsIJuM%2FjaQbByZF8ghXdMOrix9QGOrABbAGXJRzlNGqELNBqX6p%2BAGw7vcjX8rTOGHRvLbplQ6qqB2UwgaYC2v01NFt5gqjtJ8WVQhx07NqFTa2PBCDfTPZ4dCcdyx%2F546p%2FVu4hu36RA3bQPFWf4jpekZ8AhdYG10MDHqHxS8XPmlNpW%2FbCZ8OKzlriEAQ1pu5rpwIBUvUd0A5u3gS7%2BSHSdIuNLVq%2FMhHKpxaDiyAMvc4b9az6mGsgtBIL%2BtNyJM9MSO2ObJE%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=fb933ee954672a9f237a7ae6e0c81ad779517d1db3e7a0726747128b021d24b9",
+      "file_size": 6585,
+      "type": "text/x-csrc",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

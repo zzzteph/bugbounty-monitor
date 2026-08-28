@@ -1,0 +1,119 @@
+{
+  "id": 3972316,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTcyMzE2",
+  "url": "https://hackerone.com/reports/3972316",
+  "title": "46: `--libcurl` output carries `--insecure` across `--next` boundaries",
+  "state": "Closed",
+  "substate": "informative",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-26T22:10:54.803Z",
+  "submitted_at": "2026-08-26T22:10:54.935Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-28T13:43:06.218Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-27T11:06:32.242Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nWhen `--libcurl` generates C source for a command that uses `--next` to separate multiple operations, local options from earlier operations leak into later ones. Specifically, if the first operation uses `--insecure` and the second does not, the generated program silently skips TLS certificate and hostname verification for the second operation. The curl CLI itself correctly rejects the untrusted certificate for the second operation (exit 60); the compiled generated program accepts it (exit 0).\n\n## Root cause\n\n`easysrc_init()` emits one `curl_easy_init()` before all operations. `easysrc_perform()` emits `curl_easy_perform()` per operation. No `curl_easy_reset()` is ever emitted between operations.\n\nOperation 1 emits:\n\n```c\ncurl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);\ncurl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);\n```\n\nFor operation 2, `tool_setopt_long()` compares the secure values (1) against the defaults listed in `setopt_nv_CURLNONZERODEFAULTS` and suppresses both setters because the value matches the default. This optimization is correct for a fresh handle but wrong for the reused handle: libcurl options are sticky until explicitly changed or reset.\n\nThe result is that the generated source has one `curl_easy_init()`, two `curl_easy_perform()` calls, zero `curl_easy_reset()` calls, and the verify-disable setopts appear only once — before the first perform. The second perform inherits disabled verification.\n\n## Reproduction\n\nExpected output:\n\n```\nTARGET_COMMIT=c2676bf9e639e31e44b12a2cc82cf2046231b056\nCLI_MULTI_RC=60\nGENERATED_MULTI_RC=0\nSECURE_CLI_RC=60\nSECURE_GENERATED_RC=60\nGENERATED_COUNTS=init=1 perform=2 reset=0 peer_zero=1 host_zero=1\nRESULT=VULNERABLE\n```\n\nKey observations:\n- `CLI_MULTI_RC=60`: curl itself correctly rejects the self-signed cert on the second (secure) operation.\n- `GENERATED_MULTI_RC=0`: the compiled generated program accepts it — TLS verification leaked from operation 1.\n- `SECURE_*_RC=60`: a secure-only generated program correctly rejects the cert (control).\n- `GENERATED_COUNTS`: one init, two performs, zero resets, verification disabled once — confirming no inter-operation reset.\n\n## Suggested fix\n\nEmit `curl_easy_reset()` between generated operations (before each `curl_easy_perform()` after the first), then reapply global options that `--next` is documented to preserve. Alternatively, emit a separate `curl_easy_init()` / `curl_easy_cleanup()` per operation. The default-suppression logic in `tool_setopt_long()` should also be revisited for multi-operation correctness, or the reset should make it a non-issue. Other local options beyond `--insecure` are likely affected by the same sticky-state carryover and should be audited.\n\n## Impact\n\nThe `--libcurl` documentation states the output \"does the equivalent of what your command-line operation does.\" The `--next` documentation states it \"resets all local options.\" The generated code violates both promises in a security-critical dimension: TLS verification is silently disabled for operations that never requested it.\n\nAn application author who generates, compiles, and deploys this code creates a program where a network attacker can impersonate the later HTTPS endpoint without a valid certificate, even though that operation was intended to be secure.\n\nThe prerequisites — using `--libcurl` with `--next`, combining `--insecure` on only some operations, compiling and deploying the output — limit reach. Curl's own transfers are unaffected.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6560449,
+      "file_name": "poc.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/spa5sssky1s9c7jwtn0y5yr5jo1o?response-content-disposition=attachment%3B%20filename%3D%22poc.sh%22%3B%20filename%2A%3DUTF-8%27%27poc.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3W4TRE7F%2F20260828%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260828T210505Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDREGodVgQLS9c3%2BsBNPepCr0RFSUC1Yv7QxyNCYEJxaAiBvUrF9RUxOfBfvlwFywgEyC2CiIVza9OZky31aUFajiCqxBQhWEAMaDDAxMzYxOTI3NDg0OSIM7fRNV%2FWEpbKGhHa0Ko4F2vDqqCmvu4VXQpjqDtBmfbmLF2B3o7JiVmCOJU2zes0z8HfWSarC4uUzxaxwdnY%2Bw75PVX93EojDx67p9ZuMZ0fxnnPUWgDaDVqX%2FYnC86DvU8dpf2o3A4BYUVQvFhQ%2BgzrXst7hYE6FzY1QNb3UG23c3IcDBZYdi3Z4KHsUAf%2FPLRX869pVCBpA5tdPQKHk2pHS5UH8fAzVplzJIZVBPNG4du6HYbsfCc5%2Bf1fqm2nduJcZY7syXSEE1azdC9NKO37J83k5BldtufISribWERTE96RJV3UTanNkDo2LmwnIO6NYMjClcm2sLkKYjMGUFYAfJ%2F%2Fs0%2FsRAHaVRR65351utCRxEzmuYscVJhHjsDuANGtBPkst%2BpOGyeFiLGaqmbU8PpXWhEaIWZlg1tiwlwgzOQAwWlGeTks3VaTdPSBC8kMYKUsRcFeQEraMJMgz9OWPaHKecGaeXQLjfGvqsY5bA2Rb4CP1SAOV931uj4qZ4xjMVh5GkZskGvfKv8z0bb7FBQAqvGXrkGqXQul60Jw2sJ9TlLuEG%2FUMtbHq1zoQKfmbPS0wwDaLNYz9NqbiKg6Hc8nrsLr6Lq5FR2xUuOMJfwy%2FDoUogr9WtigNOKsIEjFYCvscVb4Ilrm34rd7e%2B3dyala8vGnEjWelAK8FEt8HEMeD%2FG4ugufNrfJN2nnQiE9JyNGoJkyArqosRXxwZJkkJLlfVoaAi025rW1Niwzkefs%2BV3lCATVk%2FFyfSveCe5C%2FGe84%2F2s3bcwo6ikolkoO6%2BzlaajQ1GQCXwrZIeF8T%2FwlebIlRn4u27%2FrmzJZ0rwgi%2FE16dnpBfg0CQqEEeduzoGqlYK7nnmplDpSFqlaaS7kdlMFzWYTrNgMOHex9QGOrIBlnAnZvIUSli5VPTy8xs8BG3zEhQoAHW49tV%2FU7hBabPxYsGV4uWOGyN%2BpWeBQPqfbmITrj8VVi6ybaYuTnaBl2d3Ni6G%2B%2Fzgk75pJbsepQpFme6FrQ6eOd%2Fmevp3s8hTa8af3f2HE344kx%2BkRKD9Xs1TF7sCUFWemp6bkv6OGEzlOMjDDwwJG9P9pfOdf84hD6hg832f7dXP0A7gZujKANDwfVodvfbcvvd2z9ZrgX19Sg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0033429ecdd564b0165b290c9cd8915b1b232fdb024907753a8e46c061a52f41",
+      "file_size": 2990,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6560450,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/g4okm0dz9bno0811o9ioyu296hp5?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3W4TRE7F%2F20260828%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260828T210505Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEI3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIDREGodVgQLS9c3%2BsBNPepCr0RFSUC1Yv7QxyNCYEJxaAiBvUrF9RUxOfBfvlwFywgEyC2CiIVza9OZky31aUFajiCqxBQhWEAMaDDAxMzYxOTI3NDg0OSIM7fRNV%2FWEpbKGhHa0Ko4F2vDqqCmvu4VXQpjqDtBmfbmLF2B3o7JiVmCOJU2zes0z8HfWSarC4uUzxaxwdnY%2Bw75PVX93EojDx67p9ZuMZ0fxnnPUWgDaDVqX%2FYnC86DvU8dpf2o3A4BYUVQvFhQ%2BgzrXst7hYE6FzY1QNb3UG23c3IcDBZYdi3Z4KHsUAf%2FPLRX869pVCBpA5tdPQKHk2pHS5UH8fAzVplzJIZVBPNG4du6HYbsfCc5%2Bf1fqm2nduJcZY7syXSEE1azdC9NKO37J83k5BldtufISribWERTE96RJV3UTanNkDo2LmwnIO6NYMjClcm2sLkKYjMGUFYAfJ%2F%2Fs0%2FsRAHaVRR65351utCRxEzmuYscVJhHjsDuANGtBPkst%2BpOGyeFiLGaqmbU8PpXWhEaIWZlg1tiwlwgzOQAwWlGeTks3VaTdPSBC8kMYKUsRcFeQEraMJMgz9OWPaHKecGaeXQLjfGvqsY5bA2Rb4CP1SAOV931uj4qZ4xjMVh5GkZskGvfKv8z0bb7FBQAqvGXrkGqXQul60Jw2sJ9TlLuEG%2FUMtbHq1zoQKfmbPS0wwDaLNYz9NqbiKg6Hc8nrsLr6Lq5FR2xUuOMJfwy%2FDoUogr9WtigNOKsIEjFYCvscVb4Ilrm34rd7e%2B3dyala8vGnEjWelAK8FEt8HEMeD%2FG4ugufNrfJN2nnQiE9JyNGoJkyArqosRXxwZJkkJLlfVoaAi025rW1Niwzkefs%2BV3lCATVk%2FFyfSveCe5C%2FGe84%2F2s3bcwo6ikolkoO6%2BzlaajQ1GQCXwrZIeF8T%2FwlebIlRn4u27%2FrmzJZ0rwgi%2FE16dnpBfg0CQqEEeduzoGqlYK7nnmplDpSFqlaaS7kdlMFzWYTrNgMOHex9QGOrIBlnAnZvIUSli5VPTy8xs8BG3zEhQoAHW49tV%2FU7hBabPxYsGV4uWOGyN%2BpWeBQPqfbmITrj8VVi6ybaYuTnaBl2d3Ni6G%2B%2Fzgk75pJbsepQpFme6FrQ6eOd%2Fmevp3s8hTa8af3f2HE344kx%2BkRKD9Xs1TF7sCUFWemp6bkv6OGEzlOMjDDwwJG9P9pfOdf84hD6hg832f7dXP0A7gZujKANDwfVodvfbcvvd2z9ZrgX19Sg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=bca0a7ecc38dd84d26b47267f84ad3693b27742115ccb68425a25bed15c4ebf3",
+      "file_size": 311,
+      "type": "application/octet-stream",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

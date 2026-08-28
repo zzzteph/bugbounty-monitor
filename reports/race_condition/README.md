@@ -1,12 +1,12 @@
 # Race Conditions
 
-**38 report(s) across 4 class(es)**
+**39 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 19 | $15,250 |
+| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 20 | $15,250 |
 | [Concurrent Execution Using Shared Resource With Improper Syn](concurrent_execution_using_shared_resource_with_improper_syn/README.md) | 17 | $3,000 |
 | [Improper Synchronization](improper_synchronization/README.md) | 1 | — |
 | [Leveraging Race Conditions](leveraging_race_conditions/README.md) | 1 | — |
@@ -40,6 +40,7 @@
 | CVE-2023-28320: siglongjmp race condition | — | curl | 2023-05-17 | [#1929597](https://hackerone.com/reports/1929597) |
 | Race Condition on Create API Function | — | enjin | 2024-10-15 | [#2682392](https://hackerone.com/reports/2682392) |
 |  curl_share TOCTOU > RCE via Curl_llist _dtor Function Pointer Hijack | — | curl | 2026-08-26 | [#3955945](https://hackerone.com/reports/3955945) |
+| node:sqlite SQLTagStore Iterator Replay Lets Attacker Re-Execute Victim-Bound Writes Indefinitely | — | nodejs | 2026-08-28 | [#3795900](https://hackerone.com/reports/3795900) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 | libcurl cache updates follow symlinks and truncate their targets | — | curl | 2026-08-14 | [#3938220](https://hackerone.com/reports/3938220) |
