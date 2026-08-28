@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1619 report(s) across 32 class(es)**
+**1621 report(s) across 32 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 967 | $50,000 |
+| [Unknown](unknown/README.md) | 969 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 66 | $4,920 |
@@ -500,6 +500,7 @@
 | mruby-engine: UAF in MRubyEngine#initialize enables local RCE | — | shopify | 2026-04-24 | [#3679660](https://hackerone.com/reports/3679660) |
 | Inverted ternary in peerlist_manager::filter() allows unlimited whitelist entries per host via different ports | — | monero | 2026-06-29 | [#3547349](https://hackerone.com/reports/3547349) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
+| --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
@@ -513,6 +514,7 @@
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
+| Stacked --proto modifiers leave denied protocol enabled | — | curl | 2026-08-28 | [#3970650](https://hackerone.com/reports/3970650) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |

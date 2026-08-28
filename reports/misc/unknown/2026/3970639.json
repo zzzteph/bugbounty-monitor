@@ -1,0 +1,116 @@
+{
+  "id": 3970639,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTcwNjM5",
+  "url": "https://hackerone.com/reports/3970639",
+  "title": "--etag-save - truncates append-redirected stdout",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "low",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-26T08:00:18.457Z",
+  "submitted_at": "2026-08-26T08:00:18.735Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-08-28T08:22:40.730Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-08-26T20:57:33.231Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\n`save_etag()` (line 267–273) calls `fileno()`, `fstat()`, `ftruncate(fd, 0)` whenever the underlying fd is a regular file. It does not check `OutStruct.regular_file`, which is FALSE for stdout even when shell-redirected to a file. When `--etag-save -` is used with append redirection (`>>`), an HTTP 2xx/3xx response containing an ETag header causes `ftruncate` to destroy all pre-existing content in the append target before writing the ETag value. The peer controls the trigger via the response status code and ETag header.\n\n## Reproduction\n\n```sh\npython3 poc_etag_truncate.py <sha>\n```\n\n1. Write `PRESERVE\\n` to a log file\n2. Run `curl --etag-save - http://server/ >> logfile` where server returns `ETag: \"remote\"`\n3. Log file now contains only `\"remote\"\\n` — `PRESERVE` is gone\n\n**Control:** Same setup but server returns no ETag header → `PRESERVE` retained.\n\n## Root cause\n\n```c\n// src/tool_cb_hdr.c:267-273\nint fd = fileno(etag_save->stream);\nif((fd != -1) &&\n   !curlx_fstat(fd, &file) &&\n   (S_ISREG(file.st_mode) &&    // ← only checks physical file type\n    toolx_ftruncate(fd, 0)))     // ← truncates regardless of ownership\n```\n\n`S_ISREG` alone cannot distinguish a curl-owned ETag output file from stdout redirected to a regular file. \n\n## Remediation\n\nGuard `ftruncate` with `etag_save->regular_file` (the semantic stream flag) in addition to `S_ISREG`.\n\n## Impact\n\nA remote server can destroy arbitrary pre-existing content in any regular file the user's shell has opened for append on stdout. The attacker controls the trigger (any 2xx/3xx response with an ETag header) and the replacement content (the ETag value). The user must have chosen `--etag-save -` and append redirection, but the target file, its prior contents, and the decision to append are entirely the user's — curl silently violates the append contract. In scripting contexts where multiple curl invocations append ETags to a shared log, a single malicious server response wipes the entire log history.v",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6555113,
+      "file_name": "poc.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/of5i5lodf8gsq8ujwh55n7wgmw4o?response-content-disposition=attachment%3B%20filename%3D%22poc.py%22%3B%20filename%2A%3DUTF-8%27%27poc.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ6KLL4YXC%2F20260828%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260828T093212Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEH8aCXVzLXdlc3QtMiJGMEQCICgTUa2Qzss9vpCT0It6avJdKqcwb35voWjsuZW%2BO4gaAiBscbz9xioz9wgm2nfJ%2FKOHraYhcmrurMfU7a2g9oJ5LiqyBQhIEAMaDDAxMzYxOTI3NDg0OSIMK5AI%2FtMvE9vg2o9JKo8FV4BOdtsnGSTrg8HZYro7VxPmDXfRqPrx6mA6LCND2dl6r3xrqWGPKz9yAO7ifm7uLn3kcWr7IpXC4u5cbEZiSTVn6oWJcz%2FRC5opi7b7ekPrJy5G8phM3UxmZpWSw9wQBbFKusxQz6JtpZ%2B%2Fhs9xz07rGkBeUT2kQBG3as4AAQIdlg9oCyvLvko1yyBaiuwmELcHAiRrYWIqOrSyWVFK3%2F2i%2BR8wDM84gZ5f5J8AJBOZT7OsIwysd0gN%2FFOyhhbB05b3Z6aJvbP4YzkvpTaxy9%2FMqW30rM%2BoBltFbFc%2FTJdMi4%2BSbGA1aOs%2Fm4enNBnejmqezVJLf0VbbNHXay2DAF%2F70Z1T8pFeJLwzr5AnNOQSB1iZ4qkD%2FxWebMg%2BC6VIby92%2BZzwAIk55ti2Wnt54067gsJVEeER9Ywq8CKjtx125CKh1M%2BxG7NEGnTLVreUb3jOpV3iaptPg6LUcqtGy4XSkpV%2FiSLTR%2FvzK6cdvpHkMQWcogLlPEYb9WwMPyhHQuDOlvOQz7d5KnviRfceG5d9nYJQ%2F4Ca78IRrhI6af8sC5N7fl9yxQYZe0upUgCgeZzz%2BYiv2bvp623EbaEwWk1Z3MjtG%2BiC3Hg0pNTJzyKQa1%2Broef6pidbEHbP46qRLyDDoiXPBoq1kbSLvPQGoEGdojddFkXCkEzMgIgP4hy2KQygM69DM1sCaLutZtIzd3E1vb5w8igDryqq4sUFKL9bdgdS9ysmY8Wr16K9Fki4GHojjuXcVsIvbMJsS35o8IM3OB39oVZav0jmKWFrPd6xKuGSG948Z1JXXh6Sh9kM%2FK48iIbQYaMncK3AlXFdo9kCdHoio5EslUubjozdyJc5%2FO%2BipCoI2EN2%2FqxRBzD%2B1MTUBjqyAbB%2BGUj9FxtNUj2vIoedoiel0Ru56d%2FQt5RReNlUzz6WdKounOHfecgFDcQUyHgDR1PaP11eIjNYnJCCl5JP%2F09T4yw7NLYoCUU0QCR%2FwvIsisl9iIFnPL%2BTwzGYNdAC3jESDTzMA9vvEvuPZdrenK8IGeaoIMx9r5Ffijny1GcTT9prtjk3A%2F3pgMRvwUhqinsY0RV38AGZiFdjemcYpKbPLpftTudKc%2BqoNCEds5bskIk%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=a954428910e94ca16df82120edfcfe4033cf01dd36abc32fe2ae7c88760ad3ad",
+      "file_size": 4510,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
