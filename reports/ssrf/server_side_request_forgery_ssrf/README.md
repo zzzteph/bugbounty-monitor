@@ -1,6 +1,6 @@
 # Server Side Request Forgery Ssrf
 
-**227 report(s)**
+**228 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -66,6 +66,7 @@
 | Gopher Protocol Command Injection (SSRF Smuggling) | — | curl | 2026-01-14 | [#3508785](https://hackerone.com/reports/3508785) |
 | curl-ipv4-percent-normalization-SSRF | — | curl | 2026-06-10 | [#3791168](https://hackerone.com/reports/3791168) |
 | Blind POST SSRF via Web Push Notification Endpoint | — | phpbb | 2026-05-30 | [#3608558](https://hackerone.com/reports/3608558) |
+| 50: CMake `HTTP_ONLY` does not disable SSH backends — SCP and SFTP remain usable | — | curl | 2026-08-29 | [#3973228](https://hackerone.com/reports/3973228) |
 | CVE-2021-26855 on ████████ resulting in SSRF | — | deptofdefense | 2021-03-24 | [#1119228](https://hackerone.com/reports/1119228) |
 | SSRF due to CVE-2021-26855 on ████████ | — | deptofdefense | 2021-03-24 | [#1119224](https://hackerone.com/reports/1119224) |
 | blind Server-Side Request Forgery (SSRF)  allows scanning internal ports | — | elastic | 2023-05-05 | [#1300585](https://hackerone.com/reports/1300585) |

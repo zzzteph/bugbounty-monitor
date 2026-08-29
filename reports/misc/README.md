@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1624 report(s) across 32 class(es)**
+**1625 report(s) across 32 class(es)**
 
 ## Classes
 
@@ -13,8 +13,8 @@
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
+| [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 4 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 4 | — |
-| [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 3 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
 | [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
@@ -260,6 +260,7 @@
 | HTTPS Agent TLS session reuse skips hostname verification across identity policies (incomplete fix of CVE-2026-48934) | — | nodejs | 2026-07-30 | [#3812439](https://hackerone.com/reports/3812439) |
 | TLS host identity verification bypass via session reuse with different servername leads to unauthorized connections | — | nodejs | 2026-06-25 | [#3649802](https://hackerone.com/reports/3649802) |
 | RTSP RTP Interleaved Parser Assertion Failure (Zero-Length RTP Payload) | — | curl | 2026-02-26 | [#3575250](https://hackerone.com/reports/3575250) |
+| 42: `VMS_STS` macro typo (`< 3` vs `<< 3`) turns curl failures into successful OpenVMS conditions | — | curl | 2026-08-29 | [#3973169](https://hackerone.com/reports/3973169) |
 | curl proceeds with unsafe connections when -K file can't be read | — | curl | 2022-04-21 | [#1542881](https://hackerone.com/reports/1542881) |
 | -H with space prefix leads to previous header injection when used with --proxy | — | curl | 2025-07-07 | [#2864859](https://hackerone.com/reports/2864859) |
 | Uncatchable "Maximum call stack size exceeded" error on Node.js via async_hooks leads to process crashes bypassing error handlers | — | nodejs | 2026-02-12 | [#3456295](https://hackerone.com/reports/3456295) |
