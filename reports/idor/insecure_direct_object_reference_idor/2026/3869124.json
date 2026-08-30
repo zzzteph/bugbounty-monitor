@@ -1,0 +1,169 @@
+{
+  "id": 3869124,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODY5MTI0",
+  "url": "https://hackerone.com/reports/3869124",
+  "title": "**Unauthenticated IDOR allows modification of payment customer billing information**",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-16T19:07:21.463Z",
+  "submitted_at": "2026-07-16T19:07:21.836Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "visionx7",
+    "url": "/visionx7",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/9yj8119lg9l71qx0d0eppj3fa4ft/47c72a82657a929c13ab24e11674f7e10ea2bf67b1b9e7116b522cd7ede42f15"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 19468,
+    "url": "https://hackerone.com/weblate",
+    "handle": "weblate",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/019/468/71eb3827ae9f2a388f27bd4b7eefd20bc3ac813c_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/019/468/71eb3827ae9f2a388f27bd4b7eefd20bc3ac813c_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Weblate",
+      "twitter_handle": "WeblateOrg",
+      "website": "https://weblate.org/",
+      "about": "Weblate is a libre software web-based continuous localization system"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-08-30T04:54:37.491Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-07-31T04:54:34.705Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "The application contains an access control issue in the payment billing information edit functionality. An unauthenticated user can access the payment edit endpoint and modify the billing information associated with a payment without any authorization check.\n\nThe issue occurs because the application allows access to the edit page using only the payment identifier in the URL. The server does not verify whether the requester is logged in or has permission to modify the customer information linked to that payment.\n\nSteps to reproduce:\n\n1. Create a payment object and note the payment UUID.\n\nExample:\n\n``\n01f82084-20dc-498a-b004-2694d51be433\n``\n\n2. Open the following URL in a browser where you are not logged in:\n\n``\nhttp://127.0.0.1:8000/en/payment/01f82084-20dc-498a-b004-2694d51be433/edit/\n``\n\n3. Observe that the payment billing information edit page is accessible without authentication.\n\n4. Modify the billing information fields.\n\nExample changes:\n\n```\nName:\nIDOR_EVIDENCE_TEST\n\nAddress:\nIDOR_ADDRESS_TEST\n```\n\n5. Submit the form.\n\n6. The application accepts the request and updates the customer billing information.\n\n7. Verify that the changes are stored by checking the customer record. The modified values remain saved:\n\n```\nName: IDOR_EVIDENCE_TEST\nAddress: IDOR_ADDRESS_TEST\n```\n\nThis demonstrates that an unauthenticated attacker can modify persistent customer billing information by accessing the payment edit endpoint directly.\n\nThe root cause appears to be missing authorization checks before allowing modification of the customer object associated with the payment.\n\n## Impact\n\n**An attacker can modify customer billing information without authentication by accessing the payment edit endpoint directly.**\n\nSuccessful exploitation allows unauthorized changes to stored customer data, including billing name and address information. These changes are persistent and affect the data saved in the application database.\n\nPotential impacts include:\n\n- Modification of customer billing records\n- Incorrect customer information being stored and displayed\n- Integrity loss of payment-related customer data\n- Possible disruption of billing, invoicing, or payment-related workflows if modified information is used by the system\n\nThe issue affects the integrity of customer data because an unauthenticated attacker can make unauthorized changes without requiring account access or permission.",
+  "weakness": {
+    "id": 55,
+    "name": "Insecure Direct Object Reference (IDOR)"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6266938,
+      "file_name": "01_payment_creation_uuid.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/mm48ocgjv4d68h3ua9ci8baci46r?response-content-disposition=attachment%3B%20filename%3D%2201_payment_creation_uuid.png%22%3B%20filename%2A%3DUTF-8%27%2701_payment_creation_uuid.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYH2TS37B%2F20260830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260830T075200Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHx4glNPB344jWjoOVOq8ROtVyED2sEonTO7TUjTzTdpAiBgawd2XnvEkktnvuucXBkS1CA9JcunlwI2Ox%2F0MhhurSqxBQh4EAMaDDAxMzYxOTI3NDg0OSIM2yquhWUXKHkeptDIKo4FwlZlzDcBA6vA0XYtMQi1IbWt2o7TKWENDbmqziSl53OldhRm9qkKZiqlohvsYCKuidJpRgRUWEnnch8%2FzNNKyKRQ7nXI8y02sbU%2B%2BS%2BJBTF0WkhtnDr4KXgDqa5FJqp7v0jYRZZnNDkcwJS1UZyHk%2Fb84L45pti70ad2EHPE37thedJ2CCThfyuG%2FffgWf44bVaXVg8QTpB16Jz1ntsRQvcJf5o0lYzfJdtRooFoR1%2FAfu4W4E5UjW4c8CQlYO5loKGPN7ZTpA94S5mqq%2BvHMVd72hD4yfVwL8r4RgXakgysqghW64ch%2BfYhOh6ZDiCKrx0JwSWhHpjnAkXj6iAPN57L27M%2BS%2Bcl4FbKLpsroORHarN9OhLTbJBxlkLjaErFBsygAHohALsivQcc32zNMLRxbWUn0RVvmOq9iZM2muDVwvYroByNQq9ndUXaJtjqCulputdNPdxmCayi50OE319oGvqK3UutlG6m6mjYsYrJXVPbe69gPBR2C7IFKkXx75p1kWUa1uUGBHCztYD%2BmeP0IyvdfcY25Klnxdd20geXfglIEPXwkMeijloDTZB%2FyYwFMaHMLXH126CI%2BPunITofiiVPgljhwZNTWnkkAWpVhp1k7PX3n0F5t2hYXrxwP2AeAAo7KXbsberHL3zMH9PHjZvDiIEMkWCp4uckyLPMPqSlLWXg79TWF4Egdm6A96z6d2T21GnTSO%2BWshnQv0h%2BUPhsUalNw1x%2BXh1uiLmYVsLkNor8yoSp2yawMdVuEUeasWWHKZ%2BBljcjjPjco5fR8PSEEYMHCuHx53LKGq5ldDEwkyN2NCvfpomo4eAvZljZPH2rbryVS9URPbkKu4FVvIQ5oYoBLI7e76saMI2uz9QGOrIBKG8FTm9o6bnAHfHThCzvSBTaXqRMMjGxQvDVr%2BM8joF2FYZDWvouF%2BU7pl0PbW00TfzC%2F59w9%2ByQHarFIUFvcisYBwBP0OM5TZscDS6lW1xKAx0AlqJSbGRHF%2FlSOu4CtzJjPMy%2B0k4DlHpJkBYTCV2opiYpqd3NmgrzeGtyN%2Blt99mvBPpp%2F0sI7M5J5MNdBIN3RygAJFncLx0uRiqyVS%2B7%2FKw9V49ZjXOF6Q4nnSl1Lw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=5a4bc5d90aaa8f28f1fd5439270161811615b45d89257c197aea86ca6d8d467b",
+      "file_size": 50831,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6266939,
+      "file_name": "02_unauthenticated_edit_page.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ifhf7cesp48l1irpygopx3124z88?response-content-disposition=attachment%3B%20filename%3D%2202_unauthenticated_edit_page.png%22%3B%20filename%2A%3DUTF-8%27%2702_unauthenticated_edit_page.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYH2TS37B%2F20260830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260830T075200Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHx4glNPB344jWjoOVOq8ROtVyED2sEonTO7TUjTzTdpAiBgawd2XnvEkktnvuucXBkS1CA9JcunlwI2Ox%2F0MhhurSqxBQh4EAMaDDAxMzYxOTI3NDg0OSIM2yquhWUXKHkeptDIKo4FwlZlzDcBA6vA0XYtMQi1IbWt2o7TKWENDbmqziSl53OldhRm9qkKZiqlohvsYCKuidJpRgRUWEnnch8%2FzNNKyKRQ7nXI8y02sbU%2B%2BS%2BJBTF0WkhtnDr4KXgDqa5FJqp7v0jYRZZnNDkcwJS1UZyHk%2Fb84L45pti70ad2EHPE37thedJ2CCThfyuG%2FffgWf44bVaXVg8QTpB16Jz1ntsRQvcJf5o0lYzfJdtRooFoR1%2FAfu4W4E5UjW4c8CQlYO5loKGPN7ZTpA94S5mqq%2BvHMVd72hD4yfVwL8r4RgXakgysqghW64ch%2BfYhOh6ZDiCKrx0JwSWhHpjnAkXj6iAPN57L27M%2BS%2Bcl4FbKLpsroORHarN9OhLTbJBxlkLjaErFBsygAHohALsivQcc32zNMLRxbWUn0RVvmOq9iZM2muDVwvYroByNQq9ndUXaJtjqCulputdNPdxmCayi50OE319oGvqK3UutlG6m6mjYsYrJXVPbe69gPBR2C7IFKkXx75p1kWUa1uUGBHCztYD%2BmeP0IyvdfcY25Klnxdd20geXfglIEPXwkMeijloDTZB%2FyYwFMaHMLXH126CI%2BPunITofiiVPgljhwZNTWnkkAWpVhp1k7PX3n0F5t2hYXrxwP2AeAAo7KXbsberHL3zMH9PHjZvDiIEMkWCp4uckyLPMPqSlLWXg79TWF4Egdm6A96z6d2T21GnTSO%2BWshnQv0h%2BUPhsUalNw1x%2BXh1uiLmYVsLkNor8yoSp2yawMdVuEUeasWWHKZ%2BBljcjjPjco5fR8PSEEYMHCuHx53LKGq5ldDEwkyN2NCvfpomo4eAvZljZPH2rbryVS9URPbkKu4FVvIQ5oYoBLI7e76saMI2uz9QGOrIBKG8FTm9o6bnAHfHThCzvSBTaXqRMMjGxQvDVr%2BM8joF2FYZDWvouF%2BU7pl0PbW00TfzC%2F59w9%2ByQHarFIUFvcisYBwBP0OM5TZscDS6lW1xKAx0AlqJSbGRHF%2FlSOu4CtzJjPMy%2B0k4DlHpJkBYTCV2opiYpqd3NmgrzeGtyN%2Blt99mvBPpp%2F0sI7M5J5MNdBIN3RygAJFncLx0uRiqyVS%2B7%2FKw9V49ZjXOF6Q4nnSl1Lw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ce3060ef555e56f11ea74284a998bc943f45b8f79df50368529139b06e69b494",
+      "file_size": 99951,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6266940,
+      "file_name": "04_database_persistence.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/w6non74vnk1f0694gydgep72pwfi?response-content-disposition=attachment%3B%20filename%3D%2204_database_persistence.png%22%3B%20filename%2A%3DUTF-8%27%2704_database_persistence.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYH2TS37B%2F20260830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260830T075200Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHx4glNPB344jWjoOVOq8ROtVyED2sEonTO7TUjTzTdpAiBgawd2XnvEkktnvuucXBkS1CA9JcunlwI2Ox%2F0MhhurSqxBQh4EAMaDDAxMzYxOTI3NDg0OSIM2yquhWUXKHkeptDIKo4FwlZlzDcBA6vA0XYtMQi1IbWt2o7TKWENDbmqziSl53OldhRm9qkKZiqlohvsYCKuidJpRgRUWEnnch8%2FzNNKyKRQ7nXI8y02sbU%2B%2BS%2BJBTF0WkhtnDr4KXgDqa5FJqp7v0jYRZZnNDkcwJS1UZyHk%2Fb84L45pti70ad2EHPE37thedJ2CCThfyuG%2FffgWf44bVaXVg8QTpB16Jz1ntsRQvcJf5o0lYzfJdtRooFoR1%2FAfu4W4E5UjW4c8CQlYO5loKGPN7ZTpA94S5mqq%2BvHMVd72hD4yfVwL8r4RgXakgysqghW64ch%2BfYhOh6ZDiCKrx0JwSWhHpjnAkXj6iAPN57L27M%2BS%2Bcl4FbKLpsroORHarN9OhLTbJBxlkLjaErFBsygAHohALsivQcc32zNMLRxbWUn0RVvmOq9iZM2muDVwvYroByNQq9ndUXaJtjqCulputdNPdxmCayi50OE319oGvqK3UutlG6m6mjYsYrJXVPbe69gPBR2C7IFKkXx75p1kWUa1uUGBHCztYD%2BmeP0IyvdfcY25Klnxdd20geXfglIEPXwkMeijloDTZB%2FyYwFMaHMLXH126CI%2BPunITofiiVPgljhwZNTWnkkAWpVhp1k7PX3n0F5t2hYXrxwP2AeAAo7KXbsberHL3zMH9PHjZvDiIEMkWCp4uckyLPMPqSlLWXg79TWF4Egdm6A96z6d2T21GnTSO%2BWshnQv0h%2BUPhsUalNw1x%2BXh1uiLmYVsLkNor8yoSp2yawMdVuEUeasWWHKZ%2BBljcjjPjco5fR8PSEEYMHCuHx53LKGq5ldDEwkyN2NCvfpomo4eAvZljZPH2rbryVS9URPbkKu4FVvIQ5oYoBLI7e76saMI2uz9QGOrIBKG8FTm9o6bnAHfHThCzvSBTaXqRMMjGxQvDVr%2BM8joF2FYZDWvouF%2BU7pl0PbW00TfzC%2F59w9%2ByQHarFIUFvcisYBwBP0OM5TZscDS6lW1xKAx0AlqJSbGRHF%2FlSOu4CtzJjPMy%2B0k4DlHpJkBYTCV2opiYpqd3NmgrzeGtyN%2Blt99mvBPpp%2F0sI7M5J5MNdBIN3RygAJFncLx0uRiqyVS%2B7%2FKw9V49ZjXOF6Q4nnSl1Lw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=c05314bcd32a853b54b8a94c0af6c26f835bf2c70dfe98c73b156b83cf301bcb",
+      "file_size": 21943,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6266941,
+      "file_name": "03_billing_modified_page.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/soqoky9ci1gum2lruh25k0vj0er0?response-content-disposition=attachment%3B%20filename%3D%2203_billing_modified_page.png%22%3B%20filename%2A%3DUTF-8%27%2703_billing_modified_page.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYH2TS37B%2F20260830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260830T075200Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHx4glNPB344jWjoOVOq8ROtVyED2sEonTO7TUjTzTdpAiBgawd2XnvEkktnvuucXBkS1CA9JcunlwI2Ox%2F0MhhurSqxBQh4EAMaDDAxMzYxOTI3NDg0OSIM2yquhWUXKHkeptDIKo4FwlZlzDcBA6vA0XYtMQi1IbWt2o7TKWENDbmqziSl53OldhRm9qkKZiqlohvsYCKuidJpRgRUWEnnch8%2FzNNKyKRQ7nXI8y02sbU%2B%2BS%2BJBTF0WkhtnDr4KXgDqa5FJqp7v0jYRZZnNDkcwJS1UZyHk%2Fb84L45pti70ad2EHPE37thedJ2CCThfyuG%2FffgWf44bVaXVg8QTpB16Jz1ntsRQvcJf5o0lYzfJdtRooFoR1%2FAfu4W4E5UjW4c8CQlYO5loKGPN7ZTpA94S5mqq%2BvHMVd72hD4yfVwL8r4RgXakgysqghW64ch%2BfYhOh6ZDiCKrx0JwSWhHpjnAkXj6iAPN57L27M%2BS%2Bcl4FbKLpsroORHarN9OhLTbJBxlkLjaErFBsygAHohALsivQcc32zNMLRxbWUn0RVvmOq9iZM2muDVwvYroByNQq9ndUXaJtjqCulputdNPdxmCayi50OE319oGvqK3UutlG6m6mjYsYrJXVPbe69gPBR2C7IFKkXx75p1kWUa1uUGBHCztYD%2BmeP0IyvdfcY25Klnxdd20geXfglIEPXwkMeijloDTZB%2FyYwFMaHMLXH126CI%2BPunITofiiVPgljhwZNTWnkkAWpVhp1k7PX3n0F5t2hYXrxwP2AeAAo7KXbsberHL3zMH9PHjZvDiIEMkWCp4uckyLPMPqSlLWXg79TWF4Egdm6A96z6d2T21GnTSO%2BWshnQv0h%2BUPhsUalNw1x%2BXh1uiLmYVsLkNor8yoSp2yawMdVuEUeasWWHKZ%2BBljcjjPjco5fR8PSEEYMHCuHx53LKGq5ldDEwkyN2NCvfpomo4eAvZljZPH2rbryVS9URPbkKu4FVvIQ5oYoBLI7e76saMI2uz9QGOrIBKG8FTm9o6bnAHfHThCzvSBTaXqRMMjGxQvDVr%2BM8joF2FYZDWvouF%2BU7pl0PbW00TfzC%2F59w9%2ByQHarFIUFvcisYBwBP0OM5TZscDS6lW1xKAx0AlqJSbGRHF%2FlSOu4CtzJjPMy%2B0k4DlHpJkBYTCV2opiYpqd3NmgrzeGtyN%2Blt99mvBPpp%2F0sI7M5J5MNdBIN3RygAJFncLx0uRiqyVS%2B7%2FKw9V49ZjXOF6Q4nnSl1Lw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ebc8de3c3e736987c1adf1e020abd7cb386882c4898f9df3fad2a895e7275fcc",
+      "file_size": 128640,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6266944,
+      "file_name": "reproduction-setup.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/9zsnpgyrmzonxvoqd9lgokuyw9fm?response-content-disposition=attachment%3B%20filename%3D%22reproduction-setup.py%22%3B%20filename%2A%3DUTF-8%27%27reproduction-setup.py&response-content-type=text%2Fx-python&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYH2TS37B%2F20260830%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260830T075200Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEK%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHx4glNPB344jWjoOVOq8ROtVyED2sEonTO7TUjTzTdpAiBgawd2XnvEkktnvuucXBkS1CA9JcunlwI2Ox%2F0MhhurSqxBQh4EAMaDDAxMzYxOTI3NDg0OSIM2yquhWUXKHkeptDIKo4FwlZlzDcBA6vA0XYtMQi1IbWt2o7TKWENDbmqziSl53OldhRm9qkKZiqlohvsYCKuidJpRgRUWEnnch8%2FzNNKyKRQ7nXI8y02sbU%2B%2BS%2BJBTF0WkhtnDr4KXgDqa5FJqp7v0jYRZZnNDkcwJS1UZyHk%2Fb84L45pti70ad2EHPE37thedJ2CCThfyuG%2FffgWf44bVaXVg8QTpB16Jz1ntsRQvcJf5o0lYzfJdtRooFoR1%2FAfu4W4E5UjW4c8CQlYO5loKGPN7ZTpA94S5mqq%2BvHMVd72hD4yfVwL8r4RgXakgysqghW64ch%2BfYhOh6ZDiCKrx0JwSWhHpjnAkXj6iAPN57L27M%2BS%2Bcl4FbKLpsroORHarN9OhLTbJBxlkLjaErFBsygAHohALsivQcc32zNMLRxbWUn0RVvmOq9iZM2muDVwvYroByNQq9ndUXaJtjqCulputdNPdxmCayi50OE319oGvqK3UutlG6m6mjYsYrJXVPbe69gPBR2C7IFKkXx75p1kWUa1uUGBHCztYD%2BmeP0IyvdfcY25Klnxdd20geXfglIEPXwkMeijloDTZB%2FyYwFMaHMLXH126CI%2BPunITofiiVPgljhwZNTWnkkAWpVhp1k7PX3n0F5t2hYXrxwP2AeAAo7KXbsberHL3zMH9PHjZvDiIEMkWCp4uckyLPMPqSlLWXg79TWF4Egdm6A96z6d2T21GnTSO%2BWshnQv0h%2BUPhsUalNw1x%2BXh1uiLmYVsLkNor8yoSp2yawMdVuEUeasWWHKZ%2BBljcjjPjco5fR8PSEEYMHCuHx53LKGq5ldDEwkyN2NCvfpomo4eAvZljZPH2rbryVS9URPbkKu4FVvIQ5oYoBLI7e76saMI2uz9QGOrIBKG8FTm9o6bnAHfHThCzvSBTaXqRMMjGxQvDVr%2BM8joF2FYZDWvouF%2BU7pl0PbW00TfzC%2F59w9%2ByQHarFIUFvcisYBwBP0OM5TZscDS6lW1xKAx0AlqJSbGRHF%2FlSOu4CtzJjPMy%2B0k4DlHpJkBYTCV2opiYpqd3NmgrzeGtyN%2Blt99mvBPpp%2F0sI7M5J5MNdBIN3RygAJFncLx0uRiqyVS%2B7%2FKw9V49ZjXOF6Q4nnSl1Lw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8c80d22d1f9b2f4b09f16c1065afc691bc62ceb3e8e7a97132bf17fb79406cd6",
+      "file_size": 638,
+      "type": "text/x-python",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-08-30T04:54:35.182Z",
+  "allow_singular_disclosure_after": -10645.164872798,
+  "singular_disclosure_allowed": true,
+  "vote_count": 3,
+  "voters": [
+    "visionx7",
+    "sameer_ali",
+    "ott3r"
+  ],
+  "severity": {
+    "rating": "high",
+    "score": 7.5,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "high",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 176,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/WeblateOrg/website",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

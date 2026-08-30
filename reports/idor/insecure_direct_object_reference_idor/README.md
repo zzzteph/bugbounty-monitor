@@ -1,6 +1,6 @@
 # Insecure Direct Object Reference Idor
 
-**286 report(s)**
+**287 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -65,6 +65,7 @@
 | IDOR on ██████ via direct photo URL leads to unauthorized access to deleted and other users' photos | — | nextcloud | 2026-04-07 | [#3518758](https://hackerone.com/reports/3518758) |
 | IDOR: autotranslate.translateMessage Full Message Content Leak | — | rocket_chat | 2026-05-18 | [#3713682](https://hackerone.com/reports/3713682) |
 | Hidden/restricted tags can be mutated through synonym ID paths without per-tag authorization | — | discourse | 2026-08-26 | [#3689633](https://hackerone.com/reports/3689633) |
+| **Unauthenticated IDOR allows modification of payment customer billing information** | — | weblate | 2026-08-30 | [#3869124](https://hackerone.com/reports/3869124) |
 | Add labels to arbitrary issues/prs & compromise github actions label checks | — | github | 2026-03-19 | [#3527771](https://hackerone.com/reports/3527771) |
 | Multiple IDORs in family pairing api | — | tiktok | 2022-05-06 | [#1286332](https://hackerone.com/reports/1286332) |
 | Chain of IDORs Between U4B and Vouchers APIs Allows Attackers to View and Modify Program/Voucher Policies and to Obtain Organization Employees' PII | — | uber | 2022-04-07 | [#1148697](https://hackerone.com/reports/1148697) |
