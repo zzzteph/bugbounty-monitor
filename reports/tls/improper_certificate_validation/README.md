@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**47 report(s)**
+**48 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -15,6 +15,7 @@
 | Built-in TLS module unexpectedly treats "rejectUnauthorized: undefined" as "rejectUnauthorized: false", disabling all certificate validation | $150 | nodejs | 2021-09-10 | [#1278254](https://hackerone.com/reports/1278254) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
+| 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
 | TLS session cache case-folds CA paths and bypasses the active trust profile | — | curl | 2026-08-25 | [#3966955](https://hackerone.com/reports/3966955) |
