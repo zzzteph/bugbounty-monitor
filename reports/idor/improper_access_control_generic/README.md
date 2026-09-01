@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**682 report(s)**
+**683 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -429,6 +429,7 @@
 | Hide download previews are accessible without a watermark | — | nextcloud | 2023-05-04 | [#1745755](https://hackerone.com/reports/1745755) |
 | Waitlist bypass for accessing SIGN.PLUS Beta | — | alohi | 2022-05-30 | [#1494308](https://hackerone.com/reports/1494308) |
 | Archived / Deleted / Private Poll Can Be Viewed by Another Users [Crowdsignal WordPress plugins] | — | automattic | 2022-11-03 | [#1711318](https://hackerone.com/reports/1711318) |
+| Ticket Trick Attack allows access to Rockstar Games' workspaces | — | rockstargames | 2026-09-01 | [#1534465](https://hackerone.com/reports/1534465) |
 | Disabling context isolation, nodeIntegrationInSubFrames using an unauthorised frame. | — | ibb | 2022-08-11 | [#1647287](https://hackerone.com/reports/1647287) |
 | One-click account hijack for anyone using Apple sign-in with Reddit, due to response-type switch + leaking href to XSS on www.redditmedia.com | — | reddit | 2022-08-02 | [#1567186](https://hackerone.com/reports/1567186) |
 | Broken access discloses users and PII at https://███████ [HtUS] | — | deptofdefense | 2022-10-14 | [#1624374](https://hackerone.com/reports/1624374) |
