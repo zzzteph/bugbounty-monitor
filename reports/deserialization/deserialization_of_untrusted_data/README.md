@@ -1,12 +1,13 @@
 # Deserialization Of Untrusted Data
 
-**48 report(s)**
+**49 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | Kafka Connect RCE via connector SASL  JAAS JndiLoginModule configuration | $5,000 | aiven_ltd | 2022-11-08 | [#1529790](https://hackerone.com/reports/1529790) |
 | [CVE-2023-27531] Possible Deserialization of Untrusted Data vulnerability in Kredis JSON | $4,660 | ibb | 2023-08-15 | [#2071554](https://hackerone.com/reports/2071554) |
 | CVE-2025-24813: Remote Code Execution and/or Information disclosure and/or malicious content added to uploaded files via write enabled Default Servlet | $4,323 | ibb | 2025-04-27 | [#3031518](https://hackerone.com/reports/3031518) |
+| connect.8x8.com: Deserialization Vulnerability  in Automation Builder via Jint→Newtonsoft serializer coercion (TypeNameHandling) | $3,000 | 8x8-bounty | 2026-09-01 | [#3861550](https://hackerone.com/reports/3861550) |
 | Remote code execution on rubygems.org | $1,500 | rubygems | 2017-11-09 | [#274990](https://hackerone.com/reports/274990) |
 | Loading YAML in Java client can lead to command execution | $1,000 | kubernetes | 2021-08-07 | [#1167773](https://hackerone.com/reports/1167773) |
 | [CVE-2021-44228] nps.acronis.com is vulnerable to the recent log4shell 0-day | $1,000 | acronis | 2022-07-13 | [#1425474](https://hackerone.com/reports/1425474) |

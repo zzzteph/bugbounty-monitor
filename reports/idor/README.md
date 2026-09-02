@@ -1,6 +1,6 @@
 # IDOR / Broken Access Control
 
-**1077 report(s) across 10 class(es)**
+**1078 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -15,7 +15,7 @@
 | [Missing Authorization](missing_authorization/README.md) | 7 | $1,200 |
 | [Reliance On Untrusted Inputs In A Security Decision](reliance_on_untrusted_inputs_in_a_security_decision/README.md) | 6 | — |
 | [Exposed Dangerous Method Or Function](exposed_dangerous_method_or_function/README.md) | 3 | — |
-| [External Control Of Critical State Data](external_control_of_critical_state_data/README.md) | 2 | — |
+| [External Control Of Critical State Data](external_control_of_critical_state_data/README.md) | 3 | $1,337 |
 
 ## All Reports
 
@@ -80,6 +80,7 @@
 | Possible to enumerate Addresses of users using AddressId and guessing the delivery_subzone | $1,500 | eternal | 2020-07-15 | [#514897](https://hackerone.com/reports/514897) |
 | A deactivated user can access data through GraphQL | $1,370 | gitlab | 2021-08-30 | [#1192460](https://hackerone.com/reports/1192460) |
 | Improper Access Control in LINE Timeline API that returns a list of hidden friends | $1,347 | line | 2020-11-17 | [#853894](https://hackerone.com/reports/853894) |
+| connect.8x8.com: Automation Builder - Input Validation Issue in Workflow Step Outputs | $1,337 | 8x8-bounty | 2026-09-02 | [#3858504](https://hackerone.com/reports/3858504) |
 | Any meeting chat history can be read and modified by an arbitrary user | $1,337 | 8x8-bounty | 2021-04-29 | [#1038658](https://hackerone.com/reports/1038658) |
 | Improper handling of wildcards in --allow-fs-read and --allow-fs-write | $1,290 | ibb | 2024-05-29 | [#2434819](https://hackerone.com/reports/2434819) |
 | Access token stealing. | $1,200 | playstation | 2020-11-21 | [#821896](https://hackerone.com/reports/821896) |
