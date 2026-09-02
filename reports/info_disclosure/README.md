@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1117 report(s) across 10 class(es)**
+**1118 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 910 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 911 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -294,6 +294,7 @@
 | http://digital.starbucks.com/ Creation of Google G Suite Account on Behalf of starbucks.  | — | starbucks | 2017-01-17 | [#191179](https://hackerone.com/reports/191179) |
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
 | CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
+| Background sync cache retains outgoing additional transaction secret keys | — | monero | 2026-08-20 | [#3749681](https://hackerone.com/reports/3749681) |
 | ARG_CLEAR credential scrubbing wipes only UTF-8 copies on Windows Unicode builds | — | curl | 2026-08-27 | [#3968431](https://hackerone.com/reports/3968431) |
 | CURLOPT_COOKIE leaked to cross-origin redirect target — CURLOPT_UNRESTRICTED_AUTH bypass for the STRING_COOKIE path | — | curl | 2026-06-05 | [#3766065](https://hackerone.com/reports/3766065) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
