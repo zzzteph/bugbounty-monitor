@@ -1,6 +1,6 @@
 # Path Traversal
 
-**231 report(s)**
+**232 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -43,6 +43,7 @@
 | Author → arbitrary file deletion anywhere on disk (site takeover) via `POST /wp/v2/media/<id>/finalize` poisoning `_wp_attachment_metadata` | — | wordpress | 2026-08-28 | [#3931777](https://hackerone.com/reports/3931777) |
 | Path Traversal in curl file:// Protocol Handler Allows Unauthorized File Access | — | curl | 2026-01-04 | [#3485930](https://hackerone.com/reports/3485930) |
 | Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix | — | rails | 2026-07-30 | [#3553340](https://hackerone.com/reports/3553340) |
+| CVE-2026-80256: wcurl backslash bypass | — | curl | 2026-09-02 | [#3969820](https://hackerone.com/reports/3969820) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |
 | Path Traversal in Nextcloud Talk Android Exposes User Credentials and Private Data via FileProvider | — | nextcloud | 2026-08-24 | [#3696266](https://hackerone.com/reports/3696266) |
 | [CVE-2020-3452] on ███████ | — | deptofdefense | 2022-04-07 | [#1234925](https://hackerone.com/reports/1234925) |

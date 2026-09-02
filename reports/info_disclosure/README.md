@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1116 report(s) across 10 class(es)**
+**1117 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 909 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 910 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -300,6 +300,7 @@
 | View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
 | 18:  Explicit IPv6 proxy zone ID silently ignored — proxy credentials sent to wrong interface | — | curl | 2026-08-31 | [#3973127](https://hackerone.com/reports/3973127) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
+| 07: GnuTLS 0-RTT early data bypasses file-backed public-key pin verification | — | curl | 2026-09-02 | [#3973098](https://hackerone.com/reports/3973098) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 |  Secure cookies leaked to HTTP origins through HTTPS forwarding proxy | — | curl | 2026-06-15 | [#3803415](https://hackerone.com/reports/3803415) |
 | PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
