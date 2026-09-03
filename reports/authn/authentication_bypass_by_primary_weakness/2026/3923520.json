@@ -1,0 +1,130 @@
+{
+  "id": 3923520,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTIzNTIw",
+  "url": "https://hackerone.com/reports/3923520",
+  "title": "CVE-2026-19931: Negotiate ambient user conn reuse",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-08-07T12:21:52.577Z",
+  "submitted_at": "2026-08-07T17:31:00.608Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "dukek",
+    "url": "/dukek",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-19931"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-03T06:09:11.245Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-02T07:17:04.442Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nOn Windows with SSPI/Negotiate, curl 8.21.0 can reuse a connection authenticated with ambient credentials for a later request using different explicit credentials.\n\nIn `url_match_auth_nego()`, the credential comparison is skipped when `conn->creds == NULL`. This allows a connection authenticated as one identity to be reused for a request configured with another identity. In my reproducer, request A authenticates as `Administrator`, request B supplies credentials for `userB`, but the server processes B as `Administrator`.\n\ncurl 8.20.0 does not reproduce this issue.\n\n## Affected version\n\nReproduced with libcurl 8.21.0 on Windows using SSPI/SPNEGO.\n\n## Root cause\n\nIn 8.21.0:\n\n```c\nif(m->want_nego_http) {\n  if(conn->creds &&\n     (!Curl_creds_same(conn->creds, m->data->state.creds) ||\n      !Curl_peer_equal(conn->creds_origin, m->data->state.origin)))\n    return FALSE;\n}\n```\n\nThe credential/origin comparison is only performed when `conn->creds` is non-NULL. Connections authenticated through ambient SSPI credentials can have `conn->creds == NULL`, so the check is skipped.\n\n## Steps To Reproduce\n\n1. Run the attached local Windows Negotiate server.\n2. Run the PoC as Windows user A (`Administrator` in my test).\n3. Request A uses `CURLAUTH_NEGOTIATE` without explicit credentials.\n4. Request B uses another easy handle on the same `CURLM` with explicit credentials for `userB`.\n5. On curl 8.21.0, request B reuses A's connection.\n\nObserved:\n\n```text\n8.20.0:\nA default        -> Administrator\nB explicit userB -> userB\n\n8.21.0:\nA default        -> Administrator\nB explicit userB -> Administrator\n```\n\nDisabling connection reuse causes B to authenticate correctly as `userB`.\n\nAttached:\n\n* `poc.c` - minimal libcurl reproducer\n* `server.cs` - minimal local Negotiate server\n\n## Impact\n\nA request configured for one user may execute using the identity of a previously authenticated pooled connection.\n\n## Suggested fix\n\nThe credential/origin comparison should depend on whether the connection has entered Negotiate authentication state, rather than whether `conn->creds` is non-NULL:\n\n```diff\n if(m->want_nego_http) {\n-  if(conn->creds &&\n+  if((conn->http_negotiate_state != GSS_AUTHNONE) &&\n      (!Curl_creds_same(conn->creds, m->data->state.creds) ||\n       !Curl_peer_equal(conn->creds_origin, m->data->state.origin)))\n     return FALSE;\n }\n```\n",
+  "weakness": {
+    "id": 184,
+    "name": "Authentication Bypass by Primary Weakness"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6416193,
+      "file_name": "server.cs",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ixcoetwrmchsfywlq7cgufb7b1l3?response-content-disposition=attachment%3B%20filename%3D%22server.cs%22%3B%20filename%2A%3DUTF-8%27%27server.cs&response-content-type=text%2Fx-csharp&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3S6WMZOG%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075214Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIFAbOs6KnygixnNK65%2FAtyQEpBdnZ00cFOW%2FQYGH806NAiBqCJ85OKU1t8ewwiLdDcnSMLAsXZLzXVAq35pnvHXMtCq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMC3PlwjhljPjX3ZaaKo8FWBgvCgSt48mUB4Qfk6fanuudh0LPdIffpF2eT7hgp3wU%2BGWEoz%2FTwIUdzt3TyczzXyCgkZa1mMDqN12nPzkCixMT4jUAEU547gmfuVzHjS3%2FbWuH%2FsOjDSVowQft17NC4qt%2FvHPmDTfQL23cIRL1emSxgYuBxuqqg4wgAlOfPMurLBuHR5hSdOn3VVn01UfXblpM21yMvct4X2XvdNyY8O5AmARh7hZcqmZtp%2FzpfF5h0ZS9%2BlWYijWuNkSasFVuFunRLhpJG0PAQfK9pAinmHQ0IFUeLpL4VCTPdJvvyBwj5Gn%2BV3ds1GOj3S00FKq6XUD37k5uL0Iabu8UB4nSCOf6mZt7QhvWaaIW4646CbwSYIdLvR%2BF83KtGzLZurOkYoA4S6F5T0oZC4jketV7w6YI2UYzatqmScaSgaMP%2BIH8IHcdiz5b6y%2FIFAFzHogEZtv9TIkQx83STJaAq31iv536iD%2BBlYaE2DlcSGSoyPVelwFy8FwEdF%2FHkJiJb9nzCWxUn8cvn5Y8AqyUOWf0lMLsA0XL9L5PCM7Ez3vNyVWQlKmeI%2BgN7bWZHQzOZunrARPBt1TILKY9Y7FSSG6BIOzHLlmO1XKAPk67OiTNY8FrWS2Vy3J3GzKg3u5E711gT0scDWCIwmYXKJjBeYAmGmbgARQgvlReUibHcc1zJxjnIyXcmgkenxvGL%2BjZTJ7iwirC2XheVyvfFvuGjaXNsODFnbvQySGwnLLy8eHV2exfz4k4J6476jOxzdps%2FtLLdS%2BBeneJof3mEdG27n0lGeSZCH%2F8mR9YNZMv%2FzDe%2BaUeALbY2VYeVsqaaIbojPKNzSAo%2BsBz94ZNtaVYAK9%2BlEvdT7fIwHGMA1YXoI13mzCey%2BTUBjqyAU8wXTaun3IfBfkkBX6fCrcYqhQoOztNwwrAhRFFUAjNBNJUUSrZ56kl8yPChnIf3QZMhX2pmed%2BkzoMjGoG4CPS7VibfMtB5iG%2FF9r9EqhQFkija2uhzhaqbqvusQUBv1rmcPvOqNEDIoQBmt%2Fnd2pPLogZUaQY1RWlElxDuxGDlYZbYhsh%2B1YSxJd8kOkLupcABC99gFAsHElre1Dh7ePKOUV25th6XbBqH7QoMx%2FCU6E%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=a31e8a8ab97d656b465ac7329a45fc1800997e328fd60ae78671720787ecb942",
+      "file_size": 1208,
+      "type": "text/x-csharp",
+      "moderated": null
+    },
+    {
+      "id": 6416194,
+      "file_name": "poc.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/fptiyeqvniupzuw9kskfvc25hntn?response-content-disposition=attachment%3B%20filename%3D%22poc.c%22%3B%20filename%2A%3DUTF-8%27%27poc.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3S6WMZOG%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075214Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIFAbOs6KnygixnNK65%2FAtyQEpBdnZ00cFOW%2FQYGH806NAiBqCJ85OKU1t8ewwiLdDcnSMLAsXZLzXVAq35pnvHXMtCq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMC3PlwjhljPjX3ZaaKo8FWBgvCgSt48mUB4Qfk6fanuudh0LPdIffpF2eT7hgp3wU%2BGWEoz%2FTwIUdzt3TyczzXyCgkZa1mMDqN12nPzkCixMT4jUAEU547gmfuVzHjS3%2FbWuH%2FsOjDSVowQft17NC4qt%2FvHPmDTfQL23cIRL1emSxgYuBxuqqg4wgAlOfPMurLBuHR5hSdOn3VVn01UfXblpM21yMvct4X2XvdNyY8O5AmARh7hZcqmZtp%2FzpfF5h0ZS9%2BlWYijWuNkSasFVuFunRLhpJG0PAQfK9pAinmHQ0IFUeLpL4VCTPdJvvyBwj5Gn%2BV3ds1GOj3S00FKq6XUD37k5uL0Iabu8UB4nSCOf6mZt7QhvWaaIW4646CbwSYIdLvR%2BF83KtGzLZurOkYoA4S6F5T0oZC4jketV7w6YI2UYzatqmScaSgaMP%2BIH8IHcdiz5b6y%2FIFAFzHogEZtv9TIkQx83STJaAq31iv536iD%2BBlYaE2DlcSGSoyPVelwFy8FwEdF%2FHkJiJb9nzCWxUn8cvn5Y8AqyUOWf0lMLsA0XL9L5PCM7Ez3vNyVWQlKmeI%2BgN7bWZHQzOZunrARPBt1TILKY9Y7FSSG6BIOzHLlmO1XKAPk67OiTNY8FrWS2Vy3J3GzKg3u5E711gT0scDWCIwmYXKJjBeYAmGmbgARQgvlReUibHcc1zJxjnIyXcmgkenxvGL%2BjZTJ7iwirC2XheVyvfFvuGjaXNsODFnbvQySGwnLLy8eHV2exfz4k4J6476jOxzdps%2FtLLdS%2BBeneJof3mEdG27n0lGeSZCH%2F8mR9YNZMv%2FzDe%2BaUeALbY2VYeVsqaaIbojPKNzSAo%2BsBz94ZNtaVYAK9%2BlEvdT7fIwHGMA1YXoI13mzCey%2BTUBjqyAU8wXTaun3IfBfkkBX6fCrcYqhQoOztNwwrAhRFFUAjNBNJUUSrZ56kl8yPChnIf3QZMhX2pmed%2BkzoMjGoG4CPS7VibfMtB5iG%2FF9r9EqhQFkija2uhzhaqbqvusQUBv1rmcPvOqNEDIoQBmt%2Fnd2pPLogZUaQY1RWlElxDuxGDlYZbYhsh%2B1YSxJd8kOkLupcABC99gFAsHElre1Dh7ePKOUV25th6XbBqH7QoMx%2FCU6E%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1c98c87d803bcde2b1908c8d907fdead7aed2de44462235f20820ee4efe70789",
+      "file_size": 2503,
+      "type": "text/x-csrc",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

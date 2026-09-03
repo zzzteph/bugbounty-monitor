@@ -1,0 +1,141 @@
+{
+  "id": 3973090,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTczMDkw",
+  "url": "https://hackerone.com/reports/3973090",
+  "title": "CVE-2026-82208: wolfSSL CA-cache hit overrides callback",
+  "state": "Closed",
+  "substate": "resolved",
+  "readable_substate": "Resolved",
+  "created_at": "2026-08-27T08:28:10.963Z",
+  "submitted_at": "2026-08-27T08:28:11.161Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-82208"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-03T06:08:28.588Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-02T07:16:24.478Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nWith the wolfSSL backend, when CA caching is enabled and an `CURLOPT_SSL_CTX_FUNCTION` callback replaces the trust store, curl can silently reinstall the cached store after the callback returns. A certificate trusted by the cached store but rejected by the callback-selected store is then incorrectly accepted.\n\n## Root cause\n\n`Curl_wssl_setup_x509_store()` in `lib/vtls/wolfssl.c` installs a cached X509 store but does not set `wssl->x509_store_setup = TRUE`. That flag is only set inside `wssl_populate_x509_store()`, which runs on cache misses.\n\nThe sequence on a cache hit:\n\n1. Before invoking the callback, `wssl_connect_step1()` calls `Curl_wssl_setup_x509_store()` — cached store A is installed, flag stays `false`.\n2. The `CURLOPT_SSL_CTX_FUNCTION` callback runs and replaces store A with store B.\n3. During the handshake, the still-false flag causes `Curl_wssl_setup_x509_store()` to run again. It finds `CTX_get_cert_store() != cached_store` (the callback changed it), so it reinstalls cached store A.\n\n## Affected versions\n\nIntroduced in commit `0f2876b2c33f` (Jul 2024, \"wolfSSL: CA store share fix\" for #14278). Present in releases **8.9.1 through 8.21.0**.\n\n## Impact\n\nAn application that uses `CURLOPT_SSL_CTX_FUNCTION` to restrict trust (e.g. pin to a private CA) has that restriction silently bypassed when CA caching is active. A MITM presenting a certificate valid under the cached store but rejected by the callback's store succeeds.\n\nPrerequisites: wolfSSL backend, `CURLOPT_CA_CACHE_TIMEOUT != 0`, a callback that replaces the store, and differing trust between the two stores.\n\n## Reproduction\n1. Build an affected curl release (8.9.1 through 8.21.0) against wolfSSL and configure curl without a compiled-in default CA path so that a CA file is eligible for caching.\n2. Create two independent certificate authorities, called CA A and CA B.\n3. Create a TLS server certificate for the test hostname, including a matching subject alternative name, and sign it with CA A.\n4. Start an HTTPS server on the test hostname using that certificate.\n5. Write a small libcurl client that uses the same multi handle for two transfers, sets `CURLOPT_CAINFO` to CA A, and sets a nonzero `CURLOPT_CA_CACHE_TIMEOUT`.\n6. Make the first transfer without an SSL-context callback. Confirm that it succeeds and thereby populates curl's CA cache with the trust store containing CA A.\n7. For the second transfer, use a fresh connection and register `CURLOPT_SSL_CTX_FUNCTION`. In the callback, replace the wolfSSL context's certificate store with a newly created store containing only CA B.\n8. Disable connection reuse and TLS session caching for both transfers so that the second transfer performs a new TLS handshake and certificate verification.\n9. Make the second transfer to the same HTTPS server. On a vulnerable build, it incorrectly succeeds even though the callback-selected store contains only CA B and the server certificate chains only to CA A.\n10. Repeat the sequence with `CURLOPT_CA_CACHE_TIMEOUT` set to zero. The second transfer should now fail certificate verification, demonstrating that the unexpected acceptance depends on the CA-cache path.\n11. As a fixed-version check, repeat the cached sequence on a build containing commit `ed0338befd` or a later release. The second transfer should fail because curl no longer reinstalls CA A after the callback selects CA B.\n\nThe callback-selected trust store must remain authoritative. The transfer using store B should reject the server certificate regardless of whether curl's CA cache was previously populated.\n\n## Suggested fix\n\nSet `wssl->x509_store_setup = TRUE` in `Curl_wssl_setup_x509_store()` itself (before returning), rather than only inside `wssl_populate_x509_store()`. This ensures the flag is set on both cache hits and misses, preventing the second invocation from overwriting the callback's store.\n\n## Impact\n\n## Summary:\nAn attacker able to present a hostname-valid certificate trusted by curl’s cached CA store—but rejected by the application-selected store—can impersonate the intended TLS endpoint. This bypasses the application’s trust policy and may allow interception or modification of encrypted traffic.",
+  "weakness": {
+    "id": 28,
+    "name": "Improper Certificate Validation"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6562761,
+      "file_name": "poc.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/nxm83i5kbzy6hsow707tjiklqe2p?response-content-disposition=attachment%3B%20filename%3D%22poc.c%22%3B%20filename%2A%3DUTF-8%27%27poc.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2Y74FQVH%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075216Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIE76%2BXOW5mLO7MpZgCoDXt9PrKId5AFTdxuzn9EeH%2BnqAiAF6vRpWnvLvkEugh0JRxbQQLeA5%2F17AN1xBdudKt1c1iq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMsxwdDsgOTqvSCjksKo8Fc8Jn8V2zyZMO%2BjQQN9DreL12scDrze8ySgNoKtWV9h04ah8qCyb2Rk%2F3ncumSYgheJ6jrfqNIguCrCHX2k03maS7WyhyukOx0BBCPgXJBeYZqhlQmVc7GaEwhXmaPPQ1qmGi%2FmmSTHwMsPgqcWdsps%2BN6ornQmhNSy0uB2c1EhuUwH1GJkrAjDJ6DA3y7i%2BUqBthknGOlLP1nnSPxP1IX726rwEIU3ZDM3XdZR4w7OD%2F6NlSLk%2F8KGF%2B%2Fic2MhtqGnLY%2FgvAHNYhZPq7xeW5e%2B1eMTeDLERG7S0vTL86cRpoiC74gO1vspjDabL%2B7%2F4JqQqi5AnuZLA%2F89zq8UvBs6S4oezKUt6qDjLrQ%2Fiw5okwT0lqGiEaUce%2B%2BdmogtE0Ov9EDqH0%2BWgOjPv6lb9C%2Fa1ZWlCNMnhyLZpqhpyflksqyyRVE12IKVu4XmQVVjTugKSNaPKylFV0saQR1YB2IrNonFmIZmvGBPoYFa2oMd42auLjEGUEcrTwAyBYhIGBG5avHkuMpGxvU4YZJZcc8zlIXD3H2fjSkYnatrekN21hqhUq4Sfa60ZtoX55mvlVM63TKA8qq4W%2ByWZGIWkUfK2wHgxpjVNSGuWhfZh0r6SjclKa9MUXsLxcQhWKMdknEwQ2TMoV1Wu%2Bn1cTsoAyx74QqPYcVcY99sYRgn53ofY%2FA03Cf3Z4OlAFAKi3IBm5CqZudKfDMVtJu%2FIlRCrygq4LaWpAdWmC9JPBXdIwgsYRvqyWj02wr8O39RVGdxhSCKEBKU9azTALy0rbaIXgJKq0pCGx3fUd3XrFx1ONRWMifbmdmQ9jVt6TS8w%2F1W%2FKwNU1t7hoaG5qwBsv4E7lotf%2Bi3tiDpRGKgKejqji0zC8wOTUBjqyAUZIHFV%2BtK8Xhsv6LNJgJ%2FH1bFzNk8KBfhMg9knXgW50a5z78qLwT015SJ8bYKEguoF%2FhSRpNAghpNxJ1TfUTYUTV7yblIVyJq0DyTP8rAILVIz3IBZVx4p5iUzqWT8pecpTDyUNxICOsRy09GyVE3GcKTJm3XC7eWvb2pBixMkPcv2jZcFc%2BthKksPoKSv1DRRYi3Fc2YkZ5HZ6bs50hOEt9qh1dI5qM9KzOO1Agd6Oa2k%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=a79580fc0868e06cb7fe88da336b2d08d733d98c8a477c98f5a9e9754f010af0",
+      "file_size": 3365,
+      "type": "text/x-csrc",
+      "moderated": null
+    },
+    {
+      "id": 6562763,
+      "file_name": "server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/s96ieul7o2glvjtr1azj5cahddrw?response-content-disposition=attachment%3B%20filename%3D%22server.py%22%3B%20filename%2A%3DUTF-8%27%27server.py&response-content-type=text%2Fx-python-script&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2Y74FQVH%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075216Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIE76%2BXOW5mLO7MpZgCoDXt9PrKId5AFTdxuzn9EeH%2BnqAiAF6vRpWnvLvkEugh0JRxbQQLeA5%2F17AN1xBdudKt1c1iq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMsxwdDsgOTqvSCjksKo8Fc8Jn8V2zyZMO%2BjQQN9DreL12scDrze8ySgNoKtWV9h04ah8qCyb2Rk%2F3ncumSYgheJ6jrfqNIguCrCHX2k03maS7WyhyukOx0BBCPgXJBeYZqhlQmVc7GaEwhXmaPPQ1qmGi%2FmmSTHwMsPgqcWdsps%2BN6ornQmhNSy0uB2c1EhuUwH1GJkrAjDJ6DA3y7i%2BUqBthknGOlLP1nnSPxP1IX726rwEIU3ZDM3XdZR4w7OD%2F6NlSLk%2F8KGF%2B%2Fic2MhtqGnLY%2FgvAHNYhZPq7xeW5e%2B1eMTeDLERG7S0vTL86cRpoiC74gO1vspjDabL%2B7%2F4JqQqi5AnuZLA%2F89zq8UvBs6S4oezKUt6qDjLrQ%2Fiw5okwT0lqGiEaUce%2B%2BdmogtE0Ov9EDqH0%2BWgOjPv6lb9C%2Fa1ZWlCNMnhyLZpqhpyflksqyyRVE12IKVu4XmQVVjTugKSNaPKylFV0saQR1YB2IrNonFmIZmvGBPoYFa2oMd42auLjEGUEcrTwAyBYhIGBG5avHkuMpGxvU4YZJZcc8zlIXD3H2fjSkYnatrekN21hqhUq4Sfa60ZtoX55mvlVM63TKA8qq4W%2ByWZGIWkUfK2wHgxpjVNSGuWhfZh0r6SjclKa9MUXsLxcQhWKMdknEwQ2TMoV1Wu%2Bn1cTsoAyx74QqPYcVcY99sYRgn53ofY%2FA03Cf3Z4OlAFAKi3IBm5CqZudKfDMVtJu%2FIlRCrygq4LaWpAdWmC9JPBXdIwgsYRvqyWj02wr8O39RVGdxhSCKEBKU9azTALy0rbaIXgJKq0pCGx3fUd3XrFx1ONRWMifbmdmQ9jVt6TS8w%2F1W%2FKwNU1t7hoaG5qwBsv4E7lotf%2Bi3tiDpRGKgKejqji0zC8wOTUBjqyAUZIHFV%2BtK8Xhsv6LNJgJ%2FH1bFzNk8KBfhMg9knXgW50a5z78qLwT015SJ8bYKEguoF%2FhSRpNAghpNxJ1TfUTYUTV7yblIVyJq0DyTP8rAILVIz3IBZVx4p5iUzqWT8pecpTDyUNxICOsRy09GyVE3GcKTJm3XC7eWvb2pBixMkPcv2jZcFc%2BthKksPoKSv1DRRYi3Fc2YkZ5HZ6bs50hOEt9qh1dI5qM9KzOO1Agd6Oa2k%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1d20248f8f5f78e782c8c0c30928bf0873f42ffa5bf9ea54427c16f23e6b18ff",
+      "file_size": 683,
+      "type": "text/x-python-script",
+      "moderated": null
+    },
+    {
+      "id": 6562764,
+      "file_name": "run.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2wqqeka334fb3ss61ax6p7mtrwxz?response-content-disposition=attachment%3B%20filename%3D%22run.sh%22%3B%20filename%2A%3DUTF-8%27%27run.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2Y74FQVH%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075216Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIE76%2BXOW5mLO7MpZgCoDXt9PrKId5AFTdxuzn9EeH%2BnqAiAF6vRpWnvLvkEugh0JRxbQQLeA5%2F17AN1xBdudKt1c1iq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMsxwdDsgOTqvSCjksKo8Fc8Jn8V2zyZMO%2BjQQN9DreL12scDrze8ySgNoKtWV9h04ah8qCyb2Rk%2F3ncumSYgheJ6jrfqNIguCrCHX2k03maS7WyhyukOx0BBCPgXJBeYZqhlQmVc7GaEwhXmaPPQ1qmGi%2FmmSTHwMsPgqcWdsps%2BN6ornQmhNSy0uB2c1EhuUwH1GJkrAjDJ6DA3y7i%2BUqBthknGOlLP1nnSPxP1IX726rwEIU3ZDM3XdZR4w7OD%2F6NlSLk%2F8KGF%2B%2Fic2MhtqGnLY%2FgvAHNYhZPq7xeW5e%2B1eMTeDLERG7S0vTL86cRpoiC74gO1vspjDabL%2B7%2F4JqQqi5AnuZLA%2F89zq8UvBs6S4oezKUt6qDjLrQ%2Fiw5okwT0lqGiEaUce%2B%2BdmogtE0Ov9EDqH0%2BWgOjPv6lb9C%2Fa1ZWlCNMnhyLZpqhpyflksqyyRVE12IKVu4XmQVVjTugKSNaPKylFV0saQR1YB2IrNonFmIZmvGBPoYFa2oMd42auLjEGUEcrTwAyBYhIGBG5avHkuMpGxvU4YZJZcc8zlIXD3H2fjSkYnatrekN21hqhUq4Sfa60ZtoX55mvlVM63TKA8qq4W%2ByWZGIWkUfK2wHgxpjVNSGuWhfZh0r6SjclKa9MUXsLxcQhWKMdknEwQ2TMoV1Wu%2Bn1cTsoAyx74QqPYcVcY99sYRgn53ofY%2FA03Cf3Z4OlAFAKi3IBm5CqZudKfDMVtJu%2FIlRCrygq4LaWpAdWmC9JPBXdIwgsYRvqyWj02wr8O39RVGdxhSCKEBKU9azTALy0rbaIXgJKq0pCGx3fUd3XrFx1ONRWMifbmdmQ9jVt6TS8w%2F1W%2FKwNU1t7hoaG5qwBsv4E7lotf%2Bi3tiDpRGKgKejqji0zC8wOTUBjqyAUZIHFV%2BtK8Xhsv6LNJgJ%2FH1bFzNk8KBfhMg9knXgW50a5z78qLwT015SJ8bYKEguoF%2FhSRpNAghpNxJ1TfUTYUTV7yblIVyJq0DyTP8rAILVIz3IBZVx4p5iUzqWT8pecpTDyUNxICOsRy09GyVE3GcKTJm3XC7eWvb2pBixMkPcv2jZcFc%2BthKksPoKSv1DRRYi3Fc2YkZ5HZ6bs50hOEt9qh1dI5qM9KzOO1Agd6Oa2k%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1b29440c433f05147a01f6aa486fdc8b3b48749c7cf957b32dcf6e892a98725c",
+      "file_size": 1278,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6562765,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/zghnm1luelbmum4xbj9kev34r9pc?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2Y74FQVH%2F20260903%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260903T075216Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBAaCXVzLXdlc3QtMiJGMEQCIE76%2BXOW5mLO7MpZgCoDXt9PrKId5AFTdxuzn9EeH%2BnqAiAF6vRpWnvLvkEugh0JRxbQQLeA5%2F17AN1xBdudKt1c1iq7BQjZ%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMsxwdDsgOTqvSCjksKo8Fc8Jn8V2zyZMO%2BjQQN9DreL12scDrze8ySgNoKtWV9h04ah8qCyb2Rk%2F3ncumSYgheJ6jrfqNIguCrCHX2k03maS7WyhyukOx0BBCPgXJBeYZqhlQmVc7GaEwhXmaPPQ1qmGi%2FmmSTHwMsPgqcWdsps%2BN6ornQmhNSy0uB2c1EhuUwH1GJkrAjDJ6DA3y7i%2BUqBthknGOlLP1nnSPxP1IX726rwEIU3ZDM3XdZR4w7OD%2F6NlSLk%2F8KGF%2B%2Fic2MhtqGnLY%2FgvAHNYhZPq7xeW5e%2B1eMTeDLERG7S0vTL86cRpoiC74gO1vspjDabL%2B7%2F4JqQqi5AnuZLA%2F89zq8UvBs6S4oezKUt6qDjLrQ%2Fiw5okwT0lqGiEaUce%2B%2BdmogtE0Ov9EDqH0%2BWgOjPv6lb9C%2Fa1ZWlCNMnhyLZpqhpyflksqyyRVE12IKVu4XmQVVjTugKSNaPKylFV0saQR1YB2IrNonFmIZmvGBPoYFa2oMd42auLjEGUEcrTwAyBYhIGBG5avHkuMpGxvU4YZJZcc8zlIXD3H2fjSkYnatrekN21hqhUq4Sfa60ZtoX55mvlVM63TKA8qq4W%2ByWZGIWkUfK2wHgxpjVNSGuWhfZh0r6SjclKa9MUXsLxcQhWKMdknEwQ2TMoV1Wu%2Bn1cTsoAyx74QqPYcVcY99sYRgn53ofY%2FA03Cf3Z4OlAFAKi3IBm5CqZudKfDMVtJu%2FIlRCrygq4LaWpAdWmC9JPBXdIwgsYRvqyWj02wr8O39RVGdxhSCKEBKU9azTALy0rbaIXgJKq0pCGx3fUd3XrFx1ONRWMifbmdmQ9jVt6TS8w%2F1W%2FKwNU1t7hoaG5qwBsv4E7lotf%2Bi3tiDpRGKgKejqji0zC8wOTUBjqyAUZIHFV%2BtK8Xhsv6LNJgJ%2FH1bFzNk8KBfhMg9knXgW50a5z78qLwT015SJ8bYKEguoF%2FhSRpNAghpNxJ1TfUTYUTV7yblIVyJq0DyTP8rAILVIz3IBZVx4p5iUzqWT8pecpTDyUNxICOsRy09GyVE3GcKTJm3XC7eWvb2pBixMkPcv2jZcFc%2BthKksPoKSv1DRRYi3Fc2YkZ5HZ6bs50hOEt9qh1dI5qM9KzOO1Agd6Oa2k%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=7a27286583ea9378529e028d0b0e6bbdb779bcdb65cdc4cc4ce5ab13f4742b71",
+      "file_size": 1393,
+      "type": "application/octet-stream",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
