@@ -1,13 +1,13 @@
 # Information Disclosure
 
-**1120 report(s) across 10 class(es)**
+**1121 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Information Disclosure](information_disclosure/README.md) | 913 | $25,000 |
-| [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
+| [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
@@ -1135,6 +1135,7 @@
 | Weak Password Policy on techsupport.teradici.com | — | teradici | 2017-05-29 | [#228323](https://hackerone.com/reports/228323) |
 | Раскрытие имени файла приватных документов | — | vkcom | 2017-09-20 | [#219715](https://hackerone.com/reports/219715) |
 | Proxy credentials leaked in ERR_PROXY_TUNNEL error message | — | nodejs | 2026-06-25 | [#3720313](https://hackerone.com/reports/3720313) |
+| Mail contact autocomplete bypasses administrator-configured user enumeration restrictions and expose member information outside the intended scope | — | nextcloud | 2026-09-04 | [#3617729](https://hackerone.com/reports/3617729) |
 | SVG filter primitives bypass remote image blocking, enabling email tracking without consent. | — | nextcloud | 2026-04-20 | [#3486747](https://hackerone.com/reports/3486747) |
 | exposure of personal IP address via email. | — | weblate | 2025-07-16 | [#3179850](https://hackerone.com/reports/3179850) |
 | Connection Count Bug in Monero Node Enables Outbound Peer Reset Attack | — | monero | 2026-05-06 | [#3185083](https://hackerone.com/reports/3185083) |

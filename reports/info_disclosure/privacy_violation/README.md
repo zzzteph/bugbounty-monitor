@@ -1,6 +1,6 @@
 # Privacy Violation
 
-**77 report(s)**
+**78 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -76,6 +76,7 @@
 | Weak Password Policy on techsupport.teradici.com | — | teradici | 2017-05-29 | [#228323](https://hackerone.com/reports/228323) |
 | Раскрытие имени файла приватных документов | — | vkcom | 2017-09-20 | [#219715](https://hackerone.com/reports/219715) |
 | Proxy credentials leaked in ERR_PROXY_TUNNEL error message | — | nodejs | 2026-06-25 | [#3720313](https://hackerone.com/reports/3720313) |
+| Mail contact autocomplete bypasses administrator-configured user enumeration restrictions and expose member information outside the intended scope | — | nextcloud | 2026-09-04 | [#3617729](https://hackerone.com/reports/3617729) |
 | SVG filter primitives bypass remote image blocking, enabling email tracking without consent. | — | nextcloud | 2026-04-20 | [#3486747](https://hackerone.com/reports/3486747) |
 | exposure of personal IP address via email. | — | weblate | 2025-07-16 | [#3179850](https://hackerone.com/reports/3179850) |
 | Connection Count Bug in Monero Node Enables Outbound Peer Reset Attack | — | monero | 2026-05-06 | [#3185083](https://hackerone.com/reports/3185083) |
