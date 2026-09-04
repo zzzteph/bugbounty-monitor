@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**413 report(s)**
+**414 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -380,6 +380,7 @@
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
+| Unauthenticated ?q= search query causes exponential pyparsing backtracking under a process-global lock in Weblate | — | weblate | 2026-09-04 | [#3898281](https://hackerone.com/reports/3898281) |
 | CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |

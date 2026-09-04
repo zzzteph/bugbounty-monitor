@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1119 report(s) across 10 class(es)**
+**1120 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 912 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 913 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 77 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -897,6 +897,7 @@
 | Background sync cache retains outgoing additional transaction secret keys | — | monero | 2026-08-20 | [#3749681](https://hackerone.com/reports/3749681) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 | ARG_CLEAR credential scrubbing wipes only UTF-8 copies on Windows Unicode builds | — | curl | 2026-08-27 | [#3968431](https://hackerone.com/reports/3968431) |
+| API token sent to URL dictated by an untrusted project .weblate file | — | weblate | 2026-09-04 | [#3825141](https://hackerone.com/reports/3825141) |
 | CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
 | View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
 | 18:  Explicit IPv6 proxy zone ID silently ignored — proxy credentials sent to wrong interface | — | curl | 2026-08-31 | [#3973127](https://hackerone.com/reports/3973127) |
