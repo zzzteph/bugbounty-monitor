@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1121 report(s) across 10 class(es)**
+**1123 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 913 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 915 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -197,6 +197,7 @@
 | Calendar and addressbook names disclosed (NC-SA-2017-012) | $183 | nextcloud | 2017-05-08 | [#203594](https://hackerone.com/reports/203594) |
 | Internal Hostname disclosure from multiple Apache servers via blank host header method | $150 | pingidentity | 2020-03-12 | [#548094](https://hackerone.com/reports/548094) |
 | Source Code Disclosure (CGI) | $150 | rockstargames | 2017-03-17 | [#211418](https://hackerone.com/reports/211418) |
+| Unauthenticated testing endpoint of notify_push expose internal IP | $150 | nextcloud | 2026-09-05 | [#3513471](https://hackerone.com/reports/3513471) |
 | Table and Column Exposure | $150 | rockstargames | 2018-05-10 | [#218898](https://hackerone.com/reports/218898) |
 | Google Maps API key leaked during device pairing | $150 | pingidentity | 2020-04-28 | [#724039](https://hackerone.com/reports/724039) |
 | Listing of Amazon S3 Bucket accessible to any amazon authenticated user (metrics.pscp.tv) | $140 | x | 2017-11-19 | [#278191](https://hackerone.com/reports/278191) |
@@ -218,6 +219,7 @@
 | An “algobot”-s GitHub access token was leaked | $100 | algolia | 2017-06-10 | [#212067](https://hackerone.com/reports/212067) |
 | Просмотр Участников ЧАСТНОЙ встречи  | $100 | vkcom | 2017-12-31 | [#261764](https://hackerone.com/reports/261764) |
 | Раскрытие информации о частной группе или приложении | $100 | vkcom | 2018-05-12 | [#216289](https://hackerone.com/reports/216289) |
+| Email Enumeration via Password-Protected Share Identity Verification | $100 | nextcloud | 2026-09-05 | [#3507273](https://hackerone.com/reports/3507273) |
 | Hacker email disclosed on submission at hackerone hactivity | $100 | security | 2023-10-24 | [#2215434](https://hackerone.com/reports/2215434) |
 | Lack of Input sanitization leads to database Character encoding configuration Disclosure | $100 | unikrn | 2020-08-07 | [#866271](https://hackerone.com/reports/866271) |
 | TikTok Account Creation Date Information Disclosure  | $100 | tiktok | 2022-10-18 | [#1562020](https://hackerone.com/reports/1562020) |

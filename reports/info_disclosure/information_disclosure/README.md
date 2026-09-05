@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**913 report(s)**
+**915 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -153,6 +153,7 @@
 | Calendar and addressbook names disclosed (NC-SA-2017-012) | $183 | nextcloud | 2017-05-08 | [#203594](https://hackerone.com/reports/203594) |
 | Internal Hostname disclosure from multiple Apache servers via blank host header method | $150 | pingidentity | 2020-03-12 | [#548094](https://hackerone.com/reports/548094) |
 | Source Code Disclosure (CGI) | $150 | rockstargames | 2017-03-17 | [#211418](https://hackerone.com/reports/211418) |
+| Unauthenticated testing endpoint of notify_push expose internal IP | $150 | nextcloud | 2026-09-05 | [#3513471](https://hackerone.com/reports/3513471) |
 | Listing of Amazon S3 Bucket accessible to any amazon authenticated user (metrics.pscp.tv) | $140 | x | 2017-11-19 | [#278191](https://hackerone.com/reports/278191) |
 | Просмотр удаленного сообщения из лс группы + возможность его переслать. | $100 | vkcom | 2021-11-05 | [#507972](https://hackerone.com/reports/507972) |
 | Full path disclosure on track.uber.com | $100 | uber | 2018-11-20 | [#125197](https://hackerone.com/reports/125197) |
@@ -171,6 +172,7 @@
 | An “algobot”-s GitHub access token was leaked | $100 | algolia | 2017-06-10 | [#212067](https://hackerone.com/reports/212067) |
 | Просмотр Участников ЧАСТНОЙ встречи  | $100 | vkcom | 2017-12-31 | [#261764](https://hackerone.com/reports/261764) |
 | Раскрытие информации о частной группе или приложении | $100 | vkcom | 2018-05-12 | [#216289](https://hackerone.com/reports/216289) |
+| Email Enumeration via Password-Protected Share Identity Verification | $100 | nextcloud | 2026-09-05 | [#3507273](https://hackerone.com/reports/3507273) |
 | Hacker email disclosed on submission at hackerone hactivity | $100 | security | 2023-10-24 | [#2215434](https://hackerone.com/reports/2215434) |
 | Android content provider exposes password-protected share password hashes | $75 | nextcloud | 2020-01-31 | [#242727](https://hackerone.com/reports/242727) |
 | SSRF in upload IMG through URL | $64 | discourse | 2017-06-18 | [#228377](https://hackerone.com/reports/228377) |
