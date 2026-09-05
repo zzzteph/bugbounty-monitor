@@ -1,12 +1,12 @@
 # Business Logic
 
-**372 report(s) across 5 class(es)**
+**373 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 349 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 350 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -329,6 +329,7 @@
 | Loss of multisig funds through single malicious participant's deliberate deception | — | monero | 2026-08-20 | [#3515557](https://hackerone.com/reports/3515557) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | cookie: case-insensitive path comparison in replace_existing() allows cookie eviction across distinct paths | — | curl | 2026-05-18 | [#3735238](https://hackerone.com/reports/3735238) |
+| Missing Duplicate Check allowing Multiple Retention Rules per System Tag | — | nextcloud | 2026-09-05 | [#3521646](https://hackerone.com/reports/3521646) |
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | Lack of minimum value bid wheel verification on customer_bid in Rental Trips | — | bykea | 2025-11-20 | [#3328343](https://hackerone.com/reports/3328343) |
 | WebSocket Logic Error: Control Frame (PING/PONG) Starvation causes Connection Drop (DoS) during large transfers | — | curl | 2025-12-28 | [#3480039](https://hackerone.com/reports/3480039) |

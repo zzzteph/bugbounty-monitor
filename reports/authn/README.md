@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**611 report(s) across 18 class(es)**
+**612 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 390 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 391 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -113,6 +113,7 @@
 | Brute Force against VMware Horizon | $250 | rockstargames | 2021-08-16 | [#1278072](https://hackerone.com/reports/1278072) |
 | Talk - Leak of password-protected room name via already existent resource addition | $150 | nextcloud | 2020-03-01 | [#662218](https://hackerone.com/reports/662218) |
 | Weak Email Verification: Newly Registered Users Can Bypass Email Verification Step and Log In | $150 | enjin | 2024-01-19 | [#2312320](https://hackerone.com/reports/2312320) |
+| Activity app does not verify federated file activity received from remote servers  | $150 | nextcloud | 2026-09-05 | [#3534050](https://hackerone.com/reports/3534050) |
 | Email Verification Bypass by bruteforcing when setting up 2FA | $150 | evernote | 2022-05-22 | [#1394984](https://hackerone.com/reports/1394984) |
 | Logout Bypass Vulnerability in Hiro.so | $150 | hiro | 2025-10-31 | [#3062299](https://hackerone.com/reports/3062299) |
 | Authentication Bypass to (CVE-2023-2982) | $100 | cs_money | 2023-12-08 | [#2269989](https://hackerone.com/reports/2269989) |

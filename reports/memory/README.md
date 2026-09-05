@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**689 report(s) across 25 class(es)**
+**690 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -14,7 +14,7 @@
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 29 | $3,000 |
-| [Integer Overflow](integer_overflow/README.md) | 27 | $500 |
+| [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
@@ -432,6 +432,7 @@
 | integer Overflow in MQTT Protocol Handling Allows Bypassing Message Size Limit | — | curl | 2026-01-13 | [#3508500](https://hackerone.com/reports/3508500) |
 | MQTT Protocol Violation & Integer Overflow in libcurl | — | curl | 2026-01-01 | [#3484319](https://hackerone.com/reports/3484319) |
 | Integer Overflow/Signedness Mismatch in Printf Precision for HTTP/2 Trailer Headers | — | curl | 2026-04-11 | [#3665363](https://hackerone.com/reports/3665363) |
+| Improper Input Validation and Integer Overflow in timeamount parameter of files_retention app | — | nextcloud | 2026-09-05 | [#3521639](https://hackerone.com/reports/3521639) |
 | Cookie Max-Age Integer Overflow Vulnerability | — | curl | 2026-01-19 | [#3516186](https://hackerone.com/reports/3516186) |
 | Node.js WebCrypto AES Integer Overflow Leads to Remote Process Abort (DoS) | — | nodejs | 2026-06-25 | [#3760016](https://hackerone.com/reports/3760016) |
 | libcurl MQTT `CURLOPT_POSTFIELDSIZE_LARGE` overflow leads to immediate DoS | — | curl | 2025-11-10 | [#3417428](https://hackerone.com/reports/3417428) |

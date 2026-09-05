@@ -1,6 +1,6 @@
 # Integer Overflow
 
-**27 report(s)**
+**28 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -20,6 +20,7 @@
 | integer Overflow in MQTT Protocol Handling Allows Bypassing Message Size Limit | — | curl | 2026-01-13 | [#3508500](https://hackerone.com/reports/3508500) |
 | MQTT Protocol Violation & Integer Overflow in libcurl | — | curl | 2026-01-01 | [#3484319](https://hackerone.com/reports/3484319) |
 | Integer Overflow/Signedness Mismatch in Printf Precision for HTTP/2 Trailer Headers | — | curl | 2026-04-11 | [#3665363](https://hackerone.com/reports/3665363) |
+| Improper Input Validation and Integer Overflow in timeamount parameter of files_retention app | — | nextcloud | 2026-09-05 | [#3521639](https://hackerone.com/reports/3521639) |
 | Cookie Max-Age Integer Overflow Vulnerability | — | curl | 2026-01-19 | [#3516186](https://hackerone.com/reports/3516186) |
 | Node.js WebCrypto AES Integer Overflow Leads to Remote Process Abort (DoS) | — | nodejs | 2026-06-25 | [#3760016](https://hackerone.com/reports/3760016) |
 | libcurl MQTT `CURLOPT_POSTFIELDSIZE_LARGE` overflow leads to immediate DoS | — | curl | 2025-11-10 | [#3417428](https://hackerone.com/reports/3417428) |

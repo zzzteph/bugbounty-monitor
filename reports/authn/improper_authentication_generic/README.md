@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**390 report(s)**
+**391 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -58,6 +58,7 @@
 | Sign in with Apple generates long-life JWTs, seemingly irrevocable, that grant immediate access to accounts | $250 | cloudflare | 2022-06-27 | [#1593413](https://hackerone.com/reports/1593413) |
 | Talk - Leak of password-protected room name via already existent resource addition | $150 | nextcloud | 2020-03-01 | [#662218](https://hackerone.com/reports/662218) |
 | Weak Email Verification: Newly Registered Users Can Bypass Email Verification Step and Log In | $150 | enjin | 2024-01-19 | [#2312320](https://hackerone.com/reports/2312320) |
+| Activity app does not verify federated file activity received from remote servers  | $150 | nextcloud | 2026-09-05 | [#3534050](https://hackerone.com/reports/3534050) |
 | Account takeover w/o interaction for a user that doesn't have 2fa enabled via 2fa linking and improper auth at /api/2fa/verify | $100 | helium | 2020-07-26 | [#810880](https://hackerone.com/reports/810880) |
 | App PIN code can be bypassed in Files iOS | $100 | nextcloud | 2023-12-18 | [#2245437](https://hackerone.com/reports/2245437) |
 | Bypassing lock protection | $50 | nextcloud | 2019-07-26 | [#490946](https://hackerone.com/reports/490946) |
