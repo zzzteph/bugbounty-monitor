@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**612 report(s) across 18 class(es)**
+**613 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 391 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 392 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -478,6 +478,7 @@
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
+| PII Exposure of Credit Applications and Social Security Numbers equifax-6070.my.salesforce-sites.com (Salesforce guest user) | — | equifax | 2026-09-06 | [#3828431](https://hackerone.com/reports/3828431) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 |  Nextcloud Tables v1 Share Enumeration Without Authorization (Regression of CVE-2024-52507) | — | nextcloud | 2025-12-05 | [#3334165](https://hackerone.com/reports/3334165) |
 | Email Verification Bypass via Race Condition | — | malwarebytes | 2025-08-15 | [#3020733](https://hackerone.com/reports/3020733) |

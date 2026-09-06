@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**391 report(s)**
+**392 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -368,6 +368,7 @@
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
+| PII Exposure of Credit Applications and Social Security Numbers equifax-6070.my.salesforce-sites.com (Salesforce guest user) | — | equifax | 2026-09-06 | [#3828431](https://hackerone.com/reports/3828431) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 |  Nextcloud Tables v1 Share Enumeration Without Authorization (Regression of CVE-2024-52507) | — | nextcloud | 2025-12-05 | [#3334165](https://hackerone.com/reports/3334165) |
 | Email Verification Bypass via Race Condition | — | malwarebytes | 2025-08-15 | [#3020733](https://hackerone.com/reports/3020733) |
