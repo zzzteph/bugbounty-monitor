@@ -1,6 +1,6 @@
 # Authentication Bypass By Primary Weakness
 
-**16 report(s)**
+**17 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -13,6 +13,7 @@
 | CVE-2026-19931: Negotiate ambient user conn reuse | — | curl | 2026-09-03 | [#3923520](https://hackerone.com/reports/3923520) |
 | CVE-2026-13608: OpenLDAP SASL authentication bypass | — | curl | 2026-09-03 | [#3822248](https://hackerone.com/reports/3822248) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
+| 11: `CURLOPT_FORBID_REUSE` silently lost on multiplexed HTTP/2 connection when the forbidding transfer finishes first | — | curl | 2026-09-07 | [#3973121](https://hackerone.com/reports/3973121) |
 | Unauthenticated Account Registration + Email Verification Bypass + PII Data Leak (2,480 Records) on ████████ | — | essity | 2026-05-27 | [#3737516](https://hackerone.com/reports/3737516) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |

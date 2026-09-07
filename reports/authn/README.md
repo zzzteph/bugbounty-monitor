@@ -1,16 +1,16 @@
 # Authentication & Session
 
-**613 report(s) across 18 class(es)**
+**615 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 392 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 393 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 16 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 17 | — |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
@@ -144,6 +144,7 @@
 | CVE-2026-19931: Negotiate ambient user conn reuse | — | curl | 2026-09-03 | [#3923520](https://hackerone.com/reports/3923520) |
 | CVE-2026-13608: OpenLDAP SASL authentication bypass | — | curl | 2026-09-03 | [#3822248](https://hackerone.com/reports/3822248) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
+| 11: `CURLOPT_FORBID_REUSE` silently lost on multiplexed HTTP/2 connection when the forbidding transfer finishes first | — | curl | 2026-09-07 | [#3973121](https://hackerone.com/reports/3973121) |
 | Unauthenticated Account Registration + Email Verification Bypass + PII Data Leak (2,480 Records) on ████████ | — | essity | 2026-05-27 | [#3737516](https://hackerone.com/reports/3737516) |
 | HackerOne Vulnerability Report: libcurl SSL/TLS Identity Leakage via Insecure Connection Reuse | — | curl | 2026-03-31 | [#3636244](https://hackerone.com/reports/3636244) |
 | Incorrect Parsing of IPv6 Zone ID in curl | — | curl | 2025-09-01 | [#3319767](https://hackerone.com/reports/3319767) |
@@ -472,6 +473,7 @@
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Wallet RPC Restricted-Mode Policy Bypass | — | monero | 2026-08-17 | [#3620006](https://hackerone.com/reports/3620006) |
+| ACL cache collision lets a role inherit privileges from a same-named socket user | — | mariadb | 2026-09-07 | [#3889667](https://hackerone.com/reports/3889667) |
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | CVE-2026-8927: env-set cross-proxy Digest auth state leak | — | curl | 2026-06-24 | [#3744543](https://hackerone.com/reports/3744543) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |

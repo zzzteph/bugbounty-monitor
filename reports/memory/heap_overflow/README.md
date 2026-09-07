@@ -1,6 +1,6 @@
 # Heap Overflow
 
-**53 report(s)**
+**54 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -45,6 +45,7 @@
 | heap-buffer-overflow (WRITE of size 8) in Perl_pp_reverse() | — | ibb | 2018-05-07 | [#259555](https://hackerone.com/reports/259555) |
 | read outside of buffer (heap buffer overflow) in S_regmatch - regexec.c:6057 | — | ibb | 2017-05-28 | [#207983](https://hackerone.com/reports/207983) |
 | heap-buffer-overflow (read outside of buffer) in mrb_vm_exec() | — | shopify-scripts | 2017-05-09 | [#221251](https://hackerone.com/reports/221251) |
+| MariaDB: heap buffer overflow in ha_tina::chain_append() lets a low-privileged user crash the server via CSV row deletion | — | mariadb | 2026-09-07 | [#3909248](https://hackerone.com/reports/3909248) |
 | Heap Buffer Overflow in libcurl curl_slist_append via Unterminated String | — | curl | 2025-06-30 | [#3229490](https://hackerone.com/reports/3229490) |
 | libcurl MQTT PUBLISH length overflow (heap overflow) | — | curl | 2025-10-28 | [#3395666](https://hackerone.com/reports/3395666) |
 | Integer Overflow to Heap Overflow in DoH Response Handling | — | curl | 2025-10-25 | [#3399774](https://hackerone.com/reports/3399774) |

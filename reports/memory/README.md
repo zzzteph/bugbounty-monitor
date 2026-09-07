@@ -1,25 +1,25 @@
 # Memory Corruption
 
-**690 report(s) across 25 class(es)**
+**694 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 70 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 71 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
-| [Heap Overflow](heap_overflow/README.md) | 53 | $3,646 |
-| [Out Of Bounds Read](out_of_bounds_read/README.md) | 37 | $9,000 |
+| [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
+| [Out Of Bounds Read](out_of_bounds_read/README.md) | 38 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 29 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
+| [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 8 | $10,000 |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
-| [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 7 | $10,000 |
 | [Type Confusion](type_confusion/README.md) | 7 | $500 |
 | [Off By One Error](off_by_one_error/README.md) | 6 | — |
 | [Integer Underflow](integer_underflow/README.md) | 4 | $1,121 |
@@ -387,6 +387,7 @@
 | heap-buffer-overflow (WRITE of size 8) in Perl_pp_reverse() | — | ibb | 2018-05-07 | [#259555](https://hackerone.com/reports/259555) |
 | read outside of buffer (heap buffer overflow) in S_regmatch - regexec.c:6057 | — | ibb | 2017-05-28 | [#207983](https://hackerone.com/reports/207983) |
 | heap-buffer-overflow (read outside of buffer) in mrb_vm_exec() | — | shopify-scripts | 2017-05-09 | [#221251](https://hackerone.com/reports/221251) |
+| MariaDB: heap buffer overflow in ha_tina::chain_append() lets a low-privileged user crash the server via CSV row deletion | — | mariadb | 2026-09-07 | [#3909248](https://hackerone.com/reports/3909248) |
 | Heap Buffer Overflow in libcurl curl_slist_append via Unterminated String | — | curl | 2025-06-30 | [#3229490](https://hackerone.com/reports/3229490) |
 | libcurl MQTT PUBLISH length overflow (heap overflow) | — | curl | 2025-10-28 | [#3395666](https://hackerone.com/reports/3395666) |
 | Integer Overflow to Heap Overflow in DoH Response Handling | — | curl | 2025-10-25 | [#3399774](https://hackerone.com/reports/3399774) |
@@ -416,6 +417,7 @@
 | Curl_auth_create_plain_message integer overflow leads to heap buffer overflow | — | curl | 2021-01-08 | [#872089](https://hackerone.com/reports/872089) |
 | Zip bomb | — | torproject | 2023-11-28 | [#263663](https://hackerone.com/reports/263663) |
 | first name and last name restrictions bypass | — | legalrobot | 2017-09-05 | [#260468](https://hackerone.com/reports/260468) |
+| KILL authorization trusts the presented login name instead of the authenticated anonymous account | — | mariadb | 2026-09-07 | [#3897588](https://hackerone.com/reports/3897588) |
 | Incorrect sizeof() in Rustls Backend Memory Allocation | — | curl | 2025-11-15 | [#3427460](https://hackerone.com/reports/3427460) |
 | Integer overflow in the source code tool_cb_prg.c | — | curl | 2021-02-08 | [#600359](https://hackerone.com/reports/600359) |
 | Signed integer overflow in tool_progress_cb() | — | curl | 2019-10-04 | [#591770](https://hackerone.com/reports/591770) |
@@ -633,6 +635,7 @@
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
+| 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
 | Heap Buffer Over-Read via Malicious SMB Server READ_ANDX Response | — | curl | 2025-12-20 | [#3470095](https://hackerone.com/reports/3470095) |
 | Heap-buffer-overflow (Out-of-Bounds Read) in DoH hostname encoding | — | curl | 2025-09-04 | [#3324190](https://hackerone.com/reports/3324190) |
 | Heap Buffer Over-Read via Malicious SMB Server READ_ANDX Response | — | curl | 2025-12-25 | [#3470073](https://hackerone.com/reports/3470073) |
@@ -699,6 +702,7 @@
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
 | CVE-2026-18924: HTTP/2 server push UAF | — | curl | 2026-09-02 | [#3916059](https://hackerone.com/reports/3916059) |
+| 54: Rejected HTTP/2 push destroys MIME callback state still used by parent (use-after-free) | — | curl | 2026-09-07 | [#3973213](https://hackerone.com/reports/3973213) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |

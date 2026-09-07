@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**392 report(s)**
+**393 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -362,6 +362,7 @@
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | Wallet RPC Restricted-Mode Policy Bypass | — | monero | 2026-08-17 | [#3620006](https://hackerone.com/reports/3620006) |
+| ACL cache collision lets a role inherit privileges from a same-named socket user | — | mariadb | 2026-09-07 | [#3889667](https://hackerone.com/reports/3889667) |
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | CVE-2026-8927: env-set cross-proxy Digest auth state leak | — | curl | 2026-06-24 | [#3744543](https://hackerone.com/reports/3744543) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |

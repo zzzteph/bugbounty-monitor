@@ -1,6 +1,6 @@
 # Unknown
 
-**976 report(s)**
+**978 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -875,6 +875,7 @@
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | 33: CONNECT_ONLY raw I/O selects wrong connection after CURLOPT_SHARE detach (incomplete fix for CVE-2020-8231) | — | curl | 2026-08-31 | [#3971585](https://hackerone.com/reports/3971585) |
 | `exportReportPdf` mutation shows internal Activity | — | security | 2026-07-29 | [#3577216](https://hackerone.com/reports/3577216) |
+| 43: HTTP proxy CONNECT header chooses the `-OJ` filename after a redirect | — | curl | 2026-09-07 | [#3972293](https://hackerone.com/reports/3972293) |
 | CVE-2026-80230: OpenSSL pinning bypass | — | curl | 2026-09-03 | [#3969300](https://hackerone.com/reports/3969300) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
@@ -897,6 +898,7 @@
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |
+| 36: HTTP upload resume offset consumed twice after early 307/308 redirect | — | curl | 2026-09-07 | [#3971706](https://hackerone.com/reports/3971706) |
 | CVE-2026-80229: OpenSSL provider use-after-free | — | curl | 2026-09-03 | [#3969255](https://hackerone.com/reports/3969255) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | Inverted ternary in peerlist_manager::filter() allows unlimited whitelist entries per host via different ports | — | monero | 2026-06-29 | [#3547349](https://hackerone.com/reports/3547349) |

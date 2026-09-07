@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**683 report(s)**
+**684 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -569,6 +569,7 @@
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
 | Permission Model Bypass: `trace_events.createTracing().enable()` Writes Trace Logs Outside `--allow-fs-write` | — | nodejs | 2026-07-29 | [#3838601](https://hackerone.com/reports/3838601) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
+| MariaDB GRANT PROXY permits unauthorized authentication changes and administrator account takeover | — | mariadb | 2026-09-07 | [#3876430](https://hackerone.com/reports/3876430) |
 | Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |

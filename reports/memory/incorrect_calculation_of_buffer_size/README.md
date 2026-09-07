@@ -1,6 +1,6 @@
 # Incorrect Calculation Of Buffer Size
 
-**7 report(s)**
+**8 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -10,4 +10,5 @@
 | Curl_auth_create_plain_message integer overflow leads to heap buffer overflow | — | curl | 2021-01-08 | [#872089](https://hackerone.com/reports/872089) |
 | Zip bomb | — | torproject | 2023-11-28 | [#263663](https://hackerone.com/reports/263663) |
 | first name and last name restrictions bypass | — | legalrobot | 2017-09-05 | [#260468](https://hackerone.com/reports/260468) |
+| KILL authorization trusts the presented login name instead of the authenticated anonymous account | — | mariadb | 2026-09-07 | [#3897588](https://hackerone.com/reports/3897588) |
 | Incorrect sizeof() in Rustls Backend Memory Allocation | — | curl | 2025-11-15 | [#3427460](https://hackerone.com/reports/3427460) |

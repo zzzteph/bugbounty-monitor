@@ -1,6 +1,6 @@
 # Use After Free
 
-**70 report(s)**
+**71 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -49,6 +49,7 @@
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
 | CVE-2026-18924: HTTP/2 server push UAF | — | curl | 2026-09-02 | [#3916059](https://hackerone.com/reports/3916059) |
+| 54: Rejected HTTP/2 push destroys MIME callback state still used by parent (use-after-free) | — | curl | 2026-09-07 | [#3973213](https://hackerone.com/reports/3973213) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |

@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**37 report(s)**
+**38 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -38,6 +38,7 @@
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
+| 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
 | Heap Buffer Over-Read via Malicious SMB Server READ_ANDX Response | — | curl | 2025-12-20 | [#3470095](https://hackerone.com/reports/3470095) |
 | Heap-buffer-overflow (Out-of-Bounds Read) in DoH hostname encoding | — | curl | 2025-09-04 | [#3324190](https://hackerone.com/reports/3324190) |
 | Heap Buffer Over-Read via Malicious SMB Server READ_ANDX Response | — | curl | 2025-12-25 | [#3470073](https://hackerone.com/reports/3470073) |
