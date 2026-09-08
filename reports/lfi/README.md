@@ -1,12 +1,12 @@
 # LFI / Path Traversal
 
-**267 report(s) across 9 class(es)**
+**268 report(s) across 9 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Path Traversal](path_traversal/README.md) | 232 | $29,000 |
+| [Path Traversal](path_traversal/README.md) | 233 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
 | [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 5 | — |
@@ -240,6 +240,7 @@
 | Active Storage Vips Transformer Missing validate_transformation — CVE-2025-24293 Incomplete Fix | — | rails | 2026-07-30 | [#3553340](https://hackerone.com/reports/3553340) |
 | Path Traversal in curl file:// Protocol Handler Allows Unauthorized File Access | — | curl | 2026-01-04 | [#3485930](https://hackerone.com/reports/3485930) |
 | ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection | — | rails | 2026-05-07 | [#3580511](https://hackerone.com/reports/3580511) |
+| 22:  FTP wildcard matching decodes server-provided filenames, enabling directory traversal | — | curl | 2026-09-08 | [#3973143](https://hackerone.com/reports/3973143) |
 | Windows Device Names Still Allow Path Traversal in UNC Paths After CVE-2025-27210 Fix | — | nodejs | 2025-07-28 | [#3255707](https://hackerone.com/reports/3255707) |
 | [High] Arbitrary File Write via Path Traversal in cURL CLI (`-o`, `--output`) (CWE-22: Improper Limitation of a Pathname to a Restricted Directory) | — | curl | 2025-06-30 | [#3120987](https://hackerone.com/reports/3120987) |
 | Path traversal via archive.extract - CVE 2021-3281 incomplete patch | — | django | 2025-11-21 | [#3328367](https://hackerone.com/reports/3328367) |
