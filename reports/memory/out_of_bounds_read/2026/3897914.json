@@ -1,0 +1,143 @@
+{
+  "id": 3897914,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODk3OTE0",
+  "url": "https://hackerone.com/reports/3897914",
+  "title": "Out-of-bounds read in MariaDB .frm parsing enables RCE via vtable hijacking",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-29T03:17:28.519Z",
+  "submitted_at": "2026-07-29T03:17:28.792Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "pinebudweiser",
+    "url": "/pinebudweiser",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": false,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": true,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-08T08:19:08.301Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-08T08:19:08.135Z",
+  "team_member_agreed_on_going_public_at": "2026-09-07T19:48:28.940Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nMariaDB does not validate the upper bound of the attacker-controlled `key_part->fieldnr` value parsed from a crafted `.frm` file before using it as an index into the `share->field[]` array. The code only verifies that `fieldnr` is not zero. It does not verify that `fieldnr` is less than or equal to `share->fields`. This results in an intra-allocation out-of-bounds read of a `Field*`pointer. Because `share->field` and `comment_pos` are placed in the same `multi_alloc_root` allocation, an attacker can select an out-of-range `fieldnr` whose calculated array slot overlaps attacker-controlled data stored at `comment_pos`.\n\nThe attacker-controlled value is subsequently interpreted as a valid `Field*`. MariaDB then performs a C++ virtual method call through this pointer:\n```cpp\n// mariadb-10.4.18/sql/table.cc:2705\n// mariadb-11.8.8/sql/table.cc:3162\n// mariadb-12.3.2/sql/table.cc:3201\n// mariadb-13.1.0/sql/table.cc:3209\nif (!key_part->fieldnr)\n   goto err;\n\nfield = key_part->field = share->field[key_part->fieldnr - 1];\n\n// mariadb-11.8.8/sql/table.cc:3166\n// mariadb-12.3.2/sql/table.cc:3205\n// mariadb-13.1.0/sql/table.cc:3213\nif (Charset::collation_changed_order(share->mysql_version, field->charset()->number))\n\n// mariadb-10.4.18/sql/table.cc:2709\nkey_part->type = field->key_type();\n```\nThis allows the attacker to supply a forged C++ object and fake vtable. The virtual call dereferences the attacker-controlled vtable and results in control-flow hijacking. In my tested environment, this behavior was successfully used to achieve arbitrary code execution in the security context of the MariaDB server process.\n\n## Attack prerequisites\n\nThe proof of concept was tested under the following conditions:\n\n1. The attacker has an authenticated SQL session.\n2. The SQL account has the global `FILE` privilege.\n3. `secure_file_priv` is unset or configured as an empty string, allowing file operations in locations accessible to the MariaDB server process.\n4. The MariaDB operating-system account can create files inside the database data directory.\n5. The attacker can cause MariaDB to load the crafted `.frm` metadata.\n\nThe attack does not require an existing operating-system shell or direct filesystem access. The crafted `.frm` file is delivered through the SQL interface using the `FILE` privilege. In the tested environment, the MariaDB operating-system account could write to the data directory but could not write to the plugin directory or other executable/library directories.\n\n## Security boundary\n\nThe `FILE` privilege permits specific SQL file operations, but it does not grant permission to execute arbitrary native code or control C++ virtual function dispatch. Additionally, `SELECT ... INTO DUMPFILE/OUTFILE` cannot overwrite an existing file. The attacker is limited to creating a new file in a location writable by the MariaDB server process. This vulnerability converts the ability to create a data or metadata file inside the MariaDB data directory into arbitrary code execution inside the MariaDB server process. Therefore, the impact exceeds the intended capabilities of the `FILE` privilege.\n\n## Affected versions\nThe vulnerability was reproduced on:\n- MariaDB 10.4.18\n- MariaDB 11.8.8\n- MariaDB 12.3.2\n- MariaDB 13.1.0 Preview\n- Other versions have not yet been fully tested (to RCE) but based on the memory allocation structure and processing methods, it is expected that most versions will be affected by this vulnerability if there is no control over fieldnr oob.\n\n## Result\nSuccessful exploitation provides arbitrary code execution with the operating-system privileges of the `mariadbd` process. This is an authenticated remote code execution vulnerability when the SQL service is reachable over the network and the attacker possesses the required database privileges.\n\n## Impact\n\nAn authenticated attacker with the MariaDB `FILE` privilege can convert the ability to create a file in the MariaDB data directory into arbitrary native code execution inside the `mariadbd` process.\n\nThe vulnerability allows the attacker to:\n- Perform an out-of-bounds read from the `share->field[]` pointer array\n- Substitute an attacker-controlled pointer for a legitimate `Field*`\n- Supply a forged C++ object and fake vtable\n- Control the target of a C++ virtual function call\n- Execute arbitrary code with the operating-system privileges of the MariaDB server process\n\nThis impact is greater than the intended capability of the `FILE` privilege. \n\nIn the tested environment, the attacker could write only to the MariaDB data directory. The attacker could not write to the plugin directory, system library directories, or executable directories and did not have an existing operating-system shell. Without this vulnerability, creating a new database metadata file does not authorize the SQL user to execute native code. The vulnerability crosses that boundary by causing MariaDB to interpret attacker-controlled metadata bytes as a C++ object and invoke a virtual method through an attacker-controlled vtable.\n\nSuccessful exploitation may allow the attacker to:\n- Read or modify data accessible to the MariaDB operating-system account\n- Bypass SQL-level authorization checks by operating inside the server process\n- Modify or delete files writable by the MariaDB operating-system account\n- Access credentials, keys, configuration, or process memory available  to `mariadbd`\n- Establish outbound network connections from the database server\n- Terminate or corrupt the database server process\n- Cause complete loss of database confidentiality, integrity, and availability within the privileges of the MariaDB service account\n\nThe vulnerability does not inherently provide root privileges. The final operating-system impact remains limited by the privileges of the `mariadbd` account and any active controls such as SELinux, AppArmor, containers, or systemd sandboxing. The issue was successfully reproduced as arbitrary code execution on MariaDB 10.4.18, 11.8.8, 12.3.2 and MariaDB 13.1.0 Preview.",
+  "weakness": {
+    "id": 8,
+    "name": "Out-of-bounds Read"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6345516,
+      "file_name": "072926_10.4.18_remote_fieldnrOOBRead_RCE_poc.mp4",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/7copaid7cwhrvrchd2e76ioqym0c?response-content-disposition=attachment%3B%20filename%3D%22072926_10.4.18_remote_fieldnrOOBRead_RCE_poc.mp4%22%3B%20filename%2A%3DUTF-8%27%27072926_10.4.18_remote_fieldnrOOBRead_RCE_poc.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSZ5Z6ZH6%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092144Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBpfHwswNQLpOeBEQS1X8VWfhaIHKl4OXpllIXMWgzNYAiEA0NddhOn01BHWxCX1Qr37ZDQy1zXF%2FpyhgGi9O9t2azEqsQUIURADGgwwMTM2MTkyNzQ4NDkiDAlPYFfGe2WWJSbMeiqOBdS8RV2qwvUoWsykeLkdts3Y03EfWV84xKm9ueaBvfndBk4ZNicuC3FyYAPWsm2a8a5kSsur9vsbLMX%2F%2BlxQoGEa0nEUF3SVGhLRKubuOmdedbmp4i%2BiYIFvF4ip%2Bc%2BQjDPLpWxdXMSs2kbDE6utPMIGW5JB3oM8ptYcZwHqFOEXRn0%2BV%2FMuBsAskY3ypyw%2FycM%2FhvnzoSKntUTH%2FHRHr9RhwfHT%2Bjqoxx0NqqJ5NWGkw5Vn%2FJo6oFZfJ5v84qmEMrtbS9nYHDt3MLHuqdyPinJCJGzMaYf8KIurlNPmxsaM1RGi9CFuhao4da3UQQhuA82eWposCwdLc1TGutqIWZnb%2FrPNK%2FlLP4HvREamQKh6nEBpwve62A8%2FE31ZDnBkzktjVp1XKn%2Bzh4W6JdEHn9%2BC3htRht88x8vAN2F8JVBktCDPw8FCzzZH7IZAmATUZY8I0AjG%2BXQZxIKwbuniVECBfGQSS%2BRdkan1Y%2FwQ6kp%2B%2BwJgXdZbbmU6CDS%2By79uM5Wr11nrprIQYNujLQsHEtyxaGRlBaLAPTaopJ6NU3XzWQQ9E0g8pTG86OChwmU%2BidES0S9Zt4GFGGqG92kn4eqtHwKNSK0qZZeLWJzgu6KEa2yLoUSP0nkr%2F%2FRP%2BktV0l4yxNL4yoX4XlaWDK81OILgfsBEG3iCCI%2F4nBP42JFqCcD7mYhnKO7X3kwHHjQWuP4SKvoMbzI8E6dDhS%2Fcs0UeS4%2FqYkxb2EUCko8UH9zOLs%2FHDl%2Bm4IaWbu0Rnhhs3qEnjgGsmpWLG66sLP%2Bp4Yq1lPO%2FTXaFaGB8OhycjPC%2BzvpHwqmLmaWB1RP1jIGDnOgRg55c9h3z8zlNMlFQnPbj3K0qGAhM%2Bu66LG6zVjD28%2F7UBjqxAcjDVQ8ActoyMYvzG2l7WvgxbkZV623dRkF8ZrQ9dhZIMyZAhxKbH57kPY2YnNeZRSn3PDAJxeIBl9kz5jeJZJo1r%2B%2B569duLfNGt7%2B7PjrqKsvZF2njdO67z9x6h9nj%2FwuMkXRB1qgaXZxShO7abEpthqlW8njfNqONpE2%2BJQ7Xv1gt2fWmo9dK6P5qOnsEq5meYR8vm2CzZh893VhoikFUaDwnVpgLxGdlkF7GqgO1hA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=2ae3982585abf735321cc9884959d34b6ac6e359e1f7a55ad65868444430388b",
+      "file_size": 8153107,
+      "type": "video/mp4",
+      "moderated": null
+    },
+    {
+      "id": 6345517,
+      "file_name": "072926_13.1.0_local_fieldnrOOBRead_RCE_poc.mp4",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/19652sxaozdmeczgl885aywzu4y3?response-content-disposition=attachment%3B%20filename%3D%22072926_13.1.0_local_fieldnrOOBRead_RCE_poc.mp4%22%3B%20filename%2A%3DUTF-8%27%27072926_13.1.0_local_fieldnrOOBRead_RCE_poc.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQSZ5Z6ZH6%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092144Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBpfHwswNQLpOeBEQS1X8VWfhaIHKl4OXpllIXMWgzNYAiEA0NddhOn01BHWxCX1Qr37ZDQy1zXF%2FpyhgGi9O9t2azEqsQUIURADGgwwMTM2MTkyNzQ4NDkiDAlPYFfGe2WWJSbMeiqOBdS8RV2qwvUoWsykeLkdts3Y03EfWV84xKm9ueaBvfndBk4ZNicuC3FyYAPWsm2a8a5kSsur9vsbLMX%2F%2BlxQoGEa0nEUF3SVGhLRKubuOmdedbmp4i%2BiYIFvF4ip%2Bc%2BQjDPLpWxdXMSs2kbDE6utPMIGW5JB3oM8ptYcZwHqFOEXRn0%2BV%2FMuBsAskY3ypyw%2FycM%2FhvnzoSKntUTH%2FHRHr9RhwfHT%2Bjqoxx0NqqJ5NWGkw5Vn%2FJo6oFZfJ5v84qmEMrtbS9nYHDt3MLHuqdyPinJCJGzMaYf8KIurlNPmxsaM1RGi9CFuhao4da3UQQhuA82eWposCwdLc1TGutqIWZnb%2FrPNK%2FlLP4HvREamQKh6nEBpwve62A8%2FE31ZDnBkzktjVp1XKn%2Bzh4W6JdEHn9%2BC3htRht88x8vAN2F8JVBktCDPw8FCzzZH7IZAmATUZY8I0AjG%2BXQZxIKwbuniVECBfGQSS%2BRdkan1Y%2FwQ6kp%2B%2BwJgXdZbbmU6CDS%2By79uM5Wr11nrprIQYNujLQsHEtyxaGRlBaLAPTaopJ6NU3XzWQQ9E0g8pTG86OChwmU%2BidES0S9Zt4GFGGqG92kn4eqtHwKNSK0qZZeLWJzgu6KEa2yLoUSP0nkr%2F%2FRP%2BktV0l4yxNL4yoX4XlaWDK81OILgfsBEG3iCCI%2F4nBP42JFqCcD7mYhnKO7X3kwHHjQWuP4SKvoMbzI8E6dDhS%2Fcs0UeS4%2FqYkxb2EUCko8UH9zOLs%2FHDl%2Bm4IaWbu0Rnhhs3qEnjgGsmpWLG66sLP%2Bp4Yq1lPO%2FTXaFaGB8OhycjPC%2BzvpHwqmLmaWB1RP1jIGDnOgRg55c9h3z8zlNMlFQnPbj3K0qGAhM%2Bu66LG6zVjD28%2F7UBjqxAcjDVQ8ActoyMYvzG2l7WvgxbkZV623dRkF8ZrQ9dhZIMyZAhxKbH57kPY2YnNeZRSn3PDAJxeIBl9kz5jeJZJo1r%2B%2B569duLfNGt7%2B7PjrqKsvZF2njdO67z9x6h9nj%2FwuMkXRB1qgaXZxShO7abEpthqlW8njfNqONpE2%2BJQ7Xv1gt2fWmo9dK6P5qOnsEq5meYR8vm2CzZh893VhoikFUaDwnVpgLxGdlkF7GqgO1hA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=9fcb5bc605723e92ba87a2ae1d404eae4142fbf44b75253591abdf1cfc733661",
+      "file_size": 3681962,
+      "type": "video/mp4",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-07T19:48:29.092Z",
+  "allow_singular_disclosure_after": 2543204.8603086,
+  "singular_disclosure_allowed": false,
+  "vote_count": 1,
+  "voters": [
+    "ganz39012"
+  ],
+  "severity": {
+    "rating": "high",
+    "score": 8.8,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "low",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "high",
+      "integrity": "high",
+      "availability": "high"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 10334,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors - Remote Code Execution",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

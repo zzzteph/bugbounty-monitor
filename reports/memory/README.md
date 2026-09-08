@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**694 report(s) across 25 class(es)**
+**695 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
-| [Out Of Bounds Read](out_of_bounds_read/README.md) | 38 | $9,000 |
+| [Out Of Bounds Read](out_of_bounds_read/README.md) | 39 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 29 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
@@ -634,6 +634,7 @@
 | Heap Out-of-Bounds Read in lib/http2.c via Malformed PUSH_PROMISE Headers | — | curl | 2026-01-10 | [#3506159](https://hackerone.com/reports/3506159) |
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
+| Out-of-bounds read in MariaDB .frm parsing enables RCE via vtable hijacking | — | mariadb | 2026-09-08 | [#3897914](https://hackerone.com/reports/3897914) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
 | 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
 | Heap Buffer Over-Read via Malicious SMB Server READ_ANDX Response | — | curl | 2025-12-20 | [#3470095](https://hackerone.com/reports/3470095) |

@@ -1,0 +1,140 @@
+{
+  "id": 3971518,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTcxNTE4",
+  "url": "https://hackerone.com/reports/3971518",
+  "title": "29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "none",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-26T15:42:35.047Z",
+  "submitted_at": "2026-08-26T15:42:35.268Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-08T08:01:00.034Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-05T20:55:33.948Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\n`ossl_check_issuer()` in `lib/vtls/openssl.c` uses `X509_check_issued()` to implement `CURLOPT_ISSUERCERT`. This OpenSSL function checks metadata (subject/issuer names, key identifiers, algorithm compatibility, key usage) but does **not** verify the certificate's cryptographic signature. A certificate with matching subject DN and Subject Key Identifier but a completely different public key passes the check.\n\nThe documentation at `docs/libcurl/opts/CURLOPT_ISSUERCERT.md` states the option verifies the issuer is \"indeed the one associated with the certificate\" and can \"enforce that the peer certificate is from a specific branch of the tree.\" The implementation does not cryptographically enforce this.\n\nThe same pattern exists in the GnuTLS backend (`gnutls_x509_crt_check_issuer()` at `lib/vtls/gtls.c:1815`).\n\n## Root cause\n\n```c\n// lib/vtls/openssl.c — ossl_check_issuer()\nif(X509_check_issued(issuer, server_cert) != X509_V_OK) {\n```\n\nPer OpenSSL docs ([X509_check_issued](https://docs.openssl.org/master/man3/X509_check_issued/)): this checks whether a certificate was \"apparently issued\" by another — it explicitly does not verify the signature. Normal chain verification runs independently beforehand (line 4828) and does not require the configured issuer to appear in the verified chain.\n\n## Reproduction\n\nExpected vs actual output:\n\nThe PoC builds two independent CA branches. Both intermediates share the same subject (`CN=Colliding Intermediate`) and the same hardcoded SKID, but use different RSA keys. The leaf is signed by the real intermediate (trusted root). The decoy intermediate (untrusted root) is passed as `CURLOPT_ISSUERCERT`.\n\n- **Expected:** `CURLE_SSL_ISSUER_ERROR` (83) — the configured issuer did not sign the leaf.\n- **Actual:** `CURLE_OK` (0) — the transfer succeeds.\n\nControls confirm the check is active: changing the decoy's subject or SKID correctly returns error 83. Direct `openssl verify` of the leaf against the decoy's key fails with \"certificate signature failure.\"\n\n## Impact\n\nThis bypasses the PKI branch restriction that `CURLOPT_ISSUERCERT` is documented to enforce. It does **not** bypass normal CA verification or hostname verification. Exploitation requires the attacker to already control another CA hierarchy trusted by the application and have authority to issue for the target hostname, which significantly limits practical impact. I believe Low severity is appropriate.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6558005,
+      "file_name": "reproduce.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/di20tac53hspu4aenyvz6zc7gnzr?response-content-disposition=attachment%3B%20filename%3D%22reproduce.sh%22%3B%20filename%2A%3DUTF-8%27%27reproduce.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=15a59887588485d6a4f438d20d2c9101d24611373e46f35894a46b051459fb18",
+      "file_size": 277,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6558006,
+      "file_name": "client.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ux43iyv3xglak3amsuj1mr27boog?response-content-disposition=attachment%3B%20filename%3D%22client.c%22%3B%20filename%2A%3DUTF-8%27%27client.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=a202b9fcc819c9e10214c3c0d54e635fb856b0fcd86477608b854cbc3a8e2302",
+      "file_size": 1122,
+      "type": "text/x-csrc",
+      "moderated": null
+    },
+    {
+      "id": 6558007,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ptwg15kjy244gk5wm83p85pz5bgh?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=56259cf83202e39949958f7a972cbb1f8937468d149f808d04978128d2d3b9d2",
+      "file_size": 365,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6558008,
+      "file_name": "run.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ynsthmegsxe4ngay3ezl9jly0pjn?response-content-disposition=attachment%3B%20filename%3D%22run.sh%22%3B%20filename%2A%3DUTF-8%27%27run.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092145Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=c43225fb6b9d28d364dcc62d75cfa93276c58dc142a74644d4c0f19ee192ad0d",
+      "file_size": 5022,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "none",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

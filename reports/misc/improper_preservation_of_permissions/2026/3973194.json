@@ -1,0 +1,133 @@
+{
+  "id": 3973194,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTczMTk0",
+  "url": "https://hackerone.com/reports/3973194",
+  "title": "49: Cookie-jar save transfers group access to a different GID",
+  "state": "Closed",
+  "substate": "informative",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-27T09:29:43.204Z",
+  "submitted_at": "2026-08-27T09:29:43.578Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2022-32207"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-08T08:01:11.709Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-05T21:20:48.161Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\n`Curl_fopen()` copies the old cookie jar's permission bits onto a newly created temp file, but the temp file may receive a different GID (the process's primary group instead of the old file's group). After rename, group-permission bits that were intended for one group now authorize a different group. A local attacker in the new group who could not access the jar before curl ran can read persisted cookies (mode `0640`) or inject cookies (mode `0660`) afterward, without needing write access to the directory.\n\nThis regresses the safety property introduced for CVE-2022-32207. The original fix (`20f9dd6bae`) created the temp file as `0600` and applied the old mode via `fchmod()` only when both UID and GID matched. Commit `03cb1ff4d629` (curl 8.5.0) removed that guard entirely. Commit `8deaf04febba` (curl 8.20.0) re-added a UID check but never restored the GID check.\n\n## Root cause\n\nIn `lib/curl_fopen.c`:\n\n```c\nif(sb.st_uid != geteuid())\n  sb.st_mode = 0;\n/* ... */\nfd = curlx_open(tempstore, O_WRONLY | O_CREAT | O_EXCL,\n                S_IRUSR | S_IWUSR | sb.st_mode);\n```\n\nOnly UID is guarded. The old file's group bits are passed through to `open()` unconditionally. On Linux, in an ordinary (non-setgid) directory, the kernel assigns the process's primary GID to the new file. If that GID differs from the old file's GID, the surviving group bits now authorize a different set of users. `cookie_output()` then renames the temp file over the jar, making the change permanent.\n\n## Affected versions\n\ncurl 8.5.0 through 8.21.0, plus affected 8.22.0 prerelease/development versions. The partial correction in 8.20.0 does not validate the GID.\n\n## Reproduction\n\n1. Build an affected curl release, starting with 8.5.0, on a POSIX system where newly created files normally receive the process's effective or primary GID.\n2. Create two groups, group A and group B.\n3. Create a victim user whose primary group is group B and who is also a member of group A.\n4. Create an attacker user who belongs to group B but not group A.\n5. Create a directory owned by the victim that both users can traverse but only the victim can modify.\n6. Inside that directory, create a valid cookie jar owned by the victim and group A with mode `0640`, and place a recognizable test cookie in it.\n7. Confirm that the attacker cannot read the cookie jar and cannot write to its containing directory.\n8. Run curl as the victim with a nonrestrictive-enough umask such as `0022`, loading and saving the same jar through `CURLOPT_COOKIEFILE` and `CURLOPT_COOKIEJAR`, or the equivalent `-b jar -c jar` options.\n9. Allow curl to complete a benign request so that it writes a sibling temporary file and renames that file over the original cookie jar.\n10. Inspect the replacement file's UID, GID, and mode.\n11. Observe the vulnerable result: the owner and `0640` mode are retained, but the GID changes from group A to the victim's primary group B.\n12. Confirm that the attacker can now read the replacement jar and recover the recognizable cookie despite having no access before curl saved it.\n13. Repeat the setup with an original cookie jar owned by group A at mode `0660`, and run curl as the victim with a umask such as `0002`.\n14. Confirm that the replacement jar receives group B while retaining group-write permission.\n15. As the attacker, append a syntactically valid cookie to the jar, then run curl again as the victim with that jar as input and output.\n16. Confirm that curl loads and persists the attacker-injected cookie.\n17. Repeat the read test with a restrictive `0077` umask and verify that the replacement becomes `0600`, preventing attacker access.\n18. Repeat with the original jar already assigned to group B and verify that curl does not introduce access for a new principal.\n19. Repeat in a setgid directory that causes the sibling file to inherit group A and verify that the attacker remains unable to read it.\n20. Confirm a fix by creating the sibling as `0600`, inspecting its actual ownership, and copying group permission bits only when its GID matches the original file's GID.\n21. Repeat the mismatched-GID tests and verify that saving the jar grants neither new read nor new write access to the attacker.\n\n### Expected result\n\nReplacing a cookie jar must not transfer its group permissions to a different group. Users who could not access the original file must not gain access after curl saves it.\n\n### Vulnerable result\n\nCurl copies the old mode bits to a sibling file without preserving or validating its GID. After rename, the same group permissions apply to a different group, granting new local read or write access.\n\n\n## Impact\n\n- **Confidentiality**: a local user who could not read the cookie jar before can read persisted cookies after curl saves.\n- **Integrity**: with group-write bits, the attacker can inject cookies that curl subsequently loads and re-saves.\n- The attacker does not need write access to the directory containing the jar.\n\nThe preconditions are restrictive (multi-user system, mismatched GIDs, surviving group bits, traversable path), so I expect Low severity at most.\n\n## Suggested fix\n\nCreate the temp file as `0600`. After creation, `fstat()` the descriptor and copy group permission bits only when the temp file's GID matches the old file's GID. This restores the safety property from the original CVE-2022-32207 fix.\n\n## Impact\n\n## Summary:\n\nA local attacker who belongs to the replacement file’s new group may gain access to a cookie jar they previously could not read or modify. They can potentially steal authentication cookies and hijack sessions or inject cookies that curl later sends to remote services, even without write permission to the directory containing the jar.",
+  "weakness": {
+    "id": 544,
+    "name": "Improper Preservation of Permissions"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6563199,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2hvbjtsy2novdgtflhwbg9i698nf?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092144Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=63d9d87dc094d4fae22615db9c39b3a4528eacf91c4fd412bb5aca97b6fcfe52",
+      "file_size": 300,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6563200,
+      "file_name": "poc.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/t3gllqrrxv2y6itcqwppjsd6ye09?response-content-disposition=attachment%3B%20filename%3D%22poc.sh%22%3B%20filename%2A%3DUTF-8%27%27poc.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092144Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=6d98337f7979bd679b686c39766f37a78c1e2598377f39215cfc8a1fc39acf7f",
+      "file_size": 4182,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6563201,
+      "file_name": "run.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/0c99u4b85eqarhg05iw07wmui2vc?response-content-disposition=attachment%3B%20filename%3D%22run.sh%22%3B%20filename%2A%3DUTF-8%27%27run.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUZ7QBAGI%2F20260908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260908T092144Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFcPfiwTMaOyH4tMG36%2FjWXbQCt%2Fc%2Brf1amJDfegJIFHAiEAml6I9DGrw962IKKNWFmk5%2BfB8%2F2pQG1%2Fz9fO4hN9gGAqsgUIURADGgwwMTM2MTkyNzQ4NDkiDGgk6DNDX77gKlep4CqPBSSA%2FB5yQelB%2FXXYaaAL4ID7NDy%2Fvdq7K5UTws161OesXYJsco79%2Bnlq8z%2Fafzha%2B8Eil1GWlKLlDofhElqMoJD8VtmMzTT%2BcByal%2Fn57s6SFfkVGO0yOgUti23SFtiqDNWlzbeG6%2BXGiRhi96yeAbBUo8ADxnT7%2BrIvlUrd3SXOo6Axe2nfbvjVwz%2F5Bg3w70iBC9lWeE929cBwmB%2BsqK7n9t9z6ltADe2NCyuwoQ4WlzbZyMGCPCxQ7WQrurbdQX1FLX7REaU%2BzAE14Htw%2Bgmej%2FO4QDnS3O0cBLHGa5lvkRqS07LkRjIoQdAuZZndJYnShlZZrGSwSzZBI4tfau35GbCAmM4o4gPN5Z2VChhuenyfNtERwDc3QZyL0UjmNmSuGaBYuLPFXlcbUjPsG%2B7n7s4Chq457zFQ1JT48l5NPtSitsOvlD5yeboYLxHlgUqeqQqzQaaH6KWCCoyykMd86CAmwrfQqc%2B6yMaFegHl1IjFin%2Bdn0JAEFIyS02dEVSwAK5WyOG8TG7IRey1Bcq5LGly6wuVDpVZTyYV5QO0KZzQIsi3PkvT3%2FLaa%2FdAxQX51Ds1f1SPYWvqld72gfs%2BI5yznUq4bvkfpPMVMXr9v590M6mSF25MOeV4AgrEahpFPyrqOnpsmx3YGZs9M1XzY7YZrAZlJvo3WyIIA5xvzR49%2FVkcb%2Fs57sJMTzHlSeQT%2BHHLfiDhaJ%2FfH99t3w482wblHMrvhmbMmBaS%2BQRKe3YNZXNwqNEN4UjPn61NW9uRqJJ3xUvi7pSrHBb9hpWImnwx0VFsu3jz%2FEGbIoYH%2Fbnq4VdigxbxavqYwaSp07eewvMiegw41DNn7ZFaLt7PgjuBW7QXd4CxeF0Xxx0wufz%2B1AY6sQEqZcmj2qIyFqKY%2F7etJUiHin%2BgE15LfS8J8Odnktbq57d2RFaC91uiQ%2FBGiAdH%2BUrVt2XoMQz49XyBtRsRgphC4fH2qqVzj8%2BSbYG5IUh6btSjhH8yo4PhLAy7Inwjqe9%2FRTzBUz5eY9naIv8exWckOPBPUROKVBCTkYNu3cFnVTFfq58x5lO2cHNx8fkP6MZMpv5h49BcaPc%2BWJ%2BmuHJI6W7%2FeECjL1pXntAG3PMCFOg%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ead932ce55d4e3660025b44c4712111590bf209296e9c360ab01ea37938b9089",
+      "file_size": 288,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**49 report(s)**
+**50 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -42,6 +42,7 @@
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
+| 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
 | Certificate Pinning Bypass with wolfSSL backend over HTTP/3 | — | curl | 2025-12-17 | [#3468098](https://hackerone.com/reports/3468098) |

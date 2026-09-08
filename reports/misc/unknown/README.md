@@ -1,6 +1,6 @@
 # Unknown
 
-**978 report(s)**
+**981 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -859,6 +859,7 @@
 | Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
 | Rails::HTML::Sanitizer.allowed_uri? returns true for entity-encoded control-character-split javascript: URLs | — | rails | 2026-04-18 | [#3601655](https://hackerone.com/reports/3601655) |
 | CVE-2026-80231: native CA store conn reuse | — | curl | 2026-09-03 | [#3969368](https://hackerone.com/reports/3969368) |
+| HTTP Digest nonce reused across an https→http scheme change on the same handle | — | curl | 2026-09-08 | [#3993973](https://hackerone.com/reports/3993973) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
@@ -867,6 +868,7 @@
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | curl/libcurl 8.20.0 NOPROXY bypass via uppercase-hex IPv4 aliases leaks off-proxy Basic credentials to the configured proxy | — | curl | 2026-06-03 | [#3773293](https://hackerone.com/reports/3773293) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
+| Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
 | --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |
 | Incomplete fix for CVE-2026-21637: loadSNI() in _tls_wrap.js lacks try/catch leading to Remote DoS | — | nodejs | 2026-04-23 | [#3556769](https://hackerone.com/reports/3556769) |
 | mruby-engine: UAF in MRubyEngine#initialize enables local RCE | — | shopify | 2026-04-24 | [#3679660](https://hackerone.com/reports/3679660) |
@@ -880,6 +882,7 @@
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
+| 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
 | Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
