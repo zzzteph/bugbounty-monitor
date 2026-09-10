@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**414 report(s)**
+**415 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -385,6 +385,7 @@
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
+|  Tor onion service INTRODUCE2 invalid-MAC cells permanently grow service replay cache | — | torproject | 2026-09-10 | [#3709703](https://hackerone.com/reports/3709703) |
 | Reachable assertion in node:zlib sync API crashes the entire process via spoofed TypedArray byteLength (all 11 *Sync functions affected) | — | nodejs | 2026-08-28 | [#3857258](https://hackerone.com/reports/3857258) |
 | dns.resolveAny() Aborts the Node.js Process When a DNS Response Contains More Than 256 A Records | — | nodejs | 2026-08-28 | [#3795657](https://hackerone.com/reports/3795657) |
 | HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |

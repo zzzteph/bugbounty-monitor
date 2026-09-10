@@ -1,12 +1,12 @@
 # Denial of Service
 
-**445 report(s) across 5 class(es)**
+**446 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 414 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 415 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -428,6 +428,7 @@
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
+|  Tor onion service INTRODUCE2 invalid-MAC cells permanently grow service replay cache | — | torproject | 2026-09-10 | [#3709703](https://hackerone.com/reports/3709703) |
 | Reachable assertion in node:zlib sync API crashes the entire process via spoofed TypedArray byteLength (all 11 *Sync functions affected) | — | nodejs | 2026-08-28 | [#3857258](https://hackerone.com/reports/3857258) |
 | dns.resolveAny() Aborts the Node.js Process When a DNS Response Contains More Than 256 A Records | — | nodejs | 2026-08-28 | [#3795657](https://hackerone.com/reports/3795657) |
 | HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |

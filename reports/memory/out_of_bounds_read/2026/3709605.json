@@ -1,0 +1,137 @@
+{
+  "id": 3709605,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNzA5NjA1",
+  "url": "https://hackerone.com/reports/3709605",
+  "title": "Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-05-02T19:41:19.322Z",
+  "submitted_at": "2026-05-02T19:41:20.607Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "geeknik",
+    "url": "/geeknik",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/jgjvp6dlesp661w5ashvoami0j3c/47c72a82657a929c13ab24e11674f7e10ea2bf67b1b9e7116b522cd7ede42f15"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 1800,
+    "url": "https://hackerone.com/torproject",
+    "handle": "torproject",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/001/800/6e575d0a9127b91e83833cf4a9e6be6e8b30cbc3_original.jpg/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/001/800/6e575d0a9127b91e83833cf4a9e6be6e8b30cbc3_original.jpg/1d3351b56b27c9bb56ce22821a57514a7210186a77aefb760cd2113272723c1f"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Tor",
+      "twitter_handle": "torproject",
+      "website": "https://www.torproject.org/",
+      "about": "Anonymity Online"
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-10T12:10:35.499Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-09T16:54:21.873Z",
+  "team_member_agreed_on_going_public_at": "2026-09-10T12:10:34.981Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nA zero-length `RELAY_END` cell can trigger a heap out-of-bounds read when the cell is copied through Conflux out-of-order delivery and then processed on a non-open AP stream.\n\nTor explicitly allows zero-length `RELAY_END` cells by treating them as `END_STREAM_REASON_MISC`, but `connection_ap_process_end_not_open()` reads `msg->body[0]` before checking `msg->length`.\n\nThis is normally masked by relay-cell backing storage. Conflux out-of-order queuing copies messages into exact-size heap allocations using `relay_msg_copy()`. For `msg->length == 0`, the copied `msg->body` points immediately after the allocation, and the unguarded `get_uint8(msg->body)` becomes a true heap OOB read.\n\n## Affected Code\n\n- `src/core/or/relay.c:846`\n\n```c\nint reason = get_uint8(msg->body);\n```\n\nThe length check occurs later:\n\n```c\nif (msg->length == 0) {\n  reason = END_STREAM_REASON_MISC;\n}\n```\n\n- `src/core/or/conflux.c:923`\n\n```c\nc_msg->msg = relay_msg_copy(msg);\n```\n\n- `src/core/or/relay_msg.c:71`\n\n```c\nvoid *alloc = tor_malloc_zero(sizeof(relay_msg_t) + msg->length);\n```\n\n## Proof of Concept \n\nI added a local ASan regression PoC as a patch to this checkout. The relevant patched files are:\n\n- `src/test/test_relaycell.c`\n- Test name: `relaycell/end_cell_conflux_copy_oob`\n\n{F5843197}  contains the `test_relaycell_end_cell_conflux_copy_oob()` test and its `copy_msg_through_conflux_ooo()` helper.\n\nThe PoC:\n\n1. Builds a zero-length `RELAY_END` message for a non-open AP stream.\n2. Sends it through Tor's actual `conflux_process_relay_msg()` out-of-order queue.\n3. Dequeues the exact heap-backed `relay_msg_t` produced by `relay_msg_copy()`.\n4. Simulates Conflux ordered delivery into `connection_edge_process_relay_cell()`.\n5. ASan reports a heap-buffer-overflow at `connection_ap_process_end_not_open()`.\n\n## Reproduction\n\nFrom a clean Tor checkout with this PoC patch applied:\n\n```sh\n./autogen.sh\nCC=clang \\\nCFLAGS='-O0 -g -fsanitize=address -fno-omit-frame-pointer' \\\nLDFLAGS='-fsanitize=address' \\\n./configure --disable-asciidoc --disable-manpage --disable-html-manual\nmake micro-revision.i\nmake -j\"$(nproc)\" src/test/test\nASAN_OPTIONS='abort_on_error=1:halt_on_error=1:detect_leaks=0:symbolize=1' \\\n  ./src/test/test relaycell/end_cell_conflux_copy_oob\n```\n\nIn my environment I also needed to point configure at Homebrew OpenSSL:\n\n```sh\nPKG_CONFIG_PATH=/home/linuxbrew/.linuxbrew/lib/pkgconfig \\\nCPPFLAGS='-I/home/linuxbrew/.linuxbrew/include' \\\nLDFLAGS='-fsanitize=address -L/home/linuxbrew/.linuxbrew/lib -Wl,-rpath,/home/linuxbrew/.linuxbrew/lib' \\\n./configure --with-openssl-dir=/home/linuxbrew/.linuxbrew \\\n  --disable-asciidoc --disable-manpage --disable-html-manual\n```\n\n## ASan Evidence\n\nThe PoC crashes with:\n\n```text\nERROR: AddressSanitizer: heap-buffer-overflow\nREAD of size 1\n    #0 get_uint8 src/lib/arch/bytes.h:25\n    #1 connection_ap_process_end_not_open src/core/or/relay.c:846\n    #2 connection_edge_process_relay_cell_not_open src/core/or/relay.c:1402\n    #3 connection_edge_process_ordered_relay_cell src/core/or/relay.c:2168\n    #4 connection_edge_process_relay_cell src/core/or/relay.c:2099\n    #5 test_relaycell_end_cell_conflux_copy_oob src/test/test_relaycell.c:1136\n\nallocated by thread T0 here:\n    #3 relay_msg_copy src/core/or/relay_msg.c:71\n    #4 conflux_process_relay_msg src/core/or/conflux.c:923\n    #5 copy_msg_through_conflux_ooo src/test/test_relaycell.c:214\n\n0 bytes after 16-byte region\n```\n\n## Suggested Fix\n\nRead the reason byte only when one is present:\n\n```c\nint reason = msg->length > 0 ? get_uint8(msg->body)\n                             : END_STREAM_REASON_MISC;\n```\n\n## Impact\n\nAn attacker who can cause a zero-length `RELAY_END` to be queued out-of-order on a Conflux circuit can trigger a remote heap OOB read in Tor's relay-cell handling path. In ASan or hardened builds this is a reliable process crash. In non-ASan builds, this remains memory-unsafe behavior and reads from heap-adjacent memory.\n\nThe strongest reachable case is a non-open AP stream, such as a stream still in `AP_CONN_STATE_CONNECT_WAIT`, receiving an empty `RELAY_END` from the exit side after Conflux has copied the cell through the out-of-order queue.\n\nVector: `CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H`\n\nJustification:\n\n1. `AV:N`: the malformed relay cell can be delivered over the Tor network.\n2. `AC:H`: exploitation requires a linked Conflux pair, an out-of-order sequence gap, and a non-open AP stream state such as `AP_CONN_STATE_CONNECT_WAIT`.\n3. `PR:N`: the attacker does not need privileges on the target client; they act as a relay/exit capable of sending relay cells on the circuit.\n4. `UI:N`: after the circuit and stream exist, no additional user interaction is required to send the malformed `RELAY_END`.\n5. `S:U`: the impact is within the vulnerable Tor process.\n6. `C:N`: no direct information disclosure primitive is demonstrated.\n7. `I:N`: the OOB byte is overwritten with `END_STREAM_REASON_MISC` for zero-length messages before meaningful reason handling.\n8. `A:H`: ASan/hardened builds reliably abort the Tor process on the heap OOB read.",
+  "weakness": {
+    "id": 8,
+    "name": "Out-of-bounds Read"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5843197,
+      "file_name": "tor-conflux-end-zero-length-poc.patch",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/e1phfjk6bcwxs42n83ebarh2bmlr?response-content-disposition=attachment%3B%20filename%3D%22tor-conflux-end-zero-length-poc.patch%22%3B%20filename%2A%3DUTF-8%27%27tor-conflux-end-zero-length-poc.patch&response-content-type=text%2Fx-diff&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQV7F422S3%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T144841Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjELz%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIGdja4h7LqOaI0Kx8lBLoCRLk6YLryjcwBDwKHe%2FrZ53AiBUvJyekzBtpM5oC15GZL7uZAZzKj0gtbh1iy7xZ67VByq6BQiF%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMIOTuIJoAxXDz%2FB3BKo4F0vA7QhM7zKNK%2FSpdl%2B%2F4o3ZdbuiCCiya8kXXyVUJ3%2BApVq%2BsC%2BOF4UKkqoGnNxHb4TQX52W2BRMttkT3wjb4o9x6rDAztSc9NvkAF1Ud9HHV8ILYcYn9m%2B1QTtpnKoh3MYiA8LsUx0hTIVgeqlabh6nAaVb1Pb5lAGpOftw8BTQrbrqI99YFMeGua8Y%2F4HIwH0pMyOymOBe047cIhcINXRipf93UUb43nNIK51oQLgDVYQEpKPLPrQdj0rlgiMYgHnpOatKoh0j5EwOeOVid65WBrIUE8dsGDNHBP9JBvpY4teJfiFasIhHlmh4AMWi185lBpAO%2FRIZhVzSt7HtRrhxmTmnBunGDZ14REb5lrg6Dqep12by2yrTYZ5gRj1hmIfy6kmYuBOKmPIVSu8TefNrCeUQpoNIbZzDGOiE8eBQQr8b%2Fy%2BUqRRNAAjbiYO3w0yu1F0jgPXf85UbIp%2BbgMWFKL1bIdEsztFfkXmKZNbV%2BSO%2FS02yIS8n3E%2BX3k16cP7CGm%2FcXqUvHmKN3MOF7a0HeO5%2B%2F%2B0PEQWa6Lal596nKDISbtefuT8Gh3HB0L%2Bu0WcuCD3Hwslwez%2BXUYIpgtjDs96az16%2Fk1NXkePGbfEin%2B0GMd42Vmnc6mboGKEWdLtOOXH4f5dJRHaKeLGo1OhC7vxScdyg7J%2BoaCAPGIUuwTTtKlYXaSlA85k0zYO%2Bqbyuz%2BDky0BsiqCtPIXymaIxRr4BqKmTsOxODcd23%2BRqBY7JDjF7DRkI1I7xWEdDnLRR1W%2Bfw62CpNEQ7IqYi%2ByJZHjWGDH2j3SMQEa23foqlxOAnOQOLbH79q3okBpmFu0fdwbFkY3%2F%2BS36huSqtQVveZU2Ib837QBelK3UGMLKzitUGOrIBlahx%2Fk7YB5w%2FxDJemVTHgGz6g6SSXUnpwQX2R62MXAGW7saqpzn%2FdxOnCqP1ahLHIQcpKtF%2BNxx5KpIDt8dYLHdgghPAqQm8%2Bt9XXJMzBRqBabRxQNJZHLAZIRJuHHIGDXTzrKpfg8hPH5ZWAAqrzkwKZMVRZAv7pgfeqpU5rgTRguc9wJTJetX%2FXbanVVoRnhGa4zTHKZpblqv%2BufQGDZnOmcwCwCnWrXdlO03O5LzOgg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ede3064959e4f732fb4cd4990f36d713e7f87976e6be93fa45d54a8adaa3017f",
+      "file_size": 4100,
+      "type": "text/x-diff",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-09T16:54:22.253Z",
+  "allow_singular_disclosure_after": 2513140.452354496,
+  "singular_disclosure_allowed": false,
+  "vote_count": 3,
+  "voters": [
+    "geeknik",
+    "sottam",
+    "rh2-1"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 5.9,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "high",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "none",
+      "availability": "high"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 68695,
+    "asset_type": "OTHER",
+    "asset_identifier": "Tor",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

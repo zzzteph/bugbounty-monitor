@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**39 report(s)**
+**40 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -34,6 +34,7 @@
 | Out-of-bounds read when importing corrupt blockchain with monero-blockchain-import | — | monero | 2018-04-25 | [#284951](https://hackerone.com/reports/284951) |
 | Certificate message OOB reads (CVE-2016-6306) | — | ibb | 2017-05-25 | [#221790](https://hackerone.com/reports/221790) |
 | OOB read in TS_OBJ_print_bio() (CVE-2016-2180) | — | ibb | 2017-05-25 | [#221789](https://hackerone.com/reports/221789) |
+| Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read | — | torproject | 2026-09-10 | [#3709605](https://hackerone.com/reports/3709605) |
 | Heap Out-of-Bounds Read in lib/http2.c via Malformed PUSH_PROMISE Headers | — | curl | 2026-01-10 | [#3506159](https://hackerone.com/reports/3506159) |
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
