@@ -1,6 +1,6 @@
 # Unknown
 
-**981 report(s)**
+**982 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -867,6 +867,7 @@
 | Able to bypass authorization logic and gain more access then intended | — | github | 2026-07-15 | [#3713965](https://hackerone.com/reports/3713965) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | curl/libcurl 8.20.0 NOPROXY bypass via uppercase-hex IPv4 aliases leaks off-proxy Basic credentials to the configured proxy | — | curl | 2026-06-03 | [#3773293](https://hackerone.com/reports/3773293) |
+| 27: IMAP custom FETCH listing classification skips literal boundaries, enabling response desynchronization | — | curl | 2026-09-10 | [#3971538](https://hackerone.com/reports/3971538) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
 | Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
 | --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |

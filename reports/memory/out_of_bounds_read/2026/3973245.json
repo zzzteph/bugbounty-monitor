@@ -1,0 +1,139 @@
+{
+  "id": 3973245,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTczMjQ1",
+  "url": "https://hackerone.com/reports/3973245",
+  "title": "55: Heap-buffer-overflow read in `curl_formadd_ccsid()` with binary form data",
+  "state": "Closed",
+  "substate": "informative",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-27T09:53:47.941Z",
+  "submitted_at": "2026-08-27T09:53:48.224Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-10T15:10:11.672Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-07T20:57:28.806Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\n`curl_formadd_ccsid()` in `projects/OS400/ccsidcurl.c` performs a heap-buffer-overflow read when `CURLFORM_CONTENTTYPE` appears before an explicit length (`CURLFORM_CONTENTLEN` / `CURLFORM_CONTENTSLENGTH`) for binary `CURLFORM_COPYCONTENTS` data containing embedded NUL bytes. The overread bytes are copied into the generated multipart form body.\n\n## Affected versions\n\n IBM i/OS400-specific API in curl 7.17.0 through 8.21.0, plus affected 8.22.0 prerelease/development versions.\n\n## Root cause\n\nWhen `curl_formadd_ccsid()` encounters `CURLFORM_CONTENTTYPE`, it treats it as a separator and immediately converts any pending `CURLFORM_COPYCONTENTS` via `Curl_formadd_convert()` (line 897), then clears both the content and length indexes (lines 902-903). Because the explicit length has not been seen yet, `Curl_formadd_convert()` falls back to `strlen(value) + 1` (line 675). For a NUL-leading binary body this produces a 1-byte allocation (line 690). The later `CURLFORM_CONTENTLEN` is still forwarded to core `curl_formadd()`, which copies the full declared length from that undersized buffer — a heap-buffer-overflow read.\n\nThere is also a secondary overread: the premature `strlen()` at line 675 reads beyond the caller's buffer if the binary content is not NUL-terminated.\n\n## Impact\n\nThe confirmed primitive is an out-of-bounds heap read whose contents are copied into the generated multipart request body. If that request crosses a trust boundary, adjacent heap data may be disclosed to the receiving server.\n\nConstraints: the affected API is IBM i-specific and deprecated (`curl_formadd` is superseded by `curl_mime`). The trigger requires the application to supply binary content with the specific option ordering. I have not reproduced this natively on IBM i.\n\n## Reproduction\n\n1. Build an affected curl release, starting with 7.17.0, including the IBM i CCSID compatibility wrappers and with AddressSanitizer or an equivalent heap-bounds detector enabled.\n2. Write a small application using the deprecated `curl_formadd_ccsid()` API.\n3. Prepare binary form content with a truthful explicit length and an embedded NUL byte, preferably as the first byte so premature string-length calculation produces the smallest possible converted allocation.\n4. Add a form field name and then add the binary data with `CURLFORM_COPYCONTENTS`.\n5. Place `CURLFORM_CONTENTTYPE` after the binary content but before its corresponding `CURLFORM_CONTENTLEN` or `CURLFORM_CONTENTSLENGTH`.\n6. Place the truthful explicit content length after the content type and terminate the option list normally.\n7. Observe that encountering the content type causes the CCSID wrapper to convert the pending content before it has seen the explicit length.\n8. Confirm that the conversion path falls back to `strlen(value) + 1`; for NUL-leading data, this creates a one-byte converted allocation.\n9. Confirm that the later explicit length is still forwarded to the core `curl_formadd()` implementation.\n10. Serialize or submit the generated multipart form.\n11. Observe the vulnerable result: core form processing copies the full declared content length from the undersized converted allocation, and the memory checker reports a heap out-of-bounds read.\n12. If execution continues under a recovering memory checker, inspect the multipart body and confirm that bytes adjacent to the converted allocation can replace or follow the intended binary data.\n13. Repeat with bounded binary content that has no NUL terminator and confirm the secondary overread caused by the premature `strlen()` itself.\n14. As an ordering control, place the explicit content length before `CURLFORM_CONTENTTYPE`.\n15. Confirm that the control completes without a sanitizer error and preserves every supplied binary byte.\n16. As a second control, omit `CURLFORM_CONTENTTYPE` while retaining the explicit length and confirm correct serialization.\n17. If native IBM i instrumentation is unavailable, compile the production wrapper in a sanitizer-enabled environment with minimal platform declarations and use a same-CCSID conversion path so platform conversion stubs are not executed.\n18. Confirm a fix by deferring content conversion until its explicit length is known, preserving the pending content state across the content-type option, or rejecting the unsafe ordering.\n19. Repeat all three option orderings and verify that bounded binary data is processed exactly according to its explicit length without memory overreads.\n\n### Expected result\n\nForm option order must not cause binary content to be treated as a NUL-terminated string. Once supplied, the explicit length must govern conversion and copying of the associated content.\n\n### Vulnerable result\n\n`CURLFORM_CONTENTTYPE` triggers conversion before the later length is known, producing an undersized allocation. Core form processing subsequently trusts the explicit length and reads beyond that allocation into adjacent heap memory.\n\n\n## Suggested fix\n\nDo not convert pending content at `CURLFORM_CONTENTTYPE` until the explicit length is known. Either defer conversion until end-of-parameter-list (where the length will have been seen), or preserve the content index across the `CURLFORM_CONTENTTYPE` separator when no length has been recorded yet.\n\n## Impact\n\nAn application using the IBM i curl_formadd_ccsid() wrapper with attacker-influenced binary form data may read beyond a heap allocation and include adjacent process memory in the generated multipart request. This could disclose sensitive heap contents to the receiving server or crash the process, although exploitation requires the deprecated platform-specific API and the vulnerable option ordering.",
+  "weakness": {
+    "id": 8,
+    "name": "Out-of-bounds Read"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6563420,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/qpsk21pqtb2vleunq3o3o724liiw?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRB2NQVQN%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180549Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHU70qBuDVCEvPcKLzFm9xIiWfAIhxs4DEwcqq4JYceBAiEAtM35JEQqgdmkXIDCOEt0oicelUmtcie1PLbp4HW6SdgquwUIi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDNOTjlW9bvoKruZYPiqPBYgbgrnnCO9j66jCT9KA4JxCsJNU%2BYYSaZJXOwUhPUrGpo80hF4cDzI%2BMN%2FTUTjxpJw5NgMxsOYhCXVXUWiPvDc83OlvV23I1wTm5CPoaENQU6zv5zqIaa%2BGwHRx1YbOKlMRkVOwmInk7BYMeZ88aF60n3cm1VW3CdG4%2Bl0FLqwmSV%2BAtAKfc6nb0%2B1HZBqtzJjYRD%2F7U69XrSth9RU5QL9MJY0vj7WTCkRgfnvZfGXyP7SH9clrsXGEhwNIlO18SYuPF1ddVDq07cLt7q3H0hIYDa5LVMxUhur1DI5Lhok%2FtOOyc5br0SMzffyb%2FwL2uy35icNrZf04Jg4k%2Brie6bIA2k9qjObJQfsxnQAtkwCaKDiMowtXLzxRPYnrkrl%2Ft0XyhFTbPAjo8OvpK8Qqj3ko%2BEi5mOkXTzww4Wy%2FXEqOIa5bfrjqI%2Bsz3SeCAIZU7VhT99aD3vBCY8TAImm0Lg1PNTl%2FWm5KvCeE23F0Bm9yI1mNg83%2FxPWtvaJsQvprdu9Ymg1xPv58hzfWMSrPqKFsI%2BKaZbrsECaVVzyNLkF2%2FKNofTENt1VdrcrTPay2kfh8nTM7QSpI1ZteRXOwumGbvFaa0I5G2lHXLortrnr7Cb0OitAPIu1AiZvo%2BwZ6zxAZ5%2FIq1NbogvWJ6qbnWHJGL0O%2FZwG0vGX7Q8RYmV%2FZlIGsRGKggq374m%2FTibxAVTj%2BRMPpDd4xzU7o9ofeS9tB%2BVmE2orraPlgAD6TOa1%2BzAED%2F30qcwUmoDex4vmX4LydMyrqtpkqu49Bkvl%2FxxsdxoKwSeXNQkE38G0PC3%2F%2Bhk%2BHlKok8bAp%2BueYWv59HdzV6VoTbRjf%2FEkyxZdLmk8N4bb2KKUYVIQcGCSwH%2F4wkuKL1QY6sQFNImJQIWmT7oUQoSLgZa4ZDFbQENnIj%2FKdfAvk8ledV5kIcgYfIjgYTe%2BlR05ZhHY2rgY1Xk1hzwSXsoK6jXto3YhByQ80%2B%2FRNtdrIuNPYw65h9Zv12DmP17rGj5SlKbXD5cdez1Z1pV6tIFKD66mSc2F%2B5SqwzdeB3mc5qsnkw1qkt4iBV5gdZ3M7cnfz6cuFngvR%2F8OqbSdwofSYvTesTerwCHKAR2X4RlpPnR6BwKY%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=fffedd4231f7b88051885e8753e46f71539c8391fd286632001e88f520b429a8",
+      "file_size": 1767,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6563421,
+      "file_name": "iconv.h",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ma9aweeqbvwjsm0v5xlt4t4gurux?response-content-disposition=attachment%3B%20filename%3D%22iconv.h%22%3B%20filename%2A%3DUTF-8%27%27iconv.h&response-content-type=text%2Fx-chdr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRB2NQVQN%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180549Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHU70qBuDVCEvPcKLzFm9xIiWfAIhxs4DEwcqq4JYceBAiEAtM35JEQqgdmkXIDCOEt0oicelUmtcie1PLbp4HW6SdgquwUIi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDNOTjlW9bvoKruZYPiqPBYgbgrnnCO9j66jCT9KA4JxCsJNU%2BYYSaZJXOwUhPUrGpo80hF4cDzI%2BMN%2FTUTjxpJw5NgMxsOYhCXVXUWiPvDc83OlvV23I1wTm5CPoaENQU6zv5zqIaa%2BGwHRx1YbOKlMRkVOwmInk7BYMeZ88aF60n3cm1VW3CdG4%2Bl0FLqwmSV%2BAtAKfc6nb0%2B1HZBqtzJjYRD%2F7U69XrSth9RU5QL9MJY0vj7WTCkRgfnvZfGXyP7SH9clrsXGEhwNIlO18SYuPF1ddVDq07cLt7q3H0hIYDa5LVMxUhur1DI5Lhok%2FtOOyc5br0SMzffyb%2FwL2uy35icNrZf04Jg4k%2Brie6bIA2k9qjObJQfsxnQAtkwCaKDiMowtXLzxRPYnrkrl%2Ft0XyhFTbPAjo8OvpK8Qqj3ko%2BEi5mOkXTzww4Wy%2FXEqOIa5bfrjqI%2Bsz3SeCAIZU7VhT99aD3vBCY8TAImm0Lg1PNTl%2FWm5KvCeE23F0Bm9yI1mNg83%2FxPWtvaJsQvprdu9Ymg1xPv58hzfWMSrPqKFsI%2BKaZbrsECaVVzyNLkF2%2FKNofTENt1VdrcrTPay2kfh8nTM7QSpI1ZteRXOwumGbvFaa0I5G2lHXLortrnr7Cb0OitAPIu1AiZvo%2BwZ6zxAZ5%2FIq1NbogvWJ6qbnWHJGL0O%2FZwG0vGX7Q8RYmV%2FZlIGsRGKggq374m%2FTibxAVTj%2BRMPpDd4xzU7o9ofeS9tB%2BVmE2orraPlgAD6TOa1%2BzAED%2F30qcwUmoDex4vmX4LydMyrqtpkqu49Bkvl%2FxxsdxoKwSeXNQkE38G0PC3%2F%2Bhk%2BHlKok8bAp%2BueYWv59HdzV6VoTbRjf%2FEkyxZdLmk8N4bb2KKUYVIQcGCSwH%2F4wkuKL1QY6sQFNImJQIWmT7oUQoSLgZa4ZDFbQENnIj%2FKdfAvk8ledV5kIcgYfIjgYTe%2BlR05ZhHY2rgY1Xk1hzwSXsoK6jXto3YhByQ80%2B%2FRNtdrIuNPYw65h9Zv12DmP17rGj5SlKbXD5cdez1Z1pV6tIFKD66mSc2F%2B5SqwzdeB3mc5qsnkw1qkt4iBV5gdZ3M7cnfz6cuFngvR%2F8OqbSdwofSYvTesTerwCHKAR2X4RlpPnR6BwKY%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=2b5167a857e56be5226644bac4c5d0cbcb38bbd1ee570cf9c321bd24a4ac29c5",
+      "file_size": 723,
+      "type": "text/x-chdr",
+      "moderated": null
+    },
+    {
+      "id": 6563422,
+      "file_name": "poc.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/rtnc4h8vgk2jldvhevopqr2vihp8?response-content-disposition=attachment%3B%20filename%3D%22poc.c%22%3B%20filename%2A%3DUTF-8%27%27poc.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRB2NQVQN%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180549Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHU70qBuDVCEvPcKLzFm9xIiWfAIhxs4DEwcqq4JYceBAiEAtM35JEQqgdmkXIDCOEt0oicelUmtcie1PLbp4HW6SdgquwUIi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDNOTjlW9bvoKruZYPiqPBYgbgrnnCO9j66jCT9KA4JxCsJNU%2BYYSaZJXOwUhPUrGpo80hF4cDzI%2BMN%2FTUTjxpJw5NgMxsOYhCXVXUWiPvDc83OlvV23I1wTm5CPoaENQU6zv5zqIaa%2BGwHRx1YbOKlMRkVOwmInk7BYMeZ88aF60n3cm1VW3CdG4%2Bl0FLqwmSV%2BAtAKfc6nb0%2B1HZBqtzJjYRD%2F7U69XrSth9RU5QL9MJY0vj7WTCkRgfnvZfGXyP7SH9clrsXGEhwNIlO18SYuPF1ddVDq07cLt7q3H0hIYDa5LVMxUhur1DI5Lhok%2FtOOyc5br0SMzffyb%2FwL2uy35icNrZf04Jg4k%2Brie6bIA2k9qjObJQfsxnQAtkwCaKDiMowtXLzxRPYnrkrl%2Ft0XyhFTbPAjo8OvpK8Qqj3ko%2BEi5mOkXTzww4Wy%2FXEqOIa5bfrjqI%2Bsz3SeCAIZU7VhT99aD3vBCY8TAImm0Lg1PNTl%2FWm5KvCeE23F0Bm9yI1mNg83%2FxPWtvaJsQvprdu9Ymg1xPv58hzfWMSrPqKFsI%2BKaZbrsECaVVzyNLkF2%2FKNofTENt1VdrcrTPay2kfh8nTM7QSpI1ZteRXOwumGbvFaa0I5G2lHXLortrnr7Cb0OitAPIu1AiZvo%2BwZ6zxAZ5%2FIq1NbogvWJ6qbnWHJGL0O%2FZwG0vGX7Q8RYmV%2FZlIGsRGKggq374m%2FTibxAVTj%2BRMPpDd4xzU7o9ofeS9tB%2BVmE2orraPlgAD6TOa1%2BzAED%2F30qcwUmoDex4vmX4LydMyrqtpkqu49Bkvl%2FxxsdxoKwSeXNQkE38G0PC3%2F%2Bhk%2BHlKok8bAp%2BueYWv59HdzV6VoTbRjf%2FEkyxZdLmk8N4bb2KKUYVIQcGCSwH%2F4wkuKL1QY6sQFNImJQIWmT7oUQoSLgZa4ZDFbQENnIj%2FKdfAvk8ledV5kIcgYfIjgYTe%2BlR05ZhHY2rgY1Xk1hzwSXsoK6jXto3YhByQ80%2B%2FRNtdrIuNPYw65h9Zv12DmP17rGj5SlKbXD5cdez1Z1pV6tIFKD66mSc2F%2B5SqwzdeB3mc5qsnkw1qkt4iBV5gdZ3M7cnfz6cuFngvR%2F8OqbSdwofSYvTesTerwCHKAR2X4RlpPnR6BwKY%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=699d4be203808522ea89dacac9eb149bfc89be5fcf39cefa0816fc0238de4e2b",
+      "file_size": 2522,
+      "type": "text/x-csrc",
+      "moderated": null
+    },
+    {
+      "id": 6563423,
+      "file_name": "run-container.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2cr8i9yl2fserubcxje53b5h5bla?response-content-disposition=attachment%3B%20filename%3D%22run-container.sh%22%3B%20filename%2A%3DUTF-8%27%27run-container.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRB2NQVQN%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180549Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIHU70qBuDVCEvPcKLzFm9xIiWfAIhxs4DEwcqq4JYceBAiEAtM35JEQqgdmkXIDCOEt0oicelUmtcie1PLbp4HW6SdgquwUIi%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDNOTjlW9bvoKruZYPiqPBYgbgrnnCO9j66jCT9KA4JxCsJNU%2BYYSaZJXOwUhPUrGpo80hF4cDzI%2BMN%2FTUTjxpJw5NgMxsOYhCXVXUWiPvDc83OlvV23I1wTm5CPoaENQU6zv5zqIaa%2BGwHRx1YbOKlMRkVOwmInk7BYMeZ88aF60n3cm1VW3CdG4%2Bl0FLqwmSV%2BAtAKfc6nb0%2B1HZBqtzJjYRD%2F7U69XrSth9RU5QL9MJY0vj7WTCkRgfnvZfGXyP7SH9clrsXGEhwNIlO18SYuPF1ddVDq07cLt7q3H0hIYDa5LVMxUhur1DI5Lhok%2FtOOyc5br0SMzffyb%2FwL2uy35icNrZf04Jg4k%2Brie6bIA2k9qjObJQfsxnQAtkwCaKDiMowtXLzxRPYnrkrl%2Ft0XyhFTbPAjo8OvpK8Qqj3ko%2BEi5mOkXTzww4Wy%2FXEqOIa5bfrjqI%2Bsz3SeCAIZU7VhT99aD3vBCY8TAImm0Lg1PNTl%2FWm5KvCeE23F0Bm9yI1mNg83%2FxPWtvaJsQvprdu9Ymg1xPv58hzfWMSrPqKFsI%2BKaZbrsECaVVzyNLkF2%2FKNofTENt1VdrcrTPay2kfh8nTM7QSpI1ZteRXOwumGbvFaa0I5G2lHXLortrnr7Cb0OitAPIu1AiZvo%2BwZ6zxAZ5%2FIq1NbogvWJ6qbnWHJGL0O%2FZwG0vGX7Q8RYmV%2FZlIGsRGKggq374m%2FTibxAVTj%2BRMPpDd4xzU7o9ofeS9tB%2BVmE2orraPlgAD6TOa1%2BzAED%2F30qcwUmoDex4vmX4LydMyrqtpkqu49Bkvl%2FxxsdxoKwSeXNQkE38G0PC3%2F%2Bhk%2BHlKok8bAp%2BueYWv59HdzV6VoTbRjf%2FEkyxZdLmk8N4bb2KKUYVIQcGCSwH%2F4wkuKL1QY6sQFNImJQIWmT7oUQoSLgZa4ZDFbQENnIj%2FKdfAvk8ledV5kIcgYfIjgYTe%2BlR05ZhHY2rgY1Xk1hzwSXsoK6jXto3YhByQ80%2B%2FRNtdrIuNPYw65h9Zv12DmP17rGj5SlKbXD5cdez1Z1pV6tIFKD66mSc2F%2B5SqwzdeB3mc5qsnkw1qkt4iBV5gdZ3M7cnfz6cuFngvR%2F8OqbSdwofSYvTesTerwCHKAR2X4RlpPnR6BwKY%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=413ced5a303517d0ea38a0a863622d828ee2c26ecb5149c097b94172a6fceed7",
+      "file_size": 828,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

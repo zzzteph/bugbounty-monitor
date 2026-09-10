@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**615 report(s) across 18 class(es)**
+**616 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -18,8 +18,8 @@
 | [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 5 | — |
 | [Unverified Password Change](unverified_password_change/README.md) | 5 | — |
 | [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 4 | $15,300 |
+| [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 3 | — |
 | [Insufficient Verification Of Data Authenticity](insufficient_verification_of_data_authenticity/README.md) | 2 | $1,270 |
-| [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 2 | — |
 | [Brute Force](brute_force/README.md) | 1 | $1,000 |
 | [Reusing Session Ids Aka Session Replay](reusing_session_ids_aka_session_replay/README.md) | 1 | — |
 | [Use Of Default Credentials](use_of_default_credentials/README.md) | 1 | — |
@@ -610,6 +610,7 @@
 | Authentication bypass  for  ███  leads to  take over any users account. | — | krisp | 2022-10-31 | [#1608151](https://hackerone.com/reports/1608151) |
 | Unauthenticated File Upload with CORS Wildcard and No Rate Limiting on ████████ and ████████ | — | essity | 2026-06-29 | [#3765476](https://hackerone.com/reports/3765476) |
 | Login email verification bypass via `/oauth/token`. | — | gitlab | 2024-09-03 | [#2676025](https://hackerone.com/reports/2676025) |
+| 12: SASL DIGEST-MD5 does not validate the server's `rspauth` proof | — | curl | 2026-09-10 | [#3972338](https://hackerone.com/reports/3972338) |
 | JWT audience claim is not verified | — | ibb | 2023-04-16 | [#1889161](https://hackerone.com/reports/1889161) |
 | Rack parses encoded cookie names allowing an attacker to send malicious `__Host-` and `__Secure-` prefixed cookies | — | rails | 2020-06-16 | [#895727](https://hackerone.com/reports/895727) |
 | Отправка писем с произвольным текстом/кликабельными ссылками любому зарегистрированному пользователю с указанной почтой, зная только steamid | — | cs_money | 2020-12-20 | [#993711](https://hackerone.com/reports/993711) |

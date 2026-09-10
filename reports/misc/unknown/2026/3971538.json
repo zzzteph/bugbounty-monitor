@@ -1,0 +1,135 @@
+{
+  "id": 3971538,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTcxNTM4",
+  "url": "https://hackerone.com/reports/3971538",
+  "title": "27: IMAP custom FETCH listing classification skips literal boundaries, enabling response desynchronization",
+  "state": "Closed",
+  "substate": "informative",
+  "readable_substate": "Informative",
+  "created_at": "2026-08-26T15:47:55.519Z",
+  "submitted_at": "2026-08-26T15:47:55.761Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-10T15:09:03.734Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-09-07T21:13:57.362Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\n`is_custom_fetch_listing_match()` in `lib/imap.c` classifies any custom FETCH whose sequence set contains `:` or `,` as a \"listing.\" For that classification, `imap_state_listsearch_resp()` skips literal detection entirely. The ping-pong line parser then scans the server-declared literal body as IMAP protocol lines. A tagged completion line embedded inside attacker-controlled message content terminates the active request prematurely, and the remaining literal bytes are interpreted as responses to a subsequent request on the reused connection.\n\nThe result is that content from one fetched message can be returned as the body of a different requested message, while the genuine response is suppressed.\n\n## Root cause\n\n`is_custom_fetch_listing_match()` at `lib/imap.c:1181-1197`:\n\n```c\nstatic bool is_custom_fetch_listing_match(const char *params)\n{\n  if(*params++ != ' ')\n    return FALSE;\n  while(ISDIGIT(*params)) {\n    params++;\n    if(*params == 0)\n      return FALSE;\n  }\n  if(*params == ':')\n    return TRUE;\n  if(*params == ',')\n    return TRUE;\n  return FALSE;\n}\n```\n\nThis classifies `UID FETCH 1:* BODY[]` as a listing purely because of the `:` in the sequence set, without considering the requested data items.\n\n`imap_state_listsearch_resp()` at `lib/imap.c:1233-1235`:\n\n```c\nif(imapcode == '*' && is_custom_fetch_listing(imap)) {\n  /* custom FETCH or UID FETCH for listing is not handled here */\n}\n```\n\nThis branch prevents the `else if(imapcode == '*')` block from executing. That block is the one that calls `imap_find_literal()`, parses `{size}`, and sets up proper literal consumption. With it skipped, `Curl_pp_readresp()` in `lib/pingpong.c` processes every `\\r\\n`-terminated line inside the literal as a protocol response. Any line matching the active tag terminates the request.\n\n## Reproduction\n\nFrom a curl source checkout at or after commit `c2676bf`:\n\n\n### 2. Run\n\nPlace `client.c`, `server.py`, and `Dockerfile` directory inside the curl source tree, then:\n\n```sh\ndocker build -t curl-imap-desync -f poc/Dockerfile .\ndocker run --rm curl-imap-desync\n```\n\n### 3. Expected output\n\n```\nMODE=vulnerable\nFIRST_RESULT=0\nFIRST_BYTES=0\nSECOND_RESULT=0\nSECOND_BODY=FORGED-FOR-UID-456\nVERDICT=VULNERABLE\nMODE=control\nFIRST_RESULT=0\nFIRST_BYTES=266361\nSECOND_RESULT=0\nSECOND_BODY=GENUINE-FOR-UID-456\nVERDICT=CONTROL_OK\n```\n\nThe vulnerable case shows `SECOND_BODY=FORGED-FOR-UID-456` — the attacker's payload was returned as the body of the second, unrelated FETCH. The matched control changes only the first request from `UID FETCH 1:* BODY[]` to `UID FETCH 1 BODY[]`. With the single-UID form, curl honors the literal boundary and returns `GENUINE-FOR-UID-456`.\n\nThe server withholds the forged FETCH response until after curl has sent the second command, proving the substitution happens through connection reuse rather than buffered data.\n\n## Impact\n\nAn attacker who can place a message in the target's IMAP mailbox (i.e., send an email) can embed a ~266 KB spray of fake tagged completion lines covering all 26 tag prefixes and all 256 command-counter values. When an application fetches this message as part of a multi-UID custom FETCH (e.g., `UID FETCH 1:* BODY[]`) and then reuses the connection for a second request, curl returns the attacker-controlled payload as the body of the second request, suppressing the server's genuine response.\n\nDemonstrated impact is integrity and availability. I have not demonstrated confidentiality loss, command injection, memory corruption, or code execution.\n\nExploitation requires an application to:\n1. issue a custom multi-message content FETCH containing `:` or `,` via `CURLOPT_CUSTOMREQUEST`;\n2. include an attacker-controlled message in that FETCH;\n3. reuse the same authenticated IMAP connection for a subsequent request; and\n4. trust libcurl's association between requests and returned message bodies.",
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6558082,
+      "file_name": "client.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/q0hsv1mhfq986n7vj9iu49w96gq9?response-content-disposition=attachment%3B%20filename%3D%22client.c%22%3B%20filename%2A%3DUTF-8%27%27client.c&response-content-type=text%2Fx-csrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQROYL2RIQ%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180551Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHC%2BLdkmijdGe75kei8MOC%2FoPNxi8I%2FVlNwuugcKDbAPAiBxwdUlImtQeNWfe97oQApBwc3j90%2Fpd7og9KoQtU45PSq7BQiL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMMUMekLy%2Bs6yxqKG4Ko8FC5oIVO0surHZG%2BTRDRg7Ec5rDwuOe4DAG3Z5sUvn7oH3wTMw48Lf6%2BeEGfsK9L9SZuSLXPDV%2BgR9bwndBzG2%2BKMF6VcDvgnfQxMkCQUealSxrYFEfT0NYt0Cowd4xpxZlcP715JJPcTnClGN6NG7vXqnWfiwsAiq8YohIYj43DLCEqqFVGEC%2FLVyPFzgCQ8lcOc83k%2BoBrnjoqQg%2Fm1dXwtPoqZ7p6wWntgbV%2Bg24ubJlJ2Le2OxWM3dSvII7S6VzjjH54enFvs8XkHu29tXRyjQJpnGRKhXvsSkoM2LLKQrg5KRBGJ45Vc8oDQ3h0aZyO1Oe%2BNG31wd9BHVkceM4FpblR27R3Ie3hkYX%2FhcY5FrGvzA2Q4GKKnZ9nYDjjLFzidr567Vegql20cQixI1RDT8rLps1K9pAGYjVwGTWng2lUQc0Hl84FlJGNObN1fj7UgGOS39D3cmyHui821wJ3JMbbvBSwgZkpQdd8Ut5EuarHRUFRT%2F288VCOMfUzET0v94z9FAN38w0ex51bFDAD7oBeSO%2Bjx0VHtoqlLYmKm31ls6lnwuL4H7ZTb20rBaVWHMG1vXw0rBoaAPOJ1JpxeVO7RzdeCPQdyc8vifI7%2BybPgnufhlyptAIqoIySA3U%2FBUkO9yZLTQ3grZgyhQIRLh3qzVPWTng3E6zu4kPymS75Ibl6gquKI2sFx2IfvRyyu4Js0mtu6pftb1k8M%2Fthet7DMpdv9Bn0uh1snznGC4fGZQLmAKZWeSKWWyfIpqGi%2Fbm1KrhzOL6riMD5CoJyI4BlSsgiqzFQ2MonaZSpRDo1TZFgzTeLOlNWFxIyoSfBSpecOwOt7SeqjNjlF1TKl5wmHagg46Eyuf6b6IuzCn2IvVBjqyAaJU%2F6FZbA8tDCDRLQOo8ynxNmjHLEDRekhmWZd6ilt3gLBoBD6R2aAaBOJnBfBMr9acTOOAMY25Q34WnB02omqZ7wJ86%2FfT3g0VGc9BORgMuaIyd8b4CM4X1ilaDuHeoMAa1cdwtq7uyab0OyQoalc3s%2B9QS3qjteCZTIjAs8qCGJ7XI4FMMQhv9MIyx4ZH9odG5N8NNWqsCNhf%2FRt22vfQnFS%2FxVh59X%2Bfb%2FIitjuU1lA%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d8f23df8e7caa503e3dddd0f8e80220499e30a87b4cb0a42a74f960f757b45df",
+      "file_size": 2903,
+      "type": "text/x-csrc",
+      "moderated": null
+    },
+    {
+      "id": 6558083,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/dloro8k7qu66faj9154umh2vrijd?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQROYL2RIQ%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180551Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHC%2BLdkmijdGe75kei8MOC%2FoPNxi8I%2FVlNwuugcKDbAPAiBxwdUlImtQeNWfe97oQApBwc3j90%2Fpd7og9KoQtU45PSq7BQiL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMMUMekLy%2Bs6yxqKG4Ko8FC5oIVO0surHZG%2BTRDRg7Ec5rDwuOe4DAG3Z5sUvn7oH3wTMw48Lf6%2BeEGfsK9L9SZuSLXPDV%2BgR9bwndBzG2%2BKMF6VcDvgnfQxMkCQUealSxrYFEfT0NYt0Cowd4xpxZlcP715JJPcTnClGN6NG7vXqnWfiwsAiq8YohIYj43DLCEqqFVGEC%2FLVyPFzgCQ8lcOc83k%2BoBrnjoqQg%2Fm1dXwtPoqZ7p6wWntgbV%2Bg24ubJlJ2Le2OxWM3dSvII7S6VzjjH54enFvs8XkHu29tXRyjQJpnGRKhXvsSkoM2LLKQrg5KRBGJ45Vc8oDQ3h0aZyO1Oe%2BNG31wd9BHVkceM4FpblR27R3Ie3hkYX%2FhcY5FrGvzA2Q4GKKnZ9nYDjjLFzidr567Vegql20cQixI1RDT8rLps1K9pAGYjVwGTWng2lUQc0Hl84FlJGNObN1fj7UgGOS39D3cmyHui821wJ3JMbbvBSwgZkpQdd8Ut5EuarHRUFRT%2F288VCOMfUzET0v94z9FAN38w0ex51bFDAD7oBeSO%2Bjx0VHtoqlLYmKm31ls6lnwuL4H7ZTb20rBaVWHMG1vXw0rBoaAPOJ1JpxeVO7RzdeCPQdyc8vifI7%2BybPgnufhlyptAIqoIySA3U%2FBUkO9yZLTQ3grZgyhQIRLh3qzVPWTng3E6zu4kPymS75Ibl6gquKI2sFx2IfvRyyu4Js0mtu6pftb1k8M%2Fthet7DMpdv9Bn0uh1snznGC4fGZQLmAKZWeSKWWyfIpqGi%2Fbm1KrhzOL6riMD5CoJyI4BlSsgiqzFQ2MonaZSpRDo1TZFgzTeLOlNWFxIyoSfBSpecOwOt7SeqjNjlF1TKl5wmHagg46Eyuf6b6IuzCn2IvVBjqyAaJU%2F6FZbA8tDCDRLQOo8ynxNmjHLEDRekhmWZd6ilt3gLBoBD6R2aAaBOJnBfBMr9acTOOAMY25Q34WnB02omqZ7wJ86%2FfT3g0VGc9BORgMuaIyd8b4CM4X1ilaDuHeoMAa1cdwtq7uyab0OyQoalc3s%2B9QS3qjteCZTIjAs8qCGJ7XI4FMMQhv9MIyx4ZH9odG5N8NNWqsCNhf%2FRt22vfQnFS%2FxVh59X%2Bfb%2FIitjuU1lA%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ead2af1f2bb0a0518a2f5d6bd1feb9b0898f78733a9a512fffa7cf1a2594a7a9",
+      "file_size": 1003,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6558085,
+      "file_name": "server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/vo9zn04dq76eo9ye2jclujjwju0v?response-content-disposition=attachment%3B%20filename%3D%22server.py%22%3B%20filename%2A%3DUTF-8%27%27server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQROYL2RIQ%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180551Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHC%2BLdkmijdGe75kei8MOC%2FoPNxi8I%2FVlNwuugcKDbAPAiBxwdUlImtQeNWfe97oQApBwc3j90%2Fpd7og9KoQtU45PSq7BQiL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMMUMekLy%2Bs6yxqKG4Ko8FC5oIVO0surHZG%2BTRDRg7Ec5rDwuOe4DAG3Z5sUvn7oH3wTMw48Lf6%2BeEGfsK9L9SZuSLXPDV%2BgR9bwndBzG2%2BKMF6VcDvgnfQxMkCQUealSxrYFEfT0NYt0Cowd4xpxZlcP715JJPcTnClGN6NG7vXqnWfiwsAiq8YohIYj43DLCEqqFVGEC%2FLVyPFzgCQ8lcOc83k%2BoBrnjoqQg%2Fm1dXwtPoqZ7p6wWntgbV%2Bg24ubJlJ2Le2OxWM3dSvII7S6VzjjH54enFvs8XkHu29tXRyjQJpnGRKhXvsSkoM2LLKQrg5KRBGJ45Vc8oDQ3h0aZyO1Oe%2BNG31wd9BHVkceM4FpblR27R3Ie3hkYX%2FhcY5FrGvzA2Q4GKKnZ9nYDjjLFzidr567Vegql20cQixI1RDT8rLps1K9pAGYjVwGTWng2lUQc0Hl84FlJGNObN1fj7UgGOS39D3cmyHui821wJ3JMbbvBSwgZkpQdd8Ut5EuarHRUFRT%2F288VCOMfUzET0v94z9FAN38w0ex51bFDAD7oBeSO%2Bjx0VHtoqlLYmKm31ls6lnwuL4H7ZTb20rBaVWHMG1vXw0rBoaAPOJ1JpxeVO7RzdeCPQdyc8vifI7%2BybPgnufhlyptAIqoIySA3U%2FBUkO9yZLTQ3grZgyhQIRLh3qzVPWTng3E6zu4kPymS75Ibl6gquKI2sFx2IfvRyyu4Js0mtu6pftb1k8M%2Fthet7DMpdv9Bn0uh1snznGC4fGZQLmAKZWeSKWWyfIpqGi%2Fbm1KrhzOL6riMD5CoJyI4BlSsgiqzFQ2MonaZSpRDo1TZFgzTeLOlNWFxIyoSfBSpecOwOt7SeqjNjlF1TKl5wmHagg46Eyuf6b6IuzCn2IvVBjqyAaJU%2F6FZbA8tDCDRLQOo8ynxNmjHLEDRekhmWZd6ilt3gLBoBD6R2aAaBOJnBfBMr9acTOOAMY25Q34WnB02omqZ7wJ86%2FfT3g0VGc9BORgMuaIyd8b4CM4X1ilaDuHeoMAa1cdwtq7uyab0OyQoalc3s%2B9QS3qjteCZTIjAs8qCGJ7XI4FMMQhv9MIyx4ZH9odG5N8NNWqsCNhf%2FRt22vfQnFS%2FxVh59X%2Bfb%2FIitjuU1lA%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=50e9214bd495ad1712448ecb0044c8827e339f3bbc351f58fd406669ddb3c825",
+      "file_size": 5633,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6558086,
+      "file_name": "run.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/rwdbb0h4jo871pebrokuqeyjgv2d?response-content-disposition=attachment%3B%20filename%3D%22run.sh%22%3B%20filename%2A%3DUTF-8%27%27run.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQROYL2RIQ%2F20260910%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260910T180551Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEML%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIHC%2BLdkmijdGe75kei8MOC%2FoPNxi8I%2FVlNwuugcKDbAPAiBxwdUlImtQeNWfe97oQApBwc3j90%2Fpd7og9KoQtU45PSq7BQiL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMMUMekLy%2Bs6yxqKG4Ko8FC5oIVO0surHZG%2BTRDRg7Ec5rDwuOe4DAG3Z5sUvn7oH3wTMw48Lf6%2BeEGfsK9L9SZuSLXPDV%2BgR9bwndBzG2%2BKMF6VcDvgnfQxMkCQUealSxrYFEfT0NYt0Cowd4xpxZlcP715JJPcTnClGN6NG7vXqnWfiwsAiq8YohIYj43DLCEqqFVGEC%2FLVyPFzgCQ8lcOc83k%2BoBrnjoqQg%2Fm1dXwtPoqZ7p6wWntgbV%2Bg24ubJlJ2Le2OxWM3dSvII7S6VzjjH54enFvs8XkHu29tXRyjQJpnGRKhXvsSkoM2LLKQrg5KRBGJ45Vc8oDQ3h0aZyO1Oe%2BNG31wd9BHVkceM4FpblR27R3Ie3hkYX%2FhcY5FrGvzA2Q4GKKnZ9nYDjjLFzidr567Vegql20cQixI1RDT8rLps1K9pAGYjVwGTWng2lUQc0Hl84FlJGNObN1fj7UgGOS39D3cmyHui821wJ3JMbbvBSwgZkpQdd8Ut5EuarHRUFRT%2F288VCOMfUzET0v94z9FAN38w0ex51bFDAD7oBeSO%2Bjx0VHtoqlLYmKm31ls6lnwuL4H7ZTb20rBaVWHMG1vXw0rBoaAPOJ1JpxeVO7RzdeCPQdyc8vifI7%2BybPgnufhlyptAIqoIySA3U%2FBUkO9yZLTQ3grZgyhQIRLh3qzVPWTng3E6zu4kPymS75Ibl6gquKI2sFx2IfvRyyu4Js0mtu6pftb1k8M%2Fthet7DMpdv9Bn0uh1snznGC4fGZQLmAKZWeSKWWyfIpqGi%2Fbm1KrhzOL6riMD5CoJyI4BlSsgiqzFQ2MonaZSpRDo1TZFgzTeLOlNWFxIyoSfBSpecOwOt7SeqjNjlF1TKl5wmHagg46Eyuf6b6IuzCn2IvVBjqyAaJU%2F6FZbA8tDCDRLQOo8ynxNmjHLEDRekhmWZd6ilt3gLBoBD6R2aAaBOJnBfBMr9acTOOAMY25Q34WnB02omqZ7wJ86%2FfT3g0VGc9BORgMuaIyd8b4CM4X1ilaDuHeoMAa1cdwtq7uyab0OyQoalc3s%2B9QS3qjteCZTIjAs8qCGJ7XI4FMMQhv9MIyx4ZH9odG5N8NNWqsCNhf%2FRt22vfQnFS%2FxVh59X%2Bfb%2FIitjuU1lA%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=9df8127b7fa563c4bc78119e3f512da831c9a792ae8eb21f707f77a3ca1d8d2e",
+      "file_size": 206,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

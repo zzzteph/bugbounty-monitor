@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1636 report(s) across 33 class(es)**
+**1638 report(s) across 34 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 981 | $50,000 |
+| [Unknown](unknown/README.md) | 982 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
@@ -24,6 +24,7 @@
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
 | [Authentication Bypass By Spoofing](authentication_bypass_by_spoofing/README.md) | 1 | — |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
+| [Improper Handling Of Case Sensitivity](improper_handling_of_case_sensitivity/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
 | [Improper Handling Of Unicode Encoding](improper_handling_of_unicode_encoding/README.md) | 1 | — |
@@ -264,6 +265,7 @@
 | -H with space prefix leads to previous header injection when used with --proxy | — | curl | 2025-07-07 | [#2864859](https://hackerone.com/reports/2864859) |
 | RTSP RTP Interleaved Parser Assertion Failure (Zero-Length RTP Payload) | — | curl | 2026-02-26 | [#3575250](https://hackerone.com/reports/3575250) |
 | 42: `VMS_STS` macro typo (`< 3` vs `<< 3`) turns curl failures into successful OpenVMS conditions | — | curl | 2026-08-29 | [#3973169](https://hackerone.com/reports/3973169) |
+| IMAP connection reuse runs requests in the wrong case-sensitive mailbox | — | curl | 2026-09-10 | [#3976342](https://hackerone.com/reports/3976342) |
 | Uncatchable "Maximum call stack size exceeded" error on Node.js via async_hooks leads to process crashes bypassing error handlers | — | nodejs | 2026-02-12 | [#3456295](https://hackerone.com/reports/3456295) |
 | Calendar attachments of local files are offered to downloaded | — | nextcloud | 2025-12-05 | [#3112033](https://hackerone.com/reports/3112033) |
 | Node.js unicode dot separator handling can lead to tls wildcard-depth authentication bypass due to resolver and verifier hostname normalization mismat | — | nodejs | 2026-06-25 | [#3688064](https://hackerone.com/reports/3688064) |
@@ -1182,6 +1184,7 @@
 | Able to bypass authorization logic and gain more access then intended | — | github | 2026-07-15 | [#3713965](https://hackerone.com/reports/3713965) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | curl/libcurl 8.20.0 NOPROXY bypass via uppercase-hex IPv4 aliases leaks off-proxy Basic credentials to the configured proxy | — | curl | 2026-06-03 | [#3773293](https://hackerone.com/reports/3773293) |
+| 27: IMAP custom FETCH listing classification skips literal boundaries, enabling response desynchronization | — | curl | 2026-09-10 | [#3971538](https://hackerone.com/reports/3971538) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
 | Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
 | --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |
