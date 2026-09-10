@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1079 report(s) across 10 class(es)**
+**1080 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 684 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 685 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 287 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -682,6 +682,7 @@
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
 | XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
+| CORS Misconfiguration / Broken Access Control | — | myndr | 2026-09-10 | [#3930102](https://hackerone.com/reports/3930102) |
 | Unauthorized vertical privilege escalation vulnerability found on ibm.com endpoint | — | ibm | 2026-08-28 | [#3909372](https://hackerone.com/reports/3909372) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
