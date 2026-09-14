@@ -1,6 +1,6 @@
 # Use After Free
 
-**71 report(s)**
+**72 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -47,6 +47,7 @@
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
+| Use-After-Free in BTREE Index Traversal via Stale key_version in heap_update() in MariaDB Server | — | mariadb | 2026-09-14 | [#3771144](https://hackerone.com/reports/3771144) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
 | CVE-2026-18924: HTTP/2 server push UAF | — | curl | 2026-09-02 | [#3916059](https://hackerone.com/reports/3916059) |
 | 54: Rejected HTTP/2 push destroys MIME callback state still used by parent (use-after-free) | — | curl | 2026-09-07 | [#3973213](https://hackerone.com/reports/3973213) |
