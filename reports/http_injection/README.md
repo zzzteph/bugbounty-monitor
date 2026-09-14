@@ -1,12 +1,12 @@
 # HTTP Injection
 
-**139 report(s) across 4 class(es)**
+**140 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Http Request Smuggling](http_request_smuggling/README.md) | 64 | $20,000 |
+| [Http Request Smuggling](http_request_smuggling/README.md) | 65 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 57 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
@@ -33,6 +33,7 @@
 | CVE-2022-32214 - HTTP Request Smuggling Due To Improper Delimiting of Header Fields | $1,800 | ibb | 2022-07-22 | [#1630669](https://hackerone.com/reports/1630669) |
 | HTTP Request Smuggling Due to Incorrect Parsing of Header Fields | $1,800 | ibb | 2023-04-09 | [#1888760](https://hackerone.com/reports/1888760) |
 | HTTP Request Smuggling via Empty headers separated by CR | $1,800 | ibb | 2023-08-28 | [#2032842](https://hackerone.com/reports/2032842) |
+| HTTP Request Smuggling via Unsanitized Hop-by-Hop Headers | $1,500 | cloudflare | 2026-09-14 | [#3622877](https://hackerone.com/reports/3622877) |
 | HTTP Response Header Injection in shopify/pitchfork + Rack 3 | $800 | shopify | 2025-03-27 | [#2279572](https://hackerone.com/reports/2279572) |
 | HTTP Request Smuggling on https://labs.data.gov | $750 | gsa_bbp | 2020-05-13 | [#726773](https://hackerone.com/reports/726773) |
 | CRLF Injection in Nodejs ‘undici’ via host | $600 | ibb | 2023-03-29 | [#1878489](https://hackerone.com/reports/1878489) |

@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**64 report(s)**
+**65 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,6 +18,7 @@
 | CVE-2022-32214 - HTTP Request Smuggling Due To Improper Delimiting of Header Fields | $1,800 | ibb | 2022-07-22 | [#1630669](https://hackerone.com/reports/1630669) |
 | HTTP Request Smuggling Due to Incorrect Parsing of Header Fields | $1,800 | ibb | 2023-04-09 | [#1888760](https://hackerone.com/reports/1888760) |
 | HTTP Request Smuggling via Empty headers separated by CR | $1,800 | ibb | 2023-08-28 | [#2032842](https://hackerone.com/reports/2032842) |
+| HTTP Request Smuggling via Unsanitized Hop-by-Hop Headers | $1,500 | cloudflare | 2026-09-14 | [#3622877](https://hackerone.com/reports/3622877) |
 | HTTP Request Smuggling on https://labs.data.gov | $750 | gsa_bbp | 2020-05-13 | [#726773](https://hackerone.com/reports/726773) |
 | http request smuggling in pscp.tv and periscope.tv | $560 | x | 2020-09-10 | [#713285](https://hackerone.com/reports/713285) |
 | Potential HTTP Request Smuggling in ruby webrick | $500 | ruby | 2020-10-29 | [#965267](https://hackerone.com/reports/965267) |
