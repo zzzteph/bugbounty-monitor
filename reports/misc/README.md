@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1641 report(s) across 34 class(es)**
+**1642 report(s) across 34 class(es)**
 
 ## Classes
 
@@ -14,8 +14,8 @@
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 4 | — |
+| [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 4 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 4 | — |
-| [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
 | [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
 | [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
@@ -271,6 +271,7 @@
 | Node.js unicode dot separator handling can lead to tls wildcard-depth authentication bypass due to resolver and verifier hostname normalization mismat | — | nodejs | 2026-06-25 | [#3688064](https://hackerone.com/reports/3688064) |
 | Incorrect IPv6 literal parsing leads to validated connection to unexpected https server. | — | curl | 2021-01-12 | [#688048](https://hackerone.com/reports/688048) |
 | Cache Poisoning | — | ibb | 2021-08-26 | [#824753](https://hackerone.com/reports/824753) |
+| Encoded slash traversal in the IPFS/IPNS URL rewrite escapes the configured gateway namespace | — | curl | 2026-09-14 | [#4027511](https://hackerone.com/reports/4027511) |
 | Improper handling of request URLs in nextcloud/guests allows guest users to bypass app allowlist | — | nextcloud | 2024-01-18 | [#2251074](https://hackerone.com/reports/2251074) |
 | SMB access smuggling via FILE URL on Windows | — | curl | 2021-01-17 | [#726117](https://hackerone.com/reports/726117) |
 | CSS Injection to disable app & potential message exfil | — | slack | 2019-11-09 | [#679969](https://hackerone.com/reports/679969) |
