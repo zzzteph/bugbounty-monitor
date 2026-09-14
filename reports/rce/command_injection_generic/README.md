@@ -1,6 +1,6 @@
 # Command Injection Generic
 
-**154 report(s)**
+**155 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -148,6 +148,7 @@
 | Mercurial git subrepo lead to arbritary command injection | — | ibb | 2019-09-26 | [#294147](https://hackerone.com/reports/294147) |
 | SSTI leads to Command injection | — | curl | 2026-03-04 | [#3584149](https://hackerone.com/reports/3584149) |
 | Argument Injection via curl Short-Flag Grouping | — | curl | 2026-04-13 | [#3669305](https://hackerone.com/reports/3669305) |
+| 56: IBM i CL wrapper `parse_command_line()` never enters quote mode | — | curl | 2026-09-14 | [#3973249](https://hackerone.com/reports/3973249) |
 | wcurl Argument Injection via Unquoted Variable | — | curl | 2026-01-26 | [#3523953](https://hackerone.com/reports/3523953) |
 | Command Injection on Amazon Q Developer CLI via malicious .amazonq/mcp.json leads to arbitrary code execution | — | aws_vdp | 2026-01-16 | [#3427370](https://hackerone.com/reports/3427370) |
 | Command Injection - CRITICISM | — | curl | 2025-11-11 | [#3418760](https://hackerone.com/reports/3418760) |

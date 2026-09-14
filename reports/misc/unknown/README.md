@@ -1,6 +1,6 @@
 # Unknown
 
-**982 report(s)**
+**985 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -875,6 +875,8 @@
 | mruby-engine: UAF in MRubyEngine#initialize enables local RCE | — | shopify | 2026-04-24 | [#3679660](https://hackerone.com/reports/3679660) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | 34: `curl_mprintf` reads `double` for documented `long double` conversions — uninitialized value disclosure | — | curl | 2026-08-28 | [#3972196](https://hackerone.com/reports/3972196) |
+| 53: HTTP/1 CONNECT chunked-407 trailers bypass CURLOPT_SUPPRESS_CONNECT_HEADERS and lose CURLH_CONNECT classification | — | curl | 2026-09-14 | [#3973234](https://hackerone.com/reports/3973234) |
+| OpenSSL ENGINE selection omitted from mTLS connection matching | — | curl | 2026-09-14 | [#3968853](https://hackerone.com/reports/3968853) |
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | 33: CONNECT_ONLY raw I/O selects wrong connection after CURLOPT_SHARE detach (incomplete fix for CVE-2020-8231) | — | curl | 2026-08-31 | [#3971585](https://hackerone.com/reports/3971585) |
 | `exportReportPdf` mutation shows internal Activity | — | security | 2026-07-29 | [#3577216](https://hackerone.com/reports/3577216) |
@@ -891,6 +893,7 @@
 | libcurl upload read callbacks miss recursive API guard, allowing prohibited multi API reentry and ASAN-confirmed UAF | — | curl | 2026-06-30 | [#3832393](https://hackerone.com/reports/3832393) |
 | 46: `--libcurl` output carries `--insecure` across `--next` boundaries | — | curl | 2026-08-28 | [#3972316](https://hackerone.com/reports/3972316) |
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
+| Heap-use-after-free in CURLOPT_REFERER when passed a CURLINFO_REFERER pointer | — | curl | 2026-09-14 | [#3971462](https://hackerone.com/reports/3971462) |
 | CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | 28: HTTP/3 UDP path ignores CURL_SOCKOPT_ALREADY_CONNECTED, reconnects callback-provided socket | — | curl | 2026-08-28 | [#3971496](https://hackerone.com/reports/3971496) |

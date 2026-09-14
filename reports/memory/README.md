@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**698 report(s) across 25 class(es)**
+**699 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -19,8 +19,8 @@
 | [Double Free](double_free/README.md) | 17 | $10,000 |
 | [Improper Null Termination](improper_null_termination/README.md) | 11 | — |
 | [Incorrect Calculation Of Buffer Size](incorrect_calculation_of_buffer_size/README.md) | 8 | $10,000 |
+| [Type Confusion](type_confusion/README.md) | 8 | $500 |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
-| [Type Confusion](type_confusion/README.md) | 7 | $500 |
 | [Off By One Error](off_by_one_error/README.md) | 6 | — |
 | [Integer Underflow](integer_underflow/README.md) | 4 | $1,121 |
 | [Buffer Under Read](buffer_under_read/README.md) | 2 | — |
@@ -670,6 +670,7 @@
 | Incorrect Encoding Conversion in hostname  results in indeterminate SSRF vulnerabilities | — | curl | 2024-06-18 | [#2552179](https://hackerone.com/reports/2552179) |
 | User provided values passed to PHP unset() function | — | coinbase | 2018-04-09 | [#292500](https://hackerone.com/reports/292500) |
 | Type Confusion in Object Deserialization | — | ibb | 2019-10-13 | [#198733](https://hackerone.com/reports/198733) |
+| 37: `curl_mprintf` `%F` format specifier not consumed, causing variadic argument desynchronization | — | curl | 2026-09-14 | [#3973152](https://hackerone.com/reports/3973152) |
 | GnuTLS CURLINFO_TLS_SESSION / CURLINFO_TLS_SSL_PTR type confusion | — | curl | 2025-07-23 | [#3261248](https://hackerone.com/reports/3261248) |
 | PHP 7.3.3: Heap-use-after-free (READ of size 8) in match_at() | — | ibb | 2020-10-12 | [#692040](https://hackerone.com/reports/692040) |
 | heap-use-after-free (READ of size 8) in main() | — | putty_h1c | 2019-11-03 | [#481532](https://hackerone.com/reports/481532) |
