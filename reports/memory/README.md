@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**700 report(s) across 25 class(es)**
+**703 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -8,12 +8,12 @@
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
 | [Use After Free](use_after_free/README.md) | 72 | $10,000 |
-| [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 55 | $12,500 |
-| [Buffer Over Read](buffer_over_read/README.md) | 54 | $2,142 |
+| [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
+| [Buffer Over Read](buffer_over_read/README.md) | 55 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 41 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
-| [Stack Overflow](stack_overflow/README.md) | 30 | $3,000 |
+| [Stack Overflow](stack_overflow/README.md) | 31 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
@@ -285,6 +285,7 @@
 | CVE-2017-12985: The IPv6 parser in tcpdump before 4.9.2 has a buffer over-read in ip6_print() | — | ibb | 2019-10-08 | [#268803](https://hackerone.com/reports/268803) |
 | GarlicRust - heartbleed style vulnerability in major I2P C++ router implementations | — | ibb | 2019-11-12 | [#295740](https://hackerone.com/reports/295740) |
 | CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
+| Heap Memory Disclosure via Integer Underflow in Item_func_json_arrayagg::cut_max_length in MariaDB Server | — | mariadb | 2026-09-15 | [#3771139](https://hackerone.com/reports/3771139) |
 | Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
 | Heap Buffer Overflow in Curl_memdup0() via CURLOPT_COPYPOSTFIELDS/CURLOPT_POSTFIELDSIZE Mismatch | — | curl | 2025-08-09 | [#3292590](https://hackerone.com/reports/3292590) |
@@ -333,6 +334,7 @@
 | Big XSS vulnerability! | — | legalrobot | 2017-07-30 | [#216330](https://hackerone.com/reports/216330) |
 | Stack Buffer Overflow in mprintf.c formatting function (fallback path) | — | curl | 2026-01-08 | [#3493602](https://hackerone.com/reports/3493602) |
 | Integer Overflow in curl_multi_get_handles() Leading to Heap Buffer Overflow | — | curl | 2026-02-26 | [#3575245](https://hackerone.com/reports/3575245) |
+| Stack Buffer Overflow via Crafted keyseg->start/ keyseg->length in .MYI File (MariaDB MyISAM) | — | mariadb | 2026-09-15 | [#3771147](https://hackerone.com/reports/3771147) |
 | Multiple Unsafe strcpy() Function Calls Leading to Potential Buffer Overflow Vulnerabilities in cURL 8.16.1-DEV | — | curl | 2025-09-14 | [#3337561](https://hackerone.com/reports/3337561) |
 | [Xenoblade Chronicles X: Definitive Edition] Buffer overflow in string escape function, multiplayer DoS | — | nintendo | 2025-05-15 | [#3048061](https://hackerone.com/reports/3048061) |
 | Unsafe use of strcpy in Curl_ldap_err2string (packages/OS400/os400sys.c) — stack-buffer-overflow (PoC + ASan) | — | curl | 2025-11-10 | [#3418528](https://hackerone.com/reports/3418528) |
@@ -659,6 +661,7 @@
 | mirb only: stack-buffer-overflow (OOB write) in main() | — | shopify-scripts | 2017-05-09 | [#219870](https://hackerone.com/reports/219870) |
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Overflow DoS in ST_GeomFromGeoJSON Allows Any Authenticated User to Crash the Entire Server | — | mariadb | 2026-09-03 | [#3769676](https://hackerone.com/reports/3769676) |
+| Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
 | Stack Buffer Overflow in curl's OpenSSL Provider Handling | — | curl | 2025-06-28 | [#3153971](https://hackerone.com/reports/3153971) |
 | Buffer Overflow in cURL Internal printf Function | — | curl | 2025-12-12 | [#3462525](https://hackerone.com/reports/3462525) |
 | Curl Alt-Svc Parser Stack Buffer Overflow | — | curl | 2025-12-16 | [#3466883](https://hackerone.com/reports/3466883) |

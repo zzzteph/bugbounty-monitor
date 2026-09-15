@@ -1,6 +1,6 @@
 # Os Command Injection
 
-**60 report(s)**
+**61 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -60,6 +60,7 @@
 | RCE via ssh:// URIs in multiple VCS  | — | ibb | 2017-09-21 | [#260005](https://hackerone.com/reports/260005) |
 | Export vault feature is vulnerable to CSV injection | — | bitwarden | 2017-09-28 | [#272272](https://hackerone.com/reports/272272) |
 | Command Injection via Unsanitized Bundling Options in `aws-cdk-lib/aws-lambda-nodejs` | — | aws_vdp | 2026-06-11 | [#3558713](https://hackerone.com/reports/3558713) |
+|  Incomplete fix for CVE-2022-23915: Mercurial argument injection in HgRepository.get_file() leads to command execution | — | weblate | 2026-09-15 | [#3874004](https://hackerone.com/reports/3874004) |
 | OS Command Injection in `aws-cdk-lib` NodejsFunction via Unsanitized `OsCommand` Helper (Supply Chain RCE) | — | aws_vdp | 2026-07-06 | [#3637898](https://hackerone.com/reports/3637898) |
 | Node --run POSIX positional argument escaping allows shell command injection | — | nodejs | 2026-06-23 | [#3817602](https://hackerone.com/reports/3817602) |
 |  OS Command Injection in scripts/firefox-db2pem.sh via untrusted certificate nicknames | — | curl | 2025-06-28 | [#3225565](https://hackerone.com/reports/3225565) |

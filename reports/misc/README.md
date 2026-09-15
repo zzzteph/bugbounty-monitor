@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1642 report(s) across 34 class(es)**
+**1643 report(s) across 34 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 985 | $50,000 |
+| [Unknown](unknown/README.md) | 986 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
@@ -1205,6 +1205,7 @@
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
+| Out-of-bounds read in curl_formadd when CURLFORM_NAMELENGTH is explicitly 0 | — | curl | 2026-09-15 | [#4024268](https://hackerone.com/reports/4024268) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
 | Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
 | Monero GUI OpenAlias DNSSEC-invalid resolution still writes spoofable address into recipient field | — | monero | 2026-08-20 | [#3819475](https://hackerone.com/reports/3819475) |

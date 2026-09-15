@@ -1,13 +1,13 @@
 # HTTP Injection
 
-**140 report(s) across 4 class(es)**
+**141 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 65 | $20,000 |
-| [Crlf Injection](crlf_injection/README.md) | 57 | $5,000 |
+| [Crlf Injection](crlf_injection/README.md) | 58 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
@@ -85,6 +85,7 @@
 | CRLF Injection in HTTP header values allows arbitrary header injection | — | curl | 2026-01-10 | [#3505557](https://hackerone.com/reports/3505557) |
 | CRLF Injection in Gopher Protocol (`lib/gopher.c`) | — | curl | 2026-01-02 | [#3484506](https://hackerone.com/reports/3484506) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
+| libcurl LDAP LDIF: entry DN and attribute names written without RFC 2849 base64 encoding, allowing server line injection | — | curl | 2026-09-15 | [#4023506](https://hackerone.com/reports/4023506) |
 | CRLF Injection via Custom HTTP Headers | — | curl | 2026-06-11 | [#3741744](https://hackerone.com/reports/3741744) |
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
 | SMTP CRLF injection in custom SMTP recipient operand allows additional SMTP commands after authentication | — | curl | 2026-08-03 | [#3911605](https://hackerone.com/reports/3911605) |

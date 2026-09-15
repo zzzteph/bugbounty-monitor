@@ -1,6 +1,6 @@
 # Stack Overflow
 
-**30 report(s)**
+**31 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -28,6 +28,7 @@
 | mirb only: stack-buffer-overflow (OOB write) in main() | — | shopify-scripts | 2017-05-09 | [#219870](https://hackerone.com/reports/219870) |
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Overflow DoS in ST_GeomFromGeoJSON Allows Any Authenticated User to Crash the Entire Server | — | mariadb | 2026-09-03 | [#3769676](https://hackerone.com/reports/3769676) |
+| Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
 | Stack Buffer Overflow in curl's OpenSSL Provider Handling | — | curl | 2025-06-28 | [#3153971](https://hackerone.com/reports/3153971) |
 | Buffer Overflow in cURL Internal printf Function | — | curl | 2025-12-12 | [#3462525](https://hackerone.com/reports/3462525) |
 | Curl Alt-Svc Parser Stack Buffer Overflow | — | curl | 2025-12-16 | [#3466883](https://hackerone.com/reports/3466883) |

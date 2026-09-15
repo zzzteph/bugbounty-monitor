@@ -1,0 +1,130 @@
+{
+  "id": 4023506,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MDIzNTA2",
+  "url": "https://hackerone.com/reports/4023506",
+  "title": "libcurl LDAP LDIF: entry DN and attribute names written without RFC 2849 base64 encoding, allowing server line injection",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "low",
+  "readable_substate": "Informative",
+  "created_at": "2026-09-12T05:28:36.687Z",
+  "submitted_at": "2026-09-12T05:28:37.039Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "1rhino2",
+    "url": "/1rhino2",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/h1d00k3qx0lgut84ryy9vextnubi/47c72a82657a929c13ab24e11674f7e10ea2bf67b1b9e7116b522cd7ede42f15"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-09-15T10:11:21.574Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-15T10:11:21.216Z",
+  "team_member_agreed_on_going_public_at": "2026-09-15T08:19:38.452Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\ncurl 8.22.0 base64-encodes LDAP attribute values that aren't RFC 2849 SAFE-STRINGs (commit 2ba2fe3540, issue #22339), but the entry DN and the attribute names are still written to the LDIF output verbatim. In lib/openldap.c oldap_recv() that's the DN client_write(data, STRCONST(\"DN: \"), bv.bv_val, bv.bv_len, STRCONST(\"\\n\")) call and the attribute-name client_write() right after it, neither of which goes through the SAFE-STRING check that values do; lib/ldap.c (WinLDAP/generic backend) has the same pattern in show_vals() and its DN write. So a hostile or MITM LDAP server that puts a CR/LF in a returned DN or attribute name injects its own lines into the LDIF curl prints. RFC 2849 says a DN that isn't a SAFE-STRING must use the dn:: base64 form, and a valid attribute description can't contain a control byte at all, so this is the DN/name counterpart of the value-only fix in #22339. I have a small patch (base64 the DN when it's non-SAFE, reject a control byte in an attribute name) tested on the OpenLDAP backend and can open a PR.\nAI disclosure: AI assistance was used to help find this and draft the report; I built curl, wrote and ran the mock-server PoC, and applied and tested the fix myself.\n\n## Affected version\ncurl 8.22.0 and current master. Reproduced on Linux with the OpenLDAP backend (lib/openldap.c). Paste your own `curl -V` when you file.\n\n## Steps To Reproduce:\nA real directory server won't store a CR/LF in a DN, so the PoC is a small mock LDAP server (attached: mock_ldap.py) that answers an anonymous bind and returns one crafted entry.\n1. python3 mock_ldap.py 3899 dn   # DN = cn=victim,dc=example,dc=com<LF>injected-by-server: OWNED\n2. curl -s \"ldap://127.0.0.1:3899/dc=example,dc=com?cn?sub?(cn=*)\" | cat -A\n3. Output puts injected-by-server: OWNED on its own LDIF line (the server authored it, not curl) and curl exits 0 with no warning.\nAttribute-name variant: python3 mock_ldap.py 3900 attr. Control: a clean DN prints a single well-formed DN: line with no injected line.\n\n## Impact\n\nA caller that points curl at an untrusted or MITM'd LDAP server and then consumes curl's LDIF output gets lines the server authored rather than curl. If that LDIF is piped into an LDIF processor such as ldapmodify, the server can smuggle in add/modify/delete directives it was never asked for; if it's shown in a terminal it's raw control-byte / escape output. The precondition is that the user aimed curl at the malicious server and further processes the output, so I'd rate this Low, but I'll defer the grade to you.",
+  "weakness": {
+    "id": 69,
+    "name": "CRLF Injection"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6701431,
+      "file_name": "mock_ldap.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/5y9qbt61w2kivmex5fy2l81gxbr3?response-content-disposition=attachment%3B%20filename%3D%22mock_ldap.py%22%3B%20filename%2A%3DUTF-8%27%27mock_ldap.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUMICXVGO%2F20260915%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260915T110424Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXVzLXdlc3QtMiJGMEQCH3NlliaA5Jy4s2aCSgQXVlMadOnT%2B7IrA5DUxB33ZOgCIQCCMhlb8ZFNPZ2RYu9OX%2BbN1dPI1AmXvceWalmh1inRnCq6BQj8%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMl2Y0ik6GcSyM%2FoJqKo4FjCz1Ubj1n%2BimUdxbwm8azuASbBm7q5cQ7UUvNFdUif%2Bn37Vrhm424LGKkdfRjEXgOPoQ6f3sDC7hbn55C43GuOgXaoQvySw%2BeSP4%2B%2FbiELerQj591fpAetj%2FTaSRn%2Bo1R3vASai%2B7l7yNE5lONrGgGou0PzxbZ0nl8HGLya79PjbHckrBctFbF4HnIcM%2BRITkvjy8EAnxb4q%2FYNgcb%2BE8gWTKUthy4q4Gqers534GxFheP5ftCH462M%2F0L1sFSZ5HdJ1YgrBbTsmg5h0HQcVPiSKJ5QGPbhn%2FCtC0Oa%2BOrq%2F24ijPsGRiLgkQTvpTmXkZP4J0kVR4pf9HPTGpUmK03BEE3CThWJbUkoWei6GJhfPX4I7U%2BSeHnLtY0XF0JtyeqoE3GvffQS1Fh3nfpc5pN%2Bq%2F8JswyHYjUfwQEnwmRyLCFGLFATJhD%2FUdcj6o5chxsVfIOtWOmeS5HZwcRjLRHXS2VTPCR9Ep3rlceLqUvOJ4Swb3VfwUmpBi%2B2kqb4CzBDD9SQW7GPE2X9T18AGA3tciyDiPnvW%2Bt%2B0h82dPPnzt6w8Xb3V6IYKwXQnw6fKfEH5yUUTMfE27XdGGZYjxFv477CoOSKj18w7QjQSPjf63QlcG%2FI2y1Lr58VytqZjhGVgnDueJFF3kDjMwmsr1G1TGNYoKZXp7VVC%2FDZ2eKsAlC%2FldH8iwmc4Y%2FvPTgiB2tfVi85yFNpJYLvAS9Vjmv%2BRTXosUFUrx%2FQMnVZ6fMOShCR00E2ao%2BUvaBx8HN5Gf%2FoIPlUeFStCtxbAp2%2FLwUnJXhYjzfinqdCagNT%2BrtKIU9tgXSR2qwbboudnVXvvLJidOmXdqgQYsyXNXj2C%2BjwjvnS0dzF%2Br7zib8aUMPjApNUGOrIBCEyrKSTdxw17ItLcGANXCVDsJZSa%2FvV9yTJP5EgFvGR2FVL4qiW6r2%2FfbBAjswRTM2IMhVmBtYNRpaW8RoNWxXTB2rTxpuOSQSGl2KGmgB5AMc%2Fsc1tV75BqiRkvWSFVSCQb2m8CI3dSmGuM75ezkkrS984z9DxOrfUqQsIp1lLRuE8%2B7n%2Bm1dgrzFR%2F5CiO3BOJ0%2FBBPp3C1Zhvk42wHGxwrp9uhM7dNuk0fkLeTznIHw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=74de502977d9ce451abcfb0085ea4c22540f6b24f143d3b1b52e1d1c33ecb84c",
+      "file_size": 4087,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6701432,
+      "file_name": "PZ-CURL-013-fix.patch",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/m37bzjbf1x1x5b40sqvg5gp5k53k?response-content-disposition=attachment%3B%20filename%3D%22PZ-CURL-013-fix.patch%22%3B%20filename%2A%3DUTF-8%27%27PZ-CURL-013-fix.patch&response-content-type=text%2Fx-diff&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUMICXVGO%2F20260915%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260915T110424Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDMaCXVzLXdlc3QtMiJGMEQCH3NlliaA5Jy4s2aCSgQXVlMadOnT%2B7IrA5DUxB33ZOgCIQCCMhlb8ZFNPZ2RYu9OX%2BbN1dPI1AmXvceWalmh1inRnCq6BQj8%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMl2Y0ik6GcSyM%2FoJqKo4FjCz1Ubj1n%2BimUdxbwm8azuASbBm7q5cQ7UUvNFdUif%2Bn37Vrhm424LGKkdfRjEXgOPoQ6f3sDC7hbn55C43GuOgXaoQvySw%2BeSP4%2B%2FbiELerQj591fpAetj%2FTaSRn%2Bo1R3vASai%2B7l7yNE5lONrGgGou0PzxbZ0nl8HGLya79PjbHckrBctFbF4HnIcM%2BRITkvjy8EAnxb4q%2FYNgcb%2BE8gWTKUthy4q4Gqers534GxFheP5ftCH462M%2F0L1sFSZ5HdJ1YgrBbTsmg5h0HQcVPiSKJ5QGPbhn%2FCtC0Oa%2BOrq%2F24ijPsGRiLgkQTvpTmXkZP4J0kVR4pf9HPTGpUmK03BEE3CThWJbUkoWei6GJhfPX4I7U%2BSeHnLtY0XF0JtyeqoE3GvffQS1Fh3nfpc5pN%2Bq%2F8JswyHYjUfwQEnwmRyLCFGLFATJhD%2FUdcj6o5chxsVfIOtWOmeS5HZwcRjLRHXS2VTPCR9Ep3rlceLqUvOJ4Swb3VfwUmpBi%2B2kqb4CzBDD9SQW7GPE2X9T18AGA3tciyDiPnvW%2Bt%2B0h82dPPnzt6w8Xb3V6IYKwXQnw6fKfEH5yUUTMfE27XdGGZYjxFv477CoOSKj18w7QjQSPjf63QlcG%2FI2y1Lr58VytqZjhGVgnDueJFF3kDjMwmsr1G1TGNYoKZXp7VVC%2FDZ2eKsAlC%2FldH8iwmc4Y%2FvPTgiB2tfVi85yFNpJYLvAS9Vjmv%2BRTXosUFUrx%2FQMnVZ6fMOShCR00E2ao%2BUvaBx8HN5Gf%2FoIPlUeFStCtxbAp2%2FLwUnJXhYjzfinqdCagNT%2BrtKIU9tgXSR2qwbboudnVXvvLJidOmXdqgQYsyXNXj2C%2BjwjvnS0dzF%2Br7zib8aUMPjApNUGOrIBCEyrKSTdxw17ItLcGANXCVDsJZSa%2FvV9yTJP5EgFvGR2FVL4qiW6r2%2FfbBAjswRTM2IMhVmBtYNRpaW8RoNWxXTB2rTxpuOSQSGl2KGmgB5AMc%2Fsc1tV75BqiRkvWSFVSCQb2m8CI3dSmGuM75ezkkrS984z9DxOrfUqQsIp1lLRuE8%2B7n%2Bm1dgrzFR%2F5CiO3BOJ0%2FBBPp3C1Zhvk42wHGxwrp9uhM7dNuk0fkLeTznIHw%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=acf98431a7b6cf2c64fb05b0f91cc41b8ed5eecda897f48cdbf5af26d691eb28",
+      "file_size": 5277,
+      "type": "text/x-diff",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 1,
+  "voters": [
+    "1rhino2"
+  ],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Classic Buffer Overflow
 
-**55 report(s)**
+**56 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -54,6 +54,7 @@
 | Big XSS vulnerability! | — | legalrobot | 2017-07-30 | [#216330](https://hackerone.com/reports/216330) |
 | Stack Buffer Overflow in mprintf.c formatting function (fallback path) | — | curl | 2026-01-08 | [#3493602](https://hackerone.com/reports/3493602) |
 | Integer Overflow in curl_multi_get_handles() Leading to Heap Buffer Overflow | — | curl | 2026-02-26 | [#3575245](https://hackerone.com/reports/3575245) |
+| Stack Buffer Overflow via Crafted keyseg->start/ keyseg->length in .MYI File (MariaDB MyISAM) | — | mariadb | 2026-09-15 | [#3771147](https://hackerone.com/reports/3771147) |
 | Multiple Unsafe strcpy() Function Calls Leading to Potential Buffer Overflow Vulnerabilities in cURL 8.16.1-DEV | — | curl | 2025-09-14 | [#3337561](https://hackerone.com/reports/3337561) |
 | [Xenoblade Chronicles X: Definitive Edition] Buffer overflow in string escape function, multiplayer DoS | — | nintendo | 2025-05-15 | [#3048061](https://hackerone.com/reports/3048061) |
 | Unsafe use of strcpy in Curl_ldap_err2string (packages/OS400/os400sys.c) — stack-buffer-overflow (PoC + ASan) | — | curl | 2025-11-10 | [#3418528](https://hackerone.com/reports/3418528) |

@@ -1,6 +1,6 @@
 # Unknown
 
-**985 report(s)**
+**986 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -887,6 +887,7 @@
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
+| Out-of-bounds read in curl_formadd when CURLFORM_NAMELENGTH is explicitly 0 | — | curl | 2026-09-15 | [#4024268](https://hackerone.com/reports/4024268) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
 | Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
 | Monero GUI OpenAlias DNSSEC-invalid resolution still writes spoofable address into recipient field | — | monero | 2026-08-20 | [#3819475](https://hackerone.com/reports/3819475) |
