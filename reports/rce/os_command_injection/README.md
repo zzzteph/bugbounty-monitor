@@ -1,6 +1,6 @@
 # Os Command Injection
 
-**61 report(s)**
+**62 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -63,5 +63,6 @@
 |  Incomplete fix for CVE-2022-23915: Mercurial argument injection in HgRepository.get_file() leads to command execution | — | weblate | 2026-09-15 | [#3874004](https://hackerone.com/reports/3874004) |
 | OS Command Injection in `aws-cdk-lib` NodejsFunction via Unsanitized `OsCommand` Helper (Supply Chain RCE) | — | aws_vdp | 2026-07-06 | [#3637898](https://hackerone.com/reports/3637898) |
 | Node --run POSIX positional argument escaping allows shell command injection | — | nodejs | 2026-06-23 | [#3817602](https://hackerone.com/reports/3817602) |
+|  Incomplete Input Sanitization in CodeInterpreter install_packages Allows Command Injection via pip Flags | — | aws_vdp | 2026-09-16 | [#3633123](https://hackerone.com/reports/3633123) |
 |  OS Command Injection in scripts/firefox-db2pem.sh via untrusted certificate nicknames | — | curl | 2025-06-28 | [#3225565](https://hackerone.com/reports/3225565) |
 | [indy_node]POOL_UPGRADE command injection, Trustee Node can execute command in any other Node`s system. | — | hyperledger | 2023-04-27 | [#1859592](https://hackerone.com/reports/1859592) |
