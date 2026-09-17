@@ -1,6 +1,6 @@
 # Unknown
 
-**986 report(s)**
+**989 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -863,10 +863,12 @@
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
+| sign_multisig crashes monero-wallet-rpc on a malformed but decryptable multisig txset | — | monero | 2026-09-17 | [#3683934](https://hackerone.com/reports/3683934) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | Able to bypass authorization logic and gain more access then intended | — | github | 2026-07-15 | [#3713965](https://hackerone.com/reports/3713965) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | curl/libcurl 8.20.0 NOPROXY bypass via uppercase-hex IPv4 aliases leaks off-proxy Basic credentials to the configured proxy | — | curl | 2026-06-03 | [#3773293](https://hackerone.com/reports/3773293) |
+| Restricted ZMQ RPC bypasses HTTP restricted-mode resource checks | — | monero | 2026-09-17 | [#3683886](https://hackerone.com/reports/3683886) |
 | 27: IMAP custom FETCH listing classification skips literal boundaries, enabling response desynchronization | — | curl | 2026-09-10 | [#3971538](https://hackerone.com/reports/3971538) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
 | Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
@@ -910,6 +912,7 @@
 | CVE-2026-80229: OpenSSL provider use-after-free | — | curl | 2026-09-03 | [#3969255](https://hackerone.com/reports/3969255) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | Inverted ternary in peerlist_manager::filter() allows unlimited whitelist entries per host via different ports | — | monero | 2026-06-29 | [#3547349](https://hackerone.com/reports/3547349) |
+| ZMQ get_output_distribution duplicate amount DoS | — | monero | 2026-09-17 | [#3681690](https://hackerone.com/reports/3681690) |
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | MQTT Protocol Packet Injection via Unchecked CONNACK Remaining Length | — | curl | 2026-02-05 | [#3531216](https://hackerone.com/reports/3531216) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
