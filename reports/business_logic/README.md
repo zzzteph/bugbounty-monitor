@@ -1,12 +1,12 @@
 # Business Logic
 
-**374 report(s) across 5 class(es)**
+**375 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 351 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 352 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -318,6 +318,7 @@
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Schannel custom-CA path skips Extended Key Usage enforcement | — | curl | 2026-05-19 | [#3734992](https://hackerone.com/reports/3734992) |
 | Authenticated `unsigned_txset` change spoof lets a malicious hot wallet steal cold-signer change | — | monero | 2026-09-16 | [#3621588](https://hackerone.com/reports/3621588) |
+| Approval app's file-freshness check can be bypassed by omitting the etag parameter, allowing approval of unreviewed file changes | — | nextcloud | 2026-09-17 | [#3610332](https://hackerone.com/reports/3610332) |
 | monero:// deeplink parsing accepts tx_amount=(all) and can trigger send-all transaction mode | — | monero | 2026-08-20 | [#3648638](https://hackerone.com/reports/3648638) |
 | PROTOCOL-LEVEL: Persistent UDP Amplification and Cache Poisoning via Alt-Svc Logic Flaw | — | curl | 2026-01-02 | [#3483902](https://hackerone.com/reports/3483902) |
 | Password Strength Policy Bypass via Server-Side Validation Flaw | — | tucows_vdp | 2026-03-27 | [#3523703](https://hackerone.com/reports/3523703) |

@@ -1,12 +1,12 @@
 # SSRF
 
-**230 report(s) across 2 class(es)**
+**231 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 229 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 230 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -227,6 +227,7 @@
 | Server-Side Request Forgery (SSRF) via Game Export API | — | lichess | 2025-06-03 | [#3165242](https://hackerone.com/reports/3165242) |
 | Unauthenticated SSRF in Voxtelesys integration ('checkUrlForSsrf' Bypass via DNS rebinding) | — | rocket_chat | 2026-07-29 | [#3473145](https://hackerone.com/reports/3473145) |
 | SSRF in Autodesk Rendering leading to account takeover | — | autodesk | 2025-03-18 | [#3024673](https://hackerone.com/reports/3024673) |
+| Unauthenticated blind SSRF in Circles signature verification bypasses Nextcloud local-address protections | — | nextcloud | 2026-09-17 | [#3303283](https://hackerone.com/reports/3303283) |
 | SSRF via Improper Redirect Validation in Rocket.Chat oEmbed Function | — | rocket_chat | 2026-06-11 | [#3383079](https://hackerone.com/reports/3383079) |
 | Node.js permission model bypass via unchecked Unix Domain Socket connections (UDS) | — | nodejs | 2026-02-12 | [#3465156](https://hackerone.com/reports/3465156) |
 | Unsanitized IPFS CID Allows SSRF Against Configured Gateway | — | curl | 2025-10-03 | [#3366484](https://hackerone.com/reports/3366484) |

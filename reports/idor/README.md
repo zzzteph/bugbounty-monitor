@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1080 report(s) across 10 class(es)**
+**1085 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 685 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 287 | $20,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 689 | $35,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 288 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 15 | $2,500 |
@@ -204,6 +204,7 @@
 | com.nextcloud.client bypass the protection lock in andoid app v 3.18.1 latest version. | $200 | nextcloud | 2022-04-30 | [#1450368](https://hackerone.com/reports/1450368) |
 | Bypassing Inbox Privacy Settings and Enabling Spam on Pixiv.net | $200 | pixiv | 2026-04-27 | [#3100570](https://hackerone.com/reports/3100570) |
 | IDOR with Geolocation data not stripped from images | $200 | irccloud | 2020-07-26 | [#906907](https://hackerone.com/reports/906907) |
+| Team membership information returned on API level based on ID | $200 | nextcloud | 2026-09-17 | [#3484601](https://hackerone.com/reports/3484601) |
 | Bypassing authorization of linked Instagram account | $170 | tiktok | 2022-09-30 | [#1199965](https://hackerone.com/reports/1199965) |
 | User Able to Reopen a Ticket by Modify the Request | $169 | tiktok | 2020-12-18 | [#998993](https://hackerone.com/reports/998993) |
 | Virtual Data Room / Hide download on collabora is easy to bypass | $150 | nextcloud | 2021-08-07 | [#1194606](https://hackerone.com/reports/1194606) |
@@ -673,6 +674,7 @@
 | GitHub scoped user to server tokens can escape their installation | — | github | 2026-07-29 | [#3638909](https://hackerone.com/reports/3638909) |
 | 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |
+| Critical broken access control: API-only delegated admin can enumerate all Team Folders and grant access to arbitrary groups | — | nextcloud | 2026-09-17 | [#3674940](https://hackerone.com/reports/3674940) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | Windows installer grants low-privileged users write access to executable P2Pool directory, enabling local code execution | — | monero | 2026-08-20 | [#3619409](https://hackerone.com/reports/3619409) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
@@ -685,6 +687,8 @@
 | CORS Misconfiguration / Broken Access Control | — | myndr | 2026-09-10 | [#3930102](https://hackerone.com/reports/3930102) |
 | Unauthorized vertical privilege escalation vulnerability found on ibm.com endpoint | — | ibm | 2026-08-28 | [#3909372](https://hackerone.com/reports/3909372) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
+| Arbitrary Board Preference Injection via Deck Config API | — | nextcloud | 2026-09-17 | [#3599383](https://hackerone.com/reports/3599383) |
+| Shared smart albums in the Photos app can expose files outside the album owner's configured source folders | — | nextcloud | 2026-09-17 | [#3506873](https://hackerone.com/reports/3506873) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 |  Myndr CORS Misconfiguration | — | myndr | 2026-08-12 | [#3930957](https://hackerone.com/reports/3930957) |
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
@@ -692,6 +696,7 @@
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | MariaDB GRANT PROXY permits unauthorized authentication changes and administrator account takeover | — | mariadb | 2026-09-07 | [#3876430](https://hackerone.com/reports/3876430) |
 | Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
+| Public collectives allow to create pages | — | nextcloud | 2026-09-17 | [#3533697](https://hackerone.com/reports/3533697) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |
 | [Splatoon 3] Kick other players with NplnLogin message | — | nintendo | 2026-07-02 | [#3813932](https://hackerone.com/reports/3813932) |
