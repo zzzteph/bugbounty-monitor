@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**617 report(s) across 18 class(es)**
+**618 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 393 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 394 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -487,6 +487,7 @@
 | Email Verification Bypass via Race Condition | — | malwarebytes | 2025-08-15 | [#3020733](https://hackerone.com/reports/3020733) |
 | Username Validation Bypass | — | revive_adserver | 2025-11-26 | [#3434156](https://hackerone.com/reports/3434156) |
 | Session Replay Attack Allows Authentication Bypass via Captured Login Responses Allowing Bypass of 429 Too many attempts for Multiple Failed Logins | — | wakatime | 2025-05-01 | [#3120790](https://hackerone.com/reports/3120790) |
+| Cross-User Lock/Unlock via Absolute DAV Path | — | nextcloud | 2026-09-17 | [#3301553](https://hackerone.com/reports/3301553) |
 | Approval app allows users to request approval for other users file  | — | nextcloud | 2025-12-05 | [#3338748](https://hackerone.com/reports/3338748) |
 | Changing the administrator password via admin console does not invalidate other sessions | — | portswigger | 2024-05-20 | [#2279041](https://hackerone.com/reports/2279041) |
 | default credentials at https://52.42.105.71/ | — | trellix | 2024-02-01 | [#2160178](https://hackerone.com/reports/2160178) |

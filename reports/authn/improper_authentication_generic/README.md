@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**393 report(s)**
+**394 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -375,6 +375,7 @@
 | Email Verification Bypass via Race Condition | — | malwarebytes | 2025-08-15 | [#3020733](https://hackerone.com/reports/3020733) |
 | Username Validation Bypass | — | revive_adserver | 2025-11-26 | [#3434156](https://hackerone.com/reports/3434156) |
 | Session Replay Attack Allows Authentication Bypass via Captured Login Responses Allowing Bypass of 429 Too many attempts for Multiple Failed Logins | — | wakatime | 2025-05-01 | [#3120790](https://hackerone.com/reports/3120790) |
+| Cross-User Lock/Unlock via Absolute DAV Path | — | nextcloud | 2026-09-17 | [#3301553](https://hackerone.com/reports/3301553) |
 | Approval app allows users to request approval for other users file  | — | nextcloud | 2025-12-05 | [#3338748](https://hackerone.com/reports/3338748) |
 | Changing the administrator password via admin console does not invalidate other sessions | — | portswigger | 2024-05-20 | [#2279041](https://hackerone.com/reports/2279041) |
 | default credentials at https://52.42.105.71/ | — | trellix | 2024-02-01 | [#2160178](https://hackerone.com/reports/2160178) |
