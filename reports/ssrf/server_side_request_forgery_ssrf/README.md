@@ -1,6 +1,6 @@
 # Server Side Request Forgery Ssrf
 
-**230 report(s)**
+**231 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -44,6 +44,7 @@
 | SSRF in hatchful.shopify.com | $500 | shopify | 2019-04-04 | [#409701](https://hackerone.com/reports/409701) |
 | SVG Server Side Request Forgery (SSRF) | $500 | shopify | 2017-09-22 | [#223203](https://hackerone.com/reports/223203) |
 | Lack of input sanitization in Marketo form leads to execution of HTML in lead emails | $500 | security | 2017-10-03 | [#220009](https://hackerone.com/reports/220009) |
+| SSRF with bypass leads to client side hosting / vulnerabilities ( XSS and others ) | $500 | duckduckgo | 2026-09-17 | [#3522157](https://hackerone.com/reports/3522157) |
 | Server-Side Request Forgery on SAML Application - Import via URL | $450 | pingidentity | 2019-03-26 | [#324005](https://hackerone.com/reports/324005) |
 | SSRF in notifications.server configuration | $300 | phabricator | 2020-05-15 | [#850114](https://hackerone.com/reports/850114) |
 | SSRF/XSPA in labs.data.gov/dashboard/validate | $300 | gsa_bbp | 2020-05-05 | [#272095](https://hackerone.com/reports/272095) |

