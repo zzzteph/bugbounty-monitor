@@ -1,14 +1,14 @@
 # Miscellaneous
 
-**1646 report(s) across 34 class(es)**
+**1648 report(s) across 34 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 989 | $50,000 |
+| [Unknown](unknown/README.md) | 990 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
-| [Misconfiguration](misconfiguration/README.md) | 81 | $12,500 |
+| [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
@@ -401,6 +401,7 @@
 | Remove obsolete domain from handbook subdomain | — | gitlab | 2024-10-01 | [#2599840](https://hackerone.com/reports/2599840) |
 | phpinfo() exposed on ██████████ | — | mars | 2024-11-21 | [#2666151](https://hackerone.com/reports/2666151) |
 | Cross-origin resource sharing misconfig \| steal user information  | — | semrush | 2017-12-17 | [#235200](https://hackerone.com/reports/235200) |
+| Unauthenticated API allows reading, writing to and deleting any user's private chat history on ████████ | — | essity | 2026-09-18 | [#4020767](https://hackerone.com/reports/4020767) |
 | Session Cookie Leakage via Static Header Field in WebViewerFragment | — | linkedin | 2026-03-17 | [#3475626](https://hackerone.com/reports/3475626) |
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2023-09-27 | [#2171494](https://hackerone.com/reports/2171494) |
 | Subdomain takeover on one of the subdomain under mozgcp.net | — | mozilla | 2023-11-12 | [#2143408](https://hackerone.com/reports/2143408) |
@@ -1206,6 +1207,7 @@
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
+| Socket API drops expired timeouts for transfers queued behind a connection limit | — | curl | 2026-09-18 | [#4021952](https://hackerone.com/reports/4021952) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Out-of-bounds read in curl_formadd when CURLFORM_NAMELENGTH is explicitly 0 | — | curl | 2026-09-15 | [#4024268](https://hackerone.com/reports/4024268) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |

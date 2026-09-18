@@ -1,6 +1,6 @@
 # Misconfiguration
 
-**81 report(s)**
+**82 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -58,6 +58,7 @@
 | Remove obsolete domain from handbook subdomain | — | gitlab | 2024-10-01 | [#2599840](https://hackerone.com/reports/2599840) |
 | phpinfo() exposed on ██████████ | — | mars | 2024-11-21 | [#2666151](https://hackerone.com/reports/2666151) |
 | Cross-origin resource sharing misconfig \| steal user information  | — | semrush | 2017-12-17 | [#235200](https://hackerone.com/reports/235200) |
+| Unauthenticated API allows reading, writing to and deleting any user's private chat history on ████████ | — | essity | 2026-09-18 | [#4020767](https://hackerone.com/reports/4020767) |
 | Session Cookie Leakage via Static Header Field in WebViewerFragment | — | linkedin | 2026-03-17 | [#3475626](https://hackerone.com/reports/3475626) |
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2023-09-27 | [#2171494](https://hackerone.com/reports/2171494) |
 | Subdomain takeover on one of the subdomain under mozgcp.net | — | mozilla | 2023-11-12 | [#2143408](https://hackerone.com/reports/2143408) |

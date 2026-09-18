@@ -1,6 +1,6 @@
 # Unknown
 
-**989 report(s)**
+**990 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -888,6 +888,7 @@
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | CVE-2026-8286: wrong STARTTLS connection reuse | — | curl | 2026-06-24 | [#3718195](https://hackerone.com/reports/3718195) |
 | 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
+| Socket API drops expired timeouts for transfers queued behind a connection limit | — | curl | 2026-09-18 | [#4021952](https://hackerone.com/reports/4021952) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Out-of-bounds read in curl_formadd when CURLFORM_NAMELENGTH is explicitly 0 | — | curl | 2026-09-15 | [#4024268](https://hackerone.com/reports/4024268) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
