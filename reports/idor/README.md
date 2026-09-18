@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1085 report(s) across 10 class(es)**
+**1086 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 689 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 690 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 288 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -696,6 +696,7 @@
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | MariaDB GRANT PROXY permits unauthorized authentication changes and administrator account takeover | — | mariadb | 2026-09-07 | [#3876430](https://hackerone.com/reports/3876430) |
 | Valid share tokens allow to access tempory upload files of share owner | — | nextcloud | 2026-06-07 | [#3483708](https://hackerone.com/reports/3483708) |
+| files_lock: a write-share collaborator can place a TYPE_TOKEN lock that permanently denies the file owner, survives share revocation and account delet | — | nextcloud | 2026-09-18 | [#3770482](https://hackerone.com/reports/3770482) |
 | Public collectives allow to create pages | — | nextcloud | 2026-09-17 | [#3533697](https://hackerone.com/reports/3533697) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |

@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**703 report(s) across 25 class(es)**
+**704 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -23,7 +23,7 @@
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
 | [Off By One Error](off_by_one_error/README.md) | 6 | — |
 | [Integer Underflow](integer_underflow/README.md) | 4 | $1,121 |
-| [Buffer Under Read](buffer_under_read/README.md) | 2 | — |
+| [Buffer Under Read](buffer_under_read/README.md) | 3 | — |
 | [Write What Where Condition](write_what_where_condition/README.md) | 2 | $750 |
 | [Free Of Memory Not On The Heap](free_of_memory_not_on_the_heap/README.md) | 1 | — |
 | [Improper Initialization](improper_initialization/README.md) | 1 | — |
@@ -295,6 +295,7 @@
 | Out-of-bounds read in HTTP method handling causes undefined behavior and potential crash This is sharp, Gaurav. We’ve got a real memory-safety bug ins | — | curl | 2025-11-20 | [#3434510](https://hackerone.com/reports/3434510) |
 | Curl parse_connect_to_string Heap-Overread Leading to Denial of Service via CURLOPT_CONNECT_TO | — | curl | 2025-08-20 | [#3306456](https://hackerone.com/reports/3306456) |
 | controlled buffer under-read in pack_unpack_internal() | — | ruby | 2018-03-30 | [#298246](https://hackerone.com/reports/298246) |
+| Persistent SMTP header injection via identity `organization` / `name` | — | nextcloud | 2026-09-18 | [#3913012](https://hackerone.com/reports/3913012) |
 | Telnet Suboption Buffer Pointer Underflow in lib/telnet.c leads to Out-of-Bounds Read | — | curl | 2025-12-29 | [#3480712](https://hackerone.com/reports/3480712) |
 | tcpdump: CVE-2018-14879 - buffer overflow in tcpdump.c:get_next_file() | — | ibb | 2020-02-13 | [#724217](https://hackerone.com/reports/724217) |
 | [H1-2006 2020]  Got the flag | — | h1-ctf | 2020-06-25 | [#887744](https://hackerone.com/reports/887744) |
