@@ -1,6 +1,6 @@
 # Use After Free
 
-**72 report(s)**
+**73 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -50,6 +50,7 @@
 | Use-After-Free in BTREE Index Traversal via Stale key_version in heap_update() in MariaDB Server | — | mariadb | 2026-09-14 | [#3771144](https://hackerone.com/reports/3771144) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
 | CVE-2026-18924: HTTP/2 server push UAF | — | curl | 2026-09-02 | [#3916059](https://hackerone.com/reports/3916059) |
+| Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
 | 54: Rejected HTTP/2 push destroys MIME callback state still used by parent (use-after-free) | — | curl | 2026-09-07 | [#3973213](https://hackerone.com/reports/3973213) |
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |

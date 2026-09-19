@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1648 report(s) across 34 class(es)**
+**1649 report(s) across 34 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 990 | $50,000 |
+| [Unknown](unknown/README.md) | 991 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
@@ -1194,6 +1194,7 @@
 | --etag-save - truncates append-redirected stdout | — | curl | 2026-08-28 | [#3970639](https://hackerone.com/reports/3970639) |
 | Incomplete fix for CVE-2026-21637: loadSNI() in _tls_wrap.js lacks try/catch leading to Remote DoS | — | nodejs | 2026-04-23 | [#3556769](https://hackerone.com/reports/3556769) |
 | mruby-engine: UAF in MRubyEngine#initialize enables local RCE | — | shopify | 2026-04-24 | [#3679660](https://hackerone.com/reports/3679660) |
+| TELNET control and environment data bypass HTTPS-proxy TLS | — | curl | 2026-09-19 | [#4021960](https://hackerone.com/reports/4021960) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | 34: `curl_mprintf` reads `double` for documented `long double` conversions — uninitialized value disclosure | — | curl | 2026-08-28 | [#3972196](https://hackerone.com/reports/3972196) |
 | 53: HTTP/1 CONNECT chunked-407 trailers bypass CURLOPT_SUPPRESS_CONNECT_HEADERS and lose CURLH_CONNECT classification | — | curl | 2026-09-14 | [#3973234](https://hackerone.com/reports/3973234) |

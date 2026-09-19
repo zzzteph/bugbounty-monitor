@@ -1,12 +1,12 @@
 # HTTP Injection
 
-**141 report(s) across 4 class(es)**
+**142 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Http Request Smuggling](http_request_smuggling/README.md) | 65 | $20,000 |
+| [Http Request Smuggling](http_request_smuggling/README.md) | 66 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 58 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
@@ -139,6 +139,7 @@
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | HTTP Request Smuggling via Connection: close<TAB> in Node.js llhttp parser | — | nodejs | 2026-07-31 | [#3723248](https://hackerone.com/reports/3723248) |
+| HTTP/1.1 response framing violation and unsafe connection reuse when transfer decoding is disabled | — | curl | 2026-09-19 | [#4025056](https://hackerone.com/reports/4025056) |
 | Incomplete Suppression of  Transfer-Encoding: chunked Header in HTTP/2 After Redirect From HTTP/1.1 | — | curl | 2026-06-15 | [#3793495](https://hackerone.com/reports/3793495) |
 | HTTP Request Smuggling Vulnerability Analysis - cURL Security Report | — | curl | 2025-07-13 | [#3249936](https://hackerone.com/reports/3249936) |
 | Improper HTTP header block termination in llhttp | — | nodejs | 2025-06-13 | [#2054283](https://hackerone.com/reports/2054283) |
