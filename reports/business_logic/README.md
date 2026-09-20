@@ -1,12 +1,12 @@
 # Business Logic
 
-**375 report(s) across 5 class(es)**
+**376 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 352 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 353 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -328,6 +328,7 @@
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
+| Improper input validation in emoji field leads to sidebar UI denial of service | — | nextcloud | 2026-09-20 | [#3599470](https://hackerone.com/reports/3599470) |
 | Loss of multisig funds through single malicious participant's deliberate deception | — | monero | 2026-08-20 | [#3515557](https://hackerone.com/reports/3515557) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | cookie: case-insensitive path comparison in replace_existing() allows cookie eviction across distinct paths | — | curl | 2026-05-18 | [#3735238](https://hackerone.com/reports/3735238) |
