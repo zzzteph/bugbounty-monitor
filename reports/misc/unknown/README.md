@@ -1,6 +1,6 @@
 # Unknown
 
-**991 report(s)**
+**992 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -255,6 +255,7 @@
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
 | sign_multisig crashes monero-wallet-rpc on a malformed but decryptable multisig txset | — | monero | 2026-09-17 | [#3683934](https://hackerone.com/reports/3683934) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
+| Windows filename sanitizer misses Unicode COM/LPT reserved device names | — | curl | 2026-09-24 | [#4040799](https://hackerone.com/reports/4040799) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |
