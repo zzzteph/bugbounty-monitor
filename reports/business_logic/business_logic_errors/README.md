@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**353 report(s)**
+**354 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -101,6 +101,7 @@
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | Approval app's file-freshness check can be bypassed by omitting the etag parameter, allowing approval of unreviewed file changes | — | nextcloud | 2026-09-17 | [#3610332](https://hackerone.com/reports/3610332) |
+| Missing applicability validation allows non-applicable HTTPS RR to reach ECH processing | — | curl | 2026-09-26 | [#4053066](https://hackerone.com/reports/4053066) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |

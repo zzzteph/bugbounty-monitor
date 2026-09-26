@@ -1,12 +1,12 @@
 # LFI / Path Traversal
 
-**268 report(s) across 9 class(es)**
+**269 report(s) across 9 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Path Traversal](path_traversal/README.md) | 233 | $29,000 |
+| [Path Traversal](path_traversal/README.md) | 234 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
 | [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 5 | — |
@@ -92,6 +92,7 @@
 | Path Traversal in Nextcloud Talk Android Exposes User Credentials and Private Data via FileProvider | — | nextcloud | 2026-08-24 | [#3696266](https://hackerone.com/reports/3696266) |
 | Author → arbitrary file deletion anywhere on disk (site takeover) via `POST /wp/v2/media/<id>/finalize` poisoning `_wp_attachment_metadata` | — | wordpress | 2026-08-28 | [#3931777](https://hackerone.com/reports/3931777) |
 | ActiveStorage Disk Service Path Traversal via Custom Blob Key Injection | — | rails | 2026-05-07 | [#3580511](https://hackerone.com/reports/3580511) |
+| [HIGH] CWE-22 — Path Traversal in FTP Wildcard Download via Unencoded `.` in Escaped Filenames | — | curl | 2026-09-26 | [#4057637](https://hackerone.com/reports/4057637) |
 | Path Traversal in writeFile via Unsafe Prefix Containment Check Allows Out-of-Directory Writes | — | arkadiyt-projects | 2026-03-31 | [#3634571](https://hackerone.com/reports/3634571) |
 | inconsistently Rejection Logic in file:// URLs with Authority | — | curl | 2026-01-08 | [#3494098](https://hackerone.com/reports/3494098) |
 | [dev-nightly.ubnt.com] Local File Reading | — | ui | 2017-09-14 | [#260420](https://hackerone.com/reports/260420) |

@@ -1,12 +1,12 @@
 # Business Logic
 
-**376 report(s) across 5 class(es)**
+**377 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Business Logic Errors](business_logic_errors/README.md) | 353 | $12,000 |
+| [Business Logic Errors](business_logic_errors/README.md) | 354 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
@@ -113,6 +113,7 @@
 | TLS peer-verification bypass via mid-transfer ssl_config mutation | — | curl | 2026-05-19 | [#3735276](https://hackerone.com/reports/3735276) |
 | Trailing-dot IPv4 URL bypasses IP-address guard, allows wildcard DNS SAN match | — | curl | 2026-05-17 | [#3734921](https://hackerone.com/reports/3734921) |
 | Approval app's file-freshness check can be bypassed by omitting the etag parameter, allowing approval of unreviewed file changes | — | nextcloud | 2026-09-17 | [#3610332](https://hackerone.com/reports/3610332) |
+| Missing applicability validation allows non-applicable HTTPS RR to reach ECH processing | — | curl | 2026-09-26 | [#4053066](https://hackerone.com/reports/4053066) |
 | CURLOPT_PROXY_CAINFO_BLOB silently activates native CA store on Apple builds | — | curl | 2026-05-19 | [#3735179](https://hackerone.com/reports/3735179) |
 | Proxy CONNECT response poisoning via authentication retry in cf-h1-proxy.c (libcurl) | — | curl | 2026-06-03 | [#3767963](https://hackerone.com/reports/3767963) |
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
