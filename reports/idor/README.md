@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1086 report(s) across 10 class(es)**
+**1087 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 690 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 691 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 288 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -356,6 +356,7 @@
 | Permission Model bypass: process.report writes (and overwrites) files outside --allow-fs-write paths | — | nodejs | 2026-07-30 | [#3815767](https://hackerone.com/reports/3815767) |
 | CORS Misconfiguration / Broken Access Control | — | myndr | 2026-09-10 | [#3930102](https://hackerone.com/reports/3930102) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
+| Unauthenticated disclosure of draft/private/pending post titles & IDs via Secure Custom Fields nopriv AJAX field-query handlers (post_object/relations | — | wordpress | 2026-09-28 | [#3893632](https://hackerone.com/reports/3893632) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | Missing access control when linking banners or campaigns to zones  | — | revive_adserver | 2026-06-03 | [#3650504](https://hackerone.com/reports/3650504) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
