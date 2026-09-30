@@ -1,0 +1,162 @@
+{
+  "id": 3872239,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODcyMjM5",
+  "url": "https://hackerone.com/reports/3872239",
+  "title": "Connector/J: malicious server crashes client JVM via unbounded result-set field-count allocation in ClientMessage.readPacket",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-18T08:55:21.133Z",
+  "submitted_at": "2026-07-18T08:55:21.515Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "fg0x0",
+    "url": "/fg0x0",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/we9mo7ui49vl91bznzyid2bvt1lf/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-09-30T08:00:19.275Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-30T08:00:18.965Z",
+  "team_member_agreed_on_going_public_at": "2026-09-29T22:56:40.884Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "MariaDB Connector/J parses result-set responses by reading the column count as a length-encoded integer straight from the wire and immediately uses it to size a Java array (`new ColumnDecoder[fieldCount]`) with no upper bound. A malicious or MITM MariaDB server can reply to any query - or to the driver's own connection-setup query - with a ~10-byte packet declaring a field count of up to 2^31-1, causing the client JVM to attempt a multi-gigabyte allocation and die with `java.lang.OutOfMemoryError`. The crash is JVM-wide, taking down all pooled connections and application threads.\n\n### Root cause\n\n`src/main/java/org/mariadb/jdbc/message/ClientMessage.java`:\n\n```java\ndefault:\n    int fieldCount = buf.readIntLengthEncodedNotNull();   // line 282: server-controlled\n    ColumnDecoder[] ci;\n    if (context.canSkipMeta() && this.canSkipMeta()) {\n      ...\n    } else {\n      ci = new ColumnDecoder[fieldCount];                 // line 302: unbounded allocation\n      for (int i = 0; i < fieldCount; i++) { ... }\n    }\n```\n\n`readIntLengthEncodedNotNull()` (`ReadableByteBuf.java:148`) returns the wire value verbatim. For the 0xfe form it does `return (int) readLong()`, giving the server full control over the 32-bit integer:\n\n- `fieldCount = 0x10000000` (268M) -> `OutOfMemoryError: Java heap space`\n- `fieldCount = 0x7fffffff` -> `OutOfMemoryError: Requested array size exceeds VM limit`\n- `fieldCount = 0xffffffff` -> `NegativeArraySizeException`\n\nNone are caught inside `readPacket`. `OutOfMemoryError` is JVM-wide - it destabilizes the entire client process.\n\nThe driver default is `sslMode=DISABLE` (plaintext, `Configuration.java:309`), so an on-path attacker can rewrite server responses without controlling the actual database.\n\n### Steps To Reproduce\n\nEnvironment: OpenJDK 21, driver built from HEAD c9377bc (`mariadb-java-client-3.5.9.jar`).\n\n**Step 1** - Start the rogue server (`rogue_server.py` attached):\n\n```bash\npython3 rogue_server.py positive 0 &\n```\n\nThe server completes a plaintext handshake, OKs the driver's setup query, then answers `SELECT 1` with a result-set header declaring `fieldCount = 0x10000000`.\n\n**Step 2** - POSITIVE (attack) - run a standard JDBC client (`OomClient.java` attached):\n\n```bash\njava -Xmx256m -cp .:mariadb-java-client-3.5.9.jar OomClient \"jdbc:mariadb://127.0.0.1:<port>/test?user=app&password=secret\"\n```\n\nOutput:\n\n```bash\nException in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n        at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:302)\n        at org.mariadb.jdbc.client.impl.StandardClient.readPacket(StandardClient.java:1438)\n        at org.mariadb.jdbc.client.impl.StandardClient.readResults(StandardClient.java:1377)\n        at org.mariadb.jdbc.Statement.executeQuery(Statement.java:137)\n        at OomClient.main(OomClient.java:22)\nclient exit code = 1\n```\n\n**Connect-time variant** (server mode `connect` - injects on the driver's own setup query):\n\n```bash\nException in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n        at org.mariadb.jdbc.message.ClientMessage.readPacket(ClientMessage.java:302)\n        at org.mariadb.jdbc.client.impl.StandardClient.postConnectionQueries(StandardClient.java:816)\n        at org.mariadb.jdbc.Driver.connect(Driver.java:75)\n```\n\nJVM dies inside `DriverManager.getConnection()` - no application query, no valid credentials needed.\n\n**Step 3** - NEGATIVE CONTROL (same driver, same URL, same SELECT 1, benign 1-column result):\n\n```bash\nconnected; running SELECT 1\nRESULT=1\nCLEAN_EXIT\nclient exit code = 0\n```\n\nThe only difference is the field-count value in the server's result-set header.\n\n### Supporting Material/References\n\n- Vulnerable line: `ClientMessage.java:302` (`new ColumnDecoder[fieldCount]`)\n- Same-family siblings: `Reader.java:133` (unbounded accumulator), `OkPacket.java:160` (`new byte[readIntLengthEncodedNotNull()]`)\n- Accepted sibling: H1 #3835450 (connector-nodejs malicious-server DoS, Medium)\n- Attachments: `rogue_server.py`, `OomClient.java`, `run_poc.sh`, `poc_evidence.txt`\n\n## Impact\n\nA malicious or MITM MariaDB server crashes the connecting client's JVM with `OutOfMemoryError` using a single small packet. The crash is JVM-wide - it brings down the entire client application, every pooled connection and worker thread, not just one query.\n\nThe crash fires during `DriverManager.getConnection()` (connect-time variant), before any application query and without valid credentials. Any service that opens a JDBC connection to an attacker-influenced endpoint - SSRF-style connection strings, MITM on a plaintext link, a compromised database host, or a hostile replica in a failover topology - is knocked over at connect time.\n\nPreconditions: the client must open a connection whose bytes the attacker controls. The driver default is `sslMode=DISABLE` (plaintext), so any network-level MITM suffices. No authentication and no application-level query are required.",
+  "weakness": {
+    "id": 48,
+    "name": "Uncontrolled Resource Consumption"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6275953,
+      "file_name": "OomClient.java",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/uj6y14l62xm2ovc6z8ud5i71ue2h?response-content-disposition=attachment%3B%20filename%3D%22OomClient.java%22%3B%20filename%2A%3DUTF-8%27%27OomClient.java&response-content-type=text%2Fx-java-source&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQVGF47NL6%2F20260930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260930T144704Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCICyuosyfvC%2BVHrX4EoanYqzHbsuk%2FWHfKvYRAGAgWIWtAiBYndXgHsFYNODnCj%2BdPuYlrVwknlIIlj5cWjdBwYYKVyqyBQhkEAMaDDAxMzYxOTI3NDg0OSIMLEbjO1OFmW8RjXacKo8FHfBAQs52kAQt8eq76u%2Fxs3CGCspZgPuAxMEwDl%2FhSRoqlEgQbqqI5p606m%2BgolAX7GfQmUVfJKKPIEhMpQSw91sdQAI81xHOIhMNChYdm3pQD98ZV5w4vq%2BP7mNW6%2F4etjejRvZsErSn2CssQHZ3YiaoLBEUiZQlTZvNqxGhIlm0GN4IqWFMgLN4x3SmCVdXuUJE%2BNfLyvDvMDeCbWKBm7EX%2B1dnFyaAlwT719nWmEnry%2FKP8suDI4mPiDaiczpVz1kgCxK7nXyKwu9vRFQjwlvLLJNr4rIErCVX2kVRjQzkY4bMKAjvx4wVM8pGFpLjt60G3stunpYVWHsNQW0uGVifFYnAh1IwRHQwOUzFTlzu0mrpCl17kDnQPEyulg1ndY1F4dm31D9HI5koOiHx0%2FSuqOCvCY2KBtBY65dSIyY5LPnb8oJkigh1ENIkesYnTaFgDmNVWPFFA55pHCvRshWcbK0Glz%2BmxGFEx8Sc8HuIgx0XsGBs4f%2FtBBGEO4hLOZq6tULJyniWBfT9%2BBrW53diipErHRJ7Z0qButnpQ3yNTmVYKPoPhqWBGit79s6LA3k9g2V%2BXcpFtoosIKWFNu3zljJ91Cx0Ep9dlwGfrfjUpFsjiQXAaoxZSZ9eFb4Geqxu%2BDES8uzhKK8S%2B7Xkv1FhRRjLXSaTcS33RTtMboUCh9ScO6U6JBMFfVMrxVVb%2BN2UchYxW51Ogevw9C2mRTj3QkSmEy7SrLgGLgXES9VAK65NZMNQAEa9VWNjgfioB5ZCfn1oNyFsYl4bz95Q1Kjl8zxuT3DXAQry7wbWDp7VDL2Dxh0XJEbBCMLxOSMpxE4doJUKEkmD%2B5p5NaeKCk1l0l1Gw1HiiY2O0ag7bTCU2vPVBjqyAS%2BHhqtHyPvZU4gT9QQqvaWQ7EI9T1WGJ%2FgJXUo8LTv9XxpvwalHh%2BPVj7dzGf1PKm5jZQH6t7vx9%2Fsp5QcDb%2F3NWRTHu270m92AOqU0nJ9r%2F90Hhlrxc3nL%2FPgZ41ZIAfJ1%2BCDV0p7z%2FEeBLPx3gIkh%2BXloZSmY%2FQ8jzDYGWxr3mxG7KggK1Bxtnx%2B5kTT9l%2BqrOms%2FsvfJl34hKrjV7CM8FDFz8Hbv%2Bd13cRD8rk345JU%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=69be5117886565f7bd757406be536cc80dc0a0f5e52103875e4463470065be9b",
+      "file_size": 1117,
+      "type": "text/x-java-source",
+      "moderated": null
+    },
+    {
+      "id": 6275954,
+      "file_name": "run_poc.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/xn4s2l04bobnh2ifcyjtpd7jk9sn?response-content-disposition=attachment%3B%20filename%3D%22run_poc.sh%22%3B%20filename%2A%3DUTF-8%27%27run_poc.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQVGF47NL6%2F20260930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260930T144704Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCICyuosyfvC%2BVHrX4EoanYqzHbsuk%2FWHfKvYRAGAgWIWtAiBYndXgHsFYNODnCj%2BdPuYlrVwknlIIlj5cWjdBwYYKVyqyBQhkEAMaDDAxMzYxOTI3NDg0OSIMLEbjO1OFmW8RjXacKo8FHfBAQs52kAQt8eq76u%2Fxs3CGCspZgPuAxMEwDl%2FhSRoqlEgQbqqI5p606m%2BgolAX7GfQmUVfJKKPIEhMpQSw91sdQAI81xHOIhMNChYdm3pQD98ZV5w4vq%2BP7mNW6%2F4etjejRvZsErSn2CssQHZ3YiaoLBEUiZQlTZvNqxGhIlm0GN4IqWFMgLN4x3SmCVdXuUJE%2BNfLyvDvMDeCbWKBm7EX%2B1dnFyaAlwT719nWmEnry%2FKP8suDI4mPiDaiczpVz1kgCxK7nXyKwu9vRFQjwlvLLJNr4rIErCVX2kVRjQzkY4bMKAjvx4wVM8pGFpLjt60G3stunpYVWHsNQW0uGVifFYnAh1IwRHQwOUzFTlzu0mrpCl17kDnQPEyulg1ndY1F4dm31D9HI5koOiHx0%2FSuqOCvCY2KBtBY65dSIyY5LPnb8oJkigh1ENIkesYnTaFgDmNVWPFFA55pHCvRshWcbK0Glz%2BmxGFEx8Sc8HuIgx0XsGBs4f%2FtBBGEO4hLOZq6tULJyniWBfT9%2BBrW53diipErHRJ7Z0qButnpQ3yNTmVYKPoPhqWBGit79s6LA3k9g2V%2BXcpFtoosIKWFNu3zljJ91Cx0Ep9dlwGfrfjUpFsjiQXAaoxZSZ9eFb4Geqxu%2BDES8uzhKK8S%2B7Xkv1FhRRjLXSaTcS33RTtMboUCh9ScO6U6JBMFfVMrxVVb%2BN2UchYxW51Ogevw9C2mRTj3QkSmEy7SrLgGLgXES9VAK65NZMNQAEa9VWNjgfioB5ZCfn1oNyFsYl4bz95Q1Kjl8zxuT3DXAQry7wbWDp7VDL2Dxh0XJEbBCMLxOSMpxE4doJUKEkmD%2B5p5NaeKCk1l0l1Gw1HiiY2O0ag7bTCU2vPVBjqyAS%2BHhqtHyPvZU4gT9QQqvaWQ7EI9T1WGJ%2FgJXUo8LTv9XxpvwalHh%2BPVj7dzGf1PKm5jZQH6t7vx9%2Fsp5QcDb%2F3NWRTHu270m92AOqU0nJ9r%2F90Hhlrxc3nL%2FPgZ41ZIAfJ1%2BCDV0p7z%2FEeBLPx3gIkh%2BXloZSmY%2FQ8jzDYGWxr3mxG7KggK1Bxtnx%2B5kTT9l%2BqrOms%2FsvfJl34hKrjV7CM8FDFz8Hbv%2Bd13cRD8rk345JU%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=b8f91cd093f2a78eb82224754cca35a970150e634883cc030805553c8242dc64",
+      "file_size": 1514,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6275955,
+      "file_name": "poc_evidence.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3wrw101u7hcedjanb95o3k95fxxn?response-content-disposition=attachment%3B%20filename%3D%22poc_evidence.txt%22%3B%20filename%2A%3DUTF-8%27%27poc_evidence.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQVGF47NL6%2F20260930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260930T144704Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCICyuosyfvC%2BVHrX4EoanYqzHbsuk%2FWHfKvYRAGAgWIWtAiBYndXgHsFYNODnCj%2BdPuYlrVwknlIIlj5cWjdBwYYKVyqyBQhkEAMaDDAxMzYxOTI3NDg0OSIMLEbjO1OFmW8RjXacKo8FHfBAQs52kAQt8eq76u%2Fxs3CGCspZgPuAxMEwDl%2FhSRoqlEgQbqqI5p606m%2BgolAX7GfQmUVfJKKPIEhMpQSw91sdQAI81xHOIhMNChYdm3pQD98ZV5w4vq%2BP7mNW6%2F4etjejRvZsErSn2CssQHZ3YiaoLBEUiZQlTZvNqxGhIlm0GN4IqWFMgLN4x3SmCVdXuUJE%2BNfLyvDvMDeCbWKBm7EX%2B1dnFyaAlwT719nWmEnry%2FKP8suDI4mPiDaiczpVz1kgCxK7nXyKwu9vRFQjwlvLLJNr4rIErCVX2kVRjQzkY4bMKAjvx4wVM8pGFpLjt60G3stunpYVWHsNQW0uGVifFYnAh1IwRHQwOUzFTlzu0mrpCl17kDnQPEyulg1ndY1F4dm31D9HI5koOiHx0%2FSuqOCvCY2KBtBY65dSIyY5LPnb8oJkigh1ENIkesYnTaFgDmNVWPFFA55pHCvRshWcbK0Glz%2BmxGFEx8Sc8HuIgx0XsGBs4f%2FtBBGEO4hLOZq6tULJyniWBfT9%2BBrW53diipErHRJ7Z0qButnpQ3yNTmVYKPoPhqWBGit79s6LA3k9g2V%2BXcpFtoosIKWFNu3zljJ91Cx0Ep9dlwGfrfjUpFsjiQXAaoxZSZ9eFb4Geqxu%2BDES8uzhKK8S%2B7Xkv1FhRRjLXSaTcS33RTtMboUCh9ScO6U6JBMFfVMrxVVb%2BN2UchYxW51Ogevw9C2mRTj3QkSmEy7SrLgGLgXES9VAK65NZMNQAEa9VWNjgfioB5ZCfn1oNyFsYl4bz95Q1Kjl8zxuT3DXAQry7wbWDp7VDL2Dxh0XJEbBCMLxOSMpxE4doJUKEkmD%2B5p5NaeKCk1l0l1Gw1HiiY2O0ag7bTCU2vPVBjqyAS%2BHhqtHyPvZU4gT9QQqvaWQ7EI9T1WGJ%2FgJXUo8LTv9XxpvwalHh%2BPVj7dzGf1PKm5jZQH6t7vx9%2Fsp5QcDb%2F3NWRTHu270m92AOqU0nJ9r%2F90Hhlrxc3nL%2FPgZ41ZIAfJ1%2BCDV0p7z%2FEeBLPx3gIkh%2BXloZSmY%2FQ8jzDYGWxr3mxG7KggK1Bxtnx%2B5kTT9l%2BqrOms%2FsvfJl34hKrjV7CM8FDFz8Hbv%2Bd13cRD8rk345JU%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=edae86c2712903e99333aa4ee6b4bced5aa85ca2e9a13a7968f719c1323226d2",
+      "file_size": 3529,
+      "type": "text/plain",
+      "moderated": null
+    },
+    {
+      "id": 6275956,
+      "file_name": "rogue_server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/0g5mk69ui5ylfuv6zsnaq3ngn6id?response-content-disposition=attachment%3B%20filename%3D%22rogue_server.py%22%3B%20filename%2A%3DUTF-8%27%27rogue_server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQVGF47NL6%2F20260930%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260930T144704Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCICyuosyfvC%2BVHrX4EoanYqzHbsuk%2FWHfKvYRAGAgWIWtAiBYndXgHsFYNODnCj%2BdPuYlrVwknlIIlj5cWjdBwYYKVyqyBQhkEAMaDDAxMzYxOTI3NDg0OSIMLEbjO1OFmW8RjXacKo8FHfBAQs52kAQt8eq76u%2Fxs3CGCspZgPuAxMEwDl%2FhSRoqlEgQbqqI5p606m%2BgolAX7GfQmUVfJKKPIEhMpQSw91sdQAI81xHOIhMNChYdm3pQD98ZV5w4vq%2BP7mNW6%2F4etjejRvZsErSn2CssQHZ3YiaoLBEUiZQlTZvNqxGhIlm0GN4IqWFMgLN4x3SmCVdXuUJE%2BNfLyvDvMDeCbWKBm7EX%2B1dnFyaAlwT719nWmEnry%2FKP8suDI4mPiDaiczpVz1kgCxK7nXyKwu9vRFQjwlvLLJNr4rIErCVX2kVRjQzkY4bMKAjvx4wVM8pGFpLjt60G3stunpYVWHsNQW0uGVifFYnAh1IwRHQwOUzFTlzu0mrpCl17kDnQPEyulg1ndY1F4dm31D9HI5koOiHx0%2FSuqOCvCY2KBtBY65dSIyY5LPnb8oJkigh1ENIkesYnTaFgDmNVWPFFA55pHCvRshWcbK0Glz%2BmxGFEx8Sc8HuIgx0XsGBs4f%2FtBBGEO4hLOZq6tULJyniWBfT9%2BBrW53diipErHRJ7Z0qButnpQ3yNTmVYKPoPhqWBGit79s6LA3k9g2V%2BXcpFtoosIKWFNu3zljJ91Cx0Ep9dlwGfrfjUpFsjiQXAaoxZSZ9eFb4Geqxu%2BDES8uzhKK8S%2B7Xkv1FhRRjLXSaTcS33RTtMboUCh9ScO6U6JBMFfVMrxVVb%2BN2UchYxW51Ogevw9C2mRTj3QkSmEy7SrLgGLgXES9VAK65NZMNQAEa9VWNjgfioB5ZCfn1oNyFsYl4bz95Q1Kjl8zxuT3DXAQry7wbWDp7VDL2Dxh0XJEbBCMLxOSMpxE4doJUKEkmD%2B5p5NaeKCk1l0l1Gw1HiiY2O0ag7bTCU2vPVBjqyAS%2BHhqtHyPvZU4gT9QQqvaWQ7EI9T1WGJ%2FgJXUo8LTv9XxpvwalHh%2BPVj7dzGf1PKm5jZQH6t7vx9%2Fsp5QcDb%2F3NWRTHu270m92AOqU0nJ9r%2F90Hhlrxc3nL%2FPgZ41ZIAfJ1%2BCDV0p7z%2FEeBLPx3gIkh%2BXloZSmY%2FQ8jzDYGWxr3mxG7KggK1Bxtnx%2B5kTT9l%2BqrOms%2FsvfJl34hKrjV7CM8FDFz8Hbv%2Bd13cRD8rk345JU%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=6d1c61b1fcc880144b042edb3d84688411c4d6a27802279bdbeaa2b80b0d1143",
+      "file_size": 5776,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-29T22:56:41.287Z",
+  "allow_singular_disclosure_after": 2534976.386940331,
+  "singular_disclosure_allowed": false,
+  "vote_count": 4,
+  "voters": [
+    "fg0x0",
+    "shadow043",
+    "loki712",
+    "azzzzzzzz"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 4.1,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "high",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "none",
+      "availability": "high"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 10337,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors  - Denial of Service",
+    "max_severity": "medium"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

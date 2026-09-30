@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**415 report(s)**
+**416 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -159,6 +159,7 @@
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |
 | Server-side ReDoS via user-controlled regex in OIDC Access Policy | — | rubygems | 2026-03-26 | [#3542546](https://hackerone.com/reports/3542546) |
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
+| Connector/J: malicious server crashes client JVM via unbounded result-set field-count allocation in ClientMessage.readPacket | — | mariadb | 2026-09-30 | [#3872239](https://hackerone.com/reports/3872239) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | Unbounded memory growth in `node:http2` clients via attacker-controlled ORIGIN frames | — | nodejs | 2026-06-25 | [#3676863](https://hackerone.com/reports/3676863) |
 | rpcbind "rpcbomb" CVE-2017-8779, CVE-2017-8804 | — | ibb | 2019-10-14 | [#235016](https://hackerone.com/reports/235016) |

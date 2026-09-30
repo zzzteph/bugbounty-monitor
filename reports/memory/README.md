@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**705 report(s) across 25 class(es)**
+**706 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 55 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
-| [Out Of Bounds Read](out_of_bounds_read/README.md) | 41 | $9,000 |
+| [Out Of Bounds Read](out_of_bounds_read/README.md) | 42 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 31 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
@@ -623,6 +623,7 @@
 | Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read | — | torproject | 2026-09-10 | [#3709605](https://hackerone.com/reports/3709605) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
+| Connector/C Out-of-bounds read in `unpack_fields()` from short metadata field | — | mariadb | 2026-09-30 | [#3896671](https://hackerone.com/reports/3896671) |
 | Certificate message OOB reads (CVE-2016-6306) | — | ibb | 2017-05-25 | [#221790](https://hackerone.com/reports/221790) |
 | OOB read in TS_OBJ_print_bio() (CVE-2016-2180) | — | ibb | 2017-05-25 | [#221789](https://hackerone.com/reports/221789) |
 | Out-of-bounds read when importing corrupt blockchain with monero-blockchain-import | — | monero | 2018-04-25 | [#284951](https://hackerone.com/reports/284951) |

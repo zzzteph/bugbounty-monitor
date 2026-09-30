@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**41 report(s)**
+**42 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -23,6 +23,7 @@
 | Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read | — | torproject | 2026-09-10 | [#3709605](https://hackerone.com/reports/3709605) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
+| Connector/C Out-of-bounds read in `unpack_fields()` from short metadata field | — | mariadb | 2026-09-30 | [#3896671](https://hackerone.com/reports/3896671) |
 | Certificate message OOB reads (CVE-2016-6306) | — | ibb | 2017-05-25 | [#221790](https://hackerone.com/reports/221790) |
 | OOB read in TS_OBJ_print_bio() (CVE-2016-2180) | — | ibb | 2017-05-25 | [#221789](https://hackerone.com/reports/221789) |
 | Out-of-bounds read when importing corrupt blockchain with monero-blockchain-import | — | monero | 2018-04-25 | [#284951](https://hackerone.com/reports/284951) |
