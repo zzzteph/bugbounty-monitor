@@ -1,12 +1,12 @@
 # SSRF
 
-**232 report(s) across 2 class(es)**
+**233 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 231 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 232 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -89,6 +89,7 @@
 | 50: CMake `HTTP_ONLY` does not disable SSH backends — SCP and SFTP remain usable | — | curl | 2026-08-29 | [#3973228](https://hackerone.com/reports/3973228) |
 | curl-ipv4-percent-normalization-SSRF | — | curl | 2026-06-10 | [#3791168](https://hackerone.com/reports/3791168) |
 | SSRF Filter Bypass via Unblocked NAT64 Local-Use IPv6 Prefix (64:ff9b:1::/48) | — | arkadiyt-projects | 2026-03-31 | [#3634400](https://hackerone.com/reports/3634400) |
+| SSRF via User-Controlled Push proxyServer in Notifications Push Registration | — | nextcloud | 2026-09-30 | [#3623149](https://hackerone.com/reports/3623149) |
 | WebLogic Server Side Request Forgery | — | deptofdefense | 2019-12-02 | [#300513](https://hackerone.com/reports/300513) |
 | SSRF via webhook | — | mixmax | 2017-07-18 | [#243277](https://hackerone.com/reports/243277) |
 | Server Side Request Forgery on JSON Feed | — | infogram | 2017-12-06 | [#280511](https://hackerone.com/reports/280511) |
