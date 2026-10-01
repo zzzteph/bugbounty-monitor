@@ -1,13 +1,13 @@
 # IDOR / Broken Access Control
 
-**1087 report(s) across 10 class(es)**
+**1088 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Access Control Generic](improper_access_control_generic/README.md) | 691 | $35,000 |
-| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 288 | $20,000 |
+| [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
 | [Incorrect Authorization](incorrect_authorization/README.md) | 15 | $2,500 |
@@ -26,6 +26,7 @@
 | Getting all the CD keys of any game | $20,000 | valve | 2018-10-31 | [#391217](https://hackerone.com/reports/391217) |
 | Steal private objects of other projects via project import | $20,000 | gitlab | 2022-06-07 | [#743953](https://hackerone.com/reports/743953) |
 | Private objects exposed through project import | $20,000 | gitlab | 2022-06-07 | [#767770](https://hackerone.com/reports/767770) |
+| IDOR allows user to access report details via reference.json endpoint | $15,000 | security | 2026-10-01 | [#3862641](https://hackerone.com/reports/3862641) |
 | Delete anyone's content spotlight remotely. | $15,000 | snapchat | 2023-03-06 | [#1819832](https://hackerone.com/reports/1819832) |
 | IDOR - Delete all Licenses and certifications from users account using CreateOrUpdateHackerCertification GraphQL query | $12,500 | security | 2023-08-29 | [#2122671](https://hackerone.com/reports/2122671) |
 | Exfiltrate and mutate repository and project data through injected templated service | $11,000 | gitlab | 2019-03-05 | [#446585](https://hackerone.com/reports/446585) |

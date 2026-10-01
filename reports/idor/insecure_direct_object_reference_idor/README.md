@@ -1,11 +1,12 @@
 # Insecure Direct Object Reference Idor
 
-**288 report(s)**
+**289 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | Steal private objects of other projects via project import | $20,000 | gitlab | 2022-06-07 | [#743953](https://hackerone.com/reports/743953) |
 | Private objects exposed through project import | $20,000 | gitlab | 2022-06-07 | [#767770](https://hackerone.com/reports/767770) |
+| IDOR allows user to access report details via reference.json endpoint | $15,000 | security | 2026-10-01 | [#3862641](https://hackerone.com/reports/3862641) |
 | Delete anyone's content spotlight remotely. | $15,000 | snapchat | 2023-03-06 | [#1819832](https://hackerone.com/reports/1819832) |
 | IDOR - Delete all Licenses and certifications from users account using CreateOrUpdateHackerCertification GraphQL query | $12,500 | security | 2023-08-29 | [#2122671](https://hackerone.com/reports/2122671) |
 | IDOR to add secondary users in www.paypal.com/businessmanage/users/api/v1/users | $10,500 | paypal | 2019-07-30 | [#415081](https://hackerone.com/reports/415081) |
