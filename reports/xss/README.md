@@ -1,12 +1,12 @@
 # XSS
 
-**1494 report(s) across 10 class(es)**
+**1495 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 521 | $5,000 |
+| [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 522 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 471 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 343 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
@@ -731,6 +731,7 @@
 | XSS and iframe injection on tiktok ads portal using redirect params | — | tiktok | 2022-05-19 | [#1514554](https://hackerone.com/reports/1514554) |
 | reflected XSS in [www.equifax.com] | — | equifax | 2023-04-23 | [#1818163](https://hackerone.com/reports/1818163) |
 | XSS DUE TO CVE-2022-38463 in https://████████ | — | deptofdefense | 2022-09-14 | [#1681208](https://hackerone.com/reports/1681208) |
+| One-click cross-account JavaScript execution steals a victim write token through Turbo pagination and unattached Active Storage HTML | — | basecamp | 2026-10-02 | [#3943339](https://hackerone.com/reports/3943339) |
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 |  Unauthenticated reflected XSS in Essity "Network Toolbox" CGI (████████ ████████ | — | essity | 2026-06-23 | [#3793533](https://hackerone.com/reports/3793533) |

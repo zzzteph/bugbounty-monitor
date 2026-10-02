@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**521 report(s)**
+**522 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -123,6 +123,7 @@
 | XSS and iframe injection on tiktok ads portal using redirect params | — | tiktok | 2022-05-19 | [#1514554](https://hackerone.com/reports/1514554) |
 | reflected XSS in [www.equifax.com] | — | equifax | 2023-04-23 | [#1818163](https://hackerone.com/reports/1818163) |
 | XSS DUE TO CVE-2022-38463 in https://████████ | — | deptofdefense | 2022-09-14 | [#1681208](https://hackerone.com/reports/1681208) |
+| One-click cross-account JavaScript execution steals a victim write token through Turbo pagination and unattached Active Storage HTML | — | basecamp | 2026-10-02 | [#3943339](https://hackerone.com/reports/3943339) |
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 |  Unauthenticated reflected XSS in Essity "Network Toolbox" CGI (████████ ████████ | — | essity | 2026-06-23 | [#3793533](https://hackerone.com/reports/3793533) |
