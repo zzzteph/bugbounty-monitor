@@ -1,6 +1,6 @@
 # Stack Overflow
 
-**31 report(s)**
+**32 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -16,6 +16,7 @@
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
 | Stack Overflow DoS in ST_GeomFromGeoJSON Allows Any Authenticated User to Crash the Entire Server | — | mariadb | 2026-09-03 | [#3769676](https://hackerone.com/reports/3769676) |
+| libmariadb ( mariadb-connector-c ): stack overflow via server-controlled field->length in prepared-statement codec | — | mariadb | 2026-10-04 | [#3766217](https://hackerone.com/reports/3766217) |
 | Stack overflow in UnbindFromTree (browser can be crashed remotely) | — | torproject | 2017-10-02 | [#264481](https://hackerone.com/reports/264481) |
 | [https://jenkins.brew.sh] Jenkins in Debug Mode with Stack Traces Enabled | — | homebrew | 2017-04-19 | [#221833](https://hackerone.com/reports/221833) |
 | mirb only: stack-buffer-overflow (OOB write) in main() | — | shopify-scripts | 2017-05-09 | [#219870](https://hackerone.com/reports/219870) |

@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**706 report(s) across 25 class(es)**
+**707 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -13,7 +13,7 @@
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 42 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
-| [Stack Overflow](stack_overflow/README.md) | 31 | $3,000 |
+| [Stack Overflow](stack_overflow/README.md) | 32 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
@@ -651,6 +651,7 @@
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
 | Stack Overflow DoS in ST_GeomFromGeoJSON Allows Any Authenticated User to Crash the Entire Server | — | mariadb | 2026-09-03 | [#3769676](https://hackerone.com/reports/3769676) |
+| libmariadb ( mariadb-connector-c ): stack overflow via server-controlled field->length in prepared-statement codec | — | mariadb | 2026-10-04 | [#3766217](https://hackerone.com/reports/3766217) |
 | Stack overflow in UnbindFromTree (browser can be crashed remotely) | — | torproject | 2017-10-02 | [#264481](https://hackerone.com/reports/264481) |
 | [https://jenkins.brew.sh] Jenkins in Debug Mode with Stack Traces Enabled | — | homebrew | 2017-04-19 | [#221833](https://hackerone.com/reports/221833) |
 | mirb only: stack-buffer-overflow (OOB write) in main() | — | shopify-scripts | 2017-05-09 | [#219870](https://hackerone.com/reports/219870) |
