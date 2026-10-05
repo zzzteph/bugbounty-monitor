@@ -1,0 +1,120 @@
+{
+  "id": 4085412,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MDg1NDEy",
+  "url": "https://hackerone.com/reports/4085412",
+  "title": "Rustls backend discloses out-of-bounds heap data during legal IMAP upload cancellation",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "medium",
+  "readable_substate": "N/A",
+  "created_at": "2026-10-04T19:17:09.385Z",
+  "submitted_at": "2026-10-04T19:22:29.255Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "stze",
+    "url": "/stze",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-05T11:32:02.864Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-10-05T11:32:01.985Z",
+  "team_member_agreed_on_going_public_at": "2026-10-05T11:30:57.963Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "**Affected:** Rustls-backed libcurl, curl 8.8.0 through 8.22.0 and current 8.23 development\n\n## Summary\n\nA malicious IMAP server can apply TLS socket backpressure during an `APPEND`\nupload. If the application then legally removes the active easy handle from its\nmulti handle, curl's IMAP cleanup sends a two-byte APPEND terminator while the\nRustls backend still accounts for plaintext accepted from a longer upload call.\n\nAfter flushing that retained record, `cr_send()` reports the old plaintext\nlength as progress for the new two-byte send. `Curl_pp_flushsend()` trusts the\noversized count, underflows its remaining length, and calls Rustls again with a\npointer beyond curl's command allocation and a near-`SIZE_MAX` length. Rustls\ncopies, encrypts, and transmits out-of-bounds heap data, or the client crashes\nwhile reading it.\n\nThe application uses ordinary IMAP upload and multi APIs. It does not call\n`curl_easy_send()`, `curl_ws_send()`, connect-only mode, or Rustls directly.\nThe only application action at the trigger is `curl_multi_remove_handle()`\noutside a callback, which curl documents as legal during an active transfer.\n\n## Minimal reproduction\n\nThe attachment contains:\n\n- `imap_cancel_client.c`\n- `imap_server.py`\n- `run.sh`\n\nBuild a release libcurl with Rustls, point `PKG_CONFIG_PATH` at that\ninstallation, and run:\n\n```sh\nexport PKG_CONFIG_PATH=/path/to/rustls-libcurl/lib/pkgconfig\n./run.sh\n```\n\nFor a static or nonstandard build, set `CURL_CFLAGS` and `CURL_LIBS` directly.\nThe script creates a temporary self-signed certificate, starts the local IMAP\nTLS peer, compiles the client, and performs one transfer.\n\nThe client performs a real IMAP `CAPABILITY`, `STARTTLS`, TLS handshake,\n`LOGIN`, and 65,536-byte `APPEND`. Its upload callback returns 1,024 bytes and\narms a one-shot `send()` interposer that returns `EAGAIN` on the next client\nsocket write. This is a deterministic substitute for a peer filling the\nnonblocking socket. The event loop then calls `curl_multi_remove_handle()`\noutside the callback.\n\nA current uninstrumented release run produced:\n\n```text\nlibcurl=8.23.0-DEV TLS=rustls-ffi/0.15.4/rustls/0.23.45/aws-lc-rs\nPRE_REMOVE callback_bytes=1024 injected_eagain=1\nSegmentation fault\nPEER_RESULT captured=132096 expected_callback=1024 surplus=131072 prefix_ok=1\nCLIENT_EXIT=139 SERVER_EXIT=0\n```\n\n`prefix_ok=1` confirms that the first 1,024 bytes are the callback data. The\nremaining 131,072 decrypted bytes were never returned by the callback.\n\nWith ASan, `deterministic-asan.log` contains:\n\n```text\nERROR: AddressSanitizer: heap-buffer-overflow\nREAD of size 16384\n  memcpy\n  OutboundChunks::copy_to_vec\n  GcmMessageEncrypter::encrypt\n  rustls_connection_write\n  cr_send\n  Curl_pp_flushsend\n  imap_done\n  Curl_multi_remove_handle\n  curl_multi_remove_handle\n```\n\n## Attacker-controlled reachability\n\nThe deterministic reproducer changes one client `send()` result to `EAGAIN`.\nIt does not modify Rustls state, curl state, the upload buffer, the cleanup\nbuffer, or any returned byte count.\n\nThe independent network-paced harness uses a real TLS 1.3 peer, a 1 KiB socket\nreceive buffer, bounded peer reads, and a 16 KiB upload callback. It reproduced\nthe same ASan read in 9/10 fresh processes without interposing any client I/O.\nSee `network-peer-asan.log` and `network-peer-repeat-summary.tsv`.\n\nThis route does not rely on an application replacing a pending raw send with a\nshorter buffer. Curl itself changes from the upload buffer to its internal\ntwo-byte IMAP terminator during documented transfer cancellation.\n\n## Root cause\n\nWhen the upload write blocks, Rustls has already accepted plaintext and curl\nstores its length in `backend->plain_out_buffered`. On the later two-byte IMAP\ncleanup send, current `cr_send()` flushes the old record and executes:\n\n```c\nif(blen > backend->plain_out_buffered) {\n  blen -= backend->plain_out_buffered;\n  buf += backend->plain_out_buffered;\n}\nelse\n  blen = 0;\n*pnwritten += backend->plain_out_buffered;\nbackend->plain_out_buffered = 0;\n```\n\nFor a retained count of 1,024 and a current length of two, it reports 1,024\nbytes written for the two-byte command.\n\n`Curl_pp_flushsend()` then subtracts without validating the backend count:\n\n```c\nif(written != pp->sendleft)\n  pp->sendleft -= written;\n```\n\nThe remaining length underflows. The next iteration derives an out-of-range\npointer from the corrupted progress values and Rustls attempts to copy a full\n16 KiB record from it.\n\nThe internal shorter send occurs because `imap_done()` ignores the\n`premature` argument and terminates the APPEND even during cancellation:\n\n```c\n(void)premature;\n...\nresult = Curl_pp_sendf(data, &imapc->pp, \"%s\", \"\");\n```\n\n## Affected range and current status\n\nCommit `6eee810db42ec097760e7ac57b95a80abe2e4aaa` (`rustls: fix partial\nsend handling`) introduced `plain_out_buffered` and the oversized old-count\nreturn. It first shipped in curl 8.8.0. Curl 8.7.1 lacks this retained-plaintext\naccounting shape.\n\nValidated:\n\n- curl 8.22.0: affected\n- current development commit `39c8f9dc`: affected\n- rustls-ffi 0.15.4 / Rustls 0.23.45 / aws-lc-rs\n\n## Proposed fix\n\n`proposed-bounds-guard.patch` rejects a current send shorter than the retained\nRustls plaintext before flushing or changing progress state:\n\n```c\nif(backend->plain_out_buffered > plainlen) {\n  failf(data, \"re-send data shorter than previously buffered\");\n  return CURLE_BAD_FUNCTION_ARGUMENT;\n}\n```\n\nWith that guard, the identical injected `EAGAIN` and removal schedule exits\nwithout an ASan finding (`guard-control.log`). The IMAP cleanup path should\nalso avoid sending the APPEND terminator when `premature` is true. The backend\nguard remains useful defense in depth for other protocol transitions.\n\n## AI assistance disclosure\n\nAI models assisted with harness development, source review, and drafting. I\nvalidated the report with source inspection, an uninstrumented release build,\npeer-decrypted byte counts, ASan, repeated fresh processes, a stable-release\nrun, a bounds-guard control, and an independent peer-backpressure route. This\nreport and reproducer have not been published.\n\n## Impact\n\n## Security impact\n\nThe malicious TLS endpoint receives client-process heap bytes that were never\nprovided as upload data. Because the endpoint terminates TLS, it decrypts those\nbytes normally. The invalid read also crashes the client.\n\nConfirmed on current development commit\n`39c8f9dcde7d7fe68dedda6ba7c68cbd305168a6`:\n\n- An uninstrumented release build crashed with `SIGSEGV` after the peer\n  received 132,096 decrypted literal bytes. The upload callback had supplied\n  only 1,024 bytes, leaving 131,072 bytes of surplus process memory.\n- The release disclosure and crash reproduced identically in 10/10 fresh\n  processes.\n- ASan reports a 16,384-byte heap-buffer-overflow read in Rustls encryption,\n  reached through `cr_send -> Curl_pp_flushsend -> imap_done ->\n  curl_multi_remove_handle`. The deterministic schedule reproduced in 10/10.\n- A separate harness using only peer receive-buffer pressure and read pacing,\n  without a `send()` interposer, reproduced the same ASan fault in 9/10 runs.\n- curl 8.22.0 reproduces the same 16,384-byte read with the ordinary IMAP\n  route.\n\nPreconditions are a Rustls-backed libcurl, an IMAP `APPEND`, TLS backpressure,\nand cancellation of the stalled transfer. The server controls backpressure and\ncan keep the cancellation window open. No write primitive was found.",
+  "weakness": {
+    "id": 8,
+    "name": "Out-of-bounds Read"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6904018,
+      "file_name": "curl-rustls-imap-cancel-oob-final-20261004.tar.gz",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/fmpkiwse4jp2qrt5ivk9zceb2iza?response-content-disposition=attachment%3B%20filename%3D%22curl-rustls-imap-cancel-oob-final-20261004.tar.gz%22%3B%20filename%2A%3DUTF-8%27%27curl-rustls-imap-cancel-oob-final-20261004.tar.gz&response-content-type=application%2Fgzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ34BXTRQU%2F20261005%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261005T175250Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEBkaCXVzLXdlc3QtMiJHMEUCIDsBcTelfqASIBxeYb8O5aw8qxi5YjI4mpd2pWlQn%2B5eAiEA59Tf2Afj6sG5aEDArmN7I%2B4%2FATtpQRa293oK7AZOAHAqugUI4f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDOOv9thVOSzPhGD05CqOBS4ewYG79MRoWp3p43mziyxauu8yXFVmEPpSgvQORQSOVsxGHsgi7DS%2Bd6aMimDhsD6C4nYiFoQ8aLIlp3iX8HTpm462ik4ZKr8Y%2FHuM1PxHFh2khyGceNdGFm0x9qjesX0%2BDznmkjtyAJSLJvtJf8F63wP%2B9TDA1FgQmV1t7JYlzRjJ4xP0V1AHGWKOxDo5Ps1rzJeJ9I4D%2FDenhiUJ6y9MQOuGQ8u9xkbMA86Af7ffCKauyt6tC3eI8mz5R7q%2Fl5nEhOX%2BB3Cw5JBxF0paLlKMqTpcvJit%2BZ8XnXH8U%2BByfxaUwD4sT8bJz3hIzYqvP8EnHOkl934ZQXw3tYAqjQbj7VFQRAPaj4okLNaBxokJw8q6KZy1OA4ud45LUavrNeLssPjflF5LUMODTCbKAozzndw1U40BSefM0WYaKKSbFPfS8iutixuLwbR%2BiFsCCMiKhumA5%2Bq1fQCaHWyv39ru4Tf5kyo9Y2CA0ZIx8NwFiJkNvFgHqDD4n81nE4nGIAHb0z95TJBJ3oOespu%2BHiRCUX6k8qKFVO9D8pqz4NuLZR8nkkqef9%2Bez4JmqOsupZUrcpITaHPKnfl7BLrC6%2Fxn%2FeqdpxeejfmNLbIrEWc%2BukSdhfLWc8RnruYQIN9oc2fEN%2BTTWi8WqoHlt2ieeXSanPT1hehgxfH6EMWlP3oYD3U8n8i3VV650onfkQMDBzp73fMT1jpY65QqXczkmvLd1cFMVwuGLaIpjiVTGQVCVorPrKHnxNp9AuWr%2BJrcjsyMpY3mpHeZJRFQWNWv8IpH%2B0bD1eXxokr2ZhPzSIVSl7ObugMjs4zuWWKiLBZJ8tmEIvrTFQHMM91hHgldwk5KTvJaZlKgHn0RT0DWSzD7q4%2FWBjqxAX06p6I%2FGQ9Mh4gdwRn9Ecpl90BzRYZqU6INIKQwDUCK%2BVfexYlOJTfZMoVZ9ENoNZ7Bo6JaiA1Kng6RVRdsDReYICDLpwPaZ%2FAaRG2CItPHLjrLznAtYZSZgFviH0S51tqAWbHkMKcoBphAFy35a7H32uM1%2BsX1hd7TdB5PQnKmqnu2dkDNG%2FhcEVmEV%2FKDZlXl9s8%2BZC1zcSDlu3rSiDdBviUbu%2BjDB%2BBFwSm%2Ftnwjeg%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=02649a28254b5959111c8e39905c4a2c114cf6f9e595e34c352930c5b57f40a0",
+      "file_size": 12596,
+      "type": "application/gzip",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

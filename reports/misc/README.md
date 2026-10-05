@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1650 report(s) across 34 class(es)**
+**1652 report(s) across 35 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 992 | $50,000 |
+| [Unknown](unknown/README.md) | 993 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
@@ -28,6 +28,7 @@
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
 | [Improper Handling Of Unexpected Data Type](improper_handling_of_unexpected_data_type/README.md) | 1 | — |
 | [Improper Handling Of Unicode Encoding](improper_handling_of_unicode_encoding/README.md) | 1 | — |
+| [Improper Output Neutralization For Logs](improper_output_neutralization_for_logs/README.md) | 1 | — |
 | [Improper Preservation Of Permissions](improper_preservation_of_permissions/README.md) | 1 | — |
 | [Improper Removal Of Sensitive Information Before Storage Or ](improper_removal_of_sensitive_information_before_storage_or_/README.md) | 1 | — |
 | [Improper Resource Shutdown Or Release](improper_resource_shutdown_or_release/README.md) | 1 | — |
@@ -325,6 +326,7 @@
 | Improper UUID validation results in bypass of #419896 | — | security | 2018-10-25 | [#423073](https://hackerone.com/reports/423073) |
 | Add non-existent room moderator | — | chaturbate | 2018-10-19 | [#385239](https://hackerone.com/reports/385239) |
 | H1514 Shopify API ruby SDK session setup lacks input validation, resulting in SSRF and leakage of client secret | — | shopify | 2019-04-05 | [#423437](https://hackerone.com/reports/423437) |
+| HTML Injection in Contact Form Email Enables Phishing via Legitimate ████████ Infrastructure | — | essity | 2026-10-05 | [#3802451](https://hackerone.com/reports/3802451) |
 | 49: Cookie-jar save transfers group access to a different GID | — | curl | 2026-09-08 | [#3973194](https://hackerone.com/reports/3973194) |
 | the complete server installation path is visible in cloud/user endpoint | — | nextcloud | 2023-03-30 | [#1690510](https://hackerone.com/reports/1690510) |
 | Subdomain takeover on one of the subdomain under mozaws.net | — | mozilla | 2024-02-11 | [#2037032](https://hackerone.com/reports/2037032) |
@@ -547,6 +549,7 @@
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | TELNET control and environment data bypass HTTPS-proxy TLS | — | curl | 2026-09-19 | [#4021960](https://hackerone.com/reports/4021960) |
 | 33: CONNECT_ONLY raw I/O selects wrong connection after CURLOPT_SHARE detach (incomplete fix for CVE-2020-8231) | — | curl | 2026-08-31 | [#3971585](https://hackerone.com/reports/3971585) |
+| IMAP literal size truncation on 32-bit platforms corrupts downloads and desynchronizes the response parser | — | curl | 2026-10-05 | [#4059104](https://hackerone.com/reports/4059104) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |

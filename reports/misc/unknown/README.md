@@ -1,6 +1,6 @@
 # Unknown
 
-**992 report(s)**
+**993 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -228,6 +228,7 @@
 | Credentials forwarded to HTTP after HTTPS→HTTP same-port redirect — url_set_data_creds uses scheme-blind comparator | — | curl | 2026-05-20 | [#3733946](https://hackerone.com/reports/3733946) |
 | TELNET control and environment data bypass HTTPS-proxy TLS | — | curl | 2026-09-19 | [#4021960](https://hackerone.com/reports/4021960) |
 | 33: CONNECT_ONLY raw I/O selects wrong connection after CURLOPT_SHARE detach (incomplete fix for CVE-2020-8231) | — | curl | 2026-08-31 | [#3971585](https://hackerone.com/reports/3971585) |
+| IMAP literal size truncation on 32-bit platforms corrupts downloads and desynchronizes the response parser | — | curl | 2026-10-05 | [#4059104](https://hackerone.com/reports/4059104) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |

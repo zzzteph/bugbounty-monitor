@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1123 report(s) across 10 class(es)**
+**1124 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 915 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 916 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -291,6 +291,7 @@
 | Sensitive Data Exposure at https://█████████ | — | deptofdefense | 2023-02-24 | [#1720278](https://hackerone.com/reports/1720278) |
 | Exposed Log File Lead to Full Internal path disclosure at [https://nextcloud.com/wp-content/debug.log]  | — | nextcloud | 2022-12-15 | [#1767439](https://hackerone.com/reports/1767439) |
 | CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
+|  Use-after-free read of the freed referer buffer in `curl_easy_setopt(CURLOPT_REFERER)` — stale heap bytes transmitted in an outbound `Referer:` heade | — | curl | 2026-10-05 | [#4064040](https://hackerone.com/reports/4064040) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 | CVE-2026-82209: domain-scoped PSL domain cookie | — | curl | 2026-09-03 | [#3972385](https://hackerone.com/reports/3972385) |
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
