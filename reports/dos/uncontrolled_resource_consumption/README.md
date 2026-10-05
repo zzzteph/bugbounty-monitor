@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**416 report(s)**
+**417 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -149,6 +149,7 @@
 | ReDoS due to device-detector parsing user agents | — | gitlab | 2024-10-08 | [#1772063](https://hackerone.com/reports/1772063) |
 | DoS via Automatic Response Message | — | mattermost | 2022-11-23 | [#1680241](https://hackerone.com/reports/1680241) |
 | HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |
+| Client-Side Denial of Service (DoS) via Memory Exhaustion on Password Reset Endpoint | — | khanacademy | 2026-10-05 | [#3987499](https://hackerone.com/reports/3987499) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
 | Unauthenticated ?q= search query causes exponential pyparsing backtracking under a process-global lock in Weblate | — | weblate | 2026-09-04 | [#3898281](https://hackerone.com/reports/3898281) |
