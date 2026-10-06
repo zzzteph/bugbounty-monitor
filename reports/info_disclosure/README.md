@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1124 report(s) across 10 class(es)**
+**1125 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 24 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 25 | $2,540 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
 | [Leftover Debug Code Backdoor](leftover_debug_code_backdoor/README.md) | 2 | — |
@@ -1077,6 +1077,7 @@
 | RTSP Digest auth state leaks across origins on reused libcurl easy handle | — | curl | 2026-06-05 | [#3776535](https://hackerone.com/reports/3776535) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
 | Domainless COOKIEFILE cookie leaks to unrelated IP-literal hosts | — | curl | 2026-08-21 | [#3952619](https://hackerone.com/reports/3952619) |
+| libcurl: Secure=1 cookie flag bypasses the 8.22.0 fix and leaks over HTTP | — | curl | 2026-10-06 | [#4071872](https://hackerone.com/reports/4071872) |
 | CVE-2023-46218: cookie mixed case PSL bypass | — | curl | 2023-12-06 | [#2212193](https://hackerone.com/reports/2212193) |
 | Proxy-Authorization header is leaked to origin server after redirect from proxied to direct connection | — | curl | 2025-12-30 | [#3480713](https://hackerone.com/reports/3480713) |
 |  API Data Leakage Vulnerability Report - `xvcams.com` | — | xvideos | 2025-02-09 | [#2979153](https://hackerone.com/reports/2979153) |

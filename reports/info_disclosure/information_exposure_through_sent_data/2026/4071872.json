@@ -1,0 +1,132 @@
+{
+  "id": 4071872,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MDcxODcy",
+  "url": "https://hackerone.com/reports/4071872",
+  "title": "libcurl: Secure=1 cookie flag bypasses the 8.22.0 fix and leaks over HTTP",
+  "state": "Closed",
+  "substate": "informative",
+  "severity_rating": "low",
+  "readable_substate": "Informative",
+  "created_at": "2026-09-30T08:55:51.213Z",
+  "submitted_at": "2026-09-30T08:55:51.550Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "nonetype_",
+    "url": "/nonetype_",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-80255"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-06T15:09:22.803Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-05T13:48:43.615Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\n\nAn HTTPS server can send `Set-Cookie: session=lab; Secure=1; Path=/`, and curl stores it without the Secure flag, so a later HTTP request to the same host sends `session=lab` in cleartext. I reproduced this with 8.22.0 and master `bb348b35` (`8.23.0-DEV`); the ordinary `Secure` attribute stays protected. In `lib/cookie.c` lines 624-642, `=` sets `sep` and skips `parse_flag()` at line 642, which otherwise sets `co->secure` through lines 451-466. The 8.22.0 fix for CVE-2026-80255 handles a tab-prefixed `Secure` attribute, but this value-bearing form remains unprotected. `Secure=1` is noncanonical server syntax, but RFC 6265 section 5.2.5 recognizes `Secure` by attribute name regardless of its value.\n\n## Affected version\n\nReproduced on curl/libcurl 8.22.0 and on master `bb348b35e84c40c9564783d7585762b65038e8c5` in Linux x86_64 Docker containers with OpenSSL. The attached Docker bundle builds the released version and reports:\n\n```text\ncurl 8.22.0 (x86_64-pc-linux-gnu) libcurl/8.22.0 OpenSSL/3.0.22\n```\n\nThe separate master build reports:\n\n```text\ncurl 8.23.0-DEV (x86_64-pc-linux-gnu) libcurl/8.23.0-DEV OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 nghttp2/1.59.0 OpenLDAP/2.6.10\n```\n\n## Steps To Reproduce:\n\n1. Unpack the attached `curl-secure-cookie-poc-8.22.0.zip` and enter its directory.\n2. Build and run the image:\n\n```sh\ndocker build -t curl-secure-cookie-poc .\ndocker run --rm --network none --read-only --tmpfs /tmp:rw,exec curl-secure-cookie-poc\n```\n\n3. The script starts local HTTPS and HTTP servers, receives the cookie over HTTPS, and makes a later HTTP request to the same hostname using curl's saved cookie jar. Expected output:\n\n```text\nSecure: HTTP Cookie=None, jar Secure=TRUE\nSecure=1: HTTP Cookie='session=lab', jar Secure=FALSE\n```\n\n## Impact\n\n## Summary:\n\nIf a service issues a session cookie using the noncanonical `Secure=1` syntax and a curl or libcurl client later visits the same host over HTTP, the client can send that cookie in cleartext for a network observer to capture. This requires both that server syntax and a subsequent HTTP request; the PoC uses only a synthetic cookie and local servers.",
+  "weakness": {
+    "id": 113,
+    "name": "Information Exposure Through Sent Data"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6862718,
+      "file_name": "curl-secure-cookie-poc-8.22.0.zip",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/iglxma55cr6996s2dm3ihl3a7zkn?response-content-disposition=attachment%3B%20filename%3D%22curl-secure-cookie-poc-8.22.0.zip%22%3B%20filename%2A%3DUTF-8%27%27curl-secure-cookie-poc-8.22.0.zip&response-content-type=application%2Fzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRV5YETQN%2F20261006%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261006T175531Z&X-Amz-Expires=1205&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECwaCXVzLXdlc3QtMiJIMEYCIQCfNGyHTaB6CkDvVFaSoJbNgjiBZrqAN9Fo1E0UB4sMKAIhAMz7%2FH5SdpGyX9I4me4ocE%2BVmfbMTmGFkrDwwqgO4FNJKroFCPX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMMDEzNjE5Mjc0ODQ5IgwccKFtaogbHFQWe0QqjgXjr3Fz82x1DJX58XNt9jJCLQvdM1vENztKzOywgXedxkto5fKUD6QWP8B1iKE%2Bk%2BDI9sQCYK14%2FkIw0NRxqOFrOTUNa%2FNaPoNN9j2xGlYy7OpeJEL4L3CT%2FiZ%2FNVY1floQVkSF3PlTAYI5c%2BaM4LP2CYVJsdrtHF4TtB6aLdAQ%2BqY0jZSq%2Fw6WUmKFhYNzYa%2F77RAiJeYG0zXhbQFxtxrWPLGzCtOivq7Y86w87WuLDyFQM8WJ%2F1vR%2B21I2LabA9f%2Bj96J7Fjv3fVifMO5Oah2axxtJflJlqGvbyJAyiFqoIgkpHZvxUlnP%2FSLBcSLGYOvCjCcrW0%2BWrJ%2F3XykFc4sDgwJa2DraLEhY2X1dhNkNBo8HZN9VF6DqvykKtnfvvtiM3d9CJcQ06hjfafUWIooKPCpWBlgOetaPmvMnHylqxtER2lzXYjcA%2B56Ofwn6Opco0QBYPG6c7BelUTQJzELTAAqwhv8x6OJWymUTImxbWVEzmtuT1YAJQBKYDWKT1uMj30f5sfoWq3FW7MwiXs2bPw1eNaFQf%2BmmieOI0uH4xFtZ6NPN3XdDvxxPj83daP%2F5yaKPPtD6MJeVc4qdrcg75%2Bo9sQtat9YbEk6BzaLe8rCrZ9xPLYMQxbC%2Fruy63JvLlrRJk6uecNmOpKexo1YrAd06%2FyZB6KKVFhtRKj61%2BmV3fqBZXR1RIrBtWI6QiP73eEb%2BRxPWza%2F0Kc5eHF%2BdcS5O4tSXiZGvy%2BkjHL7QWoSyIRWfQJU3eWmosKfqhi%2BiN7lST6iuD480A3HADoMRR3HfHsFB1iQcDJJvuEsjP2M62kifQ8ehYjIEGQ6D2MBHxOZTLi2uplY1oEsZB3y3aRoUJRSBqGo1JypvT4w9cmT1gY6sAHGplOtQPtF%2FsLEjg4i2er4S2xsROP%2Ft59Lv%2Brk%2B4qxBZ0gh3goC5RCHv7yC5kQzONJILvE1RMxcr1MgJXrScVkqY6aK%2FB7EpWjf8DQHGyAgu7e5d6GTs0xegxsWSXgslJmDxO6c9O7nAgzohbWcrYYTfLlCN8%2FcdEu1K%2Bp52Nf3apKmqYnFhrpD0kwZ16gLesJNXO9iLnpcQmGA%2BMa18TLAWNETk%2FRH%2Bj4DdUdA6LEmA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=c5257b3bd4b6ed8e742924724179e945ab375422add9f9d908e2dd1bf18530b4",
+      "file_size": 4362,
+      "type": "application/zip",
+      "moderated": null
+    },
+    {
+      "id": 6862719,
+      "file_name": "hackerone-poc-master-result.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/tuk2hjrp2l9n6e3ueuenw8q9b560?response-content-disposition=attachment%3B%20filename%3D%22hackerone-poc-master-result.txt%22%3B%20filename%2A%3DUTF-8%27%27hackerone-poc-master-result.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQRV5YETQN%2F20261006%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261006T175531Z&X-Amz-Expires=1205&X-Amz-Security-Token=IQoJb3JpZ2luX2VjECwaCXVzLXdlc3QtMiJIMEYCIQCfNGyHTaB6CkDvVFaSoJbNgjiBZrqAN9Fo1E0UB4sMKAIhAMz7%2FH5SdpGyX9I4me4ocE%2BVmfbMTmGFkrDwwqgO4FNJKroFCPX%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQAxoMMDEzNjE5Mjc0ODQ5IgwccKFtaogbHFQWe0QqjgXjr3Fz82x1DJX58XNt9jJCLQvdM1vENztKzOywgXedxkto5fKUD6QWP8B1iKE%2Bk%2BDI9sQCYK14%2FkIw0NRxqOFrOTUNa%2FNaPoNN9j2xGlYy7OpeJEL4L3CT%2FiZ%2FNVY1floQVkSF3PlTAYI5c%2BaM4LP2CYVJsdrtHF4TtB6aLdAQ%2BqY0jZSq%2Fw6WUmKFhYNzYa%2F77RAiJeYG0zXhbQFxtxrWPLGzCtOivq7Y86w87WuLDyFQM8WJ%2F1vR%2B21I2LabA9f%2Bj96J7Fjv3fVifMO5Oah2axxtJflJlqGvbyJAyiFqoIgkpHZvxUlnP%2FSLBcSLGYOvCjCcrW0%2BWrJ%2F3XykFc4sDgwJa2DraLEhY2X1dhNkNBo8HZN9VF6DqvykKtnfvvtiM3d9CJcQ06hjfafUWIooKPCpWBlgOetaPmvMnHylqxtER2lzXYjcA%2B56Ofwn6Opco0QBYPG6c7BelUTQJzELTAAqwhv8x6OJWymUTImxbWVEzmtuT1YAJQBKYDWKT1uMj30f5sfoWq3FW7MwiXs2bPw1eNaFQf%2BmmieOI0uH4xFtZ6NPN3XdDvxxPj83daP%2F5yaKPPtD6MJeVc4qdrcg75%2Bo9sQtat9YbEk6BzaLe8rCrZ9xPLYMQxbC%2Fruy63JvLlrRJk6uecNmOpKexo1YrAd06%2FyZB6KKVFhtRKj61%2BmV3fqBZXR1RIrBtWI6QiP73eEb%2BRxPWza%2F0Kc5eHF%2BdcS5O4tSXiZGvy%2BkjHL7QWoSyIRWfQJU3eWmosKfqhi%2BiN7lST6iuD480A3HADoMRR3HfHsFB1iQcDJJvuEsjP2M62kifQ8ehYjIEGQ6D2MBHxOZTLi2uplY1oEsZB3y3aRoUJRSBqGo1JypvT4w9cmT1gY6sAHGplOtQPtF%2FsLEjg4i2er4S2xsROP%2Ft59Lv%2Brk%2B4qxBZ0gh3goC5RCHv7yC5kQzONJILvE1RMxcr1MgJXrScVkqY6aK%2FB7EpWjf8DQHGyAgu7e5d6GTs0xegxsWSXgslJmDxO6c9O7nAgzohbWcrYYTfLlCN8%2FcdEu1K%2Bp52Nf3apKmqYnFhrpD0kwZ16gLesJNXO9iLnpcQmGA%2BMa18TLAWNETk%2FRH%2Bj4DdUdA6LEmA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=633a7d9a9c55eaa11f52a096399a5a97dcab153be6b2e2817bb52f2ef6c7f787",
+      "file_size": 96,
+      "type": "text/plain",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 1,
+  "voters": [
+    "matty69v"
+  ],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
