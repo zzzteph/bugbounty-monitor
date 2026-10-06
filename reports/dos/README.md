@@ -1,12 +1,12 @@
 # Denial of Service
 
-**448 report(s) across 5 class(es)**
+**449 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 417 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 418 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -330,6 +330,7 @@
 | HTTP/2 PUSH_PROMISE DoS | — | curl | 2024-03-27 | [#2402853](https://hackerone.com/reports/2402853) |
 | GOAWAY HTTP/2 frames cause memory leak outside heap | — | nodejs | 2025-02-06 | [#2841362](https://hackerone.com/reports/2841362) |
 | [CVE-2024-26142] ReDoS vulnerability in Accept header parsing in Action Dispatch  | — | ibb | 2024-05-22 | [#2446427](https://hackerone.com/reports/2446427) |
+| Possible DoS in NumberHelpers | — | rails | 2026-10-06 | [#2814774](https://hackerone.com/reports/2814774) |
 | Remote memory exhaustion in Epee RPC stack under zero Receive Window | — | monero | 2025-04-23 | [#2912194](https://hackerone.com/reports/2912194) |
 | CVE-2024-49761: ReDoS vulnerability in REXML | — | ibb | 2024-11-30 | [#2807139](https://hackerone.com/reports/2807139) |
 | Spamming highly nested JSON RPC requests cause node to disconnect from p2p network | — | monero | 2025-04-23 | [#2677306](https://hackerone.com/reports/2677306) |
