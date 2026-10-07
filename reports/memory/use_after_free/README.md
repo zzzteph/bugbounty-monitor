@@ -1,6 +1,6 @@
 # Use After Free
 
-**73 report(s)**
+**75 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -34,7 +34,9 @@
 | UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
+| Low-privilege RCE in MariaDB: SYS_REFCURSOR cursor-array use-after-free chained with an ST_Area heap over-read | — | mariadb | 2026-10-07 | [#3856148](https://hackerone.com/reports/3856148) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
+| Heap Use-After-Free in Materialized_cursor::open via SYS_REFCURSOR Array Reallocation | — | mariadb | 2026-10-07 | [#3915935](https://hackerone.com/reports/3915935) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | heap-use-after-free in curl_easy_cleanup() called from callback | — | curl | 2026-06-30 | [#3833577](https://hackerone.com/reports/3833577) |
 | Use-After-Free in BTREE Index Traversal via Stale key_version in heap_update() in MariaDB Server | — | mariadb | 2026-09-14 | [#3771144](https://hackerone.com/reports/3771144) |

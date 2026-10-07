@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**418 report(s)**
+**420 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -151,6 +151,7 @@
 | HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |
 | Client-Side Denial of Service (DoS) via Memory Exhaustion on Password Reset Endpoint | — | khanacademy | 2026-10-05 | [#3987499](https://hackerone.com/reports/3987499) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
+| MariaDB HandlerSocket Improper Request Field-Count Validation Causes Server Crash | — | mariadb | 2026-10-07 | [#3867363](https://hackerone.com/reports/3867363) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
 | Unauthenticated ?q= search query causes exponential pyparsing backtracking under a process-global lock in Weblate | — | weblate | 2026-09-04 | [#3898281](https://hackerone.com/reports/3898281) |
 | CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
@@ -163,6 +164,7 @@
 | Connector/J: malicious server crashes client JVM via unbounded result-set field-count allocation in ClientMessage.readPacket | — | mariadb | 2026-09-30 | [#3872239](https://hackerone.com/reports/3872239) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | Unbounded memory growth in `node:http2` clients via attacker-controlled ORIGIN frames | — | nodejs | 2026-06-25 | [#3676863](https://hackerone.com/reports/3676863) |
+| MariaDB Low-Privilege User Can Exhaust Memory Through a Formatting Function and Crash the Service | — | mariadb | 2026-10-07 | [#3867358](https://hackerone.com/reports/3867358) |
 | rpcbind "rpcbomb" CVE-2017-8779, CVE-2017-8804 | — | ibb | 2019-10-14 | [#235016](https://hackerone.com/reports/235016) |
 | stack overflow #3 in libsass | — | libsass | 2017-10-20 | [#221264](https://hackerone.com/reports/221264) |
 | Denial of service (segfault) due to null pointer dereference in mrb_obj_instance_eval | — | shopify-scripts | 2017-02-28 | [#202582](https://hackerone.com/reports/202582) |

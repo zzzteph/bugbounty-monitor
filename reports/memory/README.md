@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**708 report(s) across 25 class(es)**
+**711 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 73 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 75 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 55 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
@@ -22,7 +22,7 @@
 | [Type Confusion](type_confusion/README.md) | 8 | $500 |
 | [Buffer Underflow](buffer_underflow/README.md) | 7 | $1,500 |
 | [Off By One Error](off_by_one_error/README.md) | 6 | — |
-| [Integer Underflow](integer_underflow/README.md) | 4 | $1,121 |
+| [Integer Underflow](integer_underflow/README.md) | 5 | $1,121 |
 | [Buffer Under Read](buffer_under_read/README.md) | 3 | — |
 | [Write What Where Condition](write_what_where_condition/README.md) | 2 | $750 |
 | [Free Of Memory Not On The Heap](free_of_memory_not_on_the_heap/README.md) | 1 | — |
@@ -451,6 +451,7 @@
 | Int Overflow lead to Heap OverFlow in exif_thumbnail_extract of exif.c | — | ibb | 2019-10-21 | [#384477](https://hackerone.com/reports/384477) |
 | CVE-2025-0725: gzip integer overflow | — | curl | 2025-02-05 | [#2956023](https://hackerone.com/reports/2956023) |
 | Integer Underflow in src/var.c | — | curl | 2026-01-26 | [#3523349](https://hackerone.com/reports/3523349) |
+| Pre-authentication `size_t` integer underflow → out-of-bounds read / server crash in MariaDB `caching_sha2_password` (auth_mysql_sha2) via an RSA-OAEP | — | mariadb | 2026-10-07 | [#3781201](https://hackerone.com/reports/3781201) |
 | Interger overflow in eval trigger write out of bound | — | ibb | 2017-12-11 | [#272097](https://hackerone.com/reports/272097) |
 | Integer Underflow @ ossl_cipher_pkcs5_keyivgen  | — | ruby | 2018-02-23 | [#304115](https://hackerone.com/reports/304115) |
 | Misusing of FPU Instruction Could Cause Security Vulnerabilities in Adobe Flash Player | — | ibb | 2019-11-12 | [#66962](https://hackerone.com/reports/66962) |
@@ -699,7 +700,9 @@
 | UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
+| Low-privilege RCE in MariaDB: SYS_REFCURSOR cursor-array use-after-free chained with an ST_Area heap over-read | — | mariadb | 2026-10-07 | [#3856148](https://hackerone.com/reports/3856148) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
+| Heap Use-After-Free in Materialized_cursor::open via SYS_REFCURSOR Array Reallocation | — | mariadb | 2026-10-07 | [#3915935](https://hackerone.com/reports/3915935) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | heap-use-after-free in curl_easy_cleanup() called from callback | — | curl | 2026-06-30 | [#3833577](https://hackerone.com/reports/3833577) |
 | Use-After-Free in BTREE Index Traversal via Stale key_version in heap_update() in MariaDB Server | — | mariadb | 2026-09-14 | [#3771144](https://hackerone.com/reports/3771144) |

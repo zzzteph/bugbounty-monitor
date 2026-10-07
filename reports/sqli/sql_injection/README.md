@@ -1,6 +1,6 @@
 # Sql Injection
 
-**207 report(s)**
+**208 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -46,6 +46,7 @@
 | SQL Injection vulnerability found on ibm.com endpoint | — | ibm | 2026-03-12 | [#3578842](https://hackerone.com/reports/3578842) |
 | Complete authentication bypass to admin permissions | — | rocket_chat | 2026-04-22 | [#3564655](https://hackerone.com/reports/3564655) |
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
+| `SHOW [CREATE\|GRANTS] ...` / `mariadb-dump` Unescaped SQL Generation | — | mariadb | 2026-10-07 | [#3848978](https://hackerone.com/reports/3848978) |
 | Critical SQL Injection WDM API (████████) | — | essity | 2026-08-27 | [#3778282](https://hackerone.com/reports/3778282) |
 | Time-based Blind SQLi on news.starbucks.com | — | starbucks | 2017-02-24 | [#198292](https://hackerone.com/reports/198292) |
 | Blind SQL Injection | — | ok | 2017-04-20 | [#221757](https://hackerone.com/reports/221757) |

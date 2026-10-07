@@ -1,6 +1,6 @@
 # Unknown
 
-**993 report(s)**
+**997 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -231,6 +231,7 @@
 | IMAP literal size truncation on 32-bit platforms corrupts downloads and desynchronizes the response parser | — | curl | 2026-10-05 | [#4059104](https://hackerone.com/reports/4059104) |
 | CVE-2026-6253: proxy credentials leak over redirect-to proxy | — | curl | 2026-04-29 | [#3669637](https://hackerone.com/reports/3669637) |
 | CVE-2026-11564: Native CA trust persist | — | curl | 2026-06-24 | [#3788984](https://hackerone.com/reports/3788984) |
+| DATA / INDEX DIRECTORY Abuse | — | mariadb | 2026-10-07 | [#3849025](https://hackerone.com/reports/3849025) |
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | HTTP Digest nonce reused across an https→http scheme change on the same handle | — | curl | 2026-09-08 | [#3993973](https://hackerone.com/reports/3993973) |
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
@@ -240,9 +241,11 @@
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | ZMQ get_output_distribution duplicate amount DoS | — | monero | 2026-09-17 | [#3681690](https://hackerone.com/reports/3681690) |
 | Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
+| #mysql50# legacy alias / internal table collisions | — | mariadb | 2026-10-07 | [#3849051](https://hackerone.com/reports/3849051) |
 | CVE-2026-80230: OpenSSL pinning bypass | — | curl | 2026-09-03 | [#3969300](https://hackerone.com/reports/3969300) |
 | CVE-2026-80231: native CA store conn reuse | — | curl | 2026-09-03 | [#3969368](https://hackerone.com/reports/3969368) |
 | Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
+| #mysql50# legacy alias / stale table cache identity mismatch | — | mariadb | 2026-10-07 | [#3849040](https://hackerone.com/reports/3849040) |
 | MQTT Protocol Packet Injection via Unchecked CONNACK Remaining Length | — | curl | 2026-02-05 | [#3531216](https://hackerone.com/reports/3531216) |
 | 43: HTTP proxy CONNECT header chooses the `-OJ` filename after a redirect | — | curl | 2026-09-07 | [#3972293](https://hackerone.com/reports/3972293) |
 | Monero GUI OpenAlias DNSSEC-invalid resolution still writes spoofable address into recipient field | — | monero | 2026-08-20 | [#3819475](https://hackerone.com/reports/3819475) |
@@ -266,6 +269,7 @@
 | libcurl 8.20.0 incomplete fix for CVE-2026-7168: changing only CURLOPT_PROXYPORT leaks stale Proxy Digest auth to a different proxy | — | curl | 2026-05-05 | [#3707747](https://hackerone.com/reports/3707747) |
 | FTP entrypath accepts 0xFF (Telnet IAC) through incomplete ISCNTRL filter, sent on wire via CWD on connection reuse | — | curl | 2026-04-07 | [#3650473](https://hackerone.com/reports/3650473) |
 | setopt(VERIFYPEER) from callback bypasses TLS verify on connection reuse | — | curl | 2026-06-30 | [#3831432](https://hackerone.com/reports/3831432) |
+| Privilege escalation via user controlled usernames / roles and views | — | mariadb | 2026-10-07 | [#3880451](https://hackerone.com/reports/3880451) |
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |
 | 53: HTTP/1 CONNECT chunked-407 trailers bypass CURLOPT_SUPPRESS_CONNECT_HEADERS and lose CURLH_CONNECT classification | — | curl | 2026-09-14 | [#3973234](https://hackerone.com/reports/3973234) |
 | OpenSSL ENGINE selection omitted from mTLS connection matching | — | curl | 2026-09-14 | [#3968853](https://hackerone.com/reports/3968853) |
