@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**394 report(s)**
+**395 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -93,6 +93,7 @@
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
 | PII Exposure of Credit Applications and Social Security Numbers equifax-6070.my.salesforce-sites.com (Salesforce guest user) | — | equifax | 2026-09-06 | [#3828431](https://hackerone.com/reports/3828431) |
+| Full Admin Takeover of R3 Limited's JFrog Artifactory - 292 Users, Corda Enterprise & CBDC Supply Chain Compromised | — | r3 | 2026-10-08 | [#3994056](https://hackerone.com/reports/3994056) |
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |

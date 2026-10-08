@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**618 report(s) across 18 class(es)**
+**619 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 394 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 395 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -205,6 +205,7 @@
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
 | PII Exposure of Credit Applications and Social Security Numbers equifax-6070.my.salesforce-sites.com (Salesforce guest user) | — | equifax | 2026-09-06 | [#3828431](https://hackerone.com/reports/3828431) |
+| Full Admin Takeover of R3 Limited's JFrog Artifactory - 292 Users, Corda Enterprise & CBDC Supply Chain Compromised | — | r3 | 2026-10-08 | [#3994056](https://hackerone.com/reports/3994056) |
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | PIN bypass in PassCodeActivity via back button | — | nextcloud | 2026-06-07 | [#3625210](https://hackerone.com/reports/3625210) |
 | Session ID reuse allowing XML‑RPC API authentication bypass | — | revive_adserver | 2026-06-03 | [#3672641](https://hackerone.com/reports/3672641) |
