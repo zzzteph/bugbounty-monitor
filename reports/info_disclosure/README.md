@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1125 report(s) across 10 class(es)**
+**1126 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -11,7 +11,7 @@
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 25 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 26 | $2,540 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
 | [Leftover Debug Code Backdoor](leftover_debug_code_backdoor/README.md) | 2 | — |
@@ -1067,6 +1067,7 @@
 |  Remote memory disclosure vulnerability in libcurl on 64 Bit Windows | — | curl | 2022-02-21 | [#1444539](https://hackerone.com/reports/1444539) |
 | CVE-2022-27779: cookie for trailing dot TLD | — | curl | 2022-05-11 | [#1553301](https://hackerone.com/reports/1553301) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
+|  Cookie attribute truncation in curl drops Secure/HttpOnly protections | — | curl | 2026-10-08 | [#4093443](https://hackerone.com/reports/4093443) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
 | Cookie jar load skips public suffix check on PSL builds | — | curl | 2026-08-14 | [#3920276](https://hackerone.com/reports/3920276) |
 | TFTP upload ignores --continue-at / CURLOPT_RESUME_FROM and leaks skipped local file prefix | — | curl | 2026-06-05 | [#3776433](https://hackerone.com/reports/3776433) |

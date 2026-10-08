@@ -1,6 +1,6 @@
 # Cleartext Transmission Of Sensitive Information
 
-**40 report(s)**
+**41 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -21,6 +21,7 @@
 | Rocket.chat user info security issue | — | rocket_chat | 2022-09-22 | [#1517377](https://hackerone.com/reports/1517377) |
 | CVE-2022-42916: HSTS bypass via IDN | — | ibb | 2022-11-03 | [#1753226](https://hackerone.com/reports/1753226) |
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
+| curl tool: --hsts is ignored for a schemeless URL starting with a slash under --proto-default http | — | curl | 2026-10-08 | [#4063328](https://hackerone.com/reports/4063328) |
 | SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
 | Error the message with already e-mail  | — | legalrobot | 2017-09-04 | [#265441](https://hackerone.com/reports/265441) |

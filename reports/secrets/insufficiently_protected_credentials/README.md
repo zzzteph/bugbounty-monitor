@@ -1,6 +1,6 @@
 # Insufficiently Protected Credentials
 
-**40 report(s)**
+**41 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -10,6 +10,7 @@
 | Uninstalling Slack for Windows (64-bit), then reinstalling keeps you logged in without authentication | $500 | slack | 2020-11-10 | [#238260](https://hackerone.com/reports/238260) |
 | CVE-2022-27776: Auth/cookie leak on redirect | $480 | ibb | 2022-04-29 | [#1551591](https://hackerone.com/reports/1551591) |
 | Credential Disclosure via Unvalidated directDownloadUrl (Missing DontAddCredentialsAttribute) | $250 | nextcloud | 2026-04-13 | [#3400143](https://hackerone.com/reports/3400143) |
+| HackerOne Code: a live password reset token reaches Datadog RUM, and the same session records the account it unlocks | $200 | security | 2026-10-08 | [#4071670](https://hackerone.com/reports/4071670) |
 | HackerOne Code sends live password-reset tokens to Segment in automatic page events | $200 | security | 2026-09-24 | [#4000185](https://hackerone.com/reports/4000185) |
 | CVE-2022-27776: Auth/cookie leak on redirect  | — | curl | 2022-04-27 | [#1547048](https://hackerone.com/reports/1547048) |
 | Credential leak when use two url | — | curl | 2022-06-27 | [#1569926](https://hackerone.com/reports/1569926) |
