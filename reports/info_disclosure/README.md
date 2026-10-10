@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1126 report(s) across 10 class(es)**
+**1127 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 916 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 917 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -297,6 +297,7 @@
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
 | PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
+| Information Disclosure - Unauthen Leak Private Content | — | wordpress | 2026-10-10 | [#4053546](https://hackerone.com/reports/4053546) |
 | CURLOPT_COOKIE leaked to cross-origin redirect target — CURLOPT_UNRESTRICTED_AUTH bypass for the STRING_COOKIE path | — | curl | 2026-06-05 | [#3766065](https://hackerone.com/reports/3766065) |
 | API token sent to URL dictated by an untrusted project .weblate file | — | weblate | 2026-09-04 | [#3825141](https://hackerone.com/reports/3825141) |
 | Background sync cache retains outgoing additional transaction secret keys | — | monero | 2026-08-20 | [#3749681](https://hackerone.com/reports/3749681) |
