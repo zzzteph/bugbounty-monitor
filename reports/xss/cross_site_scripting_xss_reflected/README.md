@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Reflected
 
-**522 report(s)**
+**523 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -127,6 +127,7 @@
 | Reflected Cross-Site Scripting (XSS) found on IBM.com domain | — | ibm | 2026-06-15 | [#3664261](https://hackerone.com/reports/3664261) |
 | Reflected XSS via unsanitised refresh parameter in zone invocation tag | — | revive_adserver | 2026-06-25 | [#3780806](https://hackerone.com/reports/3780806) |
 |  Unauthenticated reflected XSS in Essity "Network Toolbox" CGI (████████ ████████ | — | essity | 2026-06-23 | [#3793533](https://hackerone.com/reports/3793533) |
+| ActionText `to_markdown` still allows `javascript:` links in kramdown via Rails-generated table cells after PR #58754 | — | rails | 2026-10-10 | [#4082665](https://hackerone.com/reports/4082665) |
 | Reflected XSS via clientid parameter in zone‑include.php | — | revive_adserver | 2026-06-03 | [#3653316](https://hackerone.com/reports/3653316) |
 | URI scheme validation bypass in ActionText `to_markdown` via user-supplied `<action-text-markdown>` marker tag | — | rails | 2026-08-24 | [#3727743](https://hackerone.com/reports/3727743) |
 | Reflected XSS in legacy CGI script /cgi-bin/████████.pl on ████████ via `████████` parameter | — | essity | 2026-06-30 | [#3830771](https://hackerone.com/reports/3830771) |
