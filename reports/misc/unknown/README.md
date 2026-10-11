@@ -1,6 +1,6 @@
 # Unknown
 
-**997 report(s)**
+**998 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -275,6 +275,7 @@
 | OpenSSL ENGINE selection omitted from mTLS connection matching | — | curl | 2026-09-14 | [#3968853](https://hackerone.com/reports/3968853) |
 | 28: HTTP/3 UDP path ignores CURL_SOCKOPT_ALREADY_CONNECTED, reconnects callback-provided socket | — | curl | 2026-08-28 | [#3971496](https://hackerone.com/reports/3971496) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
+| Server crash (stack-overflow DoS) via unbounded recursion in MariaDB WKB GEOMETRYCOLLECTION parser | — | mariadb | 2026-10-11 | [#3896507](https://hackerone.com/reports/3896507) |
 | Private Grab Messages on Android App can be accessed and cached by Search Engines | — | grab | 2017-09-14 | [#221558](https://hackerone.com/reports/221558) |
 | Weblate- Banner Grabbing-Ngnix Server version | — | weblate | 2017-06-05 | [#230633](https://hackerone.com/reports/230633) |
 | Improper validation of unicode characters  | — | weblate | 2017-11-17 | [#278718](https://hackerone.com/reports/278718) |
