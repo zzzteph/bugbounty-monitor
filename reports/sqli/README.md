@@ -1,12 +1,12 @@
 # SQL Injection
 
-**209 report(s) across 2 class(es)**
+**210 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Sql Injection](sql_injection/README.md) | 208 | $25,000 |
+| [Sql Injection](sql_injection/README.md) | 209 | $25,000 |
 | [Blind Sql Injection](blind_sql_injection/README.md) | 1 | $4,134 |
 
 ## All Reports
@@ -58,6 +58,7 @@
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
 | `SHOW [CREATE\|GRANTS] ...` / `mariadb-dump` Unescaped SQL Generation | — | mariadb | 2026-10-07 | [#3848978](https://hackerone.com/reports/3848978) |
 | Critical SQL Injection WDM API (████████) | — | essity | 2026-08-27 | [#3778282](https://hackerone.com/reports/3778282) |
+| SQL Injection found on ibm.com subdomain | — | ibm | 2026-10-12 | [#3662095](https://hackerone.com/reports/3662095) |
 | Time-based Blind SQLi on news.starbucks.com | — | starbucks | 2017-02-24 | [#198292](https://hackerone.com/reports/198292) |
 | Blind SQL Injection | — | ok | 2017-04-20 | [#221757](https://hackerone.com/reports/221757) |
 | SQL injection vulnerability in a DoD website | — | deptofdefense | 2017-06-23 | [#195051](https://hackerone.com/reports/195051) |

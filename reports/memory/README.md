@@ -1,17 +1,17 @@
 # Memory Corruption
 
-**711 report(s) across 25 class(es)**
+**713 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Memory Corruption Generic](memory_corruption_generic/README.md) | 243 | $10,000 |
+| [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
 | [Use After Free](use_after_free/README.md) | 75 | $10,000 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Buffer Over Read](buffer_over_read/README.md) | 55 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
-| [Out Of Bounds Read](out_of_bounds_read/README.md) | 43 | $9,000 |
+| [Out Of Bounds Read](out_of_bounds_read/README.md) | 44 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 32 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
@@ -457,6 +457,7 @@
 | Misusing of FPU Instruction Could Cause Security Vulnerabilities in Adobe Flash Player | — | ibb | 2019-11-12 | [#66962](https://hackerone.com/reports/66962) |
 | [MK8DX] Improper ranking/replay file parsing | — | nintendo | 2025-07-06 | [#1813453](https://hackerone.com/reports/1813453) |
 | 💥💥Crash report -Cloudflare WARP doesn't verify text length in "Excluded Host" name input data💥💥 | — | cloudflare | 2023-07-31 | [#1781096](https://hackerone.com/reports/1781096) |
+| Connector/ODBC: malicious server's long version string wraps size_t PrefixLen via negative _snprintf return, causing heap out-of-bounds write | — | mariadb | 2026-10-12 | [#3871977](https://hackerone.com/reports/3871977) |
 | Arbitrary heap exposure in JSON.generate | — | ruby | 2017-09-25 | [#209949](https://hackerone.com/reports/209949) |
 | SIGSEGV in str_buf_cat | — | shopify-scripts | 2017-04-27 | [#213255](https://hackerone.com/reports/213255) |
 | CVE-2017-5341 The OTV parser in tcpdump before 4.9.0 has a buffer overflow in print-otv.c:otv_print() | — | ibb | 2019-10-08 | [#202965](https://hackerone.com/reports/202965) |
@@ -618,6 +619,7 @@
 | CVE-2022-35260: .netrc parser out-of-bounds access | — | curl | 2022-10-27 | [#1721098](https://hackerone.com/reports/1721098) |
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Rustls backend discloses out-of-bounds heap data during legal IMAP upload cancellation | — | curl | 2026-10-05 | [#4085412](https://hackerone.com/reports/4085412) |
+| Connector/C++: heap out-of-bounds read when malicious server field length exceeds declared column length in binary result path | — | mariadb | 2026-10-12 | [#3872248](https://hackerone.com/reports/3872248) |
 | Heap Out-of-Bounds Read in lib/http2.c via Malformed PUSH_PROMISE Headers | — | curl | 2026-01-10 | [#3506159](https://hackerone.com/reports/3506159) |
 | Out-of-bounds read in MariaDB .frm parsing enables RCE via vtable hijacking | — | mariadb | 2026-09-08 | [#3897914](https://hackerone.com/reports/3897914) |
 | 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |

@@ -1,6 +1,6 @@
 # Memory Corruption Generic
 
-**243 report(s)**
+**244 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -120,6 +120,7 @@
 | Misusing of FPU Instruction Could Cause Security Vulnerabilities in Adobe Flash Player | — | ibb | 2019-11-12 | [#66962](https://hackerone.com/reports/66962) |
 | [MK8DX] Improper ranking/replay file parsing | — | nintendo | 2025-07-06 | [#1813453](https://hackerone.com/reports/1813453) |
 | 💥💥Crash report -Cloudflare WARP doesn't verify text length in "Excluded Host" name input data💥💥 | — | cloudflare | 2023-07-31 | [#1781096](https://hackerone.com/reports/1781096) |
+| Connector/ODBC: malicious server's long version string wraps size_t PrefixLen via negative _snprintf return, causing heap out-of-bounds write | — | mariadb | 2026-10-12 | [#3871977](https://hackerone.com/reports/3871977) |
 | Arbitrary heap exposure in JSON.generate | — | ruby | 2017-09-25 | [#209949](https://hackerone.com/reports/209949) |
 | SIGSEGV in str_buf_cat | — | shopify-scripts | 2017-04-27 | [#213255](https://hackerone.com/reports/213255) |
 | CVE-2017-5341 The OTV parser in tcpdump before 4.9.0 has a buffer overflow in print-otv.c:otv_print() | — | ibb | 2019-10-08 | [#202965](https://hackerone.com/reports/202965) |

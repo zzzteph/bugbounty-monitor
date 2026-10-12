@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**420 report(s)**
+**421 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -165,6 +165,7 @@
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
 | Unbounded memory growth in `node:http2` clients via attacker-controlled ORIGIN frames | — | nodejs | 2026-06-25 | [#3676863](https://hackerone.com/reports/3676863) |
 | MariaDB Low-Privilege User Can Exhaust Memory Through a Formatting Function and Crash the Service | — | mariadb | 2026-10-07 | [#3867358](https://hackerone.com/reports/3867358) |
+| r2dbc-mariadb Parsec auth: server-controlled PBKDF2 iteration count causes CPU-exhaustion DoS ( regression from b7766de ) | — | mariadb | 2026-10-12 | [#3871740](https://hackerone.com/reports/3871740) |
 | rpcbind "rpcbomb" CVE-2017-8779, CVE-2017-8804 | — | ibb | 2019-10-14 | [#235016](https://hackerone.com/reports/235016) |
 | stack overflow #3 in libsass | — | libsass | 2017-10-20 | [#221264](https://hackerone.com/reports/221264) |
 | Denial of service (segfault) due to null pointer dereference in mrb_obj_instance_eval | — | shopify-scripts | 2017-02-28 | [#202582](https://hackerone.com/reports/202582) |

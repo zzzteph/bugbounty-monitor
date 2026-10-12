@@ -1,0 +1,160 @@
+{
+  "id": 3872248,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zODcyMjQ4",
+  "url": "https://hackerone.com/reports/3872248",
+  "title": "Connector/C++: heap out-of-bounds read when malicious server field length exceeds declared column length in binary result path",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "medium",
+  "readable_substate": "Resolved",
+  "created_at": "2026-07-18T08:59:44.903Z",
+  "submitted_at": "2026-07-18T08:59:45.391Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "fg0x0",
+    "url": "/fg0x0",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/we9mo7ui49vl91bznzyid2bvt1lf/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 8724,
+    "url": "https://hackerone.com/mariadb",
+    "handle": "mariadb",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/008/724/6a67872926e894490b4fdc36cd6a3f59e300616b_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "paused",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "MariaDB",
+      "twitter_handle": "mariadb_org",
+      "website": "https://mariadb.org",
+      "about": "MariaDB is a high performance, open source database that helps the world's busiest websites deliver more content, faster."
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-10-12T09:26:55.645Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-10-12T09:26:55.536Z",
+  "team_member_agreed_on_going_public_at": "2026-10-12T09:25:17.023Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "MariaDB Connector/C++ sizes each result-column bind buffer to the column length the server declared at PREPARE time, but then reads `bind.length_value` - the actual field length the server reports in each row packet - bytes out of that buffer. libmariadb sets `length_value` to the full server-sent field length even when it only copied `MIN(len, buffer_length)` bytes into the smaller buffer. The C++ layer never clamps `MIN(length_value, buffer_length)`. A malicious or MITM server that declares a small column but sends a larger field value drives a heap out-of-bounds read, leaking adjacent process memory into application-visible column values and crashing the client.\n\nConfirmed end-to-end with ASAN (heap-buffer-overflow READ) and a non-ASAN release build (heap leak + crash) at HEAD c57f17f (VERSION 1.0.8 dev).\n\n### Root cause\n\nBuffer allocation, frozen at PREPARE time (`src/protocol/capi/BinRowProtocolCapi.cpp:55-73`):\n\n```cpp\nlength      = columnInfo->getLength();     // server-declared column length\nbind.back().buffer_length =\n    columnInfo->getColumnType().binarySize() != 0 ?\n    columnInfo->getColumnType().binarySize() :\n    getLengthMaxFieldSize();               // == declared column length for string/blob types\nbind.back().buffer = new uint8_t[bind.back().buffer_length];  // line 69: small allocation\nbind.back().length = &bind.back().length_value;\n```\n\nlibmariadb reports untruncated field length (`libmariadb/ma_stmt_codec.c:599`):\n\n```c\n// convert_froma_string: copies MIN(len, buffer_length) bytes but reports full length\n*r_param->length = (ulong)len;   // full server field length, uncapped\n```\n\nThe C++ layer trusts `length_value` as the readable extent:\n\n```cpp\n// setPosition BinRowProtocolCapi.cpp:107-108\nlength   = bind[index].length_value;                      // server field length, uncapped\nfieldBuf.wrap(static_cast<char*>(bind[index].buffer), length);  // wraps small buffer with large length\n\n// cacheCurrentRow BinRowProtocolCapi.cpp:1716\nrowDataCache.emplace_back(static_cast<const char*>(b.buffer),\n                          b.length_value);  // copies length_value bytes from buffer_length-sized allocation\n```\n\nWhen `length_value > buffer_length`, the difference is read out of bounds from the heap.\n\nThe vulnerable binary path is reached with `useServerPrepStmts=true` or ANY `prepareCall(...)` stored procedure call (which always creates a `ServerSidePreparedStatement` regardless of the option - `MariaDbProcedureStatement.cpp:59,83`).\n\n### Steps To Reproduce\n\nEnvironment: Linux x86-64, connector built from HEAD c57f17f with AddressSanitizer.\n\n**Step 1** - Start the rogue server (`rogue_server.py` attached):\n\n```bash\npython3 rogue_server.py --port 13399 --col-length 4 --field-len 40000 --once &\n```\n\nThe server speaks enough protocol for the binary prepared-statement flow: handshake, session SELECTs, COM_STMT_PREPARE (one STRING column, declared length 4), COM_STMT_EXECUTE (binary row with field length 40000).\n\n**Step 2** - POSITIVE (attack) - real ASAN-built connector (`poc_client.cpp` attached):\n\n```bash\n./poc_client 127.0.0.1 13399\n```\n\nOutput:\n\n```bash\n==ERROR: AddressSanitizer: heap-buffer-overflow ... READ of size 40000\n    #1 sql::CArray<char>::CArray(const char*, unsigned long) CArrayImp.h:68\n    #5 BinRowProtocolCapi::cacheCurrentRow(...) BinRowProtocolCapi.cpp:1716\n    #6 SelectResultSetCapi::cacheCompleteLocally() SelectResultSetCapi.cpp:2039\n   #11 BasePrepareStatement::executeQuery() BasePrepareStatement.cpp:1441\n0x...494 is located 0 bytes after 4-byte region [0x...490,0x...494)\nallocated by thread T0 here:\n    #1 BinRowProtocolCapi::BinRowProtocolCapi(...) BinRowProtocolCapi.cpp:69\n```\n\nThe OOB read fires inside `executeQuery()` in the default buffered path.\n\n**Step 3** - NEGATIVE CONTROL (honest server: declared length = field length):\n\n```bash\npython3 rogue_server.py --port 13401 --col-length 40000 --field-len 40000 --once &\n./poc_client 127.0.0.1 13401\n```\n\nOutput:\n\n```bash\n[client] got string, length=40000\n[client] done (no crash)          # exit 0, zero ASAN errors\n```\n\nNo OOB when the server doesn't lie. The mismatch is the sole cause.\n\n**Real-world impact on non-ASAN release build:**\n\nInfo leak (col=4, field=64):\n```bash\n[client] first 64 bytes (hex): 41414141 5a770000 201b3f81 5a770000 5868fb03 16610000 ...\n         ^^^^^^^^ 4 bytes stored     ^^^^^^^^^^^^^ adjacent process heap (heap pointers visible)\n```\n\nDoS (col=4, field=500000000): process crash + core dump (exit 134).\n\n### Supporting Material/References\n\n- Vulnerable allocation: `BinRowProtocolCapi.cpp:69` (`new uint8_t[buffer_length]`)\n- OOB read sink: `BinRowProtocolCapi.cpp:1716` (`cacheCurrentRow`)\n- Incomplete fix context: HEAD commit CONCPP-152 hardened `length_value == 0` but not `length_value > buffer_length`\n- Accepted sibling: H1 #3835450 (connector-nodejs malicious-server DoS, Medium)\n- Attachments: `rogue_server.py`, `poc_client.cpp`, `run_poc.sh`, `poc_evidence.txt`\n\n## Impact\n\n**Information disclosure**: Adjacent process heap memory is copied into the value the connector returns to the application as an ordinary column string. In a connection-pooled server - the dominant deployment for a database connector - that adjacent heap can contain other requests'/users' data, credentials, or pointers usable for ASLR defeat. Demonstrated: app SELECTs a 4-wide column and receives 64 bytes containing 4 bytes of actual data followed by 60 bytes of leaked heap (with visible heap pointers).\n\n**Denial of service**: An attacker-chosen `length_value` (up to 4 GB) drives the OOB `memcpy` far past the small allocation, reliably crashing the client process. Demonstrated: field length 500MB causes process abort + core dump.\n\n**Preconditions**: The client connects to a malicious or MITM-controlled server and reads a result set via the binary protocol (`useServerPrepStmts=true` or any stored procedure call). No credentials or privileges required. A single crafted result row is sufficient.",
+  "weakness": {
+    "id": 8,
+    "name": "Out-of-bounds Read"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6275973,
+      "file_name": "run_poc.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2vd5t4btpwfval7f1qmkxljw2lrg?response-content-disposition=attachment%3B%20filename%3D%22run_poc.sh%22%3B%20filename%2A%3DUTF-8%27%27run_poc.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQU4MNTX3P%2F20261012%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261012T163732Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDx3iiaizRrcrOmHoVkOTPn5rIyo0SeDsBkVy%2Bd9UVgmgIgBqRT3T5D79JeEmR2YMq6pBtRTsPEfgPmN%2BL2oJGgv4AqugUIiP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDKqeMcpXiUHWRN0u7CqOBTGwVsSzR88SEVina381jCV1OJ7hN5VdiREIc8Bj0%2FBBmPfU%2FQEzdOJAXQbL2j%2FiN7GgLsGjZ9C0AcQGhvoPG18wAz5C03YoVYVs1tmRTTavMpl58KKLUeIa%2BuG0HAnH2GG4AeEEYZECmU7uobh%2FpipbrjceKamJDZnsGxzdU4z%2FSPRsWNptYAgW4NUCZYcNRO6kr7SR8mnsNkM9MaFZ%2FTvhqv2CuptpG6%2Bsbc8w4jp0X7beqTCvxA3TAa0agtAkmF1XDwO97jb%2BQHO5E8Hlypghe%2Fl5JH3A1rlDL6x2YIKEPxIXmV%2Bq9CNfxF8TUEurl0mzK7kcibZbM1AR4cFxZBpx054tfIvzEWJn4NYTZ4sD7poIX7kEWkORi4cZ9B5J9w4QD59fjmLz620j9NQIQuAZW7r0zBX4f6jgh000AVJtOT2XCCpMyEVq7KG1uanvDGJ9Ejp%2BkJlSpKEZB5CrSjoFYeKZ%2F66IcNkx9Fslgv1QuSHq87%2FxioEipBt7pFnDsGzGCj%2FdDqMlpL%2Fmjz1%2Fj2McRpVq%2FZGgZSQ1L4XAvkD8pplVZP%2FwF9YH2EhLLO2zwdy6yMjVfBf1IaPtwSjlReXOLklvabDTpjsjxKfJzPtf5d5xmqMOhzH0toXb3LL4za6R9az4hKu0hfNAzXg%2BWsgPmsQtMM3w66rO%2F3xQms5SBQ4gagKCum1aHrPTq3yWWbFolqNN6Bng81YD9wm3F2YFloOzj%2BIwK4Lsc2cQ8DpbkssIpyx7ZnAAqy1%2BPWbEa%2Br2XGCIwNEO8%2FH6kzEMClUOBC0Ix%2B%2Flv5k6QVcrOBsEJ0eWvpnoH%2FJFSOD5YHrJpQc5nlB1lvVIRF6Fw4CGEQ3pVA1jZQo7kBTuFv161jDH8LPWBjqxAfrIawhv%2Fze4Fj5JZs8Rs5V6UMICcxGH8OO1v4kVdRLca%2BE3UP7WjtDute4sb52URQR2s92rmyAofHW%2BPbFWIoTt0XbQYom3Ex9XIxnbAxQ8h%2BemHm60fmY%2BEk%2B6Qj4jNvBPyEvBIHBoG9ojn%2BLbj7JCDdxbA6X8hgPiMFRqtuSpBvy4IeFnJp1uufOzHsnyxmmJYhUbt2PcsKFd6tAt4cmW%2F0F7IIWa0V5f%2BE3BynCWHA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=343996ae90a4646ee5a4eee6e5c2856a64b03d1427dccb889ee73e5965340e1c",
+      "file_size": 2146,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6275974,
+      "file_name": "poc_client.cpp",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/2gn7z0oc0g8le8g1r7ra7ivbl4i9?response-content-disposition=attachment%3B%20filename%3D%22poc_client.cpp%22%3B%20filename%2A%3DUTF-8%27%27poc_client.cpp&response-content-type=text%2Fx-c%2B%2Bsrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQU4MNTX3P%2F20261012%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261012T163732Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDx3iiaizRrcrOmHoVkOTPn5rIyo0SeDsBkVy%2Bd9UVgmgIgBqRT3T5D79JeEmR2YMq6pBtRTsPEfgPmN%2BL2oJGgv4AqugUIiP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDKqeMcpXiUHWRN0u7CqOBTGwVsSzR88SEVina381jCV1OJ7hN5VdiREIc8Bj0%2FBBmPfU%2FQEzdOJAXQbL2j%2FiN7GgLsGjZ9C0AcQGhvoPG18wAz5C03YoVYVs1tmRTTavMpl58KKLUeIa%2BuG0HAnH2GG4AeEEYZECmU7uobh%2FpipbrjceKamJDZnsGxzdU4z%2FSPRsWNptYAgW4NUCZYcNRO6kr7SR8mnsNkM9MaFZ%2FTvhqv2CuptpG6%2Bsbc8w4jp0X7beqTCvxA3TAa0agtAkmF1XDwO97jb%2BQHO5E8Hlypghe%2Fl5JH3A1rlDL6x2YIKEPxIXmV%2Bq9CNfxF8TUEurl0mzK7kcibZbM1AR4cFxZBpx054tfIvzEWJn4NYTZ4sD7poIX7kEWkORi4cZ9B5J9w4QD59fjmLz620j9NQIQuAZW7r0zBX4f6jgh000AVJtOT2XCCpMyEVq7KG1uanvDGJ9Ejp%2BkJlSpKEZB5CrSjoFYeKZ%2F66IcNkx9Fslgv1QuSHq87%2FxioEipBt7pFnDsGzGCj%2FdDqMlpL%2Fmjz1%2Fj2McRpVq%2FZGgZSQ1L4XAvkD8pplVZP%2FwF9YH2EhLLO2zwdy6yMjVfBf1IaPtwSjlReXOLklvabDTpjsjxKfJzPtf5d5xmqMOhzH0toXb3LL4za6R9az4hKu0hfNAzXg%2BWsgPmsQtMM3w66rO%2F3xQms5SBQ4gagKCum1aHrPTq3yWWbFolqNN6Bng81YD9wm3F2YFloOzj%2BIwK4Lsc2cQ8DpbkssIpyx7ZnAAqy1%2BPWbEa%2Br2XGCIwNEO8%2FH6kzEMClUOBC0Ix%2B%2Flv5k6QVcrOBsEJ0eWvpnoH%2FJFSOD5YHrJpQc5nlB1lvVIRF6Fw4CGEQ3pVA1jZQo7kBTuFv161jDH8LPWBjqxAfrIawhv%2Fze4Fj5JZs8Rs5V6UMICcxGH8OO1v4kVdRLca%2BE3UP7WjtDute4sb52URQR2s92rmyAofHW%2BPbFWIoTt0XbQYom3Ex9XIxnbAxQ8h%2BemHm60fmY%2BEk%2B6Qj4jNvBPyEvBIHBoG9ojn%2BLbj7JCDdxbA6X8hgPiMFRqtuSpBvy4IeFnJp1uufOzHsnyxmmJYhUbt2PcsKFd6tAt4cmW%2F0F7IIWa0V5f%2BE3BynCWHA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ce1215b760c11157326aaa323b4d98dd89adce6732822aedd2b25a0991b26e67",
+      "file_size": 2349,
+      "type": "text/x-c++src",
+      "moderated": null
+    },
+    {
+      "id": 6275975,
+      "file_name": "poc_evidence.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/si0svdt5r2ebvpvwbi4o24rpdav3?response-content-disposition=attachment%3B%20filename%3D%22poc_evidence.txt%22%3B%20filename%2A%3DUTF-8%27%27poc_evidence.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQU4MNTX3P%2F20261012%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261012T163732Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDx3iiaizRrcrOmHoVkOTPn5rIyo0SeDsBkVy%2Bd9UVgmgIgBqRT3T5D79JeEmR2YMq6pBtRTsPEfgPmN%2BL2oJGgv4AqugUIiP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDKqeMcpXiUHWRN0u7CqOBTGwVsSzR88SEVina381jCV1OJ7hN5VdiREIc8Bj0%2FBBmPfU%2FQEzdOJAXQbL2j%2FiN7GgLsGjZ9C0AcQGhvoPG18wAz5C03YoVYVs1tmRTTavMpl58KKLUeIa%2BuG0HAnH2GG4AeEEYZECmU7uobh%2FpipbrjceKamJDZnsGxzdU4z%2FSPRsWNptYAgW4NUCZYcNRO6kr7SR8mnsNkM9MaFZ%2FTvhqv2CuptpG6%2Bsbc8w4jp0X7beqTCvxA3TAa0agtAkmF1XDwO97jb%2BQHO5E8Hlypghe%2Fl5JH3A1rlDL6x2YIKEPxIXmV%2Bq9CNfxF8TUEurl0mzK7kcibZbM1AR4cFxZBpx054tfIvzEWJn4NYTZ4sD7poIX7kEWkORi4cZ9B5J9w4QD59fjmLz620j9NQIQuAZW7r0zBX4f6jgh000AVJtOT2XCCpMyEVq7KG1uanvDGJ9Ejp%2BkJlSpKEZB5CrSjoFYeKZ%2F66IcNkx9Fslgv1QuSHq87%2FxioEipBt7pFnDsGzGCj%2FdDqMlpL%2Fmjz1%2Fj2McRpVq%2FZGgZSQ1L4XAvkD8pplVZP%2FwF9YH2EhLLO2zwdy6yMjVfBf1IaPtwSjlReXOLklvabDTpjsjxKfJzPtf5d5xmqMOhzH0toXb3LL4za6R9az4hKu0hfNAzXg%2BWsgPmsQtMM3w66rO%2F3xQms5SBQ4gagKCum1aHrPTq3yWWbFolqNN6Bng81YD9wm3F2YFloOzj%2BIwK4Lsc2cQ8DpbkssIpyx7ZnAAqy1%2BPWbEa%2Br2XGCIwNEO8%2FH6kzEMClUOBC0Ix%2B%2Flv5k6QVcrOBsEJ0eWvpnoH%2FJFSOD5YHrJpQc5nlB1lvVIRF6Fw4CGEQ3pVA1jZQo7kBTuFv161jDH8LPWBjqxAfrIawhv%2Fze4Fj5JZs8Rs5V6UMICcxGH8OO1v4kVdRLca%2BE3UP7WjtDute4sb52URQR2s92rmyAofHW%2BPbFWIoTt0XbQYom3Ex9XIxnbAxQ8h%2BemHm60fmY%2BEk%2B6Qj4jNvBPyEvBIHBoG9ojn%2BLbj7JCDdxbA6X8hgPiMFRqtuSpBvy4IeFnJp1uufOzHsnyxmmJYhUbt2PcsKFd6tAt4cmW%2F0F7IIWa0V5f%2BE3BynCWHA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=b26e079fbbebb8518da6c0b8999b6d68604a371ae8a10b7f8f1b693fd595646c",
+      "file_size": 5941,
+      "type": "text/plain",
+      "moderated": null
+    },
+    {
+      "id": 6275976,
+      "file_name": "rogue_server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/gba7a1n96zrfsiadvhe0wmv3x5v7?response-content-disposition=attachment%3B%20filename%3D%22rogue_server.py%22%3B%20filename%2A%3DUTF-8%27%27rogue_server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQU4MNTX3P%2F20261012%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261012T163732Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQDx3iiaizRrcrOmHoVkOTPn5rIyo0SeDsBkVy%2Bd9UVgmgIgBqRT3T5D79JeEmR2YMq6pBtRTsPEfgPmN%2BL2oJGgv4AqugUIiP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDKqeMcpXiUHWRN0u7CqOBTGwVsSzR88SEVina381jCV1OJ7hN5VdiREIc8Bj0%2FBBmPfU%2FQEzdOJAXQbL2j%2FiN7GgLsGjZ9C0AcQGhvoPG18wAz5C03YoVYVs1tmRTTavMpl58KKLUeIa%2BuG0HAnH2GG4AeEEYZECmU7uobh%2FpipbrjceKamJDZnsGxzdU4z%2FSPRsWNptYAgW4NUCZYcNRO6kr7SR8mnsNkM9MaFZ%2FTvhqv2CuptpG6%2Bsbc8w4jp0X7beqTCvxA3TAa0agtAkmF1XDwO97jb%2BQHO5E8Hlypghe%2Fl5JH3A1rlDL6x2YIKEPxIXmV%2Bq9CNfxF8TUEurl0mzK7kcibZbM1AR4cFxZBpx054tfIvzEWJn4NYTZ4sD7poIX7kEWkORi4cZ9B5J9w4QD59fjmLz620j9NQIQuAZW7r0zBX4f6jgh000AVJtOT2XCCpMyEVq7KG1uanvDGJ9Ejp%2BkJlSpKEZB5CrSjoFYeKZ%2F66IcNkx9Fslgv1QuSHq87%2FxioEipBt7pFnDsGzGCj%2FdDqMlpL%2Fmjz1%2Fj2McRpVq%2FZGgZSQ1L4XAvkD8pplVZP%2FwF9YH2EhLLO2zwdy6yMjVfBf1IaPtwSjlReXOLklvabDTpjsjxKfJzPtf5d5xmqMOhzH0toXb3LL4za6R9az4hKu0hfNAzXg%2BWsgPmsQtMM3w66rO%2F3xQms5SBQ4gagKCum1aHrPTq3yWWbFolqNN6Bng81YD9wm3F2YFloOzj%2BIwK4Lsc2cQ8DpbkssIpyx7ZnAAqy1%2BPWbEa%2Br2XGCIwNEO8%2FH6kzEMClUOBC0Ix%2B%2Flv5k6QVcrOBsEJ0eWvpnoH%2FJFSOD5YHrJpQc5nlB1lvVIRF6Fw4CGEQ3pVA1jZQo7kBTuFv161jDH8LPWBjqxAfrIawhv%2Fze4Fj5JZs8Rs5V6UMICcxGH8OO1v4kVdRLca%2BE3UP7WjtDute4sb52URQR2s92rmyAofHW%2BPbFWIoTt0XbQYom3Ex9XIxnbAxQ8h%2BemHm60fmY%2BEk%2B6Qj4jNvBPyEvBIHBoG9ojn%2BLbj7JCDdxbA6X8hgPiMFRqtuSpBvy4IeFnJp1uufOzHsnyxmmJYhUbt2PcsKFd6tAt4cmW%2F0F7IIWa0V5f%2BE3BynCWHA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8447ae10e3d45243ec6e1262c7f61a0f56deec789a7c4960cbd863f27025ed5d",
+      "file_size": 8792,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-11-11T09:25:17.438Z",
+  "allow_singular_disclosure_after": 2566064.98545387,
+  "singular_disclosure_allowed": false,
+  "vote_count": 2,
+  "voters": [
+    "fg0x0",
+    "quantumbugs"
+  ],
+  "severity": {
+    "rating": "medium",
+    "score": 4.6,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "high",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "low",
+      "integrity": "none",
+      "availability": "high"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 10337,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "MariaDB Server & Connectors  - Denial of Service",
+    "max_severity": "medium"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**43 report(s)**
+**44 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -17,6 +17,7 @@
 | CVE-2022-35260: .netrc parser out-of-bounds access | — | curl | 2022-10-27 | [#1721098](https://hackerone.com/reports/1721098) |
 |  Firecracker Out-of-bounds Read/Write Local Privilege Escalation Vulnerability | — | aws_vdp | 2026-06-11 | [#3738654](https://hackerone.com/reports/3738654) |
 | Rustls backend discloses out-of-bounds heap data during legal IMAP upload cancellation | — | curl | 2026-10-05 | [#4085412](https://hackerone.com/reports/4085412) |
+| Connector/C++: heap out-of-bounds read when malicious server field length exceeds declared column length in binary result path | — | mariadb | 2026-10-12 | [#3872248](https://hackerone.com/reports/3872248) |
 | Heap Out-of-Bounds Read in lib/http2.c via Malformed PUSH_PROMISE Headers | — | curl | 2026-01-10 | [#3506159](https://hackerone.com/reports/3506159) |
 | Out-of-bounds read in MariaDB .frm parsing enables RCE via vtable hijacking | — | mariadb | 2026-09-08 | [#3897914](https://hackerone.com/reports/3897914) |
 | 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
