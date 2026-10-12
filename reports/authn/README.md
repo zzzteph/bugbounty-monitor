@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**619 report(s) across 18 class(es)**
+**620 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -15,8 +15,8 @@
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
 | [Authentication Bypass](authentication_bypass/README.md) | 6 | $7,500 |
+| [Unverified Password Change](unverified_password_change/README.md) | 6 | — |
 | [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 5 | — |
-| [Unverified Password Change](unverified_password_change/README.md) | 5 | — |
 | [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 4 | $15,300 |
 | [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 3 | — |
 | [Insufficient Verification Of Data Authenticity](insufficient_verification_of_data_authenticity/README.md) | 2 | $1,270 |
@@ -634,6 +634,7 @@
 | H1514 Session Fixation on multiple shopify-built apps on *.shopifycloud.com and *.shopifyapps.com | — | shopify | 2019-04-25 | [#423136](https://hackerone.com/reports/423136) |
 | Password Change not notified when changed from settings | — | starbucks | 2019-02-08 | [#242846](https://hackerone.com/reports/242846) |
 | Information can be changed without a password | — | khanacademy | 2020-03-14 | [#721341](https://hackerone.com/reports/721341) |
+| Password Reset Allows Reusing Old Password -- [AUTH-3820] | — | remitly | 2026-10-12 | [#3189580](https://hackerone.com/reports/3189580) |
 | 暴力破解用户密码没有速率控制 | — | x | 2020-07-01 | [#854424](https://hackerone.com/reports/854424) |
 | Monero wallet password change is confirmed when not matching | — | monero | 2020-03-11 | [#803028](https://hackerone.com/reports/803028) |
 | Password authentication when changing information bypass. Bypass of report #721341 | — | khanacademy | 2021-02-11 | [#1040373](https://hackerone.com/reports/1040373) |

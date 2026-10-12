@@ -1,0 +1,137 @@
+{
+  "id": 3189580,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zMTg5NTgw",
+  "url": "https://hackerone.com/reports/3189580",
+  "title": "Password Reset Allows Reusing Old Password -- [AUTH-3820]",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "none",
+  "readable_substate": "Resolved",
+  "created_at": "2025-06-12T01:12:33.047Z",
+  "submitted_at": "2025-06-12T01:12:34.087Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "is_kareem2004",
+    "url": "/is_kareem2004",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/w4ud105ep21wwv7q61hn16ndqn3l/72249f83db42955adfcb43c5cad84162ec49002aa21a79c3606f682c8e48f4e6"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 32674,
+    "url": "https://hackerone.com/remitly",
+    "handle": "remitly",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/032/674/1ad0956252615807740f983f7e8d1073e22cceaf_original.png/b8e19a7691128fca51630d7f5b14644b91b3b45324f6fd488e36244d744fe35b",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/032/674/1ad0956252615807740f983f7e8d1073e22cceaf_original.png/89f037b490baf3dcca1b84283f4c85141b64c213252a9c79b56c62bf903ab542"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Remitly",
+      "twitter_handle": "remitly",
+      "website": "https://www.remitly.com",
+      "about": ""
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": true,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-10-12T18:34:54.013Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-12T18:34:52.407Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\n\nThe password reset functionality accepts the user's current password as the new password without any validation or rejection. This bypasses common password policy controls and weakens account protection, especially when combined with session hijacking or stealth access persistence.\n\n\n## Steps To Reproduce:\n\n1) Login to an existing account using valid credentials.\n\n2) Initiate a password reset (via \"Forgot Password\" or \"Change Password\" flow).\n\n3) When prompted to enter a new password, submit the same password currently in use.\n\n4) Observe: The password is accepted successfully without any error or warning.\n\n--Optionally, re-login using the same password to confirm that the reset succeeded using the same credentials.\n\n## Supporting Material/References:\n[list any additional material (e.g. screenshots, logs, etc.)]\n\n  * [attachment / reference]\n\n## Impact\n\nPoor Security Hygiene: Users can reset their password to the same weak one repeatedly.",
+  "weakness": {
+    "id": 91,
+    "name": "Unverified Password Change"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 4443437,
+      "file_name": "poc.mp4",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/h7ia8xnmcff8jdm1jqg13czp32bi?response-content-disposition=attachment%3B%20filename%3D%22poc.mp4%22%3B%20filename%2A%3DUTF-8%27%27poc.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ25M4QTAO%2F20261012%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261012T232940Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEMf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIGQVlJUmRjRbxgnJA%2Fj%2FmUiPnDPxaxD56b4vrRwPAtCOAiEAnzQzuiNlaOjk3JxgUGcO3Re0M7KmGPBGN65cHw59iTMquwUIkP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDCGoxk3bOmQdZG0KxCqPBTX1IERnX8SXoET8yj3oQKStBVCNpw64QcbZugEln8WQZg%2F2PmJJM3mJyScI3b%2Bfj2zpVMN21otjcXzkzeyXUa5nmW4sQiGKgnxfTpw5KX1oPZNpPEl1Suv5TXXtTQfe%2BvFQKlLpn0KMBCN%2FoWywGTgPryMEz5S%2BC%2FsQLacncc%2FAcfwtHfrKWgYl34Cic8RfrGKB1McKyomqvH99D6gdM4mu3okZgPPjP0n%2FGVpSOC88sID%2BddeAMlZQOwIdFqogyDMjqpsTlnipnM33TdzCWl5rsdS2KwiQ5c3sciw%2FAp9ipyQrLY%2Bn5oBwc2pMiyja6G1l6Kuw6t30yID4WD%2BHLO%2BtsZOWyUo2jJE9BCVoNJuCU%2F1GbsmV%2FZv8rVPeW2T2bGGXWaLVYv0NYDeZV1MFCpFc%2FLjSgvNqSLbqen9Jh%2F5f%2FqaTF7krb6sUf0LaTrv51A4bEySP41mzT1f7pjwXRd6bbgE3IBwmy%2B%2BdWg0CkYDspwZnRGq1b%2BCCE2zMW2zYyIQesl1s0zQ%2F1LX7j31FJSRvGrzcsVzDVu43WS6IFZzxVd3R4L4%2Bqnbh9mxyGUbHcHZyDHvzHWRPVk%2BwKN9PrnjPkErwJFGgay3rEloxtn7LZ6%2Fevs5GERWtPleBHel7F2VN7Wxq4gf4ozB9oLEnMTW6s2eWoi5lggka8DxMZlx1lFYsbU7dUcyqgOTEw899OrXytNcpXIeBHulVWkzjIPIxHzCtihBCPIx%2BfcTTmienqlaej4miJtnd7bhI7FrPPHfjsfbQbtdua%2BqiG2jBGQNEx08cAPwgTABVa6Q2kEyJIiAiU0yPL6CqXRtIbxbyn45VyVHjDPTPTBJmKIHN9srhiefi1QYsDZPmWj1eFO0wrcq11gY6sQHxB26BVVTyRPNTuxI%2B5gI6rIb1Mgvi6bVes10SCAnOa3d76CWY0UXfdaHKONtNMIqTLEo%2FoKU5D18%2FCVdi%2FFbT4XhFWBINT76Z2iTQkW46S%2Fiy21U016X0sDT5v%2BK1C2ilXLLPVykKCZ9mLgFiwARb6SOOPZfrS8%2FGlMAMZaa3O7VsEarhxZshoymjjjJU9o48iOFcH6l2UJu2G27kChenmMZgCEaVlFqGih9GarRlDk8%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=7c8d587b91114fc148183b8f410f38a6f5e340d86203430ae1e25420836e758b",
+      "file_size": 4010394,
+      "type": "video/mp4",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-12T18:34:52.802Z",
+  "allow_singular_disclosure_after": -17688.048370397,
+  "singular_disclosure_allowed": true,
+  "vote_count": 3,
+  "voters": [
+    "2026",
+    "s_zeroth",
+    "liquidity28"
+  ],
+  "severity": {
+    "rating": "none",
+    "score": 0.0,
+    "author_type": "Team",
+    "metrics": {
+      "attack_vector": "adjacent",
+      "attack_complexity": "high",
+      "privileges_required": "none",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "none",
+      "availability": "none"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 756603,
+    "asset_type": "URL",
+    "asset_identifier": "auth.remitly.com",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

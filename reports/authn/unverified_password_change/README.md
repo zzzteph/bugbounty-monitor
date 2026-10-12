@@ -1,11 +1,12 @@
 # Unverified Password Change
 
-**5 report(s)**
+**6 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | Password Change not notified when changed from settings | — | starbucks | 2019-02-08 | [#242846](https://hackerone.com/reports/242846) |
 | Information can be changed without a password | — | khanacademy | 2020-03-14 | [#721341](https://hackerone.com/reports/721341) |
+| Password Reset Allows Reusing Old Password -- [AUTH-3820] | — | remitly | 2026-10-12 | [#3189580](https://hackerone.com/reports/3189580) |
 | 暴力破解用户密码没有速率控制 | — | x | 2020-07-01 | [#854424](https://hackerone.com/reports/854424) |
 | Monero wallet password change is confirmed when not matching | — | monero | 2020-03-11 | [#803028](https://hackerone.com/reports/803028) |
 | Password authentication when changing information bypass. Bypass of report #721341 | — | khanacademy | 2021-02-11 | [#1040373](https://hackerone.com/reports/1040373) |

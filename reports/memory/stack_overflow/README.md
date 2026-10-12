@@ -1,6 +1,6 @@
 # Stack Overflow
 
-**32 report(s)**
+**33 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -13,6 +13,7 @@
 | [GoldSrc] Remote Code Execution using malicious WAD list in BSP file | $750 | valve | 2021-05-04 | [#675710](https://hackerone.com/reports/675710) |
 | Malformed map detailed texture files in GoldSrc games lead to Remote Code Execution | $350 | valve | 2019-09-17 | [#505173](https://hackerone.com/reports/505173) |
 | CVE-2022-35260: .netrc parser out-of-bounds access | — | ibb | 2022-12-03 | [#1753224](https://hackerone.com/reports/1753224) |
+| Stack Buffer Overflow in MariaDB CONNECT storage engine when reading DOUBLE columns from TABLE_TYPE=DOS tables | — | mariadb | 2026-10-12 | [#3910393](https://hackerone.com/reports/3910393) |
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
 | Stack Overflow DoS in ST_GeomFromGeoJSON Allows Any Authenticated User to Crash the Entire Server | — | mariadb | 2026-09-03 | [#3769676](https://hackerone.com/reports/3769676) |
