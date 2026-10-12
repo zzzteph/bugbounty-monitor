@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1090 report(s) across 10 class(es)**
+**1091 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 693 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 694 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -362,6 +362,7 @@
 | Missing FILE-privilege enforcement in CONNECT file UDFs allows server-side file read and write | — | mariadb | 2026-10-07 | [#3836021](https://hackerone.com/reports/3836021) |
 | Unauthenticated File Upload to CDN | — | enjin | 2026-05-18 | [#3589247](https://hackerone.com/reports/3589247) |
 | Missing access control when linking banners or campaigns to zones  | — | revive_adserver | 2026-06-03 | [#3650504](https://hackerone.com/reports/3650504) |
+| Unauthenticated disclosure of private and hidden forum content in bbPress via the WordPress core REST single-item endpoint | — | wordpress | 2026-10-12 | [#3801107](https://hackerone.com/reports/3801107) |
 | Permission Model Bypass via `process.report.writeReport()` Path Misvalidation | — | nodejs | 2026-06-18 | [#3692858](https://hackerone.com/reports/3692858) |
 | Missing access control when modifying parent entities via XML‑RPC | — | revive_adserver | 2026-06-03 | [#3677576](https://hackerone.com/reports/3677576) |
 |  `relay_tx` wallet-rpc skips `--restricted-rpc` guard and lets any caller corrupt wallet state via attacker-controlled `pending_tx` | — | monero | 2026-08-05 | [#3687543](https://hackerone.com/reports/3687543) |
