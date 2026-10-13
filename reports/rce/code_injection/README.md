@@ -1,6 +1,6 @@
 # Code Injection
 
-**254 report(s)**
+**255 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -75,6 +75,7 @@
 | PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
 | Internal application wrapper or script using curl | — | curl | 2026-04-03 | [#3648199](https://hackerone.com/reports/3648199) |
 | PHP code injection in delivery-limitation `logical` validation bypass | — | revive_adserver | 2026-06-25 | [#3780854](https://hackerone.com/reports/3780854) |
+| RCE in AWS Amplify CLI via Prototype Chain Traversal in amplify-velocity-template | — | aws_vdp | 2026-10-13 | [#3897236](https://hackerone.com/reports/3897236) |
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |
 | PHP code injection in delivery-limitation `logical` validation bypass - XML-RPC setChannelTargeting | — | revive_adserver | 2026-06-25 | [#3781492](https://hackerone.com/reports/3781492) |
 | HTML Injection in Transaction Confirmation Dialog via Address Book Description Enables UI Spoofing Before Fund Transfer | — | monero | 2026-08-20 | [#3679471](https://hackerone.com/reports/3679471) |
