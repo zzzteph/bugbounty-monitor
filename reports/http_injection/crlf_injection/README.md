@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**58 report(s)**
+**59 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -27,6 +27,7 @@
 | CRLF Injection in Gopher Protocol (`lib/gopher.c`) | — | curl | 2026-01-02 | [#3484506](https://hackerone.com/reports/3484506) |
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
 | libcurl LDAP LDIF: entry DN and attribute names written without RFC 2849 base64 encoding, allowing server line injection | — | curl | 2026-09-15 | [#4023506](https://hackerone.com/reports/4023506) |
+| CVE-2026-87864: IMAP APPEND plus CRLF conversion command injection | — | curl | 2026-10-14 | [#3972403](https://hackerone.com/reports/3972403) |
 | CRLF Injection via Custom HTTP Headers | — | curl | 2026-06-11 | [#3741744](https://hackerone.com/reports/3741744) |
 | RTSP CRLF injection in libcurl allows CURLOPT_RTSP_* values to inject commands into independent sessions | — | curl | 2026-08-24 | [#3963494](https://hackerone.com/reports/3963494) |
 | Cross-site scripting (XSS) vulnerability on a DoD website | — | deptofdefense | 2017-08-15 | [#225936](https://hackerone.com/reports/225936) |

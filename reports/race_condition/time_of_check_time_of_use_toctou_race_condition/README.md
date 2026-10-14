@@ -1,6 +1,6 @@
 # Time Of Check Time Of Use Toctou Race Condition
 
-**20 report(s)**
+**21 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -12,6 +12,7 @@
 | Promotion code can be used more than redemption limit. | — | stripe | 2023-02-13 | [#1717650](https://hackerone.com/reports/1717650) |
 | curl --skip-existing has a TOCTOU race that lets a post-check symlink redirect the later download write | — | curl | 2026-05-20 | [#3747959](https://hackerone.com/reports/3747959) |
 |  curl_share TOCTOU > RCE via Curl_llist _dtor Function Pointer Hijack | — | curl | 2026-08-26 | [#3955945](https://hackerone.com/reports/3955945) |
+| CVE-2026-87863: HSTS response erases persisted entries | — | curl | 2026-10-14 | [#3972373](https://hackerone.com/reports/3972373) |
 | HTTP Response Queue Poisoning via TOCTOU Race Condition in `http.Agent` | — | nodejs | 2026-06-25 | [#3582376](https://hackerone.com/reports/3582376) |
 | libcurl cache updates follow symlinks and truncate their targets | — | curl | 2026-08-14 | [#3938220](https://hackerone.com/reports/3938220) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |

@@ -1,15 +1,15 @@
 # Memory Corruption
 
-**714 report(s) across 25 class(es)**
+**716 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 75 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 76 | $10,000 |
+| [Buffer Over Read](buffer_over_read/README.md) | 56 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
-| [Buffer Over Read](buffer_over_read/README.md) | 55 | $2,142 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 44 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
@@ -253,6 +253,7 @@
 | https://publishers.basicattentiontoken.org/favicon.ico is Vulnerable to CVE-2017-7529 | — | brave | 2020-12-16 | [#980856](https://hackerone.com/reports/980856) |
 | Your page has 2 blocking CSS resources. This causes a delay in rendering your page. | — | nodejs | 2018-07-15 | [#365968](https://hackerone.com/reports/365968) |
 | Read beyond bounds in mod_isapi.c [zhbug_httpd_41] | — | ibb | 2022-07-09 | [#1595296](https://hackerone.com/reports/1595296) |
+| CVE-2026-107928: info leak uploading over WebSockets with GnuTLS | — | curl | 2026-10-14 | [#4099194](https://hackerone.com/reports/4099194) |
 | CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
 | Heap Memory Disclosure via Integer Underflow in Item_func_json_arrayagg::cut_max_length in MariaDB Server | — | mariadb | 2026-09-15 | [#3771139](https://hackerone.com/reports/3771139) |
@@ -691,6 +692,7 @@
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
 | CVE-2026-9080: UAF after pause in socket callback | — | curl | 2026-06-24 | [#3749204](https://hackerone.com/reports/3749204) |
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
+| CVE-2026-92392: HTTP/2 upload Use-After-Free | — | curl | 2026-10-14 | [#4030333](https://hackerone.com/reports/4030333) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |

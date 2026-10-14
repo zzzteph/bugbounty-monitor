@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1127 report(s) across 10 class(es)**
+**1128 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 917 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 918 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -295,6 +295,7 @@
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 | CVE-2026-82209: domain-scoped PSL domain cookie | — | curl | 2026-09-03 | [#3972385](https://hackerone.com/reports/3972385) |
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
+| CVE-2026-86409: stale SigV4 headers sent unintended | — | curl | 2026-10-14 | [#3973135](https://hackerone.com/reports/3973135) |
 | PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
 | Information Disclosure - Unauthen Leak Private Content | — | wordpress | 2026-10-10 | [#4053546](https://hackerone.com/reports/4053546) |

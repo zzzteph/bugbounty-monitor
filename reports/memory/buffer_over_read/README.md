@@ -1,6 +1,6 @@
 # Buffer Over Read
 
-**55 report(s)**
+**56 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,6 +18,7 @@
 | OOB read in php_strip_tags_ex | $500 | ibb | 2020-11-09 | [#778834](https://hackerone.com/reports/778834) |
 | tcpdump before 4.9.3 has a heap-based buffer over-read related to aoe_print in print-aoe.c and lookup_emem in addrtoname.c | $500 | ibb | 2021-07-23 | [#831353](https://hackerone.com/reports/831353) |
 | Read beyond bounds in mod_isapi.c [zhbug_httpd_41] | — | ibb | 2022-07-09 | [#1595296](https://hackerone.com/reports/1595296) |
+| CVE-2026-107928: info leak uploading over WebSockets with GnuTLS | — | curl | 2026-10-14 | [#4099194](https://hackerone.com/reports/4099194) |
 | CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
 | Heap Memory Disclosure via Integer Underflow in Item_func_json_arrayagg::cut_max_length in MariaDB Server | — | mariadb | 2026-09-15 | [#3771139](https://hackerone.com/reports/3771139) |

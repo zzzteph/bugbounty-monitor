@@ -1,6 +1,6 @@
 # Cleartext Transmission Of Sensitive Information
 
-**41 report(s)**
+**42 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -20,6 +20,7 @@
 | CVE-2023-23915: HSTS amnesia with --parallel | — | curl | 2023-02-15 | [#1814333](https://hackerone.com/reports/1814333) |
 | Rocket.chat user info security issue | — | rocket_chat | 2022-09-22 | [#1517377](https://hackerone.com/reports/1517377) |
 | CVE-2022-42916: HSTS bypass via IDN | — | ibb | 2022-11-03 | [#1753226](https://hackerone.com/reports/1753226) |
+| CVE-2026-87862: HSTS cache import drops longer-lived child | — | curl | 2026-10-14 | [#3972357](https://hackerone.com/reports/3972357) |
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | curl tool: --hsts is ignored for a schemeless URL starting with a slash under --proto-default http | — | curl | 2026-10-08 | [#4063328](https://hackerone.com/reports/4063328) |
 | SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |

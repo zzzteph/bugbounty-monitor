@@ -1,6 +1,6 @@
 # Authentication Bypass By Primary Weakness
 
-**18 report(s)**
+**19 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -8,6 +8,7 @@
 | CVE-2026-19931: Negotiate ambient user conn reuse | — | curl | 2026-09-03 | [#3923520](https://hackerone.com/reports/3923520) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
 | 11: `CURLOPT_FORBID_REUSE` silently lost on multiplexed HTTP/2 connection when the forbidding transfer finishes first | — | curl | 2026-09-07 | [#3973121](https://hackerone.com/reports/3973121) |
+| CVE-2026-86411: FTP connection reuse inherits client-certificate | — | curl | 2026-10-14 | [#3973190](https://hackerone.com/reports/3973190) |
 | TLS session resumption client cert bypass with CURLOPT_SSL_CTX_FUNCTION | — | curl | 2026-09-14 | [#4016541](https://hackerone.com/reports/4016541) |
 | Unauthenticated Account Registration + Email Verification Bypass + PII Data Leak (2,480 Records) on ████████ | — | essity | 2026-05-27 | [#3737516](https://hackerone.com/reports/3737516) |
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |

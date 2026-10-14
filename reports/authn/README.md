@@ -1,22 +1,22 @@
 # Authentication & Session
 
-**620 report(s) across 18 class(es)**
+**623 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 395 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 396 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 18 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 19 | — |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
 | [Authentication Bypass](authentication_bypass/README.md) | 6 | $7,500 |
+| [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 6 | — |
 | [Unverified Password Change](unverified_password_change/README.md) | 6 | — |
-| [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 5 | — |
 | [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 4 | $15,300 |
 | [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 3 | — |
 | [Insufficient Verification Of Data Authenticity](insufficient_verification_of_data_authenticity/README.md) | 2 | $1,270 |
@@ -139,6 +139,7 @@
 | CVE-2026-19931: Negotiate ambient user conn reuse | — | curl | 2026-09-03 | [#3923520](https://hackerone.com/reports/3923520) |
 | CVE-2026-5545: wrong reuse of HTTP Negotiate connection | — | curl | 2026-04-29 | [#3642555](https://hackerone.com/reports/3642555) |
 | 11: `CURLOPT_FORBID_REUSE` silently lost on multiplexed HTTP/2 connection when the forbidding transfer finishes first | — | curl | 2026-09-07 | [#3973121](https://hackerone.com/reports/3973121) |
+| CVE-2026-86411: FTP connection reuse inherits client-certificate | — | curl | 2026-10-14 | [#3973190](https://hackerone.com/reports/3973190) |
 | TLS session resumption client cert bypass with CURLOPT_SSL_CTX_FUNCTION | — | curl | 2026-09-14 | [#4016541](https://hackerone.com/reports/4016541) |
 | Unauthenticated Account Registration + Email Verification Bypass + PII Data Leak (2,480 Records) on ████████ | — | essity | 2026-05-27 | [#3737516](https://hackerone.com/reports/3737516) |
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |
@@ -174,6 +175,7 @@
 | CVE-2026-7168: cross-proxy Digest auth state leak | — | curl | 2026-04-29 | [#3697719](https://hackerone.com/reports/3697719) |
 | libcurl reuses a learned RTSP Session header across different hosts on the same easy handle, enabling cross-host session leak and replay | — | curl | 2026-04-18 | [#3680234](https://hackerone.com/reports/3680234) |
 | CVE-2026-6276: stale custom cookie host causes cookie leak | — | curl | 2026-04-29 | [#3671818](https://hackerone.com/reports/3671818) |
+| CVE-2026-107929: local interface connection reuse mixup | — | curl | 2026-10-14 | [#4099618](https://hackerone.com/reports/4099618) |
 | State Isolation Failure in Multiplexed Connections (Shared Auth Context) | — | curl | 2026-01-08 | [#3487952](https://hackerone.com/reports/3487952) |
 | Login to any user account using other facebook app access token  | — | imgur | 2017-07-24 | [#101977](https://hackerone.com/reports/101977) |
 | Race Conditions in OAuth 2 API implementations | — | ibb | 2017-09-19 | [#55140](https://hackerone.com/reports/55140) |
@@ -198,6 +200,7 @@
 | CVE-2022-22576: OAUTH2 bearer bypass in connection re-use | — | curl | 2022-04-29 | [#1526328](https://hackerone.com/reports/1526328) |
 | Response Manipulation leads to Admin Panel Login Bypass at https://██████/ | — | sony | 2022-09-12 | [#1508661](https://hackerone.com/reports/1508661) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| CVE-2026-87861: cross-origin reuse of a Negotiate connection | — | curl | 2026-10-14 | [#3972094](https://hackerone.com/reports/3972094) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
 | Wallet RPC Restricted-Mode Policy Bypass | — | monero | 2026-08-17 | [#3620006](https://hackerone.com/reports/3620006) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |

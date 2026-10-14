@@ -1,6 +1,6 @@
 # Use After Free
 
-**75 report(s)**
+**76 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -22,6 +22,7 @@
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
 | CVE-2026-9080: UAF after pause in socket callback | — | curl | 2026-06-24 | [#3749204](https://hackerone.com/reports/3749204) |
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
+| CVE-2026-92392: HTTP/2 upload Use-After-Free | — | curl | 2026-10-14 | [#4030333](https://hackerone.com/reports/4030333) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |

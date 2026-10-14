@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Stored
 
-**471 report(s)**
+**472 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -22,6 +22,7 @@
 | Persistent XSS in Note objects | $4,500 | gitlab | 2019-07-19 | [#508184](https://hackerone.com/reports/508184) |
 | Stored XSS in merge request pages | $3,500 | gitlab | 2023-05-30 | [#723307](https://hackerone.com/reports/723307) |
 | Stored XSS in photos_user_map.gne | $3,263 | flickr | 2022-05-23 | [#1534636](https://hackerone.com/reports/1534636) |
+| Stored XSS on the public Pontoon dashboards: the latest-activity tooltip re-parses a contributor's account address as HTML | $3,000 | mozilla | 2026-10-14 | [#3988961](https://hackerone.com/reports/3988961) |
 | Bypass Filter and get Stored Xss  | $3,000 | shopify | 2018-12-12 | [#299424](https://hackerone.com/reports/299424) |
 | Stored XSS in main page of a project caused by arbitrary script payload in group "Default initial branch name" | $3,000 | gitlab | 2021-09-15 | [#1256777](https://hackerone.com/reports/1256777) |
 | Stored XSS via Mermaid Prototype Pollution vulnerability | $3,000 | gitlab | 2021-07-12 | [#1106238](https://hackerone.com/reports/1106238) |

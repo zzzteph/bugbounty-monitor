@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**917 report(s)**
+**918 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -236,6 +236,7 @@
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
 | CVE-2026-82209: domain-scoped PSL domain cookie | — | curl | 2026-09-03 | [#3972385](https://hackerone.com/reports/3972385) |
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
+| CVE-2026-86409: stale SigV4 headers sent unintended | — | curl | 2026-10-14 | [#3973135](https://hackerone.com/reports/3973135) |
 | PRE_PROXY change leaks stale Proxy Digest state across proxy-chain boundary | — | curl | 2026-06-03 | [#3777381](https://hackerone.com/reports/3777381) |
 | View-only offline transaction creation bypasses the long-payment-ID privacy block | — | monero | 2026-08-20 | [#3686283](https://hackerone.com/reports/3686283) |
 | Information Disclosure - Unauthen Leak Private Content | — | wordpress | 2026-10-10 | [#4053546](https://hackerone.com/reports/4053546) |

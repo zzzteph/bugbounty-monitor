@@ -1,0 +1,133 @@
+{
+  "id": 3973201,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTczMjAx",
+  "url": "https://hackerone.com/reports/3973201",
+  "title": "CVE-2026-86412: server-set cookie erases cookie jar",
+  "state": "Closed",
+  "substate": "resolved",
+  "readable_substate": "Resolved",
+  "created_at": "2026-08-27T09:32:48.752Z",
+  "submitted_at": "2026-08-27T09:32:49.062Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "giant_anteater",
+    "url": "/giant_anteater",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/r9sgcvqgyzx7oyd4vqjv580xuk4y/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-86412"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-14T07:35:10.455Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-14T06:36:34.225Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nA remote HTTP server can set a cookie that curl accepts and writes to a Netscape cookie jar but cannot reload. On the next invocation using the same path for `--cookie` and `--cookie-jar`, curl fails with `CURLE_TOO_LARGE` (100) before connecting, then cleanup replaces the jar with an empty 131-byte header, deleting cookies for unrelated domains.\n\nThe root cause is an inconsistency between what `get_netscape_format()` can write and what `cookie_load()` can read, combined with `cookie_load()` unconditionally marking the store as running even after a load failure, which lets cleanup overwrite the jar from an incomplete store.\n\n## Affected versions\n\ncurl 8.18.0 through 8.21.0, plus affected 8.22.0 prerelease/development versions.\n\n## Root cause\n\n`parse_cookie_header()` accepts a `Set-Cookie` value up to `MAX_COOKIE_LINE` (5000) bytes. `get_netscape_format()` then adds the domain, path, flags, expiry, and tab delimiters via `curl_maprintf` with no length check on the serialized record.\n\nA cookie with a 4094-byte name, value `v`, and `Path=/` followed by 870 `a` characters, set by a 16-byte host (`attacker.example`), serializes to a 4999-byte jar record.\n\n`cookie_load()` initializes a dynbuf with `MAX_COOKIE_LINE` (5000). The dynbuf limit includes the NUL terminator, and `Curl_get_line()` retains or appends a newline. So the maximum reloadable payload is 4998 bytes before the newline. A 4999-byte record does not fit and `Curl_get_line()` returns `CURLE_TOO_LARGE`.\n\nAfter the error, `cookie_load()` still sets `ci->running = TRUE` unconditionally (`lib/cookie.c:1211`). `Curl_pretransfer()` propagates the error and never starts a connection, but cleanup sees the cookie store as running and calls `cookie_output()`, which atomically replaces the configured jar with the partially loaded (empty) store. This bypasses the incomplete-store protection added for issue #18621 because the failed loader has already set the running flag.\n\n## Security impact\n\nA remote, unauthenticated HTTP server can:\n\n1. Prevent all later curl transfers that load the poisoned jar (`CURLE_TOO_LARGE` before any connection is made).\n2. In the documented same-file `--cookie`/`--cookie-jar` workflow, permanently erase cookies belonging to unrelated domains.\n\nThe impact is availability loss and persistent-state integrity corruption across domain boundaries. There is no confidentiality loss or memory corruption. Cookie persistence is opt-in and the boundary condition is narrow (one byte), so I would expect Low severity if considered a security issue.\n\nThis is adjacent to issue #18621 and the unreloadable TAB-path case fixed by PR #21185, but the effect is broader: one server-controlled cookie prevents unrelated transfers and can erase cross-domain persistent state.\n\n## Reproduction\n\n1. Build an affected curl release, starting with 8.18.0, with HTTP cookie support enabled.\n2. Start two HTTP virtual hosts or test servers representing an attacker-controlled domain and an unrelated victim domain.\n3. Have the victim host set a normal persistent cookie and save it to a Netscape-format cookie jar.\n4. Contact the attacker-controlled host while using the same file as both cookie input and cookie-jar output.\n5. Make the attacker response set a cookie that is accepted by curl's HTTP cookie parser but whose fully serialized Netscape record is one byte larger than the cookie-jar loader can consume.\n6. Construct the boundary using a long but accepted cookie name or value plus a long `Path` attribute, accounting for the domain, flags, expiry, separators, newline, and terminating NUL added during serialization and reload.\n7. Confirm that curl accepts the attacker cookie, completes the request, and writes a 4999-byte cookie record to the jar alongside the unrelated victim cookie.\n8. Preserve a copy of this poisoned jar for a read-only control and record the number of requests received by the victim server.\n9. Start a new curl transfer to the victim domain with the poisoned file configured as both cookie input and cookie-jar output.\n10. Observe that curl fails with `CURLE_TOO_LARGE` before connecting because the 4999-byte record, newline, and terminating NUL exceed the loader's 5000-byte dynbuf limit.\n11. Confirm that the victim server received no new request.\n12. Inspect the cookie jar after curl cleanup.\n13. Observe the destructive result: curl has replaced the original jar with only its standard header, deleting the attacker record and all unrelated victim cookies.\n14. Repeat the reload using the preserved copy only as cookie input, without configuring cookie-jar output.\n15. Confirm that loading still fails with `CURLE_TOO_LARGE` but the input file remains unchanged, isolating the deletion to cleanup persistence.\n16. Create a boundary control in which the attacker cookie serializes to 4998 bytes instead of 4999 bytes.\n17. Repeat the same-file load and save operation and confirm that the shorter record reloads successfully, the victim request occurs, and the cookie jar remains populated.\n18. Confirm a fix by ensuring a failed cookie load does not mark the store as safe to persist and by making accepted in-memory cookie limits consistent with serialized reload limits.\n19. Repeat the 4999-byte test and verify that curl may reject the transfer but never overwrites the original cookie jar from a partially loaded store.\n\n### Expected result\n\nA server-set cookie written by curl must either be reloadable or be rejected before persistence. A failed cookie-jar load must never cause cleanup to overwrite the original jar with incomplete state.\n\n### Vulnerable result\n\nCurl writes a cookie record that its own loader rejects. The load error occurs before the next connection, but cleanup treats the incomplete store as valid and replaces the shared jar, erasing cookies for every domain in that file.\n\n\n## Suggested fix\n\nTwo changes:\n\n1. Do not set `ci->running = TRUE` when `cookie_load()` fails, so cleanup cannot overwrite a jar from an incomplete load.\n2. Make the accepted in-memory cookie limit consistent with the maximum serialized Netscape record that the loader can consume (either check the serialized length in `get_netscape_format()` or increase the dynbuf limit to account for the added fields).\n\n## Impact\n\n## Summary:\nA remote, unauthenticated server can poison a shared cookie jar so that later curl operations fail before connecting and then erase cookies belonging to unrelated domains. This can destroy persistent authentication and application state, log users out, disrupt automated workflows, or alter subsequent request behavior; it does not directly disclose cookies or corrupt memory.",
+  "weakness": {
+    "id": 115,
+    "name": "Improper Check or Handling of Exceptional Conditions"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6563234,
+      "file_name": "Dockerfile",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/xfalglccxxnls0uepjfqzoivl3fv?response-content-disposition=attachment%3B%20filename%3D%22Dockerfile%22%3B%20filename%2A%3DUTF-8%27%27Dockerfile&response-content-type=application%2Foctet-stream&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQXPYTLXHX%2F20261014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261014T111108Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIC1xSfZvWuoWZzSXK57y6nr7yDqf%2F6ntSztoUIGbt8mLAiBbs%2F%2BO3FBqiReFWHyznN3KayJvq7AigW02XUemZRiykiq7BQiy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMEAAgpOlSX4kKA902Ko8FhJZ3J3GyX3DtbvynuKjR1uqzDquZF02%2BK%2FVj9qQi%2B1fomgyJP5awLfq0du4TSMhpUjE4obMYRx36FqRB4uCw2g%2BQJ%2Bfv%2BPuL16kgDYZ3xbFQm98V7n4oVRen%2BizkwJUJw0FBKlPe2ZQC%2FABI8OqoKSv1D48sODKrJNCi5BKo4FzJdscPogtvatdPtkEQjCAGagYZMA6FS%2FjdgQ0SnZ5HupKXEIunC9pSwIYGP9IBUrPpFhgt6DXUFjhBicoEhuA6EEoB12rF3H3d9%2F3cME%2FPfsUz0nx04ztnKhlrSEk%2FqEU5X7%2B9L1kDVlBeEoxK3qjNdusRdG0QcljXzkjyae03iUGaPlsk3ezpjxsB5NnGdXjNtWMhq%2Bg%2Bhcx9zyvNgQqBQQVYzl%2FX0SUX3sbV1SiXio1HxD5PH%2B%2BS1oY7UVhHE25a7yFfLQXzeEcVZWeZCurQ9Zt2dwyYVNLXu15%2FehipTamNspssPayyKRQG%2FpIVAKMRA5ERh5%2BXm3cnAYaDeWeLPP3sr4yZQLyraQV31eZCG9uXFoQQiyuOxVV2TJD4L3jv2PCKezV7iRpbHZCRD5CP6%2FTEeTpje2xsAaE2JWE%2F2XGXdj2TJ%2BIf%2BwJHDivODookG6TrvdJ98UDCcrFUvb8dv5BrryNHC1DigRV0oLhtH740k9cpdpdOp%2Bi1BdsAIuRPLAeTMCGot9tyvKKOgXFGK3b9hxIKpxqNu9dpFnX4LGQsvZOciAWtyOp%2BuijIYRofGQIdLl2fKPmo%2FTZnVFh%2BrlFodCkYvVmRAOvFwHeOa%2FBiOGm4ASoGDkgf%2FVg8dUL%2BOzY2d233gdLmoD3SoTRpcbF4MuG%2FBugXSZt1yTir3kqDJvnRVk7juAD6aj4MuzDP%2FLzWBjqyAfeqI41tKSEJwRGIzXlHFbZ1Mnd6cPa3yT%2FOaAYosoEGtnVCrysNeByv0Mv5vpchYRf3%2BLGOLwh%2FKK4wCHQ8f438vBwsFydtuDeDK5Z8uaHbiYIUiOGRyUBk6KwfUm59gDXeum8XCfyWnmFWMD3YvB5zp%2BRbYXrdgmpjduSjmHxPSJqJNuzUA3IGdpRmJ2MZ0vTfOrWNbWF9Z%2FCHGyR3QjX1TeIWqDtBod3JnbVbhkZ8Ssk%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=7ad2eea4db8fa1dcee8cbe03e8bf29ff08444874663fdb7faf33c7401c04606b",
+      "file_size": 308,
+      "type": "application/octet-stream",
+      "moderated": null
+    },
+    {
+      "id": 6563235,
+      "file_name": "poc.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/p43spsbimh0c433cdqnqgwfpm3e5?response-content-disposition=attachment%3B%20filename%3D%22poc.sh%22%3B%20filename%2A%3DUTF-8%27%27poc.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQXPYTLXHX%2F20261014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261014T111108Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIC1xSfZvWuoWZzSXK57y6nr7yDqf%2F6ntSztoUIGbt8mLAiBbs%2F%2BO3FBqiReFWHyznN3KayJvq7AigW02XUemZRiykiq7BQiy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMEAAgpOlSX4kKA902Ko8FhJZ3J3GyX3DtbvynuKjR1uqzDquZF02%2BK%2FVj9qQi%2B1fomgyJP5awLfq0du4TSMhpUjE4obMYRx36FqRB4uCw2g%2BQJ%2Bfv%2BPuL16kgDYZ3xbFQm98V7n4oVRen%2BizkwJUJw0FBKlPe2ZQC%2FABI8OqoKSv1D48sODKrJNCi5BKo4FzJdscPogtvatdPtkEQjCAGagYZMA6FS%2FjdgQ0SnZ5HupKXEIunC9pSwIYGP9IBUrPpFhgt6DXUFjhBicoEhuA6EEoB12rF3H3d9%2F3cME%2FPfsUz0nx04ztnKhlrSEk%2FqEU5X7%2B9L1kDVlBeEoxK3qjNdusRdG0QcljXzkjyae03iUGaPlsk3ezpjxsB5NnGdXjNtWMhq%2Bg%2Bhcx9zyvNgQqBQQVYzl%2FX0SUX3sbV1SiXio1HxD5PH%2B%2BS1oY7UVhHE25a7yFfLQXzeEcVZWeZCurQ9Zt2dwyYVNLXu15%2FehipTamNspssPayyKRQG%2FpIVAKMRA5ERh5%2BXm3cnAYaDeWeLPP3sr4yZQLyraQV31eZCG9uXFoQQiyuOxVV2TJD4L3jv2PCKezV7iRpbHZCRD5CP6%2FTEeTpje2xsAaE2JWE%2F2XGXdj2TJ%2BIf%2BwJHDivODookG6TrvdJ98UDCcrFUvb8dv5BrryNHC1DigRV0oLhtH740k9cpdpdOp%2Bi1BdsAIuRPLAeTMCGot9tyvKKOgXFGK3b9hxIKpxqNu9dpFnX4LGQsvZOciAWtyOp%2BuijIYRofGQIdLl2fKPmo%2FTZnVFh%2BrlFodCkYvVmRAOvFwHeOa%2FBiOGm4ASoGDkgf%2FVg8dUL%2BOzY2d233gdLmoD3SoTRpcbF4MuG%2FBugXSZt1yTir3kqDJvnRVk7juAD6aj4MuzDP%2FLzWBjqyAfeqI41tKSEJwRGIzXlHFbZ1Mnd6cPa3yT%2FOaAYosoEGtnVCrysNeByv0Mv5vpchYRf3%2BLGOLwh%2FKK4wCHQ8f438vBwsFydtuDeDK5Z8uaHbiYIUiOGRyUBk6KwfUm59gDXeum8XCfyWnmFWMD3YvB5zp%2BRbYXrdgmpjduSjmHxPSJqJNuzUA3IGdpRmJ2MZ0vTfOrWNbWF9Z%2FCHGyR3QjX1TeIWqDtBod3JnbVbhkZ8Ssk%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8875517b71a8c19003fea884a3b22ff383bfa6f7bdd8ce8089a1460656adcc94",
+      "file_size": 5109,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6563236,
+      "file_name": "run.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/kuxy92cyn8zaqtya37vl9k7h2wdw?response-content-disposition=attachment%3B%20filename%3D%22run.sh%22%3B%20filename%2A%3DUTF-8%27%27run.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQXPYTLXHX%2F20261014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261014T111108Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIC1xSfZvWuoWZzSXK57y6nr7yDqf%2F6ntSztoUIGbt8mLAiBbs%2F%2BO3FBqiReFWHyznN3KayJvq7AigW02XUemZRiykiq7BQiy%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAMaDDAxMzYxOTI3NDg0OSIMEAAgpOlSX4kKA902Ko8FhJZ3J3GyX3DtbvynuKjR1uqzDquZF02%2BK%2FVj9qQi%2B1fomgyJP5awLfq0du4TSMhpUjE4obMYRx36FqRB4uCw2g%2BQJ%2Bfv%2BPuL16kgDYZ3xbFQm98V7n4oVRen%2BizkwJUJw0FBKlPe2ZQC%2FABI8OqoKSv1D48sODKrJNCi5BKo4FzJdscPogtvatdPtkEQjCAGagYZMA6FS%2FjdgQ0SnZ5HupKXEIunC9pSwIYGP9IBUrPpFhgt6DXUFjhBicoEhuA6EEoB12rF3H3d9%2F3cME%2FPfsUz0nx04ztnKhlrSEk%2FqEU5X7%2B9L1kDVlBeEoxK3qjNdusRdG0QcljXzkjyae03iUGaPlsk3ezpjxsB5NnGdXjNtWMhq%2Bg%2Bhcx9zyvNgQqBQQVYzl%2FX0SUX3sbV1SiXio1HxD5PH%2B%2BS1oY7UVhHE25a7yFfLQXzeEcVZWeZCurQ9Zt2dwyYVNLXu15%2FehipTamNspssPayyKRQG%2FpIVAKMRA5ERh5%2BXm3cnAYaDeWeLPP3sr4yZQLyraQV31eZCG9uXFoQQiyuOxVV2TJD4L3jv2PCKezV7iRpbHZCRD5CP6%2FTEeTpje2xsAaE2JWE%2F2XGXdj2TJ%2BIf%2BwJHDivODookG6TrvdJ98UDCcrFUvb8dv5BrryNHC1DigRV0oLhtH740k9cpdpdOp%2Bi1BdsAIuRPLAeTMCGot9tyvKKOgXFGK3b9hxIKpxqNu9dpFnX4LGQsvZOciAWtyOp%2BuijIYRofGQIdLl2fKPmo%2FTZnVFh%2BrlFodCkYvVmRAOvFwHeOa%2FBiOGm4ASoGDkgf%2FVg8dUL%2BOzY2d233gdLmoD3SoTRpcbF4MuG%2FBugXSZt1yTir3kqDJvnRVk7juAD6aj4MuzDP%2FLzWBjqyAfeqI41tKSEJwRGIzXlHFbZ1Mnd6cPa3yT%2FOaAYosoEGtnVCrysNeByv0Mv5vpchYRf3%2BLGOLwh%2FKK4wCHQ8f438vBwsFydtuDeDK5Z8uaHbiYIUiOGRyUBk6KwfUm59gDXeum8XCfyWnmFWMD3YvB5zp%2BRbYXrdgmpjduSjmHxPSJqJNuzUA3IGdpRmJ2MZ0vTfOrWNbWF9Z%2FCHGyR3QjX1TeIWqDtBod3JnbVbhkZ8Ssk%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=716a87c6b83a3e0da333deda4e239ab9418d6d1202a8a06444baff2ae5fa4f23",
+      "file_size": 291,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": 3975408,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTc1NDA4",
+  "url": "https://hackerone.com/reports/3975408",
+  "title": "CVE-2026-87865: knownhost callback mismatches key as missing",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "low",
+  "readable_substate": "Resolved",
+  "created_at": "2026-08-28T07:34:45.053Z",
+  "submitted_at": "2026-08-28T07:34:45.417Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "1rhino2",
+    "url": "/1rhino2",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/h1d00k3qx0lgut84ryy9vextnubi/f4770e29726b679d8210b3bcebb50139392345e8ead50e7d67de79a93076e327"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-87865",
+    "CVE-2026-9547"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-14T07:19:42.623Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-14T06:37:46.367Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "When libcurl uses libssh2 with a hashed OpenSSH known_hosts file, an unrelated first entry can make a hostile key for an already pinned SFTP/SCP host reach CURLOPT_SSH_KEYFUNCTION as CURLKHMATCH_MISSING instead of CURLKHMATCH_MISMATCH.\n\nAt https://github.com/curl/curl/blob/68720b4837284335b2d63cb358f8f6ce65f5bc55/lib/vssh/libssh2.c#L653-L687, curl treats the first hashed entry whose public name is NULL as the destination and forces that entry's key algorithm without checking its hostname hash.\n\nWith an unrelated hashed RSA entry before the target's hashed Ed25519 entry, a hostile RSA server negotiates successfully; libssh2 then filters out the Ed25519 pin and curl passes NOTFOUND to the callback as MISSING.\n\nTo reproduce on curl 8.21.0 commit 68720b4837284335b2d63cb358f8f6ce65f5bc55, build shared libcurl with `cmake -S . -B build -DCURL_USE_LIBSSH2=ON -DBUILD_SHARED_LIBS=ON`, extract the attachment, and run `python3 poc.py --build-dir /absolute/path/to/build --output run.json`.\n\nBoth exploit runs exit 0, the callback receives MISSING, the hostile server receives the password canary, and libcurl returns ATTACKER_SFTP_BODY; the target-first and same-type MISMATCH controls send no password.\n\nThis is a separate libssh2 root from CVE-2026-9547, whose advisory says libssh2 is unaffected; I used AI to assist the source audit and drafting, then personally reran the exact-release, current-master, control, and fixed-control tests.\n\n## Impact\n\nA network attacker who controls or intercepts the reached SSH endpoint can make an already pinned host appear genuinely new to a trust-on-first-use callback. Libcurl then authenticates to the hostile endpoint; in the proof, the server receives the configured SSH password and libcurl accepts attacker-controlled SFTP data. The default callback and curl command-line tool are not claimed affected.",
+  "weakness": {
+    "id": 555,
+    "name": "Improper Validation of Certificate with Host Mismatch"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6570411,
+      "file_name": "PZ-CURL-009-h1-attachments.zip",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/vjq7lw1n627l71zmwxwbrbb9yj6c?response-content-disposition=attachment%3B%20filename%3D%22PZ-CURL-009-h1-attachments.zip%22%3B%20filename%2A%3DUTF-8%27%27PZ-CURL-009-h1-attachments.zip&response-content-type=application%2Fzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQYT7UJ3T7%2F20261014%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261014T111115Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEOn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIAm%2BVXIIdWm0FsgKTWc8qjLehiKA8kfdwbJkKJhSmO%2B5AiEAg1ptPzTI2GlJsHCI%2BEYq8WMgzkXvnZxuMYl1XIxcN%2BoquwUIsv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDMTimZv1qDlMS7saYiqPBa%2FkjE2hxOqUZs%2FunMLncsv3GX%2FjV7ZWnZnejZ3bEIGgWapw%2F0INKbxdsHVpXZR12dAcf1g%2Buone8T04MEyPl0t73DdLM5tISI4DFMt9KmhVoadOCDv71c8TSChhDbmUGTZsl0V62tljBrMVFDmeeZkCHGcGjs4n3hCqm2cMlc6FIkBPU7pqrpvoHvR%2FWLYzAJUwQN2LILeaNRvvFpkcwyCa6qUxSAfwlXUT4f%2BPic3LdNosJqdP7uxuDglLt4WW1sgB4yRKKXtcHS8kdfPJ6VvrHAhrw0J0DpDyWr2LNmevWYFrWr2T%2FnQymmt41FhJoEnF2hXjf8Tb3XpF8Q9f%2B7u4WAaF6WZtoF3%2FAnrKU4bnS2Fq287yqiuWTfTj4kHgrpTEoAW6p2grmAtbjUERiL%2FeRC5McIy4DM%2BfcdxXqf72NE3E2tlaQw8k22AJqbGqrdAVNmgnsaUcm6G5Puzgvw3pdtdV%2B8EDO1ZNBEjQODdLL6Wo2GoSLgmhc4JUvTtfGHJ1y6CB1eKEPTq8dkzmbom24GBgKtQseagRgGfoKlKchQl8CIDz4DtyYeGZCFJVwNV02ICRf4xksDo5xnis75viGiKITtzlC5LWMk3%2FE2TEsahLL9rv4mq719k%2Fd2BiTGyLfhlmTpxXDdO93D0E%2BJohdm23CnPMuZ4oA5Cv0LBf6QXY36HNuUQ8h4D4LAH9VIs6qEIPt3Eeg7115QAogZhuawtrWYsgC9El7rLFrQwccjLLTb7Fe8TP7oEEBYXqxZAOuiJFdoxKuyv%2FHihDysnjvYn3%2FfrT2y5qR1PDUnhXUNJDvC2OCXumtprk4LHvhkct92pyGUWkLXAczBs3Nc1dnZwLGmTWTKJaoj8fJYgwmYa91gY6sQFNUj3CzC2rxES2U2MyJ1Mtnwsy90AZrAStSI8KXnry48s4589JV9x2FI%2FuGszS1qUoh%2FLXGs%2FWoEWazDv02YlrNcIvNP0cIPc%2FwVE5Hxr7V3s38bEelRlmg7S%2FJwJk9%2BpjtmawwrTGCv1wcSyK7cjsoo7QCZFuvTIhPFmkYJl3v7RaOb3hExE1gbQGbMM%2BQSPR506s%2FdBUtaqvDKIQAzNy2arQF2GxoDbzfmydQJKtxeY%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=ddc6c6b319d561196f7893a29567bf2670c48a023face7728c24764a2e685be3",
+      "file_size": 6907,
+      "type": "application/zip",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

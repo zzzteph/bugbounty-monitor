@@ -1,14 +1,14 @@
 # TLS / Certificate Validation
 
-**87 report(s) across 5 class(es)**
+**90 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 51 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 52 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 28 | $1,000 |
-| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 5 | — |
+| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 7 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
@@ -36,6 +36,7 @@
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
+| CVE-2026-87866: wolfSSL public-key pinning bypass | — | curl | 2026-10-14 | [#3989514](https://hackerone.com/reports/3989514) |
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
@@ -72,6 +73,8 @@
 | CURLOPT_PROXY_CRLFILE / CURLOPT_PROXY_ISSUERCERT / CURLOPT_PROXY_ISSUERCERT_BLOB silently ignored on backends that don't support them | — | curl | 2026-06-05 | [#3717552](https://hackerone.com/reports/3717552) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |
+| CVE-2026-86410:  redirect to SFTP or SCP bypasses host verification | — | curl | 2026-10-14 | [#3973176](https://hackerone.com/reports/3973176) |
+| CVE-2026-87865: knownhost callback mismatches key as missing | — | curl | 2026-10-14 | [#3975408](https://hackerone.com/reports/3975408) |
 | mbedTLS / wolfSSL / rustls backends silently skip hostname verification when CURLOPT_SSL_VERIFYPEER=0 | — | curl | 2026-06-26 | [#3826199](https://hackerone.com/reports/3826199) |
 | wolfSSL backend disables hostname verification when CURLOPT_SSL_VERIFYPEER is 0 | — | curl | 2026-08-24 | [#3963725](https://hackerone.com/reports/3963725) |
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |

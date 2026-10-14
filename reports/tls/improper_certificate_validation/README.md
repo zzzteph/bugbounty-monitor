@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**51 report(s)**
+**52 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -22,6 +22,7 @@
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
+| CVE-2026-87866: wolfSSL public-key pinning bypass | — | curl | 2026-10-14 | [#3989514](https://hackerone.com/reports/3989514) |
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |

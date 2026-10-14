@@ -1,6 +1,6 @@
 # Unknown
 
-**998 report(s)**
+**1009 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -204,9 +204,13 @@
 | IDOR - Delete technical skill assessment result & Gained Badges result of any user | — | linkedin | 2022-10-05 | [#1592587](https://hackerone.com/reports/1592587) |
 | Insecure loading of ICU data through ICU_DATA environment variable | — | nodejs | 2023-03-19 | [#1625036](https://hackerone.com/reports/1625036) |
 | [AWC-Pune] - User can download files deleted by Admin using shortcuts | — | lark_technologies | 2022-02-25 | [#1463028](https://hackerone.com/reports/1463028) |
+| CVE-2026-86413: Negotiate credentials sent to redirected origin | — | curl | 2026-10-14 | [#3993549](https://hackerone.com/reports/3993549) |
+| CVE-2026-86415: auto client cert connection reuse mixup | — | curl | 2026-10-14 | [#3993870](https://hackerone.com/reports/3993870) |
 | Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
 | Heap-use-after-free in CURLOPT_REFERER when passed a CURLINFO_REFERER pointer | — | curl | 2026-09-14 | [#3971462](https://hackerone.com/reports/3971462) |
+| CVE-2026-92389: TFTP direction confusion | — | curl | 2026-10-14 | [#4022568](https://hackerone.com/reports/4022568) |
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
+| CVE-2026-92387: never-ending loop via server response omission | — | curl | 2026-10-14 | [#4022003](https://hackerone.com/reports/4022003) |
 | Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate | — | weblate | 2026-04-26 | [#3518571](https://hackerone.com/reports/3518571) |
 | 29: CURLOPT_ISSUERCERT accepts a different-key certificate when issuer metadata collides | — | curl | 2026-09-08 | [#3971518](https://hackerone.com/reports/3971518) |
 | CVE-2026-80229: OpenSSL provider use-after-free | — | curl | 2026-09-03 | [#3969255](https://hackerone.com/reports/3969255) |
@@ -217,6 +221,7 @@
 | Socket API drops expired timeouts for transfers queued behind a connection limit | — | curl | 2026-09-18 | [#4021952](https://hackerone.com/reports/4021952) |
 | Fail-Open in set_tlsext_servername_callback on pyopenssl via unhandled exceptions leads to security bypass | — | pyca | 2026-03-20 | [#3558277](https://hackerone.com/reports/3558277) |
 | 34: `curl_mprintf` reads `double` for documented `long double` conversions — uninitialized value disclosure | — | curl | 2026-08-28 | [#3972196](https://hackerone.com/reports/3972196) |
+| CVE-2026-92386: server-set cookie aborts cookie jar load | — | curl | 2026-10-14 | [#4021979](https://hackerone.com/reports/4021979) |
 | Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
@@ -242,13 +247,16 @@
 | ZMQ get_output_distribution duplicate amount DoS | — | monero | 2026-09-17 | [#3681690](https://hackerone.com/reports/3681690) |
 | Unbound cross-peer HTTP Digest challenge state | — | curl | 2026-08-27 | [#3968729](https://hackerone.com/reports/3968729) |
 | #mysql50# legacy alias / internal table collisions | — | mariadb | 2026-10-07 | [#3849051](https://hackerone.com/reports/3849051) |
+| CVE-2026-86414: leaking host credentials to HTTP proxy | — | curl | 2026-10-14 | [#3993566](https://hackerone.com/reports/3993566) |
 | CVE-2026-80230: OpenSSL pinning bypass | — | curl | 2026-09-03 | [#3969300](https://hackerone.com/reports/3969300) |
 | CVE-2026-80231: native CA store conn reuse | — | curl | 2026-09-03 | [#3969368](https://hackerone.com/reports/3969368) |
 | Vulnerability Report: Buffer Overflow in Path Sanitization | — | curl | 2026-06-16 | [#3804525](https://hackerone.com/reports/3804525) |
 | #mysql50# legacy alias / stale table cache identity mismatch | — | mariadb | 2026-10-07 | [#3849040](https://hackerone.com/reports/3849040) |
 | MQTT Protocol Packet Injection via Unchecked CONNACK Remaining Length | — | curl | 2026-02-05 | [#3531216](https://hackerone.com/reports/3531216) |
+| CVE-2026-94266: password leak in CURLINFO_EFFECTIVE_URL | — | curl | 2026-10-14 | [#4041053](https://hackerone.com/reports/4041053) |
 | 43: HTTP proxy CONNECT header chooses the `-OJ` filename after a redirect | — | curl | 2026-09-07 | [#3972293](https://hackerone.com/reports/3972293) |
 | Monero GUI OpenAlias DNSSEC-invalid resolution still writes spoofable address into recipient field | — | monero | 2026-08-20 | [#3819475](https://hackerone.com/reports/3819475) |
+| CVE-2026-92388: FTP wildcard write callback mixup | — | curl | 2026-10-14 | [#4022070](https://hackerone.com/reports/4022070) |
 | 36: HTTP upload resume offset consumed twice after early 307/308 redirect | — | curl | 2026-09-07 | [#3971706](https://hackerone.com/reports/3971706) |
 | DoS via Unbounded Memory Allocation in sendWebStream on Fastify v5.7.0+ leads to OOM crash when backpressure is ignored | — | fastify | 2026-03-05 | [#3524779](https://hackerone.com/reports/3524779) |
 | QuickSight Authorization Bypass: Chat Agents Accessible Despite Custom Permissions Denial | — | aws_vdp | 2026-05-12 | [#3577145](https://hackerone.com/reports/3577145) |
@@ -257,9 +265,11 @@
 | libcurl upload read callbacks miss recursive API guard, allowing prohibited multi API reentry and ASAN-confirmed UAF | — | curl | 2026-06-30 | [#3832393](https://hackerone.com/reports/3832393) |
 | Authorization header leak in ssrf_filter via cross-host redirect leads to credential theft and unauthorized access | — | arkadiyt-projects | 2026-04-15 | [#3642600](https://hackerone.com/reports/3642600) |
 | Arbitrary Code Execution via Scanner Bypass in **aws-diagram-mcp-server** `exec()` Namespace | — | aws_vdp | 2026-03-09 | [#3557138](https://hackerone.com/reports/3557138) |
+| CVE-2026-92391: curl_mime_free stack overflow by recursion | — | curl | 2026-10-14 | [#4024222](https://hackerone.com/reports/4024222) |
 | sign_multisig crashes monero-wallet-rpc on a malformed but decryptable multisig txset | — | monero | 2026-09-17 | [#3683934](https://hackerone.com/reports/3683934) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Windows filename sanitizer misses Unicode COM/LPT reserved device names | — | curl | 2026-09-24 | [#4040799](https://hackerone.com/reports/4040799) |
+| CVE-2026-94265: Authorization: Negotiate sent to foreign origin | — | curl | 2026-10-14 | [#4040551](https://hackerone.com/reports/4040551) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |
 | MQTT: unsigned integer underflow bypasses MAX_MQTT_MESSAGE_SIZE check | — | curl | 2026-01-13 | [#3508854](https://hackerone.com/reports/3508854) |
@@ -273,6 +283,7 @@
 | Bypassing Strict SSH Server Verification via Connection Pool Reuse in libcurl | — | curl | 2026-03-31 | [#3639277](https://hackerone.com/reports/3639277) |
 | 53: HTTP/1 CONNECT chunked-407 trailers bypass CURLOPT_SUPPRESS_CONNECT_HEADERS and lose CURLH_CONNECT classification | — | curl | 2026-09-14 | [#3973234](https://hackerone.com/reports/3973234) |
 | OpenSSL ENGINE selection omitted from mTLS connection matching | — | curl | 2026-09-14 | [#3968853](https://hackerone.com/reports/3968853) |
+| CVE-2026-92390: -J no-clobber guarantee bypassed with 103 early hints | — | curl | 2026-10-14 | [#4023192](https://hackerone.com/reports/4023192) |
 | 28: HTTP/3 UDP path ignores CURL_SOCKOPT_ALREADY_CONNECTED, reconnects callback-provided socket | — | curl | 2026-08-28 | [#3971496](https://hackerone.com/reports/3971496) |
 | RCE + Supply Chain Attack via pull_request_target in content-scope-scripts/semver-label.yml — Affects All DuckDuckGo Browsers | — | duckduckgo | 2026-06-11 | [#3619287](https://hackerone.com/reports/3619287) |
 | Server crash (stack-overflow DoS) via unbounded recursion in MariaDB WKB GEOMETRYCOLLECTION parser | — | mariadb | 2026-10-11 | [#3896507](https://hackerone.com/reports/3896507) |

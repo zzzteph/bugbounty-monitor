@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**395 report(s)**
+**396 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -86,6 +86,7 @@
 | CVE-2022-22576: OAUTH2 bearer bypass in connection re-use | — | curl | 2022-04-29 | [#1526328](https://hackerone.com/reports/1526328) |
 | Response Manipulation leads to Admin Panel Login Bypass at https://██████/ | — | sony | 2022-09-12 | [#1508661](https://hackerone.com/reports/1508661) |
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
+| CVE-2026-87861: cross-origin reuse of a Negotiate connection | — | curl | 2026-10-14 | [#3972094](https://hackerone.com/reports/3972094) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
 | Wallet RPC Restricted-Mode Policy Bypass | — | monero | 2026-08-17 | [#3620006](https://hackerone.com/reports/3620006) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |

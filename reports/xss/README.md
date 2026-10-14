@@ -1,13 +1,13 @@
 # XSS
 
-**1496 report(s) across 10 class(es)**
+**1497 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 523 | $5,000 |
-| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 471 | $16,000 |
+| [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 472 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 343 | $13,950 |
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
@@ -50,6 +50,7 @@
 | Wrong Handling of Content-Type allows Flash injection and Rosseta flash patch bypass | $3,000 | ibb | 2019-11-12 | [#78158](https://hackerone.com/reports/78158) |
 | Reflected XSS POST method at partners.uber.com | $3,000 | uber | 2019-01-25 | [#129582](https://hackerone.com/reports/129582) |
 | Reflected XSS on TikTok Website | $3,000 | tiktok | 2022-04-13 | [#1378413](https://hackerone.com/reports/1378413) |
+| Stored XSS on the public Pontoon dashboards: the latest-activity tooltip re-parses a contributor's account address as HTML | $3,000 | mozilla | 2026-10-14 | [#3988961](https://hackerone.com/reports/3988961) |
 | Bypass Filter and get Stored Xss  | $3,000 | shopify | 2018-12-12 | [#299424](https://hackerone.com/reports/299424) |
 | Stored XSS in main page of a project caused by arbitrary script payload in group "Default initial branch name" | $3,000 | gitlab | 2021-09-15 | [#1256777](https://hackerone.com/reports/1256777) |
 | Stored XSS via Mermaid Prototype Pollution vulnerability | $3,000 | gitlab | 2021-07-12 | [#1106238](https://hackerone.com/reports/1106238) |
