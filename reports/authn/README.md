@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**623 report(s) across 18 class(es)**
+**624 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -17,7 +17,7 @@
 | [Authentication Bypass](authentication_bypass/README.md) | 6 | $7,500 |
 | [Exposure Of Data Element To Wrong Session](exposure_of_data_element_to_wrong_session/README.md) | 6 | — |
 | [Unverified Password Change](unverified_password_change/README.md) | 6 | — |
-| [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 4 | $15,300 |
+| [Missing Authentication For Critical Function](missing_authentication_for_critical_function/README.md) | 5 | $15,300 |
 | [Missing Critical Step In Authentication](missing_critical_step_in_authentication/README.md) | 3 | — |
 | [Insufficient Verification Of Data Authenticity](insufficient_verification_of_data_authenticity/README.md) | 2 | $1,270 |
 | [Brute Force](brute_force/README.md) | 1 | $1,000 |
@@ -613,6 +613,7 @@
 | Admin web sessions remain active after logout of Shopify ID | — | shopify | 2020-09-14 | [#952035](https://hackerone.com/reports/952035) |
 | Integrity checks according to policies can be circumvented | — | nodejs | 2023-10-13 | [#2094235](https://hackerone.com/reports/2094235) |
 | Authentication bypass  for  ███  leads to  take over any users account. | — | krisp | 2022-10-31 | [#1608151](https://hackerone.com/reports/1608151) |
+| Unauthenticated self-registration on ████████ grants full access to internal supplier procurement portal and vendor data | — | essity | 2026-10-14 | [#4071064](https://hackerone.com/reports/4071064) |
 | Unauthenticated File Upload with CORS Wildcard and No Rate Limiting on ████████ and ████████ | — | essity | 2026-06-29 | [#3765476](https://hackerone.com/reports/3765476) |
 | anti_ransomware_service.exe REST API does not require authentication | — | acronis | 2021-06-24 | [#858608](https://hackerone.com/reports/858608) |
 | 12: SASL DIGEST-MD5 does not validate the server's `rspauth` proof | — | curl | 2026-09-10 | [#3972338](https://hackerone.com/reports/3972338) |
