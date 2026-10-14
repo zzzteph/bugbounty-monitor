@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**716 report(s) across 25 class(es)**
+**717 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 76 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 77 | $10,000 |
 | [Buffer Over Read](buffer_over_read/README.md) | 56 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
@@ -689,6 +689,7 @@
 | Use after free in hyperfifo example | — | curl | 2026-03-03 | [#3580247](https://hackerone.com/reports/3580247) |
 | Use-After-Free race condition in url_move_hostname() via shared connection pool | — | curl | 2026-03-31 | [#3638715](https://hackerone.com/reports/3638715) |
 | CVE-2026-18924: HTTP/2 server push UAF | — | curl | 2026-09-02 | [#3916059](https://hackerone.com/reports/3916059) |
+| Retry-independent time-condition HTTP/2 UAF | — | curl | 2026-10-14 | [#4033108](https://hackerone.com/reports/4033108) |
 | Use-After-Free in curl_easy_nextheader when reusing header handle across requests | — | curl | 2026-01-14 | [#3508701](https://hackerone.com/reports/3508701) |
 | CVE-2026-9080: UAF after pause in socket callback | — | curl | 2026-06-24 | [#3749204](https://hackerone.com/reports/3749204) |
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
