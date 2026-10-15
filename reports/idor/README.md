@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1091 report(s) across 10 class(es)**
+**1092 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 694 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 695 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -338,6 +338,7 @@
 | DROP PACKAGE leaves PACKAGE BODY grant in mysql.procs_priv causing privilege escalation | — | mariadb | 2026-10-07 | [#3908943](https://hackerone.com/reports/3908943) |
 | GitHub scoped user to server tokens can escape their installation | — | github | 2026-07-29 | [#3638909](https://hackerone.com/reports/3638909) |
 | Arbitrary Board Preference Injection via Deck Config API | — | nextcloud | 2026-09-17 | [#3599383](https://hackerone.com/reports/3599383) |
+| An organization admin can create an attacker-controlled organization owner via the gem transfer flow  | — | rubygems | 2026-10-15 | [#3938927](https://hackerone.com/reports/3938927) |
 | View-only guests could see deleted Collectives pages in the trashbin | — | nextcloud | 2026-05-08 | [#3521434](https://hackerone.com/reports/3521434) |
 | Unauthorized vertical privilege escalation vulnerability found on ibm.com endpoint | — | ibm | 2026-08-28 | [#3909372](https://hackerone.com/reports/3909372) |
 | RBAC bypass on App log endpoints via `permissionRequired` typo — any authenticated user reads admin-only Enterprise App logs | — | rocket_chat | 2026-04-23 | [#3589551](https://hackerone.com/reports/3589551) |

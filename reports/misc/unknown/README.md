@@ -1,6 +1,6 @@
 # Unknown
 
-**1009 report(s)**
+**1011 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -222,6 +222,7 @@
 | Fail-Open in set_tlsext_servername_callback on pyopenssl via unhandled exceptions leads to security bypass | — | pyca | 2026-03-20 | [#3558277](https://hackerone.com/reports/3558277) |
 | 34: `curl_mprintf` reads `double` for documented `long double` conversions — uninitialized value disclosure | — | curl | 2026-08-28 | [#3972196](https://hackerone.com/reports/3972196) |
 | CVE-2026-92386: server-set cookie aborts cookie jar load | — | curl | 2026-10-14 | [#4021979](https://hackerone.com/reports/4021979) |
+| Cross-origin redirect reuses a pooled Negotiate-authenticated connection from an unrelated transfer | — | curl | 2026-10-15 | [#3981716](https://hackerone.com/reports/3981716) |
 | Apple SecTrust fallback ignores CURLOPT_CRLFILE, letting a revoked cert pass | — | curl | 2026-09-08 | [#3993850](https://hackerone.com/reports/3993850) |
 | Kerberos/SPNEGO Connection Reuse Vulnerability | — | curl | 2026-05-14 | [#3725659](https://hackerone.com/reports/3725659) |
 | Open Redirect on lovable.dev via redirect parameter leads to phishing attacks | — | lovable-vdp | 2026-03-05 | [#3581815](https://hackerone.com/reports/3581815) |
@@ -240,6 +241,7 @@
 | Bearer Token Leaked to Attacker via .netrc Despite CVE-2026-3783 Fix | — | curl | 2026-03-26 | [#3611825](https://hackerone.com/reports/3611825) |
 | HTTP Digest nonce reused across an https→http scheme change on the same handle | — | curl | 2026-09-08 | [#3993973](https://hackerone.com/reports/3993973) |
 | admin.shopify.com: Shopify Flow continues sending internal emails to a configured recipient after the staff author is removed | — | shopify | 2026-07-03 | [#3628961](https://hackerone.com/reports/3628961) |
+| IMAP custom FETCH literals can spoof tagged responses and desynchronize reused connections | — | curl | 2026-10-15 | [#4021854](https://hackerone.com/reports/4021854) |
 | Stacked --proto modifiers leave denied protocol enabled | — | curl | 2026-08-28 | [#3970650](https://hackerone.com/reports/3970650) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
