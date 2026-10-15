@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**717 report(s) across 25 class(es)**
+**718 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -13,7 +13,7 @@
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 44 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
-| [Stack Overflow](stack_overflow/README.md) | 33 | $3,000 |
+| [Stack Overflow](stack_overflow/README.md) | 34 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
 | [Double Free](double_free/README.md) | 17 | $10,000 |
@@ -653,6 +653,7 @@
 | `npmconf` (and `npm` js api) allocate and write to disk uninitialized memory content when a typed number is passed as input on Node.js 4.x | — | nodejs-ecosystem | 2018-05-12 | [#320269](https://hackerone.com/reports/320269) |
 | Assertion error in node_url.cc via malformed URL format leads to Node.js crash | — | nodejs | 2026-03-26 | [#3546390](https://hackerone.com/reports/3546390) |
 | CVE-2022-35260: .netrc parser out-of-bounds access | — | ibb | 2022-12-03 | [#1753224](https://hackerone.com/reports/1753224) |
+| [Switch] Remote stack buffer overflow in the LDN/LP2P DHCP server leads to control-flow hijack | — | nintendo | 2026-10-15 | [#3770768](https://hackerone.com/reports/3770768) |
 | Stack Buffer Overflow in MariaDB CONNECT storage engine when reading DOUBLE columns from TABLE_TYPE=DOS tables | — | mariadb | 2026-10-12 | [#3910393](https://hackerone.com/reports/3910393) |
 | Stack Buffer Overflow in mariadb-dump quote_name() Allows Malicious Server to Execute Arbitrary Code on Client | — | mariadb | 2026-09-08 | [#3788482](https://hackerone.com/reports/3788482) |
 | Stack Buffer-Overflow in MariaDB Charset_collation_map_st::insert_or_replace() | — | mariadb | 2026-09-15 | [#3782405](https://hackerone.com/reports/3782405) |
