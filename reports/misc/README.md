@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1671 report(s) across 35 class(es)**
+**1672 report(s) across 35 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 1011 | $50,000 |
+| [Unknown](unknown/README.md) | 1012 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
@@ -107,6 +107,7 @@
 | Bypass parsing of transaction data, users on the phishing site will transfer/approve  ERC20 tokens without being alerted | $1,000 | metamask | 2023-04-10 | [#1651429](https://hackerone.com/reports/1651429) |
 | Wordpress Takeover using setup configuration at http://████.edu [HtUS] | $1,000 | deptofdefense | 2023-01-13 | [#1626205](https://hackerone.com/reports/1626205) |
 | Lack of URL normalization renders Blocked-Previews feature ineffectual | $1,000 | slack | 2022-01-16 | [#1102764](https://hackerone.com/reports/1102764) |
+| Burp Suite OpenAPI Event Log HTML injection triggers Windows SMB authentication | $1,000 | portswigger | 2026-10-15 | [#3972558](https://hackerone.com/reports/3972558) |
 | XSS в товарах | $1,000 | vkcom | 2017-10-29 | [#273365](https://hackerone.com/reports/273365) |
 | Unauthorized Ticket can be created by an Attacker in user's Helpdesk account | $1,000 | security | 2023-09-08 | [#2079502](https://hackerone.com/reports/2079502) |
 | page.line.me Open Redirect Leading to OAuth Authorization Code Exposure and Access Token Compromise | $1,000 | line | 2026-06-02 | [#3423013](https://hackerone.com/reports/3423013) |

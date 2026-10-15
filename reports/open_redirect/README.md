@@ -1,12 +1,12 @@
 # Open Redirect
 
-**201 report(s) across 1 class(es)**
+**202 report(s) across 1 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Open Redirect](open_redirect/README.md) | 201 | $2,400 |
+| [Open Redirect](open_redirect/README.md) | 202 | $2,400 |
 
 ## All Reports
 
@@ -63,6 +63,7 @@
 | Open Redirect at █████ | — | deptofdefense | 2022-11-18 | [#1634105](https://hackerone.com/reports/1634105) |
 | Open Redirect on https://██.8x8.com/login?nextPage=%2F | — | 8x8-bounty | 2022-03-10 | [#1467046](https://hackerone.com/reports/1467046) |
 | OAuth redirect uri validation bypass for :proxima_first_party_sync apps | — | github | 2026-07-21 | [#3588801](https://hackerone.com/reports/3588801) |
+| Open redirect on app.hey.com bypasses HEY desktop's internal-origin allowlist and loads attacker content inside a HEY BrowserWindow | — | basecamp | 2026-10-15 | [#3972760](https://hackerone.com/reports/3972760) |
 | another liberapay member team twitter account broken Link Hijacking via Expired Twitter Account Link | — | liberapay | 2026-05-09 | [#3723002](https://hackerone.com/reports/3723002) |
 | Incomplete fix for CVE-2022-35406: meta-redirect content-type check bypassable via parameter injection | — | portswigger | 2026-06-02 | [#3775183](https://hackerone.com/reports/3775183) |
 | Bypass of Open Redirect Fix on lovable.dev via /..// Path Traversal in redirect parameter | — | lovable-vdp | 2026-03-12 | [#3599248](https://hackerone.com/reports/3599248) |
