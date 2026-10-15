@@ -1,12 +1,12 @@
 # HTTP Injection
 
-**143 report(s) across 4 class(es)**
+**144 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Http Request Smuggling](http_request_smuggling/README.md) | 66 | $20,000 |
+| [Http Request Smuggling](http_request_smuggling/README.md) | 67 | $20,000 |
 | [Crlf Injection](crlf_injection/README.md) | 59 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
@@ -117,6 +117,7 @@
 | HTTP Request Smuggling | — | essity | 2026-05-20 | [#3589269](https://hackerone.com/reports/3589269) |
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
+| HTTP/1.1 connection reuse returns unsolicited server data as the next request's response (regression in 8.22.0) | — | curl | 2026-10-15 | [#4098761](https://hackerone.com/reports/4098761) |
 | Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line | — | nodejs | 2026-07-01 | [#3648681](https://hackerone.com/reports/3648681) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | HTTP Header Injection/HTTP_Response_Splitting | — | blockchain | 2017-03-23 | [#214436](https://hackerone.com/reports/214436) |

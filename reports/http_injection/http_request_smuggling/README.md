@@ -1,6 +1,6 @@
 # Http Request Smuggling
 
-**66 report(s)**
+**67 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -40,6 +40,7 @@
 | HTTP Request Smuggling | — | essity | 2026-05-20 | [#3589269](https://hackerone.com/reports/3589269) |
 | HTTP/1.1 Response Desynchronization via conflicting CL/TE headers in Proxy CONNECT | — | curl | 2026-03-25 | [#3623064](https://hackerone.com/reports/3623064) |
 | HTTP Request Smuggling and SSRF via CRLF Injection in Curl_add_custom_headers | — | curl | 2026-01-02 | [#3484431](https://hackerone.com/reports/3484431) |
+| HTTP/1.1 connection reuse returns unsolicited server data as the next request's response (regression in 8.22.0) | — | curl | 2026-10-15 | [#4098761](https://hackerone.com/reports/4098761) |
 | Improper Input Validation — HTTP Response Parser Unconditionally Accepts Bare CR in Status Line | — | nodejs | 2026-07-01 | [#3648681](https://hackerone.com/reports/3648681) |
 | Duplicate chunked Transfer-Encoding lets a malicious origin smuggle a response across reused HTTP proxy connections | — | curl | 2026-06-13 | [#3795615](https://hackerone.com/reports/3795615) |
 | HTTP Header Injection/HTTP_Response_Splitting | — | blockchain | 2017-03-23 | [#214436](https://hackerone.com/reports/214436) |
