@@ -1,11 +1,12 @@
 # Man In The Middle
 
-**28 report(s)**
+**29 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | Build fetches jars over HTTP | $1,000 | portswigger | 2019-06-10 | [#506161](https://hackerone.com/reports/506161) |
 | Passive mixed content issues on the site https://*.fanduel.com | $100 | fanduel | 2018-12-21 | [#437800](https://hackerone.com/reports/437800) |
+| TFTP accepts a first response from an IP other than the requested server | — | curl | 2026-10-16 | [#4103651](https://hackerone.com/reports/4103651) |
 | curl Missing Sec-WebSocket-Accept Verification Enables MITM WebSocket Session Hijacking | — | curl | 2026-08-05 | [#3917775](https://hackerone.com/reports/3917775) |
 | Download of (later executed) .NET installer over insecure channel | — | brave | 2018-07-09 | [#272231](https://hackerone.com/reports/272231) |
 | federalist.18f.gov vulnerable to Sweet32 attack | — | gsa_bbp | 2017-09-05 | [#263553](https://hackerone.com/reports/263553) |

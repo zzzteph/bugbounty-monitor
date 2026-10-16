@@ -1,13 +1,13 @@
 # TLS / Certificate Validation
 
-**90 report(s) across 5 class(es)**
+**91 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 52 | $2,580 |
-| [Man In The Middle](man_in_the_middle/README.md) | 28 | $1,000 |
+| [Man In The Middle](man_in_the_middle/README.md) | 29 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 7 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
@@ -80,6 +80,7 @@
 | CVE-2024-2466: TLS certificate check bypass with mbedTLS | — | curl | 2024-03-27 | [#2416725](https://hackerone.com/reports/2416725) |
 | CVE-2025-15079: libssh global knownhost override  | — | curl | 2026-01-07 | [#3477116](https://hackerone.com/reports/3477116) |
 | CVE-2025-4947: QUIC certificate check skip with wolfSSL | — | curl | 2025-05-28 | [#3150884](https://hackerone.com/reports/3150884) |
+| TFTP accepts a first response from an IP other than the requested server | — | curl | 2026-10-16 | [#4103651](https://hackerone.com/reports/4103651) |
 | curl Missing Sec-WebSocket-Accept Verification Enables MITM WebSocket Session Hijacking | — | curl | 2026-08-05 | [#3917775](https://hackerone.com/reports/3917775) |
 | Download of (later executed) .NET installer over insecure channel | — | brave | 2018-07-09 | [#272231](https://hackerone.com/reports/272231) |
 | federalist.18f.gov vulnerable to Sweet32 attack | — | gsa_bbp | 2017-09-05 | [#263553](https://hackerone.com/reports/263553) |
