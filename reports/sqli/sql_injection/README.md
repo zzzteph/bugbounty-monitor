@@ -1,6 +1,6 @@
 # Sql Injection
 
-**209 report(s)**
+**210 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -45,6 +45,7 @@
 | Error-Based SQL Injection in ████████.com Login/Password Reset (username parameter) | — | essity | 2026-07-03 | [#3809973](https://hackerone.com/reports/3809973) |
 | SQL Injection vulnerability found on ibm.com endpoint | — | ibm | 2026-03-12 | [#3578842](https://hackerone.com/reports/3578842) |
 | Complete authentication bypass to admin permissions | — | rocket_chat | 2026-04-22 | [#3564655](https://hackerone.com/reports/3564655) |
+| SQL Injection vulnerability found on IBM.com subdomain | — | ibm | 2026-10-16 | [#3730301](https://hackerone.com/reports/3730301) |
 | SQL Injection Detection Bypass in AWS WAF Managed Rules (AWSManagedRulesSQLiRuleSet) | — | aws_vdp | 2026-04-15 | [#3591725](https://hackerone.com/reports/3591725) |
 | `SHOW [CREATE\|GRANTS] ...` / `mariadb-dump` Unescaped SQL Generation | — | mariadb | 2026-10-07 | [#3848978](https://hackerone.com/reports/3848978) |
 | Critical SQL Injection WDM API (████████) | — | essity | 2026-08-27 | [#3778282](https://hackerone.com/reports/3778282) |
