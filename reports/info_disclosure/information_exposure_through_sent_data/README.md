@@ -1,6 +1,6 @@
 # Information Exposure Through Sent Data
 
-**26 report(s)**
+**27 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -9,6 +9,7 @@
 | CVE-2022-27779: cookie for trailing dot TLD | — | ibb | 2022-06-11 | [#1565615](https://hackerone.com/reports/1565615) |
 |  Remote memory disclosure vulnerability in libcurl on 64 Bit Windows | — | curl | 2022-02-21 | [#1444539](https://hackerone.com/reports/1444539) |
 | CVE-2022-27779: cookie for trailing dot TLD | — | curl | 2022-05-11 | [#1553301](https://hackerone.com/reports/1553301) |
+| Explicit NO_PROXY /0 CIDR rules fail to bypass HTTP proxy for IP-literal requests | — | curl | 2026-10-17 | [#4114965](https://hackerone.com/reports/4114965) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 |  Cookie attribute truncation in curl drops Secure/HttpOnly protections | — | curl | 2026-10-08 | [#4093443](https://hackerone.com/reports/4093443) |
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |

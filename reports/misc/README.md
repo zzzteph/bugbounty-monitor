@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1672 report(s) across 35 class(es)**
+**1673 report(s) across 35 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Unknown](unknown/README.md) | 1012 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
-| [Improper Input Validation](improper_input_validation/README.md) | 67 | $4,920 |
+| [Improper Input Validation](improper_input_validation/README.md) | 68 | $4,920 |
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
@@ -287,6 +287,7 @@
 | Reflected HTML Injection in ████████ Login Page via infotext/signintext Parameters | — | essity | 2026-07-22 | [#3781785](https://hackerone.com/reports/3781785) |
 | HTTP/2 server push accepts a non-authoritative :scheme=https over cleartext h2c, enabling HTTPS cache-key poisoning | — | curl | 2026-03-29 | [#3630310](https://hackerone.com/reports/3630310) |
 | CVE-2026-80255: secure cookie attribute bypass with tab | — | curl | 2026-09-03 | [#3972395](https://hackerone.com/reports/3972395) |
+| libcurl RTSP `CURLOPT_CRLF` conversion allows a request body to become a second RTSP request | — | curl | 2026-10-17 | [#4113412](https://hackerone.com/reports/4113412) |
 | Cookie attribute TAB injection regression in Set-Cookie parsing | — | curl | 2026-04-03 | [#3641893](https://hackerone.com/reports/3641893) |
 | MQTT state machine confusion: PINGRESP/DISCONNECT with non-zero remaining_length dispatches to stale nextstate | — | curl | 2026-04-29 | [#3702718](https://hackerone.com/reports/3702718) |
 | [url-parse] Improper Validation and Sanitization | — | nodejs-ecosystem | 2020-01-27 | [#496293](https://hackerone.com/reports/496293) |
