@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**718 report(s) across 25 class(es)**
+**719 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
 | [Use After Free](use_after_free/README.md) | 77 | $10,000 |
-| [Buffer Over Read](buffer_over_read/README.md) | 56 | $2,142 |
+| [Buffer Over Read](buffer_over_read/README.md) | 57 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 44 | $9,000 |
@@ -256,6 +256,7 @@
 | CVE-2026-107928: info leak uploading over WebSockets with GnuTLS | — | curl | 2026-10-14 | [#4099194](https://hackerone.com/reports/4099194) |
 | CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
+| SMTP header injection via C-escape `\r` in the recipient display name | — | nextcloud | 2026-10-18 | [#3913007](https://hackerone.com/reports/3913007) |
 | Heap Memory Disclosure via Integer Underflow in Item_func_json_arrayagg::cut_max_length in MariaDB Server | — | mariadb | 2026-09-15 | [#3771139](https://hackerone.com/reports/3771139) |
 | Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | Out of bounds read in libcurl's IMAP FETCH response parser | — | ibb | 2018-05-16 | [#278231](https://hackerone.com/reports/278231) |

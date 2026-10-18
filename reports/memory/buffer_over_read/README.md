@@ -1,6 +1,6 @@
 # Buffer Over Read
 
-**56 report(s)**
+**57 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -21,6 +21,7 @@
 | CVE-2026-107928: info leak uploading over WebSockets with GnuTLS | — | curl | 2026-10-14 | [#4099194](https://hackerone.com/reports/4099194) |
 | CVE-2026-10536: HTTP/2 stream-dependency tree UAF | — | curl | 2026-06-24 | [#3751697](https://hackerone.com/reports/3751697) |
 | Integer-underflow leads to heap over-read in TFTP implementation | — | curl | 2026-01-14 | [#3508321](https://hackerone.com/reports/3508321) |
+| SMTP header injection via C-escape `\r` in the recipient display name | — | nextcloud | 2026-10-18 | [#3913007](https://hackerone.com/reports/3913007) |
 | Heap Memory Disclosure via Integer Underflow in Item_func_json_arrayagg::cut_max_length in MariaDB Server | — | mariadb | 2026-09-15 | [#3771139](https://hackerone.com/reports/3771139) |
 | Heap-OOB read in urlapi `redirect_url()` via `CURLU_GUESS_SCHEME` + `CURLU_NO_GUESS_SCHEME` flow | — | curl | 2026-05-25 | [#3751715](https://hackerone.com/reports/3751715) |
 | Out of bounds read in libcurl's IMAP FETCH response parser | — | ibb | 2018-05-16 | [#278231](https://hackerone.com/reports/278231) |
