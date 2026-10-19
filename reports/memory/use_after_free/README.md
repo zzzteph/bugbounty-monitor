@@ -1,6 +1,6 @@
 # Use After Free
 
-**78 report(s)**
+**79 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -26,6 +26,7 @@
 | CVE-2026-92392: HTTP/2 upload Use-After-Free | — | curl | 2026-10-14 | [#4030333](https://hackerone.com/reports/4030333) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
+| WebSocket decoder use-after-free when curl_easy_pause() unpauses from a debug callback | — | curl | 2026-10-19 | [#4123749](https://hackerone.com/reports/4123749) |
 | libcurl shared-HSTS-cache race leads to use-after-free with attacker-controlled function-pointer call | — | curl | 2026-10-19 | [#4122039](https://hackerone.com/reports/4122039) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |

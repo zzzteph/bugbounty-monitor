@@ -1,6 +1,6 @@
 # Authentication & Session
 
-**626 report(s) across 18 class(es)**
+**627 report(s) across 18 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
-| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 19 | — |
+| [Authentication Bypass By Primary Weakness](authentication_bypass_by_primary_weakness/README.md) | 20 | — |
 | [Session Fixation](session_fixation/README.md) | 14 | $540 |
 | [Weak Password Recovery Mechanism For Forgotten Password](weak_password_recovery_mechanism_for_forgotten_password/README.md) | 10 | $500 |
 | [Reliance On Cookies Without Validation And Integrity Checkin](reliance_on_cookies_without_validation_and_integrity_checkin/README.md) | 7 | $2,000 |
@@ -145,6 +145,7 @@
 | lib/http2.c: SSL connections accept non-HTTP push schemes (incomplete fix for 2e8c922a) | — | curl | 2026-04-16 | [#3674275](https://hackerone.com/reports/3674275) |
 | CVE-2026-8458: wrong reuse for different services | — | curl | 2026-06-24 | [#3721183](https://hackerone.com/reports/3721183) |
 | Missing server identity policy enforcement in SSH connection reuse allows host key verification bypass via pool poisoning | — | curl | 2026-04-03 | [#3640932](https://hackerone.com/reports/3640932) |
+| SSH host-key policy is missing from the connection-reuse tuple: strict pins and knownhosts are silently skipped on reused SFTP/SCP connections | — | curl | 2026-10-19 | [#4126768](https://hackerone.com/reports/4126768) |
 | ssh_config_matches is dead code: unauthorized SSH key reuse | — | curl | 2026-06-30 | [#3826843](https://hackerone.com/reports/3826843) |
 | Negotiate connection reuse with wrong credentials when using CURLAUTH_ANY                                         | — | curl | 2026-04-29 | [#3646072](https://hackerone.com/reports/3646072) |
 | SSH/SFTP connection reuse can bypass SSH key identity after ssh_config_matches removal | — | curl | 2026-06-09 | [#3788506](https://hackerone.com/reports/3788506) |
