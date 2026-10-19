@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**625 report(s) across 18 class(es)**
+**626 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 396 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 397 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -202,6 +202,7 @@
 | Connection Reuse Ignores OAuth Bearer Token Mismatch | — | curl | 2026-03-10 | [#3595753](https://hackerone.com/reports/3595753) |
 | CVE-2026-87861: cross-origin reuse of a Negotiate connection | — | curl | 2026-10-14 | [#3972094](https://hackerone.com/reports/3972094) |
 | Trailing-Dot Hostname in Redirect Silently Strips Client Certificate and Auth Credentials | — | curl | 2026-06-10 | [#3791191](https://hackerone.com/reports/3791191) |
+| curl CONNECT response header colon-check bypass in cf-h1-proxy single_header — proxy authentication bypass via injected HTTP/1.x status line | — | curl | 2026-10-19 | [#4053116](https://hackerone.com/reports/4053116) |
 | Wallet RPC Restricted-Mode Policy Bypass | — | monero | 2026-08-17 | [#3620006](https://hackerone.com/reports/3620006) |
 | iOS Brave Playlist "Open in Private Tab" bypasses FaceID requirement for Private Tabs | — | brave | 2026-05-28 | [#3693295](https://hackerone.com/reports/3693295) |
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |

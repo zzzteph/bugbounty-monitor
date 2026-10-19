@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**423 report(s)**
+**424 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -164,6 +164,7 @@
 | Denial of Service via `__proto__` header name in `req.headersDistinct` (Uncaught `TypeError` crashes Node.js process) | — | nodejs | 2026-03-30 | [#3560402](https://hackerone.com/reports/3560402) |
 | Connector/J: malicious server crashes client JVM via unbounded result-set field-count allocation in ClientMessage.readPacket | — | mariadb | 2026-09-30 | [#3872239](https://hackerone.com/reports/3872239) |
 | HTTP/2 retained header blocks evade maxSessionMemory and enable remote memory exhaustion | — | nodejs | 2026-08-28 | [#3846922](https://hackerone.com/reports/3846922) |
+| IBC2 Entry Points Skip SetupContractCost - Systematic Gas Underpricing | — | cosmos | 2026-10-19 | [#3547607](https://hackerone.com/reports/3547607) |
 | Unbounded memory growth in `node:http2` clients via attacker-controlled ORIGIN frames | — | nodejs | 2026-06-25 | [#3676863](https://hackerone.com/reports/3676863) |
 | MariaDB Low-Privilege User Can Exhaust Memory Through a Formatting Function and Crash the Service | — | mariadb | 2026-10-07 | [#3867358](https://hackerone.com/reports/3867358) |
 | r2dbc-mariadb Parsec auth: server-controlled PBKDF2 iteration count causes CPU-exhaustion DoS ( regression from b7766de ) | — | mariadb | 2026-10-12 | [#3871740](https://hackerone.com/reports/3871740) |

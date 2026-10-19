@@ -1,6 +1,6 @@
 # Crlf Injection
 
-**62 report(s)**
+**63 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -19,6 +19,7 @@
 | SMTP Command Injection in Appointment Emails via Newlines | — | nextcloud | 2022-12-27 | [#1509216](https://hackerone.com/reports/1509216) |
 | Header CRLF Injection in Ruby Net::HTTP | — | ruby | 2023-05-04 | [#1718757](https://hackerone.com/reports/1718757) |
 | ZMQ RPC Log Injection and Untrusted Payload Persistence | — | monero | 2026-07-24 | [#3621606](https://hackerone.com/reports/3621606) |
+| SCP upload with --crlf sends more bytes than the size declared to the server (same class curl refused for IMAP CVE-2026-87864 and RTSP) | — | curl | 2026-10-19 | [#4123654](https://hackerone.com/reports/4123654) |
 | CRLF Injection in HTTP header values allows arbitrary header injection | — | curl | 2026-01-10 | [#3505557](https://hackerone.com/reports/3505557) |
 | CURLOPT_HAPROXY_CLIENT_IP lacks input validation, enabling HAProxy PROXY protocol injection | — | curl | 2026-06-26 | [#3823932](https://hackerone.com/reports/3823932) |
 | CRLF Injection in HAProxy PROXY Protocol via CURLOPT_HAPROXY_CLIENT_IP allows IP spoofing and protocol injection | — | curl | 2026-03-30 | [#3633534](https://hackerone.com/reports/3633534) |
