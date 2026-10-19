@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1673 report(s) across 35 class(es)**
+**1674 report(s) across 35 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 1012 | $50,000 |
+| [Unknown](unknown/README.md) | 1013 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 68 | $4,920 |
@@ -533,6 +533,7 @@
 | Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
 | Heap-use-after-free in CURLOPT_REFERER when passed a CURLINFO_REFERER pointer | — | curl | 2026-09-14 | [#3971462](https://hackerone.com/reports/3971462) |
 | CVE-2026-92389: TFTP direction confusion | — | curl | 2026-10-14 | [#4022568](https://hackerone.com/reports/4022568) |
+| curl RTSP connection reuse routes response headers to the RTP callback (rtsp_conn state machine not reset between sessions) | — | curl | 2026-10-19 | [#4121685](https://hackerone.com/reports/4121685) |
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
 | CVE-2026-92387: never-ending loop via server response omission | — | curl | 2026-10-14 | [#4022003](https://hackerone.com/reports/4022003) |
 | Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate | — | weblate | 2026-04-26 | [#3518571](https://hackerone.com/reports/3518571) |

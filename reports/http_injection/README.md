@@ -1,13 +1,13 @@
 # HTTP Injection
 
-**146 report(s) across 4 class(es)**
+**147 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Http Request Smuggling](http_request_smuggling/README.md) | 67 | $20,000 |
-| [Crlf Injection](crlf_injection/README.md) | 61 | $5,000 |
+| [Crlf Injection](crlf_injection/README.md) | 62 | $5,000 |
 | [Http Response Splitting](http_response_splitting/README.md) | 14 | $2,600 |
 | [Cache Poisoning](cache_poisoning/README.md) | 4 | $3,800 |
 
@@ -69,6 +69,7 @@
 | Security Vulnerability Report: Protocol Injection via Programmatic Options | — | curl | 2026-03-26 | [#3627638](https://hackerone.com/reports/3627638) |
 | libcurl LDAP LDIF: entry DN and attribute names written without RFC 2849 base64 encoding, allowing server line injection | — | curl | 2026-09-15 | [#4023506](https://hackerone.com/reports/4023506) |
 | CVE-2026-87864: IMAP APPEND plus CRLF conversion command injection | — | curl | 2026-10-14 | [#3972403](https://hackerone.com/reports/3972403) |
+| RTSP ANNOUNCE/SET_PARAMETER upload with --use-ascii / CURLOPT_TRANSFERTEXT sends more body bytes than the declared Content-Length (incomplete fix of e | — | curl | 2026-10-19 | [#4124486](https://hackerone.com/reports/4124486) |
 | CRLF injection in the RTSP request-line and Transport header via `CURLOPT_RTSP_STREAM_URI` and `CURLOPT_RTSP_TRANSPORT` | — | curl | 2026-10-18 | [#4121675](https://hackerone.com/reports/4121675) |
 | CRLF Injection via Custom HTTP Headers | — | curl | 2026-06-11 | [#3741744](https://hackerone.com/reports/3741744) |
 | RTSP CRLF injection in libcurl allows CURLOPT_RTSP_* values to inject commands into independent sessions | — | curl | 2026-08-24 | [#3963494](https://hackerone.com/reports/3963494) |

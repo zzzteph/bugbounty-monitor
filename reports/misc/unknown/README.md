@@ -1,6 +1,6 @@
 # Unknown
 
-**1012 report(s)**
+**1013 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -210,6 +210,7 @@
 | Shared HSTS cache accessed without lock | — | curl | 2026-06-05 | [#3718265](https://hackerone.com/reports/3718265) |
 | Heap-use-after-free in CURLOPT_REFERER when passed a CURLINFO_REFERER pointer | — | curl | 2026-09-14 | [#3971462](https://hackerone.com/reports/3971462) |
 | CVE-2026-92389: TFTP direction confusion | — | curl | 2026-10-14 | [#4022568](https://hackerone.com/reports/4022568) |
+| curl RTSP connection reuse routes response headers to the RTP callback (rtsp_conn state machine not reset between sessions) | — | curl | 2026-10-19 | [#4121685](https://hackerone.com/reports/4121685) |
 | RCE + PAT Exfiltration via pull_request_target in privacy-configuration/auto-respond-pr.yml — Direct Supply Chain to All DDG Browsers | — | duckduckgo | 2026-06-11 | [#3619288](https://hackerone.com/reports/3619288) |
 | CVE-2026-92387: never-ending loop via server response omission | — | curl | 2026-10-14 | [#4022003](https://hackerone.com/reports/4022003) |
 | Argument Injection in /manage/ssh/ via host parameter leads to sensitive file disclosure on Weblate | — | weblate | 2026-04-26 | [#3518571](https://hackerone.com/reports/3518571) |

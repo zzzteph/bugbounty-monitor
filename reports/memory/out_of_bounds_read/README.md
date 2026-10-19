@@ -1,6 +1,6 @@
 # Out Of Bounds Read
 
-**44 report(s)**
+**45 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -23,6 +23,7 @@
 | 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
 | 55: Heap-buffer-overflow read in `curl_formadd_ccsid()` with binary form data | — | curl | 2026-09-10 | [#3973245](https://hackerone.com/reports/3973245) |
 | Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read | — | torproject | 2026-09-10 | [#3709605](https://hackerone.com/reports/3709605) |
+| libcurl TLS shorter-retry mismatch discloses client heap memory during cancelled IMAPS upload | — | curl | 2026-10-19 | [#4105853](https://hackerone.com/reports/4105853) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
 | Connector/C Out-of-bounds read in `unpack_fields()` from short metadata field | — | mariadb | 2026-09-30 | [#3896671](https://hackerone.com/reports/3896671) |

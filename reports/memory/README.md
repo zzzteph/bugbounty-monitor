@@ -1,17 +1,17 @@
 # Memory Corruption
 
-**719 report(s) across 25 class(es)**
+**721 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 77 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 78 | $10,000 |
 | [Buffer Over Read](buffer_over_read/README.md) | 57 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
-| [Out Of Bounds Read](out_of_bounds_read/README.md) | 44 | $9,000 |
+| [Out Of Bounds Read](out_of_bounds_read/README.md) | 45 | $9,000 |
 | [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 34 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
@@ -627,6 +627,7 @@
 | 57: Heap out-of-bounds read in `curl_easy_escape_ccsid()` / `curl_easy_unescape_ccsid()` | — | curl | 2026-09-07 | [#3973219](https://hackerone.com/reports/3973219) |
 | 55: Heap-buffer-overflow read in `curl_formadd_ccsid()` with binary form data | — | curl | 2026-09-10 | [#3973245](https://hackerone.com/reports/3973245) |
 | Conflux-queued zero-length RELAY_END triggers heap out-of-bounds read | — | torproject | 2026-09-10 | [#3709605](https://hackerone.com/reports/3709605) |
+| libcurl TLS shorter-retry mismatch discloses client heap memory during cancelled IMAPS upload | — | curl | 2026-10-19 | [#4105853](https://hackerone.com/reports/4105853) |
 | Function `do_pubkey()` can have out-of-bound read issue | — | curl | 2026-03-25 | [#3617719](https://hackerone.com/reports/3617719) |
 | Heap-buffer-overflow in `Curl_ssl_push_certinfo_len()` — sole bounds check is `DEBUGASSERT` | — | curl | 2026-04-29 | [#3684614](https://hackerone.com/reports/3684614) |
 | Connector/C Out-of-bounds read in `unpack_fields()` from short metadata field | — | mariadb | 2026-09-30 | [#3896671](https://hackerone.com/reports/3896671) |
@@ -698,6 +699,7 @@
 | CVE-2026-92392: HTTP/2 upload Use-After-Free | — | curl | 2026-10-14 | [#4030333](https://hackerone.com/reports/4030333) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
 | Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
+| libcurl shared-HSTS-cache race leads to use-after-free with attacker-controlled function-pointer call | — | curl | 2026-10-19 | [#4122039](https://hackerone.com/reports/4122039) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |
 | CVE-2026-3805: use after free in SMB connection reuse | — | curl | 2026-03-11 | [#3591944](https://hackerone.com/reports/3591944) |
