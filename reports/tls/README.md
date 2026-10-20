@@ -1,14 +1,14 @@
 # TLS / Certificate Validation
 
-**91 report(s) across 5 class(es)**
+**94 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 52 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 54 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 29 | $1,000 |
-| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 7 | — |
+| [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 8 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
@@ -32,6 +32,7 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
+| wolfSSL Backend Silently Ignores --cert-status (OCSP Stapling Bypass) | — | curl | 2026-10-20 | [#4127399](https://hackerone.com/reports/4127399) |
 | 10: CURLOPT_MAXLIFETIME_CONN bypass on active HTTP/2 connections | — | curl | 2026-09-14 | [#3972323](https://hackerone.com/reports/3972323) |
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
@@ -40,6 +41,7 @@
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
+| TLS session cache key omits native_ca_store: a session validated with CURLSSLOPT_NATIVE_CA can be resumed by a transfer that disabled it (incomplete f | — | curl | 2026-10-20 | [#4123646](https://hackerone.com/reports/4123646) |
 | CVE-2026-82208: wolfSSL CA-cache hit overrides callback | — | curl | 2026-09-03 | [#3973090](https://hackerone.com/reports/3973090) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
 | TLS session cache case-folds CA paths and bypasses the active trust profile | — | curl | 2026-08-25 | [#3966955](https://hackerone.com/reports/3966955) |
@@ -73,6 +75,7 @@
 | CURLOPT_PROXY_CRLFILE / CURLOPT_PROXY_ISSUERCERT / CURLOPT_PROXY_ISSUERCERT_BLOB silently ignored on backends that don't support them | — | curl | 2026-06-05 | [#3717552](https://hackerone.com/reports/3717552) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |
+| SSH (SCP/SFTP) host-key verification is skipped on connection reuse — a pinned/known_hosts transfer silently reuses a previously-unverified connection | — | curl | 2026-10-20 | [#4124583](https://hackerone.com/reports/4124583) |
 | CVE-2026-86410:  redirect to SFTP or SCP bypasses host verification | — | curl | 2026-10-14 | [#3973176](https://hackerone.com/reports/3973176) |
 | CVE-2026-87865: knownhost callback mismatches key as missing | — | curl | 2026-10-14 | [#3975408](https://hackerone.com/reports/3975408) |
 | mbedTLS / wolfSSL / rustls backends silently skip hostname verification when CURLOPT_SSL_VERIFYPEER=0 | — | curl | 2026-06-26 | [#3826199](https://hackerone.com/reports/3826199) |

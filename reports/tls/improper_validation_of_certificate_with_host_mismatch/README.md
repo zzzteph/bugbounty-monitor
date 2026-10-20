@@ -1,9 +1,10 @@
 # Improper Validation Of Certificate With Host Mismatch
 
-**7 report(s)**
+**8 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
+| SSH (SCP/SFTP) host-key verification is skipped on connection reuse — a pinned/known_hosts transfer silently reuses a previously-unverified connection | — | curl | 2026-10-20 | [#4124583](https://hackerone.com/reports/4124583) |
 | CVE-2026-86410:  redirect to SFTP or SCP bypasses host verification | — | curl | 2026-10-14 | [#3973176](https://hackerone.com/reports/3973176) |
 | CVE-2026-87865: knownhost callback mismatches key as missing | — | curl | 2026-10-14 | [#3975408](https://hackerone.com/reports/3975408) |
 | mbedTLS / wolfSSL / rustls backends silently skip hostname verification when CURLOPT_SSL_VERIFYPEER=0 | — | curl | 2026-06-26 | [#3826199](https://hackerone.com/reports/3826199) |

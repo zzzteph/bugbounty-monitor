@@ -1,6 +1,6 @@
 # Secrets & Hardcoded Credentials
 
-**262 report(s) across 16 class(es)**
+**263 report(s) across 16 class(es)**
 
 ## Classes
 
@@ -14,9 +14,9 @@
 | [Missing Encryption Of Sensitive Data](missing_encryption_of_sensitive_data/README.md) | 11 | $750 |
 | [Plaintext Storage Of A Password](plaintext_storage_of_a_password/README.md) | 10 | $6,500 |
 | [Password In Configuration File](password_in_configuration_file/README.md) | 8 | $750 |
+| [Insecure Temporary File](insecure_temporary_file/README.md) | 4 | $100 |
 | [Storing Passwords In A Recoverable Format](storing_passwords_in_a_recoverable_format/README.md) | 4 | — |
 | [Use Of Hard Coded Cryptographic Key](use_of_hard_coded_cryptographic_key/README.md) | 4 | $2,000 |
-| [Insecure Temporary File](insecure_temporary_file/README.md) | 3 | $100 |
 | [Use Of Hard Coded Password](use_of_hard_coded_password/README.md) | 3 | — |
 | [Cleartext Storage In A File Or On Disk](cleartext_storage_in_a_file_or_on_disk/README.md) | 1 | $100 |
 | [Inclusion Of Sensitive Information In An Include File](inclusion_of_sensitive_information_in_an_include_file/README.md) | 1 | — |
@@ -207,6 +207,7 @@
 | Able to view hackerone reports attachments | — | gitlab | 2022-07-11 | [#979787](https://hackerone.com/reports/979787) |
 | PII Leak (such as CAC User ID) at https://████████/pages/login.aspx | — | deptofdefense | 2020-11-02 | [#900137](https://hackerone.com/reports/900137) |
 | [h1-2006 2020]  Chained vulnerabilities lead to account takeover | — | h1-ctf | 2020-06-18 | [#895650](https://hackerone.com/reports/895650) |
+| Symlink-following truncation of arbitrary files in `Curl_fopen()` when saving cookie jars, HSTS, or alt-svc caches | — | curl | 2026-10-20 | [#4125257](https://hackerone.com/reports/4125257) |
 | UNRESTRICTED FILE UPLOAD AT chat.makerdao.com | — | makerdao_bbp | 2020-01-15 | [#692360](https://hackerone.com/reports/692360) |
 | Encryption context keys and values logged at INFO level | — | aws_vdp | 2026-04-10 | [#3620760](https://hackerone.com/reports/3620760) |
 | CVE-2022-27776: Auth/cookie leak on redirect  | — | curl | 2022-04-27 | [#1547048](https://hackerone.com/reports/1547048) |

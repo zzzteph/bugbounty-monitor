@@ -1,0 +1,186 @@
+{
+  "id": 4124583,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MTI0NTgz",
+  "url": "https://hackerone.com/reports/4124583",
+  "title": "SSH (SCP/SFTP) host-key verification is skipped on connection reuse — a pinned/known_hosts transfer silently reuses a previously-unverified connection",
+  "state": "Closed",
+  "substate": "not-applicable",
+  "severity_rating": "medium",
+  "readable_substate": "N/A",
+  "created_at": "2026-10-18T09:45:08.261Z",
+  "submitted_at": "2026-10-18T09:45:08.684Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": true,
+    "username": "joumaaa",
+    "url": "/joumaaa",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/7jb8m1fd01xv19xi8qz0dhb844he/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": true,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2022-27782"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-20T06:04:23.739Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-19T18:21:36.062Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary\n\nFor SCP/SFTP, curl verifies the server's host key once, during the initial connect state machine,\nin `ssh_check_fingerprint()` — which reads `CURLOPT_SSH_HOST_PUBLIC_KEY_SHA256` / `_MD5`, the\n`CURLOPT_SSH_KNOWNHOSTS` file, and the `CURLOPT_SSH_HOSTKEYFUNCTION` callback. That function has\nexactly one caller, `ssh_state_hostkey()` (`lib/vssh/libssh2.c:1461`), reached only on a fresh\nconnect.\n\nThe SSH connection-reuse gate, `ssh_config_matches()`, compares only the client identity key files:\n\n```c\n/* lib/url.c:569-578 */\nstatic bool ssh_config_matches(struct connectdata *one,\n                               struct connectdata *two)\n{\n  struct ssh_conn *sshc1, *sshc2;\n  sshc1 = Curl_conn_meta_get(one, CURL_META_SSH_CONN);\n  sshc2 = Curl_conn_meta_get(two, CURL_META_SSH_CONN);\n  return sshc1 && sshc2 && Curl_safecmp(sshc1->priv_key, sshc2->priv_key) &&\n         Curl_safecmp(sshc1->pub_key, sshc2->pub_key);\n}\n```\n\nNone of the host-key verification inputs are part of this comparison (`git grep` for\n`SSH_HOST_PUBLIC_KEY_SHA256|_MD5|SSH_KNOWNHOSTS|ssh_hostkeyfunc` in `lib/url.c` returns 0 hits; the\nonly `ssh_auth_types` hit at `url.c:375` is default initialization, not a reuse comparison).\n\nFinally, the reuse/attach operation performs no re-verification — it only re-points libssh2's\nabstract pointer at the new easy handle:\n\n```c\n/* lib/vssh/libssh2.c:3910-3922 */\nstatic void ssh_attach(struct Curl_easy *data, struct connectdata *conn)\n{\n  ...\n    if(sshc && sshc->ssh_session) {\n      void **abstract = libssh2_session_abstract(sshc->ssh_session);\n      *abstract = data;   /* no ssh_check_fingerprint() here */\n    }\n}\n```\n\n## Root cause\n\nHost-key verification policy is treated as a connect-time action, not as part of the connection's\nsecurity identity. Because the verification inputs are absent from `ssh_config_matches()` and\n`ssh_attach()` does not re-check, a connection established under one host-key policy can be handed to\na later transfer that requested a stricter policy, and the stricter check never runs.\n\n## Attacker model / reachability\n\nTwo SCP/SFTP transfers in one process over a shared connection pool (one easy handle reused, a multi\nhandle, or `CURLSH` with `CURL_LOCK_DATA_CONNECT`), to the same host/port/user with the same identity\nkey files, where:\n- transfer #1 uses weak or no host-key verification (no known_hosts, no pin) — with no known_hosts\n  configured, libssh2 accepts the presented host key (`lib/vssh/libssh2.c:319-322`); and\n- transfer #2 configures a host-key pin (`CURLOPT_SSH_HOST_PUBLIC_KEY_SHA256`), a `known_hosts`\n  file, or a host-key callback.\n\n`ssh_config_matches()` returns TRUE (identity key files match), so transfer #2 reuses transfer #1's\nconnection and `ssh_check_fingerprint()` is never called for it. If a man-in-the-middle substituted\nthe server during transfer #1 (accepted because #1 did not verify), transfer #2 — which demanded a\npin precisely to detect that — proceeds on the attacker-controlled connection. The host-key pin /\nknown_hosts / callback is silently bypassed.\n\n## Live PoC (confirmed end-to-end)\n\nConfirmed against curl built from this commit with the libssh2 backend (libssh2 1.11.2_DEV, built\nfrom source) talking to a paramiko SFTP server with a fixed host key. `attachments/ssh_client.c`\nperforms two SFTP GETs on **one** easy handle (shared pool): transfer #1 with no host-key\nverification; transfer #2 with a deliberately **wrong** `CURLOPT_SSH_HOST_PUBLIC_KEY_SHA256` pin.\n`attachments/poc_ssh_hostkey.py` drives it and compares the reuse case against a `CURLOPT_FRESH_CONNECT`\ncontrol. Captured output (`attachments/ssh_hostkey_transcript.txt`):\n\n```\n################ EXPLOIT (fresh2=0): #2 reuses #1's pooled SFTP connection ################\n[client] transfer 1  pin=(none)   fresh=0 -> rc=0 (No error)\n[client] transfer 2  pin=AAAA...= fresh=0 -> rc=0 (No error)\n  RESULT rc1=0 rc2=0\n  >>> wrong host-key pin was NOT enforced on the reused connection\n\n################ CONTROL (fresh2=1): #2 forced onto a FRESH connection ################\n[client] transfer 1  pin=(none)   fresh=0 -> rc=0 (No error)\n[client] transfer 2  pin=AAAA...= fresh=1 -> rc=60 (SSH remote key was not OK)\n  RESULT rc1=0 rc2=60\n  >>> on a fresh connection the wrong pin IS enforced\n```\n\nThe exact same wrong SHA256 pin that correctly fails verification on a fresh connection (rc=60,\n`CURLE_PEER_FAILED_VERIFICATION`) is silently accepted when transfer #2 reuses transfer #1's\nconnection (rc=0). That is the host-key verification bypass, demonstrated directly.\n\n## Reproduce\n\n```\n# build libssh2 (from source) and curl --with-libssh2, then:\ngcc -I include attachments/ssh_client.c lib/.libs/libcurl.a \\\n    -L<libssh2-prefix>/lib -lssh2 -lssl -lcrypto -lbrotlidec -lbrotlicommon -lz -o ssh_client\npip install paramiko\npython3 -I attachments/poc_ssh_hostkey.py   # edit SCRATCH path at top if needed\n```\n\nThe pure-source verifier (`attachments/verify.sh` / `verify-output.txt`) remains included: it shows\nthe single fingerprint-check call site, the fields compared for reuse, and the no-op attach path.\n\n## Suggested fix\n\nAdd the host-key verification inputs to the SSH reuse comparison — `STRING_SSH_HOST_PUBLIC_KEY_SHA256`,\n`STRING_SSH_HOST_PUBLIC_KEY_MD5`, `STRING_SSH_KNOWNHOSTS`, and the presence/identity of\n`ssh_hostkeyfunc` — in `ssh_config_matches()` (mirroring how `priv_key`/`pub_key` were added for\nCVE-2022-27782), or re-run `ssh_check_fingerprint()` on reuse in `ssh_attach()`. A connection must\nnot be reused by a transfer whose host-key policy is stricter than the one the connection was\nestablished under.\n\n## Impact\n\n## Impact\n\nA transfer that explicitly requests SSH host-key verification — a SHA256/MD5 host-key pin, a\n`known_hosts` file, or a host-key callback — can have that verification silently skipped when it\nreuses a pooled SCP/SFTP connection that was established by an earlier transfer under a weaker (or\nabsent) host-key policy. Host-key verification is curl's defence against a man-in-the-middle on an\nSSH transfer; bypassing it on reuse defeats MITM detection for the transfer that asked for it.\n\nRealistic shape: a process does an initial unverified SCP/SFTP operation (or one whose host-key was\naccepted with no known_hosts), then a second operation to the same host/user with a pin configured.\nThe second operation inherits the first connection without re-checking the host key, so an attacker\nwho was able to MITM the first (unverified) connection is not caught by the second transfer's pin.\n\n## What it is / is not\n\n- It **is** a host-key verification bypass on connection reuse — the SSH analogue of the TLS reuse\n  tightening in CVE-2022-27782, whose SSH portion only added the identity key-file comparison and\n  omitted the host-key verification inputs.\n- It **is** confirmed live end-to-end: a wrong host-key pin that rejects on a fresh connection\n  (rc=60) is silently accepted on a reused connection (rc=0). Code trace, live PoC, and both\n  controls are in `attachments/`.\n- It is **not** memory-unsafe.\n\n## Honest severity\n\nMedium, matching the parent CVE-2022-27782. The effect is a security-control bypass (host-key\nverification / MITM detection), not merely a behavioural inconsistency, which is why I rate it above\nthe other reuse-key gaps. It is now demonstrated at runtime, not only from the source.",
+  "weakness": {
+    "id": 555,
+    "name": "Improper Validation of Certificate with Host Mismatch"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 7022644,
+      "file_name": "verify-output.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/iph2vehm4170ds98y7zi9nmt65v6?response-content-disposition=attachment%3B%20filename%3D%22verify-output.txt%22%3B%20filename%2A%3DUTF-8%27%27verify-output.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=215958c5702d1b6e78b18bab9b596f8a0e36130427c3e2b53d58338fac56934c",
+      "file_size": 2686,
+      "type": "text/plain",
+      "moderated": null
+    },
+    {
+      "id": 7022645,
+      "file_name": "verify.sh",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/999a75t1ovt3hpboq0p3cnpbf7nf?response-content-disposition=attachment%3B%20filename%3D%22verify.sh%22%3B%20filename%2A%3DUTF-8%27%27verify.sh&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=352de1ec615ada03b137efdc21bd5c6c120819cce9757767909fe9e7d5514d35",
+      "file_size": 2225,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 7022647,
+      "file_name": "ssh_hostkey_transcript.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/ju4ctqmul1uv23dkwxrw10npmvpl?response-content-disposition=attachment%3B%20filename%3D%22ssh_hostkey_transcript.txt%22%3B%20filename%2A%3DUTF-8%27%27ssh_hostkey_transcript.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=49eb29950aed423ac3ff2dc59b06bc483d1321d60f574939971892f5a2866f9a",
+      "file_size": 1152,
+      "type": "text/plain",
+      "moderated": null
+    },
+    {
+      "id": 7022649,
+      "file_name": "ssh_client.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/8r7rinwhg77am2cvsrc5utvpkchc?response-content-disposition=attachment%3B%20filename%3D%22ssh_client.c%22%3B%20filename%2A%3DUTF-8%27%27ssh_client.c&response-content-type=text%2Fx-c%2B%2Bsrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=6fdd3a5b0a541e710cee301ffdbb92521e1096eee711fbd952e387181a91ca5f",
+      "file_size": 1786,
+      "type": "text/x-c++src",
+      "moderated": null
+    },
+    {
+      "id": 7022650,
+      "file_name": "sftp_server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/csd7ne4eqrny92kkyo31096181oc?response-content-disposition=attachment%3B%20filename%3D%22sftp_server.py%22%3B%20filename%2A%3DUTF-8%27%27sftp_server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=0a4d8e71e7c622363bc4f2990e7f1501c63451132fd89cdc80d068c86a9cd86c",
+      "file_size": 3443,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 7022652,
+      "file_name": "poc_ssh_hostkey.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/yes4am9lwmq774ygt4r5ze07a194?response-content-disposition=attachment%3B%20filename%3D%22poc_ssh_hostkey.py%22%3B%20filename%2A%3DUTF-8%27%27poc_ssh_hostkey.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=6537f3b3d4a868db86daaf530e40bc5d61f8dace991dc25486e0f18fc92e4d7b",
+      "file_size": 3495,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 7022653,
+      "file_name": "impact.md",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/3nqgyfq0vz38wuvio6towpdaocjs?response-content-disposition=attachment%3B%20filename%3D%22impact.md%22%3B%20filename%2A%3DUTF-8%27%27impact.md&response-content-type=text%2Fmarkdown&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=32a055e96c589d4529d9f9f15f7390cdae37f098e3d93328d4fa45233c15c9dd",
+      "file_size": 1722,
+      "type": "text/markdown",
+      "moderated": null
+    },
+    {
+      "id": 7022654,
+      "file_name": "description.md",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/8v6rxvefrjzk1wgay9i32ovkc5so?response-content-disposition=attachment%3B%20filename%3D%22description.md%22%3B%20filename%2A%3DUTF-8%27%27description.md&response-content-type=text%2Fmarkdown&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=be3bbec7206aa35c25f06953d26077a1eb2dbbf8ba4266e33d7faac4b8df34e9",
+      "file_size": 5620,
+      "type": "text/markdown",
+      "moderated": null
+    },
+    {
+      "id": 7022655,
+      "file_name": "REPORT-HEADER.md",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/k3bnxo96jowctlcrt861y5zg9a6y?response-content-disposition=attachment%3B%20filename%3D%22REPORT-HEADER.md%22%3B%20filename%2A%3DUTF-8%27%27REPORT-HEADER.md&response-content-type=text%2Fmarkdown&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQUI24YPV7%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T070959Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHYaCXVzLXdlc3QtMiJHMEUCIQDuRxZD0sZJ3UX9HNsUoH8%2Ff5B%2F0X%2BaU1VkiffDW6ezLgIgcx0knLm5BfZospGlpEhNl1oKddtC9z%2BRs6vo2quHQ6IqsQUIPxADGgwwMTM2MTkyNzQ4NDkiDBeNaJWbIFyKKhNjlyqOBUnCiJfJXSpRwyJJ9gLPcXUMeHb4PQYNpF7c1BRUlr290ocLLIbS5O3Uf07WF8uvyvOb1A7s6kyc4llHl9%2FM1R%2BSgFYwgNJk2JEIZb3eBhdo9GvOmMMC9i2LqZhDFvwNtMLYmjquOD4%2Bx8WRbLLmpu2A86%2B8hYPzQ%2F9YyZGzkBoFxQsccf4doUvD1vIes6mq4UpsJ%2Bp4DSxzjP1ZFDX4tJEY%2B7ShQZuvdTnWQviYSlkmmVI4egc7Ni9lfPBIscM3ylHyVIvE5B4NjHh71p8ZEqaezSlfFlmnlY37bh73mb3FJnOQKay2z%2FBVO5FKZsDFFzNrRVzvpxp0sr6MmS0OWBWugvE0eJ03%2B0gjjFxXmwh%2F6su07EwlHSMeBJGX0EY%2Bz1PMXnT9Z36tzpMkIkX80OR9M4iu6iTVWGbYTh%2FwIZb4N0Ru1flHFCgovTxYF3nP5IYgFvRbAcWKOrS7nPH42%2FKjgEnQ4IRbHXhEHdeWvftRfCtZabIMX1CEKymeHMQzsY1A7CIEHov5z4eHgH%2BMi8GHJns3jS4uUOk8aWpJU7kNE193IInOgvrjKE5whl%2BenSY80RZQL5v6SpfHizprolYcti56LtamqtDaCrRVnZstQaCF6pTU9iMWWZDFt3X0QXkcTKzRXTGwAqzKRxtJV3LSV%2FyGtDZcqNphkW9CqgpAvnykzmPgCTp%2FpcEZVn3JPAi%2BmdTRNM71ik0U7WsB%2BCHzGtOHHGhvo4IpfzbG5aKchU%2Frn%2FzINqXaoFkxDowTko4qmLjCzEq%2BR9YAkEA12s28fqJky%2FrDB%2FSLgemmiwErA8RncJHy9Q1UJqmNXn5GKtswgX0jJZ95UOsT5Zyxi63fuxBTZox1a4GhYWcrOTDrjNzWBjqxAT9ZcLI3YxGKTL1r8vKzmiKjfS899B1GszZ82A1E3AHQPwCsOT8NiWoMXtB3h8aYJrMH3oq8h5mSKqCdG84mF4fwOzQeqZaP%2FX0%2F4S%2FnLub5QEPEd89YEuohmyxYLmJYMED2xQXaUF4F8AI5Slk12VSftwYFTue4P%2BvpBx7WIMuOescGPPVuyM68oNn5tlLaJpCCsqKMoUwWcsxhG5pFu8vdcujwkJVEK6GtG995UJpjMA%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=d12103bcc7b9a685473fc046b89345a45c387be8cf097be2b68f1f85e225c5b4",
+      "file_size": 2210,
+      "type": "text/markdown",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "medium",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

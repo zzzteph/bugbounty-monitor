@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**52 report(s)**
+**54 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -18,6 +18,7 @@
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
+| wolfSSL Backend Silently Ignores --cert-status (OCSP Stapling Bypass) | — | curl | 2026-10-20 | [#4127399](https://hackerone.com/reports/4127399) |
 | 10: CURLOPT_MAXLIFETIME_CONN bypass on active HTTP/2 connections | — | curl | 2026-09-14 | [#3972323](https://hackerone.com/reports/3972323) |
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
@@ -26,6 +27,7 @@
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
+| TLS session cache key omits native_ca_store: a session validated with CURLSSLOPT_NATIVE_CA can be resumed by a transfer that disabled it (incomplete f | — | curl | 2026-10-20 | [#4123646](https://hackerone.com/reports/4123646) |
 | CVE-2026-82208: wolfSSL CA-cache hit overrides callback | — | curl | 2026-09-03 | [#3973090](https://hackerone.com/reports/3973090) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
 | TLS session cache case-folds CA paths and bypasses the active trust profile | — | curl | 2026-08-25 | [#3966955](https://hackerone.com/reports/3966955) |

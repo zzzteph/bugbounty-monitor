@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**722 report(s) across 25 class(es)**
+**723 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 79 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 80 | $10,000 |
 | [Buffer Over Read](buffer_over_read/README.md) | 57 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
@@ -712,6 +712,7 @@
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
 | Low-privilege RCE in MariaDB: SYS_REFCURSOR cursor-array use-after-free chained with an ST_Area heap over-read | — | mariadb | 2026-10-07 | [#3856148](https://hackerone.com/reports/3856148) |
+|  WebSocket send queue use-after-free during nested curl_ws_send() | — | curl | 2026-10-20 | [#4124722](https://hackerone.com/reports/4124722) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
 | Heap Use-After-Free in Materialized_cursor::open via SYS_REFCURSOR Array Reallocation | — | mariadb | 2026-10-07 | [#3915935](https://hackerone.com/reports/3915935) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
