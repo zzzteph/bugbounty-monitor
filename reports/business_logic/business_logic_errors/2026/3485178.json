@@ -1,0 +1,139 @@
+{
+  "id": 3485178,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zNDg1MTc4",
+  "url": "https://hackerone.com/reports/3485178",
+  "title": "Deck app: Invalid tag color is accepted by API and breaks frontend UI",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "low",
+  "readable_substate": "Resolved",
+  "created_at": "2026-01-02T21:00:44.094Z",
+  "submitted_at": "2026-01-02T21:00:44.497Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "khoof",
+    "url": "/khoof",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/lrfal34c5mh7fmtv2vvfwmsnnwty/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 13291,
+    "url": "https://hackerone.com/nextcloud",
+    "handle": "nextcloud",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/hsgut1vi1cv8housqai9cm9383yx/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/hsgut1vi1cv8housqai9cm9383yx/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "Nextcloud",
+      "twitter_handle": "nextclouders",
+      "website": "https://nextcloud.com",
+      "about": "Access, share and protect your files, calendars, contacts, communication & more at home and in your enterprise."
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": true,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-10-20T12:55:32.670Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-09-20T12:55:27.864Z",
+  "team_member_agreed_on_going_public_at": null,
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Product / Component\n\n* Application: Nextcloud\n* App: Deck\n* Feature: Deck → Boards → Tags (Labels)\n\n---\n\n## Vulnerability Type\n\n* Function Confusion\n* Improper Input Validation\n* Logic Flaw\n* Application-level Denial of Service (Feature DoS)\n\n---\n\n## Description\n\nIn the Deck app, there is a feature called **Deck**, which allows users to create **Boards**.\nEach board contains **Tags (Labels)** that can be created and assigned a **color** for organization.\n\nAs a normal user who has access to a board, I attempted to create a new tag.\nDuring tag creation, the application sends the following request:\n\n```\nPOST /apps/deck/labels HTTP/1.1\nHost: 127.0.0.1:8080\nrequesttoken: <token>\nCookie: <session>\n\n{\n  \"cardId\": null,\n  \"color\": \"anything\",\n  \"title\": \"khoof\",\n  \"boardId\": 2\n}\n```\n\nThe **`color` parameter** is supposed to accept only valid color values (for example predefined colors or valid HEX values).\nHowever, the server **does not validate this parameter at all**.\n\nI was able to send **any arbitrary string** (e.g. `\"anything\"`) as the color value, and the server responded with:\n\n```\nHTTP/1.1 200 OK\n```\n\n---\n\n## Impact\n\nAfter creating a tag with an invalid color value:\n\n* The **Tags section of the board becomes broken**\n* Tags **no longer render**\n* The tags management UI **does not open**\n* Users **cannot view, edit, or manage tags anymore** on that board\n\nThis affects **all users who have access to the board**, not only the attacker.\n\nThis results in:\n\n* **Permanent functional disruption** of the tags feature for the board\n* **Denial of service at the feature level**\n* **Loss of integrity** of board metadata\n\nThe issue happens because the backend accepts invalid input that the frontend cannot process or render correctly, causing a **function confusion between backend acceptance and frontend expectations**.\n\n---\n\n## Attack Scenario\n\n1. Attacker has normal access to a Deck board\n2. Attacker sends a crafted request to create a label with an invalid `color` value\n3. Server accepts the request without validation\n4. Invalid tag is stored in the database\n5. Tags section becomes unusable for all board members\n\n---\n\n## Expected Behavior\n\n* The server should **strictly validate** the `color` parameter\n* Only allowed color formats (predefined values or valid HEX/RGB formats) should be accepted\n* Invalid input should return a **4xx error**\n\n---\n\n## Actual Behavior\n\n* Arbitrary values are accepted for the `color` parameter\n* Server responds with **200 OK**\n* Invalid data breaks the tags rendering and management functionality\n\n---\n\n## Security Impact Summary\n\n* Low privilege user can **break core board functionality**\n* No special permissions required\n* Affects multiple users\n* Persistent impact until manual backend cleanup\n\n---\n\n==The PoC Video==\n\n\n{F5180247}\n\n## Impact\n\n",
+  "weakness": {
+    "id": 65,
+    "name": "Business Logic Errors"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 5180247,
+      "file_name": "Screencast_From_2026-01-02_22-49-15.mp4",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/mqcpshzdrh2l9vamwc8un5l55bft?response-content-disposition=attachment%3B%20filename%3D%22Screencast_From_2026-01-02_22-49-15.mp4%22%3B%20filename%2A%3DUTF-8%27%27Screencast_From_2026-01-02_22-49-15.mp4&response-content-type=video%2Fmp4&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQTN7Q3EYS%2F20261020%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261020T132003Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEH0aCXVzLXdlc3QtMiJGMEQCICtF3TcDXANGOUYOHeScj0RebH0CzaAADYNZW6uHpNHWAiAs0OdGuyuQ2hjcs0m3mZa2jVgQCUDHhv4Dk4oJybmybyqxBQhGEAMaDDAxMzYxOTI3NDg0OSIMCOS4eMdLz2P8mANFKo4FwHI0S6xuOMRD3RWgHzKPnxWa0riqHl7WKzfwrFtt7sUJlGci5hgAtGlytVv8yo7foptCfD5Qta5Mxw8Yg6i2wrYRoObOeRPwbRWdFzoTxA3cPh275XQFWtrG1ycku1g40tWkGq0PHAd%2BMr7cE%2F9Ck4gh7g%2BEkY%2FquOTRcx1AezmGby5qw64etz8I56q2EuXta5dsRlce6Og2MnjRKh%2FG6dfcr1e746YecuQARB9FPVfJ2vowrbUUTgjObNCBdSxH%2BPBm0Zf6v%2B0eBrTB6R2ufZNdtL25V1aa%2FWWUFByuojL5zF85RUIItUIQq3oWJQPQyWZqTGShP8u3lm2Fn0FC7ifKWPSZFUZljMxghce%2F03%2F9xh7qxcEfFTFCoq3b%2F6zREgmvUaO4lP2HhduPmRVX%2BolAHw1%2FNg%2Bt4xkulvUnB043APzHpfu8DnWami6wJ%2FtNWh1jNiFr0oqTakg488jnX0b7tMPnmvLIW%2B4ms2%2Bz9RKMUBH05tz6LoFHZ0grNKNVTwuZkSsZASE4EufyinCaXerKyTfgR8Hg6NEL1Zm5LQOANvNmwaM%2BoSHDRrSPWPREKXZqK1%2F%2FHAR88X8Z0vkWCZoYYR%2B%2BKT3tHDyKJUs3dg7blCuYJEXIiT8VhdBgITeGLuXgRWxBivqXXt0nUxvl70nVu7SLgBR3WOZ5q29MUAICisu21xTSjDr%2FCktWbtTra%2FepqU6quvZd4G5bbzZLIYGywviRDebrDuKu7gogieUWRwwSvvq1aWDFmngfRtSK36lPAtXwac%2Fofh7mNvOyh9dnRt70qO01gyG8bDw9eEpKOfPu39gs6mp4v8WFUxkjrTLLWeuAY0QNmdDg7JeYrI9MswPD9nrjQIQmdP8nMOTG3dYGOrIB4QlNmXzORYpc31x2LQtDx%2BT1CtLSzHkARG5LQ6%2F4VnBBLeh8NR5AiQdy8sxsYA0B5sOrdx6RmLZvLIgQnnNm%2Fzw7L26pOIihbiRqhw1cbg0FwyWWkU4MF24RriwvXe5RR7xmmyzcDNXXsGcGGLJPtV3UzDhfZ0Vpgg%2FuCD89eMZ8PZU74J%2Fd5SkHc6bi0Hbwy9FoMS%2BX9Xjci1J2ApDSL0kFrvswYyeeNxDChUZPwZcI4A%3D%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=5051ed1b03d0b6c039003811b979632a9edba3a393eea0a442e7227d3dddb240",
+      "file_size": 1906292,
+      "type": "video/mp4",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-10-20T12:55:28.023Z",
+  "allow_singular_disclosure_after": -1475.54814445,
+  "singular_disclosure_allowed": true,
+  "vote_count": 5,
+  "voters": [
+    "senku_",
+    "m0hsn",
+    "khoof",
+    "0xkarim_dix",
+    "0x0dooom"
+  ],
+  "severity": {
+    "rating": "low",
+    "score": 2.7,
+    "author_type": "User",
+    "metrics": {
+      "attack_vector": "network",
+      "attack_complexity": "low",
+      "privileges_required": "high",
+      "user_interaction": "none",
+      "scope": "unchanged",
+      "confidentiality": "none",
+      "integrity": "none",
+      "availability": "low"
+    }
+  },
+  "structured_scope": {
+    "databaseId": 72103,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "nextcloud/deck",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

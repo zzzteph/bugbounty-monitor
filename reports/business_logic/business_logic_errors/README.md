@@ -1,6 +1,6 @@
 # Business Logic Errors
 
-**354 report(s)**
+**356 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -107,12 +107,14 @@
 | Authorization Bypass in Starknet Snap via enableAuthorize parameter leads to unauthorized transaction signing | — | metamask | 2026-03-13 | [#3507241](https://hackerone.com/reports/3507241) |
 | Business Logic Bypass Allows Setting “Read Access” Role Without Pro Plan Subscription | — | lovable-vdp | 2026-03-16 | [#3591764](https://hackerone.com/reports/3591764) |
 | TLS verifyhost bypass in rustls, mbedTLS, and wolfSSL when verifypeer=0 | — | curl | 2026-05-19 | [#3734095](https://hackerone.com/reports/3734095) |
+| Application Data Hiding via Invalid `iconName` Causing Frontend Crash in Nextcloud Tables | — | nextcloud | 2026-10-20 | [#3508852](https://hackerone.com/reports/3508852) |
 | Missing Duplicate Check allowing Multiple Retention Rules per System Tag | — | nextcloud | 2026-09-05 | [#3521646](https://hackerone.com/reports/3521646) |
 | Authenticated `unsigned_txset` change spoof lets a malicious hot wallet steal cold-signer change | — | monero | 2026-09-16 | [#3621588](https://hackerone.com/reports/3621588) |
 | Loss of multisig funds through single malicious participant's deliberate deception | — | monero | 2026-08-20 | [#3515557](https://hackerone.com/reports/3515557) |
 | Improper input validation in emoji field leads to sidebar UI denial of service | — | nextcloud | 2026-09-20 | [#3599470](https://hackerone.com/reports/3599470) |
 | monero:// deeplink parsing accepts tx_amount=(all) and can trigger send-all transaction mode | — | monero | 2026-08-20 | [#3648638](https://hackerone.com/reports/3648638) |
 | `check_reserve_proof` counts duplicate entries: one output can inflate `total` | — | monero | 2026-08-05 | [#3699522](https://hackerone.com/reports/3699522) |
+| Deck app: Invalid tag color is accepted by API and breaks frontend UI | — | nextcloud | 2026-10-20 | [#3485178](https://hackerone.com/reports/3485178) |
 | Reset password more than once with a reset link #2 | — | weblate | 2017-10-07 | [#245450](https://hackerone.com/reports/245450) |
 | Incorrect email content when disabling 2FA | — | legalrobot | 2017-08-15 | [#259416](https://hackerone.com/reports/259416) |
 | Adding Used Primary Email Address to attacker account and Account takeover | — | gratipay | 2017-10-05 | [#273647](https://hackerone.com/reports/273647) |

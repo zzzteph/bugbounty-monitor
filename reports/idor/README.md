@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1092 report(s) across 10 class(es)**
+**1093 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 695 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 696 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -372,6 +372,7 @@
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
 | files_lock: a write-share collaborator can place a TYPE_TOKEN lock that permanently denies the file owner, survives share revocation and account delet | — | nextcloud | 2026-09-18 | [#3770482](https://hackerone.com/reports/3770482) |
+| Ordinary HEY user can make HEY originate authenticated mail from attacker-selected @hey.com  addresses | — | basecamp | 2026-10-20 | [#4035023](https://hackerone.com/reports/4035023) |
 | Race condition leads to duplicate payouts | — | security | 2017-05-23 | [#220445](https://hackerone.com/reports/220445) |
 | Design Flaw in session management of password reset  | — | weblate | 2017-06-02 | [#229417](https://hackerone.com/reports/229417) |
 | Access to completion page without performing any action | — | weblate | 2017-05-18 | [#223846](https://hackerone.com/reports/223846) |
