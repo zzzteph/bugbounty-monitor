@@ -1,12 +1,12 @@
 # TLS / Certificate Validation
 
-**94 report(s) across 5 class(es)**
+**96 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Certificate Validation](improper_certificate_validation/README.md) | 54 | $2,580 |
+| [Improper Certificate Validation](improper_certificate_validation/README.md) | 56 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 29 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 8 | — |
 | [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
@@ -35,6 +35,8 @@
 | wolfSSL Backend Silently Ignores --cert-status (OCSP Stapling Bypass) | — | curl | 2026-10-20 | [#4127399](https://hackerone.com/reports/4127399) |
 | 10: CURLOPT_MAXLIFETIME_CONN bypass on active HTTP/2 connections | — | curl | 2026-09-14 | [#3972323](https://hackerone.com/reports/3972323) |
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
+| HSTS cache file: three trailing dots silently disable HSTS for that host | — | curl | 2026-10-20 | [#4129642](https://hackerone.com/reports/4129642) |
+| TLS session cache ignores CURLOPT_SSL_CTX_FUNCTION identity and resumes one client's session for another | — | curl | 2026-10-20 | [#4129638](https://hackerone.com/reports/4129638) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
 | CVE-2026-87866: wolfSSL public-key pinning bypass | — | curl | 2026-10-14 | [#3989514](https://hackerone.com/reports/3989514) |
