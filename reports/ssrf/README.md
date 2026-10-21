@@ -1,12 +1,12 @@
 # SSRF
 
-**233 report(s) across 2 class(es)**
+**234 report(s) across 2 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 232 | $10,000 |
+| [Server Side Request Forgery Ssrf](server_side_request_forgery_ssrf/README.md) | 233 | $10,000 |
 | [Server Side Request Forgery](server_side_request_forgery/README.md) | 1 | — |
 
 ## All Reports
@@ -71,6 +71,7 @@
 | Bypassing HTML filter in "Packing Slip Template" Lead to SSRF to Internal Kubernetes Endpoints | — | shopify | 2021-12-02 | [#1115139](https://hackerone.com/reports/1115139) |
 | Gopher Protocol Command Injection (SSRF Smuggling) | — | curl | 2026-01-14 | [#3508785](https://hackerone.com/reports/3508785) |
 | curl-ipv4-percent-normalization-SSRF | — | curl | 2026-06-10 | [#3791168](https://hackerone.com/reports/3791168) |
+| IDN decoding inserts authority delimiters and can redirect proxy CONNECT to a different host | — | curl | 2026-10-21 | [#4129950](https://hackerone.com/reports/4129950) |
 | SSRF Filter Bypass via Unblocked NAT64 Local-Use IPv6 Prefix (64:ff9b:1::/48) | — | arkadiyt-projects | 2026-03-31 | [#3634400](https://hackerone.com/reports/3634400) |
 | SSRF via User-Controlled Push proxyServer in Notifications Push Registration | — | nextcloud | 2026-09-30 | [#3623149](https://hackerone.com/reports/3623149) |
 | Blind POST SSRF via Web Push Notification Endpoint | — | phpbb | 2026-05-30 | [#3608558](https://hackerone.com/reports/3608558) |

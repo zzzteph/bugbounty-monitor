@@ -1,12 +1,12 @@
 # RCE / Command Injection
 
-**479 report(s) across 4 class(es)**
+**480 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Code Injection](code_injection/README.md) | 255 | $30,000 |
+| [Code Injection](code_injection/README.md) | 256 | $30,000 |
 | [Command Injection Generic](command_injection_generic/README.md) | 155 | $33,510 |
 | [Os Command Injection](os_command_injection/README.md) | 62 | $25,000 |
 | [Use Of Externally Controlled Format String](use_of_externally_controlled_format_string/README.md) | 7 | $8,000 |
@@ -109,6 +109,7 @@
 | RCE in AWS Amplify CLI via Prototype Chain Traversal in amplify-velocity-template | — | aws_vdp | 2026-10-13 | [#3897236](https://hackerone.com/reports/3897236) |
 | PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |
+| WordPress 7.1 Media Processing Race Enables Persistent PHP File Write and Author-to-RCE | — | wordpress | 2026-10-21 | [#3923967](https://hackerone.com/reports/3923967) |
 | HTML Injection on https://www.mycrypto.com/ | — | mycrypto | 2018-04-09 | [#326697](https://hackerone.com/reports/326697) |
 | Public Jenkins instance with /script enabled | — | ui | 2018-09-10 | [#403402](https://hackerone.com/reports/403402) |
 | Code Injection Vulnerability in morgan Package | — | nodejs-ecosystem | 2018-10-28 | [#390881](https://hackerone.com/reports/390881) |

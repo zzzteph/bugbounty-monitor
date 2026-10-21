@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**398 report(s)**
+**399 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -67,6 +67,7 @@
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | ACL cache collision lets a role inherit privileges from a same-named socket user | — | mariadb | 2026-09-07 | [#3889667](https://hackerone.com/reports/3889667) |
+| Cross-room signaling injection enabling unauthorized force-mute | — | nextcloud | 2026-10-21 | [#3636758](https://hackerone.com/reports/3636758) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
 | CVE-2026-87861: cross-origin reuse of a Negotiate connection | — | curl | 2026-10-14 | [#3972094](https://hackerone.com/reports/3972094) |
 | curl CONNECT response header colon-check bypass in cf-h1-proxy single_header — proxy authentication bypass via injected HTTP/1.x status line | — | curl | 2026-10-19 | [#4053116](https://hackerone.com/reports/4053116) |

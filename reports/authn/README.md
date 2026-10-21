@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**628 report(s) across 18 class(es)**
+**629 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 398 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 399 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -182,6 +182,7 @@
 | Restricted RPC Policy Bypass on ZMQ JSON-RPC Allows Unauthenticated Remote Admin Actions | — | monero | 2026-08-17 | [#3601469](https://hackerone.com/reports/3601469) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | ACL cache collision lets a role inherit privileges from a same-named socket user | — | mariadb | 2026-09-07 | [#3889667](https://hackerone.com/reports/3889667) |
+| Cross-room signaling injection enabling unauthorized force-mute | — | nextcloud | 2026-10-21 | [#3636758](https://hackerone.com/reports/3636758) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
 | CVE-2026-87861: cross-origin reuse of a Negotiate connection | — | curl | 2026-10-14 | [#3972094](https://hackerone.com/reports/3972094) |
 | curl CONNECT response header colon-check bypass in cf-h1-proxy single_header — proxy authentication bypass via injected HTTP/1.x status line | — | curl | 2026-10-19 | [#4053116](https://hackerone.com/reports/4053116) |

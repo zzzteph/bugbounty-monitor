@@ -1,6 +1,6 @@
 # Cross Site Scripting Xss Dom
 
-**127 report(s)**
+**128 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -30,6 +30,7 @@
 | XSS in vk.link | $300 | vkcom | 2020-12-09 | [#1025125](https://hackerone.com/reports/1025125) |
 | DOM based CSS Injection on grammarly.com | $250 | superhuman | 2019-05-06 | [#500436](https://hackerone.com/reports/500436) |
 | DOM XSS on http://talks.lystit.com | $100 | lyst | 2021-02-09 | [#1031644](https://hackerone.com/reports/1031644) |
+| Large-site Quick Edit reparses a Contributor display name into active HTML | — | wordpress | 2026-10-21 | [#3878399](https://hackerone.com/reports/3878399) |
 | Stored HTML Injection (CWE-79) via Livechat Visitor Name | — | rocket_chat | 2026-08-20 | [#3872858](https://hackerone.com/reports/3872858) |
 | DOM Based XSS in mycrypto.com | — | mycrypto | 2018-03-18 | [#324303](https://hackerone.com/reports/324303) |
 | Preview bar: Incomplete message origin validation results in XSS | — | shopify | 2018-07-26 | [#381192](https://hackerone.com/reports/381192) |

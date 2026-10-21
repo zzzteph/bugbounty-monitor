@@ -1,6 +1,6 @@
 # XSS
 
-**1497 report(s) across 10 class(es)**
+**1498 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Cross Site Scripting Xss Reflected](cross_site_scripting_xss_reflected/README.md) | 523 | $5,000 |
 | [Cross Site Scripting Xss Stored](cross_site_scripting_xss_stored/README.md) | 472 | $16,000 |
 | [Cross Site Scripting Xss Generic](cross_site_scripting_xss_generic/README.md) | 343 | $13,950 |
-| [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 127 | $3,000 |
+| [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 128 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
 | [Failure To Sanitize Special Elements Into A Different Plane ](failure_to_sanitize_special_elements_into_a_different_plane_/README.md) | 4 | $300 |
 | [Improper Neutralization Of Http Headers For Scripting Syntax](improper_neutralization_of_http_headers_for_scripting_syntax/README.md) | 4 | $1,000 |
@@ -302,6 +302,7 @@
 | Stored XSS in profile page | $50 | acronis | 2021-11-14 | [#1084183](https://hackerone.com/reports/1084183) |
 | upgrade Aspen on inside.gratipay.com to pick up CR injection fix | $40 | gratipay | 2017-03-22 | [#143139](https://hackerone.com/reports/143139) |
 | [Meetup][World ID][OIDC] Insufficient Filtering of "state" Parameter in Response Mode form_post leads to XSS and ATO | — | toolsforhumanity | 2024-06-19 | [#2515808](https://hackerone.com/reports/2515808) |
+| Large-site Quick Edit reparses a Contributor display name into active HTML | — | wordpress | 2026-10-21 | [#3878399](https://hackerone.com/reports/3878399) |
 | Stored HTML Injection (CWE-79) via Livechat Visitor Name | — | rocket_chat | 2026-08-20 | [#3872858](https://hackerone.com/reports/3872858) |
 | DOM Based XSS in mycrypto.com | — | mycrypto | 2018-03-18 | [#324303](https://hackerone.com/reports/324303) |
 | Preview bar: Incomplete message origin validation results in XSS | — | shopify | 2018-07-26 | [#381192](https://hackerone.com/reports/381192) |

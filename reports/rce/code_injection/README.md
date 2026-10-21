@@ -1,6 +1,6 @@
 # Code Injection
 
-**255 report(s)**
+**256 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -66,6 +66,7 @@
 | RCE in AWS Amplify CLI via Prototype Chain Traversal in amplify-velocity-template | — | aws_vdp | 2026-10-13 | [#3897236](https://hackerone.com/reports/3897236) |
 | PHP code injection via delivery limitation logical  | — | revive_adserver | 2026-06-03 | [#3656781](https://hackerone.com/reports/3656781) |
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |
+| WordPress 7.1 Media Processing Race Enables Persistent PHP File Write and Author-to-RCE | — | wordpress | 2026-10-21 | [#3923967](https://hackerone.com/reports/3923967) |
 | HTML Injection on https://www.mycrypto.com/ | — | mycrypto | 2018-04-09 | [#326697](https://hackerone.com/reports/326697) |
 | Public Jenkins instance with /script enabled | — | ui | 2018-09-10 | [#403402](https://hackerone.com/reports/403402) |
 | Code Injection Vulnerability in morgan Package | — | nodejs-ecosystem | 2018-10-28 | [#390881](https://hackerone.com/reports/390881) |

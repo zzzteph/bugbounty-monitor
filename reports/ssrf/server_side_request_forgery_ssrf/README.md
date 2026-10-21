@@ -1,6 +1,6 @@
 # Server Side Request Forgery Ssrf
 
-**232 report(s)**
+**233 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -61,6 +61,7 @@
 | SSRF protection bypass | $100 | nextcloud | 2020-03-14 | [#736867](https://hackerone.com/reports/736867) |
 | Gopher Protocol Command Injection (SSRF Smuggling) | — | curl | 2026-01-14 | [#3508785](https://hackerone.com/reports/3508785) |
 | curl-ipv4-percent-normalization-SSRF | — | curl | 2026-06-10 | [#3791168](https://hackerone.com/reports/3791168) |
+| IDN decoding inserts authority delimiters and can redirect proxy CONNECT to a different host | — | curl | 2026-10-21 | [#4129950](https://hackerone.com/reports/4129950) |
 | SSRF Filter Bypass via Unblocked NAT64 Local-Use IPv6 Prefix (64:ff9b:1::/48) | — | arkadiyt-projects | 2026-03-31 | [#3634400](https://hackerone.com/reports/3634400) |
 | SSRF via User-Controlled Push proxyServer in Notifications Push Registration | — | nextcloud | 2026-09-30 | [#3623149](https://hackerone.com/reports/3623149) |
 | Blind POST SSRF via Web Push Notification Endpoint | — | phpbb | 2026-05-30 | [#3608558](https://hackerone.com/reports/3608558) |
