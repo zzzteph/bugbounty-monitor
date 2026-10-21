@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1129 report(s) across 10 class(es)**
+**1130 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 27 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 28 | $2,540 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
@@ -1078,6 +1078,7 @@
 | Domainless COOKIEFILE cookie leaks to unrelated IP-literal hosts | — | curl | 2026-08-21 | [#3952619](https://hackerone.com/reports/3952619) |
 | Explicit NO_PROXY /0 CIDR rules fail to bypass HTTP proxy for IP-literal requests | — | curl | 2026-10-17 | [#4114965](https://hackerone.com/reports/4114965) |
 | CVE-2026-6429: netrc credential leak with reused proxy connection | — | curl | 2026-04-29 | [#3677759](https://hackerone.com/reports/3677759) |
+| Redirect to imap/pop3/smtp (SASL) or sftp/scp (libssh) authenticates to the attacker's host with the user's ambient Kerberos credentials | — | curl | 2026-10-21 | [#4123571](https://hackerone.com/reports/4123571) |
 | libcurl stale CURLOPT_AUTOREFERER leaks a previous request URL to a different origin on a reused easy handle | — | curl | 2026-04-17 | [#3673277](https://hackerone.com/reports/3673277) |
 | Leaking Username and Password in the URLs via Virustotal, can leads to account takeover | — | chaturbate | 2018-09-21 | [#411920](https://hackerone.com/reports/411920) |
 |  Remote memory disclosure vulnerability in libcurl on 64 Bit Windows | — | curl | 2022-02-21 | [#1444539](https://hackerone.com/reports/1444539) |

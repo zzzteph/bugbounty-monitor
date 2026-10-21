@@ -1,6 +1,6 @@
 # Allocation Of Resources Without Limits Or Throttling
 
-**27 report(s)**
+**28 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -13,6 +13,7 @@
 | CVE-2022-32205: Set-Cookie denial of service | $480 | ibb | 2022-06-27 | [#1614328](https://hackerone.com/reports/1614328) |
 | High resource consumption by insufficient sanitization of forum threads pagination | $479 | flickr | 2025-11-24 | [#1916400](https://hackerone.com/reports/1916400) |
 | HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c) | — | curl | 2026-05-19 | [#3734020](https://hackerone.com/reports/3734020) |
+| CVE-2026-11586 fix is incomplete: auto-PONG memory grows without limit through curl_ws_recv() (CONNECT_ONLY) | — | curl | 2026-10-21 | [#4123050](https://hackerone.com/reports/4123050) |
 | CVE-2026-11586: WS Auto-PONG memory exhaustion | — | curl | 2026-06-24 | [#3788931](https://hackerone.com/reports/3788931) |
 | libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
 | HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB | — | curl | 2026-05-19 | [#3734947](https://hackerone.com/reports/3734947) |

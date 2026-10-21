@@ -1,13 +1,13 @@
 # Denial of Service
 
-**455 report(s) across 5 class(es)**
+**456 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 424 | $10,000 |
-| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 27 | $2,540 |
+| [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 28 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
 | [Loop With Unreachable Exit Condition Infinite Loop](loop_with_unreachable_exit_condition_infinite_loop/README.md) | 1 | — |
@@ -137,6 +137,7 @@
 | [DOS] Browser hangs on loading the code snippet | $25 | brave | 2018-05-06 | [#181686](https://hackerone.com/reports/181686) |
 | Send email asynchronously | $10 | gratipay | 2017-03-17 | [#128856](https://hackerone.com/reports/128856) |
 | HTTP/2 proxy CONNECT tunnel unbounded 1xx chain (missing Curl_bump_headersize cap in cf-h2-proxy.c) | — | curl | 2026-05-19 | [#3734020](https://hackerone.com/reports/3734020) |
+| CVE-2026-11586 fix is incomplete: auto-PONG memory grows without limit through curl_ws_recv() (CONNECT_ONLY) | — | curl | 2026-10-21 | [#4123050](https://hackerone.com/reports/4123050) |
 | CVE-2026-11586: WS Auto-PONG memory exhaustion | — | curl | 2026-06-24 | [#3788931](https://hackerone.com/reports/3788931) |
 | libssh SFTP initialization ignores CURLOPT_TIMEOUT, hangs indefinitely | — | curl | 2026-05-18 | [#3735080](https://hackerone.com/reports/3735080) |
 | HTTP/3 paused transfer buffers incoming data without bound up to ~1 GiB | — | curl | 2026-05-19 | [#3734947](https://hackerone.com/reports/3734947) |
