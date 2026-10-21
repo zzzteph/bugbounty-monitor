@@ -1,6 +1,6 @@
 # Miscellaneous
 
-**1676 report(s) across 35 class(es)**
+**1677 report(s) across 35 class(es)**
 
 ## Classes
 
@@ -16,8 +16,8 @@
 | [Improper Check Or Handling Of Exceptional Conditions](improper_check_or_handling_of_exceptional_conditions/README.md) | 5 | — |
 | [Improper Handling Of Url Encoding Hex Encoding](improper_handling_of_url_encoding_hex_encoding/README.md) | 4 | — |
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 4 | — |
+| [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
-| [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 2 | — |
 | [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
 | [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
@@ -259,6 +259,7 @@
 | limit number of images in statement | $1 | gratipay | 2017-06-16 | [#117739](https://hackerone.com/reports/117739) |
 | curl reuses an HTTPS connection when a response is already buffered in the TLS stack | — | curl | 2026-10-20 | [#4128703](https://hackerone.com/reports/4128703) |
 | HSTS accepted from HTTP origin behind HTTPS proxy | — | curl | 2026-03-17 | [#3609505](https://hackerone.com/reports/3609505) |
+| POP3: data after the end-of-body terminator is written into the retrieved message | — | curl | 2026-10-21 | [#4132132](https://hackerone.com/reports/4132132) |
 | MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker | — | curl | 2026-05-05 | [#3712343](https://hackerone.com/reports/3712343) |
 | Windows SSPI connection-pool probe can reuse a connection under the wrong user | — | curl | 2026-08-14 | [#3938185](https://hackerone.com/reports/3938185) |
 | Unicode-to-ASCII conversion on Windows can lead to argument injection and more | — | curl | 2024-06-18 | [#2550951](https://hackerone.com/reports/2550951) |
