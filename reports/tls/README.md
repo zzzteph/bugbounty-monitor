@@ -1,6 +1,6 @@
 # TLS / Certificate Validation
 
-**97 report(s) across 5 class(es)**
+**98 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Improper Certificate Validation](improper_certificate_validation/README.md) | 57 | $2,580 |
 | [Man In The Middle](man_in_the_middle/README.md) | 29 | $1,000 |
 | [Improper Validation Of Certificate With Host Mismatch](improper_validation_of_certificate_with_host_mismatch/README.md) | 8 | — |
-| [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 2 | — |
+| [Improper Check For Certificate Revocation](improper_check_for_certificate_revocation/README.md) | 3 | — |
 | [Improper Following Of A Certificate S Chain Of Trust](improper_following_of_a_certificate_s_chain_of_trust/README.md) | 1 | — |
 
 ## All Reports
@@ -76,6 +76,7 @@
 | Silent omission of certificate hostname verification in LibreSSL and BoringSSL | — | ibb | 2019-09-26 | [#329645](https://hackerone.com/reports/329645) |
 | OpenSSL::X509::Name Equality Check Does Not Work, Patch included | — | ruby | 2018-10-19 | [#387250](https://hackerone.com/reports/387250) |
 | CURLOPT_PROXY_CRLFILE / CURLOPT_PROXY_ISSUERCERT / CURLOPT_PROXY_ISSUERCERT_BLOB silently ignored on backends that don't support them | — | curl | 2026-06-05 | [#3717552](https://hackerone.com/reports/3717552) |
+| --cert-status with OpenSSL accepts a stapled OCSP response of any age when it lacks nextUpdate (revoked certificate keeps passing) | — | curl | 2026-10-23 | [#4135826](https://hackerone.com/reports/4135826) |
 | CVE-2024-0853: OCSP verification bypass with TLS session reuse | — | curl | 2024-01-31 | [#2298922](https://hackerone.com/reports/2298922) |
 | Node.js Certificate Verification Bypass via String Injection | — | nodejs | 2022-02-10 | [#1429694](https://hackerone.com/reports/1429694) |
 | SSH (SCP/SFTP) host-key verification is skipped on connection reuse — a pinned/known_hosts transfer silently reuses a previously-unverified connection | — | curl | 2026-10-20 | [#4124583](https://hackerone.com/reports/4124583) |

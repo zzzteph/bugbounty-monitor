@@ -1,13 +1,13 @@
 # Memory Corruption
 
-**723 report(s) across 25 class(es)**
+**724 report(s) across 25 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
 | [Memory Corruption Generic](memory_corruption_generic/README.md) | 244 | $10,000 |
-| [Use After Free](use_after_free/README.md) | 80 | $10,000 |
+| [Use After Free](use_after_free/README.md) | 81 | $10,000 |
 | [Buffer Over Read](buffer_over_read/README.md) | 57 | $2,142 |
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
@@ -702,6 +702,7 @@
 | WebSocket decoder use-after-free when curl_easy_pause() unpauses from a debug callback | — | curl | 2026-10-19 | [#4123749](https://hackerone.com/reports/4123749) |
 | libcurl shared-HSTS-cache race leads to use-after-free with attacker-controlled function-pointer call | — | curl | 2026-10-19 | [#4122039](https://hackerone.com/reports/4122039) |
 | CVE-2026-9546: sending old referer | — | curl | 2026-06-24 | [#3754343](https://hackerone.com/reports/3754343) |
+| Heap-use-after-free in libcurl's multi event machinery (curl_multi_remove_handle() from a socket callback nested under a notify callback) | — | curl | 2026-10-23 | [#4135291](https://hackerone.com/reports/4135291) |
 | Heap use-after-free (write) in mev_forget_socket() via reentrant curl_easy_pause() — incomplete fix for CVE-2026-9080 | — | curl | 2026-08-04 | [#3911968](https://hackerone.com/reports/3911968) |
 | CVE-2026-3805: use after free in SMB connection reuse | — | curl | 2026-03-11 | [#3591944](https://hackerone.com/reports/3591944) |
 | heap-use-after-free in state.referer when CURLOPT_REFERER replaced or cleared after perform | — | curl | 2026-06-11 | [#3774279](https://hackerone.com/reports/3774279) |

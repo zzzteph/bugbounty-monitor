@@ -1,12 +1,12 @@
 # Denial of Service
 
-**456 report(s) across 5 class(es)**
+**458 report(s) across 5 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 424 | $10,000 |
+| [Uncontrolled Resource Consumption](uncontrolled_resource_consumption/README.md) | 426 | $10,000 |
 | [Allocation Of Resources Without Limits Or Throttling](allocation_of_resources_without_limits_or_throttling/README.md) | 28 | $2,540 |
 | [Uncontrolled Recursion](uncontrolled_recursion/README.md) | 2 | — |
 | [Improper Handling Of Highly Compressed Data Data Amplificati](improper_handling_of_highly_compressed_data_data_amplificati/README.md) | 1 | — |
@@ -193,11 +193,13 @@
 | ReDoS due to device-detector parsing user agents | — | gitlab | 2024-10-08 | [#1772063](https://hackerone.com/reports/1772063) |
 | DoS via Automatic Response Message | — | mattermost | 2022-11-23 | [#1680241](https://hackerone.com/reports/1680241) |
 | HTTP/2 sessions never clean up after GOAWAY on invalid protocol errors | — | nodejs | 2026-06-18 | [#3658225](https://hackerone.com/reports/3658225) |
+| passive FTPS data connection handshake blocks curl_multi_perform() with no timeout (regression in 8.19.0) | — | curl | 2026-10-23 | [#4122567](https://hackerone.com/reports/4122567) |
 | Client-Side Denial of Service (DoS) via Memory Exhaustion on Password Reset Endpoint | — | khanacademy | 2026-10-05 | [#3987499](https://hackerone.com/reports/3987499) |
 | MQTT: Missing upper bound on incoming Remaining Length allows server-controlled long wait | — | curl | 2026-01-06 | [#3488278](https://hackerone.com/reports/3488278) |
 | Memory exhaustion (DoS) via unbounded file read in `EncodingDiscovery.detect_encoding()` | — | weblate | 2026-10-16 | [#4028616](https://hackerone.com/reports/4028616) |
 | MariaDB HandlerSocket Improper Request Field-Count Validation Causes Server Crash | — | mariadb | 2026-10-07 | [#3867363](https://hackerone.com/reports/3867363) |
 | Potential Resource Leak in tool_parsecfg.c at line 279 during fileerror | — | curl | 2026-05-05 | [#3710209](https://hackerone.com/reports/3710209) |
+| curl EXPIRE_SHUTDOWN timer never armed for silent servers: connection-shutdown timeout bypass in cshutdn (event-driven mode) | — | curl | 2026-10-23 | [#4125065](https://hackerone.com/reports/4125065) |
 | Unauthenticated ?q= search query causes exponential pyparsing backtracking under a process-global lock in Weblate | — | weblate | 2026-09-04 | [#3898281](https://hackerone.com/reports/3898281) |
 | CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
 |  Tor onion service INTRODUCE2 invalid-MAC cells permanently grow service replay cache | — | torproject | 2026-09-10 | [#3709703](https://hackerone.com/reports/3709703) |

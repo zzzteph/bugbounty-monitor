@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**696 report(s)**
+**697 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -231,6 +231,7 @@
 | 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |
 |  Myndr CORS Misconfiguration | — | myndr | 2026-08-12 | [#3930957](https://hackerone.com/reports/3930957) |
+| dns.resolve truncates names containing NUL char | — | nodejs | 2026-10-23 | [#4038342](https://hackerone.com/reports/4038342) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |

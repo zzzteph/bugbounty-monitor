@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1093 report(s) across 10 class(es)**
+**1094 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 696 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 697 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -353,6 +353,7 @@
 | 1-Click Account Takeover via Open Redirect through Regex Bypass in Domain Validation | — | khanacademy | 2026-06-20 | [#3723458](https://hackerone.com/reports/3723458) |
 | Restricted RPC leaks alternative block hashes via /get_alt_blocks_hashes | — | monero | 2026-07-20 | [#3738727](https://hackerone.com/reports/3738727) |
 |  Myndr CORS Misconfiguration | — | myndr | 2026-08-12 | [#3930957](https://hackerone.com/reports/3930957) |
+| dns.resolve truncates names containing NUL char | — | nodejs | 2026-10-23 | [#4038342](https://hackerone.com/reports/4038342) |
 | Group restriction bypass via bearer token in user_oidc (SETTING_RESTRICT_LOGIN_TO_GROUPS not enforced in Backend::getCurrentUserId) | — | nextcloud | 2026-05-21 | [#3572848](https://hackerone.com/reports/3572848) |
 | XML‑RPC login leak exposes valid session ID enabling unauthorized API access | — | revive_adserver | 2026-06-25 | [#3783738](https://hackerone.com/reports/3783738) |
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
