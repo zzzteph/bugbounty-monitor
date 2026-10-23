@@ -1,6 +1,6 @@
 # Memory Corruption
 
-**724 report(s) across 25 class(es)**
+**725 report(s) across 25 class(es)**
 
 ## Classes
 
@@ -12,7 +12,7 @@
 | [Classic Buffer Overflow](classic_buffer_overflow/README.md) | 56 | $12,500 |
 | [Heap Overflow](heap_overflow/README.md) | 54 | $3,646 |
 | [Out Of Bounds Read](out_of_bounds_read/README.md) | 45 | $9,000 |
-| [Null Pointer Dereference](null_pointer_dereference/README.md) | 35 | $4,920 |
+| [Null Pointer Dereference](null_pointer_dereference/README.md) | 36 | $4,920 |
 | [Stack Overflow](stack_overflow/README.md) | 34 | $3,000 |
 | [Integer Overflow](integer_overflow/README.md) | 28 | $500 |
 | [Array Index Underflow](array_index_underflow/README.md) | 17 | $7,500 |
@@ -592,6 +592,7 @@
 | [MK8DX] Improper metadata parsing | — | nintendo | 2023-08-17 | [#1688309](https://hackerone.com/reports/1688309) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
+| Null Dereference in X509ToObject | — | nodejs | 2026-10-23 | [#3824331](https://hackerone.com/reports/3824331) |
 | wallet-rpc crash via malformed /gettransactions response (empty txs → vector::front() in check_tx_key / check_tx_proof) | — | monero | 2026-08-05 | [#3693636](https://hackerone.com/reports/3693636) |
 | NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | CVE-2017-5969: libxml2 when used in recover mode, allows remote attackers to cause a denial of service (NULL pointer dereference) | — | ibb | 2019-10-04 | [#262665](https://hackerone.com/reports/262665) |

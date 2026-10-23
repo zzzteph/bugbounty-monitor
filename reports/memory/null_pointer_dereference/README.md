@@ -1,6 +1,6 @@
 # Null Pointer Dereference
 
-**35 report(s)**
+**36 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -19,6 +19,7 @@
 | [MK8DX] Improper metadata parsing | — | nintendo | 2023-08-17 | [#1688309](https://hackerone.com/reports/1688309) |
 | NULL pointer dereference in libcurl URL API redirect_url() with CURLU_DEFAULT_SCHEME | — | curl | 2026-05-17 | [#3736234](https://hackerone.com/reports/3736234) |
 | NULL Pointer Dereference (DoS) in libcurl SFTP QUOTE command parsing due to missing return statement | — | curl | 2026-03-11 | [#3597359](https://hackerone.com/reports/3597359) |
+| Null Dereference in X509ToObject | — | nodejs | 2026-10-23 | [#3824331](https://hackerone.com/reports/3824331) |
 | wallet-rpc crash via malformed /gettransactions response (empty txs → vector::front() in check_tx_key / check_tx_proof) | — | monero | 2026-08-05 | [#3693636](https://hackerone.com/reports/3693636) |
 | NULL pointer dereference in node:sqlite DatabaseSync#applyChangeset() via malformed SQLite changeset | — | nodejs | 2026-05-23 | [#3736889](https://hackerone.com/reports/3736889) |
 | CVE-2017-5969: libxml2 when used in recover mode, allows remote attackers to cause a denial of service (NULL pointer dereference) | — | ibb | 2019-10-04 | [#262665](https://hackerone.com/reports/262665) |
