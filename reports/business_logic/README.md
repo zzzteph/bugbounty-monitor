@@ -1,6 +1,6 @@
 # Business Logic
 
-**379 report(s) across 5 class(es)**
+**380 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -8,7 +8,7 @@
 |-------|---------|------------|
 | [Business Logic Errors](business_logic_errors/README.md) | 356 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
-| [Expected Behavior Violation](expected_behavior_violation/README.md) | 3 | — |
+| [Expected Behavior Violation](expected_behavior_violation/README.md) | 4 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
 | [Incorrect Comparison](incorrect_comparison/README.md) | 1 | — |
 
@@ -373,6 +373,7 @@
 | Punny code Detection Parsing should be implemented on Markdown  | — | liberapay | 2018-06-07 | [#363049](https://hackerone.com/reports/363049) |
 | No Data Validation, No Captcha, No Filters... | — | liberapay | 2018-06-11 | [#363863](https://hackerone.com/reports/363863) |
 | CVE-2022-32221: POST following PUT confusion | — | curl | 2022-11-26 | [#1704017](https://hackerone.com/reports/1704017) |
+| CURL_NETRC_REQUIRED sends the URL password when the .netrc file has no matching entry | — | curl | 2026-10-23 | [#4137523](https://hackerone.com/reports/4137523) |
 | Curl_compareheader() fails to match multi-value HTTP headers | — | curl | 2026-03-12 | [#3598444](https://hackerone.com/reports/3598444) |
 | CVE-2023-28322: more POST-after-PUT confusion | — | curl | 2023-05-18 | [#1954658](https://hackerone.com/reports/1954658) |
 | DiffieHellman doesn't generate keys after setting a key | — | nodejs | 2023-07-20 | [#1927480](https://hackerone.com/reports/1927480) |

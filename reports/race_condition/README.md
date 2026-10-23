@@ -1,12 +1,12 @@
 # Race Conditions
 
-**40 report(s) across 4 class(es)**
+**41 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 21 | $15,250 |
+| [Time Of Check Time Of Use Toctou Race Condition](time_of_check_time_of_use_toctou_race_condition/README.md) | 22 | $15,250 |
 | [Concurrent Execution Using Shared Resource With Improper Syn](concurrent_execution_using_shared_resource_with_improper_syn/README.md) | 17 | $3,000 |
 | [Improper Synchronization](improper_synchronization/README.md) | 1 | — |
 | [Leveraging Race Conditions](leveraging_race_conditions/README.md) | 1 | — |
@@ -47,6 +47,7 @@
 | libcurl cache updates follow symlinks and truncate their targets | — | curl | 2026-08-14 | [#3938220](https://hackerone.com/reports/3938220) |
 | Memory Corruption via TOCTOU Race in SharedArrayBuffer UTF-8 Decode (`StringBytes::Encode`) | — | nodejs | 2026-05-23 | [#3752489](https://hackerone.com/reports/3752489) |
 | node:sqlite SQLTagStore Iterator Replay Lets Attacker Re-Execute Victim-Bound Writes Indefinitely | — | nodejs | 2026-08-28 | [#3795900](https://hackerone.com/reports/3795900) |
+| Keep-alive socket process a response that was written before the request was sent | — | nodejs | 2026-10-23 | [#4038361](https://hackerone.com/reports/4038361) |
 | Race condition in claiming program credentials  | — | security | 2019-05-19 | [#488985](https://hackerone.com/reports/488985) |
 | Race Condition leads to undeletable group member | — | security | 2020-03-20 | [#604534](https://hackerone.com/reports/604534) |
 | CVE-2023-32001: fopen race condition | — | curl | 2023-07-25 | [#2039870](https://hackerone.com/reports/2039870) |

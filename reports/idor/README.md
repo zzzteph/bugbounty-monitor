@@ -1,12 +1,12 @@
 # IDOR / Broken Access Control
 
-**1094 report(s) across 10 class(es)**
+**1095 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Access Control Generic](improper_access_control_generic/README.md) | 697 | $35,000 |
+| [Improper Access Control Generic](improper_access_control_generic/README.md) | 698 | $35,000 |
 | [Insecure Direct Object Reference Idor](insecure_direct_object_reference_idor/README.md) | 289 | $20,000 |
 | [Improper Authorization](improper_authorization/README.md) | 46 | $10,000 |
 | [Client Side Enforcement Of Server Side Security](client_side_enforcement_of_server_side_security/README.md) | 16 | $1,100 |
@@ -371,6 +371,7 @@
 | Public collectives allow to create pages | — | nextcloud | 2026-09-17 | [#3533697](https://hackerone.com/reports/3533697) |
 | [Splatoon 3] Kick other players with NplnLogin message | — | nintendo | 2026-07-02 | [#3813932](https://hackerone.com/reports/3813932) |
 | Permission Model: --allow-fs-read/--allow-fs-write radix-tree prefix-boundary over-grant | — | nodejs | 2026-07-29 | [#3761342](https://hackerone.com/reports/3761342) |
+| Permission Model bypass with fs.realpathSync | — | nodejs | 2026-10-23 | [#3838675](https://hackerone.com/reports/3838675) |
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
 | files_lock: a write-share collaborator can place a TYPE_TOKEN lock that permanently denies the file owner, survives share revocation and account delet | — | nextcloud | 2026-09-18 | [#3770482](https://hackerone.com/reports/3770482) |
 | Ordinary HEY user can make HEY originate authenticated mail from attacker-selected @hey.com  addresses | — | basecamp | 2026-10-20 | [#4035023](https://hackerone.com/reports/4035023) |

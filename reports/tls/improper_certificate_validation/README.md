@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**57 report(s)**
+**60 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -23,11 +23,14 @@
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | HSTS cache file: three trailing dots silently disable HSTS for that host | — | curl | 2026-10-20 | [#4129642](https://hackerone.com/reports/4129642) |
 | TLS session cache ignores CURLOPT_SSL_CTX_FUNCTION identity and resumes one client's session for another | — | curl | 2026-10-20 | [#4129638](https://hackerone.com/reports/4129638) |
+| TLS certificate hostname bypass when the IP is written fullwidth digits | — | nodejs | 2026-10-23 | [#4038287](https://hackerone.com/reports/4038287) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
 | CVE-2026-87866: wolfSSL public-key pinning bypass | — | curl | 2026-10-14 | [#3989514](https://hackerone.com/reports/3989514) |
+| Improper certificate validation for non-canonical IPv4 hostnames allows DNS SANs to authenticate IP endpoints | — | nodejs | 2026-10-23 | [#3962304](https://hackerone.com/reports/3962304) |
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | Pinned public key check passes for a key the server does not hold with the wolfSSL backend | — | curl | 2026-10-22 | [#4128701](https://hackerone.com/reports/4128701) |
+| TLS certificate hostname bypass when the host loosely resolves to an IP address | — | nodejs | 2026-10-23 | [#4006744](https://hackerone.com/reports/4006744) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | TLS session cache key omits native_ca_store: a session validated with CURLSSLOPT_NATIVE_CA can be resumed by a transfer that disabled it (incomplete f | — | curl | 2026-10-20 | [#4123646](https://hackerone.com/reports/4123646) |
