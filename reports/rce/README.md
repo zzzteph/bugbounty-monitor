@@ -1,12 +1,12 @@
 # RCE / Command Injection
 
-**480 report(s) across 4 class(es)**
+**481 report(s) across 4 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Code Injection](code_injection/README.md) | 256 | $30,000 |
+| [Code Injection](code_injection/README.md) | 257 | $30,000 |
 | [Command Injection Generic](command_injection_generic/README.md) | 155 | $33,510 |
 | [Os Command Injection](os_command_injection/README.md) | 62 | $25,000 |
 | [Use Of Externally Controlled Format String](use_of_externally_controlled_format_string/README.md) | 7 | $8,000 |
@@ -123,6 +123,7 @@
 | PHP code injection via unexpected delivery limitation parameter | — | revive_adserver | 2026-06-03 | [#3744200](https://hackerone.com/reports/3744200) |
 | PHP code injection in delivery-limitation `logical` validation bypass - XML-RPC setChannelTargeting | — | revive_adserver | 2026-06-25 | [#3781492](https://hackerone.com/reports/3781492) |
 | HTML Injection in Transaction Confirmation Dialog via Address Book Description Enables UI Spoofing Before Fund Transfer | — | monero | 2026-08-20 | [#3679471](https://hackerone.com/reports/3679471) |
+| Code injection allows unprivileged local attacker to execute arbitrary code in Nextcloud's OAuth/web renderer process | — | nextcloud | 2026-10-24 | [#3772818](https://hackerone.com/reports/3772818) |
 | Text manipulation in https://checkout.rbk.money | — | rbkmoney | 2018-01-29 | [#299034](https://hackerone.com/reports/299034) |
 | HTML Injection on airlink.ubnt.com | — | ui | 2017-06-22 | [#226783](https://hackerone.com/reports/226783) |
 | GMP Deserialization Type Confusion Vulnerability [MyBB <= 1.8.3 RCE Vulnerability] | — | ibb | 2019-10-13 | [#198734](https://hackerone.com/reports/198734) |
