@@ -1,6 +1,6 @@
 # Insufficiently Protected Credentials
 
-**42 report(s)**
+**43 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -23,6 +23,7 @@
 | Digest Auth State Leak on Cross-Origin Redirect via Netrc - Username and Password Hash Sent to Wrong Host | — | curl | 2026-04-19 | [#3680038](https://hackerone.com/reports/3680038) |
 | curl cross-origin HTTPS redirect reuses TLS client certificate for unintended second-origin mTLS authentication | — | curl | 2026-06-07 | [#3749428](https://hackerone.com/reports/3749428) |
 | TLS conn reuse and session cache ignore fsslctx callback and ssl_config_data flags ( incomplete fix variant of 7541ae569 ) | — | curl | 2026-06-01 | [#3761647](https://hackerone.com/reports/3761647) |
+| netrc credentials leaked to a cross-host redirect target on the Basic auth path (not covered by redirect credential protections) | — | curl | 2026-10-26 | [#4125043](https://hackerone.com/reports/4125043) |
 | FTP authentication options leak to a cross-origin FTP redirect with unrestricted auth disabled | — | curl | 2026-10-26 | [#4105790](https://hackerone.com/reports/4105790) |
 | libcurl: Improper Authentication State Management on Cross-Protocol Redirects | — | curl | 2026-01-17 | [#3514263](https://hackerone.com/reports/3514263) |
 | Admin Salt Leakage on DoD site. | — | deptofdefense | 2019-12-02 | [#241116](https://hackerone.com/reports/241116) |

@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**1131 report(s) across 10 class(es)**
+**1132 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -10,7 +10,7 @@
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
-| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 28 | $2,540 |
+| [Information Exposure Through Sent Data](information_exposure_through_sent_data/README.md) | 29 | $2,540 |
 | [Information Exposure Through Debug Information](information_exposure_through_debug_information/README.md) | 26 | $750 |
 | [File And Directory Information Exposure](file_and_directory_information_exposure/README.md) | 7 | $100 |
 | [Information Exposure Through Timing Discrepancy](information_exposure_through_timing_discrepancy/README.md) | 2 | $2,540 |
@@ -1075,6 +1075,7 @@
 | Low priority HSTS bypass in curl_easy_duphandle() | — | curl | 2026-06-01 | [#3769293](https://hackerone.com/reports/3769293) |
 | Cookie jar load skips public suffix check on PSL builds | — | curl | 2026-08-14 | [#3920276](https://hackerone.com/reports/3920276) |
 | TFTP upload ignores --continue-at / CURLOPT_RESUME_FROM and leaks skipped local file prefix | — | curl | 2026-06-05 | [#3776433](https://hackerone.com/reports/3776433) |
+| Cross-protocol redirect to imap:// or smtp:// uploads the -F/MIMEPOST form and the custom Authorization/Cookie headers to the redirect target | — | curl | 2026-10-26 | [#4123474](https://hackerone.com/reports/4123474) |
 | Alt-Svc bypasses credential leak protection (CVE-2018-1000007) | — | curl | 2026-01-04 | [#3485826](https://hackerone.com/reports/3485826) |
 | CVE-2026-11856: cross-origin Digest auth state leak | — | curl | 2026-06-24 | [#3793260](https://hackerone.com/reports/3793260) |
 | 41: `main_checkfds()` pipe reuse leaks proxy credentials into HTTPS upload body | — | curl | 2026-08-31 | [#3973158](https://hackerone.com/reports/3973158) |

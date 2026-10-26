@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**63 report(s)**
+**66 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -24,6 +24,8 @@
 | 08: CVE-2026-7009 fix incomplete for AWS-LC: `--cert-status` bypass on SecTrust path | — | curl | 2026-09-08 | [#3973111](https://hackerone.com/reports/3973111) |
 | HSTS cache file: three trailing dots silently disable HSTS for that host | — | curl | 2026-10-20 | [#4129642](https://hackerone.com/reports/4129642) |
 | TLS session cache ignores CURLOPT_SSL_CTX_FUNCTION identity and resumes one client's session for another | — | curl | 2026-10-20 | [#4129638](https://hackerone.com/reports/4129638) |
+| wolfSSL TLS sessions retain native-CA trust after the application narrows trust | — | curl | 2026-10-26 | [#4122227](https://hackerone.com/reports/4122227) |
+| OpenSSL+Apple SecTrust: SecTrust accepts certificates that the app's CURLOPT_SSL_CTX_FUNCTION trust store or verify callback rejected | — | curl | 2026-10-26 | [#4123304](https://hackerone.com/reports/4123304) |
 | TLS certificate hostname bypass when the IP is written fullwidth digits | — | nodejs | 2026-10-23 | [#4038287](https://hackerone.com/reports/4038287) |
 | CVE-2026-9545: exposing HTTP/3 early data | — | curl | 2026-06-24 | [#3752888](https://hackerone.com/reports/3752888) |
 | Sandbox User Can Inject Rogue CA Certificate into OS Trust Store via Sudo-Allowed deploy-certificates.sh | — | aws_vdp | 2026-07-28 | [#3633146](https://hackerone.com/reports/3633146) |
@@ -35,6 +37,7 @@
 | CVE-2026-111484: OpenSSL with SecTrust accepts bad OCSP staples | — | curl | 2026-10-26 | [#4118610](https://hackerone.com/reports/4118610) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
+| GnuTLS + Apple SecTrust discards authenticated OCSP failure | — | curl | 2026-10-26 | [#4124276](https://hackerone.com/reports/4124276) |
 | TLS session cache key omits native_ca_store: a session validated with CURLSSLOPT_NATIVE_CA can be resumed by a transfer that disabled it (incomplete f | — | curl | 2026-10-20 | [#4123646](https://hackerone.com/reports/4123646) |
 | CVE-2026-82208: wolfSSL CA-cache hit overrides callback | — | curl | 2026-09-03 | [#3973090](https://hackerone.com/reports/3973090) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |

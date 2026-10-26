@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**630 report(s) across 18 class(es)**
+**631 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 400 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 401 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -39,6 +39,7 @@
 | Access to some Slack workspace metadata and settings available to unauthorized parties | $7,000 | slack | 2020-11-10 | [#130133](https://hackerone.com/reports/130133) |
 | Able to steal bearer token from deep link | $6,337 | basecamp | 2022-03-27 | [#1372667](https://hackerone.com/reports/1372667) |
 | Mint Oauth2 access token for targeted user | $5,580 | gitlab | 2025-07-23 | [#1148364](https://hackerone.com/reports/1148364) |
+| A disabled account's API key still works on BMO's Mojolicious /rest/ routes, including for security-group bugs filed after the disable | $4,000 | mozilla | 2026-10-26 | [#4000084](https://hackerone.com/reports/4000084) |
 | Attacker can obtain write access to any federated share/public link | $4,000 | nextcloud | 2021-06-10 | [#1170024](https://hackerone.com/reports/1170024) |
 | Bypass a fix for report #708013 | $3,500 | shopify | 2021-12-07 | [#1363672](https://hackerone.com/reports/1363672) |
 | Ability to bypass email verification for OAuth grants results in accounts takeovers on 3rd parties | $3,000 | gitlab | 2020-10-01 | [#922456](https://hackerone.com/reports/922456) |

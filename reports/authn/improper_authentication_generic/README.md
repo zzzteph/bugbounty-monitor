@@ -1,6 +1,6 @@
 # Improper Authentication Generic
 
-**400 report(s)**
+**401 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -10,6 +10,7 @@
 | Access to some Slack workspace metadata and settings available to unauthorized parties | $7,000 | slack | 2020-11-10 | [#130133](https://hackerone.com/reports/130133) |
 | Able to steal bearer token from deep link | $6,337 | basecamp | 2022-03-27 | [#1372667](https://hackerone.com/reports/1372667) |
 | Mint Oauth2 access token for targeted user | $5,580 | gitlab | 2025-07-23 | [#1148364](https://hackerone.com/reports/1148364) |
+| A disabled account's API key still works on BMO's Mojolicious /rest/ routes, including for security-group bugs filed after the disable | $4,000 | mozilla | 2026-10-26 | [#4000084](https://hackerone.com/reports/4000084) |
 | Attacker can obtain write access to any federated share/public link | $4,000 | nextcloud | 2021-06-10 | [#1170024](https://hackerone.com/reports/1170024) |
 | Missing authentication in buddy group API of LINE TIMELINE | $3,000 | line | 2021-12-27 | [#1283938](https://hackerone.com/reports/1283938) |
 | Уязвимость в приложении для Android | $3,000 | vkcom | 2022-02-18 | [#1343528](https://hackerone.com/reports/1343528) |
