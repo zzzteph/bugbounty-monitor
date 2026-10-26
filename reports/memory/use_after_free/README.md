@@ -1,6 +1,6 @@
 # Use After Free
 
-**81 report(s)**
+**86 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -25,6 +25,7 @@
 | Use-after-free in `mev_forget_socket` when `curl_easy_pause()` is called from a `CURL_POLL_REMOVE` socket callback (incomplete fix of CVE-2026-9080) | — | curl | 2026-06-28 | [#3823985](https://hackerone.com/reports/3823985) |
 | CVE-2026-92392: HTTP/2 upload Use-After-Free | — | curl | 2026-10-14 | [#4030333](https://hackerone.com/reports/4030333) |
 | Use-After-Free in SMB connection reuse (req->path dangling pointer after needle destruction) | — | curl | 2026-04-29 | [#3591956](https://hackerone.com/reports/3591956) |
+| CVE-2026-111878: OpenSSL provider UAF on TLS shutdown | — | curl | 2026-10-26 | [#4116527](https://hackerone.com/reports/4116527) |
 | Use-after-free of the internal multi->admin easy handle via the documented CURLMOPT_NOTIFYFUNCTION callback | — | curl | 2026-09-19 | [#4033971](https://hackerone.com/reports/4033971) |
 | WebSocket decoder use-after-free when curl_easy_pause() unpauses from a debug callback | — | curl | 2026-10-19 | [#4123749](https://hackerone.com/reports/4123749) |
 | libcurl shared-HSTS-cache race leads to use-after-free with attacker-controlled function-pointer call | — | curl | 2026-10-19 | [#4122039](https://hackerone.com/reports/4122039) |
@@ -36,16 +37,20 @@
 | CURLOPT_HSTS_CTRL disables shared HSTS without share guard — use-after-free and double-free | — | curl | 2026-05-18 | [#3733934](https://hackerone.com/reports/3733934) |
 | 54: Rejected HTTP/2 push destroys MIME callback state still used by parent (use-after-free) | — | curl | 2026-09-07 | [#3973213](https://hackerone.com/reports/3973213) |
 | Use-after-free in `curl_easy_duphandle()` with HTTP/2 stream-dependency tree | — | curl | 2026-06-01 | [#3751701](https://hackerone.com/reports/3751701) |
+| OpenSSL provider OSSL_LIB_CTX used after free via the connection shutdown list (CVE-2026-80229 fix incomplete) | — | curl | 2026-10-26 | [#4118643](https://hackerone.com/reports/4118643) |
 | UAF read in mev_pollset_diff() trace path after curl_easy_pause() in socket callback | — | curl | 2026-06-28 | [#3824303](https://hackerone.com/reports/3824303) |
 | Cookie Replacement Use-After-Free Vulnerability | — | curl | 2026-01-19 | [#3516202](https://hackerone.com/reports/3516202) |
 | Use-after-free in `curl_easy_ssls_export()` during callback re-entrancy | — | curl | 2026-04-29 | [#3682666](https://hackerone.com/reports/3682666) |
 | Low-privilege RCE in MariaDB: SYS_REFCURSOR cursor-array use-after-free chained with an ST_Area heap over-read | — | mariadb | 2026-10-07 | [#3856148](https://hackerone.com/reports/3856148) |
+| CVE-2026-111954: upload reader failed redirect UAF | — | curl | 2026-10-26 | [#4123190](https://hackerone.com/reports/4123190) |
 |  WebSocket send queue use-after-free during nested curl_ws_send() | — | curl | 2026-10-20 | [#4124722](https://hackerone.com/reports/4124722) |
 | CURLSHOPT_UNSHARE race can cause UAF in shared SSL session cache during HTTPS transfer | — | curl | 2026-06-30 | [#3831345](https://hackerone.com/reports/3831345) |
+| CVE-2026-111480: pause UAF from within callback | — | curl | 2026-10-26 | [#4102061](https://hackerone.com/reports/4102061) |
 | Heap Use-After-Free in Materialized_cursor::open via SYS_REFCURSOR Array Reallocation | — | mariadb | 2026-10-07 | [#3915935](https://hackerone.com/reports/3915935) |
 | Re-entrant `nghttp2_session_mem_send()` during `nghttp2_session_mem_recv()` causes heap-use-after-free in Node.js HTTP/2 | — | nodejs | 2026-08-28 | [#3833629](https://hackerone.com/reports/3833629) |
 | heap-use-after-free in curl_easy_cleanup() called from callback | — | curl | 2026-06-30 | [#3833577](https://hackerone.com/reports/3833577) |
 | Use-After-Free in BTREE Index Traversal via Stale key_version in heap_update() in MariaDB Server | — | mariadb | 2026-09-14 | [#3771144](https://hackerone.com/reports/3771144) |
+| CVE-2026-111952: OpenSSL provider use-after-free again | — | curl | 2026-10-26 | [#4122239](https://hackerone.com/reports/4122239) |
 | Use-after-free in XML::LibXML::Node::replaceChild | — | ibb | 2017-09-16 | [#259390](https://hackerone.com/reports/259390) |
 | Use-after-free in PHP7's unserialize() | — | ibb | 2019-10-13 | [#245956](https://hackerone.com/reports/245956) |
 | Exim use-after-free vulnerability while reading mail header involving BDAT commands | — | ibb | 2019-11-12 | [#296991](https://hackerone.com/reports/296991) |

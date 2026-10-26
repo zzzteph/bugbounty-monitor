@@ -1,6 +1,6 @@
 # LFI / Path Traversal
 
-**270 report(s) across 9 class(es)**
+**271 report(s) across 9 class(es)**
 
 ## Classes
 
@@ -9,7 +9,7 @@
 | [Path Traversal](path_traversal/README.md) | 235 | $29,000 |
 | [Remote File Inclusion](remote_file_inclusion/README.md) | 14 | $300 |
 | [Externally Controlled Reference To A Resource In Another Sph](externally_controlled_reference_to_a_resource_in_another_sph/README.md) | 9 | $500 |
-| [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 5 | — |
+| [External Control Of File Name Or Path](external_control_of_file_name_or_path/README.md) | 6 | — |
 | [Relative Path Traversal](relative_path_traversal/README.md) | 3 | — |
 | [File Content Injection](file_content_injection/README.md) | 1 | — |
 | [Improper Link Resolution Before File Access Link Following](improper_link_resolution_before_file_access_link_following/README.md) | 1 | — |
@@ -57,6 +57,7 @@
 | GitHub Security Lab (GHSL) Vulnerability Report: Insufficient path validation in ReceiveExternalFilesActivity.java (GHSL-2022-060) | $50 | owncloud | 2023-01-16 | [#1650270](https://hackerone.com/reports/1650270) |
 | ssh: unprivileged users may hijack due to backdated ssh version open port found(███.unikrn.com) | $25 | unikrn | 2019-03-04 | [#257335](https://hackerone.com/reports/257335) |
 | curl External-Controlled Filename in `--url @file` Leads to Arbitrary File Overwrite | — | curl | 2026-06-07 | [#3766392](https://hackerone.com/reports/3766392) |
+| CVE-2026-111951: curl -OJ truncate without filename | — | curl | 2026-10-26 | [#4124849](https://hackerone.com/reports/4124849) |
 | CVE-2023-38546: cookie injection with none file | — | curl | 2023-10-11 | [#2148242](https://hackerone.com/reports/2148242) |
 | Insufficient checks in the file path parameter allow writing to unauthorized directories | — | singlestore | 2026-06-24 | [#3384615](https://hackerone.com/reports/3384615) |
 | Arbitrary Configuration File Inclusion: via External Control of File Name or Path | — | curl | 2025-11-10 | [#3418646](https://hackerone.com/reports/3418646) |

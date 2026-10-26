@@ -1,6 +1,6 @@
 # Cleartext Transmission Of Sensitive Information
 
-**43 report(s)**
+**44 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -24,6 +24,7 @@
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | curl tool: --hsts is ignored for a schemeless URL starting with a slash under --proto-default http | — | curl | 2026-10-08 | [#4063328](https://hackerone.com/reports/4063328) |
 |  One Strict-Transport-Security response header empties the victim's entire HSTS store, silently, | — | curl | 2026-10-15 | [#4007917](https://hackerone.com/reports/4007917) |
+| 14: HSTS cache import silently drops a longer-lived child beneath an includeSubDomains parent | — | curl | 2026-10-26 | [#3973124](https://hackerone.com/reports/3973124) |
 | SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
 | Error the message with already e-mail  | — | legalrobot | 2017-09-04 | [#265441](https://hackerone.com/reports/265441) |

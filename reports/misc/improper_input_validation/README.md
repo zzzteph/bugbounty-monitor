@@ -1,6 +1,6 @@
 # Improper Input Validation
 
-**69 report(s)**
+**71 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -27,9 +27,11 @@
 | Local File Inclusion in download.php | — | deptofdefense | 2024-07-19 | [#1639364](https://hackerone.com/reports/1639364) |
 | CVE-2022-35252: control code in cookie denial of service | — | ibb | 2022-11-05 | [#1686935](https://hackerone.com/reports/1686935) |
 | IMAP Protocol Desynchronization and Response Smuggling via Naive Literal Parsing | — | curl | 2026-01-14 | [#3509396](https://hackerone.com/reports/3509396) |
+| Derived cookie Path aborts cookie jar loading in curl 8.23.0 | — | curl | 2026-10-26 | [#4127231](https://hackerone.com/reports/4127231) |
 | Reflected HTML Injection in ████████ Login Page via infotext/signintext Parameters | — | essity | 2026-07-22 | [#3781785](https://hackerone.com/reports/3781785) |
 | HTTP/2 server push accepts a non-authoritative :scheme=https over cleartext h2c, enabling HTTPS cache-key poisoning | — | curl | 2026-03-29 | [#3630310](https://hackerone.com/reports/3630310) |
 | urlapi: CURLUPART_HOST accepts text after an IPv6 zone ip and URL round trip changes the host | — | curl | 2026-10-19 | [#4127756](https://hackerone.com/reports/4127756) |
+| CVE-2026-111481: server-set cookie still aborts cookie jar | — | curl | 2026-10-26 | [#4112912](https://hackerone.com/reports/4112912) |
 | CVE-2026-80255: secure cookie attribute bypass with tab | — | curl | 2026-09-03 | [#3972395](https://hackerone.com/reports/3972395) |
 | libcurl RTSP `CURLOPT_CRLF` conversion allows a request body to become a second RTSP request | — | curl | 2026-10-17 | [#4113412](https://hackerone.com/reports/4113412) |
 | Cookie attribute TAB injection regression in Set-Cookie parsing | — | curl | 2026-04-03 | [#3641893](https://hackerone.com/reports/3641893) |

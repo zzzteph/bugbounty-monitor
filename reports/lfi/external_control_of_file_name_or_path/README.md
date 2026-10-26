@@ -1,10 +1,11 @@
 # External Control Of File Name Or Path
 
-**5 report(s)**
+**6 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
 | curl External-Controlled Filename in `--url @file` Leads to Arbitrary File Overwrite | — | curl | 2026-06-07 | [#3766392](https://hackerone.com/reports/3766392) |
+| CVE-2026-111951: curl -OJ truncate without filename | — | curl | 2026-10-26 | [#4124849](https://hackerone.com/reports/4124849) |
 | CVE-2023-38546: cookie injection with none file | — | curl | 2023-10-11 | [#2148242](https://hackerone.com/reports/2148242) |
 | Insufficient checks in the file path parameter allow writing to unauthorized directories | — | singlestore | 2026-06-24 | [#3384615](https://hackerone.com/reports/3384615) |
 | Arbitrary Configuration File Inclusion: via External Control of File Name or Path | — | curl | 2025-11-10 | [#3418646](https://hackerone.com/reports/3418646) |

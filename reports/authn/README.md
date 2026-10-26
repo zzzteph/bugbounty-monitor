@@ -1,12 +1,12 @@
 # Authentication & Session
 
-**629 report(s) across 18 class(es)**
+**630 report(s) across 18 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Improper Authentication Generic](improper_authentication_generic/README.md) | 399 | $15,000 |
+| [Improper Authentication Generic](improper_authentication_generic/README.md) | 400 | $15,000 |
 | [Improper Restriction Of Authentication Attempts](improper_restriction_of_authentication_attempts/README.md) | 89 | $3,500 |
 | [Insufficient Session Expiration](insufficient_session_expiration/README.md) | 35 | $2,540 |
 | [Authentication Bypass Using An Alternate Path Or Channel](authentication_bypass_using_an_alternate_path_or_channel/README.md) | 22 | $13,000 |
@@ -210,6 +210,7 @@
 | SOCKS5 no-auth accepted despite username/password-only authentication | — | curl | 2026-06-09 | [#3786077](https://hackerone.com/reports/3786077) |
 | Negotiate Authentication Premature on Connection Reuse | — | curl | 2026-04-29 | [#3666576](https://hackerone.com/reports/3666576) |
 | HTTPS Agent PFX object-array key collision allows mTLS client identity reuse across different per-request certificates | — | nodejs | 2026-07-29 | [#3816840](https://hackerone.com/reports/3816840) |
+| CVE-2026-115529: Schannel TLS auto client session resumption | — | curl | 2026-10-26 | [#4136767](https://hackerone.com/reports/4136767) |
 | PII Exposure of Credit Applications and Social Security Numbers equifax-6070.my.salesforce-sites.com (Salesforce guest user) | — | equifax | 2026-09-06 | [#3828431](https://hackerone.com/reports/3828431) |
 | CURLOPT_PROXYHEADER is not part of the HTTP-proxy connection reuse key: a second CONNECT-tunnel transfer silently reuses the first tunnel's Proxy-Auth | — | curl | 2026-10-20 | [#4124549](https://hackerone.com/reports/4124549) |
 | Full Admin Takeover of R3 Limited's JFrog Artifactory - 292 Users, Corda Enterprise & CBDC Supply Chain Compromised | — | r3 | 2026-10-08 | [#3994056](https://hackerone.com/reports/3994056) |

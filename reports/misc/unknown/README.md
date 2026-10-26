@@ -1,6 +1,6 @@
 # Unknown
 
-**1014 report(s)**
+**1015 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -246,6 +246,7 @@
 | IMAP custom FETCH literals can spoof tagged responses and desynchronize reused connections | — | curl | 2026-10-15 | [#4021854](https://hackerone.com/reports/4021854) |
 | Stacked --proto modifiers leave denied protocol enabled | — | curl | 2026-08-28 | [#3970650](https://hackerone.com/reports/3970650) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
+| 20: HTAB before `Secure` attribute silently drops the Secure cookie flag | — | curl | 2026-10-26 | [#3971551](https://hackerone.com/reports/3971551) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | ZMQ get_output_distribution duplicate amount DoS | — | monero | 2026-09-17 | [#3681690](https://hackerone.com/reports/3681690) |

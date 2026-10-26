@@ -1,15 +1,15 @@
 # Miscellaneous
 
-**1678 report(s) across 35 class(es)**
+**1683 report(s) across 36 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 1014 | $50,000 |
+| [Unknown](unknown/README.md) | 1015 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
-| [Improper Input Validation](improper_input_validation/README.md) | 69 | $4,920 |
+| [Improper Input Validation](improper_input_validation/README.md) | 71 | $4,920 |
 | [Phishing](phishing/README.md) | 31 | $250 |
 | [Insufficient Logging](insufficient_logging/README.md) | 24 | — |
 | [Security Through Obscurity](security_through_obscurity/README.md) | 7 | $1,000 |
@@ -18,11 +18,11 @@
 | [Use Of Incorrectly Resolved Name Or Reference](use_of_incorrectly_resolved_name_or_reference/README.md) | 4 | — |
 | [Acceptance Of Extraneous Untrusted Data With Trusted Data](acceptance_of_extraneous_untrusted_data_with_trusted_data/README.md) | 3 | — |
 | [Use Of Inherently Dangerous Function](use_of_inherently_dangerous_function/README.md) | 3 | $300 |
+| [Authentication Bypass By Spoofing](authentication_bypass_by_spoofing/README.md) | 2 | — |
 | [Exploiting Incorrectly Configured Ssl Tls](exploiting_incorrectly_configured_ssl_tls/README.md) | 2 | — |
 | [Incorrect Default Permissions](incorrect_default_permissions/README.md) | 2 | — |
 | [Asi05 Unexpected Code Execution Rce](asi05_unexpected_code_execution_rce/README.md) | 1 | — |
 | [Authentication Bypass By Capture Replay](authentication_bypass_by_capture_replay/README.md) | 1 | $2,000 |
-| [Authentication Bypass By Spoofing](authentication_bypass_by_spoofing/README.md) | 1 | — |
 | [Encoding Error](encoding_error/README.md) | 1 | — |
 | [Improper Handling Of Case Sensitivity](improper_handling_of_case_sensitivity/README.md) | 1 | — |
 | [Improper Handling Of Exceptional Conditions](improper_handling_of_exceptional_conditions/README.md) | 1 | — |
@@ -38,6 +38,7 @@
 | [Llm09 2025 Misinformation](llm09_2025_misinformation/README.md) | 1 | — |
 | [Misinterpretation Of Input](misinterpretation_of_input/README.md) | 1 | — |
 | [Nosql Injection](nosql_injection/README.md) | 1 | — |
+| [Partial String Comparison](partial_string_comparison/README.md) | 1 | — |
 | [Reliance On Reverse Dns Resolution For A Security Critical A](reliance_on_reverse_dns_resolution_for_a_security_critical_a/README.md) | 1 | — |
 | [Unchecked Error Condition](unchecked_error_condition/README.md) | 1 | $150 |
 | [Uncontrolled Search Path Element](uncontrolled_search_path_element/README.md) | 1 | — |
@@ -261,6 +262,7 @@
 | curl reuses an HTTPS connection when a response is already buffered in the TLS stack | — | curl | 2026-10-20 | [#4128703](https://hackerone.com/reports/4128703) |
 | POP3: data after the end-of-body terminator is written into the retrieved message | — | curl | 2026-10-21 | [#4132132](https://hackerone.com/reports/4132132) |
 | MQTT CONNACK Packet Type Bypass leads to RCE via Malicious Broker | — | curl | 2026-05-05 | [#3712343](https://hackerone.com/reports/3712343) |
+|  Windows SSPI connection-pool probe can reuse a connection under the wrong user | — | curl | 2026-10-26 | [#3938190](https://hackerone.com/reports/3938190) |
 | Windows SSPI connection-pool probe can reuse a connection under the wrong user | — | curl | 2026-08-14 | [#3938185](https://hackerone.com/reports/3938185) |
 | Unicode-to-ASCII conversion on Windows can lead to argument injection and more | — | curl | 2024-06-18 | [#2550951](https://hackerone.com/reports/2550951) |
 | TLS host identity verification bypass via session reuse with different servername leads to unauthorized connections | — | nodejs | 2026-06-25 | [#3649802](https://hackerone.com/reports/3649802) |
@@ -286,9 +288,11 @@
 | Local File Inclusion in download.php | — | deptofdefense | 2024-07-19 | [#1639364](https://hackerone.com/reports/1639364) |
 | CVE-2022-35252: control code in cookie denial of service | — | ibb | 2022-11-05 | [#1686935](https://hackerone.com/reports/1686935) |
 | IMAP Protocol Desynchronization and Response Smuggling via Naive Literal Parsing | — | curl | 2026-01-14 | [#3509396](https://hackerone.com/reports/3509396) |
+| Derived cookie Path aborts cookie jar loading in curl 8.23.0 | — | curl | 2026-10-26 | [#4127231](https://hackerone.com/reports/4127231) |
 | Reflected HTML Injection in ████████ Login Page via infotext/signintext Parameters | — | essity | 2026-07-22 | [#3781785](https://hackerone.com/reports/3781785) |
 | HTTP/2 server push accepts a non-authoritative :scheme=https over cleartext h2c, enabling HTTPS cache-key poisoning | — | curl | 2026-03-29 | [#3630310](https://hackerone.com/reports/3630310) |
 | urlapi: CURLUPART_HOST accepts text after an IPv6 zone ip and URL round trip changes the host | — | curl | 2026-10-19 | [#4127756](https://hackerone.com/reports/4127756) |
+| CVE-2026-111481: server-set cookie still aborts cookie jar | — | curl | 2026-10-26 | [#4112912](https://hackerone.com/reports/4112912) |
 | CVE-2026-80255: secure cookie attribute bypass with tab | — | curl | 2026-09-03 | [#3972395](https://hackerone.com/reports/3972395) |
 | libcurl RTSP `CURLOPT_CRLF` conversion allows a request body to become a second RTSP request | — | curl | 2026-10-17 | [#4113412](https://hackerone.com/reports/4113412) |
 | Cookie attribute TAB injection regression in Set-Cookie parsing | — | curl | 2026-04-03 | [#3641893](https://hackerone.com/reports/3641893) |
@@ -439,6 +443,7 @@
 | misconfigured CORS let to HPP and SOP bypass | — | btfs | 2020-05-07 | [#867436](https://hackerone.com/reports/867436) |
 | CVE-2024-2004: Usage of disabled protocol | — | curl | 2024-03-27 | [#2384833](https://hackerone.com/reports/2384833) |
 | DDP methods getThreadsList / getThreadMessages leaks private thread content to any authenticated low privilege user (unpatched sibling of #1446767) | — | rocket_chat | 2026-08-20 | [#3852135](https://hackerone.com/reports/3852135) |
+| CVE-2026-111482: libssh2 knownhosts prefix match | — | curl | 2026-10-26 | [#4112709](https://hackerone.com/reports/4112709) |
 | Subdomain Takeover on  delivey.yelp.com  | — | yelp | 2022-11-12 | [#1715538](https://hackerone.com/reports/1715538) |
 | Impersonation of tiktok account via Broken Link in TikTok Newsroom | — | tiktok | 2022-03-24 | [#1504294](https://hackerone.com/reports/1504294) |
 | Address Bar Spoofing on TOR Browser | — | torproject | 2023-01-02 | [#275960](https://hackerone.com/reports/275960) |
@@ -572,6 +577,7 @@
 | IMAP custom FETCH literals can spoof tagged responses and desynchronize reused connections | — | curl | 2026-10-15 | [#4021854](https://hackerone.com/reports/4021854) |
 | Stacked --proto modifiers leave denied protocol enabled | — | curl | 2026-08-28 | [#3970650](https://hackerone.com/reports/3970650) |
 | Memory Exhaustion in CometBFT v1.0.1 via malicious ProposalMessage leads to network-wide denial of service | — | cosmos | 2026-01-20 | [#3510161](https://hackerone.com/reports/3510161) |
+| 20: HTAB before `Secure` attribute silently drops the Secure cookie flag | — | curl | 2026-10-26 | [#3971551](https://hackerone.com/reports/3971551) |
 | libcurl: Integer truncation in curl_easy_ssls_import() causes TLS sessions to never expire | — | curl | 2026-04-09 | [#3658049](https://hackerone.com/reports/3658049) |
 | SMB READ_ANDX DataOffset not validated | — | curl | 2026-03-16 | [#3603300](https://hackerone.com/reports/3603300) |
 | ZMQ get_output_distribution duplicate amount DoS | — | monero | 2026-09-17 | [#3681690](https://hackerone.com/reports/3681690) |

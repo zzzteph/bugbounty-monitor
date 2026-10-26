@@ -1,0 +1,122 @@
+{
+  "id": 4118643,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MTE4NjQz",
+  "url": "https://hackerone.com/reports/4118643",
+  "title": "OpenSSL provider OSSL_LIB_CTX used after free via the connection shutdown list (CVE-2026-80229 fix incomplete)",
+  "state": "Closed",
+  "substate": "duplicate",
+  "severity_rating": "low",
+  "readable_substate": "Duplicate",
+  "created_at": "2026-10-16T03:57:03.594Z",
+  "submitted_at": "2026-10-16T03:57:03.895Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "sujitjaunjal",
+    "url": "/sujitjaunjal",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/09ufu95pf862x3u4qjn0xdlc3u45/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-80229"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-26T09:10:35.854Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-26T07:58:09.318Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\nThe CVE-2026-80229 fix (7ea37abc6a, 8.22.0) only marks provider connections connclose(), but a closed TLS connection is handed to the multi handle's shutdown list (lib/conncache.c:242) and outlives its easy handle, while curl_easy_cleanup() frees the handle's OSSL_LIB_CTX (ossl_provider_cleanup(), lib/vtls/openssl.c:1747, via Curl_close() at lib/url.c:244) that the connection's SSL_CTX was created from (SSL_CTX_new_ex(), openssl.c:3748). When the shutdown list later reads from or destroys that connection, OpenSSL uses the freed context: SSL_read() handling a NewSessionTicket or KeyUpdate fetches algorithms through it, and SSL_CTX_free() in Curl_cshutdn_terminate() runs the provider teardown, which takes a lock stored inside it (a write lock with OpenSSL 3.6, a read lock with 3.0). With OpenSSL's shipped legacy provider, `curl -Z --engine legacy URL1 URL2` segfaults on every run in plain release builds of 8.23.0 on macOS and on Debian 12 (stock OpenSSL 3.0.22) and in Homebrew's 8.22.0 release, against a server that does nothing unusual, while the same command without --engine, or with a single URL, exits 0. Under AddressSanitizer the freed object is the OSSL_LIB_CTX allocated by ossl_set_provider() (openssl.c:1786) and freed by curl_easy_cleanup(), and both later accesses fault on the free-fill pattern. This is not the CVE-2026-80229 scenario, which needed a second easy handle to reuse the pooled connection: no reuse happens here, and the freed context is reached through the shutdown list that the 80229 fix now sends every provider connection to, in 8.22.0 and later, which that advisory lists as not affected.\n\n## Affected version\n8.22.0 through 8.23.0 and master (780405b584). Tested on release builds of the curl-8_23_0 tag on macOS 27.0.1 (OpenSSL 3.6.4) and Debian 12 (OpenSSL 3.0.22, in the official debian:bookworm image), an AddressSanitizer build of the same tag, and the Homebrew 8.22.0 release:\n\n```\ncurl 8.23.0-DEV (Darwin) libcurl/8.23.0-DEV OpenSSL/3.6.4 zlib/1.2.12\ncurl 8.23.0-DEV (Linux) libcurl/8.23.0-DEV OpenSSL/3.0.22\ncurl 8.22.0 (aarch64-apple-darwin25.6.0) libcurl/8.22.0 OpenSSL/3.6.4 zlib/1.2.12 brotli/1.2.0 zstd/1.5.7 AppleIDN libpsl/0.23.3 libssh2/1.11.1 nghttp2/1.70.0 ngtcp2/1.25.0 nghttp3/1.18.0 mit-krb5/1.7-prerelease OpenLDAP/2.4.28/Apple\n```\n\n## Steps To Reproduce:\nAll on 127.0.0.1, sources in the attached zip under poc/.\n\n1. `openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -days 7 -subj /CN=localhost -addext subjectAltName=DNS:localhost -keyout server.key -out server.crt`\n2. `cc poc/tls_ku_server.c -lssl -lcrypto -o tls_ku_server` (a minimal OpenSSL TLS 1.3 HTTPS server that answers one request per connection)\n3. `./tls_ku_server 22002 none 300 0 &`\n4. `curl -Z --engine legacy --cacert server.crt https://localhost:22002/a https://localhost:22002/slow` ends with `Segmentation fault`, exit 139.\n5. Controls: the same command without `--engine legacy`, or with only the first URL, exits 0.\n\nRelease-build backtrace, macOS (lldb); the Debian gdb trace in 04-linux-debian-bookworm.txt has the same curl frames:\n\n```\nEXC_BAD_ACCESS  pthread_rwlock_wrlock\n  CRYPTO_THREAD_write_lock\n  ossl_provider_deregister_child_cb\n  OSSL_LIB_CTX_free\n  legacy_teardown            (legacy.dylib)\n  ossl_provider_free\n  evp_cipher_free_int\n  SSL_CTX_free\n  ossl_close                 (curl)\n  ssl_cf_destroy\n  Curl_conn_cf_discard_all\n  Curl_cshutdn_terminate\n  cshutdn_perform\n  curl_multi_perform\n```\n\nWith `./tls_ku_server 22002 nst 300 0` (one NewSessionTicket 300 ms after the response) the fault moves to SSL_read() -> tls_process_new_session_ticket() -> evp_generic_fetch() in the shutdown read. The libcurl version (poc/poc_provider_shutdown.c, `PROV=legacy ./poc multi2 https://localhost:22002/`) does the usual remove and cleanup of the easy handle on CURLMSG_DONE and keeps driving the multi handle; calling curl_multi_cleanup() right after that crashes the same way. Scope: the multi interface, which includes curl -Z; the plain easy interface (curl_easy_perform() then curl_easy_cleanup()) does not reach it. Raw output: 01-release-curl-cli-segfault.txt, 02-release-backtrace.txt, 03-asan-freed-by-and-use.txt, 04-linux-debian-bookworm.txt (with gdb backtrace).\n\n## Fix\nMake the OSSL_LIB_CTX outlive every SSL_CTX and SSL created from it, for example by reference counting it and letting each connection hold a reference until its TLS filter is destroyed, or by tying it to the multi handle instead of the easy handle.\n\nAI disclosure: I used an AI assistant (Claude) for code review, test setup and drafting. I reproduced every result myself on curl built from the curl-8_23_0 tag (macOS, and Debian 12 in Docker) and on the Homebrew 8.22.0 release; the attached logs are the raw output.\n\n## Impact\n\nA libcurl application that uses an OpenSSL 3 provider through CURLOPT_SSLENGINE with the multi interface, and the curl tool with --engine and -Z, uses freed memory every time a provider-backed connection is closed after its easy handle was cleaned up, which the CVE-2026-80229 fix makes every such connection. The freed context is reused by the allocator, and libcrypto reads it and takes a lock through a pointer stored in it (a write lock with OpenSSL 3.6) on the way to updating the provider bookkeeping it holds, so this is a use-after-free in live code paths rather than a plain crash. A TLS server can additionally drive the read path at a moment it chooses by sending a NewSessionTicket or KeyUpdate while curl waits for close_notify. Providers are how OpenSSL 3 exposes hardware keys (pkcs11, tpm2) and legacy algorithms, which is the documented purpose of CURLOPT_SSLENGINE on OpenSSL 3.",
+  "weakness": {
+    "id": 50,
+    "name": "Use After Free"
+  },
+  "original_report_id": 4116527,
+  "original_report_url": "https://hackerone.com/reports/4116527",
+  "attachments": [
+    {
+      "id": 7002345,
+      "file_name": "curl-provider-libctx-uaf-evidence.zip",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/u0z6n25dhisgqlo80fqagz49ob2l?response-content-disposition=attachment%3B%20filename%3D%22curl-provider-libctx-uaf-evidence.zip%22%3B%20filename%2A%3DUTF-8%27%27curl-provider-libctx-uaf-evidence.zip&response-content-type=application%2Fzip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ3X3GF7ZQ%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094154Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAoaCXVzLXdlc3QtMiJHMEUCIDIHiK22jlcWMGBo7zpQV3OBIhFY9iTaigVuocExQebgAiEAi9dMLYFLnZAIvgJ0YiLu%2FWQg30MVuk3xBwBKesNKTekquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDN23czX1U8ImA8kAiyqPBW%2BPhvZ6qmoX5LUrAr3BxtHbyzLv5X1RJfZJs0f1SD%2FhfslQd7M3IJ7Qrr0Ijwa1INy6cCXmyNBurjkBkPiXegkuzJcQw8KCj3283ANSPdO6WRAU8K1sCVdYavPZtOOJZ7hm5bA78ALQ6xPqqLndsR6vrkLb2uLQwyQmUpyGNTiOrPmyuAf5Dcm7chEhQnozp71L4nMdgRCJX%2FvaYjDyTfFl2ec%2FQpvPo%2B6tEaWmg9JCBLJSgG6dvrCCxNzGppdDd0eKs6jDkxJc%2BBAkCEzy1%2FGUWRq8uVH%2BX8QczJh1D%2FhcIGbX9ujfm1BDiJRihkpGlAtZbkP4oeY%2FCJMuyvouWw0BbleV2QRVenEF2fhiFARJ6uZzyuAvaNhe0ojSWOCA%2F%2FA9rVGG%2F1KZQQ0%2BbYVXEtEt2VpDfqpnQtk%2Bc1thVia%2FQdbUbp7cRgmv9SpPlxGU7TLcYODASnQdgRwDDYhPElZp6jReArCWupRsZA6XhTkszgyLMqQa0uKaAAHb7a9QX32G6AgjhedKqBg1eySmtae%2BlQT5fiNGRfJ%2Brc3Q4DTY4%2Bkm%2Bx1BWTMXpttcEna5y4Pwx7tWoo5kIE17huygg26xHoWSCV5czqdN4jMpB9XtsDf7T%2B8YL1ep1Kd941Y2nmQYrisI1KfQjLZnPaNT3eKkn2HkzC93QnTUh3b0nlGqbYV9EhlL8mAKkdeyvx%2F%2FJ3486hmTTdrjvlpwKqubZxOPKC80B%2BUqhU73bwAOKaQmqNPachbN%2FQY%2BLmZV0%2FMQLU4rSv85GzObR%2BzAOSaWzDLN8X6FWpGmwSD2hPEjK7g%2FpwDB9X01LUpomvsWMlkcTsbdu3GsRIMUbEhlFp3qW7dylDj6bZx59fICLODWYdIwtbb81gY6sQEeHdFu4m1lphcTXbHEEuh%2BI5A51t0RMKAWVxqrv96Ecjw0dDD4AYKWQSl%2FMxnpFxKJAd270MZhuEd5r%2BSx1C%2BA5fQI08eaO%2Bx47FveELk6yJS5D3w1O%2FUT8aMV1m3mi6yh%2BIR0zx7j%2FiXl5N6aJ0EaWlFYGUGzO51HTobARFdrIR2RWu%2B086MR4ZHRnD4QNKDmp41UU9%2BHj2BnL0MU%2BqgkmzEuzsOgkZdQpPw3T4ZR6SM%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=eeda6cbdcf3195be0fb338140ac727af4f6ca22572a7327f616a0ff2c0deb5da",
+      "file_size": 13754,
+      "type": "application/zip",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

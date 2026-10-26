@@ -1,6 +1,6 @@
 # Improper Certificate Validation
 
-**60 report(s)**
+**63 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -16,6 +16,7 @@
 | nextcloudcmd incorrectly trusts bad TLS certificates | — | nextcloud | 2022-12-25 | [#1699740](https://hackerone.com/reports/1699740) |
 | Undici does not use CONNECT or otherwise validate upstream HTTPS certificates when using a proxy | — | nodejs | 2022-07-13 | [#1583680](https://hackerone.com/reports/1583680) |
 | curl GnuTLS backend accepts a clientAuth-only certificate for HTTPS server authentication | — | curl | 2026-05-25 | [#3752567](https://hackerone.com/reports/3752567) |
+| CVE-2026-115528: wolfSSL TLS connect without cert | — | curl | 2026-10-26 | [#4128428](https://hackerone.com/reports/4128428) |
 | CVE-2026-7009: OCSP stapling bypass with Apple SecTrust | — | curl | 2026-04-29 | [#3694390](https://hackerone.com/reports/3694390) |
 | SSL session-cache peer key omits signature_algorithms: strict-sigalg handle silently resumes a permissive sibling's session | — | curl | 2026-05-19 | [#3739561](https://hackerone.com/reports/3739561) |
 | wolfSSL Backend Silently Ignores --cert-status (OCSP Stapling Bypass) | — | curl | 2026-10-20 | [#4127399](https://hackerone.com/reports/4127399) |
@@ -31,12 +32,14 @@
 | 06: Incomplete fix for CVE-2026-7009: GCC/SecTrust builds silently discard stapled OCSP responses | — | curl | 2026-08-31 | [#3973093](https://hackerone.com/reports/3973093) |
 | Pinned public key check passes for a key the server does not hold with the wolfSSL backend | — | curl | 2026-10-22 | [#4128701](https://hackerone.com/reports/4128701) |
 | TLS certificate hostname bypass when the host loosely resolves to an IP address | — | nodejs | 2026-10-23 | [#4006744](https://hackerone.com/reports/4006744) |
+| CVE-2026-111484: OpenSSL with SecTrust accepts bad OCSP staples | — | curl | 2026-10-26 | [#4118610](https://hackerone.com/reports/4118610) |
 | `set_daemon` wallet-rpc silently ignores `ssl_allowed_fingerprints` → pinning bypassed, wallet↔daemon MITM | — | monero | 2026-08-05 | [#3686259](https://hackerone.com/reports/3686259) |
 | CVE-2026-12064: proto-default skips SSH verification | — | curl | 2026-06-24 | [#3797526](https://hackerone.com/reports/3797526) |
 | TLS session cache key omits native_ca_store: a session validated with CURLSSLOPT_NATIVE_CA can be resumed by a transfer that disabled it (incomplete f | — | curl | 2026-10-20 | [#4123646](https://hackerone.com/reports/4123646) |
 | CVE-2026-82208: wolfSSL CA-cache hit overrides callback | — | curl | 2026-09-03 | [#3973090](https://hackerone.com/reports/3973090) |
 | GnuTLS OCSP stapling accepts unrelated SingleResponse (no cert-ID binding) | — | curl | 2026-06-05 | [#3784125](https://hackerone.com/reports/3784125) |
 | TLS session cache case-folds CA paths and bypasses the active trust profile | — | curl | 2026-08-25 | [#3966955](https://hackerone.com/reports/3966955) |
+| CVE-2026-111953: GnuTLS SecTrust OCSP staple bypass | — | curl | 2026-10-26 | [#4122300](https://hackerone.com/reports/4122300) |
 | Improper Certificate Validation | — | portswigger | 2018-01-02 | [#294891](https://hackerone.com/reports/294891) |
 | The Microsoft Store Uber App Does Not Implement Certificate Pinning | — | uber | 2017-12-24 | [#293358](https://hackerone.com/reports/293358) |
 | Incorrect HTTPS Certificate | — | weblate | 2017-06-16 | [#225540](https://hackerone.com/reports/225540) |

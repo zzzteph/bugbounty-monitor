@@ -1,6 +1,6 @@
 # Information Disclosure
 
-**918 report(s)**
+**919 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -234,6 +234,7 @@
 | CVE-2026-9079: stale proxy password leak | — | curl | 2026-06-24 | [#3750295](https://hackerone.com/reports/3750295) |
 |  Use-after-free read of the freed referer buffer in `curl_easy_setopt(CURLOPT_REFERER)` — stale heap bytes transmitted in an outbound `Referer:` heade | — | curl | 2026-10-05 | [#4064040](https://hackerone.com/reports/4064040) |
 | Information Disclosure via Logback Configuration Injection in GoCD Agent | — | gocd | 2026-02-04 | [#3509632](https://hackerone.com/reports/3509632) |
+| Arbitrary `/tmp` read in  discourse via `convert_heif!` decoder-confusion (regression of 4bf3bf6786) | — | discourse | 2026-10-26 | [#3738834](https://hackerone.com/reports/3738834) |
 | CVE-2026-82209: domain-scoped PSL domain cookie | — | curl | 2026-09-03 | [#3972385](https://hackerone.com/reports/3972385) |
 | CVE-2026-8926: password leak with netrc and user in URL | — | curl | 2026-06-24 | [#3735184](https://hackerone.com/reports/3735184) |
 | CVE-2026-86409: stale SigV4 headers sent unintended | — | curl | 2026-10-14 | [#3973135](https://hackerone.com/reports/3973135) |

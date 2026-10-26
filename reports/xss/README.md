@@ -1,6 +1,6 @@
 # XSS
 
-**1498 report(s) across 10 class(es)**
+**1499 report(s) across 10 class(es)**
 
 ## Classes
 
@@ -12,8 +12,8 @@
 | [Cross Site Scripting Xss Dom](cross_site_scripting_xss_dom/README.md) | 128 | $3,000 |
 | [Improper Neutralization Of Script Related Html Tags In A Web](improper_neutralization_of_script_related_html_tags_in_a_web/README.md) | 18 | $1,000 |
 | [Failure To Sanitize Special Elements Into A Different Plane ](failure_to_sanitize_special_elements_into_a_different_plane_/README.md) | 4 | $300 |
+| [Improper Neutralization Of Escape Meta Or Control Sequences](improper_neutralization_of_escape_meta_or_control_sequences/README.md) | 4 | — |
 | [Improper Neutralization Of Http Headers For Scripting Syntax](improper_neutralization_of_http_headers_for_scripting_syntax/README.md) | 4 | $1,000 |
-| [Improper Neutralization Of Escape Meta Or Control Sequences](improper_neutralization_of_escape_meta_or_control_sequences/README.md) | 3 | — |
 | [Cross Site Scripting Xss](cross_site_scripting_xss/README.md) | 2 | $500 |
 | [Reflected Xss](reflected_xss/README.md) | 1 | — |
 
@@ -1497,6 +1497,7 @@
 | [simple-server] HTML with iframe element can be used as filename, which might lead to load and execute malicious JavaScript  | — | nodejs-ecosystem | 2018-03-01 | [#309641](https://hackerone.com/reports/309641) |
 | Profile bio at rockstar is accepting control characters | — | rockstargames | 2017-05-23 | [#214763](https://hackerone.com/reports/214763) |
 | CVE-2023-27533: Telnet option IAC injection | — | curl | 2023-03-22 | [#1891474](https://hackerone.com/reports/1891474) |
+|  server filename with control characters printed to terminal (`-J`) | — | curl | 2026-10-26 | [#4130124](https://hackerone.com/reports/4130124) |
 | Unescaped username in SASL DIGEST-MD5 response allows injection | — | curl | 2026-03-17 | [#3608522](https://hackerone.com/reports/3608522) |
 | Camo Image Proxy Bypass with CSS Escape Sequences | — | chaturbate | 2019-12-18 | [#745953](https://hackerone.com/reports/745953) |
 | Terminal Output Not Great | — | curl | 2025-12-11 | [#3460184](https://hackerone.com/reports/3460184) |

@@ -1,6 +1,6 @@
 # Business Logic
 
-**380 report(s) across 5 class(es)**
+**381 report(s) across 5 class(es)**
 
 ## Classes
 
@@ -9,8 +9,8 @@
 | [Business Logic Errors](business_logic_errors/README.md) | 356 | $12,000 |
 | [Modification Of Assumed Immutable Data Maid](modification_of_assumed_immutable_data_maid/README.md) | 18 | — |
 | [Expected Behavior Violation](expected_behavior_violation/README.md) | 4 | — |
+| [Incorrect Comparison](incorrect_comparison/README.md) | 2 | — |
 | [Inconsistency Between Implementation And Documented Design](inconsistency_between_implementation_and_documented_design/README.md) | 1 | — |
-| [Incorrect Comparison](incorrect_comparison/README.md) | 1 | — |
 
 ## All Reports
 
@@ -377,6 +377,7 @@
 | Curl_compareheader() fails to match multi-value HTTP headers | — | curl | 2026-03-12 | [#3598444](https://hackerone.com/reports/3598444) |
 | CVE-2023-28322: more POST-after-PUT confusion | — | curl | 2023-05-18 | [#1954658](https://hackerone.com/reports/1954658) |
 | DiffieHellman doesn't generate keys after setting a key | — | nodejs | 2023-07-20 | [#1927480](https://hackerone.com/reports/1927480) |
+| CVE-2026-111950: TLS session cache diff scheme reuse | — | curl | 2026-10-26 | [#4122175](https://hackerone.com/reports/4122175) |
 | ignoring 'options' when doing connection reuse | — | curl | 2026-04-05 | [#3646914](https://hackerone.com/reports/3646914) |
 | Prototype pollution in dot-prop | — | nodejs-ecosystem | 2020-01-28 | [#719856](https://hackerone.com/reports/719856) |
 | Editing Pentest Summary Report Answers After Submitting Them | — | security | 2021-05-06 | [#1139528](https://hackerone.com/reports/1139528) |

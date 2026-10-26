@@ -1,0 +1,162 @@
+{
+  "id": 4102061,
+  "global_id": "Z2lkOi8vaGFja2Vyb25lL1JlcG9ydC80MTAyMDYx",
+  "url": "https://hackerone.com/reports/4102061",
+  "title": "CVE-2026-111480: pause UAF from within callback",
+  "state": "Closed",
+  "substate": "resolved",
+  "severity_rating": "low",
+  "readable_substate": "Resolved",
+  "created_at": "2026-10-10T03:06:30.846Z",
+  "submitted_at": "2026-10-10T03:06:31.205Z",
+  "is_member_of_team?": false,
+  "is_organization_group_member?": false,
+  "is_triager?": false,
+  "reporter": {
+    "disabled": false,
+    "username": "rat5ak",
+    "url": "/rat5ak",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/7ss2db3u5nsjgf800pctutikesgv/33193aed4df168c753cb4b15e6d5d8d6ba053ba5ee3e8d1478c137162601abe9"
+    },
+    "is_me?": false,
+    "cleared": false,
+    "verified": true,
+    "hackerone_triager": false,
+    "hacker_mediation": false
+  },
+  "team": {
+    "id": 35663,
+    "url": "https://hackerone.com/curl",
+    "handle": "curl",
+    "profile_picture_urls": {
+      "small": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/dd1dfc8fc7352772e4a8994c07e1d628d34edc74db48377c707f10829dc23d53",
+      "medium": "https://profile-photos.hackerone-user-content.com/variants/000/035/663/2faf4c279d437d64bfda6d23d62ce1833813a4d9_original.png/2a499a0b732abf809ef45635d9ad400431480fafd17452e700cbdba6fd64fe85"
+    },
+    "permissions": [],
+    "submission_state": "open",
+    "default_currency": "usd",
+    "awards_miles": false,
+    "offers_bounties": false,
+    "state": "public_mode",
+    "only_cleared_hackers": false,
+    "pentest_feature_enabled?": false,
+    "pentest_retesting_ends_at": null,
+    "profile": {
+      "name": "curl",
+      "twitter_handle": "",
+      "website": "https://curl.se",
+      "about": "cURL is an Open Source project providing a library and command-line tool doing internet transfers"
+    }
+  },
+  "has_bounty?": false,
+  "can_view_team": true,
+  "can_view_report": true,
+  "is_external_bug": false,
+  "is_published": false,
+  "is_participant": false,
+  "has_collaborators": false,
+  "submitted_by_team_member": false,
+  "submitted_with_assistant": false,
+  "stage": 4,
+  "public": true,
+  "visibility": "full",
+  "cve_ids": [
+    "CVE-2026-111480"
+  ],
+  "singular_disclosure_disabled": true,
+  "disclosed_at": "2026-10-26T07:53:13.358Z",
+  "bug_reporter_agreed_on_going_public_at": null,
+  "team_member_agreed_on_going_public_at": "2026-10-26T07:20:41.939Z",
+  "comments_closed?": false,
+  "facebook_team?": false,
+  "team_private?": false,
+  "vulnerability_information": "## Summary:\n\n`cw_out_flush_chain()` in lib/cw-out.c keeps a `struct cw_out_buf *` in a local across the application's write callback (the loop at lib/cw-out.c:321-344). If the application calls `curl_easy_pause(CURLPAUSE_CONT)` from a callback while that buffer is being replayed, a nested `cw_out_flush_chain()` frees it, and the outer loop then reads the freed buffer at :333 and :335, installs `cwbuf->next` out of freed memory at :341 and frees it again at :344. ASan reports heap-use-after-free at lib/cw-out.c:333, and a plain release build dies in `free()` deterministically because `b.bufr` sits at the offset where glibc keeps the tcache key. `curl_easy_pause()` is documented as callable from all callbacks except the socket callback, so this is documented usage, but the trigger is application-side and no server can force it. Reproduced on master (098d3a0d40) and on releases 8.20.0, 8.21.0 and 8.22.0. A patch adding a re-entrancy guard around the flush loop, plus test 3235, is attached.\n\n## Affected version\n\nmaster 098d3a0d40, and releases 8.20.0, 8.21.0, 8.22.0. Linux x86-64, glibc 2.35, clang. `curl -V` output attached as curl-V.txt.\n\n## Steps To Reproduce:\n\n1. Build libcurl from master with ASan: `./configure --enable-debug` then `make CFLAGS=\"-fsanitize=address -g -O1\" LDFLAGS=-fsanitize=address`\n2. `python3 body_server.py` (attached) - it prints a port.\n3. `clang -fsanitize=address -I include cwout_reentrant_unpause.c -o poc libcurl.a $(curl-config --static-libs)`\n4. `./poc http://127.0.0.1:<port>/`\n5. The PoC's write callback returns `CURL_WRITEFUNC_PAUSE`; its debug callback (tracing enabled with `curl_global_trace(\"write\")`) then calls `curl_easy_pause(CURLPAUSE_RECV)` followed by `curl_easy_pause(CURLPAUSE_CONT)`. Two calls are needed because at lib/cw-out.c:206 the download rate limit is not blocked yet, so a lone CURLPAUSE_CONT never reaches `Curl_cwriter_unpause()`. ASan then reports heap-use-after-free at lib/cw-out.c:333, freed at lib/cw-out.c:93 via :344.\n6. Second path into the same frames: `cwpause_sibling.c` with `gzip_server.py`, which arrives via `cw_pause_flush()` (lib/cw-pause.c:145) when `CURLOPT_ACCEPT_ENCODING` is set, so the response may be gzip-encoded.\n7. Without ASan, at -O2, the same run segfaults inside `free()` 20/20 times; with `GLIBC_TUNABLES=glibc.malloc.tcache_count=0` glibc instead reports \"double free or corruption (fasttop)\" 10/10.\n\n{F6953092}{F6953093}{F6953095}{F6953094}{F6953096}{F6953097}\n\n## Impact\n\n## Summary:\n\nUse-after-free followed by a double free inside libcurl, crashing the application: a plain -O2 build segfaults in `free()` on every run, and with tcache disabled glibc reports \"double free or corruption (fasttop)\".\n\nThe trigger is application-side - the application has to pause and then unpause from inside its own callback, with write tracing enabled - so a remote server cannot cause this on its own. I tried to get server-controlled bytes into the freed slot across ten response shapes and three allocator configurations and could not; the value passed to `free()` was always the per-process tcache key. \n\nThe attached patch adds a `flushing` bit to `cw_out_ctx` and wraps the flush loop so a nested call returns without touching the chain. With it applied both PoCs run clean, test 3235 fails before and passes after, and the full test suite shows the same 16 pre-existing failures as the unpatched baseline. Separately and optionally, moving `Curl_xfer_pause_recv()` ahead of the trace call in `cw_out_cb_write()` closes the same window at source; it is not needed for the fix.\n\nAnalysis and the patch were developed with AI assistance. Every claim above I reproduced by running it, and the escalation theories that did not reproduce are not asserted here.",
+  "weakness": {
+    "id": 50,
+    "name": "Use After Free"
+  },
+  "original_report_id": null,
+  "original_report_url": null,
+  "attachments": [
+    {
+      "id": 6953092,
+      "file_name": "cwpause_sibling.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/eomr71too4xwujz4rhxska74jwp3?response-content-disposition=attachment%3B%20filename%3D%22cwpause_sibling.c%22%3B%20filename%2A%3DUTF-8%27%27cwpause_sibling.c&response-content-type=text%2Fx-c%2B%2Bsrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=83bc5ef11067ead7ec7dd1f072fa04dfc078880e9ea2796c1ba2534b21a97640",
+      "file_size": 3239,
+      "type": "text/x-c++src",
+      "moderated": null
+    },
+    {
+      "id": 6953093,
+      "file_name": "cwout_reentrant_unpause.c",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/8g2r1k1qn3ji8jc14ervn1kuy9ps?response-content-disposition=attachment%3B%20filename%3D%22cwout_reentrant_unpause.c%22%3B%20filename%2A%3DUTF-8%27%27cwout_reentrant_unpause.c&response-content-type=text%2Fx-c%2B%2Bsrc&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=871b9513ad10121713d43aae2ab135ec494f6aa9db233212939186c86be5f1fa",
+      "file_size": 2487,
+      "type": "text/x-c++src",
+      "moderated": null
+    },
+    {
+      "id": 6953094,
+      "file_name": "gzip_server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/pfrso1pzvtp9wtb9mtdnfwuk78zp?response-content-disposition=attachment%3B%20filename%3D%22gzip_server.py%22%3B%20filename%2A%3DUTF-8%27%27gzip_server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=cd5561b82434cee54c985f78d0db191907238ebabc63621fb9754efb9875e506",
+      "file_size": 1522,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6953095,
+      "file_name": "body_server.py",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/wngkvu18my0teyivg2bkpm04n43u?response-content-disposition=attachment%3B%20filename%3D%22body_server.py%22%3B%20filename%2A%3DUTF-8%27%27body_server.py&response-content-type=application%2Fx-sh&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=1f7cd9e40b157cdf9d66ce2afcc2b3b014100d5b2e6cc034f981e8cd3815101c",
+      "file_size": 629,
+      "type": "application/x-sh",
+      "moderated": null
+    },
+    {
+      "id": 6953096,
+      "file_name": "0003-cw-out-nested-flush-guard-minimal-with-test.diff",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/tme3lyr9481wsb6zeeqp3sg9lee9?response-content-disposition=attachment%3B%20filename%3D%220003-cw-out-nested-flush-guard-minimal-with-test.diff%22%3B%20filename%2A%3DUTF-8%27%270003-cw-out-nested-flush-guard-minimal-with-test.diff&response-content-type=text%2Fx-diff&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=2dc3228db662364741a2019869d79898e5afc1f35054aa062a326d5307ca78ff",
+      "file_size": 7418,
+      "type": "text/x-diff",
+      "moderated": null
+    },
+    {
+      "id": 6953097,
+      "file_name": "curl-V.txt",
+      "expiring_url": "https://hackerone-us-west-2-production-attachments.s3.us-west-2.amazonaws.com/794ofcwrjterhij1ckzzaaiudje4?response-content-disposition=attachment%3B%20filename%3D%22curl-V.txt%22%3B%20filename%2A%3DUTF-8%27%27curl-V.txt&response-content-type=text%2Fplain&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAQGK6FURQ2C6JICTX%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T094201Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaCXVzLXdlc3QtMiJHMEUCIGF8kJdP7Dwj8%2FjbDW3DgtBiRIN48ZSVgsesQ9ybQHJlAiEAtD7D7i5aXodcHkN5L1gJtz3j8gInhyucMIH1NHU8LGsquwUI0v%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgwwMTM2MTkyNzQ4NDkiDF8SXYlO7NDqL4hGCSqPBSpIpjmg6wA%2FSdMFhOv0U1GlEy394SG9swrnjiaSUvSkcR%2BqGMYEaz%2BjC0gUTGCccT7Gyd0oHm%2FpOX99DAgMjRzF%2FTg01p8aat%2FrDl82Fknf0hDHvTpyKCuJHImfGOLeAAcutw1m9yZTjiLvX9A9f9D13R65nDETF0ZBifMKBdj5KkkwL6fCsvu4FWNbh1xTbSnT9aHR3AjPiBd8wubqfqCzkCWKXy6fFY1RsjsWhZvHnHaetwBYila3u3TOwUEEYOsfnMZU4lXfKgpIR8XnY7OPzlg2fYXWE2NjBsVw%2BFtteY99RkCuWcrXAD58twviQjHH6QyfE17aO7lShnP2TMRn6DpDptdW6ZIXjarzt1hp%2FI2C%2ByArTyGv0xeaTrU69hXgdZU4mnwIqdp0ZeyfCZYCsZOKx0AACXfWOySbGb046AS%2F0K8JWeFZO%2BXE%2F7DHTElPn7U82iPtnU6Y%2FdxKEc7nqRb%2FeOHoR47iwyvcejdyvZ5JbxYUULzT2xl0cob6AvpyWHN6B50ek%2B6WP0Bxs%2Beg8bgChoDOCndX%2FmiStUPX4hry%2B%2BzqEijccvxVErDFM8ou6GTD4f4Lw%2BveSoK0WzFJDjm5Vj65eSbepstcOGMY2omgG9djswg28t%2BqHgS7Z7nD5KBxjJE6vgfa2JjeQUxV1R2o3rMds1CwM5QNx0icwBxWKYwBRhBejMBPAHqSq0e9d6xdUTNhrBIT8Foueu%2BbQ%2FoudysLQeOPbOk6p06phE0NKGCXrHF8ON%2FQg6LDxKBwu%2FemiUG9q4Ou%2FXuHrkeS%2FPhI7%2BC5SPps48RmOxaCnuGEY34A0yubeTYY8lGSj1lcf0irNBExiNFJqtxuyrLEdXpODXa0kUxLxhxtU7kwhaH81gY6sQEBSq5GkbhsiaODRYCnIZe0XxEXYyRD0T9UaHhoGDp%2BJqPJfW1v0yNP%2F17JFhYVgF%2FZwcQ6kzNoA3lUJB8HoLbrV2BEe0zJ8Hf9XdOm8YKbI8kZUs2UDGA4y39051ZVW6Wsx9%2F6TBgy2FMU4khKNFiurHkfo5R5IkKwEBFUh1u713NP1LQWLi%2Fjs%2Bg2U%2FLkR1ma1qUJKVAHB%2FBrRUE%2FmLwF2BjJb6%2FbELbqzyfp67%2BWEp0%3D&X-Amz-SignedHeaders=host&X-Amz-Signature=59e7f984ae9a5d721fe9a3e668972573346f4afcb737782b4138357f64bd2a65",
+      "file_size": 933,
+      "type": "text/plain",
+      "moderated": null
+    }
+  ],
+  "allow_singular_disclosure_at": null,
+  "vote_count": 0,
+  "voters": [],
+  "severity": {
+    "rating": "low",
+    "author_type": "User"
+  },
+  "structured_scope": {
+    "databaseId": 18844,
+    "asset_type": "SOURCE_CODE",
+    "asset_identifier": "https://github.com/curl/curl",
+    "max_severity": "critical"
+  },
+  "abilities": {
+    "assignable_team_members": [],
+    "assignable_team_member_groups": []
+  },
+  "is_exploit_agent_supported?": false,
+  "is_linear_agent_ui_supported?": false,
+  "summaries": [
+    {
+      "category": "team",
+      "can_view?": true,
+      "can_create?": false
+    },
+    {
+      "category": "researcher",
+      "can_view?": true,
+      "can_create?": false
+    }
+  ]
+}

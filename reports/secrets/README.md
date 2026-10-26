@@ -1,6 +1,6 @@
 # Secrets & Hardcoded Credentials
 
-**263 report(s) across 16 class(es)**
+**265 report(s) across 16 class(es)**
 
 ## Classes
 
@@ -8,8 +8,8 @@
 |-------|---------|------------|
 | [Cleartext Storage Of Sensitive Information](cleartext_storage_of_sensitive_information/README.md) | 73 | $1,000 |
 | [Insecure Storage Of Sensitive Information](insecure_storage_of_sensitive_information/README.md) | 45 | $40,000 |
-| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 43 | $4,000 |
-| [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 41 | $20,000 |
+| [Cleartext Transmission Of Sensitive Information](cleartext_transmission_of_sensitive_information/README.md) | 44 | $4,000 |
+| [Insufficiently Protected Credentials](insufficiently_protected_credentials/README.md) | 42 | $20,000 |
 | [Use Of Hard Coded Credentials](use_of_hard_coded_credentials/README.md) | 13 | $500 |
 | [Missing Encryption Of Sensitive Data](missing_encryption_of_sensitive_data/README.md) | 11 | $750 |
 | [Plaintext Storage Of A Password](plaintext_storage_of_a_password/README.md) | 10 | $6,500 |
@@ -143,6 +143,7 @@
 | HSTS multi-trailing-dot bypass-ish: possible incomplete fix for CVE-2022-30115 | — | curl | 2026-05-18 | [#3733984](https://hackerone.com/reports/3733984) |
 | curl tool: --hsts is ignored for a schemeless URL starting with a slash under --proto-default http | — | curl | 2026-10-08 | [#4063328](https://hackerone.com/reports/4063328) |
 |  One Strict-Transport-Security response header empties the victim's entire HSTS store, silently, | — | curl | 2026-10-15 | [#4007917](https://hackerone.com/reports/4007917) |
+| 14: HSTS cache import silently drops a longer-lived child beneath an includeSubDomains parent | — | curl | 2026-10-26 | [#3973124](https://hackerone.com/reports/3973124) |
 | SMTP connection reuse ignores --ssl-reqd / CURLOPT_USE_SSL and reuses a clear-text STARTTLS session on current master | — | curl | 2026-06-03 | [#3770979](https://hackerone.com/reports/3770979) |
 | CVE-2026-4873: connection reuse ignores TLS requirement | — | curl | 2026-04-29 | [#3621851](https://hackerone.com/reports/3621851) |
 | Error the message with already e-mail  | — | legalrobot | 2017-09-04 | [#265441](https://hackerone.com/reports/265441) |
@@ -221,6 +222,7 @@
 | Digest Auth State Leak on Cross-Origin Redirect via Netrc - Username and Password Hash Sent to Wrong Host | — | curl | 2026-04-19 | [#3680038](https://hackerone.com/reports/3680038) |
 | curl cross-origin HTTPS redirect reuses TLS client certificate for unintended second-origin mTLS authentication | — | curl | 2026-06-07 | [#3749428](https://hackerone.com/reports/3749428) |
 | TLS conn reuse and session cache ignore fsslctx callback and ssl_config_data flags ( incomplete fix variant of 7541ae569 ) | — | curl | 2026-06-01 | [#3761647](https://hackerone.com/reports/3761647) |
+| FTP authentication options leak to a cross-origin FTP redirect with unrestricted auth disabled | — | curl | 2026-10-26 | [#4105790](https://hackerone.com/reports/4105790) |
 | libcurl: Improper Authentication State Management on Cross-Protocol Redirects | — | curl | 2026-01-17 | [#3514263](https://hackerone.com/reports/3514263) |
 | Admin Salt Leakage on DoD site. | — | deptofdefense | 2019-12-02 | [#241116](https://hackerone.com/reports/241116) |
 | Exposed FTP Credentials on ███████ | — | deptofdefense | 2019-12-02 | [#235216](https://hackerone.com/reports/235216) |
