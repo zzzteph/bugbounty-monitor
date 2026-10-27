@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**699 report(s)**
+**704 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -102,6 +102,7 @@
 | Session Doesn't expire after 2fa and also other session can change passsword  | $300 | sidefx | 2024-03-02 | [#2234736](https://hackerone.com/reports/2234736) |
 | Authentication token and CSRF token bypass | $300 | enjin | 2022-06-19 | [#998457](https://hackerone.com/reports/998457) |
 | Any installed app can force immediate logout and persistent DOS of authenticated Basecamp sessions via unprotected exported StartActivity | $287 | basecamp | 2026-07-04 | [#3764217](https://hackerone.com/reports/3764217) |
+| Public shares remain accessible via alternate endpoints after owner account is disabled | $270 | nextcloud | 2026-10-27 | [#3620539](https://hackerone.com/reports/3620539) |
 | Gaining access to private topics using quoting feature | $256 | discourse | 2018-03-17 | [#312647](https://hackerone.com/reports/312647) |
 | [Broken Access Control ] Unauthorized Linking accounts & Linked Accounts info DIsclosure | $250 | stripe | 2022-12-20 | [#1672614](https://hackerone.com/reports/1672614) |
 | File Read Vulnerability allows Attackers to Compromise S3 buckets using Prow | $250 | kubernetes | 2023-04-25 | [#1485500](https://hackerone.com/reports/1485500) |
@@ -208,7 +209,10 @@
 | IDOR allowing to read another user's token on the Social Media Ads service | — | semrush | 2022-08-16 | [#1464168](https://hackerone.com/reports/1464168) |
 | api keys leaked | — | reddit | 2022-11-10 | [#1762927](https://hackerone.com/reports/1762927) |
 | Uppercase sni context matching can lead to mtls authorization bypass due to case-sensitive hostname matching | — | nodejs | 2026-06-25 | [#3656869](https://hackerone.com/reports/3656869) |
+| FederationController::remoteWopiToken() returns full Wopi entity without token type validation | — | nextcloud | 2026-10-27 | [#3568116](https://hackerone.com/reports/3568116) |
+| Files Confidential tagging can be bypassed with # in filename  | — | nextcloud | 2026-10-27 | [#3682163](https://hackerone.com/reports/3682163) |
 | Unix domain socket server bypasses --permission network restrictions (incomplete CVE-2026-21636 fix) | — | nodejs | 2026-06-25 | [#3618831](https://hackerone.com/reports/3618831) |
+| Unauthorized users can enumerate internal team resources via the Teams API when a team is visible to everyone | — | nextcloud | 2026-10-27 | [#3511955](https://hackerone.com/reports/3511955) |
 | Permission Model Bypass: `trace_events.createTracing().enable()` Writes Trace Logs Outside `--allow-fs-write` | — | nodejs | 2026-07-29 | [#3838601](https://hackerone.com/reports/3838601) |
 | Embedded-nul hostnames can lead to silent authority rebinding due to c-string truncation in resolver bindings | — | nodejs | 2026-06-25 | [#3656716](https://hackerone.com/reports/3656716) |
 | Node.js Permission Model bypass: UDS server bind/listen works without `--allow-net` | — | nodejs | 2026-03-30 | [#3559715](https://hackerone.com/reports/3559715) |
@@ -237,6 +241,7 @@
 | Banner status override by advertiser‑level users | — | revive_adserver | 2026-06-03 | [#3678828](https://hackerone.com/reports/3678828) |
 | Permission Model bypass: process.report writes (and overwrites) files outside --allow-fs-write paths | — | nodejs | 2026-07-30 | [#3815767](https://hackerone.com/reports/3815767) |
 | CORS Misconfiguration / Broken Access Control | — | myndr | 2026-09-10 | [#3930102](https://hackerone.com/reports/3930102) |
+| Tables application does not respect sharing limitations set by admin | — | nextcloud | 2026-10-27 | [#3642236](https://hackerone.com/reports/3642236) |
 | no_proxy IDN mismatch: Unicode hostnames bypass proxy exclusion list | — | curl | 2026-04-07 | [#3650443](https://hackerone.com/reports/3650443) |
 | Unauthenticated disclosure of draft/private/pending post titles & IDs via Secure Custom Fields nopriv AJAX field-query handlers (post_object/relations | — | wordpress | 2026-09-28 | [#3893632](https://hackerone.com/reports/3893632) |
 | Missing FILE-privilege enforcement in CONNECT file UDFs allows server-side file read and write | — | mariadb | 2026-10-07 | [#3836021](https://hackerone.com/reports/3836021) |

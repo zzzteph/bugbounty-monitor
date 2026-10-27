@@ -1,12 +1,12 @@
 # Miscellaneous
 
-**1683 report(s) across 36 class(es)**
+**1684 report(s) across 36 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Unknown](unknown/README.md) | 1015 | $50,000 |
+| [Unknown](unknown/README.md) | 1016 | $50,000 |
 | [Violation Of Secure Design Principles](violation_of_secure_design_principles/README.md) | 407 | $3,750 |
 | [Misconfiguration](misconfiguration/README.md) | 82 | $12,500 |
 | [Improper Input Validation](improper_input_validation/README.md) | 71 | $4,920 |
@@ -605,6 +605,7 @@
 | sign_multisig crashes monero-wallet-rpc on a malformed but decryptable multisig txset | — | monero | 2026-09-17 | [#3683934](https://hackerone.com/reports/3683934) |
 | Exposed .git/config File Leading to Potential Sensitive Information Disclosure | — | curl | 2026-03-20 | [#3612891](https://hackerone.com/reports/3612891) |
 | Windows filename sanitizer misses Unicode COM/LPT reserved device names | — | curl | 2026-09-24 | [#4040799](https://hackerone.com/reports/4040799) |
+| Incomplete IDN hostname check on the transfer path can lead to credential disclosure to an unintended host | — | curl | 2026-10-27 | [#4147581](https://hackerone.com/reports/4147581) |
 | CVE-2026-94265: Authorization: Negotiate sent to foreign origin | — | curl | 2026-10-14 | [#4040551](https://hackerone.com/reports/4040551) |
 | CVE-2026-5773: wrong reuse of SMB connection | — | curl | 2026-04-29 | [#3650689](https://hackerone.com/reports/3650689) |
 | libcurl 8.20.0 ignores HTTP Digest domain protection space and preemptively leaks Digest auth outside the declared scope | — | curl | 2026-06-05 | [#3774977](https://hackerone.com/reports/3774977) |

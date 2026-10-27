@@ -1,6 +1,6 @@
 # Privilege Escalation
 
-**277 report(s)**
+**278 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -67,6 +67,7 @@
 | Authentication Issue | $200 | coinbase | 2017-01-05 | [#176979](https://hackerone.com/reports/176979) |
 | Subdomain Takeover via Unclaimed Amazon S3 Bucket (Musical.ly) | $200 | tiktok | 2022-11-07 | [#1102537](https://hackerone.com/reports/1102537) |
 | [34.96.80.155] Server Logs Disclosure lead to Information Leakage | $150 | evernote | 2021-12-09 | [#1398270](https://hackerone.com/reports/1398270) |
+| Unauthorised access with hidden public link creation when sharing to a Team External Member | $100 | nextcloud | 2026-10-27 | [#3625932](https://hackerone.com/reports/3625932) |
 | Посмотреть видеоролики, которые пользователь когда-либо скидывал в ЛС.  | $100 | vkcom | 2017-07-09 | [#223597](https://hackerone.com/reports/223597) |
 | Installing Gitlab runner with Docker-In-Docker allows root access | $100 | gitlab | 2022-02-10 | [#1417211](https://hackerone.com/reports/1417211) |
 | Subdomain takeover of main domain of https://www.cyberlynx.lu/ | $100 | acronis | 2021-10-12 | [#1256389](https://hackerone.com/reports/1256389) |

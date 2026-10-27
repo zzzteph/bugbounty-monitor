@@ -1,6 +1,6 @@
 # Uncontrolled Resource Consumption
 
-**426 report(s)**
+**427 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -159,6 +159,7 @@
 | Unauthenticated ?q= search query causes exponential pyparsing backtracking under a process-global lock in Weblate | — | weblate | 2026-09-04 | [#3898281](https://hackerone.com/reports/3898281) |
 | CVE-2026-11352: QUIC zero-length UDP datagrams busy-loop | — | curl | 2026-06-24 | [#3783438](https://hackerone.com/reports/3783438) |
 |  Tor onion service INTRODUCE2 invalid-MAC cells permanently grow service replay cache | — | torproject | 2026-09-10 | [#3709703](https://hackerone.com/reports/3709703) |
+| Unauthenticated Persistent Denial-of-Service via Federated Share Injection | — | nextcloud | 2026-10-27 | [#3679640](https://hackerone.com/reports/3679640) |
 | Reachable assertion in node:zlib sync API crashes the entire process via spoofed TypedArray byteLength (all 11 *Sync functions affected) | — | nodejs | 2026-08-28 | [#3857258](https://hackerone.com/reports/3857258) |
 | dns.resolveAny() Aborts the Node.js Process When a DNS Response Contains More Than 256 A Records | — | nodejs | 2026-08-28 | [#3795657](https://hackerone.com/reports/3795657) |
 |  Incomplete Fix for CVE-2026-21637: OCSPRequest and resumeSession Events Crash Node.js TLS Server via Unhandled Synchronous Exceptions | — | nodejs | 2026-06-12 | [#3781015](https://hackerone.com/reports/3781015) |

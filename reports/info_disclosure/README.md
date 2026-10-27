@@ -1,12 +1,12 @@
 # Information Disclosure
 
-**1132 report(s) across 10 class(es)**
+**1133 report(s) across 10 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Information Disclosure](information_disclosure/README.md) | 919 | $25,000 |
+| [Information Disclosure](information_disclosure/README.md) | 920 | $25,000 |
 | [Privacy Violation](privacy_violation/README.md) | 78 | $2,940 |
 | [Information Exposure Through Directory Listing](information_exposure_through_directory_listing/README.md) | 36 | $1,000 |
 | [Information Exposure Through An Error Message](information_exposure_through_an_error_message/README.md) | 32 | $3,500 |
@@ -307,6 +307,7 @@
 | 18:  Explicit IPv6 proxy zone ID silently ignored — proxy credentials sent to wrong interface | — | curl | 2026-08-31 | [#3973127](https://hackerone.com/reports/3973127) |
 | 07: GnuTLS 0-RTT early data bypasses file-backed public-key pin verification | — | curl | 2026-09-02 | [#3973098](https://hackerone.com/reports/3973098) |
 | libcurl omits IPv6 zoneid from host identity and leaks credentials/cookies across scoped link-local realms | — | curl | 2026-04-19 | [#3680680](https://hackerone.com/reports/3680680) |
+| Users with read-only access to a Nextcloud Table can enumerate its share recipients via the Tables API | — | nextcloud | 2026-10-27 | [#3524971](https://hackerone.com/reports/3524971) |
 | CURLOPT_UNRESTRICTED_AUTH Dangerous Default Documentation Gap | — | curl | 2026-03-10 | [#3595764](https://hackerone.com/reports/3595764) |
 |  Secure cookies leaked to HTTP origins through HTTPS forwarding proxy | — | curl | 2026-06-15 | [#3803415](https://hackerone.com/reports/3803415) |
 | directory information disclose | — | paragonie | 2017-05-05 | [#226212](https://hackerone.com/reports/226212) |

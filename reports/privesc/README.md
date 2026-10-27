@@ -1,13 +1,13 @@
 # Privilege Escalation
 
-**296 report(s) across 7 class(es)**
+**298 report(s) across 7 class(es)**
 
 ## Classes
 
 | Class | Reports | Top Bounty |
 |-------|---------|------------|
-| [Privilege Escalation](privilege_escalation/README.md) | 277 | $20,000 |
-| [Improper Privilege Management](improper_privilege_management/README.md) | 6 | $750 |
+| [Privilege Escalation](privilege_escalation/README.md) | 278 | $20,000 |
+| [Improper Privilege Management](improper_privilege_management/README.md) | 7 | $750 |
 | [Incorrect Permission Assignment For Critical Resource](incorrect_permission_assignment_for_critical_resource/README.md) | 4 | $3,100 |
 | [Execution With Unnecessary Privileges](execution_with_unnecessary_privileges/README.md) | 3 | $5,000 |
 | [Improper Handling Of Insufficient Permissions Or Privileges](improper_handling_of_insufficient_permissions_or_privileges/README.md) | 3 | — |
@@ -85,6 +85,7 @@
 | Authentication Issue | $200 | coinbase | 2017-01-05 | [#176979](https://hackerone.com/reports/176979) |
 | Subdomain Takeover via Unclaimed Amazon S3 Bucket (Musical.ly) | $200 | tiktok | 2022-11-07 | [#1102537](https://hackerone.com/reports/1102537) |
 | [34.96.80.155] Server Logs Disclosure lead to Information Leakage | $150 | evernote | 2021-12-09 | [#1398270](https://hackerone.com/reports/1398270) |
+| Unauthorised access with hidden public link creation when sharing to a Team External Member | $100 | nextcloud | 2026-10-27 | [#3625932](https://hackerone.com/reports/3625932) |
 | Посмотреть видеоролики, которые пользователь когда-либо скидывал в ЛС.  | $100 | vkcom | 2017-07-09 | [#223597](https://hackerone.com/reports/223597) |
 | Installing Gitlab runner with Docker-In-Docker allows root access | $100 | gitlab | 2022-02-10 | [#1417211](https://hackerone.com/reports/1417211) |
 | Subdomain takeover of main domain of https://www.cyberlynx.lu/ | $100 | acronis | 2021-10-12 | [#1256389](https://hackerone.com/reports/1256389) |
@@ -95,6 +96,7 @@
 | HTTP/2 PUSH_PROMISE header loss on OOM bypasses scheme validation (regression of 2e8c922a89) | — | curl | 2026-03-31 | [#3636044](https://hackerone.com/reports/3636044) |
 | curl overwrites local file with -J option if file non-readable, but file writable. | — | curl | 2020-08-01 | [#926638](https://hackerone.com/reports/926638) |
 | A member-member privilege could access the https://console.rockset.com/billing?tab=payment page even though the billing page is hidden from the menu.  | — | rockset | 2021-11-09 | [#946384](https://hackerone.com/reports/946384) |
+| No password confirmation required when using apptoken on sensitive endpoint | — | nextcloud | 2026-10-27 | [#3566607](https://hackerone.com/reports/3566607) |
 | Privilege-relevant fields are clientModify in SAP CDC schema allowing role escalation to Admin | — | essity | 2026-05-20 | [#3726887](https://hackerone.com/reports/3726887) |
 | [h1-2102] [Plus] User with Store Management Permission can Make changeDomainEnforcementState - that should be limited to User Management Only | — | shopify | 2022-04-21 | [#1084892](https://hackerone.com/reports/1084892) |
 | [H1-2006 2020] Exploiting multiple vulnerabilities to get hacker's payment ensured | — | h1-ctf | 2020-06-18 | [#894949](https://hackerone.com/reports/894949) |

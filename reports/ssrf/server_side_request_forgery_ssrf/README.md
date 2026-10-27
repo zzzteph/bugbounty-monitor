@@ -1,6 +1,6 @@
 # Server Side Request Forgery Ssrf
 
-**233 report(s)**
+**234 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -52,6 +52,7 @@
 | SSRF via potential filter bypass with too lax local domain checking | $250 | nextcloud | 2022-09-16 | [#1608039](https://hackerone.com/reports/1608039) |
 | Unauthenticated SSRF in 3rd party module "cerdic/csstidy" | $250 | nextcloud | 2022-09-03 | [#1595006](https://hackerone.com/reports/1595006) |
 | SSRF via filter bypass due to lax checking on IPs | $250 | nextcloud | 2023-02-10 | [#1702864](https://hackerone.com/reports/1702864) |
+| SSRF on Nextcloud Whiteboard Application via Recordings to Unauthorised Access to Whiteboards | $250 | nextcloud | 2026-10-27 | [#3576823](https://hackerone.com/reports/3576823) |
 | The endpoint '/test/webhooks' is vulnerable to DNS Rebinding | $200 | omise | 2023-04-26 | [#1716069](https://hackerone.com/reports/1716069) |
 | SSRF allows reading AWS EC2 metadata using "readapi" variable in Streamlabs Cloudbot | $200 | logitech | 2021-02-24 | [#1108418](https://hackerone.com/reports/1108418) |
 | SSRF in Search.gov via ?url= parameter | $150 | gsa_bbp | 2019-08-26 | [#514224](https://hackerone.com/reports/514224) |
