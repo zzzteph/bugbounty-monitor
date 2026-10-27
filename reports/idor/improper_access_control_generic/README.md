@@ -1,6 +1,6 @@
 # Improper Access Control Generic
 
-**698 report(s)**
+**699 report(s)**
 
 | Title | Paid | Program | Date | Link |
 |-------|------|---------|------|------|
@@ -253,6 +253,7 @@
 | PATs without the required scope can leak issues | — | github | 2026-03-19 | [#3522254](https://hackerone.com/reports/3522254) |
 | files_lock: a write-share collaborator can place a TYPE_TOKEN lock that permanently denies the file owner, survives share revocation and account delet | — | nextcloud | 2026-09-18 | [#3770482](https://hackerone.com/reports/3770482) |
 | Ordinary HEY user can make HEY originate authenticated mail from attacker-selected @hey.com  addresses | — | basecamp | 2026-10-20 | [#4035023](https://hackerone.com/reports/4035023) |
+| Permission Model filesystem over-grant via wildcard radix lookup | — | nodejs | 2026-10-27 | [#3996423](https://hackerone.com/reports/3996423) |
 | Race condition leads to duplicate payouts | — | security | 2017-05-23 | [#220445](https://hackerone.com/reports/220445) |
 | Design Flaw in session management of password reset  | — | weblate | 2017-06-02 | [#229417](https://hackerone.com/reports/229417) |
 | Access to completion page without performing any action | — | weblate | 2017-05-18 | [#223846](https://hackerone.com/reports/223846) |
